@@ -25,10 +25,12 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    lng: 'en',
     debug: false,
     
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      // Default to English unless user explicitly changes language in localStorage
+      order: ['localStorage'],
       caches: ['localStorage'],
     },
 
