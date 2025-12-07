@@ -102,15 +102,30 @@ export default function Pricing() {
         ? (isAnnual ? "micro_monthly" /* annual server pricing is pre-discounted by server if needed */ : "micro_monthly")
         : (isAnnual ? "mini_monthly" : "mini_monthly");
 
-      const { data, error } = await supabase.functions.invoke("create-payment", {
-        body: { plan: planId },
-      });
+      // Call Supabase Edge Function via HTTP POST with JSON body
+      const res = await fetch(
+        "https://odlxhgatqyodxdessxts.supabase.co/functions/v1/create-payment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ plan: planId }),
+        }
+      );
 
-      if (error) {
-        console.error("create-payment error", error);
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Failed to create payment");
+      }
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("create-payment error", data);
         toast({
           title: t("pricing.error", { defaultValue: "Error" }),
-          description: `${t("pricing.errorDesc", { defaultValue: "No se pudo procesar el pago." })} ${(error as any)?.message ?? ""}`,
+          description: `${t("pricing.errorDesc", { defaultValue: "No se pudo procesar el pago." })} ${(data as any)?.details ?? JSON.stringify(data)}`,
           variant: "destructive",
         });
         return;
