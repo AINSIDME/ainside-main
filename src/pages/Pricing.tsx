@@ -99,8 +99,8 @@ export default function Pricing() {
       const isAnnual = billing === "annual";
       // Map client selection → server plan id (must match server PLANS keys)
       const planId = (plan === "Micro")
-        ? (isAnnual ? "micro_monthly" /* annual server pricing is pre-discounted by server if needed */ : "micro_monthly")
-        : (isAnnual ? "mini_monthly" : "mini_monthly");
+        ? (isAnnual ? "micro_annual" : "micro_monthly")
+        : (isAnnual ? "mini_annual" : "mini_monthly");
 
       // Call Supabase Edge Function via HTTP POST with JSON body
       const res = await fetch(

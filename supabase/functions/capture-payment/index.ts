@@ -99,6 +99,7 @@ serve(async (req) => {
     const capture = result?.purchase_units?.[0]?.payments?.captures?.[0];
     const payerEmail = result?.payer?.email_address;
     const amount = capture?.amount?.value;
+    const currency = capture?.amount?.currency_code;
     const status = result?.status;
 
     return new Response(
@@ -107,6 +108,7 @@ serve(async (req) => {
         orderId: result.id,
         status,
         amount,
+        currency,
         payerEmail,
         captureTime: capture?.create_time,
         plan: result?.purchase_units?.[0]?.description,

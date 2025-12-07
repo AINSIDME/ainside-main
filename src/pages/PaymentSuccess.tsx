@@ -12,6 +12,7 @@ interface PaymentDetails {
   orderId: string;
   status: string;
   amount: string;
+  currency?: string;
   payerEmail: string;
   captureTime: string;
   plan: string;
@@ -150,7 +151,7 @@ export default function PaymentSuccess() {
                   </div>
                   <div>
                     <span className="text-muted-foreground">Monto:</span>
-                    <div className="font-medium">${paymentDetails.amount} USD</div>
+                    <div className="font-medium">{paymentDetails.amount} {paymentDetails.currency || "USD"}</div>
                   </div>
                   <div>
                     <span className="text-muted-foreground">ID de orden:</span>

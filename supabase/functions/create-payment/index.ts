@@ -23,8 +23,10 @@ serve(async (req) => {
     // Server-side plan → amount mapping to prevent tampering
     const PLANS: Record<string, { amount: number; currency: string; description: string }> = {
       micro_monthly: { amount: 99.0, currency: "USD", description: "Micro S&P 500 Monthly" },
-      mini_monthly: { amount: 999.0, currency: "USD", description: "Mini S&P 500 Monthly" },
-      pro_monthly: { amount: 19.99, currency: "USD", description: "Pro Monthly" },
+      micro_annual:  { amount: 831.6, currency: "USD", description: "Micro S&P 500 Annual" },
+      mini_monthly:  { amount: 999.0, currency: "USD", description: "Mini S&P 500 Monthly" },
+      mini_annual:   { amount: 8391.6, currency: "USD", description: "Mini S&P 500 Annual" },
+      pro_monthly:   { amount: 19.99, currency: "USD", description: "Pro Monthly" },
     };
 
     const selected = plan && PLANS[plan];
