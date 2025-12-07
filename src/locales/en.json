@@ -1,0 +1,416 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services", 
+    "demo": "Real Data",
+    "liveDemoMini": "Live",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  },
+  "header": {
+    "brand": "AInside.me",
+    "toggleMenu": "Toggle menu"
+  },
+  "homepage": {
+    "title": {
+      "main": "Professional Trading",
+      "subtitle": "Algorithm Solutions"
+    },
+    "subtitle": "Algorithm Development Company",
+    "description": "We develop proprietary algorithms and rent analytical tools to traders and institutions. Technology solutions only.",
+    "trust": {
+      "security": "Enterprise Security",
+      "compliance": "Institutional Grade",
+      "global": "Global Infrastructure"
+    },
+    "capabilities": {
+      "analytics": {
+        "title": "Advanced Analytics",
+        "description": "Proprietary algorithms for market analysis and trading automation"
+      },
+      "security": {
+        "title": "Security First",
+        "description": "Bank-grade security and compliance for institutional requirements"
+      },
+      "infrastructure": {
+        "title": "Robust Infrastructure", 
+        "description": "Enterprise-level platform with 99.9% uptime guarantee"
+      },
+      "protection": {
+        "title": "Risk Protection",
+        "description": "Advanced risk management and protection protocols"
+      }
+    },
+    "services": {
+      "title": "What We Do",
+      "subtitle": "Specialized in algorithm development and technology rental services",
+      "development": {
+        "feature1": "Custom algorithm creation",
+        "feature2": "Technical indicator development", 
+        "feature3": "Market analysis tools"
+      },
+      "rental": {
+        "feature1": "Monthly subscription plans",
+        "feature2": "Platform integration support",
+        "feature3": "Technical support included"
+      },
+      "security": {
+        "feature1": "Bank-level encryption",
+        "feature2": "Compliance frameworks",
+        "feature3": "Data protection protocols"
+      }
+    },
+    "stats": {
+      "algorithms": "Algorithms",
+      "support": "Support",
+      "uptime": "Uptime",
+      "clients": "Clients"
+    },
+    "values": {
+      "title": "Our Approach",
+      "innovation": {
+        "title": "Innovation",
+        "description": "Cutting-edge algorithms and trading technology"
+      },
+      "reliability": {
+        "title": "Reliability", 
+        "description": "Proven track record with institutional clients"
+      },
+      "security": {
+        "title": "Security",
+        "description": "Enterprise-grade protection and compliance"
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Commitment to the highest quality standards"
+      }
+    },
+    "cta": {
+      "title": "Ready to Rent Our",
+      "subtitle": "Trading Algorithms?",
+      "description": "Access our trading algorithms and professional analytical tools through flexible monthly rental plans.",
+      "demo": "View Live Demo",
+      "contact": "Contact Us",
+      "services": "Our Services",
+      "consultation": "Schedule Consultation"
+    },
+    "footer": {
+      "dataProtection": "Data Protection",
+      "compliance": "Compliance Ready"
+    }
+  },
+  "hero": {
+    "title": "Professional Trading Analysis Tools",
+    "subtitle": "Advanced research and analysis tools for intraday futures trading. Educational tools only - not investment advice.",
+    "cta": "View Live Demo",
+    "ctaSecondary": "Learn More"
+  },
+  "footer": {
+    "description": "Company specialized in trading algorithm development and analytical tool rental. We do NOT provide financial advice.",
+    "copyright": "© {{year}} AInside.me. All rights reserved.",
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "disclaimer": "Legal Disclaimer"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Contact Support",
+      "documentation": "Documentation",
+      "status": "System Status"
+    },
+    "trust": {
+      "security": "Enterprise Security",
+      "protection": "Data Protection",
+      "compliance": "Compliance Ready"
+    }
+  },
+  "demo": {
+    "title": "Live Trading Tools Demo",
+    "subtitle": "See our professional analysis tools in action with real-time market simulation",
+    "live": "LIVE",
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset",
+    "speed": "Speed",
+    "overlays": "Overlays",
+    "vwap": "Session VWAP",
+    "hilo": "High/Low Zones",
+    "riskBox": "Risk Box",
+    "downloadCsv": "Download CSV",
+    "latency": "Latency",
+    "lastTick": "Last Tick",
+    "uptime": "Uptime",
+    "pnlSimulator": "P&L Simulator (Educational)",
+    "entry": "Entry",
+    "exit": "Exit",
+    "setEntry": "Set Entry",
+    "setExit": "Set Exit",
+    "clearTrades": "Clear Trades",
+    "unrealizedPnl": "Unrealized P&L",
+    "realizedPnl": "Realized P&L",
+    "totalTrades": "Total Trades",
+    "winRate": "Win Rate",
+    "ready": "Ready",
+    "manifestLoaded": "Manifest loaded",
+    "receiving": "Receiving HLS segments",
+    "fatalError": "Fatal HLS error. Retrying...",
+    "reconnecting": "Reconnecting...",
+    "notSupported": "Your browser does not support HLS",
+    "urlCopied": "URL copied to clipboard",
+    "connected": "Connected",
+    "copyError": "Could not copy URL",
+    "copyUrl": "Copy stream URL",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit fullscreen",
+      "marketOpen": "Market Open"
+  },
+  "products": {
+    "title": "Professional Analysis Tools",
+    "subtitle": "Comprehensive suite of tools for futures market research and analysis",
+    "features": {
+      "realtime": "Real-time Data",
+      "analysis": "Advanced Analysis",
+      "risk": "Risk Management",
+      "reporting": "Detailed Reporting"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Mission: Advanced analysis technology for professional traders",
+    "description": "We provide cutting-edge research and analysis tools for intraday futures trading. Our tools are designed for educational purposes and market research only."
+  },
+  "legal": {
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "disclaimer": "Legal Disclaimer",
+    "responsibility": "Responsibility Agreement",
+    "disclaimerText": "IMPORTANT LEGAL NOTICE: AInside.me is a SOFTWARE DEVELOPMENT COMPANY, NOT a financial services provider, broker, or investment advisor. Our tools are for EDUCATIONAL and RESEARCH purposes ONLY. We provide NO investment advice, recommendations, or financial services. Trading involves substantial risk of loss. Users are solely responsible for their trading decisions and outcomes. AInside.me disclaims ALL liability for any financial losses, damages, or consequences arising from use of our software tools.",
+    "responsibilityText": "DISCLAIMER OF LIABILITY: By using our software tools, you acknowledge that: (1) AInside.me is a programming/software company only, (2) We provide NO financial advice or recommendations, (3) All trading decisions are your sole responsibility, (4) You assume ALL risks and liability, (5) AInside.me is NOT liable for any losses, damages, or consequences, (6) Our tools are for educational/research purposes only, (7) Past performance does not guarantee future results, (8) You will not hold AInside.me responsible for any trading outcomes."
+  },
+  "checkout": {
+    "title": "Complete Your Purchase",
+    "responsibilityAgreement": "I accept the Responsibility Agreement",
+    "payNow": "Pay with PayPal",
+    "viewAgreement": "View Full Agreement",
+    "agreementRequired": "You must accept the Responsibility Agreement to proceed"
+  },
+  "contact": {
+    "title": "Contact & Support",
+    "subtitle": "Get help with our trading analysis tools",
+    "email": "Email Support",
+    "form": "Contact Form",
+    "sla": "Support SLA: First response within 1 business day",
+    "name": "Name",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message"
+  },
+  "accessibility": {
+    "title": "Accessibility Statement",
+    "subtitle": "Our commitment to inclusive design",
+    "statement": "We aim to meet WCAG 2.1 AA standards. If you experience any accessibility barriers, contact us and we will assist you.",
+    "skipToContent": "Skip to main content",
+    "toggleHighContrast": "Toggle High Contrast",
+    "increaseFontSize": "Increase Font Size",
+    "decreaseFontSize": "Decrease Font Size"
+  },
+  "status": {
+    "title": "System Status",
+    "operational": "All Systems Operational",
+    "degraded": "Degraded Performance",
+    "outage": "Service Outage",
+    "maintenance": "Scheduled Maintenance",
+    "dataFeed": "Market Data Feed",
+    "charts": "Chart Services",
+    "api": "API Services"
+  },
+  "trust": {
+    "ssl": "SSL Secured",
+    "privacy": "Privacy Protected",
+    "compliant": "Regulation Compliant"
+  },
+  "chat": {
+    "title": "Live Chat",
+    "subtitle": "Real-time trading analysis",
+    "welcome": "Welcome to live chat. You can ask any questions about the live stream.",
+    "assistant": "Trading Assistant",
+    "frequentQuestions": "Frequently Asked Questions",
+    "placeholder": "Write your analysis question...",
+    "writeMessage": "Write message",
+    "sendMessage": "Send message",
+    "instructions": "Enter to send • Shift+Enter for new line",
+    "backToMenu": "🔄 Back to main menu",
+    "questions": {
+      "q1": "What do I see in this live stream?",
+      "q2": "Are these real positions?",
+      "q3": "What do VWAP indicators mean?",
+      "q4": "What service do you offer exactly?",
+      "q5": "Can I copy these trades?",
+      "q6": "How much does access cost?",
+      "q7": "Do I have to give you my money?",
+      "q8": "What type of company are you exactly?"
+    },
+    "answers": {
+      "a1": "📺 This stream shows REAL S&P 500 futures trading (/ES and /MES) with current positions, professional charts, technical indicators like VWAP and real-time operations.",
+      "a2": "✅ YES, all positions shown are REAL operations with real money. It's not simulation - you can see our current capital and P&L live.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) is the volume-weighted average price. Blue/red lines show institutional support/resistance zones we use to open real positions.",
+      "a4": "🔧 We rent STUDY TOOLS and technical indicators for market analysis. They are educational tools, NOT financial advice.",
+      "a5": "📚 You can study our operations as educational material. Compatible ONLY with EasyLanguage platforms: TradeStation, TradeStation Global, and MultiCharts (PowerLanguage). IMPORTANT: For study only, not advice.",
+      "a6": "💰 Tool rental: $99/month or $999/year (save $189). Includes 24/7 access to indicators and study tools. Educational use only.",
+      "a7": "💰 NO. Your money stays in your broker account (TradeStation, etc.). We only rent the tools/algorithms. You maintain full control of your capital.",
+      "a8": "🏢 We are a software development company specialized in CREATING trading algorithms and RENTING analytical tools. We don't handle money, we only develop and rent technology."
+    },
+    "responses": {
+      "vwap": "📊 VWAP shows volume-weighted average price. Lines help you identify institutional support and resistance levels in real time.",
+      "real": "✅ YES, all positions are REAL with real money. It's not simulation - you can see our current P&L live and how we actually trade.",
+      "pnl": "💰 You see the REAL P&L of our operations in real time. Every gain and loss you see is with real money, not simulated.",
+      "stream": "📺 This stream shows REAL S&P 500 trading with current positions. You can see real operations, not demonstrations.",
+      "default": "🤖 I can help you with questions about the stream, indicators, P&L simulator, trading strategies and more. What would you like to know?",
+      "fallback": "Thank you for your question. An analyst will respond shortly."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "about": {
+    "badge": "Software Development Company",
+    "title": "About",
+    "subtitle": "AInside.me",
+    "description": "Software development company specialized in creating advanced trading algorithms and renting professional analytical tools to traders and financial institutions",
+    "missionVision": {
+      "title": "Our Mission & Vision"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To develop proprietary trading algorithms and rent professional analytical tools that help traders and institutions analyze financial markets effectively. We focus exclusively on technology development, not financial advice."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading developer of trading algorithms and analytical tools, recognized for creating innovative technology solutions that traders and institutions can rent to enhance their market analysis capabilities."
+    },
+    "values": {
+      "title": "Core Values",
+      "subtitle": "The principles that guide our organization and define our commitment to excellence"
+    }
+  },
+  "contact": {
+    "badge": "Get In Touch",
+    "title": "Contact",
+    "subtitle": "Us",
+    "description": "Contact our software development team to learn about our trading algorithms and analytical tool rental services"
+  },
+  "demo": {
+    "badge": "Software Technology Demonstration",
+    "title": "Advanced Analytics",
+    "subtitle": "Platform Demo",
+    "description": "Educational software tools for market analysis and research. AInside.me is a software development company, NOT a financial services provider."
+  },
+  "services": {
+    "badge": "Professional Services",
+    "title": "Algorithm Development",
+    "subtitle": "& Tool Rental",
+    "description": "We develop proprietary trading algorithms and rent professional analytical tools to traders and financial institutions. Technology solutions only - no financial advice."
+  },
+  "pricing": {
+    "title": "Plans & Pricing",
+    "subtitle": "Micro and Mini contracts. Choose Monthly or Annual (save 30%).",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "monthlyShort": "Monthly",
+    "annualShort": "Annual",
+    "billingCycle": "Billing Cycle",
+    "save": "Save 30%",
+    "renews": "Auto-renews. You can cancel anytime.",
+    "chooseInstrument": "Choose Instrument",
+    "billingInfo": "Monthly or annual billing (30% OFF on annual). Cancel anytime.",
+    "micro": {
+      "name": "Micro Contract",
+      "price": "$99",
+      "period": "/month",
+      "description": "Trading with micro contracts (MES/MGC).",
+      "short": "Micro",
+      "features": [
+        "Access to /MES (E-mini S&P 500)",
+        "All technical indicators",
+        "Real-time analysis",
+        "Monthly automatic updates",
+        "Email support",
+        "Live market data",
+        "Educational tools"
+      ]
+    },
+    "mini": {
+      "name": "Mini Contract",
+      "price": "$999",
+      "period": "/month",
+      "description": "Trading with mini contracts (ES/GC).",
+      "short": "Mini",
+      "features": [
+        "Full access to /ES and /MES",
+        "Complete indicator suite",
+        "Advanced analytics",
+        "Monthly premium updates",
+        "Priority support",
+        "Premium data",
+        "Training sessions",
+        "Custom alerts",
+        "Detailed reports"
+      ],
+      "popular": "Recommended"
+    },
+    "cta": "Subscribe",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "compareMicro": "Equals {{perMonth}}/month (before: {{fullYear}}/year).",
+    "compareMini": "Equals {{perMonth}}/month (before: {{fullYear}}/year).",
+    "feature": {
+      "instrument": "Instrument: {{instrument}} ({{symbol}})",
+      "focusInstrument": "Exclusive focus on {{instrument}}",
+      "liveSupport": "International chat support 24/6",
+      "secure": "Secure checkout with PayPal",
+      "updatesMonthly": "Monthly updates included",
+      "noGuarantees": "No performance guarantees"
+    },
+    "guarantee": "30-day money back guarantee",
+    "secure": "Secure and reliable",
+    "support": "Need help? Our team is available 24/6.",
+    "paypalDesc": "AInside - {{plan}} Contract - {{instrument}} ({{symbol}}) - {{cycle}} Subscription - {{amount}}",
+    "processing": "Processing payment...",
+    "loadingPaypal": "Loading PayPal...",
+    "checkoutTitle": "Secure Payment",
+    "close": "Close",
+    "plan": "Plan",
+    "contract": "Contract",
+    "cycle": "Cycle",
+    "amount": "Amount",
+    "success": "✅ Payment completed",
+    "thanks": "Thank you for your purchase!",
+    "error": "Error",
+    "errorDesc": "Payment could not be processed.",
+    "securedByPaypal": "Transaction secured by PayPal",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "popular": "Recommended"
+  }
+}

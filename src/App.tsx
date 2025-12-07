@@ -1,0 +1,82 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { setDocumentDirection } from "@/lib/i18n";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { StructuredData } from "@/components/seo/StructuredData";
+import Index from "./pages/Index";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import Demo from "./pages/Demo";
+import LiveDemo from "./pages/LiveDemo";
+import LiveDemoMini from "./pages/LiveDemoMini";
+import Pricing from "./pages/Pricing";
+import Products from "./pages/Products";
+import Documentation from "./pages/Documentation";
+import Checkout from "./pages/Checkout";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
+import Legal from "./pages/Legal";
+import LegalTerms from "./pages/LegalTerms";
+import LegalPrivacy from "./pages/LegalPrivacy";
+import LegalDisclaimer from "./pages/LegalDisclaimer";
+import Status from "./pages/Status";
+import NotFound from "./pages/NotFound";
+import "./lib/i18n";
+
+const queryClient = new QueryClient();
+
+const App = () => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    setDocumentDirection(i18n.language);
+  }, [i18n.language]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <StructuredData />
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <main id="main-content" className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/demo" element={<Demo />} />
+                <Route path="/live-demo" element={<LiveDemo />} />
+                <Route path="/live-demo-mini" element={<LiveDemoMini />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/documentation" element={<Documentation />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route path="/payment-cancel" element={<PaymentCancel />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="/legal/terms" element={<LegalTerms />} />
+                <Route path="/legal/privacy" element={<LegalPrivacy />} />
+                <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
+                <Route path="/status" element={<Status />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
+
+export default App;

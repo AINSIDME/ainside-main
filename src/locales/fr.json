@@ -1,0 +1,373 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "demo": "Données Réelles",
+    "liveDemoMini": "Live",
+    "contact": "Contact"
+  },
+  "header": {
+    "brand": "AInside.me",
+    "toggleMenu": "Basculer le menu"
+  },
+  "homepage": {
+    "title": {
+      "main": "Trading Professionnel",
+      "subtitle": "Solutions Algorithmiques"
+    },
+    "subtitle": "Société de Développement d'Algorithmes",
+    "description": "Nous développons des algorithmes propriétaires et louons des outils analytiques aux traders et institutions. Solutions technologiques uniquement.",
+    "trust": {
+      "security": "Sécurité d'Entreprise",
+      "compliance": "Grade Institutionnel",
+      "global": "Infrastructure Globale"
+    },
+    "capabilities": {
+      "analytics": {
+        "title": "Analyses Avancées",
+        "description": "Algorithmes propriétaires pour l'analyse de marché et l'automatisation du trading"
+      },
+      "security": {
+        "title": "Sécurité d'Abord",
+        "description": "Sécurité de niveau bancaire et conformité pour les exigences institutionnelles"
+      },
+      "infrastructure": {
+        "title": "Infrastructure Robuste",
+        "description": "Plateforme de niveau entreprise avec garantie de 99,9% de temps de fonctionnement"
+      },
+      "protection": {
+        "title": "Protection des Risques",
+        "description": "Gestion avancée des risques et protocoles de protection"
+      }
+    },
+    "services": {
+      "title": "Ce Que Nous Faisons",
+      "subtitle": "Spécialisés dans le développement d'algorithmes et les services de location de technologie",
+      "development": {
+        "feature1": "Création d'algorithmes personnalisés",
+        "feature2": "Développement d'indicateurs techniques",
+        "feature3": "Outils d'analyse de marché"
+      },
+      "rental": {
+        "feature1": "Plans d'abonnement mensuel",
+        "feature2": "Support d'intégration de plateforme",
+        "feature3": "Support technique inclus"
+      },
+      "security": {
+        "feature1": "Chiffrement de niveau bancaire",
+        "feature2": "Cadres de conformité",
+        "feature3": "Protocoles de protection des données"
+      }
+    },
+    "stats": {
+      "algorithms": "Algorithmes",
+      "support": "Support",
+      "uptime": "Temps de Fonctionnement",
+      "clients": "Clients"
+    },
+    "values": {
+      "title": "Notre Approche",
+      "innovation": {
+        "title": "Innovation",
+        "description": "Algorithmes de pointe et technologie de trading"
+      },
+      "reliability": {
+        "title": "Fiabilité",
+        "description": "Historique prouvé avec des clients institutionnels"
+      },
+      "security": {
+        "title": "Sécurité",
+        "description": "Protection et conformité de niveau entreprise"
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Engagement envers les plus hauts standards de qualité"
+      }
+    },
+    "cta": {
+      "title": "Prêt à Louer Nos",
+      "subtitle": "Algorithmes de Trading ?",
+      "description": "Accédez à nos algorithmes de trading et outils analytiques professionnels grâce à des plans de location mensuelle flexibles.",
+      "demo": "Voir Démo en Direct",
+      "contact": "Nous Contacter",
+      "services": "Nos Services",
+      "consultation": "Planifier une Consultation"
+    },
+    "footer": {
+      "dataProtection": "Protection des Données",
+      "compliance": "Prêt pour la Conformité"
+    }
+  },
+  "footer": {
+    "description": "Entreprise de développement de logiciels spécialisée dans les outils éducatifs et de recherche. Nous NE sommes PAS un fournisseur de services financiers.",
+    "copyright": "© {{year}} AInside.me. Tous droits réservés.",
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos de Nous",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Légal",
+      "terms": "Conditions Générales",
+      "privacy": "Politique de Confidentialité",
+      "disclaimer": "Avertissement Légal"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Support Contact",
+      "documentation": "Documentation",
+      "status": "État du Système"
+    },
+    "trust": {
+      "security": "Sécurité d'Entreprise",
+      "protection": "Protection des Données",
+      "compliance": "Prêt pour la Conformité"
+    }
+  },
+  "hero": {
+    "title": "Outils de Trading Professionnel",
+    "subtitle": "Analyses avancées en temps réel pour les traders institutionnels",
+    "cta": "Voir Stream en Direct"
+  },
+  "demo": {
+    "title": "Démo des Outils de Trading en Direct",
+    "subtitle": "Découvrez nos outils d'analyse en temps réel",
+    "play": "Lire",
+    "pause": "Pause",
+    "reset": "Réinitialiser",
+    "speed": "Vitesse",
+    "overlays": "Surcouches",
+    "overlaysTitle": "Surcouches d'Analyse",
+    "vwap": "VWAP",
+    "volumeProfile": "Profil de Volume",
+    "supportResistance": "Support/Résistance",
+    "trendlines": "Lignes de Tendance",
+    "fibonacciRetracements": "Retracements de Fibonacci",
+    "data": "Données",
+    "dataTitle": "Données de Marché en Temps Réel",
+    "price": "Prix",
+    "volume": "Volume",
+    "change": "Variation",
+    "high": "Haut",
+    "low": "Bas",
+    "time": "Heure",
+    "pnlSimulator": "Simulateur P&L",
+    "pnlTitle": "Simulateur de Profits et Pertes",
+    "portfolio": "Portefeuille",
+    "trades": "Trades",
+    "profit": "Profit",
+    "loss": "Perte",
+    "winRate": "Taux de Gain",
+    "sharpeRatio": "Ratio de Sharpe",
+    "maxDrawdown": "Drawdown Max",
+    "lastTick": "Dernière Mise à Jour",
+    "latency": "Latence",
+    "uptime": "Disponibilité",
+    "ready": "Prêt",
+    "manifestLoaded": "Manifest chargé",
+    "receiving": "Réception des segments HLS",
+    "fatalError": "Erreur fatale HLS. Nouvel essai...",
+    "reconnecting": "Reconnexion...",
+    "notSupported": "Votre navigateur ne supporte pas HLS",
+    "urlCopied": "URL copiée dans le presse-papiers",
+    "connected": "Connecté",
+    "copyError": "Impossible de copier l'URL",
+    "copyUrl": "Copier l'URL du stream",
+    "mute": "Muet",
+    "unmute": "Activer le son",
+    "fullscreen": "Plein écran",
+      "exitFullscreen": "Quitter le plein écran",
+      "marketOpen": "Marché Ouvert"
+  },
+  "products": {
+    "title": "Outils d'Analyse Professionnel",
+    "subtitle": "Tout ce dont vous avez besoin pour une analyse de marché avancée",
+    "realTimeData": "Données en Temps Réel",
+    "advancedAnalysis": "Analyse Avancée",
+    "institutionalGrade": "Niveau Institutionnel"
+  },
+  "about": {
+    "title": "À Propos de Nous",
+    "subtitle": "Spécialistes en technologie financière",
+    "description": "Nous développons des solutions technologiques avancées pour les institutions financières et les traders professionnels."
+  },
+  "legal": {
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "disclaimerText": "AVIS LÉGAL IMPORTANT: AInside.me est une ENTREPRISE DE DÉVELOPPEMENT LOGICIEL, PAS un fournisseur de services financiers, courtier ou conseiller en investissement. Nos outils sont UNIQUEMENT à des fins ÉDUCATIVES et de RECHERCHE. Nous ne fournissons AUCUN conseil d'investissement, recommandations ou services financiers. Le trading implique un risque substantiel de perte. Les utilisateurs sont seuls responsables de leurs décisions et résultats de trading. AInside.me décline TOUTE responsabilité pour les pertes financières, dommages ou conséquences découlant de l'utilisation de nos outils logiciels.",
+    "responsibilityText": "EXCLUSION DE RESPONSABILITÉ: En utilisant nos outils logiciels, vous reconnaissez que: (1) AInside.me est uniquement une entreprise de programmation/logiciel, (2) Nous ne fournissons AUCUN conseil financier ou recommandations, (3) Toutes les décisions de trading sont votre seule responsabilité, (4) Vous assumez TOUS les risques et responsabilités, (5) AInside.me n'est PAS responsable des pertes, dommages ou conséquences, (6) Nos outils sont uniquement à des fins éducatives/recherche, (7) Les performances passées ne garantissent pas les résultats futurs, (8) Vous ne tiendrez pas AInside.me responsable des résultats de trading."
+  },
+  "checkout": {
+    "title": "Finaliser l'Achat",
+    "agreement": "J'accepte les conditions d'utilisation",
+    "payNow": "Payer Maintenant"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes là pour vous aider",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "support": "Support",
+    "name": "Nom",
+    "message": "Message",
+    "send": "Envoyer"
+  },
+  "accessibility": {
+    "title": "Déclaration d'Accessibilité",
+    "subtitle": "Nous nous engageons à rendre nos services accessibles à tous",
+      "skipToMain": "Aller au contenu principal",
+      "skipToContent": "Aller au contenu principal",
+    "increaseFontSize": "Augmenter la taille de police",
+    "decreaseFontSize": "Diminuer la taille de police",
+    "toggleHighContrast": "Basculer le contraste élevé"
+  },
+  "status": {
+    "title": "État du Système",
+    "subtitle": "Surveillance en temps réel de nos services",
+    "allOperational": "Tous les Systèmes Opérationnels",
+    "degradedPerformance": "Performance Dégradée",
+    "majorOutage": "Panne Majeure",
+    "maintenance": "Maintenance",
+    "api": "API",
+    "webInterface": "Interface Web",
+    "dataFeeds": "Flux de Données"
+  },
+  "trust": {
+    "sslSecured": "SSL Sécurisé",
+    "privacyProtected": "Confidentialité Protégée",
+    "compliant": "Conforme",
+    "enterprise": "Sécurité Entreprise"
+  },
+  "chat": {
+    "title": "Chat en Direct",
+    "subtitle": "Analyse de trading en temps réel",
+    "welcome": "Bienvenue dans le chat en direct. Vous pouvez poser toute question sur le stream en direct.",
+    "assistant": "Assistant de Trading",
+    "frequentQuestions": "Questions Fréquentes",
+    "placeholder": "Écrivez votre question sur l'analyse...",
+    "writeMessage": "Écrire un message",
+    "sendMessage": "Envoyer le message",
+    "instructions": "Entrée pour envoyer • Shift+Entrée pour nouvelle ligne",
+    "backToMenu": "🔄 Retour au menu principal",
+    "questions": {
+      "q1": "Que vois-je dans ce stream en direct ?",
+      "q2": "Ce sont de vraies positions ?",
+      "q3": "Que signifient les indicateurs VWAP ?",
+      "q4": "Quel service offrez-vous exactement ?",
+      "q5": "Puis-je copier ces opérations ?",
+      "q6": "Combien coûte l'accès ?"
+    },
+    "answers": {
+      "a1": "📺 Ce stream montre du trading RÉEL sur les futures S&P 500 (/ES et /MES) avec positions actuelles, graphiques professionnels, indicateurs techniques comme VWAP et opérations en temps réel.",
+      "a2": "✅ OUI, toutes les positions montrées sont des opérations RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre capital et P&L actuels en direct.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) est le prix moyen pondéré par volume. Les lignes bleues/rouges montrent les zones institutionnelles de support/résistance que nous utilisons pour ouvrir de vraies positions.",
+      "a4": "🔧 Nous louons des OUTILS D'ÉTUDE et des indicateurs techniques pour l'analyse de marché. Ce sont des outils éducatifs, PAS de conseil financier.",
+      "a5": "📚 Vous pouvez étudier nos opérations comme matériel éducatif. Compatible SEULEMENT avec les plateformes EasyLanguage: TradeStation, TradeStation Global et MultiCharts (PowerLanguage). IMPORTANT: Pour étude seulement, pas de conseil.",
+      "a6": "💰 Location d'outils: $99/mois ou $999/an (économisez $189). Inclut accès 24/7 aux indicateurs et outils d'étude. Usage éducatif uniquement."
+    },
+    "responses": {
+      "vwap": "📊 VWAP montre le prix moyen pondéré par volume. Les lignes vous aident à identifier les niveaux institutionnels de support et résistance en temps réel.",
+      "real": "✅ OUI, toutes les positions sont RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre P&L actuel en direct et comment nous tradons réellement.",
+      "pnl": "💰 Vous voyez le P&L RÉEL de nos opérations en temps réel. Chaque gain et perte que vous voyez est avec de l'argent réel, pas simulé.",
+      "stream": "📺 Ce stream montre du trading RÉEL du S&P 500 avec positions actuelles. Vous pouvez voir de vraies opérations, pas des démonstrations.",
+      "default": "🤖 Je peux vous aider avec des questions sur le stream, indicateurs, simulateur P&L, stratégies de trading et plus. Que souhaitez-vous savoir ?",
+      "fallback": "Merci pour votre question. Un analyste répondra sous peu."
+    }
+  },
+  "pricing": {
+    "title": "Forfaits et Tarifs",
+    "subtitle": "Contrats Micro et Mini. Choisissez Mensuel ou Annuel (économisez 30%).",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "monthlyShort": "Mensuel",
+    "annualShort": "Annuel",
+    "billingCycle": "Cycle de Facturation",
+    "save": "Économisez 30%",
+    "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
+    "chooseInstrument": "Choisir l'Instrument",
+    "billingInfo": "Facturé mensuellement • Annulation à tout moment",
+    "micro": {
+      "name": "Contrat Micro",
+      "price": "$99",
+      "period": "/mois",
+      "description": "Négociation avec contrats micro (MES/MGC).",
+      "short": "Micro",
+      "features": [
+        "Accès à /MES (E-mini S&P 500)",
+        "Tous les indicateurs techniques",
+        "Analyses en temps réel",
+        "Support par email",
+        "Données de marché en direct",
+        "Outils éducatifs"
+      ]
+    },
+    "mini": {
+      "name": "Contrat Mini",
+      "price": "$999",
+      "period": "/mois",
+      "description": "Négociation avec contrats mini (ES/GC).",
+      "short": "Mini",
+      "features": [
+        "Accès complet à /ES et /MES",
+        "Suite complète d'indicateurs",
+        "Analyses avancées",
+        "Support prioritaire",
+        "Données premium",
+        "Sessions de formation",
+        "Alertes personnalisées",
+        "Rapports détaillés"
+      ],
+      "popular": "Recommandé"
+    },
+    "cta": "S'abonner",
+    "perMonth": "/mois",
+    "perYear": "/an",
+    "compareMicro": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "compareMini": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "feature": {
+      "instrument": "Instrument: {{instrument}} ({{symbol}})",
+      "focusInstrument": "Focus exclusif sur {{instrument}}",
+      "liveSupport": "Support chat international 24/6",
+      "secure": "Paiement sécurisé avec PayPal",
+      "updatesMonthly": "Mises à jour mensuelles incluses",
+      "noGuarantees": "Aucune garantie de performance"
+    },
+    "guarantee": "Garantie de remboursement de 30 jours",
+    "secure": "Sécurisé et fiable",
+    "support": "Besoin d'aide ? Notre équipe est disponible 24/6.",
+    "paypalDesc": "AInside - Contrat {{plan}} - {{instrument}} ({{symbol}}) - Abonnement {{cycle}} - {{amount}}",
+    "processing": "Traitement du paiement...",
+    "loadingPaypal": "Chargement de PayPal...",
+    "checkoutTitle": "Paiement sécurisé",
+    "close": "Fermer",
+    "plan": "Forfait",
+    "contract": "Contrat",
+    "cycle": "Cycle",
+    "amount": "Montant",
+    "success": "✅ Paiement effectué",
+    "thanks": "Merci pour votre achat !",
+    "error": "Erreur",
+    "errorDesc": "Le paiement n'a pas pu être traité.",
+    "securedByPaypal": "Transaction sécurisée par PayPal",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "popular": "Recommandé"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

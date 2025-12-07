@@ -1,0 +1,424 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "services": "Servicios",
+    "demo": "Datos Reales",
+    "liveDemoMini": "Live",
+    "pricing": "Precios",
+    "contact": "Contacto"
+  },
+  "header": {
+    "brand": "AInside.me",
+    "toggleMenu": "Alternar menú"
+  },
+  "homepage": {
+    "title": {
+      "main": "Trading Profesional",
+      "subtitle": "Soluciones Algorítmicas"
+    },
+    "subtitle": "Empresa de Desarrollo de Algoritmos",
+    "description": "Desarrollamos algoritmos propietarios y alquilamos herramientas analíticas a traders e instituciones. Solo soluciones tecnológicas.",
+    "trust": {
+      "security": "Seguridad Empresarial",
+      "compliance": "Grado Institucional",
+      "global": "Infraestructura Global"
+    },
+    "capabilities": {
+      "analytics": {
+        "title": "Análisis Avanzado",
+        "description": "Algoritmos propietarios para análisis de mercado y automatización de trading"
+      },
+      "security": {
+        "title": "Seguridad Primero",
+        "description": "Seguridad de grado bancario y cumplimiento para requisitos institucionales"
+      },
+      "infrastructure": {
+        "title": "Infraestructura Robusta",
+        "description": "Plataforma de nivel empresarial con garantía de 99.9% de tiempo de actividad"
+      },
+      "protection": {
+        "title": "Protección de Riesgo",
+        "description": "Gestión avanzada de riesgos y protocolos de protección"
+      }
+    },
+    "services": {
+      "title": "Lo Que Hacemos",
+      "subtitle": "Especializados en desarrollo de algoritmos y servicios de alquiler de tecnología",
+      "development": {
+        "feature1": "Creación de algoritmos personalizados",
+        "feature2": "Desarrollo de indicadores técnicos",
+        "feature3": "Herramientas de análisis de mercado"
+      },
+      "rental": {
+        "feature1": "Planes de suscripción mensual",
+        "feature2": "Soporte de integración de plataforma",
+        "feature3": "Soporte técnico incluido"
+      },
+      "security": {
+        "feature1": "Cifrado de nivel bancario",
+        "feature2": "Marcos de cumplimiento",
+        "feature3": "Protocolos de protección de datos"
+      }
+    },
+    "stats": {
+      "algorithms": "Algoritmos",
+      "support": "Soporte",
+      "uptime": "Tiempo Activo",
+      "clients": "Clientes"
+    },
+    "values": {
+      "title": "Nuestro Enfoque",
+      "innovation": {
+        "title": "Innovación",
+        "description": "Algoritmos de vanguardia y tecnología de trading"
+      },
+      "reliability": {
+        "title": "Confiabilidad",
+        "description": "Historial comprobado con clientes institucionales"
+      },
+      "security": {
+        "title": "Seguridad",
+        "description": "Protección y cumplimiento de grado empresarial"
+      },
+      "excellence": {
+        "title": "Excelencia",
+        "description": "Compromiso con los más altos estándares de calidad"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para Alquilar Nuestros",
+      "subtitle": "Algoritmos de Trading?",
+      "description": "Accede a nuestros algoritmos de trading y herramientas analíticas profesionales a través de planes de alquiler mensual flexibles.",
+      "demo": "Ver Demo en Vivo",
+      "contact": "Contáctanos",
+      "services": "Nuestros Servicios", 
+      "consultation": "Programar Consulta"
+    },
+    "footer": {
+      "dataProtection": "Protección de Datos",
+      "compliance": "Listo para Cumplimiento"
+    }
+  },
+  "footer": {
+    "description": "Empresa especializada en desarrollo de algoritmos de trading y alquiler de herramientas analíticas. NO proporcionamos asesoramiento financiero.",
+    "copyright": "© {{year}} AInside.me. Todos los derechos reservados.",
+    "company": {
+      "title": "Empresa",
+      "about": "Acerca de Nosotros",
+      "services": "Servicios",
+      "contact": "Contacto"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos y Condiciones",
+      "privacy": "Política de Privacidad",
+      "disclaimer": "Descargo de Responsabilidad Legal"
+    },
+    "support": {
+      "title": "Soporte",
+      "contact": "Soporte de Contacto",
+      "documentation": "Documentación",
+      "status": "Estado del Sistema"
+    },
+    "trust": {
+      "security": "Seguridad Empresarial",
+      "protection": "Protección de Datos",
+      "compliance": "Listo para Cumplimiento"
+    }
+  },
+  "hero": {
+    "title": "Herramientas Profesionales de Análisis de Trading",
+    "subtitle": "Herramientas avanzadas de investigación y análisis para trading intradía de futuros. Solo herramientas educativas - no asesoramiento de inversión.",
+    "cta": "Ver Demo en Vivo",
+    "ctaSecondary": "Más Información"
+  },
+  "demo": {
+    "title": "Demo en Vivo de Herramientas de Trading",
+    "subtitle": "Vea nuestras herramientas de análisis profesional en acción con simulación de mercado en tiempo real",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "reset": "Reiniciar",
+    "speed": "Velocidad",
+    "overlays": "Superposiciones",
+    "vwap": "VWAP de Sesión",
+    "hilo": "Zonas Alto/Bajo",
+    "riskBox": "Caja de Riesgo",
+    "downloadCsv": "Descargar CSV",
+    "latency": "Latencia",
+    "lastTick": "Último Tick",
+    "uptime": "Tiempo Activo",
+    "pnlSimulator": "Simulador P&L (Educativo)",
+    "entry": "Entrada",
+    "exit": "Salida",
+    "setEntry": "Establecer Entrada",
+    "setExit": "Establecer Salida",
+    "clearTrades": "Limpiar Operaciones",
+    "unrealizedPnl": "P&L No Realizado",
+    "realizedPnl": "P&L Realizado",
+    "totalTrades": "Total de Operaciones",
+    "winRate": "Tasa de Ganancia",
+    "ready": "Listo",
+    "manifestLoaded": "Manifest cargado",
+    "receiving": "Recibiendo segmentos HLS",
+    "fatalError": "Error fatal HLS. Reintentando...",
+    "reconnecting": "Reconectando...",
+    "notSupported": "Tu navegador no soporta HLS",
+    "urlCopied": "URL copiada al portapapeles",
+    "connected": "Conectado",
+    "copyError": "No se pudo copiar la URL",
+    "copyUrl": "Copiar URL del stream",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido",
+    "fullscreen": "Pantalla completa",
+      "exitFullscreen": "Salir de pantalla completa",
+      "marketOpen": "Mercado Abierto"
+  },
+  "products": {
+    "title": "Herramientas de Análisis Profesional",
+    "subtitle": "Suite completa de herramientas para investigación y análisis del mercado de futuros",
+    "features": {
+      "realtime": "Datos en Tiempo Real",
+      "analysis": "Análisis Avanzado",
+      "risk": "Gestión de Riesgos",
+      "reporting": "Reportes Detallados"
+    }
+  },
+  "about": {
+    "title": "Acerca de Nosotros",
+    "subtitle": "Misión: Tecnología de análisis avanzada para traders profesionales",
+    "description": "Proporcionamos herramientas de investigación y análisis de vanguardia para trading intradía de futuros. Nuestras herramientas están diseñadas únicamente para fines educativos e investigación de mercado."
+  },
+  "legal": {
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad",
+    "disclaimer": "Descargo Legal",
+    "responsibility": "Acuerdo de Responsabilidad",
+    "disclaimerText": "AVISO LEGAL IMPORTANTE: AInside.me es una EMPRESA DE DESARROLLO DE SOFTWARE, NO un proveedor de servicios financieros, broker o asesor de inversiones. Nuestras herramientas son SOLO para fines EDUCATIVOS y de INVESTIGACIÓN. NO proporcionamos asesoramiento de inversión, recomendaciones o servicios financieros. El trading implica riesgo sustancial de pérdida. Los usuarios son únicamente responsables de sus decisiones y resultados de trading. AInside.me renuncia a TODA responsabilidad por pérdidas financieras, daños o consecuencias derivadas del uso de nuestras herramientas de software.",
+    "responsibilityText": "EXENCIÓN DE RESPONSABILIDAD: Al usar nuestras herramientas de software, usted reconoce que: (1) AInside.me es únicamente una empresa de programación/software, (2) NO proporcionamos asesoramiento financiero ni recomendaciones, (3) Todas las decisiones de trading son su única responsabilidad, (4) Usted asume TODOS los riesgos y responsabilidades, (5) AInside.me NO es responsable de pérdidas, daños o consecuencias, (6) Nuestras herramientas son solo para fines educativos/investigación, (7) El rendimiento pasado no garantiza resultados futuros, (8) Usted no responsabilizará a AInside.me por ningún resultado de trading."
+  },
+  "checkout": {
+    "title": "Complete su Compra",
+    "responsibilityAgreement": "Acepto el Acuerdo de Responsabilidad",
+    "payNow": "Pagar con PayPal",
+    "viewAgreement": "Ver Acuerdo Completo",
+    "agreementRequired": "Debe aceptar el Acuerdo de Responsabilidad para continuar"
+  },
+  "contact": {
+    "title": "Contacto y Soporte",
+    "subtitle": "Obtenga ayuda con nuestras herramientas de análisis de trading",
+    "email": "Soporte por Email",
+    "form": "Formulario de Contacto",
+    "sla": "SLA de Soporte: Primera respuesta dentro de 1 día hábil",
+    "name": "Nombre",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje"
+  },
+  "accessibility": {
+    "title": "Declaración de Accesibilidad",
+    "subtitle": "Nuestro compromiso con el diseño inclusivo",
+    "statement": "Buscamos cumplir con los estándares WCAG 2.1 AA. Si experimenta barreras de accesibilidad, contáctenos y le ayudaremos.",
+    "skipToContent": "Saltar al contenido principal",
+    "toggleHighContrast": "Alternar Alto Contraste",
+    "increaseFontSize": "Aumentar Tamaño de Fuente",
+    "decreaseFontSize": "Disminuir Tamaño de Fuente"
+  },
+  "status": {
+    "title": "Estado del Sistema",
+    "operational": "Todos los Sistemas Operativos",
+    "degraded": "Rendimiento Degradado",
+    "outage": "Interrupción del Servicio",
+    "maintenance": "Mantenimiento Programado",
+    "dataFeed": "Feed de Datos del Mercado",
+    "charts": "Servicios de Gráficos",
+    "api": "Servicios API"
+  },
+  "trust": {
+    "ssl": "Seguridad SSL",
+    "privacy": "Privacidad Protegida",
+    "compliant": "Cumplimiento Regulatorio"
+  },
+  "chat": {
+    "title": "Chat en Vivo",
+    "subtitle": "Análisis de trading en tiempo real",
+    "welcome": "Bienvenidos al chat en vivo. Pueden hacer cualquier pregunta sobre el stream en vivo.",
+    "assistant": "Asistente de Trading",
+    "frequentQuestions": "Preguntas Frecuentes",
+    "placeholder": "Escriban su pregunta sobre el análisis...",
+    "writeMessage": "Escribir mensaje",
+    "sendMessage": "Enviar mensaje",
+    "instructions": "Enter para enviar • Shift+Enter para nueva línea",
+    "backToMenu": "🔄 Volver al menú principal",
+    "questions": {
+      "q1": "¿Qué veo en este stream en vivo?",
+      "q2": "¿Estas son posiciones reales?",
+      "q3": "¿Qué significan los indicadores VWAP?",
+      "q4": "¿Qué servicio ofrecen exactamente?",
+      "q5": "¿Puedo copiar estas operaciones?",
+      "q6": "¿Cuánto cuesta acceder a todo esto?"
+    },
+    "answers": {
+      "a1": "📺 Este stream muestra trading REAL del S&P 500 futuros (/ES y /MES) con posiciones actuales, gráficos profesionales, indicadores técnicos como VWAP y operaciones en tiempo real.",
+      "a2": "✅ SÍ, todas las posiciones mostradas son operaciones REALES con dinero real. No es simulación - puedes ver nuestro capital y P&L actual en vivo.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) es el precio promedio ponderado por volumen. Las líneas azules/rojas muestran zonas de soporte/resistencia institucional que usamos para abrir posiciones reales.",
+      "a4": "🔧 Somos una empresa que DESARROLLA algoritmos de trading y ALQUILA herramientas analíticas. Tu dinero queda en tu cuenta de broker, solo alquilas nuestras herramientas.",
+      "a5": "📚 Puedes estudiar nuestras operaciones como material educativo. Compatible SOLO con plataformas EasyLanguage: TradeStation, TradeStation Global y MultiCharts (PowerLanguage). IMPORTANTE: Solo para estudio, no es asesoramiento.",
+      "a6": "💰 Alquiler de herramientas: $99/mes o $999/año (ahorras $189). Incluye acceso 24/7 a indicadores y herramientas de estudio. Solo para uso educativo."
+    },
+    "responses": {
+      "vwap": "📊 VWAP muestra el precio promedio ponderado por volumen. Las líneas te ayudan a identificar niveles institucionales de soporte y resistencia en tiempo real.",
+      "real": "✅ SÍ, todas las posiciones son REALES con dinero real. No es simulación - puedes ver nuestro P&L actual en vivo y cómo operamos realmente.",
+      "pnl": "💰 Ves el P&L REAL de nuestras operaciones en tiempo real. Cada ganancia y pérdida que ves es con dinero real, no simulado.",
+      "stream": "📺 Este stream muestra trading REAL del S&P 500 con posiciones actuales. Puedes ver operaciones reales, no demostraciones.",
+      "default": "🤖 Puedo ayudarte con preguntas sobre el stream, indicadores, simulador P&L, estrategias de trading y más. ¿Qué te interesa saber?",
+      "fallback": "Gracias por su pregunta. Un analista responderá en breve."
+    }
+  },
+  "pricing": {
+    "title": "Planes y Precios",
+    "subtitle": "Contratos Micro y Mini. Elegí Mensual o Anual (ahorro 30%).",
+    "monthly": "Mensual",
+    "annual": "Anual",
+    "monthlyShort": "Mensual",
+    "annualShort": "Anual",
+    "billingCycle": "Ciclo de Facturación",
+    "save": "Ahorra 30%",
+    "renews": "Renovación automática. Podés cancelar cuando quieras.",
+    "chooseInstrument": "Elegí Instrumento",
+    "billingInfo": "Facturación mensual o anual (30% OFF en anual). Podés cancelar en cualquier momento.",
+    "micro": {
+      "name": "Alquiler Micro S&P 500",
+      "price": "$99",
+      "period": "/mes",
+      "description": "Alquiler mensual perfecto para traders principiantes. Incluye actualizaciones automáticas.",
+      "short": "Micro",
+      "features": [
+        "Acceso a /MES (E-mini S&P 500)",
+        "Todos los indicadores técnicos",
+        "Análisis en tiempo real",
+        "Actualizaciones mensuales automáticas",
+        "Soporte por email",
+        "Datos de mercado en vivo",
+        "Herramientas educativas"
+      ]
+    },
+    "mini": {
+      "name": "Alquiler Mini S&P 500",
+      "price": "$999",
+      "period": "/mes",
+      "description": "Alquiler completo para traders profesionales. Actualizaciones premium cada mes.",
+      "short": "Mini",
+      "features": [
+        "Acceso completo a /ES y /MES",
+        "Suite completa de indicadores",
+        "Análisis avanzados",
+        "Actualizaciones mensuales premium",
+        "Soporte prioritario",
+        "Datos premium",
+        "Sesiones de entrenamiento",
+        "Alertas personalizadas",
+        "Reportes detallados"
+      ],
+      "popular": "Recomendado"
+    },
+    "cta": "Suscribirme",
+    "perMonth": "/mes",
+    "perYear": "/año",
+    "compareMicro": "Equivale a {{perMonth}}/mes (antes: {{fullYear}}/año).",
+    "compareMini": "Equivale a {{perMonth}}/mes (antes: {{fullYear}}/año).",
+    "feature": {
+      "instrument": "Instrumento: {{instrument}} ({{symbol}})",
+      "focusInstrument": "Enfoque exclusivo en {{instrument}}",
+      "liveSupport": "Soporte internacional por chat 24/6",
+      "secure": "Checkout seguro con PayPal",
+      "updatesMonthly": "Actualizaciones mensuales incluidas",
+      "noGuarantees": "Sin compromiso de resultados"
+    },
+    "guarantee": "Garantía de devolución de 30 días",
+    "secure": "Seguro y confiable",
+    "support": "¿Necesitás ayuda? Nuestro equipo está disponible 24/6.",
+    "paypalDesc": "AInside - Contrato {{plan}} - {{instrument}} ({{symbol}}) - Suscripción {{cycle}} - {{amount}}",
+    "processing": "Procesando pago...",
+    "loadingPaypal": "Cargando PayPal...",
+    "checkoutTitle": "Pago seguro",
+    "close": "Cerrar",
+    "plan": "Plan",
+    "contract": "Contrato",
+    "cycle": "Ciclo",
+    "amount": "Importe",
+    "success": "✅ Pago completado",
+    "thanks": "¡Gracias por tu compra!",
+    "error": "Error",
+    "errorDesc": "No se pudo procesar el pago.",
+    "securedByPaypal": "Transacción protegida por PayPal",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "popular": "Recomendado"
+  },
+  "trust": {
+    "ssl": "SSL Seguro",
+    "compliant": "Conforme"
+  },
+  "about": {
+    "badge": "Empresa de Desarrollo de Software",
+    "title": "Acerca de",
+    "subtitle": "AInside.me",
+    "description": "Empresa de desarrollo de software especializada en crear algoritmos de trading avanzados y alquilar herramientas analíticas profesionales a traders e instituciones financieras",
+    "missionVision": {
+      "title": "Nuestra Misión y Visión"
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "Desarrollar algoritmos de trading propietarios y alquilar herramientas analíticas profesionales que ayuden a traders e instituciones a analizar los mercados financieros de manera efectiva. Nos enfocamos exclusivamente en el desarrollo tecnológico, no en asesoría financiera."
+    },
+    "vision": {
+      "title": "Nuestra Visión",
+      "description": "Ser el desarrollador líder de algoritmos de trading y herramientas analíticas, reconocido por crear soluciones tecnológicas innovadoras que traders e instituciones pueden alquilar para mejorar sus capacidades de análisis de mercado."
+    },
+    "values": {
+      "title": "Valores Fundamentales",
+      "subtitle": "Los principios que guían nuestra organización y definen nuestro compromiso con la excelencia"
+    }
+  },
+  "contact": {
+    "badge": "Contáctanos",
+    "title": "Contacto",
+    "subtitle": "Nosotros",
+    "description": "Contacta a nuestro equipo de desarrollo de software para conocer sobre nuestros algoritmos de trading y servicios de alquiler de herramientas analíticas"
+  },
+  "demo": {
+    "badge": "Demostración de Tecnología de Software",
+    "title": "Análisis Avanzado",
+    "subtitle": "Demo de Plataforma",
+    "description": "Herramientas de software educativo para análisis e investigación de mercado. AInside.me es una empresa de desarrollo de software, NO un proveedor de servicios financieros."
+  },
+  "services": {
+    "badge": "Servicios Profesionales",
+    "title": "Desarrollo de Algoritmos",
+    "subtitle": "y Alquiler de Herramientas",
+    "description": "Desarrollamos algoritmos de trading propietarios y alquilamos herramientas analíticas profesionales a traders e instituciones financieras. Solo soluciones tecnológicas - sin asesoría financiera."
+  },
+  "legal": {
+    "title": "Información Legal y Exenciones de Responsabilidad",
+    "subtitle": "Avisos legales importantes sobre los servicios de desarrollo de software de AInside.me",
+    "disclaimer": {
+      "title": "EXENCIÓN DE RESPONSABILIDAD LEGAL CRÍTICA",
+      "subtitle": "Esta información es legalmente vinculante y afecta su uso de nuestros servicios",
+      "company": "AInside.me ES UNA EMPRESA DE DESARROLLO DE SOFTWARE ÚNICAMENTE"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "yes": "Sí",
+    "no": "No"
+  }
+}
