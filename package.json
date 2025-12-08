@@ -8,7 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "i18n:coverage": "node ./scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

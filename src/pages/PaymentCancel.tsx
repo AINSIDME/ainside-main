@@ -3,12 +3,13 @@ import { PageSEO } from "@/components/seo/PageSEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { XCircle, ArrowLeft, Home } from "lucide-react";
-
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function PaymentCancel() {
+  const { t } = useTranslation();
   useEffect(() => {
-    // Si estamos en una ventana popup, cerrarla después de un momento
+    // If this is a popup window, close after a moment
     if (window.opener) {
       setTimeout(() => {
         window.close();
@@ -19,8 +20,8 @@ export default function PaymentCancel() {
   return (
     <>
       <PageSEO 
-        title="Pago cancelado - AInside"
-        description="El pago ha sido cancelado"
+        title={t("paymentCancel.seo.title", { defaultValue: "Payment cancelled - AInside" })}
+        description={t("paymentCancel.seo.desc", { defaultValue: "The payment has been cancelled" })}
       />
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
@@ -28,9 +29,9 @@ export default function PaymentCancel() {
             <div className="mx-auto mb-4 h-16 w-16 bg-orange-500 rounded-full flex items-center justify-center">
               <XCircle className="h-8 w-8 text-white" />
             </div>
-            <CardTitle className="text-2xl text-orange-600">Pago Cancelado</CardTitle>
+            <CardTitle className="text-2xl text-orange-600">{t("paymentCancel.title", { defaultValue: "Payment Cancelled" })}</CardTitle>
             <p className="text-muted-foreground">
-              Has cancelado el proceso de pago. No se ha realizado ningún cargo.
+              {t("paymentCancel.subtitle", { defaultValue: "You cancelled the payment process. No charge was made." })}
             </p>
           </CardHeader>
           
@@ -39,12 +40,12 @@ export default function PaymentCancel() {
               <Button variant="outline" asChild className="flex-1">
                 <Link to="/pricing" className="flex items-center justify-center gap-2">
                   <ArrowLeft className="h-4 w-4" />
-                  Ver planes
+                  {t("paymentCancel.cta.plans", { defaultValue: "View plans" })}
                 </Link>
               </Button>
               <Button asChild className="flex-1">
                 <Link to="/checkout">
-                  Reintentar pago
+                  {t("paymentCancel.cta.retry", { defaultValue: "Retry payment" })}
                 </Link>
               </Button>
             </div>
@@ -52,12 +53,12 @@ export default function PaymentCancel() {
             <Button variant="ghost" asChild className="w-full">
               <Link to="/" className="flex items-center justify-center gap-2">
                 <Home className="h-4 w-4" />
-                Volver al inicio
+                {t("paymentCancel.cta.home", { defaultValue: "Back to home" })}
               </Link>
             </Button>
 
             <p className="text-xs text-center text-muted-foreground">
-              ¿Necesitas ayuda? <Link to="/contact" className="text-primary hover:underline">Contáctanos</Link>
+              {t("paymentCancel.help", { defaultValue: "Need help?" })} <Link to="/contact" className="text-primary hover:underline">{t("paymentCancel.contact", { defaultValue: "Contact us" })}</Link>
             </p>
           </CardContent>
         </Card>

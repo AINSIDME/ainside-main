@@ -6,11 +6,330 @@
     "demo": "Real Data",
     "liveDemoMini": "Live",
     "pricing": "Pricing",
-    "contact": "Contact"
+    "contact": "Contact",
+    "accessibility": "Accessibility"
+  },
+  "paymentSuccess": {
+    "errors": {
+      "noToken": "Payment token not found",
+      "capture": "Error confirming payment",
+      "processing": "Error processing payment"
+    },
+    "toast": {
+      "success": "Payment confirmed successfully!"
+    },
+    "loading": {
+      "title": "Confirming payment - AInside",
+      "desc": "Confirming your payment...",
+      "heading": "Confirming your payment...",
+      "note": "Please wait while we process your transaction"
+    },
+    "error": {
+      "title": "Payment error - AInside",
+      "desc": "Error processing the payment",
+      "heading": "Payment error",
+      "retry": "Retry payment"
+    },
+    "success": {
+      "title": "Payment confirmed - AInside",
+      "desc": "Your payment has been confirmed successfully",
+      "heading": "Payment Confirmed!",
+      "note": "Your payment has been processed successfully"
+    },
+    "details": {
+      "title": "Transaction details",
+      "plan": "Plan:",
+      "amount": "Amount:",
+      "orderId": "Order ID:",
+      "email": "Email:",
+      "status": "Status:",
+      "date": "Date:"
+    },
+    "cta": {
+      "demo": "Open Demo",
+      "guide": "Getting Started",
+      "home": "Go to Home"
+    },
+    "footer": {
+      "email": "You will receive a confirmation email in the next few minutes.",
+      "autoclose": "This window will close automatically in a few seconds."
+    }
+  },
+  "checkoutPage": {
+    "seo": {
+      "title": "Checkout - AInside",
+      "desc": "Complete your purchase securely with PayPal"
+    },
+    "title": "Secure Checkout",
+    "subtitle": "Complete your purchase quickly and safely",
+    "selectPlan": "Select your plan",
+    "summary": "Order Summary",
+    "total": "Total",
+    "badges": {
+      "secure": "100% secure payment",
+      "guarantee": "Money-back guarantee"
+    },
+    "processing": "Processing...",
+    "payWithPaypal": "Pay ${{price}} with PayPal",
+    "notice": "By continuing you accept our terms and conditions",
+    "errors": {
+      "selectPlan": "Please select a plan",
+      "create": "Error creating payment",
+      "noApproval": "Could not obtain payment URL",
+      "process": "Error processing payment"
+    },
+    "plans": {
+      "micro_monthly": { "name": "Micro S&P 500 Monthly", "desc": "One-month access" },
+      "micro_annual": { "name": "Micro S&P 500 Annual", "desc": "Annual access (discounted)" },
+      "mini_monthly": { "name": "Mini S&P 500 Monthly", "desc": "One-month access" },
+      "mini_annual": { "name": "Mini S&P 500 Annual", "desc": "Annual access (discounted)" }
+    }
+  },
+  "paymentCancel": {
+    "seo": { "title": "Payment cancelled - AInside", "desc": "The payment has been cancelled" },
+    "title": "Payment Cancelled",
+    "subtitle": "You cancelled the payment process. No charge was made.",
+    "cta": {
+      "plans": "View plans",
+      "retry": "Retry payment",
+      "home": "Back to home"
+    },
+    "help": "Need help?",
+    "contact": "Contact us"
+  },
+  "contactPage": {
+    "form": {
+      "header": "Send us a Message",
+      "subheader": "Our algorithm development team is ready to help with your tool rental inquiry",
+      "labels": {
+        "name": "Full Name *",
+        "email": "Email Address *",
+        "organization": "Organization",
+        "subject": "Subject *",
+        "message": "Message *"
+      },
+      "submit": "Send Message",
+      "toast": {
+        "title": "Message Sent",
+        "desc": "Thank you for your inquiry. Our team will respond within one business day."
+      }
+    },
+    "info": {
+      "email": { "title": "Email", "desc": "Primary contact for business inquiries" },
+      "phone": { "title": "Phone", "desc": "Business hours: Monday - Friday, 9 AM - 6 PM EST" },
+      "address": { "title": "Address", "desc": "Corporate headquarters" },
+      "response": { "title": "Response Time", "content": "Within 1 Business Day", "desc": "Our commitment to timely communication" }
+    },
+    "areas": {
+      "title": "Service Areas",
+      "subtitle": "Areas where our team can provide expert assistance",
+      "list": [
+        "Algorithm Development",
+        "Tool Rental Services",
+        "Platform Integration",
+        "Technical Support",
+        "Custom Algorithm Creation",
+        "Training and Documentation"
+      ]
+    },
+    "notice": {
+      "title": "Algorithm & Tool Consultation",
+      "p1": "Our development team is available to discuss algorithm rental services and provide information about our trading tools and technical indicators.",
+      "rememberLabel": "Remember:",
+      "remember": "We develop technology tools only - we do not provide financial advice."
+    }
+  },
+  "liveDemo": {
+    "slides": {
+      "ts1": "TradeStation: Entries/Exits and ATRStopL/S",
+      "ts2": "TradeStation: Short signal and stop management",
+      "ts3": "TradeStation: EndOfDay event"
+    },
+    "title": "Live Demo (Visual)",
+    "description": {
+      "part1": "The real execution of the strategy happens in ",
+      "part2": " with ",
+      "part3": "This page is a visualization for context and user experience. To see real signals on your platform, follow the "
+    },
+    "cta": {
+      "guide": "Getting Started Guide",
+      "guideWithPlatform": "Getting Started (EasyLanguage)",
+      "pricing": "See Pricing",
+      "install": "Install on my platform"
+    },
+    "chart": {
+      "title": "Flow visualization (example)",
+      "subtitle": "Illustrative example in the browser"
+    },
+    "active": "● ACTIVE",
+    "gallery": {
+      "empty": "Place screenshots in /public/guide to show real examples here."
+    },
+    "execution": {
+      "title": "Real execution (EasyLanguage)",
+      "p1": "The strategy runs natively on ",
+      "p2": " and ",
+      "p3": " using ",
+      "p4": "The browser only shows a visual representation. To install it in your platform see the "
+    },
+    "metrics": {
+      "title": "Example metrics",
+      "executed": "Trades Executed:",
+      "winners": "Winning Trades:",
+      "netPnl": "Net P&L:",
+      "profitFactor": "Profit Factor:",
+      "gain": "Gain %:",
+      "note": "Metrics shown are illustrative. For backtests and validations, use your own platform with historical data and indicated settings."
+    }
+  },
+  "a11yPage": {
+    "title": "Accessibility Statement",
+    "description": "Commitment to WCAG 2.1 AA, usability and inclusion.",
+    "commitment": {
+      "title": "Commitment",
+      "text": "AInside is committed to an inclusive experience aligned with WCAG 2.1 AA. If you encounter any accessibility barriers, contact us and we will assist and correct issues.",
+      "items": {
+        "langDir": "Document language and direction set per locale.",
+        "keyboard": "Keyboard shortcuts and navigation, 'Skip to content' link.",
+        "controls": "High contrast and font size controls.",
+        "aria": "Accessible labels, ARIA roles and semantic landmarks.",
+        "readers": "Screen reader compatibility and motion reduction."
+      }
+    },
+    "features": {
+      "title": "Accessibility features",
+      "skip": "Skip to content: visible on focus before main navigation.",
+      "controls": "High contrast and font size controls in the header accessibility menu.",
+      "keyboard": "Keyboard compatibility: all controls navigable with Tab/Shift+Tab; visible focus states.",
+      "i18n": "Internationalization: lang and dir attributes update by locale.",
+      "motion": "Reduced motion: respect system prefers-reduced-motion."
+    },
+    "contact": {
+      "title": "Contact and assistance",
+      "text": "If you need a reasonable accommodation or found an accessibility issue, contact us. We will respond as soon as possible.",
+      "form": "Via form: ",
+      "email": "Support email: support@ainside.me"
+    }
   },
   "header": {
     "brand": "AInside.me",
     "toggleMenu": "Toggle menu"
+  },
+  "gettingStarted": {
+    "title": "Getting Started • EasyLanguage",
+    "description": "EasyLanguage compatibility (TradeStation/MultiCharts), installation, data, logic and optimization.",
+    "deliverables": {
+      "title": "Compatibility and deliverables",
+      "compat": "Compatibility: The strategy is designed for EasyLanguage, usable on TradeStation and MultiCharts (PowerLanguage). Other platforms are not compatible.",
+      "afterPay": "After confirming payment, you receive:",
+      "eldpla": "EasyLanguage package: .ELD (TradeStation) and/or .PLA (MultiCharts).",
+      "workspaces": "Example workspaces: .wsp/.mcw per instrument (ES/MES, GC/MGC).",
+      "params": "Recommended parameters: /params/*.json (monthly/annual, micro/mini).",
+      "data": "Sample data: /data/*.csv for backtest/validation.",
+      "manual": "PDF manual with installation, rules and risk management.",
+      "panel": "Access to the Live Panel and 24/6 support.",
+      "note": "Download links are sent to the PayPal email and enabled in the panel."
+    },
+    "requirements": {
+      "title": "Minimum requirements",
+      "conn": "Stable connection (≥ 20 Mbps) and machine with 8 GB RAM or more.",
+      "platform": "Compatible platform to execute: TradeStation or MultiCharts (EasyLanguage).",
+      "provider": "Data provider/broker enabled for chosen instruments (ES/MES or GC/MGC)."
+    },
+    "install": {
+      "title": "EasyLanguage installation",
+      "s1": {
+        "title": "1) Download and organize the package",
+        "l1": "Download the ZIP from the provided link.",
+        "l2": "Extract to C:/AInside (short path recommended).",
+        "l3": "Typical structure: /easy-language/*.ELD|*.PLA, /workspaces, /params, /data, manual.pdf."
+      },
+      "s2": {
+        "title": "2) TradeStation (.ELD)",
+        "l1": "File → Import/Export EasyLanguage → Import → select the .ELD.",
+        "l2": "Open a chart of the symbol (ES/MES or GC/MGC), 1m/5m timeframe.",
+        "l3": "Insert the Strategy via Insert → Strategy and select the AInside strategy.",
+        "l4": "Set Inputs according to /params/*.json (plan and cycle).",
+        "l5": "Sessions: use recommended session template (CME RTH) per instrument."
+      },
+      "s3": {
+        "title": "3) MultiCharts (.PLA) + QuoteManager",
+        "l1": "File → Import PLA → select the .PLA.",
+        "l2": "Open QuoteManager → File → Import Data → ASCII to load /data/*.csv.",
+        "l3": "CSV mapping: timestamp,open,high,low,close,volume (UTC). 1m/5m interval.",
+        "l4": "On chart, insert the Signal/Study and set Inputs like /params.",
+        "l5": "Sessions: select proper CME session template for the symbol."
+      },
+      "s4": {
+        "title": "4) Parameters, backtest and optimization",
+        "l1": "Load Inputs from /params (micro/mini, monthly/annual).",
+        "l2": "Backtest ≥ 2 years; metrics: Profit Factor, Max Drawdown, Win%, Sharpe.",
+        "l3": "Optimize within sensible ranges; use out-of-sample to avoid overfitting.",
+        "l4": "Risk: position sizing, stop (ATR/fixed), daily loss limits."
+      },
+      "s5": {
+        "title": "5) Trading and best practices",
+        "l1": "Sync system clock; minimize feed latency.",
+        "l2": "Start in demo for 2–4 weeks before going live.",
+        "l3": "Keep a disciplined journal and update when new versions release."
+      }
+    },
+    "logic": {
+      "title": "Strategy logic (summary)",
+      "desc": "High-level description (no proprietary code):",
+      "l1": "Regimes: context detection (trend/range) via lookbacks and filters.",
+      "l2": "Volatility: thresholds via ATR/averages to enable/disable signals.",
+      "l3": "Entries: continuation/pullback patterns by regime and instrument.",
+      "l4": "Management: dynamic stops/targets, trailing, daily limits.",
+      "note": "Input names and suggested ranges are included in /params."
+    },
+    "gallery": {
+      "title": "Screenshot gallery (EasyLanguage)",
+      "empty": "Place your images in /public/guide named ts-1.png, ts-2.png, ts-3.png to display them here."
+    },
+    "slides": {
+      "ts1": "Entries/Exits, trade line and ATRStopL/S",
+      "ts2": "Short signal with ATRStopS and intrabar update",
+      "ts3": "EndOfDay event and position close"
+    },
+    "tsViz": {
+      "title": "Visualization in TradeStation",
+      "desc": "In TradeStation, the strategy shows entry/exit arrows, trade lines, ATRStopL/S labels, Long/Short markers, and events like EndOfDay. If you don't see them:",
+      "l1": "Right-click chart → Format Strategies → Properties tab:",
+      "l2": "Enable 'Show strategy orders on chart' and 'Show entries/exits'.",
+      "l3": "In Settings: turn on 'Use Look-Inside-Bar Back-testing (LIBB)' at 1 tick for realistic stops.",
+      "l4": "Verify Session template (CME RTH) and correct symbol/contract (e.g., MGCZ25, SILZ25).",
+      "l5": "Recommended timeframe: 1–5 minutes; standard bars, not Heikin Ashi.",
+      "tip": "Tip: open Strategy Performance Report to validate metrics and equity curve."
+    },
+    "validation": {
+      "title": "Quick validation checklist",
+      "l1": "Correct symbol and expiration (ES/MES or GC/MGC; e.g., MGCZ25).",
+      "l2": "Proper session template (CME RTH) and expected time zone.",
+      "l3": "Strategy inserted and Inputs loaded from /params.",
+      "l4": "LIBB/IOG configured for realistic backtest; arrows/trades visible.",
+      "l5": "Data without gaps: range ≥ 2 years for backtest/optimization."
+    },
+    "faq": {
+      "title": "Frequently asked questions (EasyLanguage)",
+      "q1": "I don't see entries/exits on the chart",
+      "a1": "Check Format Strategies → Properties: enable showing orders/entries and apply the correct session. Ensure you are not using synthetic bars (Heikin Ashi).",
+      "q2": "Backtest results look unrealistic",
+      "a2": "Enable Look-Inside-Bar Back-testing (1 tick) and use high-resolution data. Adjust slippage/commissions in Properties.",
+      "q3": "CSV data won't import in MultiCharts",
+      "a3": "Import via QuoteManager → File → Import Data → ASCII with columns timestamp,open,high,low,close,volume (UTC) and comma separator.",
+      "q4": "What do ATRStopL/ATRStopS mean?",
+      "a4": "Dynamic ATR-based stop levels for Long/Short positions. They update intrabar if LIBB/IOG is enabled."
+    }
+    ,
+    "support": {
+      "title": "Support and resources",
+      "status": "Service status:",
+      "contact": "Contact:",
+      "docs": "General documentation:",
+      "viewPlans": "View plans",
+      "openDemo": "Open live demo"
+    }
   },
   "homepage": {
     "title": {
@@ -92,8 +411,9 @@
       "description": "Access our trading algorithms and professional analytical tools through flexible monthly rental plans.",
       "demo": "View Live Demo",
       "contact": "Contact Us",
-      "services": "Our Services",
-      "consultation": "Schedule Consultation"
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "accessibility": "Accessibility"
     },
     "footer": {
       "dataProtection": "Data Protection",
@@ -175,6 +495,16 @@
       "exitFullscreen": "Exit fullscreen",
       "marketOpen": "Market Open"
   },
+  "demoPage": {
+    "platform": { "title": "Advanced Analytics Platform", "subtitle": "Professional trading analytics and performance tracking" },
+    "status": { "active": "ACTIVE", "standby": "STANDBY" },
+    "controls": { "start": "Start", "pause": "Pause", "export": "Export" },
+    "view": { "charts": "Charts", "table": "Table" },
+    "charts": { "netProfit": "Net Profit Evolution", "gainPct": "Percentage Gains" },
+    "tooltip": { "netProfit": "Net Profit", "gainPct": "% Gain" },
+    "features": { "title": "Platform Features", "f1": "Real-time Analytics", "f2": "Advanced Charting", "f3": "Risk Management", "f4": "Performance Tracking" },
+    "cta": { "title": "Ready to Get Started?", "desc": "Contact our team to learn more about our algorithm rental services.", "button": "Contact Us" }
+  },
   "products": {
     "title": "Professional Analysis Tools",
     "subtitle": "Comprehensive suite of tools for futures market research and analysis",
@@ -183,6 +513,26 @@
       "analysis": "Advanced Analysis",
       "risk": "Risk Management",
       "reporting": "Detailed Reporting"
+    }
+  },
+  "docsPage": {
+    "seo": { "title": "Documentation", "desc": "Professional product documentation: legal policies, system status, and getting started guides." },
+    "badge": "Product Documentation",
+    "title": "Documentation & Policies",
+    "subtitle": "Professional documentation for AInside.me software: legal policies, system status, and getting started guides. Educational tools only — no financial advice.",
+    "subtitleFull": "Professional documentation for AInside.me software: rental plans overview, legal policies, system status, and getting started guides. Educational tools only — no financial advice.",
+    "quick": {
+      "title": "Quick Access",
+      "plans": { "title": "Rental Plans", "desc": "Overview of Micro/Mini contracts and billing options." },
+      "support": { "title": "Contact Support", "desc": "Get assistance from our support team." },
+      "terms": { "title": "Terms & Conditions", "desc": "Educational use only — software provided “AS IS”." },
+      "privacy": { "title": "Privacy Policy", "desc": "Minimal technical data only. No financial data stored." },
+      "status": { "title": "System Status", "desc": "Current operational status for platform components." }
+    },
+    "cta": {
+      "title": { "top": "See Our Algorithms", "bottom": "in Action" },
+      "desc": "Watch our proprietary algorithms analyze live market data in real-time with advanced technical indicators",
+      "button": "View Live Algorithm Demo"
     }
   },
   "about": {
@@ -194,9 +544,46 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "disclaimer": "Legal Disclaimer",
+    "accessibility": "Accessibility",
     "responsibility": "Responsibility Agreement",
     "disclaimerText": "IMPORTANT LEGAL NOTICE: AInside.me is a SOFTWARE DEVELOPMENT COMPANY, NOT a financial services provider, broker, or investment advisor. Our tools are for EDUCATIONAL and RESEARCH purposes ONLY. We provide NO investment advice, recommendations, or financial services. Trading involves substantial risk of loss. Users are solely responsible for their trading decisions and outcomes. AInside.me disclaims ALL liability for any financial losses, damages, or consequences arising from use of our software tools.",
     "responsibilityText": "DISCLAIMER OF LIABILITY: By using our software tools, you acknowledge that: (1) AInside.me is a programming/software company only, (2) We provide NO financial advice or recommendations, (3) All trading decisions are your sole responsibility, (4) You assume ALL risks and liability, (5) AInside.me is NOT liable for any losses, damages, or consequences, (6) Our tools are for educational/research purposes only, (7) Past performance does not guarantee future results, (8) You will not hold AInside.me responsible for any trading outcomes."
+  },
+  "legalTerms": {
+    "seo": { "title": "Terms & Conditions", "desc": "Institutional-grade terms governing the educational, research-only use of AInside.me software tools. No warranties; user assumes all risk." },
+    "title": "Terms & Conditions",
+    "p1": "Our software and materials are provided exclusively for educational and research purposes. We do not provide trading signals, investment advice, or financial services.",
+    "p2": "You must not use our tools for live trading decisions or any regulated financial activity. Software is provided \"AS IS\" without warranties of any kind.",
+    "p3": "By using our services, you acknowledge that you are solely responsible for your decisions and outcomes.",
+    "p4": "AInside.me is a software development company only. Nothing herein constitutes investment advice."
+  },
+  "legalPrivacy": {
+    "seo": { "title": "Privacy Policy", "desc": "We collect only minimal technical data required for software functionality. No financial or trading data is stored." },
+    "title": "Privacy Policy",
+    "p1": "We collect only minimal technical data needed for software functionality. We do not store financial, trading, or broker account data.",
+    "p2": "Third-party integrations are used for educational display only. We are not responsible for any third-party data, services, or outages.",
+    "p3": "Users are responsible for safeguarding their own devices, credentials, and data.",
+    "p4": "AInside.me does not access broker accounts, execute trades, or handle funds."
+  },
+  "legalDisclaimer": {
+    "seo": { "title": "Legal Disclaimer", "desc": "AInside.me provides educational software tools only. No financial advice. User assumes all risk and AInside.me disclaims all liability." },
+    "title": "Legal Disclaimer",
+    "p1": "AInside.me is a software development company. We provide educational and research tools only. We do not provide financial advice, investment recommendations, or brokerage services.",
+    "p2": "Trading involves substantial risk of loss. You agree not to hold AInside.me liable for any financial losses, damages, or consequences related to the use of our software."
+  },
+  "statusPage": {
+    "seo": { "title": "System Status", "desc": "Current operational status for educational data display services and platform components." },
+    "title": "System Status",
+    "operational": "All systems operational.",
+    "items": {
+      "data": "Market Data Feed: Operational",
+      "charts": "Chart Services: Operational",
+      "api": "API Services: Operational"
+    }
+  },
+  "notFound": {
+    "message": "Oops! Page not found",
+    "home": "Return to Home"
   },
   "checkout": {
     "title": "Complete Your Purchase",
@@ -223,7 +610,9 @@
     "skipToContent": "Skip to main content",
     "toggleHighContrast": "Toggle High Contrast",
     "increaseFontSize": "Increase Font Size",
-    "decreaseFontSize": "Decrease Font Size"
+    "decreaseFontSize": "Decrease Font Size",
+    "options": "Accessibility options",
+    "short": "A11y"
   },
   "status": {
     "title": "System Status",
@@ -311,7 +700,24 @@
     },
     "values": {
       "title": "Core Values",
-      "subtitle": "The principles that guide our organization and define our commitment to excellence"
+      "subtitle": "The principles that guide our organization and define our commitment to excellence",
+      "integrity": { "title": "Integrity", "description": "Conducting business with the highest ethical standards and transparency" },
+      "innovation": { "title": "Innovation", "description": "Continuously advancing technology to meet evolving industry needs" },
+      "excellence": { "title": "Excellence", "description": "Delivering superior quality in every aspect of our services and solutions" },
+      "partnership": { "title": "Partnership", "description": "Building lasting relationships through trust, collaboration, and shared success" }
+    },
+    "org": {
+      "title": "Our Organization",
+      "exec": { "name": "Executive Leadership", "role": "Strategic Direction", "desc": "Decades of combined experience in financial technology and institutional services" },
+      "tech": { "name": "Technology Team", "role": "Innovation & Development", "desc": "Expert engineers and analysts dedicated to advancing financial technology solutions" },
+      "ops": { "name": "Operations Team", "role": "Service Excellence", "desc": "Committed professionals ensuring reliable delivery and client satisfaction" }
+    },
+    "milestones": {
+      "title": "Our Journey",
+      "founded": { "title": "Founded", "desc": "Established to provide institutional-grade technology solutions" },
+      "innovation": { "title": "Innovation", "desc": "Continuous advancement in analytical technology and infrastructure" },
+      "global": { "title": "Global Reach", "desc": "Serving financial institutions across multiple markets" },
+      "recognition": { "title": "Recognition", "desc": "Trusted by leading institutions for technology excellence" }
     }
   },
   "contact": {
@@ -331,6 +737,74 @@
     "title": "Algorithm Development",
     "subtitle": "& Tool Rental",
     "description": "We develop proprietary trading algorithms and rent professional analytical tools to traders and financial institutions. Technology solutions only - no financial advice."
+  },
+  "servicesPage": {
+    "services": {
+      "dev": {
+        "title": "Trading Algorithm Development",
+        "desc": "We create proprietary trading algorithms and technical analysis tools for market research",
+        "features": [
+          "Custom algorithm development",
+          "Technical indicator creation",
+          "Backtesting and optimization",
+          "Real-time market analysis tools"
+        ]
+      },
+      "rental": {
+        "title": "Tool Rental Service",
+        "desc": "Monthly rental of our proprietary algorithms and analytical tools for traders and institutions",
+        "features": [
+          "Monthly subscription model",
+          "Access to all algorithm tools",
+          "Compatible with major platforms",
+          "24/7 technical support"
+        ]
+      },
+      "security": {
+        "title": "Security & Compliance",
+        "desc": "Bank-level security protocols ensuring the highest standards of data protection and regulatory compliance",
+        "features": [
+          "Advanced encryption protocols",
+          "Multi-factor authentication systems",
+          "Compliance framework integration",
+          "Regular security audits and assessments"
+        ]
+      },
+      "integration": {
+        "title": "Platform Integration",
+        "desc": "Our tools integrate with major trading platforms like TradeStation, MultiCharts and others",
+        "features": [
+          "EasyLanguage compatibility",
+          "TradeStation Global support",
+          "MultiCharts PowerLanguage",
+          "Installation and setup assistance"
+        ]
+      }
+    },
+    "benefits": {
+      "institutional": { "title": "Institutional Grade", "desc": "Solutions designed to meet the exacting standards of financial institutions" },
+      "security": { "title": "Security First", "desc": "Bank-level security protocols protecting your most sensitive data" },
+      "global": { "title": "Global Scale", "desc": "Infrastructure capable of supporting operations across multiple markets" },
+      "reliable": { "title": "Reliable Performance", "desc": "Consistent, dependable performance when you need it most" }
+    },
+    "tech": {
+      "title": "Technology Excellence",
+      "desc": "Our technology platform represents years of development and refinement, designed specifically to meet the unique challenges and requirements of financial institutions operating in today's complex market environment.",
+      "points": {
+        "p1": "Proven institutional reliability",
+        "p2": "Advanced security architecture",
+        "p3": "Scalable performance optimization",
+        "p4": "Comprehensive compliance support"
+      },
+      "cta": { "primary": "Discuss Your Requirements" }
+    },
+    "impl": {
+      "title": "Implementation Approach",
+      "s1": { "title": "1. Assessment & Planning", "desc": "Comprehensive evaluation of your current infrastructure and requirements" },
+      "s2": { "title": "2. Custom Configuration", "desc": "Tailored solution design to meet your specific institutional needs" },
+      "s3": { "title": "3. Secure Deployment", "desc": "Careful implementation with minimal disruption to existing operations" },
+      "s4": { "title": "4. Ongoing Support", "desc": "Continuous monitoring, maintenance, and optimization services" }
+    }
   },
   "pricing": {
     "title": "Plans & Pricing",

@@ -19,6 +19,7 @@ export const Header = () => {
     { key: 'liveDemoMini', path: '/live-demo-mini' },
     { key: 'pricing', path: '/pricing' },
     { key: 'contact', path: '/contact' },
+    { key: 'accessibility', path: '/accessibility' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -55,6 +56,7 @@ export const Header = () => {
                     ? 'text-primary border-b-2 border-primary'
                     : 'text-muted-foreground'
                 }`}
+                aria-current={isActive(item.path) ? 'page' : undefined}
               >
                 {t(`nav.${item.key}`)}
               </Link>

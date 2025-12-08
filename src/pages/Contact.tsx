@@ -21,8 +21,8 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message Sent",
-      description: "Thank you for your inquiry. Our team will respond within one business day.",
+      title: t("contactPage.form.toast.title", { defaultValue: "Message Sent" }),
+      description: t("contactPage.form.toast.desc", { defaultValue: "Thank you for your inquiry. Our team will respond within one business day." }),
     });
     setFormData({ name: "", email: "", organization: "", subject: "", message: "" });
   };
@@ -37,38 +37,38 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      title: t("contactPage.info.email.title", { defaultValue: "Email" }),
       content: "inquiries@ainside.me",
-      description: "Primary contact for business inquiries"
+      description: t("contactPage.info.email.desc", { defaultValue: "Primary contact for business inquiries" })
     },
     {
       icon: Phone,
-      title: "Phone",
+      title: t("contactPage.info.phone.title", { defaultValue: "Phone" }),
       content: "+1 (555) 123-4567",
-      description: "Business hours: Monday - Friday, 9 AM - 6 PM EST"
+      description: t("contactPage.info.phone.desc", { defaultValue: "Business hours: Monday - Friday, 9 AM - 6 PM EST" })
     },
     {
       icon: MapPin,
-      title: "Address",
+      title: t("contactPage.info.address.title", { defaultValue: "Address" }),
       content: "123 Financial District, New York, NY 10005",
-      description: "Corporate headquarters"
+      description: t("contactPage.info.address.desc", { defaultValue: "Corporate headquarters" })
     },
     {
       icon: Clock,
-      title: "Response Time",
-      content: "Within 1 Business Day",
-      description: "Our commitment to timely communication"
+      title: t("contactPage.info.response.title", { defaultValue: "Response Time" }),
+      content: t("contactPage.info.response.content", { defaultValue: "Within 1 Business Day" }),
+      description: t("contactPage.info.response.desc", { defaultValue: "Our commitment to timely communication" })
     }
   ];
 
-  const serviceAreas = [
+  const serviceAreas = t("contactPage.areas.list", { returnObjects: true, defaultValue: [
     "Algorithm Development",
-    "Tool Rental Services", 
+    "Tool Rental Services",
     "Platform Integration",
     "Technical Support",
     "Custom Algorithm Creation",
     "Training and Documentation"
-  ];
+  ] }) as string[];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm">
@@ -97,15 +97,13 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="p-8 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
               <div className="mb-8">
-                <h2 className="text-2xl font-light text-slate-100 mb-4">Send us a Message</h2>
-                <p className="text-slate-300 font-light">
-                  Our algorithm development team is ready to help with your tool rental inquiry
-                </p>
+                <h2 className="text-2xl font-light text-slate-100 mb-4">{t("contactPage.form.header", { defaultValue: "Send us a Message" })}</h2>
+                <p className="text-slate-300 font-light">{t("contactPage.form.subheader", { defaultValue: "Our algorithm development team is ready to help with your tool rental inquiry" })}</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-slate-200 font-light">Full Name *</Label>
+                    <Label htmlFor="name" className="text-slate-200 font-light">{t("contactPage.form.labels.name", { defaultValue: "Full Name *" })}</Label>
                     <Input
                       id="name"
                       name="name"
@@ -116,7 +114,7 @@ const Contact = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-slate-200 font-light">Email Address *</Label>
+                    <Label htmlFor="email" className="text-slate-200 font-light">{t("contactPage.form.labels.email", { defaultValue: "Email Address *" })}</Label>
                     <Input
                       id="email"
                       name="email"
@@ -130,7 +128,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="organization" className="text-slate-200 font-light">Organization</Label>
+                  <Label htmlFor="organization" className="text-slate-200 font-light">{t("contactPage.form.labels.organization", { defaultValue: "Organization" })}</Label>
                   <Input
                     id="organization"
                     name="organization"
@@ -141,7 +139,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject" className="text-slate-200 font-light">Subject *</Label>
+                  <Label htmlFor="subject" className="text-slate-200 font-light">{t("contactPage.form.labels.subject", { defaultValue: "Subject *" })}</Label>
                   <Input
                     id="subject"
                     name="subject"
@@ -153,7 +151,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-slate-200 font-light">Message *</Label>
+                  <Label htmlFor="message" className="text-slate-200 font-light">{t("contactPage.form.labels.message", { defaultValue: "Message *" })}</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -167,7 +165,7 @@ const Contact = () => {
 
                 <Button type="submit" size="lg" className="w-full text-base py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 border-0">
                   <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {t("contactPage.form.submit", { defaultValue: "Send Message" })}
                 </Button>
               </form>
             </div>
@@ -194,10 +192,8 @@ const Contact = () => {
 
               {/* Service Areas */}
               <div className="p-6 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
-                <h3 className="text-xl font-light text-slate-100 mb-2">Service Areas</h3>
-                <p className="text-slate-400 mb-4 font-light">
-                  Areas where our team can provide expert assistance
-                </p>
+                <h3 className="text-xl font-light text-slate-100 mb-2">{t("contactPage.areas.title", { defaultValue: "Service Areas" })}</h3>
+                <p className="text-slate-400 mb-4 font-light">{t("contactPage.areas.subtitle", { defaultValue: "Areas where our team can provide expert assistance" })}</p>
                 <div className="grid gap-3">
                   {serviceAreas.map((area, index) => (
                     <div key={index} className="flex items-center gap-3">
@@ -210,13 +206,12 @@ const Contact = () => {
 
               {/* Professional Notice */}
               <div className="p-6 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
-                <h3 className="font-medium text-slate-100 mb-3">Algorithm & Tool Consultation</h3>
+                <h3 className="font-medium text-slate-100 mb-3">{t("contactPage.notice.title", { defaultValue: "Algorithm & Tool Consultation" })}</h3>
                 <p className="text-slate-300 leading-relaxed mb-4 text-sm font-light">
-                  Our development team is available to discuss algorithm rental services 
-                  and provide information about our trading tools and technical indicators.
+                  {t("contactPage.notice.p1", { defaultValue: "Our development team is available to discuss algorithm rental services and provide information about our trading tools and technical indicators." })}
                 </p>
                 <p className="text-xs text-slate-400 font-light">
-                  <span className="font-medium text-slate-300">Remember:</span> We develop technology tools only - we do not provide financial advice.
+                  <span className="font-medium text-slate-300">{t("contactPage.notice.rememberLabel", { defaultValue: "Remember:" })}</span> {t("contactPage.notice.remember", { defaultValue: "We develop technology tools only - we do not provide financial advice." })}
                 </p>
               </div>
             </div>

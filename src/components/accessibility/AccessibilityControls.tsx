@@ -64,10 +64,11 @@ export const AccessibilityControls = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="focus-visible"
-          aria-label="Accessibility options"
+          className="focus-visible flex items-center gap-2"
+          aria-label={t('accessibility.options', { defaultValue: 'Accessibility options' })}
         >
           <AdjustmentsHorizontalIcon className="h-4 w-4" />
+          <span className="hidden md:inline text-xs">{t('accessibility.short', { defaultValue: 'A11y' })}</span>
           <span className="sr-only">Accessibility Controls</span>
         </Button>
       </DropdownMenuTrigger>

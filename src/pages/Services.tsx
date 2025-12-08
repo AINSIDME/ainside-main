@@ -20,70 +20,70 @@ const Services = () => {
   const services = [
     {
       icon: BarChart3,
-      title: "Trading Algorithm Development",
-      description: "We create proprietary trading algorithms and technical analysis tools for market research",
-      features: [
-        "Custom algorithm development",
-        "Technical indicator creation", 
-        "Backtesting and optimization",
-        "Real-time market analysis tools"
-      ]
+      title: t('servicesPage.services.dev.title', { defaultValue: 'Trading Algorithm Development' }),
+      description: t('servicesPage.services.dev.desc', { defaultValue: 'We create proprietary trading algorithms and technical analysis tools for market research' }),
+      features: t('servicesPage.services.dev.features', { returnObjects: true, defaultValue: [
+        'Custom algorithm development',
+        'Technical indicator creation',
+        'Backtesting and optimization',
+        'Real-time market analysis tools'
+      ] }) as string[]
     },
     {
       icon: Server,
-      title: "Tool Rental Service",
-      description: "Monthly rental of our proprietary algorithms and analytical tools for traders and institutions",
-      features: [
-        "Monthly subscription model",
-        "Access to all algorithm tools",
-        "Compatible with major platforms",
-        "24/7 technical support"
-      ]
+      title: t('servicesPage.services.rental.title', { defaultValue: 'Tool Rental Service' }),
+      description: t('servicesPage.services.rental.desc', { defaultValue: 'Monthly rental of our proprietary algorithms and analytical tools for traders and institutions' }),
+      features: t('servicesPage.services.rental.features', { returnObjects: true, defaultValue: [
+        'Monthly subscription model',
+        'Access to all algorithm tools',
+        'Compatible with major platforms',
+        '24/7 technical support'
+      ] }) as string[]
     },
     {
       icon: Shield,
-      title: "Security & Compliance",
-      description: "Bank-level security protocols ensuring the highest standards of data protection and regulatory compliance",
-      features: [
-        "Advanced encryption protocols",
-        "Multi-factor authentication systems",
-        "Compliance framework integration",
-        "Regular security audits and assessments"
-      ]
+      title: t('servicesPage.services.security.title', { defaultValue: 'Security & Compliance' }),
+      description: t('servicesPage.services.security.desc', { defaultValue: 'Bank-level security protocols ensuring the highest standards of data protection and regulatory compliance' }),
+      features: t('servicesPage.services.security.features', { returnObjects: true, defaultValue: [
+        'Advanced encryption protocols',
+        'Multi-factor authentication systems',
+        'Compliance framework integration',
+        'Regular security audits and assessments'
+      ] }) as string[]
     },
     {
       icon: Zap,
-      title: "Platform Integration",
-      description: "Our tools integrate with major trading platforms like TradeStation, MultiCharts and others",
-      features: [
-        "EasyLanguage compatibility",
-        "TradeStation Global support",
-        "MultiCharts PowerLanguage",
-        "Installation and setup assistance"
-      ]
+      title: t('servicesPage.services.integration.title', { defaultValue: 'Platform Integration' }),
+      description: t('servicesPage.services.integration.desc', { defaultValue: 'Our tools integrate with major trading platforms like TradeStation, MultiCharts and others' }),
+      features: t('servicesPage.services.integration.features', { returnObjects: true, defaultValue: [
+        'EasyLanguage compatibility',
+        'TradeStation Global support',
+        'MultiCharts PowerLanguage',
+        'Installation and setup assistance'
+      ] }) as string[]
     }
   ];
 
   const benefits = [
     {
       icon: Building2,
-      title: "Institutional Grade",
-      description: "Solutions designed to meet the exacting standards of financial institutions"
+      title: t('servicesPage.benefits.institutional.title', { defaultValue: 'Institutional Grade' }),
+      description: t('servicesPage.benefits.institutional.desc', { defaultValue: 'Solutions designed to meet the exacting standards of financial institutions' })
     },
     {
       icon: Lock,
-      title: "Security First",
-      description: "Bank-level security protocols protecting your most sensitive data"
+      title: t('servicesPage.benefits.security.title', { defaultValue: 'Security First' }),
+      description: t('servicesPage.benefits.security.desc', { defaultValue: 'Bank-level security protocols protecting your most sensitive data' })
     },
     {
       icon: Globe,
-      title: "Global Scale",
-      description: "Infrastructure capable of supporting operations across multiple markets"
+      title: t('servicesPage.benefits.global.title', { defaultValue: 'Global Scale' }),
+      description: t('servicesPage.benefits.global.desc', { defaultValue: 'Infrastructure capable of supporting operations across multiple markets' })
     },
     {
       icon: Clock,
-      title: "Reliable Performance",
-      description: "Consistent, dependable performance when you need it most"
+      title: t('servicesPage.benefits.reliable.title', { defaultValue: 'Reliable Performance' }),
+      description: t('servicesPage.benefits.reliable.desc', { defaultValue: 'Consistent, dependable performance when you need it most' })
     }
   ];
 
@@ -166,58 +166,56 @@ const Services = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-light text-slate-100 mb-6 tracking-tight">Technology Excellence</h2>
+              <h2 className="text-4xl md:text-5xl font-light text-slate-100 mb-6 tracking-tight">{t('servicesPage.tech.title', { defaultValue: 'Technology Excellence' })}</h2>
               <p className="text-lg text-slate-300 mb-8 leading-relaxed font-light">
-                Our technology platform represents years of development and refinement, 
-                designed specifically to meet the unique challenges and requirements of 
-                financial institutions operating in today's complex market environment.
+                {t('servicesPage.tech.desc', { defaultValue: "Our technology platform represents years of development and refinement, designed specifically to meet the unique challenges and requirements of financial institutions operating in today's complex market environment." })}
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
-                  <span className="text-slate-300 font-light">Proven institutional reliability</span>
+                  <span className="text-slate-300 font-light">{t('servicesPage.tech.points.p1', { defaultValue: 'Proven institutional reliability' })}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full" />
-                  <span className="text-slate-300 font-light">Advanced security architecture</span>
+                  <span className="text-slate-300 font-light">{t('servicesPage.tech.points.p2', { defaultValue: 'Advanced security architecture' })}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
-                  <span className="text-slate-300 font-light">Scalable performance optimization</span>
+                  <span className="text-slate-300 font-light">{t('servicesPage.tech.points.p3', { defaultValue: 'Scalable performance optimization' })}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-purple-400 rounded-full" />
-                  <span className="text-slate-300 font-light">Comprehensive compliance support</span>
+                  <span className="text-slate-300 font-light">{t('servicesPage.tech.points.p4', { defaultValue: 'Comprehensive compliance support' })}</span>
                 </div>
               </div>
 
               <Button asChild size="lg" className="text-base px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 border-0">
                 <Link to="/contact">
-                  Discuss Your Requirements
+                  {t('servicesPage.tech.cta.primary', { defaultValue: 'Discuss Your Requirements' })}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
             </div>
 
             <div className="p-8 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
-              <h3 className="text-2xl font-light text-slate-100 mb-6">Implementation Approach</h3>
+              <h3 className="text-2xl font-light text-slate-100 mb-6">{t('servicesPage.impl.title', { defaultValue: 'Implementation Approach' })}</h3>
               <div className="space-y-6">
                 <div>
-                  <h4 className="font-medium text-slate-200 mb-2">1. Assessment & Planning</h4>
-                  <p className="text-slate-400 text-sm font-light">Comprehensive evaluation of your current infrastructure and requirements</p>
+                  <h4 className="font-medium text-slate-200 mb-2">{t('servicesPage.impl.s1.title', { defaultValue: '1. Assessment & Planning' })}</h4>
+                  <p className="text-slate-400 text-sm font-light">{t('servicesPage.impl.s1.desc', { defaultValue: 'Comprehensive evaluation of your current infrastructure and requirements' })}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-slate-200 mb-2">2. Custom Configuration</h4>
-                  <p className="text-slate-400 text-sm font-light">Tailored solution design to meet your specific institutional needs</p>
+                  <h4 className="font-medium text-slate-200 mb-2">{t('servicesPage.impl.s2.title', { defaultValue: '2. Custom Configuration' })}</h4>
+                  <p className="text-slate-400 text-sm font-light">{t('servicesPage.impl.s2.desc', { defaultValue: 'Tailored solution design to meet your specific institutional needs' })}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-slate-200 mb-2">3. Secure Deployment</h4>
-                  <p className="text-slate-400 text-sm font-light">Careful implementation with minimal disruption to existing operations</p>
+                  <h4 className="font-medium text-slate-200 mb-2">{t('servicesPage.impl.s3.title', { defaultValue: '3. Secure Deployment' })}</h4>
+                  <p className="text-slate-400 text-sm font-light">{t('servicesPage.impl.s3.desc', { defaultValue: 'Careful implementation with minimal disruption to existing operations' })}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-slate-200 mb-2">4. Ongoing Support</h4>
-                  <p className="text-slate-400 text-sm font-light">Continuous monitoring, maintenance, and optimization services</p>
+                  <h4 className="font-medium text-slate-200 mb-2">{t('servicesPage.impl.s4.title', { defaultValue: '4. Ongoing Support' })}</h4>
+                  <p className="text-slate-400 text-sm font-light">{t('servicesPage.impl.s4.desc', { defaultValue: 'Continuous monitoring, maintenance, and optimization services' })}</p>
                 </div>
               </div>
             </div>

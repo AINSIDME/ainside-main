@@ -70,19 +70,15 @@ const Demo = () => {
                 <div className="border-b border-slate-700/50 pb-6 mb-8">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-light text-slate-100 mb-2">
-                        Advanced Analytics Platform
-                      </h2>
-                      <p className="text-slate-300 font-light">
-                        Professional trading analytics and performance tracking
-                      </p>
+                      <h2 className="text-2xl md:text-3xl font-light text-slate-100 mb-2">{t('demoPage.platform.title', { defaultValue: 'Advanced Analytics Platform' })}</h2>
+                      <p className="text-slate-300 font-light">{t('demoPage.platform.subtitle', { defaultValue: 'Professional trading analytics and performance tracking' })}</p>
                     </div>
                     <div className="flex items-center gap-3 self-start sm:self-auto">
                       <Badge 
                         variant={isRunning ? "default" : "secondary"} 
                         className={`text-xs md:text-sm px-3 py-1 ${isRunning ? 'bg-green-500/20 text-green-300 border-green-500/30' : 'bg-slate-600/20 text-slate-300 border-slate-600/30'}`}
                       >
-                        {isRunning ? 'ACTIVE' : 'STANDBY'}
+                        {isRunning ? t('demoPage.status.active', { defaultValue: 'ACTIVE' }) : t('demoPage.status.standby', { defaultValue: 'STANDBY' })}
                       </Badge>
                       <Button
                         variant="outline"
@@ -91,7 +87,7 @@ const Demo = () => {
                         className="flex items-center gap-2 border-slate-600/40 text-slate-200 hover:bg-slate-700/50"
                       >
                         {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                        <span className="hidden sm:inline">{isRunning ? 'Pause' : 'Start'}</span>
+                        <span className="hidden sm:inline">{isRunning ? t('demoPage.controls.pause', { defaultValue: 'Pause' }) : t('demoPage.controls.start', { defaultValue: 'Start' })}</span>
                       </Button>
                     </div>
                   </div>
@@ -106,7 +102,7 @@ const Demo = () => {
                       <div className="p-6 bg-slate-900/50 border border-slate-600/30 rounded-xl">
                         <h4 className="font-light text-slate-200 mb-6 flex items-center gap-2 text-lg">
                           <LineChart className="w-5 h-5" />
-                          Net Profit Evolution
+                          {t('demoPage.charts.netProfit', { defaultValue: 'Net Profit Evolution' })}
                         </h4>
                         <ResponsiveContainer width="100%" height={250}>
                           <RechartsLineChart data={demoData}>
@@ -130,7 +126,7 @@ const Demo = () => {
                                 borderRadius: '8px',
                                 color: '#f1f5f9'
                               }}
-                              formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Net Profit']}
+                              formatter={(value: any) => [`$${Number(value).toFixed(2)}`, t('demoPage.tooltip.netProfit', { defaultValue: 'Net Profit' })]}
                             />
                             <Line 
                               type="monotone" 
@@ -147,7 +143,7 @@ const Demo = () => {
                       <div className="p-6 bg-slate-900/50 border border-slate-600/30 rounded-xl">
                         <h4 className="font-light text-slate-200 mb-6 flex items-center gap-2 text-lg">
                           <BarChart3 className="w-5 h-5" />
-                          Percentage Gains
+                          {t('demoPage.charts.gainPct', { defaultValue: 'Percentage Gains' })}
                         </h4>
                         <ResponsiveContainer width="100%" height={250}>
                           <BarChart data={demoData}>
@@ -171,7 +167,7 @@ const Demo = () => {
                                 borderRadius: '8px',
                                 color: '#f1f5f9'
                               }}
-                              formatter={(value: any) => [`${Number(value)}%`, '% Gain']}
+                              formatter={(value: any) => [`${Number(value)}%`, t('demoPage.tooltip.gainPct', { defaultValue: '% Gain' })]}
                             />
                             <Bar 
                               dataKey="gainPercent" 
@@ -259,7 +255,7 @@ const Demo = () => {
                       className="flex items-center gap-2 w-full sm:w-auto border-slate-600/40"
                     >
                       <BarChart3 className="w-4 h-4" />
-                      <span className="text-sm font-light">Charts</span>
+                      <span className="text-sm font-light">{t('demoPage.view.charts', { defaultValue: 'Charts' })}</span>
                     </Button>
                     <Button
                       variant={selectedView === 'monitoring' ? 'default' : 'outline'}
@@ -268,12 +264,12 @@ const Demo = () => {
                       className="flex items-center gap-2 w-full sm:w-auto border-slate-600/40"
                     >
                       <Monitor className="w-4 h-4" />
-                      <span className="text-sm font-light">Table</span>
+                      <span className="text-sm font-light">{t('demoPage.view.table', { defaultValue: 'Table' })}</span>
                     </Button>
                   </div>
                   <Button variant="outline" size="sm" className="flex items-center gap-2 w-full sm:w-auto border-slate-600/40 text-slate-200 hover:bg-slate-700/50">
                     <Download className="w-4 h-4" />
-                    <span className="text-sm font-light">Export</span>
+                    <span className="text-sm font-light">{t('demoPage.controls.export', { defaultValue: 'Export' })}</span>
                   </Button>
                 </div>
               </div>
@@ -283,35 +279,33 @@ const Demo = () => {
             <div className="space-y-6 order-1 lg:order-2">
               {/* Technology Overview */}
               <div className="p-6 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
-                <h3 className="text-lg font-light text-slate-100 mb-6">Platform Features</h3>
+                <h3 className="text-lg font-light text-slate-100 mb-6">{t('demoPage.features.title', { defaultValue: 'Platform Features' })}</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></div>
-                    <span className="text-slate-300 font-light">Real-time Analytics</span>
+                    <span className="text-slate-300 font-light">{t('demoPage.features.f1', { defaultValue: 'Real-time Analytics' })}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-2 h-2 bg-cyan-400 rounded-full flex-shrink-0"></div>
-                    <span className="text-slate-300 font-light">Advanced Charting</span>
+                    <span className="text-slate-300 font-light">{t('demoPage.features.f2', { defaultValue: 'Advanced Charting' })}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-2 h-2 bg-emerald-400 rounded-full flex-shrink-0"></div>
-                    <span className="text-slate-300 font-light">Risk Management</span>
+                    <span className="text-slate-300 font-light">{t('demoPage.features.f3', { defaultValue: 'Risk Management' })}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                    <span className="text-slate-300 font-light">Performance Tracking</span>
+                    <span className="text-slate-300 font-light">{t('demoPage.features.f4', { defaultValue: 'Performance Tracking' })}</span>
                   </div>
                 </div>
               </div>
 
               {/* Contact CTA */}
               <div className="p-6 bg-slate-800/60 border border-slate-700/40 rounded-2xl backdrop-blur-sm">
-                <h3 className="text-lg font-light text-slate-100 mb-4">Ready to Get Started?</h3>
-                <p className="text-slate-300 text-sm mb-6 font-light">
-                  Contact our team to learn more about our algorithm rental services.
-                </p>
+                <h3 className="text-lg font-light text-slate-100 mb-4">{t('demoPage.cta.title', { defaultValue: 'Ready to Get Started?' })}</h3>
+                <p className="text-slate-300 text-sm mb-6 font-light">{t('demoPage.cta.desc', { defaultValue: 'Contact our team to learn more about our algorithm rental services.' })}</p>
                 <Button asChild className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 border-0">
-                  <Link to="/contact">Contact Us</Link>
+                  <Link to="/contact">{t('demoPage.cta.button', { defaultValue: 'Contact Us' })}</Link>
                 </Button>
               </div>
             </div>

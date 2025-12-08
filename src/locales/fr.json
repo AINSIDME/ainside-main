@@ -5,8 +5,74 @@
     "services": "Services",
     "demo": "Données Réelles",
     "liveDemoMini": "Live",
-    "contact": "Contact"
+    "contact": "Contact",
+    "pricing": "Tarifs",
+    "accessibility": "Accessibilité"
   },
+    "paymentSuccess": {
+      "errors": {
+        "noToken": "Jeton de paiement introuvable",
+        "capture": "Erreur de confirmation du paiement",
+        "processing": "Erreur lors du traitement du paiement"
+      },
+      "toast": { "success": "Paiement confirmé avec succès !" },
+      "loading": {
+        "title": "Confirmation du paiement - AInside",
+        "desc": "Confirmation de votre paiement...",
+        "heading": "Confirmation de votre paiement...",
+        "note": "Veuillez patienter pendant que nous traitons votre transaction"
+      },
+      "error": {
+        "title": "Erreur de paiement - AInside",
+        "desc": "Erreur lors du traitement du paiement",
+        "heading": "Erreur de paiement",
+        "retry": "Réessayer le paiement"
+      },
+      "success": {
+        "title": "Paiement confirmé - AInside",
+        "desc": "Votre paiement a été confirmé avec succès",
+        "heading": "Paiement confirmé !",
+        "note": "Votre paiement a été traité avec succès"
+      },
+      "details": {
+        "title": "Détails de la transaction",
+        "plan": "Plan :",
+        "amount": "Montant :",
+        "orderId": "ID de commande :",
+        "email": "Email :",
+        "status": "Statut :",
+        "date": "Date :"
+      },
+      "cta": { "demo": "Ouvrir la démo", "guide": "Guide de démarrage", "home": "Aller à l'accueil" },
+      "footer": {
+        "email": "Vous recevrez un email de confirmation dans les prochaines minutes.",
+        "autoclose": "Cette fenêtre se fermera automatiquement dans quelques secondes."
+      }
+    },
+    "checkoutPage": {
+      "seo": { "title": "Paiement - AInside", "desc": "Finalisez votre achat en toute sécurité avec PayPal" },
+      "title": "Paiement sécurisé",
+      "subtitle": "Finalisez votre achat rapidement et en toute sécurité",
+      "selectPlan": "Sélectionnez votre plan",
+      "summary": "Récapitulatif",
+      "total": "Total",
+      "badges": { "secure": "Paiement 100% sécurisé", "guarantee": "Garantie de remboursement" },
+      "processing": "Traitement...",
+      "payWithPaypal": "Payer ${{price}} avec PayPal",
+      "notice": "En continuant vous acceptez nos termes et conditions",
+      "errors": {
+        "selectPlan": "Veuillez sélectionner un plan",
+        "create": "Erreur de création du paiement",
+        "noApproval": "Impossible d'obtenir l'URL de paiement",
+        "process": "Erreur de traitement du paiement"
+      },
+      "plans": {
+        "micro_monthly": { "name": "Micro S&P 500 Mensuel", "desc": "Accès d'un mois" },
+        "micro_annual": { "name": "Micro S&P 500 Annuel", "desc": "Accès annuel (remisé)" },
+        "mini_monthly": { "name": "Mini S&P 500 Mensuel", "desc": "Accès d'un mois" },
+        "mini_annual": { "name": "Mini S&P 500 Annuel", "desc": "Accès annuel (remisé)" }
+      }
+    },
   "header": {
     "brand": "AInside.me",
     "toggleMenu": "Basculer le menu"
@@ -112,7 +178,8 @@
       "title": "Légal",
       "terms": "Conditions Générales",
       "privacy": "Politique de Confidentialité",
-      "disclaimer": "Avertissement Légal"
+      "disclaimer": "Avertissement Légal",
+      "accessibility": "Accessibilité"
     },
     "support": {
       "title": "Support",
@@ -125,6 +192,62 @@
       "protection": "Protection des Données",
       "compliance": "Prêt pour la Conformité"
     }
+  },
+  "paymentCancel": {
+    "seo": { "title": "Paiement annulé - AInside", "desc": "Le paiement a été annulé" },
+    "title": "Paiement annulé",
+    "subtitle": "Vous avez annulé le processus de paiement. Aucun débit n'a été effectué.",
+    "cta": { "plans": "Voir les plans", "retry": "Réessayer le paiement", "home": "Retour à l'accueil" },
+    "help": "Besoin d'aide ?",
+    "contact": "Contactez-nous"
+  },
+  "contactPage": {
+    "form": {
+      "header": "Envoyez-nous un message",
+      "subheader": "Notre équipe de développement d'algorithmes est prête à aider pour votre demande de location d'outils",
+      "labels": {
+        "name": "Nom complet *",
+        "email": "Adresse email *",
+        "organization": "Organisation",
+        "subject": "Sujet *",
+        "message": "Message *"
+      },
+      "submit": "Envoyer le message",
+      "toast": { "title": "Message envoyé", "desc": "Merci pour votre demande. Notre équipe répondra sous un jour ouvrable." }
+    },
+    "info": {
+      "email": { "title": "Email", "desc": "Contact principal pour les demandes commerciales" },
+      "phone": { "title": "Téléphone", "desc": "Heures de bureau : Lundi - Vendredi, 9h - 18h EST" },
+      "address": { "title": "Adresse", "desc": "Siège social" },
+      "response": { "title": "Délai de réponse", "content": "Sous 1 jour ouvrable", "desc": "Notre engagement envers une communication rapide" }
+    },
+    "areas": {
+      "title": "Domaines de service",
+      "subtitle": "Domaines où notre équipe peut fournir une assistance experte",
+      "list": [
+        "Développement d'algorithmes",
+        "Services de location d'outils",
+        "Intégration de plateforme",
+        "Support technique",
+        "Création d'algorithmes sur mesure",
+        "Formation et documentation"
+      ]
+    },
+    "notice": {
+      "title": "Consultation sur algorithmes et outils",
+      "p1": "Notre équipe de développement est disponible pour discuter des services de location d'algorithmes et fournir des informations sur nos outils de trading et indicateurs techniques.",
+      "rememberLabel": "Rappel :",
+      "remember": "Nous développons uniquement des outils technologiques - nous ne fournissons pas de conseils financiers."
+    }
+  },
+  "liveDemo": {
+    "slides": { "ts1": "TradeStation : Entrées/Sorties et ATRStopL/S", "ts2": "TradeStation : Signal court et gestion des stops", "ts3": "TradeStation : Événement de fin de journée" },
+    "title": "Démo en direct (visuel)",
+    "description": { "part1": "L'exécution réelle de la stratégie se fait dans ", "part2": " avec ", "part3": "Cette page est une visualisation pour le contexte et l'expérience utilisateur. Pour voir des signaux réels sur votre plateforme, suivez le " },
+    "cta": { "guide": "Guide de démarrage", "guideWithPlatform": "Guide de démarrage (EasyLanguage)", "pricing": "Voir les tarifs", "install": "Installer sur ma plateforme" },
+    "chart": { "title": "Visualisation du flux (exemple)", "subtitle": "Exemple illustratif dans le navigateur" },
+    "active": "● ACTIF",
+    "gallery": { "empty": "Placez des captures dans /public/guide pour montrer des exemples réels ici." }
   },
   "hero": {
     "title": "Outils de Trading Professionnel",

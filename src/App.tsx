@@ -22,10 +22,12 @@ import Documentation from "./pages/Documentation";
 import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import GettingStarted from "./pages/GettingStarted";
 import Legal from "./pages/Legal";
 import LegalTerms from "./pages/LegalTerms";
 import LegalPrivacy from "./pages/LegalPrivacy";
 import LegalDisclaimer from "./pages/LegalDisclaimer";
+import Accessibility from "./pages/Accessibility";
 import Status from "./pages/Status";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
@@ -48,7 +50,7 @@ const App = () => {
           <StructuredData />
           <div className="min-h-screen flex flex-col">
             <Header />
-            <main id="main-content" className="flex-1">
+            <main id="main-content" className="flex-1" role="main" aria-label="Main content">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
@@ -62,12 +64,14 @@ const App = () => {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
+                <Route path="/getting-started" element={<GettingStarted />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/legal" element={<Legal />} />
                 <Route path="/legal/terms" element={<LegalTerms />} />
                 <Route path="/legal/privacy" element={<LegalPrivacy />} />
                 <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
                 <Route path="/status" element={<Status />} />
+                <Route path="/accessibility" element={<Accessibility />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

@@ -27,11 +27,17 @@ i18n
     fallbackLng: 'en',
     lng: 'en',
     debug: false,
-    
+    // Expose all available languages; missing keys fall back to EN
+    supportedLngs: ['en', 'es', 'fr', 'he', 'ar', 'ru'],
+    nonExplicitSupportedLngs: true,
+    load: 'languageOnly',
+    lowerCaseLng: true,
+
     detection: {
-      // Default to English unless user explicitly changes language in localStorage
-      order: ['localStorage'],
+      // Prefer saved choice; otherwise detect from browser, then default to EN
+      order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],
+      convertDetectedLanguage: (lng: string) => lng?.toLowerCase?.() ?? 'en',
     },
 
     interpolation: {
