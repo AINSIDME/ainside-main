@@ -1,11 +1,15 @@
+/// <reference lib="deno.ns" />
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 serve(async (req) => {
+  // CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -20,25 +24,54 @@ serve(async (req) => {
 
     const { plan } = await req.json();
 
-    // Server-side plan → amount mapping to prevent tampering
-    const PLANS: Record<string, { amount: number; currency: string; description: string }> = {
-      micro_monthly: { amount: 99.0, currency: "USD", description: "Micro S&P 500 Monthly" },
-      micro_annual:  { amount: 831.6, currency: "USD", description: "Micro S&P 500 Annual" },
-      mini_monthly:  { amount: 999.0, currency: "USD", description: "Mini S&P 500 Monthly" },
-      mini_annual:   { amount: 8391.6, currency: "USD", description: "Mini S&P 500 Annual" },
-      pro_monthly:   { amount: 19.99, currency: "USD", description: "Pro Monthly" },
+    // 🔐 Mapeo de planes en el servidor
+    const PLANS: Record<
+      string,
+      { amount: number; currency: string; description: string }
+    > = {
+      micro_monthly: {
+        amount: 99.0,
+        currency: "USD",
+        description: "Micro S&P 500 Monthly",
+      },
+      micro_annual: {
+        amount: 831.6,
+        currency: "USD",
+        description: "Micro S&P 500 Annual",
+      },
+      mini_monthly: {
+        amount: 999.0,
+        currency: "USD",
+        description: "Mini S&P 500 Monthly",
+      },
+      mini_annual: {
+        amount: 8391.6,
+        currency: "USD",
+        description: "Mini S&P 500 Annual",
+      },
+      pro_monthly: {
+        amount: 19.99,
+        currency: "USD",
+        description: "Pro Monthly",
+      },
     };
 
     const selected = plan && PLANS[plan];
     if (!selected) {
+      console.error("Invalid plan received:", plan);
       return new Response(
-        JSON.stringify({ error: "Invalid plan", details: "Unknown plan identifier" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+        JSON.stringify({
+          error: "Invalid plan",
+          details: "Unknown plan identifier",
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        },
       );
     }
-    const amountStr = selected.amount.toFixed(2);
 
-    // We already validated 'plan' and resolved amount from server-side mapping
+    const amountStr = selected.amount.toFixed(2); // "99.00"
 
     const PAYPAL_CLIENT_ID = Deno.env.get("PAYPAL_CLIENT_ID");
     const PAYPAL_CLIENT_SECRET = Deno.env.get("PAYPAL_CLIENT_SECRET");
@@ -46,18 +79,22 @@ serve(async (req) => {
     const APP_ORIGIN = Deno.env.get("APP_ORIGIN") || "http://localhost:8080";
 
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
-      return new Response(JSON.stringify({ error: "PayPal credentials not configured" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      });
+      console.error("Missing PayPal credentials in environment");
+      return new Response(
+        JSON.stringify({ error: "PayPal credentials not configured" }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 500,
+        },
+      );
     }
 
-    const PAYPAL_BASE_URL = PAYPAL_ENV === "live" 
-      ? "https://api-m.paypal.com" 
+    const PAYPAL_BASE_URL = PAYPAL_ENV === "live"
+      ? "https://api-m.paypal.com"
       : "https://api-m.sandbox.paypal.com";
 
-    // Require HTTPS origin in live mode to comply with PayPal callbacks
     if (PAYPAL_ENV === "live" && !APP_ORIGIN.startsWith("https://")) {
+      console.error("Invalid APP_ORIGIN for live:", APP_ORIGIN);
       return new Response(
         JSON.stringify({
           error: "Invalid APP_ORIGIN for live mode",
@@ -66,16 +103,18 @@ serve(async (req) => {
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 400,
-        }
+        },
       );
     }
 
-    // Get PayPal access token
+    // 1) TOKEN de PayPal
     const authResponse = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": `Basic ${btoa(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`)}`,
+        Authorization: `Basic ${
+          btoa(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`)
+        }`,
       },
       body: "grant_type=client_credentials",
     });
@@ -89,22 +128,22 @@ serve(async (req) => {
           details: text,
         }),
         {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 502,
-      }
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 502,
+        },
       );
     }
 
     const { access_token } = await authResponse.json();
 
-    // Create PayPal order
+    // 2) ORDEN de PayPal (versión mínima súper estricta)
     const orderData = {
       intent: "CAPTURE",
       purchase_units: [
         {
           amount: {
-            currency_code: selected.currency,
-            value: amountStr,
+            currency_code: selected.currency, // "USD"
+            value: amountStr, // "99.00"
           },
           description: selected.description,
         },
@@ -118,11 +157,13 @@ serve(async (req) => {
       },
     };
 
+    console.log("Creating PayPal order with:", JSON.stringify(orderData));
+
     const orderResponse = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${access_token}`,
+        Authorization: `Bearer ${access_token}`,
       },
       body: JSON.stringify(orderData),
     });
@@ -136,14 +177,16 @@ serve(async (req) => {
           details: text,
         }),
         {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 502,
-      }
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 502,
+        },
       );
     }
 
     const order = await orderResponse.json();
-    const approvalUrl = order.links?.find((link: any) => link.rel === "approve")?.href;
+    const approvalUrl = order.links?.find(
+      (link: { rel: string }) => link.rel === "approve",
+    )?.href;
 
     return new Response(
       JSON.stringify({
@@ -153,7 +196,7 @@ serve(async (req) => {
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
-      }
+      },
     );
   } catch (error) {
     console.error("Payment creation error:", error);

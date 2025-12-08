@@ -9,7 +9,7 @@ import {
   Check, DollarSign, Shield, Globe, Clock, LineChart, BarChart3,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, SUPABASE_PUBLISHABLE_KEY } from "@/integrations/supabase/client";
 
 type Instrument = "sp500" | "gold";
 type Billing = "monthly" | "annual";
@@ -103,12 +103,15 @@ export default function Pricing() {
         : (isAnnual ? "mini_annual" : "mini_monthly");
 
       // Call Supabase Edge Function via HTTP POST with JSON body
+      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || SUPABASE_PUBLISHABLE_KEY;
       const res = await fetch(
         "https://odlxhgatqyodxdessxts.supabase.co/functions/v1/create-payment",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            // Always supply anon key (env or exported fallback)
+            Authorization: `Bearer ${anonKey}`,
           },
           body: JSON.stringify({ plan: planId }),
         }

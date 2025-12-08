@@ -3,6 +3,7 @@ import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 serve(async (req) => {
@@ -54,11 +55,13 @@ serve(async (req) => {
 
     if (!authResponse.ok) {
       const text = await authResponse.text();
-      console.error("PayPal auth failed:", text);
+      const debugId = authResponse.headers.get("paypal-debug-id");
+      console.error("PayPal auth failed:", { text, debugId });
       return new Response(
         JSON.stringify({
           error: "Failed to authenticate with PayPal",
           details: text,
+          debugId,
         }),
         {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -80,11 +83,13 @@ serve(async (req) => {
 
     if (!captureResponse.ok) {
       const text = await captureResponse.text();
-      console.error("PayPal capture failed:", text);
+      const debugId = captureResponse.headers.get("paypal-debug-id");
+      console.error("PayPal capture failed:", { text, debugId });
       return new Response(
         JSON.stringify({
           error: "Failed to capture payment",
           details: text,
+          debugId,
         }),
         {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -102,6 +107,7 @@ serve(async (req) => {
     const currency = capture?.amount?.currency_code;
     const status = result?.status;
 
+    const debugId = captureResponse.headers.get("paypal-debug-id");
     return new Response(
       JSON.stringify({
         success: true,
@@ -112,6 +118,7 @@ serve(async (req) => {
         payerEmail,
         captureTime: capture?.create_time,
         plan: result?.purchase_units?.[0]?.description,
+        debugId,
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
