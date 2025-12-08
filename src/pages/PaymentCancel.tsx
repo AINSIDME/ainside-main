@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PageSEO } from "@/components/seo/PageSEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,12 +8,20 @@ import { useTranslation } from "react-i18next";
 
 export default function PaymentCancel() {
   const { t } = useTranslation();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const planFromQuery = params.get('plan') || '';
+
   useEffect(() => {
     // If this is a popup window, close after a moment
     if (window.opener) {
       setTimeout(() => {
         window.close();
       }, 3000);
+    }
+    // Persist last plan so checkout can preselect on retry
+    if (planFromQuery) {
+      try { localStorage.setItem('lastPlan', planFromQuery); } catch {}
     }
   }, []);
 
@@ -44,7 +52,7 @@ export default function PaymentCancel() {
                 </Link>
               </Button>
               <Button asChild className="flex-1">
-                <Link to="/checkout">
+                <Link to={planFromQuery ? `/checkout?plan=${encodeURIComponent(planFromQuery)}` : "/checkout"}>
                   {t("paymentCancel.cta.retry", { defaultValue: "Retry payment" })}
                 </Link>
               </Button>

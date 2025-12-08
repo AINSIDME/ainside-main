@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PageSEO } from "@/components/seo/PageSEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,18 +10,56 @@ import { CreditCard, Shield, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { formatCurrency } from "@/lib/utils";
 
-// Align client plan identifiers and amounts with server function mapping
-const plans = [
-  { id: "micro_monthly", nameKey: "checkoutPage.plans.micro_monthly.name", descKey: "checkoutPage.plans.micro_monthly.desc", price: 99.0, currency: 'USD' },
-  { id: "micro_annual", nameKey: "checkoutPage.plans.micro_annual.name", descKey: "checkoutPage.plans.micro_annual.desc", price: 831.6, currency: 'USD' },
-  { id: "mini_monthly", nameKey: "checkoutPage.plans.mini_monthly.name", descKey: "checkoutPage.plans.mini_monthly.desc", price: 999.0, currency: 'USD' },
-  { id: "mini_annual", nameKey: "checkoutPage.plans.mini_annual.name", descKey: "checkoutPage.plans.mini_annual.desc", price: 8391.6, currency: 'USD' },
-];
+// Map plan ids to i18n keys; prices come from backend get-plans
+const PLAN_I18N: Record<string, { nameKey: string; descKey: string }> = {
+  micro_monthly: {
+    nameKey: "checkoutPage.plans.micro_monthly.name",
+    descKey: "checkoutPage.plans.micro_monthly.desc",
+  },
+  micro_annual: {
+    nameKey: "checkoutPage.plans.micro_annual.name",
+    descKey: "checkoutPage.plans.micro_annual.desc",
+  },
+  mini_monthly: {
+    nameKey: "checkoutPage.plans.mini_monthly.name",
+    descKey: "checkoutPage.plans.mini_monthly.desc",
+  },
+  mini_annual: {
+    nameKey: "checkoutPage.plans.mini_annual.name",
+    descKey: "checkoutPage.plans.mini_annual.desc",
+  },
+};
+
+type PlanInfo = { id: string; amount: number; currency: string };
 
 export default function Checkout() {
   const { t } = useTranslation();
-  const [selectedPlan, setSelectedPlan] = useState("mini");
+  const [selectedPlan, setSelectedPlan] = useState<string>("micro_monthly");
   const [loading, setLoading] = useState(false);
+  const [plans, setPlans] = useState<PlanInfo[]>([]);
+
+  useEffect(() => {
+    const loadPlans = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke("get-plans", {});
+        if (error) throw error;
+        if (data?.plans && Array.isArray(data.plans)) {
+          setPlans(data.plans as PlanInfo[]);
+          setSelectedPlan((prev) => (prev && data.plans.find((p: PlanInfo) => p.id === prev) ? prev : data.plans[0]?.id ?? "micro_monthly"));
+        }
+      } catch (e) {
+        console.error("Failed to load plans:", e);
+        // Fallback to a minimal hardcoded list if needed
+        setPlans([
+          { id: "micro_monthly", amount: 99.0, currency: "USD" },
+          { id: "micro_annual", amount: 831.6, currency: "USD" },
+          { id: "mini_monthly", amount: 999.0, currency: "USD" },
+          { id: "mini_annual", amount: 8391.6, currency: "USD" },
+        ]);
+      }
+    };
+    loadPlans();
+  }, []);
 
   const handlePayment = async () => {
     setLoading(true);
@@ -87,11 +125,11 @@ export default function Checkout() {
                     <Label htmlFor={plan.id} className="flex-1 cursor-pointer">
                       <div className="flex justify-between items-center">
                         <div>
-                          <div className="font-semibold">{t(plan.nameKey)}</div>
-                          <div className="text-sm text-muted-foreground">{t(plan.descKey)}</div>
+                          <div className="font-semibold">{t(PLAN_I18N[plan.id]?.nameKey || plan.id)}</div>
+                          <div className="text-sm text-muted-foreground">{t(PLAN_I18N[plan.id]?.descKey || '')}</div>
                         </div>
                         <div className="text-2xl font-bold text-primary">
-                          {formatCurrency(plan.price, undefined, plan.currency)}
+                          {formatCurrency(plan.amount, undefined, plan.currency)}
                         </div>
                       </div>
                     </Label>
@@ -108,13 +146,13 @@ export default function Checkout() {
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center mb-4">
-                  <span>{t(selectedPlanData.nameKey)}</span>
-                  <span className="font-semibold">{formatCurrency(selectedPlanData.price, undefined, selectedPlanData.currency)}</span>
+                  <span>{t(PLAN_I18N[selectedPlanData.id]?.nameKey || selectedPlanData.id)}</span>
+                  <span className="font-semibold">{formatCurrency(selectedPlanData.amount, undefined, selectedPlanData.currency)}</span>
                 </div>
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center text-lg font-bold">
                     <span>{t("checkoutPage.total", { defaultValue: "Total" })}</span>
-                    <span className="text-primary">{formatCurrency(selectedPlanData.price, undefined, selectedPlanData.currency)}</span>
+                    <span className="text-primary">{formatCurrency(selectedPlanData.amount, undefined, selectedPlanData.currency)}</span>
                   </div>
                 </div>
               </CardContent>
@@ -143,7 +181,7 @@ export default function Checkout() {
           >
             {loading
               ? t("checkoutPage.processing", { defaultValue: "Processing..." })
-              : t("checkoutPage.payWithPaypal", { defaultValue: "Pay ${{price}} with PayPal", price: formatCurrency(selectedPlanData?.price ?? 0) })}
+              : t("checkoutPage.payWithPaypal", { defaultValue: "Pay ${{price}} with PayPal", price: formatCurrency(selectedPlanData?.amount ?? 0) })}
           </Button>
 
           <p className="text-xs text-center text-muted-foreground mt-4">

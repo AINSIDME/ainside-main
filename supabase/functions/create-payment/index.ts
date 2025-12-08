@@ -150,7 +150,7 @@ serve(async (req) => {
       ],
       application_context: {
         return_url: `${APP_ORIGIN}/payment-success`,
-        cancel_url: `${APP_ORIGIN}/payment-cancel`,
+        cancel_url: `${APP_ORIGIN}/payment-cancel?plan=${encodeURIComponent(plan)}`,
         brand_name: "AInside",
         user_action: "PAY_NOW",
         shipping_preference: "NO_SHIPPING",
