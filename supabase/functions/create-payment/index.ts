@@ -22,7 +22,7 @@ serve(async (req) => {
       });
     }
 
-    const { plan } = await req.json();
+    const { plan, intro } = await req.json();
 
     // 🔐 Mapeo de planes en el servidor
     const PLANS: Record<
@@ -49,10 +49,26 @@ serve(async (req) => {
         currency: "USD",
         description: "Mini S&P 500 Annual",
       },
-      pro_monthly: {
-        amount: 19.99,
+      // Gold variants
+      micro_gold_monthly: {
+        amount: 99.0,
         currency: "USD",
-        description: "Pro Monthly",
+        description: "Micro Gold Monthly",
+      },
+      micro_gold_annual: {
+        amount: 831.6,
+        currency: "USD",
+        description: "Micro Gold Annual",
+      },
+      mini_gold_monthly: {
+        amount: 999.0,
+        currency: "USD",
+        description: "Mini Gold Monthly",
+      },
+      mini_gold_annual: {
+        amount: 8391.6,
+        currency: "USD",
+        description: "Mini Gold Annual",
       },
     };
 
@@ -71,12 +87,14 @@ serve(async (req) => {
       );
     }
 
-    const amountStr = selected.amount.toFixed(2); // "99.00"
+    const applyIntro = !!intro && String(plan).endsWith("_monthly");
+    const finalAmount = applyIntro ? Number((selected.amount * 0.5).toFixed(2)) : selected.amount;
+    const amountStr = finalAmount.toFixed(2); // "99.00"
 
     const PAYPAL_CLIENT_ID = Deno.env.get("PAYPAL_CLIENT_ID");
     const PAYPAL_CLIENT_SECRET = Deno.env.get("PAYPAL_CLIENT_SECRET");
     const PAYPAL_ENV = Deno.env.get("PAYPAL_ENV") || "sandbox";
-    const APP_ORIGIN = Deno.env.get("APP_ORIGIN") || "http://localhost:8080";
+    const APP_ORIGIN = Deno.env.get("APP_ORIGIN") || "https://ainside.me";
 
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
       console.error("Missing PayPal credentials in environment");
@@ -142,10 +160,12 @@ serve(async (req) => {
       purchase_units: [
         {
           amount: {
-            currency_code: selected.currency, // "USD"
-            value: amountStr, // "99.00"
+            currency_code: selected.currency,
+            value: amountStr,
           },
-          description: selected.description,
+          description: applyIntro
+            ? `${selected.description} - First month 50% off`
+            : selected.description,
         },
       ],
       application_context: {

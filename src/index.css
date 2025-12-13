@@ -183,4 +183,61 @@ All colors MUST be HSL.
   .section-header {
     @apply text-3xl md:text-4xl font-bold text-center mb-6;
   }
+
+  /* Accessibility Features */
+  
+  /* High Contrast Mode */
+  .high-contrast {
+    filter: contrast(1.5);
+  }
+
+  .high-contrast * {
+    border-color: #000 !important;
+  }
+
+  .high-contrast a {
+    color: #0000ff !important;
+    text-decoration: underline !important;
+  }
+
+  .high-contrast button {
+    border: 2px solid #000 !important;
+  }
+
+  /* Underline Links */
+  .underline-links a {
+    text-decoration: underline !important;
+  }
+
+  .underline-links a:hover {
+    text-decoration: underline !important;
+    text-decoration-thickness: 2px !important;
+  }
+
+  /* Readable Font */
+  .readable-font {
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+  }
+
+  .readable-font * {
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.8 !important;
+  }
+
+  /* Reduced Motion */
+  .reduced-motion *,
+  .reduced-motion *::before,
+  .reduced-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Focus Visible Enhancement */
+  .focus-visible:focus-visible {
+    outline: 3px solid #2563eb !important;
+    outline-offset: 2px !important;
+  }
 }

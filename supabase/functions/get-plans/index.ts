@@ -45,6 +45,27 @@ serve(async (req) => {
       currency: "USD",
       description: "Mini S&P 500 Annual",
     },
+    // Gold variants
+    micro_gold_monthly: {
+      amount: 99.0,
+      currency: "USD",
+      description: "Micro Gold Monthly",
+    },
+    micro_gold_annual: {
+      amount: 831.6,
+      currency: "USD",
+      description: "Micro Gold Annual",
+    },
+    mini_gold_monthly: {
+      amount: 999.0,
+      currency: "USD",
+      description: "Mini Gold Monthly",
+    },
+    mini_gold_annual: {
+      amount: 8391.6,
+      currency: "USD",
+      description: "Mini Gold Annual",
+    },
   };
 
   const list = Object.entries(PLANS).map(([id, p]) => ({ id, ...p }));

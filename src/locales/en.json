@@ -3,7 +3,7 @@
     "home": "Home",
     "about": "About",
     "services": "Services", 
-    "demo": "Real Data",
+    "demo": "Strategy",
     "liveDemoMini": "Live",
     "pricing": "Pricing",
     "contact": "Contact",
@@ -63,15 +63,23 @@
     "title": "Secure Checkout",
     "subtitle": "Complete your purchase quickly and safely",
     "selectPlan": "Select your plan",
+    "instrument": {
+      "sp500": "S&P 500",
+      "gold": "Gold"
+    },
     "summary": "Order Summary",
     "total": "Total",
     "badges": {
       "secure": "100% secure payment",
-      "guarantee": "Money-back guarantee"
+      "noRefundAfterDownload": "No refund after download"
     },
     "processing": "Processing...",
     "payWithPaypal": "Pay ${{price}} with PayPal",
     "notice": "By continuing you accept our terms and conditions",
+    "intro": {
+      "title": "Fixed Monthly Plan – first month 50% off",
+      "note": "Applies only to monthly plans"
+    },
     "errors": {
       "selectPlan": "Please select a plan",
       "create": "Error creating payment",
@@ -82,7 +90,11 @@
       "micro_monthly": { "name": "Micro S&P 500 Monthly", "desc": "One-month access" },
       "micro_annual": { "name": "Micro S&P 500 Annual", "desc": "Annual access (discounted)" },
       "mini_monthly": { "name": "Mini S&P 500 Monthly", "desc": "One-month access" },
-      "mini_annual": { "name": "Mini S&P 500 Annual", "desc": "Annual access (discounted)" }
+      "mini_annual": { "name": "Mini S&P 500 Annual", "desc": "Annual access (discounted)" },
+      "micro_gold_monthly": { "name": "Micro Gold Monthly", "desc": "One-month access" },
+      "micro_gold_annual": { "name": "Micro Gold Annual", "desc": "Annual access (discounted)" },
+      "mini_gold_monthly": { "name": "Mini Gold Monthly", "desc": "One-month access" },
+      "mini_gold_annual": { "name": "Mini Gold Annual", "desc": "Annual access (discounted)" }
     }
   },
   "paymentCancel": {
@@ -451,6 +463,9 @@
       "security": "Enterprise Security",
       "protection": "Data Protection",
       "compliance": "Compliance Ready"
+    },
+    "policy": {
+      "noRefundAfterDownload": "No refund after download"
     }
   },
   "demo": {
@@ -496,14 +511,72 @@
       "marketOpen": "Market Open"
   },
   "demoPage": {
+    "badge": "EDUCATIONAL SIMULATION",
+    "header": {
+      "title": "Strategy Visual Simulation",
+      "description": "Visual representation of how an automated algorithm would identify entries and exits. This is an educational example only."
+    },
+    "disclaimer": "This simulation does not guarantee future results. Past performance shown is hypothetical and for educational purposes only.",
     "platform": { "title": "Advanced Analytics Platform", "subtitle": "Professional trading analytics and performance tracking" },
     "status": { "active": "ACTIVE", "standby": "STANDBY" },
     "controls": { "start": "Start", "pause": "Pause", "export": "Export" },
-    "view": { "charts": "Charts", "table": "Table" },
+    "view": { "liveSimulation": "Live Simulation", "historicalData": "Historical Data", "charts": "Charts", "table": "Table" },
+    "liveChart": {
+      "title": "E-mini S&P 500 (@ES) - Simulation",
+      "subtitle": "Real historical data + automated entry/exit simulation",
+      "entryAt": "Entry",
+      "currentPnL": "Current P&L",
+      "instrument": "E-mini S&P 500",
+      "loading": "Loading...",
+      "perPoint": "$50 per point",
+      "position": "Position",
+      "marketOpen": "● MARKET OPEN",
+      "marketClosed": "● MARKET CLOSED",
+      "closedMessage": "Market Closed: Live simulation is paused. E-mini S&P 500 futures markets operate from Sunday 6:00 PM to Friday 5:00 PM ET, with a daily maintenance break from 5:00-6:00 PM ET.",
+      "longEntry": "Long Entry",
+      "shortEntry": "Short Entry",
+      "exit": "Exit",
+      "totalTrades": "Total Trades",
+      "winRate": "Win Rate",
+      "totalPnL": "Total P&L",
+      "winningTrades": "Winning Trades",
+      "losingTrades": "Losing Trades",
+      "winsLosses": "W/L",
+      "recentTrades": "Recent Trades",
+      "noPosition": "No active position",
+      "statistics": "Statistics",
+      "noTrades": "No trades yet"
+    },
     "charts": { "netProfit": "Net Profit Evolution", "gainPct": "Percentage Gains" },
     "tooltip": { "netProfit": "Net Profit", "gainPct": "% Gain" },
     "features": { "title": "Platform Features", "f1": "Real-time Analytics", "f2": "Advanced Charting", "f3": "Risk Management", "f4": "Performance Tracking" },
-    "cta": { "title": "Ready to Get Started?", "desc": "Contact our team to learn more about our algorithm rental services.", "button": "Contact Us" }
+    "cards": {
+      "card1": { "title": "Market Analysis", "desc": "The algorithm analyzes price movements and patterns in real-time." },
+      "card2": { "title": "Automatic Signals", "desc": "Identifies entry and exit points automatically." },
+      "card3": { "title": "Risk Management", "desc": "Manages exits based on profit targets and stops." }
+    },
+    "disclaimerBox": {
+      "title": "Important Notice",
+      "point1": { "title": "Your account is 100% yours:", "desc": "Only you have access to your trading account. We do NOT have access or control over your account at any time." },
+      "point2": { "title": "Educational service:", "desc": "We provide automated tools and teach you how to use them. We do NOT provide financial advice or make decisions for you." },
+      "point3": { "title": "Teaching, not advising:", "desc": "Our service is educational. We teach you how to use the tools and strategies, but final decisions are always yours." },
+      "point4": { "title": "Your responsibility:", "desc": "You are the one operating your account. You must understand the risks and manage your capital responsibly." },
+      "point5": "This is an educational simulation. Past performance does not guarantee future results. Trading involves risk of capital loss."
+    },
+    "sidebar": {
+      "disclaimerTitle": "Important Notice",
+      "disclaimer1": "This is an educational simulation showing how an automated algorithm could work.",
+      "disclaimer2": "Past performance does not guarantee future results. All data shown is hypothetical.",
+      "disclaimer3": "Trading involves risk. This tool is for educational purposes only.",
+      "howItWorks": "How It Works",
+      "step1Title": "Market Analysis",
+      "step1Desc": "Algorithm analyzes price movements and patterns",
+      "step2Title": "Entry Signal",
+      "step2Desc": "Identifies optimal entry points automatically",
+      "step3Title": "Exit Management",
+      "step3Desc": "Manages exits based on profit targets and stops"
+    },
+    "cta": { "title": "Ready to Get Started?", "desc": "Contact our team to learn more about our algorithm rental services.", "button": "Contact Us", "pricing": "View Pricing", "contact": "Contact Us", "viewPricing": "View Pricing" }
   },
   "products": {
     "title": "Professional Analysis Tools",
@@ -608,11 +681,19 @@
     "subtitle": "Our commitment to inclusive design",
     "statement": "We aim to meet WCAG 2.1 AA standards. If you experience any accessibility barriers, contact us and we will assist you.",
     "skipToContent": "Skip to main content",
-    "toggleHighContrast": "Toggle High Contrast",
-    "increaseFontSize": "Increase Font Size",
-    "decreaseFontSize": "Decrease Font Size",
-    "options": "Accessibility options",
-    "short": "A11y"
+    "toggleHighContrast": "High Contrast",
+    "increaseFontSize": "Increase Text",
+    "decreaseFontSize": "Decrease Text",
+    "underlineLinks": "Underline Links",
+    "readableFont": "Readable Font",
+    "reducedMotion": "Reduce Animations",
+    "resetAll": "Reset All",
+    "options": "Accessibility Options",
+    "short": "Accessibility",
+    "textSize": "Text Size",
+    "contrastColors": "Contrast & Colors",
+    "readability": "Readability",
+    "motion": "Motion"
   },
   "status": {
     "title": "System Status",
@@ -814,6 +895,12 @@
     "monthlyShort": "Monthly",
     "annualShort": "Annual",
     "billingCycle": "Billing Cycle",
+    "intro": {
+      "title": "First month 50% off",
+      "note": "Applies only to monthly plans",
+      "on": "On",
+      "off": "Off"
+    },
     "save": "Save 30%",
     "renews": "Auto-renews. You can cancel anytime.",
     "chooseInstrument": "Choose Instrument",

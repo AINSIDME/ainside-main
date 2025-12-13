@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { CreditCard, Shield, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { formatCurrency } from "@/lib/utils";
+import { useLocation } from "react-router-dom";
 
 // Map plan ids to i18n keys; prices come from backend get-plans
 const PLAN_I18N: Record<string, { nameKey: string; descKey: string }> = {
@@ -28,15 +30,35 @@ const PLAN_I18N: Record<string, { nameKey: string; descKey: string }> = {
     nameKey: "checkoutPage.plans.mini_annual.name",
     descKey: "checkoutPage.plans.mini_annual.desc",
   },
+  // Gold variants
+  micro_gold_monthly: {
+    nameKey: "checkoutPage.plans.micro_gold_monthly.name",
+    descKey: "checkoutPage.plans.micro_gold_monthly.desc",
+  },
+  micro_gold_annual: {
+    nameKey: "checkoutPage.plans.micro_gold_annual.name",
+    descKey: "checkoutPage.plans.micro_gold_annual.desc",
+  },
+  mini_gold_monthly: {
+    nameKey: "checkoutPage.plans.mini_gold_monthly.name",
+    descKey: "checkoutPage.plans.mini_gold_monthly.desc",
+  },
+  mini_gold_annual: {
+    nameKey: "checkoutPage.plans.mini_gold_annual.name",
+    descKey: "checkoutPage.plans.mini_gold_annual.desc",
+  },
 };
 
 type PlanInfo = { id: string; amount: number; currency: string };
 
 export default function Checkout() {
   const { t } = useTranslation();
+  const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<string>("micro_monthly");
+  const [instrument, setInstrument] = useState<"sp500" | "gold">("sp500");
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState<PlanInfo[]>([]);
+  const [intro, setIntro] = useState<boolean>(false);
 
   useEffect(() => {
     const loadPlans = async () => {
@@ -45,21 +67,27 @@ export default function Checkout() {
         if (error) throw error;
         if (data?.plans && Array.isArray(data.plans)) {
           setPlans(data.plans as PlanInfo[]);
-          setSelectedPlan((prev) => (prev && data.plans.find((p: PlanInfo) => p.id === prev) ? prev : data.plans[0]?.id ?? "micro_monthly"));
+          const urlPlan = new URLSearchParams(location.search).get('plan') || (localStorage.getItem('lastPlan') || '');
+          const initial = (urlPlan && data.plans.find((p: PlanInfo) => p.id === urlPlan)) ? urlPlan : (data.plans[0]?.id ?? "micro_monthly");
+          setSelectedPlan(initial);
         }
       } catch (e) {
         console.error("Failed to load plans:", e);
-        // Fallback to a minimal hardcoded list if needed
+        // Fallback including SP500 and Gold variants
         setPlans([
           { id: "micro_monthly", amount: 99.0, currency: "USD" },
           { id: "micro_annual", amount: 831.6, currency: "USD" },
           { id: "mini_monthly", amount: 999.0, currency: "USD" },
           { id: "mini_annual", amount: 8391.6, currency: "USD" },
+          { id: "micro_gold_monthly", amount: 99.0, currency: "USD" },
+          { id: "micro_gold_annual", amount: 831.6, currency: "USD" },
+          { id: "mini_gold_monthly", amount: 999.0, currency: "USD" },
+          { id: "mini_gold_annual", amount: 8391.6, currency: "USD" },
         ]);
       }
     };
     loadPlans();
-  }, []);
+  }, [location.search]);
 
   const handlePayment = async () => {
     setLoading(true);
@@ -69,10 +97,12 @@ export default function Checkout() {
         toast.error(t("checkoutPage.errors.selectPlan", { defaultValue: "Please select a plan" }));
         return;
       }
+      try { localStorage.setItem('lastPlan', plan.id); } catch {}
 
       const { data, error } = await supabase.functions.invoke("create-payment", {
         body: {
           plan: plan.id,
+          intro: !!(intro && plan.id.includes('_monthly')),
         },
       });
 
@@ -95,7 +125,19 @@ export default function Checkout() {
     }
   };
 
-  const selectedPlanData = plans.find(p => p.id === selectedPlan);
+  // Filter plans by instrument: gold ids contain "_gold_"
+  const visiblePlans = plans.filter(p => instrument === "gold" ? p.id.includes("_gold_") : !p.id.includes("_gold_"));
+  const selectedPlanData = visiblePlans.find(p => p.id === selectedPlan) || visiblePlans[0];
+  const isMonthly = !!selectedPlanData?.id.includes("_monthly");
+  const effectiveAmount = selectedPlanData
+    ? (intro && isMonthly ? Number((selectedPlanData.amount * 0.5).toFixed(2)) : selectedPlanData.amount)
+    : 0;
+  useEffect(() => {
+    // When switching instrument, ensure selected plan is valid
+    if (selectedPlanData && selectedPlanData.id !== selectedPlan) {
+      setSelectedPlan(selectedPlanData.id);
+    }
+  }, [instrument, plans]);
 
   return (
     <>
@@ -118,8 +160,12 @@ export default function Checkout() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan}>
-                {plans.map((plan) => (
+              <div className="flex gap-2 mb-4">
+                <Button variant={instrument === "sp500" ? "default" : "outline"} onClick={() => setInstrument("sp500")}>{t("checkoutPage.instrument.sp500", { defaultValue: "S&P 500" })}</Button>
+                <Button variant={instrument === "gold" ? "default" : "outline"} onClick={() => setInstrument("gold")}>{t("checkoutPage.instrument.gold", { defaultValue: "Gold" })}</Button>
+              </div>
+              <RadioGroup value={selectedPlan} onValueChange={(v) => { setSelectedPlan(v); }}>
+                {visiblePlans.map((plan) => (
                   <div key={plan.id} className="flex items-center space-x-2 p-4 border rounded-lg">
                     <RadioGroupItem value={plan.id} id={plan.id} />
                     <Label htmlFor={plan.id} className="flex-1 cursor-pointer">
@@ -136,6 +182,15 @@ export default function Checkout() {
                   </div>
                 ))}
               </RadioGroup>
+              {selectedPlanData && isMonthly && (
+                <div className="flex items-center justify-between mt-4 p-3 border rounded-lg">
+                  <div>
+                    <div className="font-medium">{t("checkoutPage.intro.title", { defaultValue: "First month 50% off" })}</div>
+                    <div className="text-sm text-muted-foreground">{t("checkoutPage.intro.note", { defaultValue: "Applies only to monthly plans" })}</div>
+                  </div>
+                  <Switch checked={intro} onCheckedChange={setIntro} />
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -147,12 +202,12 @@ export default function Checkout() {
               <CardContent>
                 <div className="flex justify-between items-center mb-4">
                   <span>{t(PLAN_I18N[selectedPlanData.id]?.nameKey || selectedPlanData.id)}</span>
-                  <span className="font-semibold">{formatCurrency(selectedPlanData.amount, undefined, selectedPlanData.currency)}</span>
+                  <span className="font-semibold">{formatCurrency(effectiveAmount, undefined, selectedPlanData.currency)}</span>
                 </div>
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center text-lg font-bold">
                     <span>{t("checkoutPage.total", { defaultValue: "Total" })}</span>
-                    <span className="text-primary">{formatCurrency(selectedPlanData.amount, undefined, selectedPlanData.currency)}</span>
+                    <span className="text-primary">{formatCurrency(effectiveAmount, undefined, selectedPlanData.currency)}</span>
                   </div>
                 </div>
               </CardContent>
@@ -168,7 +223,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  {t("checkoutPage.badges.guarantee", { defaultValue: "Money-back guarantee" })}
+                  {t("checkoutPage.badges.noRefundAfterDownload", { defaultValue: "No refund after download" })}
                 </div>
               </div>
             </CardContent>
@@ -181,7 +236,7 @@ export default function Checkout() {
           >
             {loading
               ? t("checkoutPage.processing", { defaultValue: "Processing..." })
-              : t("checkoutPage.payWithPaypal", { defaultValue: "Pay ${{price}} with PayPal", price: formatCurrency(selectedPlanData?.amount ?? 0) })}
+              : t("checkoutPage.payWithPaypal", { defaultValue: "Pay ${{price}} with PayPal", price: formatCurrency(effectiveAmount) })}
           </Button>
 
           <p className="text-xs text-center text-muted-foreground mt-4">

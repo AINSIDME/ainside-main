@@ -3,7 +3,7 @@
     "home": "Accueil",
     "about": "À propos",
     "services": "Services",
-    "demo": "Données Réelles",
+    "demo": "Stratégie",
     "liveDemoMini": "Live",
     "contact": "Contact",
     "pricing": "Tarifs",
@@ -54,12 +54,21 @@
       "title": "Paiement sécurisé",
       "subtitle": "Finalisez votre achat rapidement et en toute sécurité",
       "selectPlan": "Sélectionnez votre plan",
+      "instrument": { "sp500": "S&P 500", "gold": "Or" },
       "summary": "Récapitulatif",
       "total": "Total",
-      "badges": { "secure": "Paiement 100% sécurisé", "guarantee": "Garantie de remboursement" },
+      "badges": { "secure": "Paiement 100% sécurisé", "noRefundAfterDownload": "Pas de remboursement après téléchargement" },
       "processing": "Traitement...",
       "payWithPaypal": "Payer ${{price}} avec PayPal",
       "notice": "En continuant vous acceptez nos termes et conditions",
+      "intro": {
+        "title": "Premier mois à -50%",
+        "note": "S'applique uniquement aux plans mensuels"
+      },
+      "intro": {
+        "title": "Forfait mensuel fixe – premier mois à -50%",
+        "note": "S'applique uniquement aux forfaits mensuels"
+      },
       "errors": {
         "selectPlan": "Veuillez sélectionner un plan",
         "create": "Erreur de création du paiement",
@@ -70,7 +79,11 @@
         "micro_monthly": { "name": "Micro S&P 500 Mensuel", "desc": "Accès d'un mois" },
         "micro_annual": { "name": "Micro S&P 500 Annuel", "desc": "Accès annuel (remisé)" },
         "mini_monthly": { "name": "Mini S&P 500 Mensuel", "desc": "Accès d'un mois" },
-        "mini_annual": { "name": "Mini S&P 500 Annuel", "desc": "Accès annuel (remisé)" }
+        "mini_annual": { "name": "Mini S&P 500 Annuel", "desc": "Accès annuel (remisé)" },
+        "micro_gold_monthly": { "name": "Micro Or Mensuel", "desc": "Accès d'un mois" },
+        "micro_gold_annual": { "name": "Micro Or Annuel", "desc": "Accès annuel (remisé)" },
+        "mini_gold_monthly": { "name": "Mini Or Mensuel", "desc": "Accès d'un mois" },
+        "mini_gold_annual": { "name": "Mini Or Annuel", "desc": "Accès annuel (remisé)" }
       }
     },
   "header": {
@@ -191,6 +204,9 @@
       "security": "Sécurité d'Entreprise",
       "protection": "Protection des Données",
       "compliance": "Prêt pour la Conformité"
+    },
+    "policy": {
+      "noRefundAfterDownload": "Pas de remboursement après téléchargement"
     }
   },
   "paymentCancel": {
@@ -253,6 +269,47 @@
     "title": "Outils de Trading Professionnel",
     "subtitle": "Analyses avancées en temps réel pour les traders institutionnels",
     "cta": "Voir Stream en Direct"
+  },
+  "demoPage": {
+    "badge": "SIMULATION ÉDUCATIVE",
+    "header": {
+      "title": "Simulation Visuelle de Stratégie",
+      "description": "Représentation visuelle de la façon dont un algorithme automatisé identifierait les entrées et sorties. Ceci est un exemple éducatif uniquement."
+    },
+    "disclaimer": "Cette simulation ne garantit pas les résultats futurs. Les performances affichées sont hypothétiques et à des fins éducatives uniquement.",
+    "liveChart": {
+      "title": "E-mini S&P 500 (@ES) - Simulation",
+      "subtitle": "Données historiques réelles + simulation d'entrées/sorties automatiques",
+      "instrument": "E-mini S&P 500",
+      "loading": "Chargement...",
+      "perPoint": "$50 par point",
+      "position": "Position",
+      "marketOpen": "● MARCHÉ OUVERT",
+      "marketClosed": "● MARCHÉ FERMÉ",
+      "closedMessage": "Marché Fermé: La simulation en direct est en pause. Les marchés à terme E-mini S&P 500 fonctionnent du dimanche 18h00 au vendredi 17h00 ET, avec une pause de maintenance quotidienne de 17h00-18h00 ET.",
+      "totalTrades": "Total Trades",
+      "totalPnL": "P&L Total",
+      "winningTrades": "Trades Gagnants",
+      "losingTrades": "Trades Perdants",
+      "recentTrades": "Derniers Trades",
+      "noPosition": "Aucune position active",
+      "statistics": "Statistiques",
+      "noTrades": "Pas encore de trades"
+    },
+    "cards": {
+      "card1": { "title": "Analyse de Marché", "desc": "L'algorithme analyse les mouvements de prix et les modèles en temps réel." },
+      "card2": { "title": "Signaux Automatiques", "desc": "Identifie automatiquement les points d'entrée et de sortie." },
+      "card3": { "title": "Gestion des Risques", "desc": "Gère les sorties basées sur les objectifs de profit et les stops." }
+    },
+    "disclaimerBox": {
+      "title": "Avis Important",
+      "point1": { "title": "Votre compte est 100% à vous:", "desc": "Seul vous avez accès à votre compte de trading. Nous n'avons AUCUN accès ni contrôle sur votre compte à aucun moment." },
+      "point2": { "title": "Service éducatif:", "desc": "Nous fournissons des outils automatisés et vous enseignons comment les utiliser. Nous ne fournissons AUCUN conseil financier ni ne prenons de décisions pour vous." },
+      "point3": { "title": "Enseignement, pas conseil:", "desc": "Notre service est éducatif. Nous vous enseignons comment utiliser les outils et stratégies, mais les décisions finales sont toujours les vôtres." },
+      "point4": { "title": "Votre responsabilité:", "desc": "C'est vous qui opérez votre compte. Vous devez comprendre les risques et gérer votre capital de manière responsable." },
+      "point5": "Ceci est une simulation éducative. Les performances passées ne garantissent pas les résultats futurs. Le trading comporte un risque de perte en capital."
+    },
+    "cta": { "title": "Prêt à Commencer?", "desc": "Contactez notre équipe pour en savoir plus sur notre service de location d'algorithmes.", "pricing": "Voir les Prix", "contact": "Nous Contacter" }
   },
   "demo": {
     "title": "Démo des Outils de Trading en Direct",
@@ -341,11 +398,21 @@
   "accessibility": {
     "title": "Déclaration d'Accessibilité",
     "subtitle": "Nous nous engageons à rendre nos services accessibles à tous",
-      "skipToMain": "Aller au contenu principal",
-      "skipToContent": "Aller au contenu principal",
-    "increaseFontSize": "Augmenter la taille de police",
-    "decreaseFontSize": "Diminuer la taille de police",
-    "toggleHighContrast": "Basculer le contraste élevé"
+    "skipToMain": "Aller au contenu principal",
+    "skipToContent": "Aller au contenu principal",
+    "increaseFontSize": "Augmenter le Texte",
+    "decreaseFontSize": "Réduire le Texte",
+    "toggleHighContrast": "Contraste Élevé",
+    "underlineLinks": "Souligner les Liens",
+    "readableFont": "Police Lisible",
+    "reducedMotion": "Réduire les Animations",
+    "resetAll": "Réinitialiser Tout",
+    "options": "Options d'Accessibilité",
+    "short": "Accessibilité",
+    "textSize": "Taille du Texte",
+    "contrastColors": "Contraste et Couleurs",
+    "readability": "Lisibilité",
+    "motion": "Mouvement"
   },
   "status": {
     "title": "État du Système",
@@ -408,6 +475,12 @@
     "monthlyShort": "Mensuel",
     "annualShort": "Annuel",
     "billingCycle": "Cycle de Facturation",
+    "intro": {
+      "title": "Premier mois à -50%",
+      "note": "S'applique uniquement aux plans mensuels",
+      "on": "Activé",
+      "off": "Désactivé"
+    },
     "save": "Économisez 30%",
     "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
     "chooseInstrument": "Choisir l'Instrument",

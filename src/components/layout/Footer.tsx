@@ -60,6 +60,10 @@ export const Footer = () => {
                   <span>{indicator.text}</span>
                 </div>
               ))}
+              <div className="flex items-center gap-2 text-sm text-slate-400 font-light mt-2">
+                <AlertTriangle className="h-4 w-4 text-amber-400" />
+                <span>{t('footer.policy.noRefundAfterDownload', { defaultValue: 'No refund after download' })}</span>
+              </div>
             </div>
           </div>
 

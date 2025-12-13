@@ -22,6 +22,7 @@ export default function Pricing() {
   // ===== Selecciones globales =====
   const [instrument, setInstrument] = useState<Instrument>("sp500");
   const [billing, setBilling] = useState<Billing>("monthly"); // Mensual / Anual
+  const [intro, setIntro] = useState<boolean>(false); // Primer mes 50% OFF
 
   // ===== Meta de instrumentos (reacciona al idioma) =====
   const instrumentMeta = useMemo(
@@ -49,6 +50,8 @@ export default function Pricing() {
   const DISCOUNT = 0.30; // 30% OFF anual
   const MICRO_MONTHLY = 99;
   const MINI_MONTHLY = 999;
+  const MICRO_MONTHLY_EFFECTIVE = intro && billing === "monthly" ? +(MICRO_MONTHLY * 0.5).toFixed(2) : MICRO_MONTHLY;
+  const MINI_MONTHLY_EFFECTIVE  = intro && billing === "monthly" ? +(MINI_MONTHLY  * 0.5).toFixed(2) : MINI_MONTHLY;
   const MICRO_ANNUAL = useMemo(() => +(MICRO_MONTHLY * 12 * (1 - DISCOUNT)).toFixed(2), []);
   const MINI_ANNUAL  = useMemo(() => +(MINI_MONTHLY  * 12 * (1 - DISCOUNT)).toFixed(2), []);
 
@@ -113,7 +116,7 @@ export default function Pricing() {
             // Always supply anon key (env or exported fallback)
             Authorization: `Bearer ${anonKey}`,
           },
-          body: JSON.stringify({ plan: planId }),
+          body: JSON.stringify({ plan: planId, intro: !!(intro && billing === "monthly") }),
         }
       );
 
@@ -236,6 +239,21 @@ export default function Pricing() {
                 defaultValue: "Renovación automática. Podés cancelar cuando quieras.",
               })}
             </p>
+            {billing === "monthly" && (
+              <div className="mt-4 flex items-center justify-between rounded-lg border border-slate-700 p-3">
+                <div>
+                  <div className="text-slate-200 font-medium">{t("pricing.intro.title", { defaultValue: "Primer mes 50% OFF" })}</div>
+                  <div className="text-slate-400 text-xs">{t("pricing.intro.note", { defaultValue: "Aplica solo a planes mensuales" })}</div>
+                </div>
+                <button
+                  aria-pressed={intro}
+                  onClick={() => setIntro(v => !v)}
+                  className={`px-3 py-1 text-sm rounded-md border ${intro ? "bg-emerald-700 text-white border-emerald-600" : "bg-slate-900 text-slate-300 border-slate-700"}`}
+                >
+                  {intro ? t("pricing.intro.on", { defaultValue: "Activado" }) : t("pricing.intro.off", { defaultValue: "Desactivado" })}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Selector de Instrumento (radio formal) */}
@@ -295,7 +313,7 @@ export default function Pricing() {
             <CardContent className="pt-0">
               {billing === "monthly" ? (
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MICRO_MONTHLY)}</span>
+                  <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MICRO_MONTHLY_EFFECTIVE)}</span>
                   <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/mes" })}</span>
                 </div>
               ) : (
@@ -356,7 +374,7 @@ export default function Pricing() {
             <CardContent className="pt-0">
               {billing === "monthly" ? (
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MINI_MONTHLY)}</span>
+                  <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MINI_MONTHLY_EFFECTIVE)}</span>
                   <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/mes" })}</span>
                 </div>
               ) : (

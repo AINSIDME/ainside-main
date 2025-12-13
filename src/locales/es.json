@@ -3,7 +3,7 @@
     "home": "Inicio",
     "about": "Acerca de",
     "services": "Servicios",
-    "demo": "Datos Reales",
+    "demo": "Estrategia",
     "liveDemoMini": "Live",
     "pricing": "Precios",
     "contact": "Contacto",
@@ -63,15 +63,23 @@
     "title": "Checkout Seguro",
     "subtitle": "Completa tu compra de forma rápida y segura",
     "selectPlan": "Selecciona tu plan",
+    "instrument": {
+      "sp500": "S&P 500",
+      "gold": "Oro"
+    },
     "summary": "Resumen de compra",
     "total": "Total",
     "badges": {
       "secure": "Pago 100% seguro",
-      "guarantee": "Garantía de devolución"
+      "noRefundAfterDownload": "Sin reembolso luego de la descarga"
     },
     "processing": "Procesando...",
     "payWithPaypal": "Pagar ${{price}} con PayPal",
     "notice": "Al continuar aceptas nuestros términos y condiciones",
+    "intro": {
+      "title": "Plan mensual fijo – 1er mes 50% OFF",
+      "note": "Aplica sólo a planes mensuales"
+    },
     "errors": {
       "selectPlan": "Por favor selecciona un plan",
       "create": "Error al crear el pago",
@@ -82,7 +90,11 @@
       "micro_monthly": { "name": "Micro S&P 500 Mensual", "desc": "Acceso de un mes" },
       "micro_annual": { "name": "Micro S&P 500 Anual", "desc": "Acceso anual (descuento)" },
       "mini_monthly": { "name": "Mini S&P 500 Mensual", "desc": "Acceso de un mes" },
-      "mini_annual": { "name": "Mini S&P 500 Anual", "desc": "Acceso anual (descuento)" }
+      "mini_annual": { "name": "Mini S&P 500 Anual", "desc": "Acceso anual (descuento)" },
+      "micro_gold_monthly": { "name": "Micro Oro Mensual", "desc": "Acceso de un mes" },
+      "micro_gold_annual": { "name": "Micro Oro Anual", "desc": "Acceso anual (descuento)" },
+      "mini_gold_monthly": { "name": "Mini Oro Mensual", "desc": "Acceso de un mes" },
+      "mini_gold_annual": { "name": "Mini Oro Anual", "desc": "Acceso anual (descuento)" }
     }
   },
   "paymentCancel": {
@@ -495,14 +507,72 @@
       "marketOpen": "Mercado Abierto"
   },
   "demoPage": {
+    "badge": "SIMULACIÓN EDUCATIVA",
+    "header": {
+      "title": "Simulación Visual de Estrategia",
+      "description": "Representación visual de cómo un algoritmo automatizado identificaría entradas y salidas. Esto es solo un ejemplo educativo."
+    },
+    "disclaimer": "Esta simulación no garantiza resultados futuros. El rendimiento mostrado es hipotético y solo con fines educativos.",
     "platform": { "title": "Plataforma de Análisis Avanzado", "subtitle": "Analítica profesional de trading y seguimiento de rendimiento" },
     "status": { "active": "ACTIVO", "standby": "EN ESPERA" },
     "controls": { "start": "Iniciar", "pause": "Pausar", "export": "Exportar" },
-    "view": { "charts": "Gráficos", "table": "Tabla" },
+    "view": { "liveSimulation": "Simulación en Vivo", "historicalData": "Datos Históricos", "charts": "Gráficos", "table": "Tabla" },
+    "liveChart": {
+      "title": "E-mini S&P 500 (@ES) - Simulación",
+      "subtitle": "Datos históricos reales + simulación de entradas/salidas automáticas",
+      "entryAt": "Entrada",
+      "currentPnL": "P&L Actual",
+      "instrument": "E-mini S&P 500",
+      "loading": "Cargando...",
+      "perPoint": "$50 por punto",
+      "position": "Posición",
+      "marketOpen": "● MERCADO ABIERTO",
+      "marketClosed": "● MERCADO CERRADO",
+      "closedMessage": "Mercado Cerrado: La simulación en vivo está pausada. Los mercados de futuros E-mini S&P 500 operan de domingo 6:00 PM a viernes 5:00 PM ET, con un cierre diario de mantenimiento de 5:00-6:00 PM ET.",
+      "longEntry": "Entrada Long",
+      "shortEntry": "Entrada Short",
+      "exit": "Salida",
+      "totalTrades": "Total Trades",
+      "winRate": "% Ganadores",
+      "totalPnL": "P&L Total",
+      "winningTrades": "Operaciones Ganadoras",
+      "losingTrades": "Operaciones Perdedoras",
+      "winsLosses": "G/P",
+      "recentTrades": "Últimas Operaciones",
+      "noPosition": "Sin posición activa",
+      "statistics": "Estadísticas",
+      "noTrades": "Sin trades aún"
+    },
     "charts": { "netProfit": "Evolución de Ganancia Neta", "gainPct": "Porcentaje de Ganancia" },
     "tooltip": { "netProfit": "Ganancia Neta", "gainPct": "% Ganancia" },
     "features": { "title": "Características de la Plataforma", "f1": "Analítica en tiempo real", "f2": "Gráficos avanzados", "f3": "Gestión de riesgo", "f4": "Seguimiento de performance" },
-    "cta": { "title": "¿Listo para Empezar?", "desc": "Contactá a nuestro equipo para conocer el servicio de alquiler de algoritmos.", "button": "Contáctanos" }
+    "cards": {
+      "card1": { "title": "Análisis de Mercado", "desc": "El algoritmo analiza movimientos de precio y patrones en tiempo real." },
+      "card2": { "title": "Señales Automáticas", "desc": "Identifica puntos de entrada y salida de manera automatizada." },
+      "card3": { "title": "Gestión de Riesgo", "desc": "Gestiona salidas basadas en objetivos de ganancia y stops." }
+    },
+    "disclaimerBox": {
+      "title": "Aviso Importante",
+      "point1": { "title": "Tu cuenta es 100% tuya:", "desc": "Solo tú tienes acceso a tu cuenta de trading. Nosotros NO tenemos acceso ni control sobre tu cuenta en ningún momento." },
+      "point2": { "title": "Servicio educativo:", "desc": "Brindamos herramientas automatizadas y enseñanza sobre cómo usarlas. NO proporcionamos asesoramiento financiero ni tomamos decisiones por ti." },
+      "point3": { "title": "Enseñanza, no asesoría:", "desc": "Nuestro servicio es educativo. Te enseñamos a usar las herramientas y estrategias, pero las decisiones finales son siempre tuyas." },
+      "point4": { "title": "Tu responsabilidad:", "desc": "Tú eres quien opera tu cuenta. Debes entender los riesgos y gestionar tu capital de forma responsable." },
+      "point5": "Esta es una simulación educativa. El rendimiento pasado no garantiza resultados futuros. El trading implica riesgo de pérdida de capital."
+    },
+    "sidebar": {
+      "disclaimerTitle": "Aviso Importante",
+      "disclaimer1": "Esta es una simulación educativa que muestra cómo podría funcionar un algoritmo automatizado.",
+      "disclaimer2": "El rendimiento pasado no garantiza resultados futuros. Todos los datos mostrados son hipotéticos.",
+      "disclaimer3": "El trading implica riesgo. Esta herramienta es solo para fines educativos.",
+      "howItWorks": "Cómo Funciona",
+      "step1Title": "Análisis de Mercado",
+      "step1Desc": "El algoritmo analiza movimientos de precio y patrones",
+      "step2Title": "Señal de Entrada",
+      "step2Desc": "Identifica puntos de entrada óptimos automáticamente",
+      "step3Title": "Gestión de Salida",
+      "step3Desc": "Gestiona salidas basadas en objetivos y stops"
+    },
+    "cta": { "title": "¿Listo para Empezar?", "desc": "Contacta a nuestro equipo para conocer más sobre el servicio de alquiler de algoritmos.", "button": "Contáctanos", "pricing": "Ver Precios", "contact": "Contáctanos", "viewPricing": "Ver Precios" }
   },
   "products": {
     "title": "Herramientas de Análisis Profesional",
@@ -606,11 +676,19 @@
     "subtitle": "Nuestro compromiso con el diseño inclusivo",
     "statement": "Buscamos cumplir con los estándares WCAG 2.1 AA. Si experimenta barreras de accesibilidad, contáctenos y le ayudaremos.",
     "skipToContent": "Saltar al contenido principal",
-    "toggleHighContrast": "Alternar Alto Contraste",
-    "increaseFontSize": "Aumentar Tamaño de Fuente",
-    "decreaseFontSize": "Disminuir Tamaño de Fuente",
-    "options": "Opciones de accesibilidad",
-    "short": "A11y"
+    "toggleHighContrast": "Alto Contraste",
+    "increaseFontSize": "Aumentar Texto",
+    "decreaseFontSize": "Reducir Texto",
+    "underlineLinks": "Subrayar Enlaces",
+    "readableFont": "Fuente Legible",
+    "reducedMotion": "Reducir Animaciones",
+    "resetAll": "Restablecer Todo",
+    "options": "Opciones de Accesibilidad",
+    "short": "Accesibilidad",
+    "textSize": "Tamaño de Texto",
+    "contrastColors": "Contraste y Colores",
+    "readability": "Legibilidad",
+    "motion": "Movimiento"
   },
   "status": {
     "title": "Estado del Sistema",
@@ -671,6 +749,12 @@
     "monthlyShort": "Mensual",
     "annualShort": "Anual",
     "billingCycle": "Ciclo de Facturación",
+    "intro": {
+      "title": "Primer mes 50% OFF",
+      "note": "Aplica solo a planes mensuales",
+      "on": "Activado",
+      "off": "Desactivado"
+    },
     "save": "Ahorra 30%",
     "renews": "Renovación automática. Podés cancelar cuando quieras.",
     "chooseInstrument": "Elegí Instrumento",
