@@ -309,7 +309,11 @@
       "point4": { "title": "Votre responsabilité:", "desc": "C'est vous qui opérez votre compte. Vous devez comprendre les risques et gérer votre capital de manière responsable." },
       "point5": "Ceci est une simulation éducative. Les performances passées ne garantissent pas les résultats futurs. Le trading comporte un risque de perte en capital."
     },
-    "cta": { "title": "Prêt à Commencer?", "desc": "Contactez notre équipe pour en savoir plus sur notre service de location d'algorithmes.", "pricing": "Voir les Prix", "contact": "Nous Contacter" }
+    "cta": { "title": "Prêt à Commencer?", "desc": "Contactez notre équipe pour en savoir plus sur notre service de location d'algorithmes.", "pricing": "Voir les Prix", "contact": "Nous Contacter" },
+    "chartType": {
+      "area": "Graphique en Aires",
+      "candlestick": "Graphique en Chandeliers"
+    }
   },
   "demo": {
     "title": "Démo des Outils de Trading en Direct",

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AlertTriangle, BarChart3, TrendingUp, Activity } from "lucide-react";
+import { AlertTriangle, BarChart3, TrendingUp, Activity, CandlestickChart, AreaChart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import Highcharts from 'highcharts/highstock';
@@ -11,6 +11,7 @@ const Demo = () => {
   const { t } = useTranslation();
   
   const [chartData, setChartData] = useState<any[]>([]);
+  const [ohlcData, setOhlcData] = useState<any[]>([]); // Datos OHLC para velas
   const [currentPrice, setCurrentPrice] = useState(6830);
   const [position, setPosition] = useState<'long' | 'short' | null>(null);
   const [entryPrice, setEntryPrice] = useState(0);
@@ -18,6 +19,7 @@ const Demo = () => {
   const [pnl, setPnl] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isMarketOpen, setIsMarketOpen] = useState(false);
+  const [chartType, setChartType] = useState<'area' | 'candlestick'>('area');
 
   // Función para verificar si el mercado está abierto
   const checkMarketHours = () => {
@@ -125,7 +127,18 @@ const Demo = () => {
       },
       gridLineColor: '#1e293b'
     },
-    series: [{
+    series: chartType === 'candlestick' ? [{
+      name: 'ES=F',
+      data: ohlcData,
+      type: 'candlestick',
+      color: '#ef4444', // Rojo para velas bajistas
+      upColor: '#22c55e', // Verde para velas alcistas
+      lineColor: '#ef4444',
+      upLineColor: '#22c55e',
+      tooltip: {
+        valueDecimals: 2
+      }
+    }] : [{
       name: 'ES=F',
       data: chartData,
       type: 'area',
@@ -210,39 +223,47 @@ const Demo = () => {
           const lows = quote.low || [];
           const closes = quote.close || [];
           
-          // Filtrar velas con datos válidos
-          const historicalData = timestamps
-            .map((timestamp: number, idx: number) => {
-              const open = opens[idx];
-              const high = highs[idx];
-              const low = lows[idx];
-              const close = closes[idx];
+          // Filtrar velas con datos válidos y crear ambos formatos
+          const historicalDataArea: any[] = [];
+          const historicalDataOHLC: any[] = [];
+          
+          timestamps.forEach((timestamp: number, idx: number) => {
+            const open = opens[idx];
+            const high = highs[idx];
+            const low = lows[idx];
+            const close = closes[idx];
+            
+            // Solo incluir velas con datos válidos
+            if (open && high && low && close && 
+                !isNaN(open) && !isNaN(high) && !isNaN(low) && !isNaN(close)) {
               
-              // Solo incluir velas con datos válidos
-              if (!open || !high || !low || !close || 
-                  isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close)) return null;
+              const ts = timestamp * 1000; // Highcharts usa timestamp en milisegundos
               
-              return [
-                timestamp * 1000, // Highcharts usa timestamp en milisegundos
-                close // Precio de cierre
-              ];
-            })
-            .filter((d: any) => d !== null);
+              // Formato para gráfico de área (timestamp, close)
+              historicalDataArea.push([ts, close]);
+              
+              // Formato para candlestick (timestamp, open, high, low, close)
+              historicalDataOHLC.push([ts, open, high, low, close]);
+            }
+          });
           
-          const finalData = historicalData.slice(-100); // Más datos para mejor visualización
+          const finalDataArea = historicalDataArea.slice(-100); // Más datos para mejor visualización
+          const finalDataOHLC = historicalDataOHLC.slice(-100);
           
-          console.log('✅ Datos cargados desde Yahoo Finance:', finalData.length, 'puntos');
-          console.log('Muestra de datos:', finalData.slice(0, 3));
+          console.log('✅ Datos cargados desde Yahoo Finance:', finalDataArea.length, 'puntos');
+          console.log('Muestra de datos área:', finalDataArea.slice(0, 3));
+          console.log('Muestra de datos OHLC:', finalDataOHLC.slice(0, 3));
           
-          if (finalData.length > 0) {
-            const lastValidCandle = finalData[finalData.length - 1];
+          if (finalDataArea.length > 0) {
+            const lastValidCandle = finalDataArea[finalDataArea.length - 1];
             const lastValidTime = new Date(lastValidCandle[0]); // [0] es el timestamp en milisegundos
             console.log('Última vela válida:', lastValidTime.toLocaleString());
             console.log('Precio actual:', lastValidCandle[1]);
             
             setCurrentPrice(lastValidCandle[1]);
-            setChartData(finalData);
-            console.log('✅ setChartData llamado con', finalData.length, 'puntos');
+            setChartData(finalDataArea);
+            setOhlcData(finalDataOHLC);
+            console.log('✅ setChartData y setOhlcData llamados con', finalDataArea.length, 'puntos');
           } else {
             console.warn('⚠️ No hay datos válidos');
             setCurrentPrice(marketPrice);
@@ -251,7 +272,8 @@ const Demo = () => {
       } catch (error) {
         console.error('Error cargando datos:', error);
         // Fallback a datos simulados si falla la API
-        const initialData = [];
+        const initialDataArea = [];
+        const initialDataOHLC = [];
         let price = 6830; // Precio real actual del E-mini S&P 500 futures
         const now = Math.floor(Date.now() / 1000);
         for (let i = 0; i < 60; i++) {
@@ -261,14 +283,15 @@ const Demo = () => {
           const high = Math.max(open, close) + Math.random() * 5;
           const low = Math.min(open, close) - Math.random() * 5;
           
-          initialData.push([
-            (now - ((60 - i) * 3600)) * 1000, // timestamp en milisegundos
-            close // Precio
-          ]);
+          const ts = (now - ((60 - i) * 3600)) * 1000;
+          
+          initialDataArea.push([ts, close]);
+          initialDataOHLC.push([ts, open, high, low, close]);
           
           price = close;
         }
-        setChartData(initialData);
+        setChartData(initialDataArea);
+        setOhlcData(initialDataOHLC);
         setCurrentPrice(price);
       } finally {
         setLoading(false);
@@ -288,7 +311,7 @@ const Demo = () => {
         const lastCandle = prev[prev.length - 1];
         if (!lastCandle) return prev;
         
-        const lastClose = lastCandle.close;
+        const lastClose = lastCandle[1]; // En formato área es [timestamp, close]
         
         // Generar nueva vela con variación realista
         const open = lastClose;
@@ -331,14 +354,41 @@ const Demo = () => {
         const lastTimestamp = lastCandle[0]; // [0] es el timestamp en milisegundos
         const newTimestamp = lastTimestamp + 3600000; // +3600000 ms (1 hora)
         
-        const newCandle = [
+        const newCandleArea = [
           newTimestamp, // timestamp en milisegundos
           close // Precio
         ];
 
-        const newData = [...prev, newCandle].slice(-100); // Mantener últimas 100 velas
+        const newData = [...prev, newCandleArea].slice(-100); // Mantener últimas 100 velas
         
         return newData;
+      });
+      
+      // Actualizar también datos OHLC
+      setOhlcData((prev) => {
+        const lastCandle = prev[prev.length - 1];
+        if (!lastCandle) return prev;
+        
+        const lastClose = lastCandle[4]; // En OHLC es [timestamp, open, high, low, close]
+        
+        const open = lastClose;
+        const change = (Math.random() - 0.5) * 6;
+        const close = open + change;
+        const high = Math.max(open, close) + Math.random() * 3;
+        const low = Math.min(open, close) - Math.random() * 3;
+        
+        const lastTimestamp = lastCandle[0];
+        const newTimestamp = lastTimestamp + 3600000;
+        
+        const newCandleOHLC = [
+          newTimestamp,
+          open,
+          high,
+          low,
+          close
+        ];
+        
+        return [...prev, newCandleOHLC].slice(-100);
       });
     }, 3600000); // Actualizar cada 60 minutos (1 hora - timeframe real)
 
@@ -413,6 +463,32 @@ const Demo = () => {
                         <span className="text-xs text-slate-400 font-mono">60m</span>
                       </div>
                       <div className="text-xs text-slate-500 font-mono">{t('demoPage.liveChart.instrument', { defaultValue: 'E-mini S&P 500 Futures' })}</div>
+                    </div>
+                    
+                    {/* Selector de Tipo de Gráfico */}
+                    <div className="flex items-center gap-2 ml-6">
+                      <button
+                        onClick={() => setChartType('area')}
+                        className={`p-2 rounded transition-all ${
+                          chartType === 'area'
+                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50'
+                            : 'bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700'
+                        }`}
+                        title={t('demoPage.chartType.area', { defaultValue: 'Area Chart' })}
+                      >
+                        <AreaChart className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setChartType('candlestick')}
+                        className={`p-2 rounded transition-all ${
+                          chartType === 'candlestick'
+                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50'
+                            : 'bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700'
+                        }`}
+                        title={t('demoPage.chartType.candlestick', { defaultValue: 'Candlestick Chart' })}
+                      >
+                        <CandlestickChart className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
                   <div className="flex items-center gap-6">

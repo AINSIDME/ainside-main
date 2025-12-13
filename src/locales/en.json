@@ -576,7 +576,11 @@
       "step3Title": "Exit Management",
       "step3Desc": "Manages exits based on profit targets and stops"
     },
-    "cta": { "title": "Ready to Get Started?", "desc": "Contact our team to learn more about our algorithm rental services.", "button": "Contact Us", "pricing": "View Pricing", "contact": "Contact Us", "viewPricing": "View Pricing" }
+    "cta": { "title": "Ready to Get Started?", "desc": "Contact our team to learn more about our algorithm rental services.", "button": "Contact Us", "pricing": "View Pricing", "contact": "Contact Us", "viewPricing": "View Pricing" },
+    "chartType": {
+      "area": "Area Chart",
+      "candlestick": "Candlestick Chart"
+    }
   },
   "products": {
     "title": "Professional Analysis Tools",

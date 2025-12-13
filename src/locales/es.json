@@ -572,7 +572,11 @@
       "step3Title": "Gestión de Salida",
       "step3Desc": "Gestiona salidas basadas en objetivos y stops"
     },
-    "cta": { "title": "¿Listo para Empezar?", "desc": "Contacta a nuestro equipo para conocer más sobre el servicio de alquiler de algoritmos.", "button": "Contáctanos", "pricing": "Ver Precios", "contact": "Contáctanos", "viewPricing": "Ver Precios" }
+    "cta": { "title": "¿Listo para Empezar?", "desc": "Contacta a nuestro equipo para conocer más sobre el servicio de alquiler de algoritmos.", "button": "Contáctanos", "pricing": "Ver Precios", "contact": "Contáctanos", "viewPricing": "Ver Precios" },
+    "chartType": {
+      "area": "Gráfico de Área",
+      "candlestick": "Gráfico de Velas"
+    }
   },
   "products": {
     "title": "Herramientas de Análisis Profesional",
