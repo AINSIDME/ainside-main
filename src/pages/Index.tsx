@@ -272,6 +272,70 @@ const Index = () => {
         </div>
       </section>
 
+      {/* SEO Internal Links Section */}
+      <section className="py-16 bg-slate-900/50 backdrop-blur-md border-y border-slate-800/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-light text-slate-100 mb-4">
+              Aprende Más Sobre Trading Algorítmico
+            </h2>
+            <p className="text-slate-400 text-sm">
+              Recursos educativos para dominar el trading automatizado
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <Link to="/blog/guia-completa-trading-algoritmico" className="group">
+              <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-300 h-full">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:border-blue-500/40 transition-all">
+                    <CheckCircle className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">
+                    Guía Completa 2025
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Todo sobre trading algorítmico: estrategias, tecnología, riesgos y cómo empezar paso a paso.
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link to="/algotrading" className="group">
+              <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-cyan-500/50 transition-all duration-300 h-full">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:border-cyan-500/40 transition-all">
+                    <Building2 className="w-6 h-6 text-cyan-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">
+                    Plataforma Institucional
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Acceso a algoritmos de nivel institucional con tecnología de fondos hedge de Wall Street.
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link to="/demo" className="group">
+              <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-300 h-full">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:border-blue-500/40 transition-all">
+                    <Zap className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">
+                    Ver Demo en Vivo
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Prueba nuestros algoritmos en tiempo real con datos del mercado de futuros S&P 500.
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <section className="py-12 bg-gradient-to-t from-slate-950 to-slate-900/95 backdrop-blur-sm border-t border-slate-700/30">
         <div className="container mx-auto px-4">
