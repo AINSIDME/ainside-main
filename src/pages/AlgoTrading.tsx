@@ -35,7 +35,7 @@ const AlgoTrading = () => {
               {t('algoTradingPage.title', 'Algorithmic Trading')}
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-300/90 leading-relaxed font-light tracking-wide max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-slate-200 leading-relaxed font-light tracking-wide max-w-4xl mx-auto">
               {t('algoTradingPage.subtitle', 'Excelencia en Sistemas de Trading Cuantitativo de Clase Institucional')}
             </p>
           </div>
@@ -62,22 +62,22 @@ const AlgoTrading = () => {
             <div className="space-y-3">
               <Building2 className="w-12 h-12 text-blue-400 mx-auto" />
               <div className="text-4xl font-light text-slate-100">500+</div>
-              <div className="text-sm text-slate-400 uppercase tracking-wider">{t('algoTradingPage.stats.institutions', 'Instituciones')}</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.institutions', 'Instituciones')}</div>
             </div>
             <div className="space-y-3">
               <Users className="w-12 h-12 text-cyan-400 mx-auto" />
               <div className="text-4xl font-light text-slate-100">10K+</div>
-              <div className="text-sm text-slate-400 uppercase tracking-wider">{t('algoTradingPage.stats.traders', 'Traders Profesionales')}</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.traders', 'Traders Profesionales')}</div>
             </div>
             <div className="space-y-3">
               <Globe className="w-12 h-12 text-blue-400 mx-auto" />
               <div className="text-4xl font-light text-slate-100">45+</div>
-              <div className="text-sm text-slate-400 uppercase tracking-wider">{t('algoTradingPage.stats.countries', 'Países')}</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.countries', 'Países')}</div>
             </div>
             <div className="space-y-3">
               <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto" />
               <div className="text-4xl font-light text-slate-100">$2B+</div>
-              <div className="text-sm text-slate-400 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Volumen Operado')}</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Volumen Operado')}</div>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ const AlgoTrading = () => {
                   {t('algoTradingPage.whatIs.p1', 'El trading algorítmico representa la vanguardia de los mercados financieros modernos: sistemas cuantitativos que ejecutan estrategias de inversión mediante modelos matemáticos avanzados, análisis estadístico riguroso y ejecución automatizada de alta frecuencia.')}
                 </p>
                 
-                <p className="text-lg text-slate-400 leading-relaxed">
+                <p className="text-lg text-slate-300 leading-relaxed">
                   {t('algoTradingPage.whatIs.p2', 'Instituciones líderes, fondos hedge y traders profesionales confían en algoritmos propietarios para eliminar sesgos emocionales, capitalizar ineficiencias del mercado en milisegundos y gestionar portafolios con precisión científica.')}
                 </p>
 
@@ -110,7 +110,7 @@ const AlgoTrading = () => {
                       <Brain className="w-8 h-8 text-blue-400" />
                     </div>
                     <h4 className="font-medium text-slate-200 text-lg">{t('algoTradingPage.whatIs.quantitative', 'Análisis Cuantitativo')}</h4>
-                    <p className="text-sm text-slate-500">Modelos matemáticos avanzados</p>
+                    <p className="text-sm text-slate-400">Modelos matemáticos avanzados</p>
                   </div>
 
                   <div className="text-center space-y-4">
@@ -118,7 +118,7 @@ const AlgoTrading = () => {
                       <Zap className="w-8 h-8 text-cyan-400" />
                     </div>
                     <h4 className="font-medium text-slate-200 text-lg">{t('algoTradingPage.whatIs.execution', 'Ejecución HFT')}</h4>
-                    <p className="text-sm text-slate-500">Alta frecuencia sub-millisegundo</p>
+                    <p className="text-sm text-slate-400">Alta frecuencia sub-millisegundo</p>
                   </div>
 
                   <div className="text-center space-y-4">
@@ -126,7 +126,7 @@ const AlgoTrading = () => {
                       <Shield className="w-8 h-8 text-blue-400" />
                     </div>
                     <h4 className="font-medium text-slate-200 text-lg">{t('algoTradingPage.whatIs.risk', 'Risk Management')}</h4>
-                    <p className="text-sm text-slate-500">Controles institucionales</p>
+                    <p className="text-sm text-slate-400">Controles institucionales</p>
                   </div>
                 </div>
               </CardContent>
@@ -140,7 +140,7 @@ const AlgoTrading = () => {
             <h2 className="text-4xl md:text-6xl font-light text-slate-100 mb-6 tracking-tight">
               {t('algoTradingPage.advantages.title', 'Ventajas Institucionales')}
             </h2>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
               {t('algoTradingPage.advantages.subtitle', 'Por qué las instituciones líderes eligen sistemas algorítmicos')}
             </p>
             <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mt-8"></div>
@@ -185,7 +185,7 @@ const AlgoTrading = () => {
                     <advantage.icon className="w-7 h-7 text-blue-400 group-hover:text-cyan-400 transition-colors duration-300" />
                   </div>
                   <h3 className="text-xl font-medium text-slate-100 mb-4 leading-tight">{advantage.title}</h3>
-                  <p className="text-slate-400 leading-relaxed text-sm">{advantage.description}</p>
+                  <p className="text-slate-300 leading-relaxed text-sm">{advantage.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -213,19 +213,19 @@ const AlgoTrading = () => {
               <div className="space-y-3">
                 <div className="text-5xl font-light text-blue-400">$0</div>
                 <div className="text-slate-300 font-medium text-lg">{t('algoTradingPage.solution.infrastructure', 'Inversión en Infraestructura')}</div>
-                <p className="text-sm text-slate-500">Servidores, co-location, feeds de datos premium incluidos</p>
+                <p className="text-sm text-slate-400">Servidores, co-location, feeds de datos premium incluidos</p>
               </div>
 
               <div className="space-y-3">
                 <div className="text-5xl font-light text-cyan-400">24/7</div>
                 <div className="text-slate-300 font-medium text-lg">{t('algoTradingPage.solution.operation', 'Operación Autónoma')}</div>
-                <p className="text-sm text-slate-500">Monitoreo continuo sin intervención humana</p>
+                <p className="text-sm text-slate-400">Monitoreo continuo sin intervención humana</p>
               </div>
 
               <div className="space-y-3">
                 <div className="text-5xl font-light text-blue-400">{'<'}1ms</div>
                 <div className="text-slate-300 font-medium text-lg">{t('algoTradingPage.solution.latency', 'Latencia Promedio')}</div>
-                <p className="text-sm text-slate-500">Ejecución institucional de ultra-baja latencia</p>
+                <p className="text-sm text-slate-400">Ejecución institucional de ultra-baja latencia</p>
               </div>
             </div>
 
@@ -283,7 +283,7 @@ const AlgoTrading = () => {
                         {section.points.map((point, i) => (
                           <li key={i} className="flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1" />
-                            <span className="text-slate-400 text-sm leading-relaxed">{point}</span>
+                            <span className="text-slate-300 text-sm leading-relaxed">{point}</span>
                           </li>
                         ))}
                       </ul>
