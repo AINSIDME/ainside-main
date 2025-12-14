@@ -1088,5 +1088,77 @@
       "demoButton": "See Live Demo",
       "pricingButton": "View Plans and Pricing"
     }
+  },
+  "algoTradingPage": {
+    "badge": "Institutional • Elite",
+    "title": "Algorithmic Trading",
+    "subtitle": "Excellence in Institutional-Grade Quantitative Trading Systems",
+    "cta": {
+      "demo": "Explore Platform",
+      "pricing": "View Membership"
+    },
+    "stats": {
+      "institutions": "Institutions",
+      "traders": "Professional Traders",
+      "countries": "Countries",
+      "volume": "Trading Volume"
+    },
+    "whatIs": {
+      "title": "What is Algorithmic Trading?",
+      "p1": "Algorithmic trading represents the vanguard of modern financial markets: quantitative systems that execute investment strategies through advanced mathematical models, rigorous statistical analysis, and high-frequency automated execution.",
+      "p2": "Leading institutions, hedge funds, and professional traders rely on proprietary algorithms to eliminate emotional biases, capitalize on market inefficiencies in milliseconds, and manage portfolios with scientific precision.",
+      "quantitative": "Quantitative Analysis",
+      "execution": "HFT Execution",
+      "risk": "Risk Management"
+    },
+    "advantages": {
+      "title": "Institutional Advantages",
+      "subtitle": "Why leading institutions choose algorithmic systems",
+      "precision": {
+        "title": "Pinpoint Precision",
+        "desc": "Exact strategy execution without emotional deviation. Rigorous backtesting on decades of historical data with statistical cross-validation."
+      },
+      "intelligence": {
+        "title": "Proprietary Artificial Intelligence",
+        "desc": "Advanced Machine Learning that identifies hidden patterns, dynamically optimizes parameters, and adapts to changing market regimes in real-time."
+      },
+      "speed": {
+        "title": "Institutional Speed",
+        "desc": "Ultra-low co-located latency. Captures arbitrage opportunities in microseconds before the market adjusts. Institutional-grade infrastructure."
+      },
+      "riskControl": {
+        "title": "Sophisticated Risk Control",
+        "desc": "Dynamic VaR, continuous stress testing, multi-level limits and automatic circuit breakers. Risk management comparable to $1B+ hedge funds."
+      },
+      "diversification": {
+        "title": "Multi-Strategy Diversification",
+        "desc": "Portfolio of uncorrelated algorithms: momentum, mean reversion, statistical arbitrage, market making. Systematic drawdown reduction."
+      },
+      "transparency": {
+        "title": "Total Transparency",
+        "desc": "Detailed institutional metrics: Sharpe ratio, Sortino, Calmar, Maximum Drawdown, volatility-adjusted win rate. Complete audit of every trade."
+      }
+    },
+    "solution": {
+      "badge": "Institutional Technology",
+      "title": "Why AIinside.me",
+      "description": "Democratic access to trading technology that was previously reserved exclusively for $100M+ hedge funds and Wall Street institutional trading desks.",
+      "infrastructure": "Infrastructure Investment",
+      "operation": "Autonomous Operation",
+      "latency": "Average Latency",
+      "cta": "Request Institutional Access"
+    },
+    "academic": {
+      "title": "Academic Rigor",
+      "description": "Our algorithms are grounded in peer-reviewed quantitative research, modern portfolio theory (Markowitz), stochastic volatility models (GARCH), and academically validated machine learning frameworks.",
+      "methodology": "Scientific Methodology",
+      "transparency": "Academic Transparency"
+    },
+    "finalCta": {
+      "title": "Join the Elite of Quantitative Trading",
+      "description": "Institutional technology, modern accessibility. No million-dollar entry barriers.",
+      "demo": "View Live Demonstration",
+      "contact": "Contact Advisor"
+    }
   }
 }

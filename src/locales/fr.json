@@ -680,5 +680,77 @@
       "demoButton": "Voir la Démo",
       "pricingButton": "Voir les Tarifs"
     }
+  },
+  "algoTradingPage": {
+    "badge": "Institutionnel • Élite",
+    "title": "Trading Algorithmique",
+    "subtitle": "Excellence en Systèmes de Trading Quantitatif de Niveau Institutionnel",
+    "cta": {
+      "demo": "Explorer la Plateforme",
+      "pricing": "Voir l'Adhésion"
+    },
+    "stats": {
+      "institutions": "Institutions",
+      "traders": "Traders Professionnels",
+      "countries": "Pays",
+      "volume": "Volume Négocié"
+    },
+    "whatIs": {
+      "title": "Qu'est-ce que le Trading Algorithmique?",
+      "p1": "Le trading algorithmique représente l'avant-garde des marchés financiers modernes : des systèmes quantitatifs qui exécutent des stratégies d'investissement via des modèles mathématiques avancés, une analyse statistique rigoureuse et une exécution automatisée à haute fréquence.",
+      "p2": "Les institutions leaders, les hedge funds et les traders professionnels s'appuient sur des algorithmes propriétaires pour éliminer les biais émotionnels, capitaliser sur les inefficiences du marché en millisecondes et gérer les portefeuilles avec une précision scientifique.",
+      "quantitative": "Analyse Quantitative",
+      "execution": "Exécution HFT",
+      "risk": "Gestion des Risques"
+    },
+    "advantages": {
+      "title": "Avantages Institutionnels",
+      "subtitle": "Pourquoi les institutions leaders choisissent les systèmes algorithmiques",
+      "precision": {
+        "title": "Précision Milimétrique",
+        "desc": "Exécution exacte des stratégies sans déviation émotionnelle. Backtesting rigoureux sur des décennies de données historiques avec validation croisée statistique."
+      },
+      "intelligence": {
+        "title": "Intelligence Artificielle Propriétaire",
+        "desc": "Machine Learning avancé qui identifie les patterns cachés, optimise les paramètres dynamiquement et s'adapte aux régimes de marché changeants en temps réel."
+      },
+      "speed": {
+        "title": "Vitesse Institutionnelle",
+        "desc": "Latence ultra-faible co-localisée. Capture les opportunités d'arbitrage en microsecondes avant que le marché ne s'ajuste. Infrastructure de niveau institutionnel."
+      },
+      "riskControl": {
+        "title": "Contrôle des Risques Sophistiqué",
+        "desc": "VaR dynamique, stress testing continu, limites multi-niveaux et disjoncteurs automatiques. Gestion des risques comparable aux hedge funds de 1B$+."
+      },
+      "diversification": {
+        "title": "Diversification Multi-Stratégie",
+        "desc": "Portfolio d'algorithmes non corrélés : momentum, mean reversion, statistical arbitrage, market making. Réduction systématique du drawdown."
+      },
+      "transparency": {
+        "title": "Transparence Totale",
+        "desc": "Métriques institutionnelles détaillées : ratio de Sharpe, Sortino, Calmar, Maximum Drawdown, taux de gain ajusté par la volatilité. Audit complet de chaque transaction."
+      }
+    },
+    "solution": {
+      "badge": "Technologie Institutionnelle",
+      "title": "Pourquoi AIinside.me",
+      "description": "Accès démocratique à une technologie de trading auparavant réservée exclusivement aux hedge funds de 100M$+ et aux desks de trading institutionnels de Wall Street.",
+      "infrastructure": "Investissement en Infrastructure",
+      "operation": "Opération Autonome",
+      "latency": "Latence Moyenne",
+      "cta": "Demander Accès Institutionnel"
+    },
+    "academic": {
+      "title": "Rigueur Académique",
+      "description": "Nos algorithmes sont fondés sur la recherche quantitative peer-reviewed, la théorie moderne du portefeuille (Markowitz), les modèles de volatilité stochastique (GARCH), et les frameworks de machine learning validés académiquement.",
+      "methodology": "Méthodologie Scientifique",
+      "transparency": "Transparence Académique"
+    },
+    "finalCta": {
+      "title": "Rejoignez l'Élite du Trading Quantitatif",
+      "description": "Technologie institutionnelle, accessibilité moderne. Pas de barrières d'entrée de millions de dollars.",
+      "demo": "Voir Démonstration en Direct",
+      "contact": "Contacter un Conseiller"
+    }
   }
 }
