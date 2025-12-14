@@ -36,7 +36,7 @@ const BlogAlgoTradingGuide = () => {
         {/* Hero Article Header */}
         <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/98 backdrop-blur-sm border-b border-slate-800/50">
           <div className="container mx-auto max-w-4xl">
-            <div className="inline-block px-4 py-2 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-300 rounded-full mb-6 tracking-wide uppercase border border-blue-500/30">
+            <div className="inline-block px-4 py-2 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-lg mb-6 tracking-wide uppercase border border-blue-500/20">
               <BookOpen className="w-4 h-4 inline mr-2" />
               Guía Completa • 15 min lectura
             </div>
@@ -45,11 +45,11 @@ const BlogAlgoTradingGuide = () => {
               Trading Algorítmico: La Guía Definitiva para 2025
             </h1>
             
-            <p className="text-xl text-slate-400 leading-relaxed mb-8">
+            <p className="text-xl text-white leading-relaxed mb-8">
               Todo lo que necesitas saber sobre algoritmos de trading, desde los conceptos básicos hasta estrategias institucionales avanzadas. Aprende cómo los profesionales ganan millones con sistemas automatizados.
             </p>
 
-            <div className="flex items-center gap-6 text-sm text-slate-500">
+            <div className="flex items-center gap-6 text-sm text-slate-100">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 Actualizado: Diciembre 2025
@@ -72,34 +72,34 @@ const BlogAlgoTradingGuide = () => {
                   <BookOpen className="w-6 h-6 text-blue-400" />
                   Índice de Contenidos
                 </h2>
-                <ul className="space-y-3 text-slate-300">
+                <ul className="space-y-3 text-slate-100">
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#que-es" className="hover:text-cyan-400 transition-colors">¿Qué es el Trading Algorítmico?</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#que-es" className="hover:text-blue-400 transition-colors">¿Qué es el Trading Algorítmico?</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#como-funciona" className="hover:text-cyan-400 transition-colors">Cómo Funciona el Algotrading</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#como-funciona" className="hover:text-blue-400 transition-colors">Cómo Funciona el Algotrading</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#ventajas" className="hover:text-cyan-400 transition-colors">Ventajas del Trading Algorítmico</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#ventajas" className="hover:text-blue-400 transition-colors">Ventajas del Trading Algorítmico</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#estrategias" className="hover:text-cyan-400 transition-colors">Estrategias Más Rentables</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#estrategias" className="hover:text-blue-400 transition-colors">Estrategias Más Rentables</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#tecnologia" className="hover:text-cyan-400 transition-colors">Tecnología y Herramientas</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#tecnologia" className="hover:text-blue-400 transition-colors">Tecnología y Herramientas</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#riesgos" className="hover:text-cyan-400 transition-colors">Riesgos y Consideraciones</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#riesgos" className="hover:text-blue-400 transition-colors">Riesgos y Consideraciones</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    <a href="#empezar" className="hover:text-cyan-400 transition-colors">Cómo Empezar</a>
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#empezar" className="hover:text-blue-400 transition-colors">Cómo Empezar</a>
                   </li>
                 </ul>
               </CardContent>
@@ -112,7 +112,7 @@ const BlogAlgoTradingGuide = () => {
                 ¿Qué es el Trading Algorítmico?
               </h2>
               
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-slate-100 leading-relaxed">
                 <p className="text-lg">
                   El <strong className="text-slate-100">trading algorítmico</strong> (o algotrading) es el uso de programas informáticos para ejecutar operaciones financieras de manera automática, basándose en reglas matemáticas predefinidas. En lugar de que un humano decida cuándo comprar o vender, un algoritmo analiza el mercado 24/7 y ejecuta trades en milisegundos.
                 </p>
@@ -127,7 +127,7 @@ const BlogAlgoTradingGuide = () => {
                       <Award className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                       <div>
                         <h4 className="text-lg font-medium text-slate-100 mb-2">Dato Clave</h4>
-                        <p className="text-slate-300 text-sm">
+                        <p className="text-slate-100 text-sm">
                           En 2025, más del <strong className="text-blue-400">75% del volumen de trading</strong> en Wall Street es ejecutado por algoritmos. El trading manual representa menos del 25% del mercado institucional.
                         </p>
                       </div>
@@ -141,7 +141,7 @@ const BlogAlgoTradingGuide = () => {
                   <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
                     <CardContent className="p-6">
                       <h4 className="text-lg font-medium text-slate-100 mb-4">Trading Manual</h4>
-                      <ul className="space-y-2 text-sm text-slate-400">
+                      <ul className="space-y-2 text-sm text-white">
                         <li>• Decisiones emocionales</li>
                         <li>• Análisis lento y subjetivo</li>
                         <li>• Errores humanos frecuentes</li>
@@ -153,26 +153,26 @@ const BlogAlgoTradingGuide = () => {
 
                   <Card className="bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg">
                     <CardContent className="p-6">
-                      <h4 className="text-lg font-medium text-blue-300 mb-4">Trading Algorítmico</h4>
-                      <ul className="space-y-2 text-sm text-slate-300">
+                      <h4 className="text-lg font-medium text-blue-400 mb-4">Trading Algorítmico</h4>
+                      <ul className="space-y-2 text-sm text-slate-100">
                         <li className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
                           Decisiones objetivas basadas en datos
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
                           Análisis en microsegundos
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
                           Precisión matemática
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
                           Operación 24/7 automatizada
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
                           Sin emociones ni fatiga
                         </li>
                       </ul>
@@ -185,11 +185,11 @@ const BlogAlgoTradingGuide = () => {
             {/* Section 2: How It Works */}
             <section id="como-funciona" className="mb-16 scroll-mt-20">
               <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
-                <Brain className="w-8 h-8 text-cyan-400" />
+                <Brain className="w-8 h-8 text-blue-400" />
                 Cómo Funciona el Algotrading
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-slate-100 leading-relaxed">
                 <p className="text-lg">
                   Un sistema de trading algorítmico funciona en <strong>4 fases principales</strong>:
                 </p>
@@ -229,10 +229,10 @@ const BlogAlgoTradingGuide = () => {
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
-                              <phase.icon className="w-5 h-5 text-cyan-400" />
+                              <phase.icon className="w-5 h-5 text-blue-400" />
                               <h4 className="text-lg font-medium text-slate-100">{phase.title}</h4>
                             </div>
-                            <p className="text-sm text-slate-400 leading-relaxed">{phase.description}</p>
+                            <p className="text-sm text-white leading-relaxed">{phase.description}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -244,7 +244,7 @@ const BlogAlgoTradingGuide = () => {
                 
                 <Card className="bg-slate-900/60 border border-slate-800/50 backdrop-blur-lg">
                   <CardContent className="p-6">
-                    <pre className="text-xs md:text-sm text-cyan-300 overflow-x-auto">
+                    <pre className="text-xs md:text-sm text-blue-300 overflow-x-auto">
 {`# Estrategia: Mean Reversion en S&P 500 (ES)
 IF precio_actual < media_movil_20_dias - (2 * desviacion_estandar):
     COMPRAR 1 contrato
@@ -256,7 +256,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
     STOP_LOSS = precio_entrada + $50
     TAKE_PROFIT = media_movil_20_dias`}
                     </pre>
-                    <p className="text-xs text-slate-500 mt-4">
+                    <p className="text-xs text-slate-100 mt-4">
                       Este algoritmo básico busca reversión a la media cuando el precio se aleja más de 2 desviaciones estándar.
                     </p>
                   </CardContent>
@@ -271,7 +271,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                 Ventajas del Trading Algorítmico
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-white leading-relaxed">
                 <p className="text-lg">
                   El trading algorítmico ha revolucionado los mercados financieros por razones fundamentales:
                 </p>
@@ -318,17 +318,17 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     <Card key={index} className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-300">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                             <advantage.icon className="w-6 h-6 text-blue-400" />
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-3">
                               <h4 className="text-xl font-medium text-slate-100">{advantage.title}</h4>
-                              <span className="text-xs text-cyan-400 font-mono bg-cyan-500/10 px-3 py-1 rounded-full">
+                              <span className="text-xs text-blue-400 font-mono bg-blue-500/10 px-3 py-1 rounded-full">
                                 {advantage.stat}
                               </span>
                             </div>
-                            <p className="text-sm text-slate-400 leading-relaxed">{advantage.description}</p>
+                            <p className="text-sm text-white leading-relaxed">{advantage.description}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -341,11 +341,11 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
             {/* Section 4: Strategies */}
             <section id="estrategias" className="mb-16 scroll-mt-20">
               <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
-                <Award className="w-8 h-8 text-cyan-400" />
+                <Award className="w-8 h-8 text-blue-400" />
                 Estrategias de Trading Algorítmico Más Rentables
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-slate-100 leading-relaxed">
                 <p className="text-lg">
                   Existen cientos de estrategias algorítmicas, pero estas son las más utilizadas por traders profesionales en 2025:
                 </p>
@@ -354,21 +354,21 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
                     <CardContent className="p-8">
                       <h3 className="text-2xl font-medium text-slate-100 mb-4">1. Momentum Trading</h3>
-                      <p className="text-slate-400 mb-4">
+                      <p className="text-white mb-4">
                         Identifica activos con fuerte tendencia y sigue el momentum hasta que se agota. La premisa: "lo que sube, tiende a seguir subiendo".
                       </p>
-                      <ul className="space-y-2 text-sm text-slate-400 ml-6">
+                      <ul className="space-y-2 text-sm text-white ml-6">
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Indicadores:</strong> RSI, MACD, Bandas de Bollinger, Rate of Change</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Indicadores:</strong> RSI, MACD, Bandas de Bollinger, Rate of Change</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Timeframe:</strong> 15 minutos a 4 horas</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Timeframe:</strong> 15 minutos a 4 horas</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Win Rate típico:</strong> 45-55% pero con R:R favorable (1:2 o superior)</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Win Rate típico:</strong> 45-55% pero con R:R favorable (1:2 o superior)</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -377,21 +377,21 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
                     <CardContent className="p-8">
                       <h3 className="text-2xl font-medium text-slate-100 mb-4">2. Mean Reversion (Reversión a la Media)</h3>
-                      <p className="text-slate-400 mb-4">
+                      <p className="text-white mb-4">
                         Cuando un activo se aleja demasiado de su promedio histórico, tiende a volver. Compras cuando está "barato" y vendes cuando está "caro" relativamente.
                       </p>
-                      <ul className="space-y-2 text-sm text-slate-400 ml-6">
+                      <ul className="space-y-2 text-sm text-white ml-6">
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Indicadores:</strong> Desviación estándar, Z-Score, Bandas de Bollinger</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Indicadores:</strong> Desviación estándar, Z-Score, Bandas de Bollinger</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Mejor en:</strong> Mercados laterales (ranging), no en tendencias fuertes</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Mejor en:</strong> Mercados laterales (ranging), no en tendencias fuertes</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Win Rate típico:</strong> 60-70% pero con R:R más ajustado</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Win Rate típico:</strong> 60-70% pero con R:R más ajustado</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -400,21 +400,21 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
                     <CardContent className="p-8">
                       <h3 className="text-2xl font-medium text-slate-100 mb-4">3. Statistical Arbitrage (Stat Arb)</h3>
-                      <p className="text-slate-400 mb-4">
+                      <p className="text-white mb-4">
                         Explota ineficiencias temporales entre activos correlacionados. Por ejemplo, si Apple y Microsoft suelen moverse juntas pero Apple sube 5% y Microsoft solo 1%, el algoritmo apuesta a que Microsoft alcanzará a Apple.
                       </p>
-                      <ul className="space-y-2 text-sm text-slate-400 ml-6">
+                      <ul className="space-y-2 text-sm text-white ml-6">
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Requiere:</strong> Análisis de cointegración, pairs trading, análisis de spread</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Requiere:</strong> Análisis de cointegración, pairs trading, análisis de spread</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Capital necesario:</strong> Alto (por diversificación de pares)</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Capital necesario:</strong> Alto (por diversificación de pares)</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Riesgo:</strong> Bajo (market-neutral, no depende de dirección del mercado)</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Riesgo:</strong> Bajo (market-neutral, no depende de dirección del mercado)</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -423,21 +423,21 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
                     <CardContent className="p-8">
                       <h3 className="text-2xl font-medium text-slate-100 mb-4">4. Machine Learning / AI Trading</h3>
-                      <p className="text-slate-400 mb-4">
+                      <p className="text-white mb-4">
                         Usa redes neuronales, random forests, o gradient boosting para predecir movimientos de precio basándose en patrones complejos que los humanos no pueden ver.
                       </p>
-                      <ul className="space-y-2 text-sm text-slate-400 ml-6">
+                      <ul className="space-y-2 text-sm text-white ml-6">
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Tecnologías:</strong> TensorFlow, PyTorch, scikit-learn</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Tecnologías:</strong> TensorFlow, PyTorch, scikit-learn</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Ventaja:</strong> Adapta estrategias automáticamente a nuevos regímenes de mercado</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Ventaja:</strong> Adapta estrategias automáticamente a nuevos regímenes de mercado</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span><strong className="text-slate-300">Desventaja:</strong> Riesgo de overfitting (aprender ruido en lugar de señal)</span>
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Desventaja:</strong> Riesgo de overfitting (aprender ruido en lugar de señal)</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -452,7 +452,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                 Tecnología y Herramientas Necesarias
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-slate-100 leading-relaxed">
                 <p className="text-lg">
                   Para ejecutar trading algorítmico profesional, necesitas el <strong>stack tecnológico correcto</strong>:
                 </p>
@@ -462,8 +462,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     <h3 className="text-xl font-medium text-slate-100 mb-6">Stack Tecnológico Típico</h3>
                     <div className="grid md:grid-cols-2 gap-6 text-sm">
                       <div>
-                        <h4 className="text-cyan-400 font-semibold mb-3">Lenguajes de Programación</h4>
-                        <ul className="space-y-2 text-slate-400">
+                        <h4 className="text-blue-400 font-semibold mb-3">Lenguajes de Programación</h4>
+                        <ul className="space-y-2 text-white">
                           <li>• Python (más popular, 80% del mercado)</li>
                           <li>• C++ (HFT de ultra-baja latencia)</li>
                           <li>• R (análisis estadístico avanzado)</li>
@@ -471,8 +471,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-cyan-400 font-semibold mb-3">Librerías Python Esenciales</h4>
-                        <ul className="space-y-2 text-slate-400">
+                        <h4 className="text-blue-400 font-semibold mb-3">Librerías Python Esenciales</h4>
+                        <ul className="space-y-2 text-white">
                           <li>• pandas (manipulación de datos)</li>
                           <li>• numpy (cálculos numéricos)</li>
                           <li>• scikit-learn (machine learning)</li>
@@ -480,8 +480,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-cyan-400 font-semibold mb-3">Brokers con APIs</h4>
-                        <ul className="space-y-2 text-slate-400">
+                        <h4 className="text-blue-400 font-semibold mb-3">Brokers con APIs</h4>
+                        <ul className="space-y-2 text-white">
                           <li>• Interactive Brokers (más completo)</li>
                           <li>• Alpaca (crypto + stocks)</li>
                           <li>• TD Ameritrade</li>
@@ -489,8 +489,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-cyan-400 font-semibold mb-3">Infraestructura</h4>
-                        <ul className="space-y-2 text-slate-400">
+                        <h4 className="text-blue-400 font-semibold mb-3">Infraestructura</h4>
+                        <ul className="space-y-2 text-white">
                           <li>• VPS/Servidores dedicados</li>
                           <li>• Co-location (para HFT)</li>
                           <li>• Feeds de datos en tiempo real</li>
@@ -501,8 +501,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   </CardContent>
                 </Card>
 
-                <p>
-                  <strong className="text-slate-100">Inversión inicial:</strong> Puedes empezar con $0 usando plataformas como QuantConnect o Alpaca paper trading. Para trading real con infraestructura profesional: $500-$2,000/mes en servidores + feeds de datos.
+                <p className="text-slate-900 dark:text-slate-100">
+                  <strong className="text-slate-900 dark:text-slate-100">Inversión inicial:</strong> Puedes empezar con $0 usando plataformas como QuantConnect o Alpaca paper trading. Para trading real con infraestructura profesional: $500-$2,000/mes en servidores + feeds de datos.
                 </p>
 
                 <Card className="bg-blue-500/5 border border-blue-500/20 backdrop-blur-lg mt-8">
@@ -510,9 +510,9 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     <div className="flex items-start gap-4">
                       <DollarSign className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="text-lg font-medium text-slate-100 mb-2">Alternativa: Plataformas Todo-en-Uno</h4>
-                        <p className="text-slate-300 text-sm leading-relaxed">
-                          Si no quieres gestionar toda la infraestructura, plataformas como <Link to="/algotrading" className="text-cyan-400 hover:underline">AIinside.me</Link> ofrecen algoritmos pre-construidos con infraestructura incluida. $0 en costos de setup, solo pagas por el servicio.
+                        <h4 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">Alternativa: Plataformas Todo-en-Uno</h4>
+                        <p className="text-slate-900 dark:text-slate-100 text-sm leading-relaxed">
+                          Si no quieres gestionar toda la infraestructura, plataformas como <Link to="/algotrading" className="text-blue-400 hover:underline">AIinside.me</Link> ofrecen algoritmos pre-construidos con infraestructura incluida. $0 en costos de setup, solo pagas por el servicio.
                         </p>
                       </div>
                     </div>
@@ -528,9 +528,9 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                 Riesgos y Consideraciones Importantes
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
-                <p className="text-lg">
-                  El trading algorítmico <strong className="text-slate-100">NO es una impresora de dinero</strong>. Tiene riesgos serios que debes entender:
+              <div className="space-y-6 text-slate-900 dark:text-slate-100 leading-relaxed">
+                <p className="text-lg text-slate-900 dark:text-slate-100">
+                  El trading algorítmico <strong className="text-slate-900 dark:text-slate-100">NO es una impresora de dinero</strong>. Tiene riesgos serios que debes entender:
                 </p>
 
                 <Card className="bg-yellow-500/5 border border-yellow-500/30 backdrop-blur-lg my-8">
@@ -538,8 +538,8 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     <div className="flex items-start gap-4">
                       <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="text-lg font-medium text-yellow-300 mb-2">Advertencia Legal</h4>
-                        <p className="text-slate-300 text-sm">
+                        <h4 className="text-lg font-medium text-yellow-600 dark:text-yellow-300 mb-2">Advertencia Legal</h4>
+                        <p className="text-slate-900 dark:text-slate-100 text-sm">
                           El trading algorítmico conlleva riesgo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. Nunca inviertas dinero que no puedas permitirte perder.
                         </p>
                       </div>
@@ -550,35 +550,35 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                 <div className="space-y-6 mt-10">
                   <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
                     <h4 className="text-xl font-medium text-slate-100 mb-2">1. Overfitting (Sobreajuste)</h4>
-                    <p className="text-slate-400">
+                    <p className="text-white">
                       Tu algoritmo puede funcionar perfectamente en backtests pero fallar en trading real porque "aprendió" patrones del pasado que no se repiten. Solución: validación out-of-sample y walk-forward testing.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
                     <h4 className="text-xl font-medium text-slate-100 mb-2">2. Slippage y Costos de Transacción</h4>
-                    <p className="text-slate-400">
+                    <p className="text-white">
                       En backtests asumes que ejecutas al precio exacto. En realidad hay slippage (diferencia entre precio esperado y ejecutado) y comisiones. Estrategias de alta frecuencia son especialmente sensibles a esto.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
                     <h4 className="text-xl font-medium text-slate-100 mb-2">3. Fallas Técnicas (Bugs)</h4>
-                    <p className="text-slate-400">
+                    <p className="text-white">
                       Un bug en tu código puede costar miles de dólares en minutos. Knight Capital perdió $440 millones en 45 minutos por un error de software en 2012. Testing exhaustivo y circuit breakers son críticos.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
                     <h4 className="text-xl font-medium text-slate-100 mb-2">4. Cambios de Régimen de Mercado</h4>
-                    <p className="text-slate-400">
+                    <p className="text-white">
                       Una estrategia que funciona en mercado alcista puede fallar en mercado bajista. Los algoritmos necesitan adaptación constante o diversificación de estrategias para diferentes regímenes.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
                     <h4 className="text-xl font-medium text-slate-100 mb-2">5. Competencia Institucional</h4>
-                    <p className="text-slate-400">
+                    <p className="text-white">
                       Compites contra fondos con presupuestos de millones de dólares, PhDs en matemáticas y servidores co-localizados. Las oportunidades de arbitraje obvias desaparecen rápidamente.
                     </p>
                   </div>
@@ -592,7 +592,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                 Cómo Empezar en Trading Algorítmico (Paso a Paso)
               </h2>
 
-              <div className="space-y-6 text-slate-300 leading-relaxed">
+              <div className="space-y-6 text-slate-100 leading-relaxed">
                 <p className="text-lg">
                   Si quieres empezar en algotrading, sigue esta <strong>ruta probada</strong>:
                 </p>
@@ -639,11 +639,11 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-3">
                               <h4 className="text-xl font-medium text-slate-100">{item.title}</h4>
-                              <span className="text-xs text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">
+                              <span className="text-xs text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">
                                 {item.time}
                               </span>
                             </div>
-                            <p className="text-slate-400 leading-relaxed">{item.description}</p>
+                            <p className="text-white leading-relaxed">{item.description}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -651,23 +651,23 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                   ))}
                 </div>
 
-                <Card className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/30 backdrop-blur-lg mt-12">
+                <Card className="bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg mt-12">
                   <CardContent className="p-8 text-center">
-                    <h3 className="text-2xl font-medium text-slate-100 mb-4">
+                    <h3 className="text-2xl font-medium text-slate-900 dark:text-slate-100 mb-4">
                       ¿Quieres Saltar Directamente a Algoritmos Profesionales?
                     </h3>
-                    <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+                    <p className="text-slate-900 dark:text-slate-100 mb-6 max-w-2xl mx-auto">
                       Si no tienes tiempo de aprender programación o gestionar infraestructura, prueba nuestra plataforma de trading algorítmico lista para usar. Algoritmos institucionales sin código.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                       <Link to="/algotrading">
-                        <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-6 text-lg">
+                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg">
                           Ver Plataforma AlgoTrading
                           <ArrowRight className="w-5 h-5 ml-2" />
                         </Button>
                       </Link>
                       <Link to="/demo">
-                        <Button size="lg" variant="outline" className="border-2 border-slate-600 text-slate-200 hover:bg-slate-800/50 px-8 py-6 text-lg">
+                        <Button size="lg" variant="outline" className="border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 px-8 py-6 text-lg">
                           Probar Demo Gratis
                         </Button>
                       </Link>
@@ -681,10 +681,10 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
             <section className="mb-16">
               <Card className="bg-slate-900/60 border border-slate-800/50 backdrop-blur-lg">
                 <CardContent className="p-10">
-                  <h2 className="text-3xl font-light text-slate-100 mb-6">Conclusión</h2>
-                  <div className="space-y-4 text-slate-300 leading-relaxed">
+                  <h2 className="text-3xl font-light text-slate-900 dark:text-slate-100 mb-6">Conclusión</h2>
+                  <div className="space-y-4 text-slate-900 dark:text-slate-100 leading-relaxed">
                     <p>
-                      El <strong className="text-slate-100">trading algorítmico</strong> ha democratizado el acceso a estrategias que antes solo estaban disponibles para fondos hedge multimillonarios. Con las herramientas correctas, educación y disciplina, traders individuales pueden competir en mercados globales.
+                      El <strong className="text-slate-900 dark:text-slate-100">trading algorítmico</strong> ha democratizado el acceso a estrategias que antes solo estaban disponibles para fondos hedge multimillonarios. Con las herramientas correctas, educación y disciplina, traders individuales pueden competir en mercados globales.
                     </p>
                     <p>
                       Sin embargo, no es un atajo mágico. Requiere tiempo, aprendizaje constante, gestión de riesgo estricta y adaptación continua. Los mejores traders algorítmicos combinan conocimiento técnico profundo con entendimiento fundamental de los mercados.
@@ -692,7 +692,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     <p>
                       Si estás listo para dar el salto, empieza con educación sólida, practica exhaustivamente en backtesting y paper trading, y cuando pases a trading real, hazlo con capital que puedas permitirte perder.
                     </p>
-                    <p className="text-cyan-400 font-medium pt-4">
+                    <p className="text-blue-400 font-medium pt-4">
                       El futuro del trading es algorítmico. La pregunta no es si deberías aprenderlo, sino cuándo empezarás.
                     </p>
                   </div>

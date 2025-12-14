@@ -61,23 +61,23 @@ const AlgoTrading = () => {
           <div className="grid md:grid-cols-4 gap-12 text-center max-w-6xl mx-auto">
             <div className="space-y-3">
               <Building2 className="w-12 h-12 text-blue-400 mx-auto" />
-              <div className="text-4xl font-light text-slate-100">500+</div>
-              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.institutions', 'Instituciones')}</div>
+              <div className="text-4xl font-light text-slate-100">Institucional</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.institutions', 'Grado Institucional')}</div>
             </div>
             <div className="space-y-3">
               <Users className="w-12 h-12 text-cyan-400 mx-auto" />
-              <div className="text-4xl font-light text-slate-100">10K+</div>
-              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.traders', 'Traders Profesionales')}</div>
+              <div className="text-4xl font-light text-slate-100">Profesional</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.traders', 'Para Traders Avanzados')}</div>
             </div>
             <div className="space-y-3">
               <Globe className="w-12 h-12 text-blue-400 mx-auto" />
-              <div className="text-4xl font-light text-slate-100">45+</div>
-              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.countries', 'Países')}</div>
+              <div className="text-4xl font-light text-slate-100">Global</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.countries', 'Acceso Mundial')}</div>
             </div>
             <div className="space-y-3">
               <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto" />
-              <div className="text-4xl font-light text-slate-100">$2B+</div>
-              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Volumen Operado')}</div>
+              <div className="text-4xl font-light text-slate-100">24/7</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Operación Continua')}</div>
             </div>
           </div>
         </div>
