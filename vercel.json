@@ -1,5 +1,27 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/algotrading",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/trading-algoritmico",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/algorithmic-trading",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-rentable",
+      "destination": "/trading",
+      "permanent": true
+    }
+  ],
   "routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
