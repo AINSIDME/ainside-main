@@ -977,5 +977,116 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "popular": "Recommended"
+  },
+  "tradingPage": {
+    "badge": "Smart Trading",
+    "title": "What is Trading?",
+    "subtitle": "Discover how to make informed decisions in financial markets and why AIinside.me technology makes the difference",
+    "whatIs": {
+      "title": "Understanding Trading",
+      "p1": "Trading is the buying and selling of financial assets (stocks, currencies, cryptocurrencies, futures) with the goal of making profits by taking advantage of market fluctuations. Unlike long-term investing, trading seeks benefits in shorter timeframes.",
+      "p2": "Success in trading doesn't depend on luck, but on well-defined strategies, rigorous technical analysis, disciplined risk management, and emotional control. Professional traders spend years perfecting their systems and learning to interpret market patterns.",
+      "dayTrading": "Operations that open and close the same day",
+      "swingTrading": "Hold positions for days or weeks",
+      "scalping": "Multiple quick operations with small gains"
+    },
+    "goodStrategies": {
+      "title": "How to Identify Good Strategies?",
+      "description": "Not all strategies are equal. Learn to evaluate their effectiveness",
+      "backtesting": {
+        "title": "Rigorous Backtesting",
+        "desc": "A good strategy must be tested with real historical data for at least 3-5 years. If it worked in the past under different market conditions, it's more likely to work in the future."
+      },
+      "winRate": {
+        "title": "Win Rate + Risk/Reward",
+        "desc": "You don't need to win 90% of the time. A strategy with 40% accuracy but a 1:3 risk/reward ratio is profitable. What matters is that gains exceed losses in the long run."
+      },
+      "drawdown": {
+        "title": "Controlled Drawdown",
+        "desc": "The best strategies limit maximum losses. A drawdown above 30% can be psychologically devastating and financially dangerous."
+      },
+      "consistency": {
+        "title": "Time Consistency",
+        "desc": "The strategy should show consistent profitability month to month, year after year. A 3-month winning streak guarantees nothing. Look for patterns of 2-3 years minimum."
+      },
+      "warning": {
+        "title": "Warning:",
+        "desc": "Beware of strategies promising 100% accuracy or guaranteed profits. Trading always involves risk. What makes the difference is how you manage that risk."
+      }
+    },
+    "dangers": {
+      "title": "What You Must Watch Out For",
+      "description": "Trading has real risks you need to know",
+      "overtrading": {
+        "title": "Overtrading",
+        "desc": "Opening too many trades due to anxiety or boredom. Each trade has costs (commissions, spreads) that accumulate quickly."
+      },
+      "revenge": {
+        "title": "Revenge Trading",
+        "desc": "Trying to recover losses immediately with impulsive trades. It's the fastest way to lose your capital."
+      },
+      "leverage": {
+        "title": "Excessive Leverage",
+        "desc": "Using 100x leverage can multiply gains, but it can also liquidate your account in minutes. Start with low leverage (2x-5x)."
+      },
+      "fomo": {
+        "title": "FOMO and Panic",
+        "desc": "Entering trades because \"everyone is winning\" or selling because \"everyone is selling\" destroys discipline."
+      },
+      "noStopLoss": {
+        "title": "Not Using Stop Loss",
+        "desc": "A well-placed stop loss protects you from catastrophic losses. Never trade without one."
+      },
+      "scams": {
+        "title": "Signals and Telegram Groups",
+        "desc": "95% of \"gurus\" selling signals lose money. If they really made millions, they wouldn't need to sell you anything."
+      }
+    },
+    "whoUses": {
+      "title": "Who Uses Algorithmic Trading Tools?",
+      "p1": "Automated trading tools are not just for financial institutions. Today, individual traders, professional teams, and investment funds use algorithmic systems to:",
+      "point1": "Eliminate emotional bias from decisions",
+      "point2": "Operate 24/7 without being in front of the screen",
+      "point3": "Execute complex strategies with pinpoint accuracy",
+      "point4": "Quick backtesting of ideas on years of historical data",
+      "point5": "Manage multiple assets simultaneously",
+      "point6": "React to opportunities in milliseconds",
+      "p2": "From beginner traders who want to learn without risking real capital, to professionals managing millions, everyone benefits from well-designed systems."
+    },
+    "solution": {
+      "title": "Why AIinside.me is the Solution",
+      "subtitle": "Cutting-edge technology at your fingertips",
+      "p1": "AIinside.me is not another trading course or signal group. It's an AI-powered algorithmic trading platform that allows you to test, optimize, and execute strategies professionally.",
+      "highlight": "What sets us apart:",
+      "ai": {
+        "title": "Real Artificial Intelligence",
+        "desc": "Our algorithms analyze patterns in real-time, optimize parameters automatically, and adapt to changing market conditions."
+      },
+      "time": {
+        "title": "Massive Time Savings",
+        "desc": "Spending 8 hours daily analyzing charts? With AIinside.me, the system works for you. Get your life back while AI operates 24/7."
+      },
+      "mentalPeace": {
+        "title": "Total Mental Peace",
+        "desc": "No more anxiety waiting for the market to move. No more insomnia over open positions. The system manages risk with clear, objective rules."
+      },
+      "backtesting": {
+        "title": "Instant Backtesting",
+        "desc": "Test any strategy on years of historical data in seconds. No more Excel or manual calculations. See real results before risking a penny."
+      },
+      "timeComparison": {
+        "title": "Real Time Comparison",
+        "manual": "Traditional Manual Trading",
+        "ai": "With AIinside.me"
+      },
+      "timeSaved": "Saving 45-65 hours per week",
+      "timeSavedDesc": "That's 2,400+ hours per year you can dedicate to what really matters"
+    },
+    "cta": {
+      "title": "Ready to Transform Your Trading?",
+      "description": "Try our strategies in demo, risk-free. Discover how AI can change the way you trade.",
+      "demoButton": "See Live Demo",
+      "pricingButton": "View Plans and Pricing"
+    }
   }
 }

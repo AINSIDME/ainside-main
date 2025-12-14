@@ -23,6 +23,7 @@ import Checkout from "./pages/Checkout";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import GettingStarted from "./pages/GettingStarted";
+import Trading from "./pages/Trading";
 import Legal from "./pages/Legal";
 import LegalTerms from "./pages/LegalTerms";
 import LegalPrivacy from "./pages/LegalPrivacy";
@@ -65,6 +66,7 @@ const App = () => {
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
                 <Route path="/getting-started" element={<GettingStarted />} />
+                <Route path="/trading" element={<Trading />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/legal" element={<Legal />} />
                 <Route path="/legal/terms" element={<LegalTerms />} />

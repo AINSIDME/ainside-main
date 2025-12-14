@@ -569,5 +569,116 @@
     "open": "Ouvrir",
     "yes": "Oui",
     "no": "Non"
+  },
+  "tradingPage": {
+    "badge": "Trading Intelligent",
+    "title": "Qu'est-ce que le Trading?",
+    "subtitle": "Découvrez comment prendre des décisions éclairées sur les marchés financiers et pourquoi la technologie d'AIinside.me fait la différence",
+    "whatIs": {
+      "title": "Comprendre le Trading",
+      "p1": "Le trading est l'achat et la vente d'actifs financiers (actions, devises, cryptomonnaies, contrats à terme) dans le but de réaliser des bénéfices en profitant des fluctuations du marché. Contrairement à l'investissement à long terme, le trading recherche des avantages à plus court terme.",
+      "p2": "Le succès dans le trading ne dépend pas de la chance, mais de stratégies bien définies, d'une analyse technique rigoureuse, d'une gestion disciplinée des risques et d'un contrôle émotionnel. Les traders professionnels passent des années à perfectionner leurs systèmes.",
+      "dayTrading": "Opérations qui s'ouvrent et se ferment le même jour",
+      "swingTrading": "Maintenir des positions pendant des jours ou des semaines",
+      "scalping": "Opérations rapides multiples avec de petits gains"
+    },
+    "goodStrategies": {
+      "title": "Comment Identifier les Bonnes Stratégies?",
+      "description": "Toutes les stratégies ne se valent pas",
+      "backtesting": {
+        "title": "Backtesting Rigoureux",
+        "desc": "Une bonne stratégie doit être testée avec des données historiques réelles pendant au moins 3 à 5 ans."
+      },
+      "winRate": {
+        "title": "Taux de Réussite + Risque/Récompense",
+        "desc": "Une stratégie avec 40% de précision mais un ratio risque/récompense de 1:3 est rentable."
+      },
+      "drawdown": {
+        "title": "Drawdown Contrôlé",
+        "desc": "Les meilleures stratégies limitent les pertes maximales. Un drawdown supérieur à 30% peut être dangereux."
+      },
+      "consistency": {
+        "title": "Cohérence Temporelle",
+        "desc": "La stratégie doit montrer une rentabilité cohérente mois après mois, année après année."
+      },
+      "warning": {
+        "title": "Avertissement:",
+        "desc": "Méfiez-vous des stratégies promettant 100% de précision. Le trading comporte toujours des risques."
+      }
+    },
+    "dangers": {
+      "title": "Ce Dont Vous Devez Vous Méfier",
+      "description": "Le trading comporte des risques réels",
+      "overtrading": {
+        "title": "Surtrading",
+        "desc": "Ouvrir trop de transactions. Chaque transaction a des coûts qui s'accumulent rapidement."
+      },
+      "revenge": {
+        "title": "Trading de Revanche",
+        "desc": "Essayer de récupérer les pertes immédiatement. C'est le moyen le plus rapide de perdre votre capital."
+      },
+      "leverage": {
+        "title": "Effet de Levier Excessif",
+        "desc": "Un effet de levier de 100x peut liquider votre compte en minutes. Commencez avec 2x-5x."
+      },
+      "fomo": {
+        "title": "FOMO et Panique",
+        "desc": "Entrer dans des transactions parce que tout le monde gagne détruit la discipline."
+      },
+      "noStopLoss": {
+        "title": "Ne Pas Utiliser de Stop Loss",
+        "desc": "Un stop loss bien placé vous protège des pertes catastrophiques."
+      },
+      "scams": {
+        "title": "Signaux et Groupes Telegram",
+        "desc": "95% des gourous vendant des signaux perdent de l'argent."
+      }
+    },
+    "whoUses": {
+      "title": "Qui Utilise les Outils de Trading Algorithmique?",
+      "p1": "Les outils de trading automatisé ne sont pas réservés aux institutions financières:",
+      "point1": "Éliminer les biais émotionnels",
+      "point2": "Opérer 24/7 automatiquement",
+      "point3": "Exécuter des stratégies complexes",
+      "point4": "Backtesting rapide",
+      "point5": "Gérer plusieurs actifs",
+      "point6": "Réagir en millisecondes",
+      "p2": "Des débutants aux professionnels, tout le monde bénéficie de systèmes bien conçus."
+    },
+    "solution": {
+      "title": "Pourquoi AIinside.me est la Solution",
+      "subtitle": "Technologie de pointe à portée de main",
+      "p1": "AIinside.me est une plateforme de trading algorithmique avec IA professionnelle.",
+      "highlight": "Ce qui nous distingue:",
+      "ai": {
+        "title": "Intelligence Artificielle Réelle",
+        "desc": "Nos algorithmes analysent en temps réel et s'adaptent aux conditions changeantes."
+      },
+      "time": {
+        "title": "Économie de Temps Massive",
+        "desc": "Le système travaille 24/7. Récupérez votre vie pendant que l'IA opère."
+      },
+      "mentalPeace": {
+        "title": "Paix Mentale Totale",
+        "desc": "Plus d'anxiété. Le système gère les risques avec des règles claires."
+      },
+      "backtesting": {
+        "title": "Backtesting Instantané",
+        "desc": "Testez n'importe quelle stratégie en secondes sur des années de données."
+      },
+      "timeComparison": {
+        "title": "Comparaison Temps Réel",
+        "manual": "Trading Manuel",
+        "ai": "Avec AIinside.me"
+      },
+      "timeSaved": "Économie de 45-65 heures/semaine",
+      "timeSavedDesc": "Plus de 2,400 heures par an pour ce qui compte vraiment"
+    },
+    "cta": {
+      "title": "Prêt à Transformer Votre Trading?",
+      "description": "Essayez nos stratégies en démo, sans risque.",
+      "demoButton": "Voir la Démo",
+      "pricingButton": "Voir les Tarifs"
+    }
   }
 }
