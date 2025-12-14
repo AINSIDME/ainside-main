@@ -155,6 +155,20 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://ainside.me/algotrading" />
   </url>
 
+  <!-- Blog: Complete Guide to Algorithmic Trading (SEO Article) -->
+  <url>
+    <loc>https://ainside.me/blog/guia-completa-trading-algoritmico</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+    <xhtml:link rel="alternate" hreflang="he" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ainside.me/blog/guia-completa-trading-algoritmico" />
+  </url>
+
   <!-- AlgoTrading Alternative URLs (All redirect to /algotrading) -->
   <!-- Spanish variants -->
   <url>

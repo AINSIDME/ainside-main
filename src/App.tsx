@@ -24,6 +24,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import GettingStarted from "./pages/GettingStarted";
 import AlgoTrading from "./pages/AlgoTrading";
+import BlogAlgoTradingGuide from "./pages/BlogAlgoTradingGuide";
 import Legal from "./pages/Legal";
 import LegalTerms from "./pages/LegalTerms";
 import LegalPrivacy from "./pages/LegalPrivacy";
@@ -67,6 +68,7 @@ const App = () => {
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
                 <Route path="/getting-started" element={<GettingStarted />} />
                 <Route path="/algotrading" element={<AlgoTrading />} />
+                <Route path="/blog/guia-completa-trading-algoritmico" element={<BlogAlgoTradingGuide />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/legal" element={<Legal />} />
                 <Route path="/legal/terms" element={<LegalTerms />} />
