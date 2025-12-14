@@ -6,6 +6,7 @@
     "demo": "Estrategia",
     "liveDemoMini": "Live",
     "pricing": "Precios",
+    "faq": "FAQ",
     "contact": "Contacto",
     "accessibility": "Accesibilidad"
   },
@@ -1163,6 +1164,74 @@
       "description": "Tecnología institucional, accesibilidad moderna. Sin barreras de entrada de millones de dólares.",
       "demo": "Ver Demostración en Vivo",
       "contact": "Contactar Asesor"
+    }
+  },
+  "faq": {
+    "badge": "Preguntas Frecuentes",
+    "title": "FAQ",
+    "subtitle": "Respuestas a las preguntas más comunes sobre nuestras estrategias y servicios",
+    "seo": {
+      "title": "Preguntas Frecuentes - AIinside.me",
+      "description": "Encuentra respuestas a tus preguntas sobre trading algorítmico, estrategias, reembolsos y soporte técnico."
+    },
+    "categories": {
+      "general": "General",
+      "refunds": "Reembolsos y Política",
+      "strategies": "Estrategias y Uso",
+      "technical": "Soporte Técnico",
+      "investment": "Inversión y Riesgos"
+    },
+    "general": {
+      "q1": "¿Por qué el AlgoTrading es absolutamente privado?",
+      "a1": "Todas nuestras estrategias operan directamente en tu cuenta de broker. Nunca tenemos acceso a tus fondos. El código se ejecuta localmente en TradingView o MetaTrader, garantizando privacidad total y control completo sobre tu capital.",
+      "q2": "Política de Reembolso: ¿Cómo funciona la garantía de devolución de dinero?",
+      "a2": "Ofrecemos una garantía de reembolso de 30 días sin preguntas. Si no estás satisfecho con la estrategia por cualquier motivo, simplemente contacta nuestro soporte dentro de los primeros 30 días para un reembolso completo.",
+      "q3": "¿Cuál es la diferencia entre los planes Gold, Platinum y Premium?",
+      "a3": "Gold ofrece acceso a 1 estrategia básica. Platinum incluye 2 estrategias optimizadas con soporte prioritario. Premium ofrece acceso completo a todas las estrategias, análisis personalizado y soporte VIP 24/7.",
+      "q4": "¿Dónde puedo cancelar mi suscripción?",
+      "a4": "Puedes cancelar tu suscripción en cualquier momento desde tu panel de usuario en la sección 'Mi Cuenta' → 'Suscripciones'. También puedes contactar soporte y cancelaremos tu suscripción inmediatamente."
+    },
+    "refunds": {
+      "q1": "¿Qué es el mínimo de inversión?",
+      "a1": "Para plan Micro recomendamos $100-$1,000. Para plan Mini recomendamos $1,000-$5,000. Sin embargo, puedes empezar con menos en cuenta demo para familiarizarte con la estrategia sin riesgo.",
+      "q2": "¿Cuál es la ganancia esperada?",
+      "a2": "No garantizamos ganancias específicas ya que depende de condiciones de mercado, capital inicial y gestión de riesgo. Nuestras estrategias han mostrado resultados históricos entre 8-25% anual, pero el rendimiento pasado no garantiza resultados futuros.",
+      "q3": "¿Puedo cambiar mi estrategia a mitad de mes si no funciona para mí?",
+      "a3": "Sí, si tienes plan Mini o superior, puedes cambiar entre estrategias disponibles en cualquier momento. Para plan Micro, el cambio se puede realizar al renovar tu suscripción mensual."
+    },
+    "strategies": {
+      "q1": "¿Cuándo promedio necesita?",
+      "a1": "Recomendamos evaluar cualquier estrategia durante al menos 30-90 días para obtener resultados significativos. El trading algorítmico requiere paciencia - las ganancias son a mediano-largo plazo, no de la noche a la mañana.",
+      "q2": "¿Cuál es la ventaja de un trading algorítmico?",
+      "a2": "Elimina emociones, opera 24/7 sin supervisión, ejecuta operaciones con precisión milimétrica, backtesting instantáneo en años de datos históricos, y gestión de riesgo sistemática basada en reglas objetivas.",
+      "q3": "¿Puedo usar la estrategia en múltiples cuentas?",
+      "a3": "La licencia es válida para 1 cuenta de trading por usuario. Para cuentas adicionales (por ejemplo, cuenta personal y cuenta empresarial), contacta soporte para opciones de licencia múltiple con descuento.",
+      "q4": "¿Puedo usar cualquier broker?",
+      "a4": "Nuestras estrategias son compatibles con la mayoría de brokers que soportan TradingView o MetaTrader 4/5. Recomendamos brokers regulados como IC Markets, Pepperstone, o OANDA para mejores condiciones de ejecución."
+    },
+    "technical": {
+      "q1": "¿Cómo instalo el software?",
+      "a1": "Tras la compra, recibirás un email con archivos de la estrategia, documentación PDF paso a paso, y video tutorial. El proceso toma 10-15 minutos: descargar archivo, importar a TradingView/MetaTrader, configurar parámetros, y activar en demo primero.",
+      "q2": "¿Cuáles son los beneficios de un trading algorítmico?",
+      "a2": "Consistencia emocional (sin FOMO, pánico o revenge trading), disponibilidad 24/7, ejecución instantánea de operaciones complejas, backtesting científico, diversificación multi-estrategia, y ahorro masivo de tiempo (2,400+ horas al año).",
+      "q3": "¿Busca asistencia adicional para apoyar su decisión?",
+      "a3": "Sí, ofrecemos consulta gratuita de 30 minutos para nuevos clientes. Contáctanos por email (support@ainside.me) o Telegram y un especialista te guiará para elegir la estrategia ideal según tu perfil de riesgo y capital.",
+      "q4": "¿Necesito experiencia en programación?",
+      "a4": "No. Las estrategias vienen listas para usar con instalación paso a paso. Solo necesitas seguir el manual. Sin embargo, si deseas personalizar parámetros avanzados, ofrecemos soporte técnico incluido en todos los planes."
+    },
+    "investment": {
+      "q1": "¿Necesito un MQL4/MQL5 o script para usar en un smartphone o tablet?",
+      "a1": "Para MetaTrader móvil, sí necesitas los archivos MQL. Sin embargo, TradingView funciona perfectamente en navegador móvil sin instalación adicional. Recomendamos TradingView para traders que operan desde dispositivos móviles.",
+      "q2": "Live trackrecord y backtested",
+      "a2": "Todos nuestros planes incluyen reportes detallados de backtesting (2-3 años de datos históricos) y acceso a resultados de trading en vivo verificados. Los clientes Mini+ obtienen acceso a dashboard en tiempo real con métricas transparentes.",
+      "q3": "¿Puedo probar gratis antes de comprar?",
+      "a3": "Ofrecemos demo en vivo gratuito donde puedes ver la estrategia operando en tiempo real con datos de mercado. Además, la garantía de reembolso de 30 días te permite probar sin riesgo financiero."
+    },
+    "cta": {
+      "title": "¿Todavía tienes preguntas?",
+      "description": "Nuestro equipo está aquí para ayudarte. Contáctanos y te responderemos en menos de 24 horas.",
+      "contact": "Contactar Soporte",
+      "docs": "Ver Documentación"
     }
   }
 }

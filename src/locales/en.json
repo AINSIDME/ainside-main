@@ -2,10 +2,11 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "services": "Services", 
+    "services": "Services",
     "demo": "Strategy",
     "liveDemoMini": "Live",
     "pricing": "Pricing",
+    "faq": "FAQ",
     "contact": "Contact",
     "accessibility": "Accessibility"
   },
@@ -1159,6 +1160,74 @@
       "description": "Institutional technology, modern accessibility. No million-dollar entry barriers.",
       "demo": "View Live Demonstration",
       "contact": "Contact Advisor"
+    }
+  },
+  "faq": {
+    "badge": "Frequently Asked Questions",
+    "title": "FAQ",
+    "subtitle": "Answers to the most common questions about our strategies and services",
+    "seo": {
+      "title": "Frequently Asked Questions - AIinside.me",
+      "description": "Find answers to your questions about algorithmic trading, strategies, refunds and technical support."
+    },
+    "categories": {
+      "general": "General",
+      "refunds": "Refunds & Policy",
+      "strategies": "Strategies & Usage",
+      "technical": "Technical Support",
+      "investment": "Investment & Risks"
+    },
+    "general": {
+      "q1": "Why is AlgoTrading absolutely private?",
+      "a1": "All our strategies operate directly in your broker account. We never have access to your funds. The code runs locally on TradingView or MetaTrader, ensuring total privacy and complete control over your capital.",
+      "q2": "Refund Policy: How does the money-back guarantee work?",
+      "a2": "We offer a 30-day money-back guarantee with no questions asked. If you're not satisfied with the strategy for any reason, simply contact our support within the first 30 days for a full refund.",
+      "q3": "What are the differences between the Micro, Mini plans?",
+      "a3": "Micro offers access to 1 proven strategy ideal for small accounts ($100-$1,000). Mini includes 2 optimized strategies with priority support, perfect for serious traders ($1,000-$5,000).",
+      "q4": "Where can I cancel my subscription?",
+      "a4": "You can cancel your subscription anytime from your user panel in 'My Account' → 'Subscriptions' section. You can also contact support and we'll cancel your subscription immediately."
+    },
+    "refunds": {
+      "q1": "What is the minimum investment?",
+      "a1": "For Micro plan we recommend $100-$1,000. For Mini plan we recommend $1,000-$5,000. However, you can start with less in demo account to familiarize yourself with the strategy risk-free.",
+      "q2": "What is the expected profit?",
+      "a2": "We don't guarantee specific profits as it depends on market conditions, initial capital and risk management. Our strategies have shown historical results between 8-25% annually, but past performance doesn't guarantee future results.",
+      "q3": "Can I change my strategy mid-month if it doesn't work for me?",
+      "a3": "Yes, if you have Mini plan or higher, you can switch between available strategies anytime. For Micro plan, the change can be made when renewing your monthly subscription."
+    },
+    "strategies": {
+      "q1": "How long average do I need?",
+      "a1": "We recommend evaluating any strategy for at least 30-90 days to get meaningful results. Algorithmic trading requires patience - profits are medium to long-term, not overnight.",
+      "q2": "What is the advantage of algorithmic trading?",
+      "a2": "Eliminates emotions, operates 24/7 without supervision, executes trades with pinpoint precision, instant backtesting on years of historical data, and systematic risk management based on objective rules.",
+      "q3": "Can I use the strategy on multiple accounts?",
+      "a3": "The license is valid for 1 trading account per user. For additional accounts (e.g., personal and business account), contact support for discounted multi-license options.",
+      "q4": "Can I use any broker?",
+      "a4": "Our strategies are compatible with most brokers that support TradingView or MetaTrader 4/5. We recommend regulated brokers like IC Markets, Pepperstone, or OANDA for best execution conditions."
+    },
+    "technical": {
+      "q1": "How do I install the software?",
+      "a1": "After purchase, you'll receive an email with strategy files, step-by-step PDF documentation, and video tutorial. The process takes 10-15 minutes: download file, import to TradingView/MetaTrader, configure parameters, and activate in demo first.",
+      "q2": "What are the benefits of algorithmic trading?",
+      "a2": "Emotional consistency (no FOMO, panic or revenge trading), 24/7 availability, instant execution of complex operations, scientific backtesting, multi-strategy diversification, and massive time savings (2,400+ hours per year).",
+      "q3": "Are you looking for additional assistance to support your decision?",
+      "a3": "Yes, we offer free 30-minute consultation for new clients. Contact us by email (support@ainside.me) or Telegram and a specialist will guide you to choose the ideal strategy according to your risk profile and capital.",
+      "q4": "Do I need programming experience?",
+      "a4": "No. Strategies come ready to use with step-by-step installation. You just need to follow the manual. However, if you want to customize advanced parameters, we offer technical support included in all plans."
+    },
+    "investment": {
+      "q1": "Do I need a MQL4/MQL5 or script to use on a smartphone or tablet?",
+      "a1": "For mobile MetaTrader, yes you need MQL files. However, TradingView works perfectly in mobile browser without additional installation. We recommend TradingView for traders who operate from mobile devices.",
+      "q2": "Live trackrecord and backtested",
+      "a2": "All our plans include detailed backtesting reports (2-3 years of historical data) and access to verified live trading results. Mini+ clients get access to real-time dashboard with transparent metrics.",
+      "q3": "Can I try for free before buying?",
+      "a3": "We offer free live demo where you can see the strategy operating in real-time with market data. Additionally, the 30-day money-back guarantee lets you try risk-free financially."
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "description": "Our team is here to help you. Contact us and we'll respond within 24 hours.",
+      "contact": "Contact Support",
+      "docs": "View Documentation"
     }
   }
 }

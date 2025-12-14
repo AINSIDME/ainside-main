@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import {
   Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
 } from "@/components/ui/card";
@@ -455,9 +456,11 @@ export default function Pricing() {
           <p className="text-slate-300 mb-4">
             {t("pricing.support", { defaultValue: "¿Necesitás ayuda? Nuestro equipo está disponible 24/6." })}
           </p>
-          <Button variant="outline" className="border-slate-700 text-slate-200 hover:bg-slate-900">
-            {t("contact.title", { defaultValue: "Contactar" })}
-          </Button>
+          <Link to="/contact">
+            <Button variant="outline" className="border-slate-700 text-slate-200 hover:bg-slate-900">
+              {t("contact.title", { defaultValue: "Contactar" })}
+            </Button>
+          </Link>
         </div>
       </section>
 

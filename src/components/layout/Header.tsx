@@ -18,6 +18,7 @@ export const Header = () => {
     { key: 'demo', path: '/demo' },
     { key: 'liveDemoMini', path: '/live-demo-mini' },
     { key: 'pricing', path: '/pricing' },
+    { key: 'faq', path: '/faq' },
     { key: 'contact', path: '/contact' },
     { key: 'accessibility', path: '/accessibility' },
   ];

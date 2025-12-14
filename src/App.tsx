@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { setDocumentDirection } from "@/lib/i18n";
@@ -31,10 +31,22 @@ import LegalPrivacy from "./pages/LegalPrivacy";
 import LegalDisclaimer from "./pages/LegalDisclaimer";
 import Accessibility from "./pages/Accessibility";
 import Status from "./pages/Status";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
 
 const queryClient = new QueryClient();
+
+// Component to scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   const { i18n } = useTranslation();
@@ -49,6 +61,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <StructuredData />
           <div className="min-h-screen flex flex-col">
             <Header />
@@ -76,6 +89,7 @@ const App = () => {
                 <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
                 <Route path="/status" element={<Status />} />
                 <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/faq" element={<FAQ />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
