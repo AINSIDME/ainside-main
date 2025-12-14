@@ -2,58 +2,58 @@
   "version": 2,
   "redirects": [
     {
-      "source": "/algotrading",
-      "destination": "/trading",
+      "source": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/trading-algoritmico",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algotrading-rentable",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/comercio-algoritmico",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algorithmic-trading",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algo-trading",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/automated-trading",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/trading-algorithmique",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algotrading-fr",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algoritmicheskaya-torgovlya",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     },
     {
       "source": "/algotrading-ru",
-      "destination": "/trading",
+      "destination": "/algotrading",
       "permanent": true
     }
   ],
