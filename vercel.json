@@ -12,12 +12,47 @@
       "permanent": true
     },
     {
+      "source": "/algotrading-rentable",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-algoritmico",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
       "source": "/algorithmic-trading",
       "destination": "/trading",
       "permanent": true
     },
     {
-      "source": "/algotrading-rentable",
+      "source": "/algo-trading",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/automated-trading",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/trading-algorithmique",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-fr",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/algoritmicheskaya-torgovlya",
+      "destination": "/trading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-ru",
       "destination": "/trading",
       "permanent": true
     }

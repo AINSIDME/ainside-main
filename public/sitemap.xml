@@ -155,33 +155,101 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://ainside.me/trading" />
   </url>
 
-  <!-- Trading Alternative URLs (Redirects to /trading) -->
+  <!-- Trading Alternative URLs (All redirect to /trading) -->
+  <!-- Spanish variants -->
   <url>
     <loc>https://ainside.me/algotrading</loc>
     <lastmod>2025-01-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/trading" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
   </url>
 
   <url>
     <loc>https://ainside.me/trading-algoritmico</loc>
     <lastmod>2025-01-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://ainside.me/algorithmic-trading</loc>
-    <lastmod>2025-01-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/trading" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
   </url>
 
   <url>
     <loc>https://ainside.me/algotrading-rentable</loc>
     <lastmod>2025-01-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/trading" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
+  </url>
+
+  <url>
+    <loc>https://ainside.me/comercio-algoritmico</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/trading" />
+  </url>
+
+  <!-- English variants -->
+  <url>
+    <loc>https://ainside.me/algorithmic-trading</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ainside.me/trading" />
+  </url>
+
+  <url>
+    <loc>https://ainside.me/algo-trading</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
+  </url>
+
+  <url>
+    <loc>https://ainside.me/automated-trading</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainside.me/trading" />
+  </url>
+
+  <!-- French variants -->
+  <url>
+    <loc>https://ainside.me/trading-algorithmique</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ainside.me/trading" />
+  </url>
+
+  <url>
+    <loc>https://ainside.me/algotrading-fr</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ainside.me/trading" />
+  </url>
+
+  <!-- Russian variants -->
+  <url>
+    <loc>https://ainside.me/algoritmicheskaya-torgovlya</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ainside.me/trading" />
+  </url>
+
+  <url>
+    <loc>https://ainside.me/algotrading-ru</loc>
+    <lastmod>2025-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ainside.me/trading" />
   </url>
 
   <!-- Contact -->
