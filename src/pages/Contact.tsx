@@ -22,7 +22,7 @@ const Contact = () => {
     e.preventDefault();
     toast({
       title: t("contactPage.form.toast.title", { defaultValue: "Message Sent" }),
-      description: t("contactPage.form.toast.desc", { defaultValue: "Thank you for your inquiry. Our team will respond within one business day." }),
+      description: t("contactPage.form.toast.desc", { defaultValue: "Thank you for your inquiry. Our team will respond as soon as possible." }),
     });
     setFormData({ name: "", email: "", organization: "", subject: "", message: "" });
   };
@@ -43,21 +43,21 @@ const Contact = () => {
     },
     {
       icon: Phone,
-      title: t("contactPage.info.phone.title", { defaultValue: "Phone" }),
-      content: "+1 (555) 123-4567",
-      description: t("contactPage.info.phone.desc", { defaultValue: "Business hours: Monday - Friday, 9 AM - 6 PM EST" })
+      title: t("contactPage.info.phone.title", { defaultValue: "Support" }),
+      content: "support@ainside.me",
+      description: t("contactPage.info.phone.desc", { defaultValue: "Email support for technical assistance" })
     },
     {
       icon: MapPin,
-      title: t("contactPage.info.address.title", { defaultValue: "Address" }),
-      content: "123 Financial District, New York, NY 10005",
-      description: t("contactPage.info.address.desc", { defaultValue: "Corporate headquarters" })
+      title: t("contactPage.info.address.title", { defaultValue: "Platform" }),
+      content: "TradeStation / MultiCharts",
+      description: t("contactPage.info.address.desc", { defaultValue: "Compatible platforms for strategies" })
     },
     {
       icon: Clock,
       title: t("contactPage.info.response.title", { defaultValue: "Response Time" }),
-      content: t("contactPage.info.response.content", { defaultValue: "Within 1 Business Day" }),
-      description: t("contactPage.info.response.desc", { defaultValue: "Our commitment to timely communication" })
+      content: t("contactPage.info.response.content", { defaultValue: "Generally 24-48 hours" }),
+      description: t("contactPage.info.response.desc", { defaultValue: "We respond as soon as possible" })
     }
   ];
 

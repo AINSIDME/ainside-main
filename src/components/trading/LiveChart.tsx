@@ -141,7 +141,7 @@ export const LiveChart = ({ isPlaying, speed, overlays, instrument }: LiveChartP
     if (strategyFile) {
       toast({
         title: "Información",
-        description: "Abre TradingView para copiar tu estrategia Pine Script",
+        description: "Las estrategias son para TradeStation/MultiCharts (EasyLanguage)",
       });
       openPineEditor();
     } else {

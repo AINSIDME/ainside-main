@@ -36,8 +36,8 @@ const Services = () => {
       features: t('servicesPage.services.rental.features', { returnObjects: true, defaultValue: [
         'Monthly subscription model',
         'Access to all algorithm tools',
-        'Compatible with major platforms',
-        '24/7 technical support'
+        'Compatible with TradeStation/MultiCharts',
+        'Email technical support'
       ] }) as string[]
     },
     {

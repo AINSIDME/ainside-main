@@ -48,9 +48,9 @@ const Products = () => {
       features: [
         "Complete algorithm library",
         "Custom development included",
-        "Dedicated support team",
+        "Priority email support",
         "Multiple user licenses",
-        "SLA guarantee",
+        "Email support: support@ainside.me",
         "Custom integrations",
         "Ongoing algorithm updates"
       ],
