@@ -128,7 +128,7 @@ const BlogAlgoTradingGuide = () => {
                       <div>
                         <h4 className="text-lg font-medium text-slate-100 mb-2">Dato Clave</h4>
                         <p className="text-slate-100 text-sm">
-                          En 2025, más del <strong className="text-blue-400">75% del volumen de trading</strong> en Wall Street es ejecutado por algoritmos. El trading manual representa menos del 25% del mercado institucional.
+                          En 2025, gran parte del <strong className="text-blue-400">volumen de trading</strong> en los mercados globales es ejecutado por sistemas automatizados. La automatización es fundamental en el trading moderno.
                         </p>
                       </div>
                     </div>
@@ -602,7 +602,7 @@ ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
                     {
                       step: "Paso 1",
                       title: "Aprende los Fundamentos",
-                      description: "Antes de escribir código, entiende análisis técnico, gestión de riesgo y psicología del trading. Lee: 'A Random Walk Down Wall Street' y 'Trading Systems and Methods'.",
+                      description: "Antes de escribir código, entiende análisis técnico, gestión de riesgo y psicología del trading. Empieza con libros sobre análisis técnico y gestión de riesgo.",
                       time: "1-2 meses"
                     },
                     {

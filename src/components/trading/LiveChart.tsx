@@ -502,7 +502,7 @@ export const LiveChart = ({ isPlaying, speed, overlays, instrument }: LiveChartP
               <BarChart3 className="w-16 h-16 mb-4 text-blue-400" />
               <h3 className="text-xl font-bold mb-2">MultiCharts - PowerLanguage™</h3>
               <p className="text-center text-gray-300 mb-6">
-                <strong>99.9% compatible</strong> con EasyLanguage TradeStation.<br/>
+                <strong>Alta compatibilidad</strong> con EasyLanguage TradeStation.<br/>
                 Más de 30 años de estrategias EasyLanguage disponibles.
               </p>
               
@@ -510,7 +510,7 @@ export const LiveChart = ({ isPlaying, speed, overlays, instrument }: LiveChartP
                 <div className="bg-green-900/30 border border-green-500/50 p-4 rounded-lg">
                   <h4 className="font-semibold text-green-400 mb-2">✅ Ventajas PowerLanguage:</h4>
                   <ul className="text-sm space-y-1 text-gray-300">
-                    <li>• 99.9% compatible con EasyLanguage</li>
+                    <li>• Alta compatibilidad con EasyLanguage</li>
                     <li>• Más de 30 años de código disponible</li>
                     <li>• Backtesting y optimización avanzada</li>
                     <li>• Trading automatizado profesional</li>

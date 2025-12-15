@@ -27,9 +27,6 @@ const AlgoTrading = () => {
       <section className="relative py-32 px-4 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/98 backdrop-blur-sm">
         <div className="container mx-auto text-center max-w-5xl">
           <div className="mb-16">
-            <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
-              {t('algoTradingPage.badge', 'Institucional • Elite')}
-            </div>
             
             <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
               {t('algoTradingPage.title', 'Algorithmic Trading')}
@@ -76,8 +73,8 @@ const AlgoTrading = () => {
             </div>
             <div className="space-y-3">
               <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto" />
-              <div className="text-4xl font-light text-slate-100">24/7</div>
-              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Operación Continua')}</div>
+              <div className="text-4xl font-light text-slate-100">Auto</div>
+              <div className="text-sm text-slate-300 uppercase tracking-wider">{t('algoTradingPage.stats.volume', 'Sistema Automatizado')}</div>
             </div>
           </div>
         </div>
@@ -166,7 +163,7 @@ const AlgoTrading = () => {
               {
                 icon: Shield,
                 title: t('algoTradingPage.advantages.riskControl.title', 'Control de Riesgo Sofisticado'),
-                description: t('algoTradingPage.advantages.riskControl.desc', 'VaR dinámico, stress testing continuo, límites multi-nivel y circuit breakers automáticos. Gestión de riesgo comparable a fondos hedge de $1B+.')
+                description: t('algoTradingPage.advantages.riskControl.desc', 'Estrategias con stops y objetivos predefinidos basados en ATR y volatilidad del mercado. Gestión sistemática del riesgo.')
               },
               {
                 icon: BarChart3,
@@ -206,7 +203,7 @@ const AlgoTrading = () => {
             </h2>
 
             <p className="text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-light">
-              {t('algoTradingPage.solution.description', 'Acceso democrático a tecnología de trading que antes estaba reservada exclusivamente para fondos hedge de $100M+ y mesas de trading institucionales de Wall Street.')}
+              {t('algoTradingPage.solution.description', 'Estrategias algorítmicas profesionales accesibles para traders que buscan automatización con backtesting verificable.')}
             </p>
 
             <div className="grid md:grid-cols-3 gap-10 mt-16 pt-12 border-t border-slate-800/50">
@@ -217,9 +214,9 @@ const AlgoTrading = () => {
               </div>
 
               <div className="space-y-3">
-                <div className="text-5xl font-light text-cyan-400">24/7</div>
-                <div className="text-slate-300 font-medium text-lg">{t('algoTradingPage.solution.operation', 'Operación Autónoma')}</div>
-                <p className="text-sm text-slate-400">Monitoreo continuo sin intervención humana</p>
+                <div className="text-5xl font-light text-cyan-400">Auto</div>
+                <div className="text-slate-300 font-medium text-lg">{t('algoTradingPage.solution.operation', 'Sistema Automatizado')}</div>
+                <p className="text-sm text-slate-400">Estrategias se ejecutan automáticamente</p>
               </div>
 
               <div className="space-y-3">

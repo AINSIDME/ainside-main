@@ -284,10 +284,10 @@ const Index = () => {
                     <Building2 className="w-6 h-6 text-cyan-400" />
                   </div>
                   <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">
-                    Plataforma Institucional
+                    Estrategias Profesionales
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Acceso a algoritmos de nivel institucional con tecnología de fondos hedge de Wall Street.
+                    Algoritmos de trading automatizado para TradeStation/MultiCharts con backtesting verificable.
                   </p>
                 </CardContent>
               </Card>

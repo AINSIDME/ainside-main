@@ -1154,9 +1154,9 @@
     }
   },
   "algoTradingPage": {
-    "badge": "Institutionnel • Élite",
+    "badge": "Trading Systématique",
     "title": "Trading Algorithmique",
-    "subtitle": "Excellence en Systèmes de Trading Quantitatif de Niveau Institutionnel",
+    "subtitle": "Stratégies EasyLanguage Professionnelles pour TradeStation et MultiCharts",
     "cta": {
       "demo": "Explorer la Plateforme",
       "pricing": "Voir l'Adhésion"
@@ -1219,10 +1219,10 @@
       "transparency": "Transparence Académique"
     },
     "finalCta": {
-      "title": "Rejoignez l'Élite du Trading Quantitatif",
-      "description": "Technologie institutionnelle, accessibilité moderne. Pas de barrières d'entrée de millions de dollars.",
+      "title": "Trading Automatisé Professionnel",
+      "description": "Stratégies algorithmiques avec backtesting vérifiable. Plans mensuels accessibles.",
       "demo": "Voir Démonstration en Direct",
-      "contact": "Contacter un Conseiller"
+      "contact": "Contacter le Support"
     }
   },
   "faq": {
