@@ -8,7 +8,6 @@ export const MarketStatus = () => {
   const { t } = useTranslation();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [latency] = useState(Math.floor(Math.random() * 20) + 15); // Simulated latency 15-35ms
-  const [uptime] = useState("99.97%");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,7 +41,7 @@ export const MarketStatus = () => {
             
             <Badge variant="secondary" className="flex items-center gap-1">
               <Activity className="w-3 h-3" />
-              {t('demo.uptime')}: {uptime}
+              {t('demo.status')}: Active
             </Badge>
           </div>
         </div>

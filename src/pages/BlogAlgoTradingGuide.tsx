@@ -118,7 +118,7 @@ const BlogAlgoTradingGuide = () => {
                 </p>
 
                 <p>
-                  Los algoritmos de trading utilizan <strong>análisis cuantitativo</strong>, procesando millones de datos históricos para identificar patrones rentables. Instituciones como Goldman Sachs, JP Morgan y fondos hedge multimillonarios dependen casi completamente de algoritmos para gestionar sus operaciones.
+                  Los algoritmos de trading utilizan <strong>análisis cuantitativo</strong>, procesando millones de datos históricos para identificar patrones rentables. Los sistemas automatizados son ampliamente utilizados en los mercados financieros modernos para analizar datos y ejecutar operaciones.
                 </p>
 
                 <Card className="bg-blue-500/5 border border-blue-500/20 backdrop-blur-lg my-8">
