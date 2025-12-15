@@ -1007,7 +1007,7 @@
       "updatesMonthly": "Mises à jour mensuelles incluses",
       "noGuarantees": "Aucune garantie de performance"
     },
-    "guarantee": "Garantie de remboursement de 30 jours",
+    "guarantee": "Produit numérique - Pas de remboursement après téléchargement",
     "secure": "Sécurisé et fiable",
     "support": "Besoin d'aide ? Notre équipe est disponible 24/6.",
     "paypalDesc": "AInside - Contrat {{plan}} - {{instrument}} ({{symbol}}) - Abonnement {{cycle}} - {{amount}}",
@@ -1284,7 +1284,7 @@
       "q2": "Live trackrecord et backtesté",
       "a2": "Tous nos plans incluent des rapports détaillés de backtesting (2-3 ans de données historiques) et accès aux résultats de trading en direct vérifiés. Les clients Mini+ obtiennent accès au tableau de bord en temps réel avec métriques transparentes.",
       "q3": "Puis-je essayer gratuitement avant d'acheter?",
-      "a3": "Nous offrons démo en direct gratuite où vous pouvez voir la stratégie opérer en temps réel avec données de marché. De plus, la garantie de remboursement de 30 jours vous permet d'essayer sans risque financier."
+      "a3": "Nous offrons une démo en direct gratuite où vous pouvez voir la stratégie opérer en temps réel. Examinez attentivement la démo et la documentation avant l'achat, car les produits numériques ne peuvent pas être remboursés après téléchargement."
     },
     "cta": {
       "title": "Vous avez encore des questions?",

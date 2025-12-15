@@ -958,7 +958,7 @@
       "updatesMonthly": "Monthly updates included",
       "noGuarantees": "No performance guarantees"
     },
-    "guarantee": "30-day money back guarantee",
+    "guarantee": "Digital product - No refund after download",
     "secure": "Secure and reliable",
     "support": "Need help? Our team is available 24/6.",
     "paypalDesc": "AInside - {{plan}} Contract - {{instrument}} ({{symbol}}) - {{cycle}} Subscription - {{amount}}",
@@ -1221,7 +1221,7 @@
       "q2": "Live trackrecord and backtested",
       "a2": "All our plans include detailed backtesting reports (2-3 years of historical data) and access to verified live trading results. Mini+ clients get access to real-time dashboard with transparent metrics.",
       "q3": "Can I try for free before buying?",
-      "a3": "We offer free live demo where you can see the strategy operating in real-time with market data. Additionally, the 30-day money-back guarantee lets you try risk-free financially."
+      "a3": "We offer free live demo where you can see the strategy operating in real-time with market data. Review the demo and documentation carefully before purchasing, as digital products cannot be refunded after download."
     },
     "cta": {
       "title": "Still have questions?",
