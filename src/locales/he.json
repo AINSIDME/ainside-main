@@ -58,7 +58,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "זהב" },
       "summary": "סיכום הזמנה",
       "total": "סך הכל",
-      "badges": { "secure": "תשלום מאובטח 100%", "noRefundAfterDownload": "אין החזר לאחר הורדה" },
+      "badges": { "secure": "תשלום מאובטח דרך PayPal", "noRefundAfterDownload": "אין החזר לאחר הורדה" },
       "processing": "מעבד...",
       "payWithPaypal": "שלם ${{price}} עם PayPal",
       "notice": "בהמשך אתה מקבל את התנאים וההגבלות שלנו",

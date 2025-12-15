@@ -58,7 +58,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "الذهب" },
       "summary": "ملخص الطلب",
       "total": "الإجمالي",
-      "badges": { "secure": "دفع آمن 100%", "noRefundAfterDownload": "لا يوجد استرداد بعد التحميل" },
+      "badges": { "secure": "دفع آمن عبر PayPal", "noRefundAfterDownload": "لا يوجد استرداد بعد التحميل" },
       "processing": "جاري المعالجة...",
       "payWithPaypal": "ادفع ${{price}} باستخدام PayPal",
       "notice": "بالمتابعة فإنك توافق على الشروط والأحكام",
@@ -510,7 +510,7 @@
       "updatesMonthly": "تحديثات شهرية متضمنة",
       "noGuarantees": "لا ضمانات للأداء"
     },
-    "guarantee": "ضمان استرداد المال لمدة 30 يوماً",
+    "guarantee": "منتج رقمي - لا استرداد بعد التنزيل",
     "secure": "آمن وموثوق",
     "support": "تحتاج مساعدة؟ فريقنا متاح 24/6.",
     "paypalDesc": "AInside - عقد {{plan}} - {{instrument}} ({{symbol}}) - اشتراك {{cycle}} - {{amount}}",

@@ -114,7 +114,7 @@
       },
       "infrastructure": {
         "title": "Infrastructure Robuste",
-        "description": "Plateforme de niveau entreprise avec garantie de 99,9% de temps de fonctionnement"
+        "description": "Stratégies optimisées pour TradeStation et MultiCharts avec support technique"
       },
       "protection": {
         "title": "Protection des Risques",
@@ -450,7 +450,7 @@
           "Modèle d'abonnement mensuel",
           "Accès à tous les outils algorithmiques",
           "Compatible avec les principales plateformes",
-          "Support technique 24/7"
+          "Support technique par email"
         ]
       },
       "security": {
@@ -565,7 +565,7 @@
       "updatesMonthly": "Mises à jour mensuelles incluses",
       "noGuarantees": "Aucune garantie de performance"
     },
-    "guarantee": "Garantie de remboursement de 30 jours",
+    "guarantee": "Produit numérique - Pas de remboursement après téléchargement",
     "secure": "Sécurisé et fiable",
     "support": "Besoin d'aide? Notre équipe est disponible 24/6.",
     "paypalDesc": "AInside - Contrat {{plan}} - {{instrument}} ({{symbol}}) - Abonnement {{cycle}} - {{amount}}",
@@ -1170,7 +1170,7 @@
     "whatIs": {
       "title": "Qu'est-ce que le Trading Algorithmique?",
       "p1": "Le trading algorithmique représente l'avant-garde des marchés financiers modernes : des systèmes quantitatifs qui exécutent des stratégies d'investissement via des modèles mathématiques avancés, une analyse statistique rigoureuse et une exécution automatisée à haute fréquence.",
-      "p2": "Les institutions leaders, les hedge funds et les traders professionnels s'appuient sur des algorithmes propriétaires pour éliminer les biais émotionnels, capitaliser sur les inefficiences du marché en millisecondes et gérer les portefeuilles avec une précision scientifique.",
+      "p2": "Les algorithmes permettent d'éliminer les biais émotionnels dans le trading, d'analyser les données de marché systématiquement et d'exécuter des stratégies basées sur des règles prédéfinies.",
       "quantitative": "Analyse Quantitative",
       "execution": "Exécution HFT",
       "risk": "Gestion des Risques"
@@ -1192,7 +1192,7 @@
       },
       "riskControl": {
         "title": "Contrôle des Risques Sophistiqué",
-        "desc": "VaR dynamique, stress testing continu, limites multi-niveaux et disjoncteurs automatiques. Gestion des risques comparable aux hedge funds de 1B$+."
+        "desc": "Stratégies avec stops et objectifs de gains prédéfinis basés sur l'ATR et la volatilité du marché."
       },
       "diversification": {
         "title": "Diversification Multi-Stratégie",
@@ -1206,7 +1206,7 @@
     "solution": {
       "badge": "Technologie Institutionnelle",
       "title": "Pourquoi AIinside.me",
-      "description": "Accès démocratique à une technologie de trading auparavant réservée exclusivement aux hedge funds de 100M$+ et aux desks de trading institutionnels de Wall Street.",
+      "description": "Stratégies automatisées développées avec une méthodologie systématique et un backtesting extensif sur données historiques.",
       "infrastructure": "Investissement en Infrastructure",
       "operation": "Opération Autonome",
       "latency": "Latence Moyenne",
