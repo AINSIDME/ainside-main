@@ -1175,57 +1175,57 @@
       "description": "Encuentra respuestas a tus preguntas sobre trading algorítmico, estrategias, reembolsos y soporte técnico."
     },
     "categories": {
-      "general": "General",
-      "refunds": "Reembolsos y Política",
-      "strategies": "Estrategias y Uso",
-      "technical": "Soporte Técnico",
-      "investment": "Inversión y Riesgos"
+      "general": "Información General",
+      "refunds": "Política de Reembolsos",
+      "strategies": "Compatibilidad y Uso",
+      "technical": "Requisitos Técnicos",
+      "investment": "Riesgos y Advertencias"
     },
     "general": {
-      "q1": "¿Por qué el AlgoTrading es absolutamente privado?",
-      "a1": "Todas nuestras estrategias operan directamente en tu cuenta de broker. Nunca tenemos acceso a tus fondos. El código se ejecuta localmente en TradingView o MetaTrader, garantizando privacidad total y control completo sobre tu capital.",
-      "q2": "Política de Reembolso: ¿Cómo funciona la garantía de devolución de dinero?",
-      "a2": "Ofrecemos una garantía de reembolso de 30 días sin preguntas. Si no estás satisfecho con la estrategia por cualquier motivo, simplemente contacta nuestro soporte dentro de los primeros 30 días para un reembolso completo.",
-      "q3": "¿Cuál es la diferencia entre los planes Gold, Platinum y Premium?",
-      "a3": "Gold ofrece acceso a 1 estrategia básica. Platinum incluye 2 estrategias optimizadas con soporte prioritario. Premium ofrece acceso completo a todas las estrategias, análisis personalizado y soporte VIP 24/7.",
+      "q1": "¿Qué recibo exactamente al contratar un plan?",
+      "a1": "Recibes archivos de estrategia en formato EasyLanguage (.ELD para TradeStation, .PLA para MultiCharts), espacios de trabajo de ejemplo, parámetros recomendados en JSON, manual PDF de instalación, y acceso a soporte técnico 24/6.",
+      "q2": "Política de Reembolso: ¿Es posible después de descargar?",
+      "a2": "IMPORTANTE: Al ser un producto digital descargable, NO es posible reembolso una vez que hayas descargado los archivos. Te recomendamos revisar cuidadosamente la demo y documentación antes de comprar. La descarga implica aceptación final del producto.",
+      "q3": "¿Cuál es la diferencia entre los planes Micro y Mini?",
+      "a3": "Micro ($99/mes): Acceso a estrategia para contratos Micro (/MES). Mini ($999/mes): Acceso a estrategia para contratos Mini (/ES). Ambos incluyen soporte, actualizaciones mensuales y documentación completa.",
       "q4": "¿Dónde puedo cancelar mi suscripción?",
-      "a4": "Puedes cancelar tu suscripción en cualquier momento desde tu panel de usuario en la sección 'Mi Cuenta' → 'Suscripciones'. También puedes contactar soporte y cancelaremos tu suscripción inmediatamente."
+      "a4": "Puedes cancelar en cualquier momento contactando a support@ainside.me. La cancelación es inmediata pero NO se reembolsa el mes en curso. Los archivos descargados siguen siendo tuyos pero no recibirás actualizaciones futuras."
     },
     "refunds": {
-      "q1": "¿Qué es el mínimo de inversión?",
-      "a1": "Para plan Micro recomendamos $100-$1,000. Para plan Mini recomendamos $1,000-$5,000. Sin embargo, puedes empezar con menos en cuenta demo para familiarizarte con la estrategia sin riesgo.",
-      "q2": "¿Cuál es la ganancia esperada?",
-      "a2": "No garantizamos ganancias específicas ya que depende de condiciones de mercado, capital inicial y gestión de riesgo. Nuestras estrategias han mostrado resultados históricos entre 8-25% anual, pero el rendimiento pasado no garantiza resultados futuros.",
-      "q3": "¿Puedo cambiar mi estrategia a mitad de mes si no funciona para mí?",
-      "a3": "Sí, si tienes plan Mini o superior, puedes cambiar entre estrategias disponibles en cualquier momento. Para plan Micro, el cambio se puede realizar al renovar tu suscripción mensual."
+      "q1": "¿Qué capital necesito para operar?",
+      "a1": "Plan Micro (/MES): Recomendamos mínimo $500-$2,000 en cuenta real. Plan Mini (/ES): Recomendamos mínimo $5,000-$15,000. Puedes practicar primero en cuenta demo sin riesgo. El capital recomendado permite gestión de riesgo adecuada.",
+      "q2": "¿Garantizan ganancias o resultados?",
+      "a2": "NO. No garantizamos ganancias ni resultados específicos. El trading de futuros tiene riesgo alto de pérdida de capital. Los resultados históricos mostrados son backtests y NO garantizan rendimiento futuro. Solo opera con capital que puedas permitirte perder.",
+      "q3": "¿Puedo obtener reembolso si los resultados no son buenos?",
+      "a3": "NO. Al ser producto digital descargable, NO hay reembolsos una vez descargados los archivos. El rendimiento de la estrategia depende de condiciones de mercado, ejecución del broker, y tu gestión de riesgo. No somos responsables de pérdidas en trading."
     },
     "strategies": {
-      "q1": "¿Cuándo promedio necesita?",
-      "a1": "Recomendamos evaluar cualquier estrategia durante al menos 30-90 días para obtener resultados significativos. El trading algorítmico requiere paciencia - las ganancias son a mediano-largo plazo, no de la noche a la mañana.",
-      "q2": "¿Cuál es la ventaja de un trading algorítmico?",
-      "a2": "Elimina emociones, opera 24/7 sin supervisión, ejecuta operaciones con precisión milimétrica, backtesting instantáneo en años de datos históricos, y gestión de riesgo sistemática basada en reglas objetivas.",
-      "q3": "¿Puedo usar la estrategia en múltiples cuentas?",
-      "a3": "La licencia es válida para 1 cuenta de trading por usuario. Para cuentas adicionales (por ejemplo, cuenta personal y cuenta empresarial), contacta soporte para opciones de licencia múltiple con descuento.",
-      "q4": "¿Puedo usar cualquier broker?",
-      "a4": "Nuestras estrategias son compatibles con la mayoría de brokers que soportan TradingView o MetaTrader 4/5. Recomendamos brokers regulados como IC Markets, Pepperstone, o OANDA para mejores condiciones de ejecución."
+      "q1": "¿Qué plataformas son compatibles con las estrategias?",
+      "a1": "Las estrategias están en formato EasyLanguage, compatible SOLO con TradeStation y MultiCharts (PowerLanguage). NO funcionan en TradingView, MetaTrader, NinjaTrader u otras plataformas. Debes tener TradeStation o MultiCharts instalado para usarlas.",
+      "q2": "¿Puedo usar la estrategia en múltiples cuentas?",
+      "a2": "La licencia incluye uso en UNA cuenta de trading. Si necesitas usar en múltiples cuentas (personal/empresa), contacta a support@ainside.me para licencias adicionales. Cada licencia adicional tiene costo separado.",
+      "q3": "¿Las estrategias operan automáticamente 24/7?",
+      "a3": "Las estrategias generan señales automáticas, pero requieren que tu computadora con TradeStation/MultiCharts esté encendida durante horarios de mercado CME. Puedes usar un VPS para operación continua. No es 100% automático - requiere supervisión.",
+      "q4": "¿Funcionan las estrategias en todos los futuros?",
+      "a4": "NO. Cada estrategia está optimizada SOLO para el contrato específico contratado: Plan Micro solo para /MES (E-mini S&P 500 Micro). Plan Mini solo para /ES (E-mini S&P 500). NO incluye otros futuros como /GC, /NQ, /CL, etc."
     },
     "technical": {
-      "q1": "¿Cómo instalo el software?",
-      "a1": "Tras la compra, recibirás un email con archivos de la estrategia, documentación PDF paso a paso, y video tutorial. El proceso toma 10-15 minutos: descargar archivo, importar a TradingView/MetaTrader, configurar parámetros, y activar en demo primero.",
-      "q2": "¿Cuáles son los beneficios de un trading algorítmico?",
-      "a2": "Consistencia emocional (sin FOMO, pánico o revenge trading), disponibilidad 24/7, ejecución instantánea de operaciones complejas, backtesting científico, diversificación multi-estrategia, y ahorro masivo de tiempo (2,400+ horas al año).",
-      "q3": "¿Busca asistencia adicional para apoyar su decisión?",
-      "a3": "Sí, ofrecemos consulta gratuita de 30 minutos para nuevos clientes. Contáctanos por email (support@ainside.me) o Telegram y un especialista te guiará para elegir la estrategia ideal según tu perfil de riesgo y capital.",
-      "q4": "¿Necesito experiencia en programación?",
-      "a4": "No. Las estrategias vienen listas para usar con instalación paso a paso. Solo necesitas seguir el manual. Sin embargo, si deseas personalizar parámetros avanzados, ofrecemos soporte técnico incluido en todos los planes."
+      "q1": "¿Qué requisitos técnicos necesito?",
+      "a1": "OBLIGATORIO: TradeStation o MultiCharts instalado y con licencia activa. Conexión estable ≥20 Mbps. Computadora con 8GB RAM mínimo (o VPS). Cuenta con broker que ofrezca datos CME para /ES o /MES. Sin estos requisitos, las estrategias NO funcionarán.",
+      "q2": "¿Incluye el servicio de broker o datos de mercado?",
+      "a2": "NO. El plan solo incluye archivos de estrategia. Debes tener tu propio broker, pagar comisiones de trading, suscripción a datos CME, y licencia de TradeStation/MultiCharts. Estos costos son adicionales y pueden ser $100-$300/mes aproximadamente.",
+      "q3": "¿Ofrecen soporte técnico si tengo problemas?",
+      "a3": "Sí, soporte 24/6 vía email (support@ainside.me) para problemas de instalación y configuración de estrategias. NO brindamos soporte sobre: uso de TradeStation/MultiCharts (consulta su documentación), problemas con tu broker, o consejos de trading.",
+      "q4": "¿Puedo modificar el código de las estrategias?",
+      "a4": "Los archivos .ELD/.PLA están protegidos y NO permiten edición del código fuente. Solo puedes ajustar parámetros de entrada permitidos (stops, objetivos, etc.). Esto protege nuestra propiedad intelectual. No se entrega código fuente bajo ninguna circunstancia."
     },
     "investment": {
-      "q1": "¿Necesito un MQL4/MQL5 o script para usar en un smartphone o tablet?",
-      "a1": "Para MetaTrader móvil, sí necesitas los archivos MQL. Sin embargo, TradingView funciona perfectamente en navegador móvil sin instalación adicional. Recomendamos TradingView para traders que operan desde dispositivos móviles.",
-      "q2": "Live trackrecord y backtested",
-      "a2": "Todos nuestros planes incluyen reportes detallados de backtesting (2-3 años de datos históricos) y acceso a resultados de trading en vivo verificados. Los clientes Mini+ obtienen acceso a dashboard en tiempo real con métricas transparentes.",
-      "q3": "¿Puedo probar gratis antes de comprar?",
-      "a3": "Ofrecemos demo en vivo gratuito donde puedes ver la estrategia operando en tiempo real con datos de mercado. Además, la garantía de reembolso de 30 días te permite probar sin riesgo financiero."
+      "q1": "¿Qué riesgos debo conocer antes de comprar?",
+      "a1": "Trading de futuros tiene ALTO RIESGO de pérdida total del capital. Las estrategias no garantizan ganancias. Puedes perder más de tu inversión inicial. Backtests NO predicen resultados futuros. Solo opera si entiendes y aceptas estos riesgos. No es para principiantes.",
+      "q2": "¿Muestran resultados reales de trading en vivo?",
+      "a2": "Los reportes de backtesting muestran resultados HISTÓRICOS simulados, no trading en vivo real. No tenemos cuentas públicas verificadas por terceros. Los resultados individuales variarán según broker, slippage, comisiones y ejecución. Backtests ≠ Realidad.",
+      "q3": "¿Puedo probar la estrategia antes de comprar?",
+      "a3": "Puedes ver la demo visual en /demo y revisar documentación en /getting-started. NO ofrecemos prueba gratuita de archivos descargables. Una vez compras y descargas, NO hay reembolso. Revisa toda la información disponible antes de decidir."
     },
     "cta": {
       "title": "¿Todavía tienes preguntas?",
