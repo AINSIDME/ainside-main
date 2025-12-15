@@ -731,7 +731,7 @@
     },
     "answers": {
       "a1": "📺 Este stream muestra trading REAL del S&P 500 futuros (/ES y /MES) con posiciones actuales, gráficos profesionales, indicadores técnicos como VWAP y operaciones en tiempo real.",
-      "a2": "✅ SÍ, todas las posiciones mostradas son operaciones REALES con dinero real. No es simulación - puedes ver nuestro capital y P&L actual en vivo.",
+      "a2": "📊 Este es un ejemplo educativo que muestra cómo funcionarían las estrategias. Los datos mostrados son ilustrativos con fines didácticos.",
       "a3": "📊 VWAP (Volume Weighted Average Price) es el precio promedio ponderado por volumen. Las líneas azules/rojas muestran zonas de soporte/resistencia institucional que usamos para abrir posiciones reales.",
       "a4": "🔧 Somos una empresa que DESARROLLA algoritmos de trading y ALQUILA herramientas analíticas. Tu dinero queda en tu cuenta de broker, solo alquilas nuestras herramientas.",
       "a5": "📚 Puedes estudiar nuestras operaciones como material educativo. Compatible SOLO con plataformas EasyLanguage: TradeStation, TradeStation Global y MultiCharts (PowerLanguage). IMPORTANTE: Solo para estudio, no es asesoramiento.",
@@ -739,9 +739,9 @@
     },
     "responses": {
       "vwap": "📊 VWAP muestra el precio promedio ponderado por volumen. Las líneas te ayudan a identificar niveles institucionales de soporte y resistencia en tiempo real.",
-      "real": "✅ SÍ, todas las posiciones son REALES con dinero real. No es simulación - puedes ver nuestro P&L actual en vivo y cómo operamos realmente.",
-      "pnl": "💰 Ves el P&L REAL de nuestras operaciones en tiempo real. Cada ganancia y pérdida que ves es con dinero real, no simulado.",
-      "stream": "📺 Este stream muestra trading REAL del S&P 500 con posiciones actuales. Puedes ver operaciones reales, no demostraciones.",
+      "real": "📊 Esta es una visualización educativa que muestra cómo funcionarían las estrategias con datos de mercado reales. Fines educativos.",
+      "pnl": "📊 Los datos mostrados son ejemplos ilustrativos basados en backtesting histórico. No son operaciones en vivo.",
+      "stream": "📺 Esta visualización muestra cómo las estrategias analizan el S&P 500. Ejemplo educativo, no operaciones reales.",
       "default": "🤖 Puedo ayudarte con preguntas sobre el stream, indicadores, simulador P&L, estrategias de trading y más. ¿Qué te interesa saber?",
       "fallback": "Gracias por su pregunta. Un analista responderá en breve."
     }
@@ -858,7 +858,7 @@
       "subtitle": "Los principios que guían nuestro trabajo y desarrollo de estrategias",
       "integrity": { "title": "Integridad", "description": "Conducirnos con los más altos estándares éticos y transparencia" },
       "innovation": { "title": "Innovación", "description": "Avanzar continuamente la tecnología para satisfacer necesidades cambiantes" },
-      "excellence": { "title": "Excelencia", "description": "Entregar calidad superior en todos los aspectos de nuestros servicios y soluciones" },
+      "excellence": { "title": "Excelencia", "description": "Enfoque en calidad y mejora continua en el desarrollo de estrategias" },
       "partnership": { "title": "Alianzas", "description": "Construir relaciones duraderas con confianza, colaboración y éxito compartido" }
     },
     "org": {
@@ -912,7 +912,7 @@
           "Modelo de suscripción mensual",
           "Acceso a todas las herramientas",
           "Compatibles con plataformas principales",
-          "Soporte técnico 24/7"
+          "Soporte técnico por email"
         ]
       },
       "security": {
@@ -1111,14 +1111,14 @@
     "whatIs": {
       "title": "¿Qué es el Algorithmic Trading?",
       "p1": "El trading algorítmico representa la vanguardia de los mercados financieros modernos: sistemas cuantitativos que ejecutan estrategias de inversión mediante modelos matemáticos avanzados, análisis estadístico riguroso y ejecución automatizada de alta frecuencia.",
-      "p2": "Instituciones líderes, fondos hedge y traders profesionales confían en algoritmos propietarios para eliminar sesgos emocionales, capitalizar ineficiencias del mercado en milisegundos y gestionar portafolios con precisión científica.",
+      "p2": "Los algoritmos permiten eliminar sesgos emocionales en el trading, analizar datos de mercado sistemáticamente y ejecutar estrategias basadas en reglas predefinidas.",
       "quantitative": "Análisis Cuantitativo",
       "execution": "Ejecución HFT",
       "risk": "Risk Management"
     },
     "advantages": {
       "title": "Ventajas Institucionales",
-      "subtitle": "Por qué las instituciones líderes eligen sistemas algorítmicos",
+      "subtitle": "Ventajas del trading sistemático con algoritmos",
       "precision": {
         "title": "Precisión Milimétrica",
         "desc": "Ejecución exacta de estrategias sin desviación emocional. Backtesting riguroso en décadas de datos históricos con validación cruzada estadística."

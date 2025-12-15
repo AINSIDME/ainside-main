@@ -71,7 +71,7 @@
     "summary": "Order Summary",
     "total": "Total",
     "badges": {
-      "secure": "100% secure payment",
+      "secure": "Secure payment via PayPal",
       "noRefundAfterDownload": "No refund after download"
     },
     "processing": "Processing...",
@@ -367,7 +367,7 @@
       },
       "infrastructure": {
         "title": "Robust Infrastructure", 
-        "description": "Enterprise-level platform with 99.9% uptime guarantee"
+        "description": "Strategies optimized for TradeStation and MultiCharts with technical support"
       },
       "protection": {
         "title": "Risk Protection",
@@ -748,9 +748,9 @@
     },
     "responses": {
       "vwap": "📊 VWAP shows volume-weighted average price. Lines help you identify institutional support and resistance levels in real time.",
-      "real": "✅ YES, all positions are REAL with real money. It's not simulation - you can see our current P&L live and how we actually trade.",
-      "pnl": "💰 You see the REAL P&L of our operations in real time. Every gain and loss you see is with real money, not simulated.",
-      "stream": "📺 This stream shows REAL S&P 500 trading with current positions. You can see real operations, not demonstrations.",
+      "real": "📊 This is an educational visualization showing how strategies would work with real market data. For educational purposes.",
+      "pnl": "📊 Data shown are illustrative examples based on historical backtesting. Not live operations.",
+      "stream": "📺 This visualization shows how strategies analyze the S&P 500. Educational example, not real operations.",
       "default": "🤖 I can help you with questions about the stream, indicators, P&L simulator, trading strategies and more. What would you like to know?",
       "fallback": "Thank you for your question. An analyst will respond shortly."
     }
@@ -782,14 +782,14 @@
     },
     "vision": {
       "title": "Our Vision",
-      "description": "To be the leading developer of trading algorithms and analytical tools, recognized for creating innovative technology solutions that traders and institutions can rent to enhance their market analysis capabilities."
+      "description": "To develop quality trading algorithms and analytical tools, offering technology solutions that traders can rent for market analysis."
     },
     "values": {
       "title": "Core Values",
       "subtitle": "The principles that guide our organization and define our commitment to excellence",
       "integrity": { "title": "Integrity", "description": "Conducting business with the highest ethical standards and transparency" },
       "innovation": { "title": "Innovation", "description": "Continuously advancing technology to meet evolving industry needs" },
-      "excellence": { "title": "Excellence", "description": "Delivering superior quality in every aspect of our services and solutions" },
+      "excellence": { "title": "Excellence", "description": "Focus on quality and continuous improvement in strategy development" },
       "partnership": { "title": "Partnership", "description": "Building lasting relationships through trust, collaboration, and shared success" }
     },
     "org": {
@@ -803,7 +803,7 @@
       "founded": { "title": "Founded", "desc": "Established to provide institutional-grade technology solutions" },
       "innovation": { "title": "Innovation", "desc": "Continuous advancement in analytical technology and infrastructure" },
       "global": { "title": "Global Reach", "desc": "Serving financial institutions across multiple markets" },
-      "recognition": { "title": "Recognition", "desc": "Trusted by leading institutions for technology excellence" }
+      "recognition": { "title": "Recognition", "desc": "Continuous focus on improvement and strategy optimization" }
     }
   },
   "contact": {
@@ -843,7 +843,7 @@
           "Monthly subscription model",
           "Access to all algorithm tools",
           "Compatible with major platforms",
-          "24/7 technical support"
+          "Email technical support"
         ]
       },
       "security": {
@@ -937,11 +937,11 @@
         "Complete indicator suite",
         "Advanced analytics",
         "Monthly premium updates",
-        "Priority support",
-        "Premium data",
-        "Training sessions",
-        "Custom alerts",
-        "Detailed reports"
+        "Priority email support",
+        "EasyLanguage files (.ELD/.PLA)",
+        "Extended documentation",
+        "Installation guide PDF",
+        "Monthly updates"
       ],
       "popular": "Recommended"
     },
@@ -1107,7 +1107,7 @@
     "whatIs": {
       "title": "What is Algorithmic Trading?",
       "p1": "Algorithmic trading represents the vanguard of modern financial markets: quantitative systems that execute investment strategies through advanced mathematical models, rigorous statistical analysis, and high-frequency automated execution.",
-      "p2": "Leading institutions, hedge funds, and professional traders rely on proprietary algorithms to eliminate emotional biases, capitalize on market inefficiencies in milliseconds, and manage portfolios with scientific precision.",
+      "p2": "Algorithms allow eliminating emotional biases in trading, systematically analyzing market data, and executing strategies based on predefined rules.",
       "quantitative": "Quantitative Analysis",
       "execution": "HFT Execution",
       "risk": "Risk Management"
