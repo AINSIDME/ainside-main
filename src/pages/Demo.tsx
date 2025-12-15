@@ -302,10 +302,8 @@ const Demo = () => {
 
     // Actualizar con datos simulados basados en el último precio real
     const interval = setInterval(() => {
-      // Solo actualizar si el mercado está abierto
-      if (!checkMarketHours()) {
-        return;
-      }
+      // La simulación continúa siempre para propósitos educativos
+      // (En producción, solo se actualizaría cuando el mercado está abierto)
       
       setChartData((prev) => {
         const lastCandle = prev[prev.length - 1];
@@ -322,8 +320,8 @@ const Demo = () => {
         
         setCurrentPrice(close);
 
-        // Lógica de entrada automática (más conservadora)
-        if (!position && Math.random() > 0.97) {
+        // Lógica de entrada automática (más visible para demo)
+        if (!position && Math.random() > 0.92) { // 8% probabilidad cada tick
           const isLong = Math.random() > 0.5;
           setPosition(isLong ? 'long' : 'short');
           setEntryPrice(close);
@@ -335,8 +333,8 @@ const Demo = () => {
             ? close - entryPrice 
             : entryPrice - close;
           
-          // Salir si ganancia > 15 puntos o pérdida > 8 puntos
-          if (priceDiff > 15 || priceDiff < -8) {
+          // Salir si ganancia > 12 puntos o pérdida > 6 puntos (más frecuente para demo)
+          if (priceDiff > 12 || priceDiff < -6) {
             setTrades((prev) => [{
               type: position,
               entry: entryPrice,
@@ -352,7 +350,7 @@ const Demo = () => {
 
         // Calcular el siguiente timestamp
         const lastTimestamp = lastCandle[0]; // [0] es el timestamp en milisegundos
-        const newTimestamp = lastTimestamp + 3600000; // +3600000 ms (1 hora)
+        const newTimestamp = lastTimestamp + 5000; // +5000 ms (5 segundos para demo)
         
         const newCandleArea = [
           newTimestamp, // timestamp en milisegundos
@@ -378,7 +376,7 @@ const Demo = () => {
         const low = Math.min(open, close) - Math.random() * 3;
         
         const lastTimestamp = lastCandle[0];
-        const newTimestamp = lastTimestamp + 3600000;
+        const newTimestamp = lastTimestamp + 5000; // 5 segundos para demo
         
         const newCandleOHLC = [
           newTimestamp,
@@ -390,7 +388,7 @@ const Demo = () => {
         
         return [...prev, newCandleOHLC].slice(-100);
       });
-    }, 3600000); // Actualizar cada 60 minutos (1 hora - timeframe real)
+    }, 5000); // Actualizar cada 5 segundos para demo (más visible)
 
     return () => {
       clearInterval(interval);
