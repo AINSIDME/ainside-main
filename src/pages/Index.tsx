@@ -200,30 +200,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Numbers */}
-      <section className="py-20 bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-slate-900/95 backdrop-blur-sm">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="grid md:grid-cols-4 gap-12 text-center">
-            <div className="group">
-              <div className="text-4xl font-light text-slate-100 mb-2 group-hover:text-blue-400 transition-colors duration-300">100+</div>
-              <div className="text-sm text-slate-400 tracking-wide uppercase font-medium">{t('homepage.stats.algorithms')}</div>
-            </div>
-            <div className="group">
-              <div className="text-4xl font-light text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors duration-300">24/7</div>
-              <div className="text-sm text-slate-400 tracking-wide uppercase font-medium">{t('homepage.stats.support')}</div>
-            </div>
-            <div className="group">
-              <div className="text-4xl font-light text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors duration-300">99.9%</div>
-              <div className="text-sm text-slate-400 tracking-wide uppercase font-medium">{t('homepage.stats.uptime')}</div>
-            </div>
-            <div className="group">
-              <div className="text-4xl font-light text-slate-100 mb-2 group-hover:text-purple-400 transition-colors duration-300">500+</div>
-              <div className="text-sm text-slate-400 tracking-wide uppercase font-medium">{t('homepage.stats.clients')}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Values */}
       <section className="py-32 bg-gradient-to-br from-slate-800/60 via-slate-900/80 to-slate-950/90 backdrop-blur-sm border-y border-slate-700/30">
         <div className="container mx-auto px-4 max-w-5xl">
