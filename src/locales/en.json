@@ -1179,9 +1179,9 @@
     },
     "general": {
       "q1": "Why is AlgoTrading absolutely private?",
-      "a1": "All our strategies operate directly in your broker account. We never have access to your funds. The code runs locally on TradingView or MetaTrader, ensuring total privacy and complete control over your capital.",
-      "q2": "Refund Policy: How does the money-back guarantee work?",
-      "a2": "We offer a 30-day money-back guarantee with no questions asked. If you're not satisfied with the strategy for any reason, simply contact our support within the first 30 days for a full refund.",
+      "a1": "All strategies run directly in your broker account via EasyLanguage on TradeStation or MultiCharts. We never have access to your funds, account, or trading activity. The code executes locally on your platform, ensuring complete privacy and control.",
+      "q2": "Refund Policy: Is refund possible after download?",
+      "a2": "IMPORTANT: As a downloadable digital product, NO REFUNDS are possible once you've downloaded the files. We recommend carefully reviewing the demo and documentation before purchasing. Download implies final acceptance of the product.",
       "q3": "What are the differences between the Micro, Mini plans?",
       "a3": "Micro offers access to 1 proven strategy ideal for small accounts ($100-$1,000). Mini includes 2 optimized strategies with priority support, perfect for serious traders ($1,000-$5,000).",
       "q4": "Where can I cancel my subscription?",
@@ -1201,13 +1201,13 @@
       "q2": "What is the advantage of algorithmic trading?",
       "a2": "Eliminates emotions, operates 24/7 without supervision, executes trades with pinpoint precision, instant backtesting on years of historical data, and systematic risk management based on objective rules.",
       "q3": "Can I use the strategy on multiple accounts?",
-      "a3": "The license is valid for 1 trading account per user. For additional accounts (e.g., personal and business account), contact support for discounted multi-license options.",
-      "q4": "Can I use any broker?",
-      "a4": "Our strategies are compatible with most brokers that support TradingView or MetaTrader 4/5. We recommend regulated brokers like IC Markets, Pepperstone, or OANDA for best execution conditions."
+      "a3": "The license includes use on ONE trading account. If you need to use on multiple accounts (personal/business), contact support@ainside.me for additional licenses. Each additional license has a separate cost.",
+      "q4": "What platforms are compatible with the strategies?",
+      "a4": "Strategies are in EasyLanguage format, compatible ONLY with TradeStation and MultiCharts (PowerLanguage). They do NOT work on TradingView, MetaTrader, NinjaTrader, or other platforms. You must have TradeStation or MultiCharts installed to use them."
     },
     "technical": {
       "q1": "How do I install the software?",
-      "a1": "After purchase, you'll receive an email with strategy files, step-by-step PDF documentation, and video tutorial. The process takes 10-15 minutes: download file, import to TradingView/MetaTrader, configure parameters, and activate in demo first.",
+      "a1": "After purchase, you'll receive strategy files in EasyLanguage format (.ELD for TradeStation, .PLA for MultiCharts), PDF installation manual with step-by-step instructions, recommended parameters in JSON, and access to technical support. Import the files into your platform and test in demo account first.",
       "q2": "What are the benefits of algorithmic trading?",
       "a2": "Emotional consistency (no FOMO, panic or revenge trading), 24/7 availability, instant execution of complex operations, scientific backtesting, multi-strategy diversification, and massive time savings (2,400+ hours per year).",
       "q3": "Are you looking for additional assistance to support your decision?",
@@ -1216,8 +1216,8 @@
       "a4": "No. Strategies come ready to use with step-by-step installation. You just need to follow the manual. However, if you want to customize advanced parameters, we offer technical support included in all plans."
     },
     "investment": {
-      "q1": "Do I need a MQL4/MQL5 or script to use on a smartphone or tablet?",
-      "a1": "For mobile MetaTrader, yes you need MQL files. However, TradingView works perfectly in mobile browser without additional installation. We recommend TradingView for traders who operate from mobile devices.",
+      "q1": "Can I use the strategies on mobile devices?",
+      "a1": "EasyLanguage strategies require TradeStation or MultiCharts desktop software. You can access these platforms remotely via VPS (Virtual Private Server) from mobile devices, but the strategies themselves don't run natively on smartphones or tablets.",
       "q2": "Live trackrecord and backtested",
       "a2": "All our plans include detailed backtesting reports (2-3 years of historical data) and access to verified live trading results. Mini+ clients get access to real-time dashboard with transparent metrics.",
       "q3": "Can I try for free before buying?",

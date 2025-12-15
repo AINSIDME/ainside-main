@@ -71,7 +71,7 @@
     "summary": "Resumen de compra",
     "total": "Total",
     "badges": {
-      "secure": "Pago 100% seguro",
+      "secure": "Pago seguro vía PayPal",
       "noRefundAfterDownload": "Sin reembolso luego de la descarga"
     },
     "processing": "Procesando...",
@@ -131,7 +131,7 @@
       "email": { "title": "Email", "desc": "Contacto principal para consultas comerciales" },
       "phone": { "title": "Teléfono", "desc": "Horario: Lunes a Viernes, 9 AM - 6 PM EST" },
       "address": { "title": "Dirección", "desc": "Oficinas corporativas" },
-      "response": { "title": "Tiempo de respuesta", "content": "Dentro de 1 día hábil", "desc": "Nuestro compromiso con una comunicación oportuna" }
+      "response": { "title": "Tiempo de respuesta", "content": "Generalmente 24-48 horas", "desc": "Nos esforzamos por responder lo antes posible" }
     },
     "areas": {
       "title": "Áreas de servicio",
@@ -415,7 +415,7 @@
       },
       "excellence": {
         "title": "Excelencia",
-        "description": "Compromiso con los más altos estándares de calidad"
+        "description": "Enfoque en desarrollo y optimización continua de estrategias"
       }
     },
     "cta": {
@@ -851,11 +851,11 @@
     },
     "vision": {
       "title": "Nuestra Visión",
-      "description": "Ser el desarrollador líder de algoritmos de trading y herramientas analíticas, reconocido por crear soluciones tecnológicas innovadoras que traders e instituciones pueden alquilar para mejorar sus capacidades de análisis de mercado."
+      "description": "Desarrollar algoritmos de trading y herramientas analíticas de calidad, ofreciendo soluciones tecnológicas que traders pueden alquilar para análisis de mercado."
     },
     "values": {
       "title": "Valores Fundamentales",
-      "subtitle": "Los principios que guían nuestra organización y definen nuestro compromiso con la excelencia",
+      "subtitle": "Los principios que guían nuestro trabajo y desarrollo de estrategias",
       "integrity": { "title": "Integridad", "description": "Conducirnos con los más altos estándares éticos y transparencia" },
       "innovation": { "title": "Innovación", "description": "Avanzar continuamente la tecnología para satisfacer necesidades cambiantes" },
       "excellence": { "title": "Excelencia", "description": "Entregar calidad superior en todos los aspectos de nuestros servicios y soluciones" },
@@ -927,7 +927,7 @@
       },
       "integration": {
         "title": "Integración de Plataformas",
-        "desc": "Nuestras herramientas se integran con plataformas líderes como TradeStation y MultiCharts",
+        "desc": "Estrategias en formato EasyLanguage para TradeStation y MultiCharts únicamente",
         "features": [
           "Compatibilidad con EasyLanguage",
           "Soporte TradeStation Global",
@@ -939,14 +939,14 @@
     "benefits": {
       "institutional": { "title": "Nivel Institucional", "desc": "Soluciones diseñadas para exigencias de instituciones financieras" },
       "security": { "title": "Seguridad Primero", "desc": "Protocolos de nivel bancario para proteger sus datos más sensibles" },
-      "global": { "title": "Escala Global", "desc": "Infraestructura capaz de operar en múltiples mercados" },
-      "reliable": { "title": "Rendimiento Confiable", "desc": "Desempeño consistente cuando más lo necesita" }
+      "global": { "title": "Alcance Global", "desc": "Estrategias disponibles para traders en cualquier ubicación" },
+      "reliable": { "title": "Metodología Rigurosa", "desc": "Estrategias desarrolladas con backtesting extensivo en datos históricos" }
     },
     "tech": {
       "title": "Excelencia Tecnológica",
-      "desc": "Nuestra plataforma tecnológica representa años de desarrollo y refinamiento, diseñada para los retos de instituciones financieras en el entorno actual.",
+      "desc": "Estrategias desarrolladas con metodología sistemática, testeadas en datos históricos del S&P 500.",
       "points": {
-        "p1": "Fiabilidad probada a nivel institucional",
+        "p1": "Estrategias testeadas en datos históricos",
         "p2": "Arquitectura de seguridad avanzada",
         "p3": "Optimización de rendimiento escalable",
         "p4": "Soporte integral de cumplimiento"

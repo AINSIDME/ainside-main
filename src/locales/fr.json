@@ -1242,9 +1242,9 @@
     },
     "general": {
       "q1": "Pourquoi l'AlgoTrading est-il absolument privé?",
-      "a1": "Toutes nos stratégies opèrent directement sur votre compte broker. Nous n'avons jamais accès à vos fonds. Le code s'exécute localement sur TradingView ou MetaTrader, garantissant une confidentialité totale et un contrôle complet de votre capital.",
-      "q2": "Politique de Remboursement: Comment fonctionne la garantie satisfait ou remboursé?",
-      "a2": "Nous offrons une garantie de remboursement de 30 jours sans questions. Si vous n'êtes pas satisfait de la stratégie pour quelque raison que ce soit, contactez simplement notre support dans les 30 premiers jours pour un remboursement complet.",
+      "a1": "Toutes les stratégies s'exécutent directement dans votre compte broker via EasyLanguage sur TradeStation ou MultiCharts. Nous n'avons jamais accès à vos fonds, votre compte ou votre activité de trading. Le code s'exécute localement sur votre plateforme, garantissant une confidentialité et un contrôle complets.",
+      "q2": "Politique de Remboursement: Le remboursement est-il possible après téléchargement?",
+      "a2": "IMPORTANT: En tant que produit numérique téléchargeable, AUCUN REMBOURSEMENT n'est possible une fois les fichiers téléchargés. Nous recommandons d'examiner attentivement la démo et la documentation avant l'achat. Le téléchargement implique l'acceptation finale du produit.",
       "q3": "Quelles sont les différences entre les plans Micro et Mini?",
       "a3": "Micro offre accès à 1 stratégie éprouvée idéale pour petits comptes ($100-$1,000). Mini inclut 2 stratégies optimisées avec support prioritaire, parfait pour traders sérieux ($1,000-$5,000).",
       "q4": "Où puis-je annuler mon abonnement?",
@@ -1264,13 +1264,13 @@
       "q2": "Quel est l'avantage du trading algorithmique?",
       "a2": "Élimine les émotions, opère 24/7 sans supervision, exécute les trades avec précision millimétrique, backtesting instantané sur années de données historiques, et gestion des risques systématique basée sur règles objectives.",
       "q3": "Puis-je utiliser la stratégie sur plusieurs comptes?",
-      "a3": "La licence est valide pour 1 compte de trading par utilisateur. Pour des comptes supplémentaires (par exemple, compte personnel et professionnel), contactez le support pour des options de licence multiple à tarif réduit.",
-      "q4": "Puis-je utiliser n'importe quel broker?",
-      "a4": "Nos stratégies sont compatibles avec la plupart des brokers qui supportent TradingView ou MetaTrader 4/5. Nous recommandons des brokers régulés comme IC Markets, Pepperstone, ou OANDA pour les meilleures conditions d'exécution."
+      "a3": "La licence inclut l'utilisation sur UN compte de trading. Si vous devez utiliser sur plusieurs comptes (personnel/professionnel), contactez support@ainside.me pour des licences supplémentaires. Chaque licence supplémentaire a un coût séparé.",
+      "q4": "Quelles plateformes sont compatibles avec les stratégies?",
+      "a4": "Les stratégies sont au format EasyLanguage, compatibles UNIQUEMENT avec TradeStation et MultiCharts (PowerLanguage). Elles ne fonctionnent PAS sur TradingView, MetaTrader, NinjaTrader ou autres plateformes. Vous devez avoir TradeStation ou MultiCharts installé pour les utiliser."
     },
     "technical": {
       "q1": "Comment installer le logiciel?",
-      "a1": "Après l'achat, vous recevrez un email avec les fichiers de stratégie, documentation PDF étape par étape, et tutoriel vidéo. Le processus prend 10-15 minutes: télécharger le fichier, importer dans TradingView/MetaTrader, configurer les paramètres, et activer en démo d'abord.",
+      "a1": "Après l'achat, vous recevrez des fichiers de stratégie au format EasyLanguage (.ELD pour TradeStation, .PLA pour MultiCharts), manuel d'installation PDF avec instructions étape par étape, paramètres recommandés en JSON, et accès au support technique. Importez les fichiers dans votre plateforme et testez d'abord en compte démo.",
       "q2": "Quels sont les avantages du trading algorithmique?",
       "a2": "Cohérence émotionnelle (pas de FOMO, panique ou revenge trading), disponibilité 24/7, exécution instantanée d'opérations complexes, backtesting scientifique, diversification multi-stratégies, et économie massive de temps (2,400+ heures par an).",
       "q3": "Cherchez-vous une assistance supplémentaire pour appuyer votre décision?",
@@ -1279,8 +1279,8 @@
       "a4": "Non. Les stratégies viennent prêtes à l'emploi avec installation étape par étape. Vous devez juste suivre le manuel. Cependant, si vous souhaitez personnaliser des paramètres avancés, nous offrons support technique inclus dans tous les plans."
     },
     "investment": {
-      "q1": "Ai-je besoin d'un MQL4/MQL5 ou script pour utiliser sur smartphone ou tablette?",
-      "a1": "Pour MetaTrader mobile, oui vous avez besoin des fichiers MQL. Cependant, TradingView fonctionne parfaitement en navigateur mobile sans installation supplémentaire. Nous recommandons TradingView pour traders qui opèrent depuis appareils mobiles.",
+      "q1": "Puis-je utiliser les stratégies sur appareils mobiles?",
+      "a1": "Les stratégies EasyLanguage nécessitent le logiciel de bureau TradeStation ou MultiCharts. Vous pouvez accéder à ces plateformes à distance via VPS (serveur privé virtuel) depuis des appareils mobiles, mais les stratégies elles-mêmes ne s'exécutent pas nativement sur smartphones ou tablettes.",
       "q2": "Live trackrecord et backtesté",
       "a2": "Tous nos plans incluent des rapports détaillés de backtesting (2-3 ans de données historiques) et accès aux résultats de trading en direct vérifiés. Les clients Mini+ obtiennent accès au tableau de bord en temps réel avec métriques transparentes.",
       "q3": "Puis-je essayer gratuitement avant d'acheter?",
