@@ -711,8 +711,8 @@
         "title": "تطوير استراتيجيات مخصصة",
         "description": "نقوم ببرمجة استراتيجيات التداول الخوارزمي المصممة خصيصًا لاحتياجاتك.",
         "features": {
-          "pinescript": "استراتيجيات في Pine Script لـ TradingView",
-          "mql": "روبوتات تداول في MQL4/MQL5 لـ MetaTrader",
+          "pinescript": "استراتيجيات في EasyLanguage لـ TradeStation/MultiCharts",
+          "mql": "ملفات .ELD و.PLA للتثبيت الفوري",
           "backtesting": "اختبار خلفي صارم على بيانات تاريخية",
           "optimization": "تحسين المعلمات لزيادة الأداء"
         }
@@ -773,8 +773,8 @@
       "title": "تقنية متقدمة",
       "description": "نستخدم أحدث التقنيات في التطوير والتحليل:",
       "points": {
-        "languages": "Pine Script، MQL4/5، Python، C++",
-        "platforms": "TradingView، MetaTrader 4/5، NinjaTrader",
+        "languages": "EasyLanguage، PowerLanguage، Python",
+        "platforms": "TradeStation، MultiCharts",
         "data": "تحليل بيانات ضخمة وتعلم الآلة",
         "infrastructure": "بنية تحتية سحابية قابلة للتطوير"
       },
@@ -889,10 +889,10 @@
     "subtitle": "دليل شامل خطوة بخطوة من الشراء إلى التداول المباشر",
     "deliverables": {
       "title": "ماذا ستحصل بعد الشراء",
-      "compatibility": "التوافق: TradingView، MetaTrader 4/5",
+      "compatibility": "التوافق: TradeStation، MultiCharts فقط",
       "afterPayment": "بعد إتمام الدفع عبر PayPal، ستتلقى على الفور:",
       "item1": "📧 بريد إلكتروني للتأكيد مع تفاصيل الوصول",
-      "item2": "📁 ملفات الاستراتيجية (Pine Script أو MQL)",
+      "item2": "📁 ملفات الاستراتيجية (.ELD/.PLA - EasyLanguage)",
       "item3": "📚 وثائق تثبيت كاملة (PDF)",
       "item4": "⚙️ معلمات تكوين محسّنة",
       "item5": "📊 تقارير اختبار تاريخي",
@@ -901,8 +901,8 @@
     },
     "requirements": {
       "title": "المتطلبات الأساسية",
-      "broker": "حساب وساطة نشط (موصى به: IC Markets، Pepperstone، OANDA)",
-      "platform": "TradingView Pro+ أو MetaTrader 4/5 مثبت",
+      "broker": "حساب وسيط عقود آجلة متوافق (موصى به: Interactive Brokers، Amp Futures)",
+      "platform": "TradeStation أو MultiCharts مثبت (مطلوب)",
       "capital": "رأس مال موصى به: 100-1,000 دولار (Micro) | 1,000-5,000 دولار (Mini)"
     },
     "install": {
@@ -917,24 +917,23 @@
         ]
       },
       "step2": {
-        "title": "2️⃣ التثبيت في TradingView",
+        "title": "2️⃣ استيراد إلى TradeStation/MultiCharts",
         "list": [
-          "افتح TradingView وانتقل إلى Pine Editor",
-          "انقر على 'New' → 'Blank indicator script'",
-          "انسخ والصق رمز Pine Script",
-          "انقر على 'Save' وقم بتسمية الاستراتيجية الخاصة بك",
-          "انقر على 'Add to Chart'"
+          "افتح TradeStation أو MultiCharts",
+          "انتقل إلى File → Import → EasyLanguage",
+          "حدد ملف .ELD (TradeStation) أو .PLA (MultiCharts)",
+          "أكد الاستيراد",
+          "أعد تشغيل المنصة"
         ]
       },
       "step3": {
-        "title": "3️⃣ التثبيت في MetaTrader",
+        "title": "3️⃣ تطبيق على الرسم البياني",
         "list": [
-          "افتح MetaTrader 4/5",
-          "انتقل إلى File → Open Data Folder",
-          "افتح مجلد MQL4/MQL5 → Experts",
-          "انسخ ملف .ex4/.ex5",
-          "أعد تشغيل MetaTrader",
-          "اسحب الاستراتيجية إلى الرسم البياني"
+          "افتح رسم بياني للأداة المطلوبة (NQ، ES، YM)",
+          "انقر بزر الماوس الأيمن على الرسم البياني → Insert Strategy",
+          "حدد الاستراتيجية المستوردة",
+          "أكد وانتظر الحساب",
+          "تحقق من النشاط الصحيح في وضع التجريبي أولاً"
         ]
       },
       "step4": {
@@ -1256,8 +1255,8 @@
       "a4": "لا. تأتي الاستراتيجيات جاهزة للاستخدام مع تثبيت خطوة بخطوة. تحتاج فقط إلى اتباع الدليل. ومع ذلك، إذا كنت ترغب في تخصيص المعلمات المتقدمة، فإننا نقدم دعمًا فنيًا مدرجًا في جميع الخطط."
     },
     "investment": {
-      "q1": "هل أحتاج إلى MQL4/MQL5 أو سكريبت للاستخدام على الهاتف الذكي أو الجهاز اللوحي؟",
-      "a1": "لـ MetaTrader المحمول، نعم تحتاج إلى ملفات MQL. ومع ذلك، يعمل TradingView بشكل مثالي في متصفح الجوال بدون تثبيت إضافي. نوصي بـ TradingView للمتداولين الذين يعملون من الأجهزة المحمولة.",
+      "q1": "هل يمكنني استخدام الاستراتيجيات من الأجهزة المحمولة؟",
+      "a1": "استراتيجيات EasyLanguage تتطلب TradeStation أو MultiCharts يعمل على كمبيوتر مكتبي أو VPS. الاستخدام المحمول ممكن عبر سطح المكتب البعيد المتصل بجهاز الكمبيوتر الخاص بك أو VPS.",
       "q2": "سجل حي واختبار خلفي",
       "a2": "جميع خططنا تتضمن تقارير اختبار خلفي تفصيلية (2-3 سنوات من البيانات التاريخية) والوصول إلى نتائج التداول المباشر الموثقة. يحصل عملاء Mini+ على الوصول إلى لوحة معلومات في الوقت الفعلي مع مقاييس شفافة.",
       "q3": "هل يمكنني التجربة مجانًا قبل الشراء؟",

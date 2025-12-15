@@ -716,9 +716,9 @@
     "compliant": "Regulation Compliant"
   },
   "chat": {
-    "title": "Live Chat",
+    "title": "Live Stream",
     "subtitle": "Real-time trading analysis",
-    "welcome": "Welcome to live chat. You can ask any questions about the live stream.",
+    "welcome": "Welcome to live stream. You can ask any questions about the live demo.",
     "assistant": "Trading Assistant",
     "frequentQuestions": "Frequently Asked Questions",
     "placeholder": "Write your analysis question...",
@@ -953,7 +953,7 @@
     "feature": {
       "instrument": "Instrument: {{instrument}} ({{symbol}})",
       "focusInstrument": "Exclusive focus on {{instrument}}",
-      "liveSupport": "International chat support 24/6",
+      "liveSupport": "Email support: support@ainside.me",
       "secure": "Secure checkout with PayPal",
       "updatesMonthly": "Monthly updates included",
       "noGuarantees": "No performance guarantees"

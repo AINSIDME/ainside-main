@@ -512,7 +512,7 @@
       "updatesMonthly": "עדכונים חודשיים כלולים",
       "noGuarantees": "אין הבטחות לביצועים"
     },
-    "guarantee": "ביטחון החזר כספי 30 יום",
+    "guarantee": "מוצר דיגיטלי - אין החזר לאחר הורדה",
     "secure": "מאובטח ואמין",
     "support": "צריך עזרה? הצוות שלנו זמין 24/6.",
     "paypalDesc": "AInside - חוזה {{plan}} - {{instrument}} ({{symbol}}) - מנוי {{cycle}} - {{amount}}",
@@ -713,8 +713,8 @@
         "title": "פיתוח אסטרטגיות מותאמות אישית",
         "description": "אנו מתכנתים אסטרטגיות מסחר אלגוריתמי המותאמות במיוחד לצרכים שלך.",
         "features": {
-          "pinescript": "אסטרטגיות ב-Pine Script עבור TradingView",
-          "mql": "רובוטי מסחר ב-MQL4/MQL5 עבור MetaTrader",
+          "pinescript": "אסטרטגיות ב-EasyLanguage עבור TradeStation/MultiCharts",
+          "mql": "קבצי .ELD ו-.PLA להתקנה מיידית",
           "backtesting": "בדיקה אחורית קפדנית על נתונים היסטוריים",
           "optimization": "אופטימיזציה של פרמטרים להגדלת ביצועים"
         }
@@ -775,8 +775,8 @@
       "title": "טכנולוגיה מתקדמת",
       "description": "אנו משתמשים בטכנולוגיות החדישות ביותר בפיתוח וניתוח:",
       "points": {
-        "languages": "Pine Script, MQL4/5, Python, C++",
-        "platforms": "TradingView, MetaTrader 4/5, NinjaTrader",
+        "languages": "EasyLanguage, PowerLanguage, Python",
+        "platforms": "TradeStation, MultiCharts",
         "data": "ניתוח מאסיבי של נתונים ולמידת מכונה",
         "infrastructure": "תשתית ענן בעלת יכולת התרחבות"
       },
@@ -891,10 +891,10 @@
     "subtitle": "מדריך מקיף שלב אחר שלב מרכישה למסחר חי",
     "deliverables": {
       "title": "מה תקבל לאחר הרכישה",
-      "compatibility": "תאימות: TradingView, MetaTrader 4/5",
+      "compatibility": "תאימות: TradeStation, MultiCharts בלבד",
       "afterPayment": "לאחר השלמת התשלום דרך PayPal, תקבל מיד:",
       "item1": "📧 דוא\"ל אישור עם פרטי גישה",
-      "item2": "📁 קבצי אסטרטגיה (Pine Script או MQL)",
+      "item2": "📁 קבצי אסטרטגיה (.ELD/.PLA - EasyLanguage)",
       "item3": "📚 תיעוד התקנה מלא (PDF)",
       "item4": "⚙️ פרמטרי תצורה מותאמים",
       "item5": "📊 דוחות בדיקה היסטוריים",
@@ -903,8 +903,8 @@
     },
     "requirements": {
       "title": "דרישות בסיסיות",
-      "broker": "חשבון ברוקר פעיל (מומלץ: IC Markets, Pepperstone, OANDA)",
-      "platform": "TradingView Pro+ או MetaTrader 4/5 מותקן",
+      "broker": "חשבון ברוקר עתידיים תואם (מומלץ: Interactive Brokers, Amp Futures)",
+      "platform": "TradeStation או MultiCharts מותקן (נדרש)",
       "capital": "הון מומלץ: $100-$1,000 (Micro) | $1,000-$5,000 (Mini)"
     },
     "install": {
@@ -919,24 +919,23 @@
         ]
       },
       "step2": {
-        "title": "2️⃣ התקנה ב-TradingView",
+        "title": "2️⃣ יבא ל-TradeStation/MultiCharts",
         "list": [
-          "פתח TradingView ועבור ל-Pine Editor",
-          "לחץ על 'New' → 'Blank indicator script'",
-          "העתק והדבק את קוד Pine Script",
-          "לחץ על 'Save' ושם את האסטרטגיה שלך",
-          "לחץ על 'Add to Chart'"
+          "פתח TradeStation או MultiCharts",
+          "עבור ל-File → Import → EasyLanguage",
+          "בחר את קובץ .ELD (TradeStation) או .PLA (MultiCharts)",
+          "אשר את היבוא",
+          "הפעל מחדש את הפלטפורמה"
         ]
       },
       "step3": {
-        "title": "3️⃣ התקנה ב-MetaTrader",
+        "title": "3️⃣ החל לתרשים",
         "list": [
-          "פתח MetaTrader 4/5",
-          "עבור ל-File → Open Data Folder",
-          "פתח תיקיית MQL4/MQL5 → Experts",
-          "העתק את קובץ ה-.ex4/.ex5",
-          "הפעל מחדש את MetaTrader",
-          "גרור את האסטרטגיה לתרשים"
+          "פתח תרשים של הכלי הרצוי (NQ, ES, YM)",
+          "לחץ לחיצה ימנית על התרשים → Insert Strategy",
+          "בחר את האסטרטגיה שיובאה",
+          "אשר וחכה לחישוב",
+          "בדוק פעילות נכונה במצב דמו קודם"
         ]
       },
       "step4": {
