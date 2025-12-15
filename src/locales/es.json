@@ -124,7 +124,7 @@
       "submit": "Enviar mensaje",
       "toast": {
         "title": "Mensaje enviado",
-        "desc": "Gracias por tu consulta. Nuestro equipo responderá dentro de un día hábil."
+        "desc": "Gracias por tu consulta. Nuestro equipo responderá lo antes posible."
       }
     },
     "info": {
@@ -670,7 +670,7 @@
     "subtitle": "Obtenga ayuda con nuestras herramientas de análisis de trading",
     "email": "Soporte por Email",
     "form": "Formulario de Contacto",
-    "sla": "SLA de Soporte: Primera respuesta dentro de 1 día hábil",
+    "sla": "Soporte por email: support@ainside.me",
     "name": "Nombre",
     "subject": "Asunto",
     "message": "Mensaje",
@@ -730,9 +730,9 @@
       "q6": "¿Cuánto cuesta acceder a todo esto?"
     },
     "answers": {
-      "a1": "📺 Este stream muestra trading REAL del S&P 500 futuros (/ES y /MES) con posiciones actuales, gráficos profesionales, indicadores técnicos como VWAP y operaciones en tiempo real.",
+      "a1": "📺 Esta visualización muestra análisis del S&P 500 futuros (/ES y /MES) con indicadores técnicos como VWAP. Ejemplo educativo con datos de mercado reales.",
       "a2": "📊 Este es un ejemplo educativo que muestra cómo funcionarían las estrategias. Los datos mostrados son ilustrativos con fines didácticos.",
-      "a3": "📊 VWAP (Volume Weighted Average Price) es el precio promedio ponderado por volumen. Las líneas azules/rojas muestran zonas de soporte/resistencia institucional que usamos para abrir posiciones reales.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) es el precio promedio ponderado por volumen. Las líneas azules/rojas muestran zonas de soporte/resistencia que se pueden usar para análisis de trading.",
       "a4": "🔧 Somos una empresa que DESARROLLA algoritmos de trading y ALQUILA herramientas analíticas. Tu dinero queda en tu cuenta de broker, solo alquilas nuestras herramientas.",
       "a5": "📚 Puedes estudiar nuestras operaciones como material educativo. Compatible SOLO con plataformas EasyLanguage: TradeStation, TradeStation Global y MultiCharts (PowerLanguage). IMPORTANTE: Solo para estudio, no es asesoramiento.",
       "a6": "💰 Alquiler de herramientas: $99/mes o $999/año (ahorras $189). Incluye acceso 24/7 a indicadores y herramientas de estudio. Solo para uso educativo."
@@ -1095,9 +1095,9 @@
     }
   },
   "algoTradingPage": {
-    "badge": "Institucional • Elite",
+    "badge": "Trading Sistemático",
     "title": "Algorithmic Trading",
-    "subtitle": "Excelencia en Sistemas de Trading Cuantitativo de Clase Institucional",
+    "subtitle": "Estrategias automatizadas para traders de futuros S&P 500",
     "cta": {
       "demo": "Explorar Plataforma",
       "pricing": "Ver Membresía"
@@ -1129,11 +1129,11 @@
       },
       "speed": {
         "title": "Velocidad Institucional",
-        "desc": "Latencia ultra-baja co-localizada. Captura oportunidades de arbitraje en microsegundos antes que el mercado se ajuste. Infraestructura de nivel institucional."
+        "desc": "Estrategias ejecutadas localmente en tu plataforma TradeStation o MultiCharts durante horas de mercado CME."
       },
       "riskControl": {
         "title": "Control de Riesgo Sofisticado",
-        "desc": "VaR dinámico, stress testing continuo, límites multi-nivel y circuit breakers automáticos. Gestión de riesgo comparable a fondos hedge de $1B+."
+        "desc": "Estrategias con stops y objetivos de ganancia predefinidos basados en ATR y volatilidad del mercado."
       },
       "diversification": {
         "title": "Diversificación Multi-Estrategia",
@@ -1147,11 +1147,11 @@
     "solution": {
       "badge": "Tecnología Institucional",
       "title": "Por Qué AIinside.me",
-      "description": "Acceso democrático a tecnología de trading que antes estaba reservada exclusivamente para fondos hedge de $100M+ y mesas de trading institucionales de Wall Street.",
+      "description": "Estrategias automatizadas desarrolladas con metodología sistemática y backtesting extensivo en datos históricos.",
       "infrastructure": "Inversión en Infraestructura",
       "operation": "Operación Autónoma",
       "latency": "Latencia Promedio",
-      "cta": "Solicitar Acceso Institucional"
+      "cta": "Ver Planes Disponibles"
     },
     "academic": {
       "title": "Rigor Académico",
@@ -1229,7 +1229,7 @@
     },
     "cta": {
       "title": "¿Todavía tienes preguntas?",
-      "description": "Nuestro equipo está aquí para ayudarte. Contáctanos y te responderemos en menos de 24 horas.",
+      "description": "Nuestro equipo está aquí para ayudarte. Contáctanos por email y responderemos lo antes posible.",
       "contact": "Contactar Soporte",
       "docs": "Ver Documentación"
     }

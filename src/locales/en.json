@@ -124,14 +124,14 @@
       "submit": "Send Message",
       "toast": {
         "title": "Message Sent",
-        "desc": "Thank you for your inquiry. Our team will respond within one business day."
+        "desc": "Thank you for your inquiry. Our team will respond as soon as possible."
       }
     },
     "info": {
       "email": { "title": "Email", "desc": "Primary contact for business inquiries" },
       "phone": { "title": "Phone", "desc": "Business hours: Monday - Friday, 9 AM - 6 PM EST" },
       "address": { "title": "Address", "desc": "Corporate headquarters" },
-      "response": { "title": "Response Time", "content": "Within 1 Business Day", "desc": "Our commitment to timely communication" }
+      "response": { "title": "Response Time", "content": "Generally 24-48 hours", "desc": "We strive to respond as soon as possible" }
     },
     "areas": {
       "title": "Service Areas",
@@ -675,7 +675,7 @@
     "subtitle": "Get help with our trading analysis tools",
     "email": "Email Support",
     "form": "Contact Form",
-    "sla": "Support SLA: First response within 1 business day",
+    "sla": "Email support: support@ainside.me",
     "name": "Name",
     "subject": "Subject",
     "message": "Message",
@@ -1143,11 +1143,11 @@
     "solution": {
       "badge": "Institutional Technology",
       "title": "Why AIinside.me",
-      "description": "Democratic access to trading technology that was previously reserved exclusively for $100M+ hedge funds and Wall Street institutional trading desks.",
+      "description": "Automated strategies developed with systematic methodology and extensive backtesting on historical data.",
       "infrastructure": "Infrastructure Investment",
       "operation": "Autonomous Operation",
       "latency": "Average Latency",
-      "cta": "Request Institutional Access"
+      "cta": "View Available Plans"
     },
     "academic": {
       "title": "Academic Rigor",
@@ -1225,7 +1225,7 @@
     },
     "cta": {
       "title": "Still have questions?",
-      "description": "Our team is here to help you. Contact us and we'll respond within 24 hours.",
+      "description": "Our team is here to help you. Contact us via email and we'll respond as soon as possible.",
       "contact": "Contact Support",
       "docs": "View Documentation"
     }
