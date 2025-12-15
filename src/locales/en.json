@@ -1091,9 +1091,9 @@
     }
   },
   "algoTradingPage": {
-    "badge": "Institutional • Elite",
+    "badge": "Algorithmic Trading",
     "title": "Algorithmic Trading",
-    "subtitle": "Excellence in Institutional-Grade Quantitative Trading Systems",
+    "subtitle": "Professional EasyLanguage Strategies for TradeStation and MultiCharts",
     "cta": {
       "demo": "Explore Platform",
       "pricing": "View Membership"
@@ -1113,8 +1113,8 @@
       "risk": "Risk Management"
     },
     "advantages": {
-      "title": "Institutional Advantages",
-      "subtitle": "Why leading institutions choose algorithmic systems",
+      "title": "Systematic Advantages",
+      "subtitle": "Why traders choose algorithmic systems",
       "precision": {
         "title": "Pinpoint Precision",
         "desc": "Exact strategy execution without emotional deviation. Rigorous backtesting on decades of historical data with statistical cross-validation."
@@ -1124,12 +1124,12 @@
         "desc": "Advanced Machine Learning that identifies hidden patterns, dynamically optimizes parameters, and adapts to changing market regimes in real-time."
       },
       "speed": {
-        "title": "Institutional Speed",
-        "desc": "Ultra-low co-located latency. Captures arbitrage opportunities in microseconds before the market adjusts. Institutional-grade infrastructure."
+        "title": "Efficient Execution",
+        "desc": "Strategies execute trades automatically based on predefined rules. No emotional delays. Consistent entry and exit points."
       },
       "riskControl": {
-        "title": "Sophisticated Risk Control",
-        "desc": "Dynamic VaR, continuous stress testing, multi-level limits and automatic circuit breakers. Risk management comparable to $1B+ hedge funds."
+        "title": "Risk Control",
+        "desc": "Strategies with predefined stops and targets. Maximum loss per trade is determined before execution. Consistent position sizing."
       },
       "diversification": {
         "title": "Multi-Strategy Diversification",
