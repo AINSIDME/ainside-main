@@ -367,7 +367,7 @@
       },
       "infrastructure": {
         "title": "Infraestructura Robusta",
-        "description": "Plataforma de nivel empresarial con garantía de 99.9% de tiempo de actividad"
+        "description": "Estrategias optimizadas para TradeStation y MultiCharts con soporte técnico"
       },
       "protection": {
         "title": "Protección de Riesgo",
@@ -407,7 +407,7 @@
       },
       "reliability": {
         "title": "Confiabilidad",
-        "description": "Historial comprobado con clientes institucionales"
+        "description": "Estrategias desarrolladas con metodología rigurosa y backtesting exhaustivo"
       },
       "security": {
         "title": "Seguridad",
@@ -768,34 +768,34 @@
       "name": "Alquiler Micro S&P 500",
       "price": "$99",
       "period": "/mes",
-      "description": "Alquiler mensual perfecto para traders principiantes. Incluye actualizaciones automáticas.",
+      "description": "Estrategia para contrato /MES. Requiere TradeStation o MultiCharts.",
       "short": "Micro",
       "features": [
-        "Acceso a /MES (E-mini S&P 500)",
-        "Todos los indicadores técnicos",
-        "Análisis en tiempo real",
-        "Actualizaciones mensuales automáticas",
-        "Soporte por email",
-        "Datos de mercado en vivo",
-        "Herramientas educativas"
+        "Estrategia para /MES (E-mini S&P 500 Micro)",
+        "Formato EasyLanguage (.ELD/.PLA)",
+        "Parámetros optimizados incluidos",
+        "Actualizaciones mensuales de estrategia",
+        "Soporte técnico por email",
+        "Manual de instalación PDF",
+        "Documentación completa"
       ]
     },
     "mini": {
       "name": "Alquiler Mini S&P 500",
       "price": "$999",
       "period": "/mes",
-      "description": "Alquiler completo para traders profesionales. Actualizaciones premium cada mes.",
+      "description": "Estrategia para contrato /ES. Requiere TradeStation o MultiCharts.",
       "short": "Mini",
       "features": [
-        "Acceso completo a /ES y /MES",
-        "Suite completa de indicadores",
-        "Análisis avanzados",
-        "Actualizaciones mensuales premium",
-        "Soporte prioritario",
-        "Datos premium",
-        "Sesiones de entrenamiento",
-        "Alertas personalizadas",
-        "Reportes detallados"
+        "Estrategia para /ES (E-mini S&P 500)",
+        "Acceso también a /MES",
+        "Formato EasyLanguage (.ELD/.PLA)",
+        "Parámetros optimizados premium",
+        "Actualizaciones mensuales prioritarias",
+        "Soporte técnico prioritario",
+        "Manual avanzado de configuración",
+        "Espacios de trabajo de ejemplo",
+        "Documentación extendida"
       ],
       "popular": "Recomendado"
     },
@@ -807,14 +807,14 @@
     "feature": {
       "instrument": "Instrumento: {{instrument}} ({{symbol}})",
       "focusInstrument": "Enfoque exclusivo en {{instrument}}",
-      "liveSupport": "Soporte internacional por chat 24/6",
+      "liveSupport": "Soporte por email (respuesta en 24-48h)",
       "secure": "Checkout seguro con PayPal",
       "updatesMonthly": "Actualizaciones mensuales incluidas",
       "noGuarantees": "Sin compromiso de resultados"
     },
-    "guarantee": "Garantía de devolución de 30 días",
+    "guarantee": "Producto digital - sin devolución tras descarga",
     "secure": "Seguro y confiable",
-    "support": "¿Necesitás ayuda? Nuestro equipo está disponible 24/6.",
+    "support": "¿Necesitás ayuda? Contáctanos por email: support@ainside.me",
     "paypalDesc": "AInside - Contrato {{plan}} - {{instrument}} ({{symbol}}) - Suscripción {{cycle}} - {{amount}}",
     "processing": "Procesando pago...",
     "loadingPaypal": "Cargando PayPal...",
@@ -863,16 +863,16 @@
     },
     "org": {
       "title": "Nuestra Organización",
-      "exec": { "name": "Liderazgo Ejecutivo", "role": "Dirección Estratégica", "desc": "Décadas de experiencia combinada en tecnología financiera y servicios institucionales" },
-      "tech": { "name": "Equipo de Tecnología", "role": "Innovación y Desarrollo", "desc": "Ingenieros y analistas expertos dedicados a avanzar soluciones de tecnología financiera" },
-      "ops": { "name": "Equipo de Operaciones", "role": "Excelencia en Servicio", "desc": "Profesionales comprometidos garantizando entrega confiable y satisfacción del cliente" }
+      "exec": { "name": "Liderazgo Ejecutivo", "role": "Dirección Estratégica", "desc": "Equipo enfocado en desarrollo de estrategias de trading automatizadas" },
+      "tech": { "name": "Equipo de Tecnología", "role": "Innovación y Desarrollo", "desc": "Desarrolladores especializados en EasyLanguage para TradeStation y MultiCharts" },
+      "ops": { "name": "Equipo de Operaciones", "role": "Excelencia en Servicio", "desc": "Soporte técnico dedicado para instalación y configuración de estrategias" }
     },
     "milestones": {
       "title": "Nuestro Camino",
-      "founded": { "title": "Fundación", "desc": "Establecidos para proveer soluciones tecnológicas de nivel institucional" },
+      "founded": { "title": "Fundación", "desc": "Empresa fundada para desarrollar estrategias de trading algoritmicas" },
       "innovation": { "title": "Innovación", "desc": "Avance continuo en tecnología analítica e infraestructura" },
-      "global": { "title": "Alcance Global", "desc": "Atendiendo instituciones financieras en múltiples mercados" },
-      "recognition": { "title": "Reconocimiento", "desc": "Confiados por instituciones líderes por excelencia tecnológica" }
+      "global": { "title": "Alcance Global", "desc": "Estrategias disponibles para traders en cualquier parte del mundo" },
+      "recognition": { "title": "Reconocimiento", "desc": "Enfoque continuo en mejora y optimización de estrategias" }
     }
   },
   "contact": {
