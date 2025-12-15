@@ -296,7 +296,7 @@ const AlgoTrading = () => {
         <section className="text-center pb-16">
           <div className="max-w-5xl mx-auto space-y-10 py-20">
             <h2 className="text-4xl md:text-6xl font-light text-slate-100 tracking-tight leading-tight">
-              {t('algoTradingPage.finalCta.title', 'Únase a la Elite del Trading Cuantitativo')}
+              {t('algoTradingPage.finalCta.title', 'Trading Automatizado Profesional')}
             </h2>
             
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
