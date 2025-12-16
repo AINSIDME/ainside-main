@@ -1292,5 +1292,35 @@
       "contact": "Contacter le Support",
       "docs": "Voir Documentation"
     }
+  },
+  "blog": {
+    "algoTradingGuide": {
+      "slug": "guide-complet-trading-algorithmique",
+      "seo": {
+        "title": "Guide Complet du Trading Algorithmique 2025: Tout ce que Vous Devez Savoir",
+        "description": "Découvrez comment fonctionne le trading algorithmique, ses avantages, les stratégies les plus rentables et comment commencer. Guide complet avec exemples réels.",
+        "keywords": "trading algorithmique, algo trading, algorithmes de trading, stratégies automatisées, trading quantitatif, bots de trading, machine learning trading"
+      },
+      "hero": {
+        "badge": "Guide Complet",
+        "readTime": "15 min lecture",
+        "title": "Trading Algorithmique: Le Guide Définitif pour 2025",
+        "description": "Tout ce que vous devez savoir sur les algorithmes de trading, des concepts de base aux stratégies institutionnelles avancées.",
+        "updated": "Mis à jour: Décembre 2025",
+        "readers": "10,000+ lecteurs"
+      },
+      "toc": {
+        "title": "Table des Matières",
+        "items": {
+          "whatIs": "Qu'est-ce que le Trading Algorithmique?",
+          "howWorks": "Comment Fonctionne l'Algo Trading",
+          "advantages": "Avantages du Trading Algorithmique",
+          "strategies": "Stratégies les Plus Rentables",
+          "technology": "Technologie et Outils",
+          "risks": "Risques et Considérations",
+          "getStarted": "Comment Commencer"
+        }
+      }
+    }
   }
 }

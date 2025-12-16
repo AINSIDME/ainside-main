@@ -81,7 +81,13 @@ const App = () => {
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
                 <Route path="/getting-started" element={<GettingStarted />} />
                 <Route path="/algotrading" element={<AlgoTrading />} />
+                {/* Blog routes - multilingual */}
                 <Route path="/blog/guia-completa-trading-algoritmico" element={<BlogAlgoTradingGuide />} />
+                <Route path="/blog/complete-algorithmic-trading-guide" element={<BlogAlgoTradingGuide />} />
+                <Route path="/blog/guide-complet-trading-algorithmique" element={<BlogAlgoTradingGuide />} />
+                <Route path="/blog/dalil-kamil-altadawul-alalgorithmiat" element={<BlogAlgoTradingGuide />} />
+                <Route path="/blog/polnoe-rukovodstvo-algoritmicheskoj-torgovli" element={<BlogAlgoTradingGuide />} />
+                <Route path="/blog/madrich-male-lamischar-algorithmi" element={<BlogAlgoTradingGuide />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/legal" element={<Legal />} />
                 <Route path="/legal/terms" element={<LegalTerms />} />

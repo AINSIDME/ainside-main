@@ -21,15 +21,16 @@ import {
 } from "lucide-react";
 
 const BlogAlgoTradingGuide = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const slug = t('blog.algoTradingGuide.slug');
 
   return (
     <>
       <PageSEO
-        title="Guía Completa de Trading Algorítmico 2025: Todo lo que Necesitas Saber"
-        description="Descubre cómo funciona el trading algorítmico, sus ventajas, estrategias más rentables y cómo empezar. Guía completa con ejemplos reales y métricas institucionales."
-        keywords="trading algorítmico, algotrading, algoritmos de trading, estrategias automatizadas, trading cuantitativo, bots de trading, machine learning trading, high frequency trading, backtesting, python trading"
-        canonical={`${window.location.origin}/blog/guia-completa-trading-algoritmico`}
+        title={t('blog.algoTradingGuide.seo.title')}
+        description={t('blog.algoTradingGuide.seo.description')}
+        keywords={t('blog.algoTradingGuide.seo.keywords')}
+        canonical={`${window.location.origin}/blog/${slug}`}
       />
       
       <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98">
@@ -38,25 +39,25 @@ const BlogAlgoTradingGuide = () => {
           <div className="container mx-auto max-w-4xl">
             <div className="inline-block px-4 py-2 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-lg mb-6 tracking-wide uppercase border border-blue-500/20">
               <BookOpen className="w-4 h-4 inline mr-2" />
-              Guía Completa • 15 min lectura
+              {t('blog.algoTradingGuide.hero.badge')} • {t('blog.algoTradingGuide.hero.readTime')}
             </div>
             
             <h1 className="text-4xl md:text-6xl font-light text-slate-100 mb-6 leading-tight tracking-tight">
-              Trading Algorítmico: La Guía Definitiva para 2025
+              {t('blog.algoTradingGuide.hero.title')}
             </h1>
             
             <p className="text-xl text-white leading-relaxed mb-8">
-              Todo lo que necesitas saber sobre algoritmos de trading, desde los conceptos básicos hasta estrategias institucionales avanzadas. Aprende cómo los profesionales ganan millones con sistemas automatizados.
+              {t('blog.algoTradingGuide.hero.description')}
             </p>
 
             <div className="flex items-center gap-6 text-sm text-slate-100">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                Actualizado: Diciembre 2025
+                {t('blog.algoTradingGuide.hero.updated')}
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
-                10,000+ lectores
+                {t('blog.algoTradingGuide.hero.readers')}
               </div>
             </div>
           </div>
@@ -70,36 +71,36 @@ const BlogAlgoTradingGuide = () => {
               <CardContent className="p-8">
                 <h2 className="text-2xl font-medium text-slate-100 mb-6 flex items-center gap-3">
                   <BookOpen className="w-6 h-6 text-blue-400" />
-                  Índice de Contenidos
+                  {t('blog.algoTradingGuide.toc.title')}
                 </h2>
                 <ul className="space-y-3 text-slate-100">
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#que-es" className="hover:text-blue-400 transition-colors">¿Qué es el Trading Algorítmico?</a>
+                    <a href="#que-es" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.whatIs')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#como-funciona" className="hover:text-blue-400 transition-colors">Cómo Funciona el Algotrading</a>
+                    <a href="#como-funciona" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.howWorks')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#ventajas" className="hover:text-blue-400 transition-colors">Ventajas del Trading Algorítmico</a>
+                    <a href="#ventajas" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.advantages')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#estrategias" className="hover:text-blue-400 transition-colors">Estrategias Más Rentables</a>
+                    <a href="#estrategias" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.strategies')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#tecnologia" className="hover:text-blue-400 transition-colors">Tecnología y Herramientas</a>
+                    <a href="#tecnologia" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.technology')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#riesgos" className="hover:text-blue-400 transition-colors">Riesgos y Consideraciones</a>
+                    <a href="#riesgos" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.risks')}</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <ArrowRight className="w-4 h-4 text-blue-400" />
-                    <a href="#empezar" className="hover:text-blue-400 transition-colors">Cómo Empezar</a>
+                    <a href="#empezar" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.getStarted')}</a>
                   </li>
                 </ul>
               </CardContent>

@@ -261,17 +261,17 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Link to="/blog/guia-completa-trading-algoritmico" className="group">
+            <Link to={`/blog/${t('blog.algoTradingGuide.slug')}`} className="group">
               <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-300 h-full">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:border-blue-500/40 transition-all">
                     <CheckCircle className="w-6 h-6 text-blue-400" />
                   </div>
                   <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">
-                    Guía Completa 2025
+                    {t('blog.algoTradingGuide.hero.badge')} 2025
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Todo sobre trading algorítmico: estrategias, tecnología, riesgos y cómo empezar paso a paso.
+                    {t('blog.algoTradingGuide.hero.description').substring(0, 100)}...
                   </p>
                 </CardContent>
               </Card>
