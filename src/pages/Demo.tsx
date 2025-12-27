@@ -20,7 +20,8 @@ const Demo = () => {
   const [loading, setLoading] = useState(true);
   const [isMarketOpen, setIsMarketOpen] = useState(false);
   const [chartType, setChartType] = useState<'area' | 'candlestick'>('area');
-  const [tradeMarkers, setTradeMarkers] = useState<any[]>([]); // Marcadores para entradas/salidas
+  const [entryMarkers, setEntryMarkers] = useState<any[]>([]); // Marcadores de entrada
+  const [exitMarkers, setExitMarkers] = useState<any[]>([]); // Marcadores de salida
 
   // Función para verificar si el mercado está abierto
   const checkMarketHours = () => {
@@ -132,6 +133,7 @@ const Demo = () => {
       name: 'ES=F',
       data: ohlcData,
       type: 'candlestick',
+      id: 'price',
       color: '#ef4444', // Rojo para velas bajistas
       upColor: '#22c55e', // Verde para velas alcistas
       lineColor: '#ef4444',
@@ -140,25 +142,40 @@ const Demo = () => {
         valueDecimals: 2
       }
     }, {
-      // Serie de marcadores para entradas y salidas
-      name: 'Trade Signals',
-      type: 'flags',
-      data: tradeMarkers,
-      onSeries: 'ES=F',
-      shape: 'squarepin',
-      width: 16,
-      style: {
-        color: 'white'
+      // Serie de marcadores de ENTRADA (flechas hacia arriba o abajo)
+      name: 'Entry Signals',
+      type: 'scatter',
+      data: entryMarkers,
+      color: 'transparent',
+      marker: {
+        enabled: true,
+        symbol: 'triangle',
+        radius: 8,
       },
-      states: {
-        hover: {
-          fillColor: '#395C84'
-        }
-      }
+      tooltip: {
+        pointFormat: '<b>{point.label}</b><br/>Price: {point.y:.2f}'
+      },
+      zIndex: 10
+    }, {
+      // Serie de marcadores de SALIDA (círculos)
+      name: 'Exit Signals',
+      type: 'scatter',
+      data: exitMarkers,
+      color: 'transparent',
+      marker: {
+        enabled: true,
+        symbol: 'circle',
+        radius: 8,
+      },
+      tooltip: {
+        pointFormat: '<b>{point.label}</b><br/>Price: {point.y:.2f}<br/>P&L: {point.pnl}'
+      },
+      zIndex: 10
     }] : [{
       name: 'ES=F',
       data: chartData,
       type: 'area',
+      id: 'price',
       threshold: null,
       fillColor: {
         linearGradient: {
@@ -178,21 +195,35 @@ const Demo = () => {
         valueDecimals: 2
       }
     }, {
-      // Serie de marcadores para entradas y salidas
-      name: 'Trade Signals',
-      type: 'flags',
-      data: tradeMarkers,
-      onSeries: 'ES=F',
-      shape: 'squarepin',
-      width: 16,
-      style: {
-        color: 'white'
+      // Serie de marcadores de ENTRADA (flechas hacia arriba o abajo)
+      name: 'Entry Signals',
+      type: 'scatter',
+      data: entryMarkers,
+      color: 'transparent',
+      marker: {
+        enabled: true,
+        symbol: 'triangle',
+        radius: 8,
       },
-      states: {
-        hover: {
-          fillColor: '#395C84'
-        }
-      }
+      tooltip: {
+        pointFormat: '<b>{point.label}</b><br/>Price: {point.y:.2f}'
+      },
+      zIndex: 10
+    }, {
+      // Serie de marcadores de SALIDA (círculos)
+      name: 'Exit Signals',
+      type: 'scatter',
+      data: exitMarkers,
+      color: 'transparent',
+      marker: {
+        enabled: true,
+        symbol: 'circle',
+        radius: 8,
+      },
+      tooltip: {
+        pointFormat: '<b>{point.label}</b><br/>Price: {point.y:.2f}<br/>P&L: {point.pnl}'
+      },
+      zIndex: 10
     }],
     credits: {
       enabled: false
@@ -361,15 +392,18 @@ const Demo = () => {
           
           // Agregar marcador de ENTRADA en el gráfico
           const entryMarker = {
-            x: newTimestamp, // timestamp
-            title: isLong ? '▲' : '▼',
-            text: `${isLong ? 'LONG' : 'SHORT'} Entry: ${close.toFixed(2)}`,
-            fillColor: isLong ? '#22c55e' : '#ef4444',
-            style: {
-              color: 'white'
+            x: newTimestamp,
+            y: close,
+            label: isLong ? '🟢 LONG ENTRY' : '🔴 SHORT ENTRY',
+            marker: {
+              fillColor: isLong ? '#22c55e' : '#ef4444',
+              lineColor: '#ffffff',
+              lineWidth: 2,
+              symbol: isLong ? 'triangle' : 'triangle-down',
+              radius: 10
             }
           };
-          setTradeMarkers(prev => [...prev, entryMarker]);
+          setEntryMarkers(prev => [...prev, entryMarker].slice(-10));
         }
 
         // Lógica de salida automática (objetivos más realistas para ES)
@@ -384,15 +418,19 @@ const Demo = () => {
             
             // Agregar marcador de SALIDA en el gráfico
             const exitMarker = {
-              x: newTimestamp, // timestamp
-              title: profitLoss >= 0 ? '✓' : '✗',
-              text: `${position.toUpperCase()} Exit: ${close.toFixed(2)} | P&L: ${profitLoss >= 0 ? '+' : ''}$${profitLoss.toFixed(0)}`,
-              fillColor: profitLoss >= 0 ? '#3b82f6' : '#f59e0b',
-              style: {
-                color: 'white'
+              x: newTimestamp,
+              y: close,
+              label: profitLoss >= 0 ? `✓ EXIT +$${profitLoss.toFixed(0)}` : `✗ EXIT $${profitLoss.toFixed(0)}`,
+              pnl: profitLoss >= 0 ? `+$${profitLoss.toFixed(0)}` : `$${profitLoss.toFixed(0)}`,
+              marker: {
+                fillColor: profitLoss >= 0 ? '#3b82f6' : '#f59e0b',
+                lineColor: '#ffffff',
+                lineWidth: 2,
+                symbol: 'circle',
+                radius: 10
               }
             };
-            setTradeMarkers(prev => [...prev, exitMarker].slice(-20)); // Mantener últimas 20 marcas
+            setExitMarkers(prev => [...prev, exitMarker].slice(-10));
             
             setTrades((prev) => [{
               type: position,
