@@ -21,7 +21,7 @@ export const Footer = () => {
         { key: t('footer.legal.terms'), href: '/legal/terms' },
         { key: t('footer.legal.privacy'), href: '/legal/privacy' },
         { key: t('footer.legal.disclaimer'), href: '/legal/disclaimer' },
-        { key: t('footer.legal.accessibility',), href: '/accessibility' },
+        { key: t('footer.legal.accessibility'), href: '/accessibility' },
       ]
     },
     {
