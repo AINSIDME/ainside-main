@@ -19,7 +19,7 @@ const Demo = () => {
   const [pnl, setPnl] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isMarketOpen, setIsMarketOpen] = useState(false);
-  const [chartType, setChartType] = useState<'area' | 'candlestick'>('area');
+  const [chartType, setChartType] = useState<'area' | 'candlestick'>('candlestick');
   const [entryMarkers, setEntryMarkers] = useState<any[]>([]); // Marcadores de entrada
   const [exitMarkers, setExitMarkers] = useState<any[]>([]); // Marcadores de salida
 
