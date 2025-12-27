@@ -89,7 +89,7 @@ const Index = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
             <Button asChild size="lg" className="text-base px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 border-0">
-              <Link to="/live-demo-mini">
+              <Link to="/demo">
                 {t('homepage.cta.demo')}
               </Link>
             </Button>
