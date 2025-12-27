@@ -32,6 +32,7 @@ import LegalDisclaimer from "./pages/LegalDisclaimer";
 import Accessibility from "./pages/Accessibility";
 import Status from "./pages/Status";
 import FAQ from "./pages/FAQ";
+import Crypto from "./pages/Crypto";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
 
@@ -96,6 +97,7 @@ const App = () => {
                 <Route path="/status" element={<Status />} />
                 <Route path="/accessibility" element={<Accessibility />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/crypto" element={<Crypto />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
