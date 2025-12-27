@@ -20,6 +20,7 @@ const Demo = () => {
   const [loading, setLoading] = useState(true);
   const [isMarketOpen, setIsMarketOpen] = useState(false);
   const [chartType, setChartType] = useState<'area' | 'candlestick'>('area');
+  const [tradeMarkers, setTradeMarkers] = useState<any[]>([]); // Marcadores para entradas/salidas
 
   // Función para verificar si el mercado está abierto
   const checkMarketHours = () => {
@@ -138,6 +139,22 @@ const Demo = () => {
       tooltip: {
         valueDecimals: 2
       }
+    }, {
+      // Serie de marcadores para entradas y salidas
+      name: 'Trade Signals',
+      type: 'flags',
+      data: tradeMarkers,
+      onSeries: 'ES=F',
+      shape: 'squarepin',
+      width: 16,
+      style: {
+        color: 'white'
+      },
+      states: {
+        hover: {
+          fillColor: '#395C84'
+        }
+      }
     }] : [{
       name: 'ES=F',
       data: chartData,
@@ -159,6 +176,22 @@ const Demo = () => {
       lineWidth: 2,
       tooltip: {
         valueDecimals: 2
+      }
+    }, {
+      // Serie de marcadores para entradas y salidas
+      name: 'Trade Signals',
+      type: 'flags',
+      data: tradeMarkers,
+      onSeries: 'ES=F',
+      shape: 'squarepin',
+      width: 16,
+      style: {
+        color: 'white'
+      },
+      states: {
+        hover: {
+          fillColor: '#395C84'
+        }
       }
     }],
     credits: {
@@ -325,6 +358,18 @@ const Demo = () => {
           const isLong = Math.random() > 0.5;
           setPosition(isLong ? 'long' : 'short');
           setEntryPrice(close);
+          
+          // Agregar marcador de ENTRADA en el gráfico
+          const entryMarker = {
+            x: newTimestamp, // timestamp
+            title: isLong ? '▲' : '▼',
+            text: `${isLong ? 'LONG' : 'SHORT'} Entry: ${close.toFixed(2)}`,
+            fillColor: isLong ? '#22c55e' : '#ef4444',
+            style: {
+              color: 'white'
+            }
+          };
+          setTradeMarkers(prev => [...prev, entryMarker]);
         }
 
         // Lógica de salida automática (objetivos más realistas para ES)
@@ -335,14 +380,28 @@ const Demo = () => {
           
           // Salir si ganancia > 12 puntos o pérdida > 6 puntos (más frecuente para demo)
           if (priceDiff > 12 || priceDiff < -6) {
+            const profitLoss = priceDiff * 50; // $50 por punto en ES
+            
+            // Agregar marcador de SALIDA en el gráfico
+            const exitMarker = {
+              x: newTimestamp, // timestamp
+              title: profitLoss >= 0 ? '✓' : '✗',
+              text: `${position.toUpperCase()} Exit: ${close.toFixed(2)} | P&L: ${profitLoss >= 0 ? '+' : ''}$${profitLoss.toFixed(0)}`,
+              fillColor: profitLoss >= 0 ? '#3b82f6' : '#f59e0b',
+              style: {
+                color: 'white'
+              }
+            };
+            setTradeMarkers(prev => [...prev, exitMarker].slice(-20)); // Mantener últimas 20 marcas
+            
             setTrades((prev) => [{
               type: position,
               entry: entryPrice,
               exit: close,
-              pnl: priceDiff * 50, // $50 por punto en ES
+              pnl: profitLoss,
               time: Date.now(),
             }, ...prev].slice(0, 5));
-            setPnl((prev) => prev + (priceDiff * 50));
+            setPnl((prev) => prev + profitLoss);
             setPosition(null);
             setEntryPrice(0);
           }
