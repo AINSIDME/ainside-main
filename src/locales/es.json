@@ -4,6 +4,7 @@
     "about": "Acerca de",
     "services": "Servicios",
     "demo": "Estrategia",
+    "crypto": "Cripto",
     "liveDemoMini": "Live",
     "pricing": "Precios",
     "faq": "FAQ",
@@ -71,8 +72,7 @@
     "summary": "Resumen de compra",
     "total": "Total",
     "badges": {
-      "secure": "Pago seguro vía PayPal",
-      "noRefundAfterDownload": "Sin reembolso luego de la descarga"
+      "secure": "Pago seguro vía PayPal"
     },
     "processing": "Procesando...",
     "payWithPaypal": "Pagar ${{price}} con PayPal",

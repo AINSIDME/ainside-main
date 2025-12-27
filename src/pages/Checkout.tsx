@@ -221,10 +221,6 @@ export default function Checkout() {
                   <Shield className="h-4 w-4 text-green-500" />
                   {t("checkoutPage.badges.secure", { defaultValue: "100% secure payment" })}
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  {t("checkoutPage.badges.noRefundAfterDownload", { defaultValue: "No refund after download" })}
-                </div>
               </div>
             </CardContent>
           </Card>

@@ -4,6 +4,7 @@
     "about": "حولنا",
     "services": "الخدمات",
     "demo": "استراتيجية",
+    "crypto": "عملات رقمية",
     "liveDemoMini": "مباشر",
     "pricing": "الأسعار",
     "faq": "FAQ",
@@ -58,7 +59,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "الذهب" },
       "summary": "ملخص الطلب",
       "total": "الإجمالي",
-      "badges": { "secure": "دفع آمن عبر PayPal", "noRefundAfterDownload": "لا يوجد استرداد بعد التحميل" },
+      "badges": { "secure": "دفع آمن عبر PayPal" },
       "processing": "جاري المعالجة...",
       "payWithPaypal": "ادفع ${{price}} باستخدام PayPal",
       "notice": "بالمتابعة فإنك توافق على الشروط والأحكام",
@@ -182,9 +183,6 @@
       "security": "أمان المؤسسة",
       "protection": "حماية البيانات",
       "compliance": "جاهز للامتثال"
-    },
-    "policy": {
-      "noRefundAfterDownload": "لا يوجد استرداد بعد التحميل"
     }
   },
   "paymentCancel": {

@@ -4,6 +4,7 @@
     "about": "אודות",
     "services": "שירותים",
     "demo": "אסטרטגיה",
+    "crypto": "קריפטו",
     "liveDemoMini": "לייב",
     "pricing": "תמחור",
     "faq": "FAQ",
@@ -58,7 +59,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "זהב" },
       "summary": "סיכום הזמנה",
       "total": "סך הכל",
-      "badges": { "secure": "תשלום מאובטח דרך PayPal", "noRefundAfterDownload": "אין החזר לאחר הורדה" },
+      "badges": { "secure": "תשלום מאובטח דרך PayPal" },
       "processing": "מעבד...",
       "payWithPaypal": "שלם ${{price}} עם PayPal",
       "notice": "בהמשך אתה מקבל את התנאים וההגבלות שלנו",
@@ -182,9 +183,6 @@
       "security": "אבטחה ארגונית",
       "protection": "הגנת נתונים",
       "compliance": "מוכן לציות"
-    },
-    "policy": {
-      "noRefundAfterDownload": "אין החזר לאחר הורדה"
     }
   },
   "paymentCancel": {

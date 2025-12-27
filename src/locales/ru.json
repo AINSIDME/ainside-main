@@ -4,6 +4,7 @@
     "about": "О нас",
     "services": "Услуги",
     "demo": "Стратегия",
+    "crypto": "Крипто",
     "liveDemoMini": "Прямой эфир",
     "pricing": "Цены",
     "faq": "FAQ",
@@ -58,7 +59,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "Золото" },
       "summary": "Итог заказа",
       "total": "Итого",
-      "badges": { "secure": "Безопасный платеж через PayPal", "noRefundAfterDownload": "Без возврата после загрузки" },
+      "badges": { "secure": "Безопасный платеж через PayPal" },
       "processing": "Обработка...",
       "payWithPaypal": "Оплатить ${{price}} через PayPal",
       "notice": "Продолжая, вы принимаете наши условия и положения",
@@ -182,9 +183,6 @@
       "security": "Корпоративная Безопасность",
       "protection": "Защита Данных",
       "compliance": "Готовность к Соответствию"
-    },
-    "policy": {
-      "noRefundAfterDownload": "Без возврата после загрузки"
     }
   },
   "paymentCancel": {
@@ -680,9 +678,6 @@
       "security": "Корпоративная безопасность",
       "protection": "Защита данных",
       "compliance": "Соответствие нормам"
-    },
-    "policy": {
-      "noRefundAfterDownload": "Возврат средств после загрузки невозможен"
     }
   },
   "hero": {

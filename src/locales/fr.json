@@ -4,6 +4,7 @@
     "about": "À propos",
     "services": "Services",
     "demo": "Stratégie",
+    "crypto": "Crypto",
     "liveDemoMini": "Live",
     "pricing": "Tarifs",
     "faq": "FAQ",
@@ -58,7 +59,7 @@
       "instrument": { "sp500": "S&P 500", "gold": "Or" },
       "summary": "Récapitulatif",
       "total": "Total",
-      "badges": { "secure": "Paiement 100% sécurisé", "noRefundAfterDownload": "Pas de remboursement après téléchargement" },
+      "badges": { "secure": "Paiement 100% sécurisé" },
       "processing": "Traitement...",
       "payWithPaypal": "Payer ${{price}} avec PayPal",
       "notice": "En continuant vous acceptez nos termes et conditions",
@@ -205,9 +206,6 @@
       "security": "Sécurité d'Entreprise",
       "protection": "Protection des Données",
       "compliance": "Prêt pour la Conformité"
-    },
-    "policy": {
-      "noRefundAfterDownload": "Pas de remboursement après téléchargement"
     }
   },
   "paymentCancel": {
@@ -414,9 +412,6 @@
       "security": "Sécurité d'Entreprise",
       "protection": "Protection des Données",
       "compliance": "Conformité Réglementaire"
-    },
-    "policy": {
-      "noRefundAfterDownload": "Pas de remboursement après téléchargement"
     }
   },
   "hero": {

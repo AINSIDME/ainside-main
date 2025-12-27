@@ -4,6 +4,7 @@
     "about": "About",
     "services": "Services",
     "demo": "Strategy",
+    "crypto": "Crypto",
     "liveDemoMini": "Live",
     "pricing": "Pricing",
     "faq": "FAQ",
@@ -71,8 +72,7 @@
     "summary": "Order Summary",
     "total": "Total",
     "badges": {
-      "secure": "Secure payment via PayPal",
-      "noRefundAfterDownload": "No refund after download"
+      "secure": "Secure payment via PayPal"
     },
     "processing": "Processing...",
     "payWithPaypal": "Pay ${{price}} with PayPal",
@@ -464,9 +464,6 @@
       "security": "Enterprise Security",
       "protection": "Data Protection",
       "compliance": "Compliance Ready"
-    },
-    "policy": {
-      "noRefundAfterDownload": "No refund after download"
     }
   },
   "demo": {
