@@ -129,9 +129,9 @@
     },
     "info": {
       "email": { "title": "Email", "desc": "Contacto principal para consultas comerciales" },
-      "phone": { "title": "Teléfono", "desc": "Horario: Lunes a Viernes, 9 AM - 6 PM EST" },
-      "address": { "title": "Dirección", "desc": "Oficinas corporativas" },
-      "response": { "title": "Tiempo de respuesta", "content": "Generalmente 24-48 horas", "desc": "Nos esforzamos por responder lo antes posible" }
+      "phone": { "title": "Soporte", "desc": "Soporte por email para asistencia técnica" },
+      "address": { "title": "Plataforma", "desc": "Plataformas compatibles para estrategias" },
+      "response": { "title": "Tiempo de respuesta", "content": "Generalmente 24-48 horas", "desc": "Respondemos lo antes posible" }
     },
     "areas": {
       "title": "Áreas de servicio",

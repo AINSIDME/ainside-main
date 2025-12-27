@@ -210,7 +210,7 @@
     "info": {
       "email": { "title": "אימייל", "desc": "איש קשר ראשי לפניות עסקיות" },
       "phone": { "title": "תמיכה", "desc": "תמיכה באימייל לסיוע טכני" },
-      "address": { "title": "פלטפורמה", "desc": "TradeStation / MultiCharts" },
+      "address": { "title": "פלטפורמה", "desc": "פלטפורמות תואמות לאסטרטגיות" },
       "response": { "title": "זמן תגובה", "content": "בדרך כלל 24-48 שעות", "desc": "נענה בהקדם האפשרי" }
     },
     "areas": {

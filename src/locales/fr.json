@@ -232,9 +232,9 @@
     },
     "info": {
       "email": { "title": "Email", "desc": "Contact principal pour les demandes commerciales" },
-      "phone": { "title": "Téléphone", "desc": "Heures de bureau : Lundi - Vendredi, 9h - 18h EST" },
-      "address": { "title": "Adresse", "desc": "Siège social" },
-      "response": { "title": "Délai de réponse", "content": "Sous 1 jour ouvrable", "desc": "Notre engagement envers une communication rapide" }
+      "phone": { "title": "Support", "desc": "Support par email pour l'assistance technique" },
+      "address": { "title": "Plateforme", "desc": "Plateformes compatibles pour les stratégies" },
+      "response": { "title": "Délai de réponse", "content": "Généralement 24-48 heures", "desc": "Nous répondons dès que possible" }
     },
     "areas": {
       "title": "Domaines de service",
