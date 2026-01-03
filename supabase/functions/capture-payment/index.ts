@@ -184,6 +184,19 @@ async function sendProductEmail(data: {
     const isMini = data.planName.toLowerCase().includes('mini');
     const isES = data.planName.toLowerCase().includes('mes') || data.planName.toLowerCase().includes('es') || data.planName.toLowerCase().includes('s&p') || data.planName.toLowerCase().includes('sp500');
     const isGold = data.planName.toLowerCase().includes('mgc') || data.planName.toLowerCase().includes('gc') || data.planName.toLowerCase().includes('gold') || data.planName.toLowerCase().includes('oro');
+    const isMonthly = data.planName.toLowerCase().includes('mensual') || data.planName.toLowerCase().includes('monthly') || data.planName.toLowerCase().includes('mes');
+    const isAnnual = data.planName.toLowerCase().includes('anual') || data.planName.toLowerCase().includes('annual') || data.planName.toLowerCase().includes('año');
+    
+    // Billing cycle info
+    const billingInfo = {
+      cycle: isAnnual ? 'Anual' : 'Mensual',
+      renewalDate: new Date(Date.now() + (isAnnual ? 365 : 30) * 24 * 60 * 60 * 1000).toLocaleDateString('es-ES', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }),
+      benefit: isAnnual ? '💰 Ahorras 30% con el plan anual' : '📅 Renovación mensual automática'
+    };
 
     // Determine plan key
     let planType: string;
@@ -333,7 +346,13 @@ Download Your Files</h3>
 
               <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 4px;">
                 <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.6;">
-                  <strong>⚠️ Important:</strong> Please download your files within 30 days. Keep these files in a safe place as they are only available through this email.
+                  <strong>⚠️ Importante:</strong> Descarga tus archivos dentro de los próximos 30 días. Guárdalos en un lugar seguro ya que solo están disponibles a través de este email.
+                </p>
+              </div>
+
+              <div style="background-color: #f1f5f9; border-left: 4px solid #64748b; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                <p style="margin: 0; color: #475569; font-size: 13px; line-height: 1.6;">
+                  <strong>🔄 Gestiona tu suscripción:</strong> Para cancelar o modificar tu suscripción ${billingInfo.cycle.toLowerCase()}, ingresa a tu cuenta de PayPal o contáctanos a <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a>
                 </p>
               </div>
 
