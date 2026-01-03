@@ -206,9 +206,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
           <!-- Header with Logo -->
           <tr>
             <td style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 300; letter-spacing: -0.5px;">
-                AI<span style="font-weight: 600;">inside</span>
-              </h1>
+              <img src="https://ainside.me/brand/logo-master.png" alt="AIinside Logo" style="width: 180px; height: auto; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;" />
               <p style="margin: 8px 0 0; color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">
                 Algorithmic Trading Solutions
               </p>
