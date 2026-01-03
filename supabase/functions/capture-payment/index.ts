@@ -184,6 +184,53 @@ async function sendProductEmail(data: {
                    : data.planName.toLowerCase().includes('professional') ? 'professional'
                    : 'premium';
 
+    // Plan-specific content
+    const planContent = {
+      basic: {
+        color: '#3b82f6',
+        icon: '⭐',
+        title: 'Basic Plan',
+        description: 'Your essential trading toolkit to get started',
+        features: [
+          '📊 Basic Trading Indicators',
+          '📈 Market Analysis Tools',
+          '📖 Getting Started Guide',
+          '💡 Strategy Templates'
+        ]
+      },
+      professional: {
+        color: '#8b5cf6',
+        icon: '🚀',
+        title: 'Professional Plan',
+        description: 'Advanced tools for serious traders',
+        features: [
+          '📊 All Basic Features',
+          '🤖 Advanced Algorithms',
+          '📊 Real-time Data Integration',
+          '🎯 Custom Indicators',
+          '📚 Professional Training Materials',
+          '💬 Priority Support'
+        ]
+      },
+      premium: {
+        color: '#f59e0b',
+        icon: '👑',
+        title: 'Premium Plan',
+        description: 'Complete professional trading solution',
+        features: [
+          '📊 All Professional Features',
+          '🤖 AI-Powered Strategies',
+          '🔥 Real-time Alerts & Signals',
+          '📈 Advanced Portfolio Management',
+          '🎓 Exclusive Masterclasses',
+          '👨‍💻 1-on-1 Consultation',
+          '⚡ VIP Support 24/7'
+        ]
+      }
+    };
+
+    const plan = planContent[planType as keyof typeof planContent];
+
     const emailHTML = `
 <!DOCTYPE html>
 <html lang="en">
@@ -203,6 +250,7 @@ async function sendProductEmail(data: {
             <td style="background: #f8fafc; padding: 40px 40px 30px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 2px solid #e2e8f0;">
               <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 220px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
               <h1 style="margin: 0; color: #059669; font-size: 24px; font-weight: 600;">✓ Payment Successful</h1>
+              <p style="margin: 10px 0 0; color: ${plan.color}; font-size: 18px; font-weight: 600;">${plan.icon} ${plan.title}</p>
             </td>
           </tr>
 
@@ -214,10 +262,20 @@ async function sendProductEmail(data: {
               </p>
 
               <p style="margin: 0 0 20px; color: #475569; font-size: 16px; line-height: 1.6;">
-                Thank you for your purchase! Your payment has been successfully processed.
+                Thank you for purchasing the <strong style="color: ${plan.color};">${plan.title}</strong>! Your payment has been successfully processed.
               </p>
 
-              <!-- Order Details -->
+              <p style="margin: 0 0 20px; color: #475569; font-size: 16px; line-height: 1.6;">
+                ${plan.description}
+              </p>
+
+              <!-- What's Included -->
+              <div style="background-color: #f8fafc; border: 2px solid ${plan.color}; padding: 25px; margin: 30px 0; border-radius: 8px;">
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 18px;">${plan.icon} What's Included in Your Plan</h3>
+                ${plan.features.map(feature => `<p style="margin: 8px 0; color: #475569; font-size: 14px; line-height: 1.6;">${feature}</p>`).join('')}
+              </div>
+Download Your Files</h3>
+                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Access your ${plan.title} materials below
               <div style="background-color: #f1f5f9; border-left: 4px solid #3b82f6; padding: 20px; margin: 30px 0; border-radius: 4px;">
                 <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 16px;">Order Details</h3>
                 <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Plan:</strong> ${data.planName}</p>
