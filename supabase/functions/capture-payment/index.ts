@@ -179,52 +179,84 @@ async function sendProductEmail(data: {
       return false;
     }
 
-    // Determine plan type from plan name
-    const planType = data.planName.toLowerCase().includes('basic') ? 'basic' 
-                   : data.planName.toLowerCase().includes('professional') ? 'professional'
-                   : 'premium';
+    // Determine plan type and instrument from plan name
+    const isMicro = data.planName.toLowerCase().includes('micro');
+    const isMini = data.planName.toLowerCase().includes('mini');
+    const isES = data.planName.toLowerCase().includes('mes') || data.planName.toLowerCase().includes('es') || data.planName.toLowerCase().includes('s&p') || data.planName.toLowerCase().includes('sp500');
+    const isGold = data.planName.toLowerCase().includes('mgc') || data.planName.toLowerCase().includes('gc') || data.planName.toLowerCase().includes('gold') || data.planName.toLowerCase().includes('oro');
+
+    // Determine plan key
+    let planType: string;
+    if (isMicro && isES) planType = 'micro-sp500';
+    else if (isMicro && isGold) planType = 'micro-gold';
+    else if (isMini && isES) planType = 'mini-sp500';
+    else if (isMini && isGold) planType = 'mini-gold';
+    else planType = 'micro-sp500'; // default
 
     // Plan-specific content
     const planContent = {
-      basic: {
+      'micro-sp500': {
         color: '#3b82f6',
-        icon: '⭐',
-        title: 'Basic Plan',
-        description: 'Your essential trading toolkit to get started',
+        icon: '📊',
+        title: 'Contrato Micro - S&P 500',
+        instrument: 'S&P 500 (MES)',
+        description: 'Operación con contratos micro del S&P 500 - Perfecto para comenzar',
         features: [
-          '📊 Basic Trading Indicators',
-          '📈 Market Analysis Tools',
-          '📖 Getting Started Guide',
-          '💡 Strategy Templates'
+          '📈 Contrato Micro E-mini S&P 500 (MES)',
+          '🎯 Enfoque exclusivo en S&P 500',
+          '📊 Algoritmos optimizados para índices',
+          '💬 Soporte internacional 24/6',
+          '🔄 Actualizaciones mensuales incluidas',
+          '🔒 Checkout seguro con PayPal'
         ]
       },
-      professional: {
+      'micro-gold': {
+        color: '#f59e0b',
+        icon: '🥇',
+        title: 'Contrato Micro - Oro',
+        instrument: 'Oro (MGC)',
+        description: 'Operación con contratos micro de Oro - Perfecto para comenzar',
+        features: [
+          '🥇 Contrato Micro Gold (MGC)',
+          '🎯 Enfoque exclusivo en Oro',
+          '📊 Algoritmos optimizados para commodities',
+          '💬 Soporte internacional 24/6',
+          '🔄 Actualizaciones mensuales incluidas',
+          '🔒 Checkout seguro con PayPal'
+        ]
+      },
+      'mini-sp500': {
         color: '#8b5cf6',
         icon: '🚀',
-        title: 'Professional Plan',
-        description: 'Advanced tools for serious traders',
+        title: 'Contrato Mini - S&P 500',
+        instrument: 'S&P 500 (ES)',
+        description: 'Operación con contratos mini del S&P 500 - Para traders con experiencia',
         features: [
-          '📊 All Basic Features',
-          '🤖 Advanced Algorithms',
-          '📊 Real-time Data Integration',
-          '🎯 Custom Indicators',
-          '📚 Professional Training Materials',
-          '💬 Priority Support'
+          '📈 Contrato E-mini S&P 500 (ES)',
+          '🎯 Enfoque exclusivo en S&P 500',
+          '📊 Algoritmos avanzados para índices',
+          '💼 Mayor potencial de ganancias',
+          '💬 Soporte internacional 24/6',
+          '🔄 Actualizaciones mensuales incluidas',
+          '🔒 Checkout seguro con PayPal',
+          '⚡ Ejecución prioritaria'
         ]
       },
-      premium: {
-        color: '#f59e0b',
+      'mini-gold': {
+        color: '#d97706',
         icon: '👑',
-        title: 'Premium Plan',
-        description: 'Complete professional trading solution',
+        title: 'Contrato Mini - Oro',
+        instrument: 'Oro (GC)',
+        description: 'Operación con contratos mini de Oro - Para traders con experiencia',
         features: [
-          '📊 All Professional Features',
-          '🤖 AI-Powered Strategies',
-          '🔥 Real-time Alerts & Signals',
-          '📈 Advanced Portfolio Management',
-          '🎓 Exclusive Masterclasses',
-          '👨‍💻 1-on-1 Consultation',
-          '⚡ VIP Support 24/7'
+          '🥇 Contrato Gold (GC)',
+          '🎯 Enfoque exclusivo en Oro',
+          '📊 Algoritmos avanzados para commodities',
+          '💼 Mayor potencial de ganancias',
+          '💬 Soporte internacional 24/6',
+          '🔄 Actualizaciones mensuales incluidas',
+          '🔒 Checkout seguro con PayPal',
+          '⚡ Ejecución prioritaria'
         ]
       }
     };
@@ -289,13 +321,13 @@ Download Your Files</h3>
                 <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Click the buttons below to download your files:</p>
                 
                 <a href="https://ainside.me/downloads/${planType}/${planType}-plan.pdf" 
-                   style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
-                  📄 Download PDF Guide
+                   style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, ${plan.color} 0%, #2563eb 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
+                  📄 Descargar Guía PDF
                 </a>
                 
                 <a href="https://ainside.me/downloads/${planType}/${planType}-files.zip" 
                    style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
-                  📦 Download Files (.ZIP)
+                  📦 Descargar Archivos (.ZIP)
                 </a>
               </div>
 
