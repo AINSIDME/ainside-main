@@ -1,227 +1,44 @@
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    if (req.method !== "POST") {
-      return new Response(JSON.stringify({ error: "Method not allowed" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 405,
-      });
-    }
+    const { email, name, planName, amount, currency, orderId } = await req.json()
 
-    const { orderId } = await req.json();
-
-    if (!orderId) {
-      return new Response(JSON.stringify({ error: "Order ID is required" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 400,
-      });
-    }
-
-    const PAYPAL_CLIENT_ID = Deno.env.get("PAYPAL_CLIENT_ID");
-    const PAYPAL_CLIENT_SECRET = Deno.env.get("PAYPAL_CLIENT_SECRET");
-    const PAYPAL_ENV = Deno.env.get("PAYPAL_ENV") || "sandbox";
-
-    if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
-      return new Response(JSON.stringify({ error: "PayPal credentials not configured" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      });
-    }
-
-    const PAYPAL_BASE_URL = PAYPAL_ENV === "live" 
-      ? "https://api-m.paypal.com" 
-      : "https://api-m.sandbox.paypal.com";
-
-    // Get PayPal access token
-    const authResponse = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": `Basic ${btoa(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`)}`,
-      },
-      body: "grant_type=client_credentials",
-    });
-
-    if (!authResponse.ok) {
-      const text = await authResponse.text();
-      const debugId = authResponse.headers.get("paypal-debug-id");
-      console.error("PayPal auth failed:", { text, debugId });
-      return new Response(
-        JSON.stringify({
-          error: "Failed to authenticate with PayPal",
-          details: text,
-          debugId,
-        }),
-        {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 502,
-      }
-      );
-    }
-
-    const { access_token } = await authResponse.json();
-
-    // Capture the PayPal order
-    const captureResponse = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders/${orderId}/capture`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${access_token}`,
-      },
-    });
-
-    if (!captureResponse.ok) {
-      const text = await captureResponse.text();
-      const debugId = captureResponse.headers.get("paypal-debug-id");
-      console.error("PayPal capture failed:", { text, debugId });
-      return new Response(
-        JSON.stringify({
-          error: "Failed to capture payment",
-          details: text,
-          debugId,
-        }),
-        {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 502,
-      }
-      );
-    }
-
-    const result = await captureResponse.json();
-    
-    // Extract payment details
-    const capture = result?.purchase_units?.[0]?.payments?.captures?.[0];
-    const payerEmail = result?.payer?.email_address;
-    const payerName = result?.payer?.name?.given_name + ' ' + (result?.payer?.name?.surname || '');
-    const amount = capture?.amount?.value;
-    const currency = capture?.amount?.currency_code;
-    const status = result?.status;
-    const planName = result?.purchase_units?.[0]?.description;
-
-    // Verify payment is COMPLETED and APPROVED
-    if (status !== 'COMPLETED' || capture?.status !== 'COMPLETED') {
-      console.error('Payment not completed:', { status, captureStatus: capture?.status });
-      return new Response(
-        JSON.stringify({
-          error: 'Payment not completed',
-          status,
-          captureStatus: capture?.status
-        }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 400,
-        }
-      );
-    }
-
-    // Store purchase in database
-    await storePurchase({
-      orderId: result.id,
-      email: payerEmail,
-      planName,
-      amount,
-      currency
-    });
-
-    // Send email with product files
-    const emailSent = await sendProductEmail({
-      email: payerEmail,
-      name: payerName,
+    const result = await sendProductEmail({
+      email,
+      name,
       planName,
       amount,
       currency,
-      orderId: result.id
-    });
+      orderId
+    })
 
-    const debugId = captureResponse.headers.get("paypal-debug-id");
     return new Response(
-      JSON.stringify({
-        success: true,
-        orderId: result.id,
-        status,
-        amount,
-        currency,
-        payerEmail,
-        captureTime: capture?.create_time,
-        plan: planName,
-        emailSent,
-        debugId,
-      }),
-      {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      JSON.stringify({ success: result }),
+      { 
         status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       }
-    );
+    )
   } catch (error) {
-    console.error("Payment capture error:", error);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { 
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    )
   }
-});
-
-async function storePurchase(data: {
-  orderId: string;
-  email: string;
-  planName: string;
-  amount: string;
-  currency: string;
-}): Promise<void> {
-  try {
-    const supabaseUrl = Deno.env.get('SUPABASE_URL');
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    
-    if (!supabaseUrl || !supabaseKey) {
-      console.warn('Supabase credentials not configured');
-      return;
-    }
-
-    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    
-    // Determine plan type from name
-    const isMicro = data.planName.toLowerCase().includes('micro');
-    const isES = data.planName.toLowerCase().includes('mes') || data.planName.toLowerCase().includes('es') || data.planName.toLowerCase().includes('s&p') || data.planName.toLowerCase().includes('sp500');
-    const isGold = data.planName.toLowerCase().includes('mgc') || data.planName.toLowerCase().includes('gc') || data.planName.toLowerCase().includes('gold') || data.planName.toLowerCase().includes('oro');
-    
-    let planType: string;
-    if (isMicro && isES) planType = 'micro-sp500';
-    else if (isMicro && isGold) planType = 'micro-gold';
-    else if (!isMicro && isES) planType = 'mini-sp500';
-    else if (!isMicro && isGold) planType = 'mini-gold';
-    else planType = 'micro-sp500';
-    
-    const { error } = await supabase.from('purchases').insert({
-      order_id: data.orderId,
-      email: data.email,
-      plan_name: data.planName,
-      plan_type: planType,
-      amount: data.amount,
-      currency: data.currency,
-      status: 'completed'
-    });
-
-    if (error) {
-      console.error('Error storing purchase:', error);
-    } else {
-      console.log('Purchase stored successfully:', data.orderId);
-    }
-  } catch (error) {
-    console.error('Error in storePurchase:', error);
-  }
-}
+})
 
 async function sendProductEmail(data: {
   email: string;
@@ -338,7 +155,7 @@ async function sendProductEmail(data: {
 
     const emailHTML = `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -379,35 +196,42 @@ async function sendProductEmail(data: {
                 <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 18px;">${plan.icon} What's Included in Your Plan</h3>
                 ${plan.features.map(feature => `<p style="margin: 8px 0; color: #475569; font-size: 14px; line-height: 1.6;">${feature}</p>`).join('')}
               </div>
-Download Your Files</h3>
-                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Access your ${plan.title} materials below
+
+              <!-- Order Details -->
               <div style="background-color: #f1f5f9; border-left: 4px solid #3b82f6; padding: 20px; margin: 30px 0; border-radius: 4px;">
-                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 16px;">Order Details</h3>
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 16px;">📋 Detalles del Pedido</h3>
                 <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Plan:</strong> ${data.planName}</p>
-                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Amount:</strong> ${data.amount} ${data.currency}</p>
+                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Instrumento:</strong> ${plan.instrument}</p>
+                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Monto:</strong> ${data.amount} ${data.currency}</p>
+                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Ciclo:</strong> ${billingInfo.cycle}</p>
+                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Próxima renovación:</strong> ${billingInfo.renewalDate}</p>
                 <p style="margin: 0; color: #475569; font-size: 14px;"><strong>Order ID:</strong> ${data.orderId}</p>
+              </div>
+
+              <!-- Billing Info -->
+              <div style="background-color: ${isAnnual ? '#ecfdf5' : '#fef3c7'}; border-left: 4px solid ${isAnnual ? '#10b981' : '#f59e0b'}; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                <p style="margin: 0; color: ${isAnnual ? '#047857' : '#92400e'}; font-size: 14px; line-height: 1.6;">
+                  <strong>${billingInfo.benefit}</strong><br/>
+                  ${isAnnual 
+                    ? 'Tu suscripción anual te da acceso completo por 12 meses sin preocuparte de renovaciones mensuales.' 
+                    : 'Tu suscripción se renovará automáticamente cada mes. Puedes cancelar en cualquier momento.'}
+                </p>
               </div>
 
               <!-- Download Links -->
               <div style="background-color: #ecfdf5; border: 2px solid #10b981; padding: 25px; margin: 30px 0; border-radius: 8px; text-align: center;">
-                <h3 style="margin: 0 0 15px; color: #065f46; font-size: 18px;">📦 Your Product Files</h3>
-                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Click the buttons below to download your files:</p>
+                <h3 style="margin: 0 0 15px; color: #065f46; font-size: 18px;">📦 Download Your Files</h3>
+                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Access your ${plan.title} materials below:</p>
                 
-                <a href="https://ainside.me/download?order=${data.orderId}&plan=${planType}&file=plan" 
+                <a href="https://ainside.me/downloads/${planType}/${planType}-plan.pdf" 
                    style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, ${plan.color} 0%, #2563eb 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
                   📄 Descargar Guía PDF
                 </a>
                 
-                <a href="https://ainside.me/download?order=${data.orderId}&plan=${planType}&file=files" 
+                <a href="https://ainside.me/downloads/${planType}/${planType}-files.zip" 
                    style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
                   📦 Descargar Archivos (.ZIP)
                 </a>
-              </div>
-
-              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.6;">
-                  <strong>⚠️ Importante:</strong> Los enlaces de descarga expiran en 1 hora por seguridad. Si expiran, contáctanos a <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a> con tu Order ID para obtener nuevos enlaces.
-                </p>
               </div>
 
               <div style="background-color: #f1f5f9; border-left: 4px solid #64748b; padding: 15px; margin: 20px 0; border-radius: 4px;">
@@ -456,7 +280,7 @@ Download Your Files</h3>
       body: JSON.stringify({
         from: 'AInside <onboarding@resend.dev>',
         to: [data.email],
-        subject: `✓ Purchase Confirmed - ${data.planName} - AInside`,
+        subject: `✓ TEST - ${data.planName} - AInside`,
         html: emailHTML
       })
     });
@@ -466,11 +290,11 @@ Download Your Files</h3>
       return false;
     }
 
-    console.log('Product email sent successfully to:', data.email);
+    console.log('Test email sent successfully to:', data.email);
     return true;
 
   } catch (error) {
-    console.error('Error sending product email:', error);
+    console.error('Error sending test email:', error);
     return false;
   }
 }
