@@ -272,6 +272,31 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
             </td>
           </tr>
 
+          <!-- Disclaimer and Unsubscribe -->
+          <tr>
+            <td style="background-color: #f1f5f9; padding: 20px 40px; border-top: 1px solid #e2e8f0;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="text-align: center;">
+                    <p style="margin: 0 0 12px; color: #64748b; font-size: 11px; line-height: 1.6;">
+                      <strong>Disclaimer:</strong> This email is an automated confirmation for your inquiry submitted through our contact form. 
+                      Trading involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. 
+                      Please read our full risk disclosure on our website.
+                    </p>
+                    <p style="margin: 0 0 12px; color: #64748b; font-size: 11px; line-height: 1.6;">
+                      You are receiving this email because you contacted us through <a href="https://ainside.me" style="color: #3b82f6; text-decoration: none;">ainside.me</a>. 
+                      This is a one-time confirmation message and you will only receive additional emails if our team responds to your inquiry.
+                    </p>
+                    <p style="margin: 0; color: #94a3b8; font-size: 10px;">
+                      If you did not submit this inquiry or wish to stop receiving emails, please contact us at 
+                      <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
         </table>
       </td>
     </tr>
