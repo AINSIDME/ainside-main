@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Payment System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            border-left-color: #ef4444;
+            color: #fca5a5;
+        }
+        .success {
+            border-left-color: #10b981;
+            color: #86efac;
+        }
+        h1 {
+            color: #3b82f6;
+        }
+        h2 {
+            color: #60a5fa;
+            margin-top: 0;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.pending { background: #fbbf24; color: #000; }
+        .status.success { background: #10b981; color: #fff; }
+        .status.error { background: #ef4444; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>🔧 AInside Payment System Diagnostics</h1>
+    
+    <div class="test-section">
+        <h2>1. Test Supabase Connection</h2>
+        <button onclick="testSupabaseConnection()">Test Connection</button>
+        <div id="supabase-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test Get Plans Function</h2>
+        <button onclick="testGetPlans()">Test Get Plans</button>
+        <div id="plans-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test Create Payment Function</h2>
+        <select id="plan-select" style="padding: 8px; margin-right: 10px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+            <option value="micro_monthly">Micro Monthly - $99</option>
+            <option value="micro_annual">Micro Annual - $831.60</option>
+            <option value="mini_monthly">Mini Monthly - $999</option>
+            <option value="mini_annual">Mini Annual - $8,391.60</option>
+        </select>
+        <button onclick="testCreatePayment()">Test Create Payment</button>
+        <div id="payment-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Check PayPal Configuration</h2>
+        <button onclick="checkPayPalConfig()">Check Configuration</button>
+        <div id="paypal-result" class="result" style="display:none;"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://odlxhgatqyodxdessxts.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyMzY5MTMsImV4cCI6MjA3MjgxMjkxM30.btScPRHOEIdRShS7kYNFdzHKpQrwMZKRJ54KlGCl52s";
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        function showResult(elementId, content, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = 'result ' + (isError ? 'error' : 'success');
+            element.textContent = content;
+        }
+
+        async function testSupabaseConnection() {
+            try {
+                showResult('supabase-result', '⏳ Testing connection...', false);
+                
+                const startTime = Date.now();
+                const { data, error } = await supabase.functions.invoke('get-plans');
+                const duration = Date.now() - startTime;
+
+                if (error) {
+                    showResult('supabase-result', 
+                        `❌ Connection Error (${duration}ms):\n\n${JSON.stringify(error, null, 2)}`, 
+                        true);
+                } else {
+                    showResult('supabase-result', 
+                        `✅ Connection Successful (${duration}ms):\n\nSupabase is reachable and Edge Functions are responding.`, 
+                        false);
+                }
+            } catch (error) {
+                showResult('supabase-result', 
+                    `❌ Connection Failed:\n\n${error.message}\n\nStack: ${error.stack}`, 
+                    true);
+            }
+        }
+
+        async function testGetPlans() {
+            try {
+                showResult('plans-result', '⏳ Fetching plans...', false);
+                
+                const startTime = Date.now();
+                const { data, error } = await supabase.functions.invoke('get-plans', {});
+                const duration = Date.now() - startTime;
+
+                if (error) {
+                    showResult('plans-result', 
+                        `❌ Get Plans Error (${duration}ms):\n\n${JSON.stringify(error, null, 2)}`, 
+                        true);
+                } else {
+                    showResult('plans-result', 
+                        `✅ Plans Retrieved Successfully (${duration}ms):\n\n${JSON.stringify(data, null, 2)}`, 
+                        false);
+                }
+            } catch (error) {
+                showResult('plans-result', 
+                    `❌ Get Plans Failed:\n\n${error.message}`, 
+                    true);
+            }
+        }
+
+        async function testCreatePayment() {
+            try {
+                const plan = document.getElementById('plan-select').value;
+                showResult('payment-result', `⏳ Creating payment for plan: ${plan}...`, false);
+                
+                const startTime = Date.now();
+                const { data, error } = await supabase.functions.invoke('create-payment', {
+                    body: { plan, intro: false }
+                });
+                const duration = Date.now() - startTime;
+
+                if (error) {
+                    showResult('payment-result', 
+                        `❌ Create Payment Error (${duration}ms):\n\n` +
+                        `Error Details:\n${JSON.stringify(error, null, 2)}\n\n` +
+                        `This usually means:\n` +
+                        `- Edge Function is not deployed\n` +
+                        `- PayPal credentials not set in Supabase\n` +
+                        `- Edge Function has runtime errors`, 
+                        true);
+                } else {
+                    const result = `✅ Payment Created Successfully (${duration}ms):\n\n` +
+                        `Order ID: ${data.orderId}\n` +
+                        `Approval URL: ${data.approvalUrl}\n\n` +
+                        `Full Response:\n${JSON.stringify(data, null, 2)}`;
+                    
+                    showResult('payment-result', result, false);
+                    
+                    if (data.approvalUrl) {
+                        const openPayPal = confirm('Payment created! Open PayPal approval page?');
+                        if (openPayPal) {
+                            window.open(data.approvalUrl, '_blank');
+                        }
+                    }
+                }
+            } catch (error) {
+                showResult('payment-result', 
+                    `❌ Create Payment Failed:\n\n${error.message}\n\nStack:\n${error.stack}`, 
+                    true);
+            }
+        }
+
+        async function checkPayPalConfig() {
+            showResult('paypal-result', '⏳ Checking PayPal configuration...', false);
+            
+            let report = '📋 PayPal Configuration Check:\n\n';
+            
+            // Check if functions are accessible
+            report += '1. Supabase Edge Functions Status:\n';
+            try {
+                const { data, error } = await supabase.functions.invoke('get-plans');
+                if (error) {
+                    report += `   ❌ Edge Functions not accessible\n`;
+                    report += `   Error: ${error.message}\n`;
+                } else {
+                    report += `   ✅ Edge Functions are accessible\n`;
+                }
+            } catch (e) {
+                report += `   ❌ Edge Functions error: ${e.message}\n`;
+            }
+            
+            report += '\n2. Required Secrets (must be set in Supabase Dashboard):\n';
+            report += '   ⚠️  PAYPAL_CLIENT_ID (check in Supabase Dashboard > Settings > Edge Functions > Secrets)\n';
+            report += '   ⚠️  PAYPAL_CLIENT_SECRET (check in Supabase Dashboard > Settings > Edge Functions > Secrets)\n';
+            report += '   ⚠️  PAYPAL_ENV (should be "live" or "sandbox")\n';
+            report += '   ⚠️  APP_ORIGIN (should be "https://ainside.me")\n';
+            
+            report += '\n3. Expected Edge Functions:\n';
+            report += '   • get-plans\n';
+            report += '   • create-payment\n';
+            report += '   • capture-payment\n';
+            
+            report += '\n4. Deployment Checklist:\n';
+            report += '   □ Deploy Edge Functions to Supabase\n';
+            report += '   □ Set PayPal secrets in Supabase Dashboard\n';
+            report += '   □ Verify APP_ORIGIN is HTTPS\n';
+            report += '   □ Test payment flow end-to-end\n';
+            
+            report += '\n5. How to Deploy:\n';
+            report += '   1. Install Supabase CLI: npm install -g supabase\n';
+            report += '   2. Login: supabase login\n';
+            report += '   3. Link project: supabase link --project-ref odlxhgatqyodxdessxts\n';
+            report += '   4. Deploy functions: supabase functions deploy\n';
+            report += '   5. Set secrets: supabase secrets set PAYPAL_CLIENT_ID=your_id\n';
+            
+            showResult('paypal-result', report, false);
+        }
+    </script>
+</body>
+</html>

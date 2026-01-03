@@ -1,0 +1,717 @@
+import { useTranslation } from "react-i18next";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
+import { PageSEO } from "@/components/seo/PageSEO";
+import { useEffect } from "react";
+import { 
+  TrendingUp, 
+  Brain, 
+  Target, 
+  Shield, 
+  Zap,
+  CheckCircle2,
+  ArrowRight,
+  BookOpen,
+  LineChart,
+  Users,
+  Clock,
+  DollarSign,
+  AlertTriangle,
+  Award
+} from "lucide-react";
+
+// Map URL slugs to language codes
+const SLUG_TO_LANGUAGE: { [key: string]: string } = {
+  'guia-completa-trading-algoritmico': 'es',
+  'complete-algorithmic-trading-guide': 'en',
+  'guide-complet-trading-algorithmique': 'fr',
+  'dalil-kamil-altadawul-alalgorithmiat': 'ar',
+  'polnoe-rukovodstvo-algoritmicheskoj-torgovli': 'ru',
+  'madrich-male-lamischar-algorithmi': 'he'
+};
+
+const BlogAlgoTradingGuide = () => {
+  const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const slug = t('blog.algoTradingGuide.slug');
+
+  // Detect language from URL and set it
+  useEffect(() => {
+    const currentSlug = location.pathname.split('/').pop() || '';
+    const detectedLanguage = SLUG_TO_LANGUAGE[currentSlug];
+    
+    if (detectedLanguage && detectedLanguage !== i18n.language) {
+      i18n.changeLanguage(detectedLanguage);
+    }
+  }, [location.pathname, i18n]);
+
+  return (
+    <>
+      <PageSEO
+        title={t('blog.algoTradingGuide.seo.title')}
+        description={t('blog.algoTradingGuide.seo.description')}
+        keywords={t('blog.algoTradingGuide.seo.keywords')}
+        canonical={`${window.location.origin}/blog/${slug}`}
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98">
+        {/* Hero Article Header */}
+        <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/98 backdrop-blur-sm border-b border-slate-800/50">
+          <div className="container mx-auto max-w-4xl">
+            <div className="inline-block px-4 py-2 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-lg mb-6 tracking-wide uppercase border border-blue-500/20">
+              <BookOpen className="w-4 h-4 inline mr-2" />
+              {t('blog.algoTradingGuide.hero.badge')} • {t('blog.algoTradingGuide.hero.readTime')}
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-light text-slate-100 mb-6 leading-tight tracking-tight">
+              {t('blog.algoTradingGuide.hero.title')}
+            </h1>
+            
+            <p className="text-xl text-white leading-relaxed mb-8">
+              {t('blog.algoTradingGuide.hero.description')}
+            </p>
+
+            <div className="flex items-center gap-6 text-sm text-slate-100">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                {t('blog.algoTradingGuide.hero.updated')}
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                {t('blog.algoTradingGuide.hero.readers')}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="container mx-auto px-4 py-16 max-w-4xl">
+          <article className="prose prose-invert prose-lg max-w-none">
+            
+            {/* Table of Contents */}
+            <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg mb-16">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-medium text-slate-100 mb-6 flex items-center gap-3">
+                  <BookOpen className="w-6 h-6 text-blue-400" />
+                  {t('blog.algoTradingGuide.toc.title')}
+                </h2>
+                <ul className="space-y-3 text-slate-100">
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#que-es" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.whatIs')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#como-funciona" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.howWorks')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#ventajas" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.advantages')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#estrategias" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.strategies')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#tecnologia" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.technology')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#riesgos" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.risks')}</a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                    <a href="#empezar" className="hover:text-blue-400 transition-colors">{t('blog.algoTradingGuide.toc.items.getStarted')}</a>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Section 1: What is Algo Trading */}
+            <section id="que-es" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
+                <Target className="w-8 h-8 text-blue-400" />
+                {t('blog.algoTradingGuide.content.whatIs.title')}
+              </h2>
+              
+              <div className="space-y-6 text-slate-100 leading-relaxed">
+                <p className="text-lg">
+                  {t('blog.algoTradingGuide.content.whatIs.intro1')}
+                </p>
+
+                <p>
+                  {t('blog.algoTradingGuide.content.whatIs.intro2')}
+                </p>
+
+                <Card className="bg-blue-500/5 border border-blue-500/20 backdrop-blur-lg my-8">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <Award className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-lg font-medium text-slate-100 mb-2">{t('blog.algoTradingGuide.content.whatIs.keyFact.title')}</h4>
+                        <p className="text-slate-100 text-sm">
+                          {t('blog.algoTradingGuide.content.whatIs.keyFact.text')}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <h3 className="text-2xl font-medium text-slate-100 mt-10 mb-4">{t('blog.algoTradingGuide.content.whatIs.comparison.title')}</h3>
+                
+                <div className="grid md:grid-cols-2 gap-6 my-8">
+                  <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                    <CardContent className="p-6">
+                      <h4 className="text-lg font-medium text-slate-100 mb-4">{t('blog.algoTradingGuide.content.whatIs.comparison.manual.title')}</h4>
+                      <ul className="space-y-2 text-sm text-white">
+                        {(t('blog.algoTradingGuide.content.whatIs.comparison.manual.items', { returnObjects: true }) as string[]).map((item, index) => (
+                          <li key={index}>• {item}</li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg">
+                    <CardContent className="p-6">
+                      <h4 className="text-lg font-medium text-blue-400 mb-4">{t('blog.algoTradingGuide.content.whatIs.comparison.algo.title')}</h4>
+                      <ul className="space-y-2 text-sm text-slate-100">
+                        {(t('blog.algoTradingGuide.content.whatIs.comparison.algo.items', { returnObjects: true }) as string[]).map((item, index) => (
+                          <li key={index} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 2: How It Works */}
+            <section id="como-funciona" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
+                <Brain className="w-8 h-8 text-blue-400" />
+                Cómo Funciona el Algotrading
+              </h2>
+
+              <div className="space-y-6 text-slate-100 leading-relaxed">
+                <p className="text-lg">
+                  Un sistema de trading algorítmico funciona en <strong>4 fases principales</strong>:
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 my-10">
+                  {[
+                    {
+                      number: "01",
+                      title: "Recopilación de Datos",
+                      description: "El algoritmo ingiere datos en tiempo real: precios, volúmenes, orderbook, noticias, sentimiento de redes sociales, indicadores macroeconómicos.",
+                      icon: LineChart
+                    },
+                    {
+                      number: "02",
+                      title: "Análisis Cuantitativo",
+                      description: "Aplica modelos matemáticos (Machine Learning, estadística, análisis técnico) para identificar oportunidades de trading con alta probabilidad de éxito.",
+                      icon: Brain
+                    },
+                    {
+                      number: "03",
+                      title: "Generación de Señales",
+                      description: "Cuando detecta una oportunidad que cumple los criterios predefinidos, genera una señal de compra/venta con tamaño de posición calculado.",
+                      icon: Target
+                    },
+                    {
+                      number: "04",
+                      title: "Ejecución Automática",
+                      description: "Ejecuta la orden en microsegundos a través de APIs de brokers, con gestión de riesgo integrada (stop-loss, take-profit, trailing stops).",
+                      icon: Zap
+                    }
+                  ].map((phase) => (
+                    <Card key={phase.number} className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg group hover:border-blue-500/50 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="text-4xl font-light text-blue-400/30 group-hover:text-blue-400/50 transition-colors">
+                            {phase.number}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-3">
+                              <phase.icon className="w-5 h-5 text-blue-400" />
+                              <h4 className="text-lg font-medium text-slate-100">{phase.title}</h4>
+                            </div>
+                            <p className="text-sm text-white leading-relaxed">{phase.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <h3 className="text-2xl font-medium text-slate-100 mt-12 mb-4">Ejemplo Real de Algoritmo</h3>
+                
+                <Card className="bg-slate-900/60 border border-slate-800/50 backdrop-blur-lg">
+                  <CardContent className="p-6">
+                    <pre className="text-xs md:text-sm text-blue-300 overflow-x-auto">
+{`# Estrategia: Mean Reversion en S&P 500 (ES)
+IF precio_actual < media_movil_20_dias - (2 * desviacion_estandar):
+    COMPRAR 1 contrato
+    STOP_LOSS = precio_entrada - $50
+    TAKE_PROFIT = media_movil_20_dias
+    
+ELIF precio_actual > media_movil_20_dias + (2 * desviacion_estandar):
+    VENDER 1 contrato
+    STOP_LOSS = precio_entrada + $50
+    TAKE_PROFIT = media_movil_20_dias`}
+                    </pre>
+                    <p className="text-xs text-slate-100 mt-4">
+                      Este algoritmo básico busca reversión a la media cuando el precio se aleja más de 2 desviaciones estándar.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: Advantages */}
+            <section id="ventajas" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
+                <TrendingUp className="w-8 h-8 text-blue-400" />
+                Ventajas del Trading Algorítmico
+              </h2>
+
+              <div className="space-y-6 text-white leading-relaxed">
+                <p className="text-lg">
+                  El trading algorítmico ha revolucionado los mercados financieros por razones fundamentales:
+                </p>
+
+                <div className="grid gap-6 my-10">
+                  {[
+                    {
+                      icon: Zap,
+                      title: "Velocidad Extrema",
+                      description: "Los algoritmos ejecutan trades en microsegundos. En mercados de alta frecuencia (HFT), la diferencia entre ganar y perder puede ser de 1 microsegundo. Esta velocidad permite capturar oportunidades de arbitraje que desaparecen en milisegundos.",
+                      stat: "< 1ms de latencia"
+                    },
+                    {
+                      icon: Brain,
+                      title: "Cero Emociones",
+                      description: "El mayor enemigo del trader manual es el miedo y la codicia. Los algoritmos eliminan completamente las emociones, siguiendo las reglas sin desviación. No hay FOMO (fear of missing out), no hay revenge trading, solo ejecución disciplinada.",
+                      stat: "100% objetivo"
+                    },
+                    {
+                      icon: Target,
+                      title: "Backtesting Riguroso",
+                      description: "Antes de arriesgar capital real, puedes probar tu estrategia en 10+ años de datos históricos. Esto te muestra exactamente cómo habría performado tu algoritmo en diferentes condiciones de mercado: alcista, bajista, lateral, crisis.",
+                      stat: "10+ años de datos"
+                    },
+                    {
+                      icon: Shield,
+                      title: "Gestión de Riesgo Automática",
+                      description: "Los algoritmos incluyen stop-loss, position sizing dinámico, correlación de portafolio y circuit breakers. Si el mercado se mueve en contra, el sistema cierra posiciones automáticamente sin pánico ni dudas.",
+                      stat: "Risk/Reward 1:3"
+                    },
+                    {
+                      icon: LineChart,
+                      title: "Diversificación Multi-Estrategia",
+                      description: "Puedes ejecutar múltiples estrategias no correlacionadas simultáneamente: momentum en acciones, mean reversion en forex, statistical arbitrage en crypto. Esto reduce el drawdown sistémico del portafolio.",
+                      stat: "5-10 estrategias"
+                    },
+                    {
+                      icon: Clock,
+                      title: "Operación 24/7",
+                      description: "Mientras duermes, tu algoritmo sigue monitoreando mercados globales. Captura oportunidades en mercados asiáticos, europeos y americanos sin necesidad de estar despierto 24 horas.",
+                      stat: "24/7/365"
+                    }
+                  ].map((advantage, index) => (
+                    <Card key={index} className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg hover:border-blue-500/50 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <advantage.icon className="w-6 h-6 text-blue-400" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className="text-xl font-medium text-slate-100">{advantage.title}</h4>
+                              <span className="text-xs text-blue-400 font-mono bg-blue-500/10 px-3 py-1 rounded-full">
+                                {advantage.stat}
+                              </span>
+                            </div>
+                            <p className="text-sm text-white leading-relaxed">{advantage.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Strategies */}
+            <section id="estrategias" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
+                <Award className="w-8 h-8 text-blue-400" />
+                Estrategias de Trading Algorítmico Más Rentables
+              </h2>
+
+              <div className="space-y-6 text-slate-100 leading-relaxed">
+                <p className="text-lg">
+                  Existen cientos de estrategias algorítmicas, pero estas son las más utilizadas por traders profesionales en 2025:
+                </p>
+
+                <div className="space-y-8 mt-10">
+                  <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                    <CardContent className="p-8">
+                      <h3 className="text-2xl font-medium text-slate-100 mb-4">1. Momentum Trading</h3>
+                      <p className="text-white mb-4">
+                        Identifica activos con fuerte tendencia y sigue el momentum hasta que se agota. La premisa: "lo que sube, tiende a seguir subiendo".
+                      </p>
+                      <ul className="space-y-2 text-sm text-white ml-6">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Indicadores:</strong> RSI, MACD, Bandas de Bollinger, Rate of Change</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Timeframe:</strong> 15 minutos a 4 horas</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Win Rate típico:</strong> 45-55% pero con R:R favorable (1:2 o superior)</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                    <CardContent className="p-8">
+                      <h3 className="text-2xl font-medium text-slate-100 mb-4">2. Mean Reversion (Reversión a la Media)</h3>
+                      <p className="text-white mb-4">
+                        Cuando un activo se aleja demasiado de su promedio histórico, tiende a volver. Compras cuando está "barato" y vendes cuando está "caro" relativamente.
+                      </p>
+                      <ul className="space-y-2 text-sm text-white ml-6">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Indicadores:</strong> Desviación estándar, Z-Score, Bandas de Bollinger</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Mejor en:</strong> Mercados laterales (ranging), no en tendencias fuertes</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Win Rate típico:</strong> 60-70% pero con R:R más ajustado</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                    <CardContent className="p-8">
+                      <h3 className="text-2xl font-medium text-slate-100 mb-4">3. Statistical Arbitrage (Stat Arb)</h3>
+                      <p className="text-white mb-4">
+                        Explota ineficiencias temporales entre activos correlacionados. Por ejemplo, si Apple y Microsoft suelen moverse juntas pero Apple sube 5% y Microsoft solo 1%, el algoritmo apuesta a que Microsoft alcanzará a Apple.
+                      </p>
+                      <ul className="space-y-2 text-sm text-white ml-6">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Requiere:</strong> Análisis de cointegración, pairs trading, análisis de spread</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Capital necesario:</strong> Alto (por diversificación de pares)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Riesgo:</strong> Bajo (market-neutral, no depende de dirección del mercado)</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                    <CardContent className="p-8">
+                      <h3 className="text-2xl font-medium text-slate-100 mb-4">4. Machine Learning / AI Trading</h3>
+                      <p className="text-white mb-4">
+                        Usa redes neuronales, random forests, o gradient boosting para predecir movimientos de precio basándose en patrones complejos que los humanos no pueden ver.
+                      </p>
+                      <ul className="space-y-2 text-sm text-white ml-6">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Tecnologías:</strong> TensorFlow, PyTorch, scikit-learn</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Ventaja:</strong> Adapta estrategias automáticamente a nuevos regímenes de mercado</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span><strong className="text-slate-100">Desventaja:</strong> Riesgo de overfitting (aprender ruido en lugar de señal)</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 5: Technology */}
+            <section id="tecnologia" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6">
+                Tecnología y Herramientas Necesarias
+              </h2>
+
+              <div className="space-y-6 text-slate-100 leading-relaxed">
+                <p className="text-lg">
+                  Para ejecutar trading algorítmico profesional, necesitas el <strong>stack tecnológico correcto</strong>:
+                </p>
+
+                <Card className="bg-slate-900/60 border border-slate-800/50 backdrop-blur-lg my-8">
+                  <CardContent className="p-8">
+                    <h3 className="text-xl font-medium text-slate-100 mb-6">Stack Tecnológico Típico</h3>
+                    <div className="grid md:grid-cols-2 gap-6 text-sm">
+                      <div>
+                        <h4 className="text-blue-400 font-semibold mb-3">Lenguajes de Programación</h4>
+                        <ul className="space-y-2 text-white">
+                          <li>• Python (más popular, 80% del mercado)</li>
+                          <li>• C++ (HFT de ultra-baja latencia)</li>
+                          <li>• R (análisis estadístico avanzado)</li>
+                          <li>• Java (sistemas enterprise)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-blue-400 font-semibold mb-3">Librerías Python Esenciales</h4>
+                        <ul className="space-y-2 text-white">
+                          <li>• pandas (manipulación de datos)</li>
+                          <li>• numpy (cálculos numéricos)</li>
+                          <li>• scikit-learn (machine learning)</li>
+                          <li>• backtrader / zipline (backtesting)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-blue-400 font-semibold mb-3">Brokers con APIs</h4>
+                        <ul className="space-y-2 text-white">
+                          <li>• Interactive Brokers (más completo)</li>
+                          <li>• Alpaca (crypto + stocks)</li>
+                          <li>• TD Ameritrade</li>
+                          <li>• Binance (crypto)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-blue-400 font-semibold mb-3">Infraestructura</h4>
+                        <ul className="space-y-2 text-white">
+                          <li>• VPS/Servidores dedicados</li>
+                          <li>• Co-location (para HFT)</li>
+                          <li>• Feeds de datos en tiempo real</li>
+                          <li>• Sistemas de monitoreo 24/7</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <p className="text-slate-900 dark:text-slate-100">
+                  <strong className="text-slate-900 dark:text-slate-100">Inversión inicial:</strong> Puedes empezar con $0 usando plataformas como QuantConnect o Alpaca paper trading. Para trading real con infraestructura profesional: $500-$2,000/mes en servidores + feeds de datos.
+                </p>
+
+                <Card className="bg-blue-500/5 border border-blue-500/20 backdrop-blur-lg mt-8">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <DollarSign className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">Alternativa: Plataformas Todo-en-Uno</h4>
+                        <p className="text-slate-900 dark:text-slate-100 text-sm leading-relaxed">
+                          Si no quieres gestionar toda la infraestructura, plataformas como <Link to="/algotrading" className="text-blue-400 hover:underline">AIinside.me</Link> ofrecen algoritmos pre-construidos con infraestructura incluida. $0 en costos de setup, solo pagas por el servicio.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 6: Risks */}
+            <section id="riesgos" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6 flex items-center gap-3">
+                <AlertTriangle className="w-8 h-8 text-yellow-400" />
+                Riesgos y Consideraciones Importantes
+              </h2>
+
+              <div className="space-y-6 text-slate-900 dark:text-slate-100 leading-relaxed">
+                <p className="text-lg text-slate-900 dark:text-slate-100">
+                  El trading algorítmico <strong className="text-slate-900 dark:text-slate-100">NO es una impresora de dinero</strong>. Tiene riesgos serios que debes entender:
+                </p>
+
+                <Card className="bg-yellow-500/5 border border-yellow-500/30 backdrop-blur-lg my-8">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-lg font-medium text-yellow-600 dark:text-yellow-300 mb-2">Advertencia Legal</h4>
+                        <p className="text-slate-900 dark:text-slate-100 text-sm">
+                          El trading algorítmico conlleva riesgo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. Nunca inviertas dinero que no puedas permitirte perder.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <div className="space-y-6 mt-10">
+                  <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
+                    <h4 className="text-xl font-medium text-slate-100 mb-2">1. Overfitting (Sobreajuste)</h4>
+                    <p className="text-white">
+                      Tu algoritmo puede funcionar perfectamente en backtests pero fallar en trading real porque "aprendió" patrones del pasado que no se repiten. Solución: validación out-of-sample y walk-forward testing.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
+                    <h4 className="text-xl font-medium text-slate-100 mb-2">2. Slippage y Costos de Transacción</h4>
+                    <p className="text-white">
+                      En backtests asumes que ejecutas al precio exacto. En realidad hay slippage (diferencia entre precio esperado y ejecutado) y comisiones. Estrategias de alta frecuencia son especialmente sensibles a esto.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
+                    <h4 className="text-xl font-medium text-slate-100 mb-2">3. Fallas Técnicas (Bugs)</h4>
+                    <p className="text-white">
+                      Un bug en tu código puede costar miles de dólares en minutos. Knight Capital perdió $440 millones en 45 minutos por un error de software en 2012. Testing exhaustivo y circuit breakers son críticos.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
+                    <h4 className="text-xl font-medium text-slate-100 mb-2">4. Cambios de Régimen de Mercado</h4>
+                    <p className="text-white">
+                      Una estrategia que funciona en mercado alcista puede fallar en mercado bajista. Los algoritmos necesitan adaptación constante o diversificación de estrategias para diferentes regímenes.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500/50 pl-6 py-2">
+                    <h4 className="text-xl font-medium text-slate-100 mb-2">5. Competencia Institucional</h4>
+                    <p className="text-white">
+                      Compites contra fondos con presupuestos de millones de dólares, PhDs en matemáticas y servidores co-localizados. Las oportunidades de arbitraje obvias desaparecen rápidamente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 7: Getting Started */}
+            <section id="empezar" className="mb-16 scroll-mt-20">
+              <h2 className="text-3xl md:text-4xl font-light text-slate-100 mb-6">
+                Cómo Empezar en Trading Algorítmico (Paso a Paso)
+              </h2>
+
+              <div className="space-y-6 text-slate-100 leading-relaxed">
+                <p className="text-lg">
+                  Si quieres empezar en algotrading, sigue esta <strong>ruta probada</strong>:
+                </p>
+
+                <div className="space-y-6 mt-10">
+                  {[
+                    {
+                      step: "Paso 1",
+                      title: "Aprende los Fundamentos",
+                      description: "Antes de escribir código, entiende análisis técnico, gestión de riesgo y psicología del trading. Empieza con libros sobre análisis técnico y gestión de riesgo.",
+                      time: "1-2 meses"
+                    },
+                    {
+                      step: "Paso 2",
+                      title: "Aprende Python",
+                      description: "Python es el lenguaje estándar para algotrading. Enfócate en pandas, numpy y matplotlib. Curso recomendado: 'Python for Finance' en Udemy o Coursera.",
+                      time: "2-3 meses"
+                    },
+                    {
+                      step: "Paso 3",
+                      title: "Practica Backtesting",
+                      description: "Usa plataformas como QuantConnect, Backtrader o Zipline para probar estrategias simples. Empieza con algo básico como cruce de medias móviles.",
+                      time: "1-2 meses"
+                    },
+                    {
+                      step: "Paso 4",
+                      title: "Paper Trading",
+                      description: "Ejecuta tu algoritmo en tiempo real pero con dinero simulado. Brokers como Alpaca y Interactive Brokers ofrecen paper trading gratuito.",
+                      time: "3-6 meses"
+                    },
+                    {
+                      step: "Paso 5",
+                      title: "Trading Real (Pequeño)",
+                      description: "Empieza con capital mínimo ($500-$1,000). No arriesgues más del 1-2% por trade. Monitorea resultados diariamente y ajusta.",
+                      time: "Ongoing"
+                    }
+                  ].map((item) => (
+                    <Card key={item.step} className="bg-slate-900/40 border border-slate-800/50 backdrop-blur-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-6">
+                          <div className="text-5xl font-light text-blue-400/30 flex-shrink-0">
+                            {item.step.split(' ')[1]}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className="text-xl font-medium text-slate-100">{item.title}</h4>
+                              <span className="text-xs text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">
+                                {item.time}
+                              </span>
+                            </div>
+                            <p className="text-white leading-relaxed">{item.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Card className="bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg mt-12">
+                  <CardContent className="p-8 text-center">
+                    <h3 className="text-2xl font-medium text-slate-900 dark:text-slate-100 mb-4">
+                      ¿Quieres Saltar Directamente a Algoritmos Profesionales?
+                    </h3>
+                    <p className="text-slate-900 dark:text-slate-100 mb-6 max-w-2xl mx-auto">
+                      Si no tienes tiempo de aprender programación o gestionar infraestructura, prueba nuestra plataforma de trading algorítmico lista para usar. Algoritmos institucionales sin código.
+                    </p>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      <Link to="/algotrading">
+                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg">
+                          Ver Plataforma AlgoTrading
+                          <ArrowRight className="w-5 h-5 ml-2" />
+                        </Button>
+                      </Link>
+                      <Link to="/demo">
+                        <Button size="lg" variant="outline" className="border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 px-8 py-6 text-lg">
+                          Probar Demo Gratis
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Conclusion */}
+            <section className="mb-16">
+              <Card className="bg-slate-900/60 border border-slate-800/50 backdrop-blur-lg">
+                <CardContent className="p-10">
+                  <h2 className="text-3xl font-light text-slate-900 dark:text-slate-100 mb-6">Conclusión</h2>
+                  <div className="space-y-4 text-slate-900 dark:text-slate-100 leading-relaxed">
+                    <p>
+                      El <strong className="text-slate-900 dark:text-slate-100">trading algorítmico</strong> ha democratizado el acceso a estrategias que antes solo estaban disponibles para fondos hedge multimillonarios. Con las herramientas correctas, educación y disciplina, traders individuales pueden competir en mercados globales.
+                    </p>
+                    <p>
+                      Sin embargo, no es un atajo mágico. Requiere tiempo, aprendizaje constante, gestión de riesgo estricta y adaptación continua. Los mejores traders algorítmicos combinan conocimiento técnico profundo con entendimiento fundamental de los mercados.
+                    </p>
+                    <p>
+                      Si estás listo para dar el salto, empieza con educación sólida, practica exhaustivamente en backtesting y paper trading, y cuando pases a trading real, hazlo con capital que puedas permitirte perder.
+                    </p>
+                    <p className="text-blue-400 font-medium pt-4">
+                      El futuro del trading es algorítmico. La pregunta no es si deberías aprenderlo, sino cuándo empezarás.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+          </article>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default BlogAlgoTradingGuide;
