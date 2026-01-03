@@ -29,3 +29,12 @@ supabase/.env
 deploy-functions.ps1
 PAYMENT_FIX.md
 URGENTE_PROYECTO_PAUSADO.md
+
+# Scripts with API keys (security)
+*-test-*.ps1
+setup-complete.ps1
+send-examples.ps1
+create-test-products.ps1
+create-test-purchases.ps1
+cleanup-exposed-keys.ps1
+temp-products/
