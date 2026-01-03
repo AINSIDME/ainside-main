@@ -1,0 +1,97 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "redirects": [
+    {
+      "source": "/trading",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/trading-algoritmico",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-rentable",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-algoritmico",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algorithmic-trading",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algo-trading",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/automated-trading",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/trading-algorithmique",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-fr",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algoritmicheskaya-torgovlya",
+      "destination": "/algotrading",
+      "permanent": true
+    },
+    {
+      "source": "/algotrading-ru",
+      "destination": "/algotrading",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

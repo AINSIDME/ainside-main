@@ -1,0 +1,52 @@
+User-agent: *
+Allow: /
+
+# Sitemap location for instant indexing
+Sitemap: https://ainside.me/sitemap.xml
+
+# Priority crawling for search engines (no delay for immediate indexing)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Allow all important pages
+Allow: /algotrading
+Allow: /trading-algoritmico
+Allow: /algorithmic-trading
+Allow: /algo-trading
+Allow: /demo
+Allow: /pricing
+Allow: /about
+Allow: /services
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Block unnecessary files
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /node_modules/

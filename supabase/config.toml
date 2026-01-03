@@ -1,0 +1,7 @@
+project_id = "odlxhgatqyodxdessxts"
+
+[functions.create-payment]
+verify_jwt = false
+
+[functions.capture-payment]
+verify_jwt = false

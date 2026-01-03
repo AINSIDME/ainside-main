@@ -1,0 +1,1595 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "demo": "Stratégie",
+    "crypto": "Crypto",
+    "liveDemoMini": "Live",
+    "pricing": "Tarifs",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "accessibility": "Accessibilité"
+  },
+    "paymentSuccess": {
+      "errors": {
+        "noToken": "Jeton de paiement introuvable",
+        "capture": "Erreur de confirmation du paiement",
+        "processing": "Erreur lors du traitement du paiement"
+      },
+      "toast": { "success": "Paiement confirmé avec succès !" },
+      "loading": {
+        "title": "Confirmation du paiement - AInside",
+        "desc": "Confirmation de votre paiement...",
+        "heading": "Confirmation de votre paiement...",
+        "note": "Veuillez patienter pendant que nous traitons votre transaction"
+      },
+      "error": {
+        "title": "Erreur de paiement - AInside",
+        "desc": "Erreur lors du traitement du paiement",
+        "heading": "Erreur de paiement",
+        "retry": "Réessayer le paiement"
+      },
+      "success": {
+        "title": "Paiement confirmé - AInside",
+        "desc": "Votre paiement a été confirmé avec succès",
+        "heading": "Paiement confirmé !",
+        "note": "Votre paiement a été traité avec succès"
+      },
+      "details": {
+        "title": "Détails de la transaction",
+        "plan": "Plan :",
+        "amount": "Montant :",
+        "orderId": "ID de commande :",
+        "email": "Email :",
+        "status": "Statut :",
+        "date": "Date :"
+      },
+      "cta": { "demo": "Ouvrir la démo", "guide": "Guide de démarrage", "home": "Aller à l'accueil" },
+      "footer": {
+        "email": "Vous recevrez un email de confirmation dans les prochaines minutes.",
+        "autoclose": "Cette fenêtre se fermera automatiquement dans quelques secondes."
+      }
+    },
+    "checkoutPage": {
+      "seo": { "title": "Paiement - AInside", "desc": "Finalisez votre achat en toute sécurité avec PayPal" },
+      "title": "Paiement sécurisé",
+      "subtitle": "Finalisez votre achat rapidement et en toute sécurité",
+      "selectPlan": "Sélectionnez votre plan",
+      "instrument": { "sp500": "S&P 500", "gold": "Or" },
+      "summary": "Récapitulatif",
+      "total": "Total",
+      "badges": { "secure": "Paiement 100% sécurisé" },
+      "processing": "Traitement...",
+      "payWithPaypal": "Payer ${{price}} avec PayPal",
+      "notice": "En continuant vous acceptez nos termes et conditions",
+      "intro": {
+        "title": "Premier mois à -50%",
+        "note": "S'applique uniquement aux plans mensuels"
+      },
+      "intro": {
+        "title": "Forfait mensuel fixe – premier mois à -50%",
+        "note": "S'applique uniquement aux forfaits mensuels"
+      },
+      "errors": {
+        "selectPlan": "Veuillez sélectionner un plan",
+        "create": "Erreur de création du paiement",
+        "noApproval": "Impossible d'obtenir l'URL de paiement",
+        "process": "Erreur de traitement du paiement"
+      },
+      "plans": {
+        "micro_monthly": { "name": "Micro S&P 500 Mensuel", "desc": "Accès d'un mois" },
+        "micro_annual": { "name": "Micro S&P 500 Annuel", "desc": "Accès annuel (remisé)" },
+        "mini_monthly": { "name": "Mini S&P 500 Mensuel", "desc": "Accès d'un mois" },
+        "mini_annual": { "name": "Mini S&P 500 Annuel", "desc": "Accès annuel (remisé)" },
+        "micro_gold_monthly": { "name": "Micro Or Mensuel", "desc": "Accès d'un mois" },
+        "micro_gold_annual": { "name": "Micro Or Annuel", "desc": "Accès annuel (remisé)" },
+        "mini_gold_monthly": { "name": "Mini Or Mensuel", "desc": "Accès d'un mois" },
+        "mini_gold_annual": { "name": "Mini Or Annuel", "desc": "Accès annuel (remisé)" }
+      }
+    },
+  "header": {
+    "brand": "AInside.me",
+    "toggleMenu": "Basculer le menu"
+  },
+  "homepage": {
+    "title": {
+      "main": "Trading Professionnel",
+      "subtitle": "Solutions Algorithmiques"
+    },
+    "subtitle": "Société de Développement d'Algorithmes",
+    "description": "Nous développons des algorithmes propriétaires et louons des outils analytiques aux traders et institutions. Solutions technologiques uniquement.",
+    "trust": {
+      "security": "Sécurité d'Entreprise",
+      "compliance": "Grade Institutionnel",
+      "global": "Infrastructure Globale"
+    },
+    "capabilities": {
+      "analytics": {
+        "title": "Analyses Avancées",
+        "description": "Algorithmes propriétaires pour l'analyse de marché et l'automatisation du trading"
+      },
+      "security": {
+        "title": "Sécurité d'Abord",
+        "description": "Sécurité de niveau bancaire et conformité pour les exigences institutionnelles"
+      },
+      "infrastructure": {
+        "title": "Infrastructure Robuste",
+        "description": "Stratégies optimisées pour TradeStation et MultiCharts avec support technique"
+      },
+      "protection": {
+        "title": "Protection des Risques",
+        "description": "Gestion avancée des risques et protocoles de protection"
+      }
+    },
+    "services": {
+      "title": "Ce Que Nous Faisons",
+      "subtitle": "Spécialisés dans le développement d'algorithmes et les services de location de technologie",
+      "development": {
+        "feature1": "Création d'algorithmes personnalisés",
+        "feature2": "Développement d'indicateurs techniques",
+        "feature3": "Outils d'analyse de marché"
+      },
+      "rental": {
+        "feature1": "Plans d'abonnement mensuel",
+        "feature2": "Support d'intégration de plateforme",
+        "feature3": "Support technique inclus"
+      },
+      "security": {
+        "feature1": "Chiffrement de niveau bancaire",
+        "feature2": "Cadres de conformité",
+        "feature3": "Protocoles de protection des données"
+      }
+    },
+    "stats": {
+      "algorithms": "Algorithmes",
+      "support": "Support",
+      "uptime": "Temps de Fonctionnement",
+      "clients": "Clients"
+    },
+    "values": {
+      "title": "Notre Approche",
+      "innovation": {
+        "title": "Innovation",
+        "description": "Algorithmes de pointe et technologie de trading"
+      },
+      "reliability": {
+        "title": "Fiabilité",
+        "description": "Historique prouvé avec des clients institutionnels"
+      },
+      "security": {
+        "title": "Sécurité",
+        "description": "Protection et conformité de niveau entreprise"
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Engagement envers les plus hauts standards de qualité"
+      }
+    },
+    "cta": {
+      "title": "Prêt à Louer Nos",
+      "subtitle": "Algorithmes de Trading ?",
+      "description": "Accédez à nos algorithmes de trading et outils analytiques professionnels grâce à des plans de location mensuelle flexibles.",
+      "demo": "Voir Démo en Direct",
+      "contact": "Nous Contacter",
+      "services": "Nos Services",
+      "consultation": "Planifier une Consultation"
+    },
+    "seoLinks": {
+      "title": "En Savoir Plus sur le Trading Algorithmique",
+      "subtitle": "Ressources éducatives pour maîtriser le trading automatisé",
+      "strategies": {
+        "title": "Stratégies Professionnelles",
+        "description": "Algorithmes de trading automatisé pour TradeStation/MultiCharts avec backtesting vérifiable."
+      },
+      "demo": {
+        "title": "Voir Démo en Direct",
+        "description": "Testez nos algorithmes en temps réel avec les données du marché à terme S&P 500."
+      }
+    },
+    "footer": {
+      "dataProtection": "Protection des Données",
+      "compliance": "Prêt pour la Conformité"
+    }
+  },
+  "footer": {
+    "description": "Entreprise de développement de logiciels spécialisée dans les outils éducatifs et de recherche. Nous NE sommes PAS un fournisseur de services financiers.",
+    "copyright": "© {{year}} AInside.me. Tous droits réservés.",
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos de Nous",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Légal",
+      "terms": "Conditions Générales",
+      "privacy": "Politique de Confidentialité",
+      "disclaimer": "Avertissement Légal",
+      "accessibility": "Accessibilité"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Support Contact",
+      "documentation": "Documentation",
+      "status": "État du Système"
+    },
+    "trust": {
+      "security": "Sécurité d'Entreprise",
+      "protection": "Protection des Données",
+      "compliance": "Prêt pour la Conformité"
+    }
+  },
+  "paymentCancel": {
+    "seo": { "title": "Paiement annulé - AInside", "desc": "Le paiement a été annulé" },
+    "title": "Paiement annulé",
+    "subtitle": "Vous avez annulé le processus de paiement. Aucun débit n'a été effectué.",
+    "cta": { "plans": "Voir les plans", "retry": "Réessayer le paiement", "home": "Retour à l'accueil" },
+    "help": "Besoin d'aide ?",
+    "contact": "Contactez-nous"
+  },
+  "contactPage": {
+    "form": {
+      "header": "Envoyez-nous un message",
+      "subheader": "Notre équipe de développement d'algorithmes est prête à aider pour votre demande de location d'outils",
+      "labels": {
+        "name": "Nom complet *",
+        "email": "Adresse email *",
+        "organization": "Organisation",
+        "subject": "Sujet *",
+        "message": "Message *"
+      },
+      "submit": "Envoyer le message",
+      "toast": { "title": "Message envoyé", "desc": "Merci pour votre demande. Notre équipe répondra sous un jour ouvrable." }
+    },
+    "info": {
+      "email": { "title": "Email", "desc": "Contact principal pour les demandes commerciales" },
+      "phone": { "title": "Support", "desc": "Support par email pour l'assistance technique" },
+      "address": { "title": "Plateforme", "desc": "Plateformes compatibles pour les stratégies" },
+      "response": { "title": "Délai de réponse", "content": "Généralement 24-48 heures", "desc": "Nous répondons dès que possible" }
+    },
+    "areas": {
+      "title": "Domaines de service",
+      "subtitle": "Domaines où notre équipe peut fournir une assistance experte",
+      "list": [
+        "Développement d'algorithmes",
+        "Services de location d'outils",
+        "Intégration de plateforme",
+        "Support technique",
+        "Création d'algorithmes sur mesure",
+        "Formation et documentation"
+      ]
+    },
+    "notice": {
+      "title": "Consultation sur algorithmes et outils",
+      "p1": "Notre équipe de développement est disponible pour discuter des services de location d'algorithmes et fournir des informations sur nos outils de trading et indicateurs techniques.",
+      "rememberLabel": "Rappel :",
+      "remember": "Nous développons uniquement des outils technologiques - nous ne fournissons pas de conseils financiers."
+    }
+  },
+  "liveDemo": {
+    "slides": { "ts1": "TradeStation : Entrées/Sorties et ATRStopL/S", "ts2": "TradeStation : Signal court et gestion des stops", "ts3": "TradeStation : Événement de fin de journée" },
+    "title": "Démo en direct (visuel)",
+    "description": { "part1": "L'exécution réelle de la stratégie se fait dans ", "part2": " avec ", "part3": "Cette page est une visualisation pour le contexte et l'expérience utilisateur. Pour voir des signaux réels sur votre plateforme, suivez le " },
+    "cta": { "guide": "Guide de démarrage", "guideWithPlatform": "Guide de démarrage (EasyLanguage)", "pricing": "Voir les tarifs", "install": "Installer sur ma plateforme" },
+    "chart": { "title": "Visualisation du flux (exemple)", "subtitle": "Exemple illustratif dans le navigateur" },
+    "active": "● ACTIF",
+    "gallery": { "empty": "Placez des captures dans /public/guide pour montrer des exemples réels ici." }
+  },
+  "hero": {
+    "title": "Outils de Trading Professionnel",
+    "subtitle": "Analyses avancées en temps réel pour les traders institutionnels",
+    "cta": "Voir Stream en Direct"
+  },
+  "demoPage": {
+    "badge": "SIMULATION ÉDUCATIVE",
+    "header": {
+      "title": "Simulation Visuelle de Stratégie",
+      "description": "Représentation visuelle de la façon dont un algorithme automatisé identifierait les entrées et sorties. Ceci est un exemple éducatif uniquement."
+    },
+    "disclaimer": "Cette simulation ne garantit pas les résultats futurs. Les performances affichées sont hypothétiques et à des fins éducatives uniquement.",
+    "liveChart": {
+      "title": "E-mini S&P 500 (@ES) - Simulation",
+      "subtitle": "Données historiques réelles + simulation d'entrées/sorties automatiques",
+      "instrument": "E-mini S&P 500",
+      "loading": "Chargement...",
+      "perPoint": "$50 par point",
+      "position": "Position",
+      "marketOpen": "● MARCHÉ OUVERT",
+      "marketClosed": "● MARCHÉ FERMÉ",
+      "closedMessage": "Marché Fermé: La simulation en direct est en pause. Les marchés à terme E-mini S&P 500 fonctionnent du dimanche 18h00 au vendredi 17h00 ET, avec une pause de maintenance quotidienne de 17h00-18h00 ET.",
+      "totalTrades": "Total Trades",
+      "totalPnL": "P&L Total",
+      "winningTrades": "Trades Gagnants",
+      "losingTrades": "Trades Perdants",
+      "recentTrades": "Derniers Trades",
+      "noPosition": "Aucune position active",
+      "statistics": "Statistiques",
+      "noTrades": "Pas encore de trades"
+    },
+    "cards": {
+      "card1": { "title": "Analyse de Marché", "desc": "L'algorithme analyse les mouvements de prix et les modèles en temps réel." },
+      "card2": { "title": "Signaux Automatiques", "desc": "Identifie automatiquement les points d'entrée et de sortie." },
+      "card3": { "title": "Gestion des Risques", "desc": "Gère les sorties basées sur les objectifs de profit et les stops." }
+    },
+    "disclaimerBox": {
+      "title": "Avis Important",
+      "point1": { "title": "Votre compte est 100% à vous:", "desc": "Seul vous avez accès à votre compte de trading. Nous n'avons AUCUN accès ni contrôle sur votre compte à aucun moment." },
+      "point2": { "title": "Service éducatif:", "desc": "Nous fournissons des outils automatisés et vous enseignons comment les utiliser. Nous ne fournissons AUCUN conseil financier ni ne prenons de décisions pour vous." },
+      "point3": { "title": "Enseignement, pas conseil:", "desc": "Notre service est éducatif. Nous vous enseignons comment utiliser les outils et stratégies, mais les décisions finales sont toujours les vôtres." },
+      "point4": { "title": "Votre responsabilité:", "desc": "C'est vous qui opérez votre compte. Vous devez comprendre les risques et gérer votre capital de manière responsable." },
+      "point5": "Ceci est une simulation éducative. Les performances passées ne garantissent pas les résultats futurs. Le trading comporte un risque de perte en capital."
+    },
+    "cta": { "title": "Prêt à Commencer?", "desc": "Contactez notre équipe pour en savoir plus sur notre service de location d'algorithmes.", "pricing": "Voir les Prix", "contact": "Nous Contacter" },
+    "chartType": {
+      "area": "Graphique en Aires",
+      "candlestick": "Graphique en Chandeliers"
+    }
+  },
+  "demo": {
+    "title": "Démo des Outils de Trading en Direct",
+    "subtitle": "Découvrez nos outils d'analyse en temps réel",
+    "play": "Lire",
+    "pause": "Pause",
+    "reset": "Réinitialiser",
+    "speed": "Vitesse",
+    "overlays": "Surcouches",
+    "overlaysTitle": "Surcouches d'Analyse",
+    "vwap": "VWAP",
+    "volumeProfile": "Profil de Volume",
+    "supportResistance": "Support/Résistance",
+    "trendlines": "Lignes de Tendance",
+    "fibonacciRetracements": "Retracements de Fibonacci",
+    "data": "Données",
+    "dataTitle": "Données de Marché en Temps Réel",
+    "price": "Prix",
+    "volume": "Volume",
+    "change": "Variation",
+    "high": "Haut",
+    "low": "Bas",
+    "time": "Heure",
+    "pnlSimulator": "Simulateur P&L",
+    "pnlTitle": "Simulateur de Profits et Pertes",
+    "portfolio": "Portefeuille",
+    "trades": "Trades",
+    "profit": "Profit",
+    "loss": "Perte",
+    "winRate": "Taux de Gain",
+    "sharpeRatio": "Ratio de Sharpe",
+    "maxDrawdown": "Drawdown Max",
+    "lastTick": "Dernière Mise à Jour",
+    "latency": "Latence",
+    "uptime": "Disponibilité",
+    "ready": "Prêt",
+    "manifestLoaded": "Manifest chargé",
+    "receiving": "Réception des segments HLS",
+    "fatalError": "Erreur fatale HLS. Nouvel essai...",
+    "reconnecting": "Reconnexion...",
+    "notSupported": "Votre navigateur ne supporte pas HLS",
+    "urlCopied": "URL copiée dans le presse-papiers",
+    "connected": "Connecté",
+    "copyError": "Impossible de copier l'URL",
+    "copyUrl": "Copier l'URL du stream",
+    "mute": "Muet",
+    "unmute": "Activer le son",
+    "fullscreen": "Plein écran",
+      "exitFullscreen": "Quitter le plein écran",
+      "marketOpen": "Marché Ouvert"
+  },
+  "products": {
+    "title": "Outils d'Analyse Professionnel",
+    "subtitle": "Tout ce dont vous avez besoin pour une analyse de marché avancée",
+    "realTimeData": "Données en Temps Réel",
+    "advancedAnalysis": "Analyse Avancée",
+    "institutionalGrade": "Niveau Institutionnel"
+  },
+  "about": {
+    "title": "À Propos de Nous",
+    "subtitle": "Spécialistes en technologie financière",
+    "description": "Nous développons des solutions technologiques avancées pour les institutions financières et les traders professionnels."
+  },
+  "legal": {
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "disclaimerText": "AVIS LÉGAL IMPORTANT: AInside.me est une ENTREPRISE DE DÉVELOPPEMENT LOGICIEL, PAS un fournisseur de services financiers, courtier ou conseiller en investissement. Nos outils sont UNIQUEMENT à des fins ÉDUCATIVES et de RECHERCHE. Nous ne fournissons AUCUN conseil d'investissement, recommandations ou services financiers. Le trading implique un risque substantiel de perte. Les utilisateurs sont seuls responsables de leurs décisions et résultats de trading. AInside.me décline TOUTE responsabilité pour les pertes financières, dommages ou conséquences découlant de l'utilisation de nos outils logiciels.",
+    "responsibilityText": "EXCLUSION DE RESPONSABILITÉ: En utilisant nos outils logiciels, vous reconnaissez que: (1) AInside.me est uniquement une entreprise de programmation/logiciel, (2) Nous ne fournissons AUCUN conseil financier ou recommandations, (3) Toutes les décisions de trading sont votre seule responsabilité, (4) Vous assumez TOUS les risques et responsabilités, (5) AInside.me n'est PAS responsable des pertes, dommages ou conséquences, (6) Nos outils sont uniquement à des fins éducatives/recherche, (7) Les performances passées ne garantissent pas les résultats futurs, (8) Vous ne tiendrez pas AInside.me responsable des résultats de trading."
+  },
+  "checkout": {
+    "title": "Finaliser l'Achat",
+    "agreement": "J'accepte les conditions d'utilisation",
+    "payNow": "Payer Maintenant"
+  },
+  "footer": {
+    "description": "Entreprise spécialisée dans le développement d'algorithmes de trading et la location d'outils analytiques. Nous ne fournissons PAS de conseils financiers.",
+    "copyright": "© {{year}} AInside.me. Tous droits réservés.",
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Légal",
+      "terms": "Conditions Générales",
+      "privacy": "Politique de Confidentialité",
+      "disclaimer": "Avis Légal",
+      "accessibility": "Accessibilité"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Contacter le Support",
+      "documentation": "Documentation",
+      "status": "État du Système"
+    },
+    "trust": {
+      "security": "Sécurité d'Entreprise",
+      "protection": "Protection des Données",
+      "compliance": "Conformité Réglementaire"
+    }
+  },
+  "hero": {
+    "title": "Outils d'Analyse de Trading Professionnels",
+    "subtitle": "Outils de recherche et d'analyse avancés pour le trading de contrats à terme intrajournalier. Outils éducatifs uniquement - pas de conseils d'investissement.",
+    "cta": "Voir la Démo en Direct",
+    "ctaSecondary": "En Savoir Plus"
+  },
+  "services": {
+    "badge": "Services Professionnels",
+    "title": "Développement d'Algorithmes",
+    "subtitle": "et Location d'Outils",
+    "description": "Nous développons des algorithmes de trading propriétaires et louons des outils analytiques professionnels aux traders et aux institutions financières. Solutions technologiques uniquement - pas de conseils financiers."
+  },
+  "servicesPage": {
+    "services": {
+      "dev": {
+        "title": "Développement d'Algorithmes de Trading",
+        "desc": "Nous créons des algorithmes de trading propriétaires et des outils d'analyse technique pour la recherche de marché",
+        "features": [
+          "Développement d'algorithmes personnalisés",
+          "Création d'indicateurs techniques",
+          "Backtesting et optimisation",
+          "Outils d'analyse de marché en temps réel"
+        ]
+      },
+      "rental": {
+        "title": "Service de Location d'Outils",
+        "desc": "Location mensuelle de nos algorithmes propriétaires et outils analytiques pour traders et institutions",
+        "features": [
+          "Modèle d'abonnement mensuel",
+          "Accès à tous les outils algorithmiques",
+          "Compatible avec les principales plateformes",
+          "Support technique par email"
+        ]
+      },
+      "security": {
+        "title": "Sécurité et Conformité",
+        "desc": "Protocoles de sécurité de niveau bancaire garantissant les plus hauts standards de protection des données et de conformité réglementaire",
+        "features": [
+          "Protocoles de chiffrement avancés",
+          "Systèmes d'authentification multi-facteurs",
+          "Intégration du cadre de conformité",
+          "Audits de sécurité réguliers"
+        ]
+      },
+      "integration": {
+        "title": "Intégration de Plateforme",
+        "desc": "Nos outils s'intègrent avec les principales plateformes de trading comme TradeStation, MultiCharts et autres",
+        "features": [
+          "Compatibilité EasyLanguage",
+          "Support TradeStation Global",
+          "MultiCharts PowerLanguage",
+          "Assistance à l'installation et à la configuration"
+        ]
+      }
+    },
+    "benefits": {
+      "institutional": { "title": "Niveau Institutionnel", "desc": "Solutions conçues pour répondre aux standards exigeants des institutions financières" },
+      "security": { "title": "Sécurité Prioritaire", "desc": "Protocoles de sécurité de niveau bancaire protégeant vos données les plus sensibles" },
+      "global": { "title": "Échelle Mondiale", "desc": "Infrastructure capable de supporter des opérations sur plusieurs marchés" },
+      "reliable": { "title": "Performance Fiable", "desc": "Performance cohérente et fiable quand vous en avez le plus besoin" }
+    },
+    "tech": {
+      "title": "Excellence Technologique",
+      "desc": "Notre plateforme technologique représente des années de développement et de perfectionnement, conçue spécifiquement pour répondre aux défis uniques et aux exigences des institutions financières opérant dans l'environnement de marché complexe d'aujourd'hui.",
+      "points": {
+        "p1": "Fiabilité institutionnelle éprouvée",
+        "p2": "Architecture de sécurité avancée",
+        "p3": "Optimisation de performance évolutive",
+        "p4": "Support complet de conformité"
+      },
+      "cta": { "primary": "Discuter de Vos Besoins" }
+    },
+    "impl": {
+      "title": "Approche de Mise en Œuvre",
+      "s1": { "title": "1. Évaluation et Planification", "desc": "Évaluation complète de votre infrastructure actuelle et de vos besoins" },
+      "s2": { "title": "2. Configuration Personnalisée", "desc": "Conception de solution sur mesure pour répondre à vos besoins institutionnels spécifiques" },
+      "s3": { "title": "3. Déploiement Sécurisé", "desc": "Mise en œuvre minutieuse avec perturbation minimale des opérations existantes" },
+      "s4": { "title": "4. Support Continu", "desc": "Services de surveillance, maintenance et optimisation continus" }
+    }
+  },
+  "pricing": {
+    "title": "Plans et Tarifs",
+    "subtitle": "Contrats Micro et Mini. Choisissez Mensuel ou Annuel (économisez 30%).",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "monthlyShort": "Mensuel",
+    "annualShort": "Annuel",
+    "billingCycle": "Cycle de Facturation",
+    "intro": {
+      "title": "Premier mois à 50% de réduction",
+      "note": "S'applique uniquement aux plans mensuels",
+      "on": "Activé",
+      "off": "Désactivé"
+    },
+    "save": "Économisez 30%",
+    "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
+    "chooseInstrument": "Choisissez l'Instrument",
+    "billingInfo": "Facturation mensuelle ou annuelle (30% DE RÉDUCTION sur annuel). Annulation à tout moment.",
+    "micro": {
+      "name": "Contrat Micro",
+      "price": "$99",
+      "period": "/mois",
+      "description": "Trading avec contrats micro (MES/MGC).",
+      "short": "Micro",
+      "features": [
+        "Accès à /MES (E-mini S&P 500)",
+        "Tous les indicateurs techniques",
+        "Analyse en temps réel",
+        "Mises à jour automatiques mensuelles",
+        "Support par email",
+        "Données de marché en direct",
+        "Outils éducatifs"
+      ]
+    },
+    "mini": {
+      "name": "Contrat Mini",
+      "price": "$999",
+      "period": "/mois",
+      "description": "Trading avec contrats mini (ES/GC).",
+      "short": "Mini",
+      "features": [
+        "Accès complet à /ES et /MES",
+        "Suite complète d'indicateurs",
+        "Analyses avancées",
+        "Mises à jour premium mensuelles",
+        "Support prioritaire",
+        "Données premium",
+        "Sessions de formation",
+        "Alertes personnalisées",
+        "Rapports détaillés"
+      ],
+      "popular": "Recommandé"
+    },
+    "cta": "S'Abonner",
+    "processing": "Traitement...",
+    "perMonth": "/mois",
+    "perYear": "/an",
+    "compareMicro": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "compareMini": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "feature": {
+      "instrument": "Instrument: {{instrument}} ({{symbol}})",
+      "focusInstrument": "Focus exclusif sur {{instrument}}",
+      "liveSupport": "Support chat international 24/6",
+      "secure": "Paiement sécurisé avec PayPal",
+      "updatesMonthly": "Mises à jour mensuelles incluses",
+      "noGuarantees": "Aucune garantie de performance"
+    },
+    "guarantee": "Produit numérique - Pas de remboursement après téléchargement",
+    "secure": "Sécurisé et fiable",
+    "support": "Besoin d'aide? Notre équipe est disponible 24/6.",
+    "paypalDesc": "AInside - Contrat {{plan}} - {{instrument}} ({{symbol}}) - Abonnement {{cycle}} - {{amount}}",
+    "processing": "Traitement du paiement...",
+    "loadingPaypal": "Chargement PayPal...",
+    "checkoutTitle": "Paiement Sécurisé",
+    "close": "Fermer",
+    "plan": "Plan",
+    "contract": "Contrat",
+    "cycle": "Cycle",
+    "amount": "Montant",
+    "success": "✅ Paiement effectué",
+    "thanks": "Merci pour votre achat!",
+    "error": "Erreur",
+    "errorDesc": "Le paiement n'a pas pu être traité.",
+    "securedByPaypal": "Transaction sécurisée par PayPal",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "popular": "Recommandé"
+  },
+  "tradingPage": {
+    "badge": "Trading Intelligent",
+    "title": "Qu'est-ce que le Trading?",
+    "subtitle": "Découvrez comment prendre des décisions éclairées sur les marchés financiers et pourquoi la technologie AIinside.me fait la différence",
+    "whatIs": {
+      "title": "Comprendre le Trading",
+      "p1": "Le trading est l'achat et la vente d'actifs financiers (actions, devises, cryptomonnaies, contrats à terme) dans le but de réaliser des profits en profitant des fluctuations du marché. Contrairement à l'investissement à long terme, le trading recherche des bénéfices dans des délais plus courts.",
+      "p2": "Le succès en trading ne dépend pas de la chance, mais de stratégies bien définies, d'une analyse technique rigoureuse, d'une gestion disciplinée du risque et d'un contrôle émotionnel. Les traders professionnels passent des années à perfectionner leurs systèmes et à apprendre à interpréter les modèles de marché.",
+      "dayTrading": "Opérations qui ouvrent et ferment le même jour",
+      "swingTrading": "Positions détenues pendant des jours ou des semaines",
+      "scalping": "Multiples opérations rapides avec de petits gains"
+    },
+    "goodStrategies": {
+      "title": "Comment Identifier de Bonnes Stratégies?",
+      "description": "Toutes les stratégies ne sont pas égales. Apprenez à évaluer leur efficacité",
+      "backtesting": {
+        "title": "Backtesting Rigoureux",
+        "desc": "Une bonne stratégie doit être testée avec des données historiques réelles pendant au moins 3-5 ans. Si elle a fonctionné dans le passé sous différentes conditions de marché, elle est plus susceptible de fonctionner à l'avenir."
+      },
+      "winRate": {
+        "title": "Taux de Réussite + Risque/Récompense",
+        "desc": "Vous n'avez pas besoin de gagner 90% du temps. Une stratégie avec 40% de précision mais un ratio risque/récompense de 1:3 est rentable. Ce qui compte, c'est que les gains dépassent les pertes à long terme."
+      },
+      "drawdown": {
+        "title": "Drawdown Contrôlé",
+        "desc": "Les meilleures stratégies limitent les pertes maximales. Un drawdown supérieur à 30% peut être psychologiquement dévastateur et financièrement dangereux."
+      },
+      "consistency": {
+        "title": "Cohérence Temporelle",
+        "desc": "La stratégie doit montrer une rentabilité constante mois après mois, année après année. Une série de victoires de 3 mois ne garantit rien. Recherchez des modèles d'au moins 2-3 ans minimum."
+      },
+      "warning": {
+        "title": "Attention:",
+        "desc": "Méfiez-vous des stratégies promettant 100% de précision ou des profits garantis. Le trading comporte toujours des risques. Ce qui fait la différence, c'est comment vous gérez ce risque."
+      }
+    },
+    "dangers": {
+      "title": "Ce Qu'il Faut Surveiller",
+      "description": "Le trading comporte des risques réels que vous devez connaître",
+      "overtrading": {
+        "title": "Surtrading",
+        "desc": "Ouvrir trop de trades par anxiété ou ennui. Chaque trade a des coûts (commissions, spreads) qui s'accumulent rapidement."
+      },
+      "revenge": {
+        "title": "Trading de Revanche",
+        "desc": "Essayer de récupérer les pertes immédiatement avec des trades impulsifs. C'est le moyen le plus rapide de perdre votre capital."
+      },
+      "leverage": {
+        "title": "Levier Excessif",
+        "desc": "Utiliser un levier de 100x peut multiplier les gains, mais peut également liquider votre compte en quelques minutes. Commencez avec un faible levier (2x-5x)."
+      },
+      "fomo": {
+        "title": "FOMO et Panique",
+        "desc": "Entrer dans des trades parce que \"tout le monde gagne\" ou vendre parce que \"tout le monde vend\" détruit la discipline."
+      },
+      "noStopLoss": {
+        "title": "Ne Pas Utiliser de Stop Loss",
+        "desc": "Un stop loss bien placé vous protège des pertes catastrophiques. Ne tradez jamais sans un."
+      },
+      "scams": {
+        "title": "Signaux et Groupes Telegram",
+        "desc": "95% des \"gourous\" vendant des signaux perdent de l'argent. S'ils gagnaient vraiment des millions, ils n'auraient pas besoin de vous vendre quoi que ce soit."
+      }
+    },
+    "whoUses": {
+      "title": "Qui Utilise les Outils de Trading Algorithmique?",
+      "p1": "Les outils de trading automatisé ne sont pas réservés aux institutions financières. Aujourd'hui, les traders individuels, les équipes professionnelles et les fonds d'investissement utilisent des systèmes algorithmiques pour:",
+      "point1": "Éliminer les biais émotionnels des décisions",
+      "point2": "Opérer 24/7 sans être devant l'écran",
+      "point3": "Exécuter des stratégies complexes avec une précision extrême",
+      "point4": "Backtester rapidement des idées sur des années de données historiques",
+      "point5": "Gérer plusieurs actifs simultanément",
+      "point6": "Réagir aux opportunités en millisecondes",
+      "p2": "Des traders débutants qui veulent apprendre sans risquer du capital réel, aux professionnels gérant des millions, tout le monde bénéficie de systèmes bien conçus."
+    },
+    "solution": {
+      "title": "Pourquoi AIinside.me est la Solution",
+      "subtitle": "Technologie de pointe à portée de main",
+      "p1": "AIinside.me n'est pas un autre cours de trading ou groupe de signaux. C'est une plateforme de trading algorithmique propulsée par l'IA qui vous permet de tester, optimiser et exécuter des stratégies professionnellement.",
+      "highlight": "Ce qui nous distingue:",
+      "ai": {
+        "title": "Intelligence Artificielle Réelle",
+        "desc": "Nos algorithmes analysent les modèles en temps réel, optimisent les paramètres automatiquement et s'adaptent aux conditions changeantes du marché."
+      },
+      "time": {
+        "title": "Gain de Temps Massif",
+        "desc": "Passer 8 heures par jour à analyser des graphiques? Avec AIinside.me, le système travaille pour vous. Récupérez votre vie pendant que l'IA opère 24/7."
+      },
+      "mentalPeace": {
+        "title": "Paix Mentale Totale",
+        "desc": "Fini l'anxiété d'attendre que le marché bouge. Fini l'insomnie à cause des positions ouvertes. Le système gère le risque avec des règles claires et objectives."
+      },
+      "backtesting": {
+        "title": "Backtesting Instantané",
+        "desc": "Testez n'importe quelle stratégie sur des années de données historiques en quelques secondes. Fini les calculs Excel ou manuels. Voyez des résultats réels avant de risquer un centime."
+      },
+      "timeComparison": {
+        "title": "Comparaison de Temps Réel",
+        "manual": "Trading Manuel Traditionnel",
+        "ai": "Avec AIinside.me"
+      },
+      "timeSaved": "Économie de 45-65 heures par semaine",
+      "timeSavedDesc": "C'est plus de 2 400 heures par an que vous pouvez consacrer à ce qui compte vraiment"
+    },
+    "cta": {
+      "title": "Prêt à Transformer Votre Trading?",
+      "description": "Essayez nos stratégies en démo, sans risque. Découvrez comment l'IA peut changer votre façon de trader.",
+      "demoButton": "Voir la Démo",
+      "pricingButton": "Voir les Tarifs"
+    }
+  },
+  "gettingStarted": {
+    "title": "Démarrage • EasyLanguage",
+    "description": "Compatibilité EasyLanguage (TradeStation/MultiCharts), installation, données, logique et optimisation.",
+    "deliverables": {
+      "title": "Compatibilité et livrables",
+      "compat": "Compatibilité: La stratégie est conçue pour EasyLanguage, utilisable sur TradeStation et MultiCharts (PowerLanguage). Les autres plateformes ne sont pas compatibles.",
+      "afterPay": "Après confirmation du paiement, vous recevez:",
+      "eldpla": "Package EasyLanguage: .ELD (TradeStation) et/ou .PLA (MultiCharts).",
+      "workspaces": "Espaces de travail exemples: .wsp/.mcw par instrument (ES/MES, GC/MGC).",
+      "params": "Paramètres recommandés: /params/*.json (mensuel/annuel, micro/mini).",
+      "data": "Données d'exemple: /data/*.csv pour backtest/validation.",
+      "manual": "Manuel PDF avec installation, règles et gestion des risques.",
+      "panel": "Accès au Panneau Live et support 24/6.",
+      "note": "Les liens de téléchargement sont envoyés à l'email PayPal et activés dans le panneau."
+    },
+    "requirements": {
+      "title": "Exigences minimales",
+      "conn": "Connexion stable (≥ 20 Mbps) et machine avec 8 Go de RAM ou plus.",
+      "platform": "Plateforme compatible pour exécuter: TradeStation ou MultiCharts (EasyLanguage).",
+      "provider": "Fournisseur de données/courtier activé pour les instruments choisis (ES/MES ou GC/MGC)."
+    },
+    "install": {
+      "title": "Installation EasyLanguage",
+      "s1": {
+        "title": "1) Télécharger et organiser le package",
+        "l1": "Téléchargez le ZIP depuis le lien fourni.",
+        "l2": "Extrayez vers C:/AInside (chemin court recommandé).",
+        "l3": "Structure typique: /easy-language/*.ELD|*.PLA, /workspaces, /params, /data, manual.pdf."
+      },
+      "s2": {
+        "title": "2) TradeStation (.ELD)",
+        "l1": "Fichier → Importer/Exporter EasyLanguage → Importer → sélectionner le .ELD.",
+        "l2": "Ouvrez un graphique du symbole (ES/MES ou GC/MGC), timeframe 1m/5m.",
+        "l3": "Insérez la Stratégie via Insertion → Stratégie et sélectionnez la stratégie AInside.",
+        "l4": "Définissez les Entrées selon /params/*.json (plan et cycle).",
+        "l5": "Sessions: utilisez le modèle de session recommandé (CME RTH) par instrument."
+      },
+      "s3": {
+        "title": "3) MultiCharts (.PLA) + QuoteManager",
+        "l1": "Fichier → Importer PLA → sélectionner le .PLA.",
+        "l2": "Ouvrez QuoteManager → Fichier → Importer Données → ASCII pour charger /data/*.csv.",
+        "l3": "Mappage CSV: timestamp,open,high,low,close,volume (UTC). Intervalle 1m/5m.",
+        "l4": "Sur le graphique, insérez le Signal/Study et définissez les Entrées comme /params.",
+        "l5": "Sessions: sélectionnez le bon modèle de session CME pour le symbole."
+      },
+      "s4": {
+        "title": "4) Paramètres, backtest et optimisation",
+        "l1": "Chargez les Entrées depuis /params (micro/mini, mensuel/annuel).",
+        "l2": "Backtest ≥ 2 ans; métriques: Profit Factor, Max Drawdown, Win%, Sharpe.",
+        "l3": "Optimisez dans des plages raisonnables; utilisez out-of-sample pour éviter l'overfitting.",
+        "l4": "Risque: dimensionnement des positions, stop (ATR/fixe), limites de perte quotidiennes."
+      },
+      "s5": {
+        "title": "5) Trading et meilleures pratiques",
+        "l1": "Synchronisez l'horloge système; minimisez la latence du flux.",
+        "l2": "Commencez en démo pendant 2-4 semaines avant de passer en réel.",
+        "l3": "Tenez un journal discipliné et mettez à jour lors des nouvelles versions."
+      }
+    },
+    "logic": {
+      "title": "Logique de stratégie (résumé)",
+      "desc": "Description de haut niveau (pas de code propriétaire):",
+      "l1": "Régimes: détection de contexte (tendance/range) via lookbacks et filtres.",
+      "l2": "Volatilité: seuils via ATR/moyennes pour activer/désactiver les signaux.",
+      "l3": "Entrées: modèles de continuation/pullback par régime et instrument.",
+      "l4": "Gestion: stops/objectifs dynamiques, trailing, limites quotidiennes.",
+      "note": "Les noms d'entrée et les plages suggérées sont inclus dans /params."
+    },
+    "gallery": {
+      "title": "Galerie de captures d'écran (EasyLanguage)",
+      "empty": "Placez vos images dans /public/guide nommées ts-1.png, ts-2.png, ts-3.png pour les afficher ici."
+    },
+    "slides": {
+      "ts1": "Entrées/Sorties, ligne de trade et ATRStopL/S",
+      "ts2": "Signal short avec ATRStopS et mise à jour intrabar",
+      "ts3": "Événement EndOfDay et clôture de position"
+    },
+    "tsViz": {
+      "title": "Visualisation dans TradeStation",
+      "desc": "Dans TradeStation, la stratégie affiche des flèches entrée/sortie, des lignes de trade, des étiquettes ATRStopL/S, des marqueurs Long/Short et des événements comme EndOfDay. Si vous ne les voyez pas:",
+      "l1": "Clic droit sur graphique → Format Stratégies → onglet Propriétés:",
+      "l2": "Activez 'Afficher les ordres de stratégie sur le graphique' et 'Afficher entrées/sorties'.",
+      "l3": "Dans Paramètres: activez 'Use Look-Inside-Bar Back-testing (LIBB)' à 1 tick pour des stops réalistes.",
+      "l4": "Vérifiez le modèle de Session (CME RTH) et le symbole/contrat correct (ex: MGCZ25, SILZ25).",
+      "l5": "Timeframe recommandé: 1-5 minutes; barres standard, pas Heikin Ashi.",
+      "tip": "Conseil: ouvrez le Rapport de Performance de Stratégie pour valider les métriques et la courbe d'équité."
+    },
+    "validation": {
+      "title": "Liste de contrôle de validation rapide",
+      "l1": "Symbole et expiration corrects (ES/MES ou GC/MGC; ex: MGCZ25).",
+      "l2": "Modèle de session approprié (CME RTH) et fuseau horaire attendu.",
+      "l3": "Stratégie insérée et Entrées chargées depuis /params.",
+      "l4": "LIBB/IOG configuré pour backtest réaliste; flèches/trades visibles.",
+      "l5": "Données sans lacunes: plage ≥ 2 ans pour backtest/optimisation."
+    },
+    "faq": {
+      "title": "Questions fréquemment posées (EasyLanguage)",
+      "q1": "Je ne vois pas les entrées/sorties sur le graphique",
+      "a1": "Vérifiez Format Stratégies → Propriétés: activez l'affichage des ordres/entrées et appliquez la session correcte. Assurez-vous de ne pas utiliser de barres synthétiques (Heikin Ashi).",
+      "q2": "Les résultats du backtest semblent irréalistes",
+      "a2": "Activez Look-Inside-Bar Back-testing (1 tick) et utilisez des données haute résolution. Ajustez le slippage/commissions dans Propriétés.",
+      "q3": "Les données CSV ne s'importent pas dans MultiCharts",
+      "a3": "Importez via QuoteManager → Fichier → Importer Données → ASCII avec colonnes timestamp,open,high,low,close,volume (UTC) et séparateur virgule.",
+      "q4": "Que signifient ATRStopL/ATRStopS?",
+      "a4": "Niveaux de stop dynamiques basés sur ATR pour les positions Long/Short. Ils se mettent à jour intrabar si LIBB/IOG est activé."
+    },
+    "support": {
+      "title": "Support et ressources",
+      "status": "État du service:",
+      "contact": "Contact:",
+      "docs": "Documentation générale:",
+      "viewPlans": "Voir les plans",
+      "openDemo": "Ouvrir la démo en direct"
+    }
+  },
+  "documentation": {
+    "title": "Documentation",
+    "subtitle": "Guides complets et ressources pour utiliser nos outils de trading algorithmique",
+    "gettingStarted": "Guide de Démarrage",
+    "apiReference": "Référence API",
+    "tutorials": "Tutoriels",
+    "faq": "FAQ"
+  },
+  "about": {
+    "badge": "Entreprise de Développement Logiciel",
+    "title": "À Propos",
+    "subtitle": "AInside.me",
+    "description": "Entreprise de développement logiciel spécialisée dans la création d'algorithmes de trading avancés et la location d'outils analytiques professionnels aux traders et institutions financières",
+    "missionVision": {
+      "title": "Notre Mission et Vision"
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Développer des algorithmes de trading propriétaires et louer des outils analytiques professionnels qui aident les traders et les institutions à analyser efficacement les marchés financiers. Nous nous concentrons exclusivement sur le développement technologique, pas sur les conseils financiers."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Être le développeur leader d'algorithmes de trading et d'outils analytiques, reconnu pour créer des solutions technologiques innovantes que les traders et les institutions peuvent louer pour améliorer leurs capacités d'analyse de marché."
+    },
+    "values": {
+      "title": "Valeurs Fondamentales",
+      "subtitle": "Les principes qui guident notre organisation et définissent notre engagement envers l'excellence",
+      "integrity": { "title": "Intégrité", "description": "Mener nos affaires avec les plus hauts standards éthiques et de transparence" },
+      "innovation": { "title": "Innovation", "description": "Faire progresser continuellement la technologie pour répondre aux besoins évolutifs de l'industrie" },
+      "excellence": { "title": "Excellence", "description": "Offrir une qualité supérieure dans tous les aspects de nos services et solutions" },
+      "partnership": { "title": "Partenariat", "description": "Construire des relations durables par la confiance, la collaboration et le succès partagé" }
+    },
+    "org": {
+      "title": "Notre Organisation",
+      "exec": { "name": "Direction Exécutive", "role": "Direction Stratégique", "desc": "Des décennies d'expérience combinée en technologie financière et services institutionnels" },
+      "tech": { "name": "Équipe Technologique", "role": "Innovation et Développement", "desc": "Ingénieurs et analystes experts dédiés à faire progresser les solutions de technologie financière" },
+      "ops": { "name": "Équipe Opérationnelle", "role": "Excellence de Service", "desc": "Professionnels engagés assurant une livraison fiable et la satisfaction des clients" }
+    },
+    "milestones": {
+      "title": "Notre Parcours",
+      "founded": { "title": "Fondation", "desc": "Établi pour fournir des solutions technologiques de niveau institutionnel" },
+      "innovation": { "title": "Innovation", "desc": "Avancement continu dans la technologie analytique et l'infrastructure" },
+      "global": { "title": "Portée Mondiale", "desc": "Au service des institutions financières sur plusieurs marchés" },
+      "recognition": { "title": "Reconnaissance", "desc": "Reconnu par les institutions leaders pour l'excellence technologique" }
+    }
+  },
+  "contact": {
+    "badge": "Contactez-Nous",
+    "title": "Contact",
+    "subtitle": "Nous",
+    "description": "Contactez notre équipe de développement logiciel pour en savoir plus sur nos algorithmes de trading et nos services de location d'outils analytiques",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "support": "Support",
+    "name": "Nom",
+    "message": "Message",
+    "send": "Envoyer"
+  },
+  "accessibility": {
+    "title": "Déclaration d'Accessibilité",
+    "subtitle": "Nous nous engageons à rendre nos services accessibles à tous",
+    "skipToMain": "Aller au contenu principal",
+    "skipToContent": "Aller au contenu principal",
+    "increaseFontSize": "Augmenter le Texte",
+    "decreaseFontSize": "Réduire le Texte",
+    "toggleHighContrast": "Contraste Élevé",
+    "underlineLinks": "Souligner les Liens",
+    "readableFont": "Police Lisible",
+    "reducedMotion": "Réduire les Animations",
+    "resetAll": "Réinitialiser Tout",
+    "options": "Options d'Accessibilité",
+    "short": "Accessibilité",
+    "textSize": "Taille du Texte",
+    "contrastColors": "Contraste et Couleurs",
+    "readability": "Lisibilité",
+    "motion": "Mouvement"
+  },
+  "status": {
+    "title": "État du Système",
+    "subtitle": "Surveillance en temps réel de nos services",
+    "allOperational": "Tous les Systèmes Opérationnels",
+    "degradedPerformance": "Performance Dégradée",
+    "majorOutage": "Panne Majeure",
+    "maintenance": "Maintenance",
+    "api": "API",
+    "webInterface": "Interface Web",
+    "dataFeeds": "Flux de Données"
+  },
+  "trust": {
+    "sslSecured": "SSL Sécurisé",
+    "privacyProtected": "Confidentialité Protégée",
+    "compliant": "Conforme",
+    "enterprise": "Sécurité Entreprise"
+  },
+  "chat": {
+    "title": "Chat en Direct",
+    "subtitle": "Analyse de trading en temps réel",
+    "welcome": "Bienvenue dans le chat en direct. Vous pouvez poser toute question sur le stream en direct.",
+    "assistant": "Assistant de Trading",
+    "frequentQuestions": "Questions Fréquentes",
+    "placeholder": "Écrivez votre question sur l'analyse...",
+    "writeMessage": "Écrire un message",
+    "sendMessage": "Envoyer le message",
+    "instructions": "Entrée pour envoyer • Shift+Entrée pour nouvelle ligne",
+    "backToMenu": "🔄 Retour au menu principal",
+    "questions": {
+      "q1": "Que vois-je dans ce stream en direct ?",
+      "q2": "Ce sont de vraies positions ?",
+      "q3": "Que signifient les indicateurs VWAP ?",
+      "q4": "Quel service offrez-vous exactement ?",
+      "q5": "Puis-je copier ces opérations ?",
+      "q6": "Combien coûte l'accès ?"
+    },
+    "answers": {
+      "a1": "📺 Ce stream montre du trading RÉEL sur les futures S&P 500 (/ES et /MES) avec positions actuelles, graphiques professionnels, indicateurs techniques comme VWAP et opérations en temps réel.",
+      "a2": "✅ OUI, toutes les positions montrées sont des opérations RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre capital et P&L actuels en direct.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) est le prix moyen pondéré par volume. Les lignes bleues/rouges montrent les zones institutionnelles de support/résistance que nous utilisons pour ouvrir de vraies positions.",
+      "a4": "🔧 Nous louons des OUTILS D'ÉTUDE et des indicateurs techniques pour l'analyse de marché. Ce sont des outils éducatifs, PAS de conseil financier.",
+      "a5": "📚 Vous pouvez étudier nos opérations comme matériel éducatif. Compatible SEULEMENT avec les plateformes EasyLanguage: TradeStation, TradeStation Global et MultiCharts (PowerLanguage). IMPORTANT: Pour étude seulement, pas de conseil.",
+      "a6": "💰 Location d'outils: $99/mois ou $999/an (économisez $189). Inclut accès 24/7 aux indicateurs et outils d'étude. Usage éducatif uniquement."
+    },
+    "responses": {
+      "vwap": "📊 VWAP montre le prix moyen pondéré par volume. Les lignes vous aident à identifier les niveaux institutionnels de support et résistance en temps réel.",
+      "real": "✅ OUI, toutes les positions sont RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre P&L actuel en direct et comment nous tradons réellement.",
+      "pnl": "💰 Vous voyez le P&L RÉEL de nos opérations en temps réel. Chaque gain et perte que vous voyez est avec de l'argent réel, pas simulé.",
+      "stream": "📺 Ce stream montre du trading RÉEL du S&P 500 avec positions actuelles. Vous pouvez voir de vraies opérations, pas des démonstrations.",
+      "default": "🤖 Je peux vous aider avec des questions sur le stream, indicateurs, simulateur P&L, stratégies de trading et plus. Que souhaitez-vous savoir ?",
+      "fallback": "Merci pour votre question. Un analyste répondra sous peu."
+    }
+  },
+  "pricing": {
+    "title": "Forfaits et Tarifs",
+    "subtitle": "Contrats Micro et Mini. Choisissez Mensuel ou Annuel (économisez 30%).",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "monthlyShort": "Mensuel",
+    "annualShort": "Annuel",
+    "billingCycle": "Cycle de Facturation",
+    "intro": {
+      "title": "Premier mois à -50%",
+      "note": "S'applique uniquement aux plans mensuels",
+      "on": "Activé",
+      "off": "Désactivé"
+    },
+    "save": "Économisez 30%",
+    "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
+    "chooseInstrument": "Choisir l'Instrument",
+    "billingInfo": "Facturé mensuellement • Annulation à tout moment",
+    "micro": {
+      "name": "Contrat Micro",
+      "price": "$99",
+      "period": "/mois",
+      "description": "Négociation avec contrats micro (MES/MGC).",
+      "short": "Micro",
+      "features": [
+        "Accès à /MES (E-mini S&P 500)",
+        "Tous les indicateurs techniques",
+        "Analyses en temps réel",
+        "Support par email",
+        "Données de marché en direct",
+        "Outils éducatifs"
+      ]
+    },
+    "mini": {
+      "name": "Contrat Mini",
+      "price": "$999",
+      "period": "/mois",
+      "description": "Négociation avec contrats mini (ES/GC).",
+      "short": "Mini",
+      "features": [
+        "Accès complet à /ES et /MES",
+        "Suite complète d'indicateurs",
+        "Analyses avancées",
+        "Support prioritaire",
+        "Données premium",
+        "Sessions de formation",
+        "Alertes personnalisées",
+        "Rapports détaillés"
+      ],
+      "popular": "Recommandé"
+    },
+    "cta": "S'abonner",
+    "perMonth": "/mois",
+    "perYear": "/an",
+    "compareMicro": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "compareMini": "Équivaut à {{perMonth}}/mois (avant: {{fullYear}}/an).",
+    "feature": {
+      "instrument": "Instrument: {{instrument}} ({{symbol}})",
+      "focusInstrument": "Focus exclusif sur {{instrument}}",
+      "liveSupport": "Support chat international 24/6",
+      "secure": "Paiement sécurisé avec PayPal",
+      "updatesMonthly": "Mises à jour mensuelles incluses",
+      "noGuarantees": "Aucune garantie de performance"
+    },
+    "guarantee": "Produit numérique - Pas de remboursement après téléchargement",
+    "secure": "Sécurisé et fiable",
+    "support": "Besoin d'aide ? Notre équipe est disponible 24/6.",
+    "paypalDesc": "AInside - Contrat {{plan}} - {{instrument}} ({{symbol}}) - Abonnement {{cycle}} - {{amount}}",
+    "processing": "Traitement du paiement...",
+    "loadingPaypal": "Chargement de PayPal...",
+    "checkoutTitle": "Paiement sécurisé",
+    "close": "Fermer",
+    "plan": "Forfait",
+    "contract": "Contrat",
+    "cycle": "Cycle",
+    "amount": "Montant",
+    "success": "✅ Paiement effectué",
+    "thanks": "Merci pour votre achat !",
+    "error": "Erreur",
+    "errorDesc": "Le paiement n'a pas pu être traité.",
+    "securedByPaypal": "Transaction sécurisée par PayPal",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "popular": "Recommandé"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "tradingPage": {
+    "badge": "Trading Intelligent",
+    "title": "Qu'est-ce que le Trading?",
+    "subtitle": "Découvrez comment prendre des décisions éclairées sur les marchés financiers et pourquoi la technologie d'AIinside.me fait la différence",
+    "whatIs": {
+      "title": "Comprendre le Trading",
+      "p1": "Le trading est l'achat et la vente d'actifs financiers (actions, devises, cryptomonnaies, contrats à terme) dans le but de réaliser des bénéfices en profitant des fluctuations du marché. Contrairement à l'investissement à long terme, le trading recherche des avantages à plus court terme.",
+      "p2": "Le succès dans le trading ne dépend pas de la chance, mais de stratégies bien définies, d'une analyse technique rigoureuse, d'une gestion disciplinée des risques et d'un contrôle émotionnel. Les traders professionnels passent des années à perfectionner leurs systèmes.",
+      "dayTrading": "Opérations qui s'ouvrent et se ferment le même jour",
+      "swingTrading": "Maintenir des positions pendant des jours ou des semaines",
+      "scalping": "Opérations rapides multiples avec de petits gains"
+    },
+    "goodStrategies": {
+      "title": "Comment Identifier les Bonnes Stratégies?",
+      "description": "Toutes les stratégies ne se valent pas",
+      "backtesting": {
+        "title": "Backtesting Rigoureux",
+        "desc": "Une bonne stratégie doit être testée avec des données historiques réelles pendant au moins 3 à 5 ans."
+      },
+      "winRate": {
+        "title": "Taux de Réussite + Risque/Récompense",
+        "desc": "Une stratégie avec 40% de précision mais un ratio risque/récompense de 1:3 est rentable."
+      },
+      "drawdown": {
+        "title": "Drawdown Contrôlé",
+        "desc": "Les meilleures stratégies limitent les pertes maximales. Un drawdown supérieur à 30% peut être dangereux."
+      },
+      "consistency": {
+        "title": "Cohérence Temporelle",
+        "desc": "La stratégie doit montrer une rentabilité cohérente mois après mois, année après année."
+      },
+      "warning": {
+        "title": "Avertissement:",
+        "desc": "Méfiez-vous des stratégies promettant 100% de précision. Le trading comporte toujours des risques."
+      }
+    },
+    "dangers": {
+      "title": "Ce Dont Vous Devez Vous Méfier",
+      "description": "Le trading comporte des risques réels",
+      "overtrading": {
+        "title": "Surtrading",
+        "desc": "Ouvrir trop de transactions. Chaque transaction a des coûts qui s'accumulent rapidement."
+      },
+      "revenge": {
+        "title": "Trading de Revanche",
+        "desc": "Essayer de récupérer les pertes immédiatement. C'est le moyen le plus rapide de perdre votre capital."
+      },
+      "leverage": {
+        "title": "Effet de Levier Excessif",
+        "desc": "Un effet de levier de 100x peut liquider votre compte en minutes. Commencez avec 2x-5x."
+      },
+      "fomo": {
+        "title": "FOMO et Panique",
+        "desc": "Entrer dans des transactions parce que tout le monde gagne détruit la discipline."
+      },
+      "noStopLoss": {
+        "title": "Ne Pas Utiliser de Stop Loss",
+        "desc": "Un stop loss bien placé vous protège des pertes catastrophiques."
+      },
+      "scams": {
+        "title": "Signaux et Groupes Telegram",
+        "desc": "95% des gourous vendant des signaux perdent de l'argent."
+      }
+    },
+    "whoUses": {
+      "title": "Qui Utilise les Outils de Trading Algorithmique?",
+      "p1": "Les outils de trading automatisé ne sont pas réservés aux institutions financières:",
+      "point1": "Éliminer les biais émotionnels",
+      "point2": "Opérer 24/7 automatiquement",
+      "point3": "Exécuter des stratégies complexes",
+      "point4": "Backtesting rapide",
+      "point5": "Gérer plusieurs actifs",
+      "point6": "Réagir en millisecondes",
+      "p2": "Des débutants aux professionnels, tout le monde bénéficie de systèmes bien conçus."
+    },
+    "solution": {
+      "title": "Pourquoi AIinside.me est la Solution",
+      "subtitle": "Technologie de pointe à portée de main",
+      "p1": "AIinside.me est une plateforme de trading algorithmique avec IA professionnelle.",
+      "highlight": "Ce qui nous distingue:",
+      "ai": {
+        "title": "Intelligence Artificielle Réelle",
+        "desc": "Nos algorithmes analysent en temps réel et s'adaptent aux conditions changeantes."
+      },
+      "time": {
+        "title": "Économie de Temps Massive",
+        "desc": "Le système travaille 24/7. Récupérez votre vie pendant que l'IA opère."
+      },
+      "mentalPeace": {
+        "title": "Paix Mentale Totale",
+        "desc": "Plus d'anxiété. Le système gère les risques avec des règles claires."
+      },
+      "backtesting": {
+        "title": "Backtesting Instantané",
+        "desc": "Testez n'importe quelle stratégie en secondes sur des années de données."
+      },
+      "timeComparison": {
+        "title": "Comparaison Temps Réel",
+        "manual": "Trading Manuel",
+        "ai": "Avec AIinside.me"
+      },
+      "timeSaved": "Économie de 45-65 heures/semaine",
+      "timeSavedDesc": "Plus de 2,400 heures par an pour ce qui compte vraiment"
+    },
+    "cta": {
+      "title": "Prêt à Transformer Votre Trading?",
+      "description": "Essayez nos stratégies en démo, sans risque.",
+      "demoButton": "Voir la Démo",
+      "pricingButton": "Voir les Tarifs"
+    }
+  },
+  "algoTradingPage": {
+    "badge": "Trading Systématique",
+    "title": "Trading Algorithmique",
+    "subtitle": "Stratégies EasyLanguage Professionnelles pour TradeStation et MultiCharts",
+    "cta": {
+      "demo": "Explorer la Plateforme",
+      "pricing": "Voir l'Adhésion"
+    },
+    "stats": {
+      "institutions": "Institutions",
+      "traders": "Traders Professionnels",
+      "countries": "Pays",
+      "volume": "Volume Négocié"
+    },
+    "whatIs": {
+      "title": "Qu'est-ce que le Trading Algorithmique?",
+      "p1": "Le trading algorithmique représente l'avant-garde des marchés financiers modernes : des systèmes quantitatifs qui exécutent des stratégies d'investissement via des modèles mathématiques avancés, une analyse statistique rigoureuse et une exécution automatisée à haute fréquence.",
+      "p2": "Les algorithmes permettent d'éliminer les biais émotionnels dans le trading, d'analyser les données de marché systématiquement et d'exécuter des stratégies basées sur des règles prédéfinies.",
+      "quantitative": "Analyse Quantitative",
+      "execution": "Exécution HFT",
+      "risk": "Gestion des Risques"
+    },
+    "advantages": {
+      "title": "Avantages Institutionnels",
+      "subtitle": "Pourquoi les institutions leaders choisissent les systèmes algorithmiques",
+      "precision": {
+        "title": "Précision Milimétrique",
+        "desc": "Exécution exacte des stratégies sans déviation émotionnelle. Backtesting rigoureux sur des décennies de données historiques avec validation croisée statistique."
+      },
+      "intelligence": {
+        "title": "Intelligence Artificielle Propriétaire",
+        "desc": "Machine Learning avancé qui identifie les patterns cachés, optimise les paramètres dynamiquement et s'adapte aux régimes de marché changeants en temps réel."
+      },
+      "speed": {
+        "title": "Vitesse Institutionnelle",
+        "desc": "Latence ultra-faible co-localisée. Capture les opportunités d'arbitrage en microsecondes avant que le marché ne s'ajuste. Infrastructure de niveau institutionnel."
+      },
+      "riskControl": {
+        "title": "Contrôle des Risques Sophistiqué",
+        "desc": "Stratégies avec stops et objectifs de gains prédéfinis basés sur l'ATR et la volatilité du marché."
+      },
+      "diversification": {
+        "title": "Diversification Multi-Stratégie",
+        "desc": "Portfolio d'algorithmes non corrélés : momentum, mean reversion, statistical arbitrage, market making. Réduction systématique du drawdown."
+      },
+      "transparency": {
+        "title": "Transparence Totale",
+        "desc": "Métriques institutionnelles détaillées : ratio de Sharpe, Sortino, Calmar, Maximum Drawdown, taux de gain ajusté par la volatilité. Audit complet de chaque transaction."
+      }
+    },
+    "solution": {
+      "badge": "Technologie Institutionnelle",
+      "title": "Pourquoi AIinside.me",
+      "description": "Stratégies automatisées développées avec une méthodologie systématique et un backtesting extensif sur données historiques.",
+      "infrastructure": "Investissement en Infrastructure",
+      "operation": "Opération Autonome",
+      "latency": "Latence Moyenne",
+      "cta": "Demander Accès Institutionnel"
+    },
+    "academic": {
+      "title": "Rigueur Académique",
+      "description": "Nos algorithmes sont fondés sur la recherche quantitative peer-reviewed, la théorie moderne du portefeuille (Markowitz), les modèles de volatilité stochastique (GARCH), et les frameworks de machine learning validés académiquement.",
+      "methodology": "Méthodologie Scientifique",
+      "methodologyPoints": [
+        "Hypothèses statistiquement testables",
+        "Backtesting avec analyse walk-forward",
+        "Validation hors échantillon rigoureuse",
+        "Monte Carlo pour les tests de résistance"
+      ],
+      "transparency": "Transparence Académique",
+      "transparencyPoints": [
+        "Métriques de performance ajustées au risque",
+        "Divulgation complète des hypothèses",
+        "Documentation exhaustive des stratégies",
+        "Audit vérifiable des résultats"
+      ]
+    },
+    "finalCta": {
+      "title": "Trading Automatisé Professionnel",
+      "description": "Stratégies algorithmiques avec backtesting vérifiable. Plans mensuels accessibles.",
+      "demo": "Voir Démonstration en Direct",
+      "contact": "Contacter le Support"
+    }
+  },
+  "faq": {
+    "badge": "Questions Fréquentes",
+    "title": "FAQ",
+    "subtitle": "Réponses aux questions les plus courantes sur nos stratégies et services",
+    "seo": {
+      "title": "Questions Fréquentes - AIinside.me",
+      "description": "Trouvez des réponses à vos questions sur le trading algorithmique, les stratégies, les remboursements et le support technique."
+    },
+    "categories": {
+      "general": "Général",
+      "refunds": "Remboursements et Politique",
+      "strategies": "Stratégies et Utilisation",
+      "technical": "Support Technique",
+      "investment": "Investissement et Risques"
+    },
+    "general": {
+      "q1": "Pourquoi l'AlgoTrading est-il absolument privé?",
+      "a1": "Toutes les stratégies s'exécutent directement dans votre compte broker via EasyLanguage sur TradeStation ou MultiCharts. Nous n'avons jamais accès à vos fonds, votre compte ou votre activité de trading. Le code s'exécute localement sur votre plateforme, garantissant une confidentialité et un contrôle complets.",
+      "q2": "Politique de Remboursement: Le remboursement est-il possible après téléchargement?",
+      "a2": "IMPORTANT: En tant que produit numérique téléchargeable, AUCUN REMBOURSEMENT n'est possible une fois les fichiers téléchargés. Nous recommandons d'examiner attentivement la démo et la documentation avant l'achat. Le téléchargement implique l'acceptation finale du produit.",
+      "q3": "Quelles sont les différences entre les plans Micro et Mini?",
+      "a3": "Micro offre accès à 1 stratégie éprouvée idéale pour petits comptes ($100-$1,000). Mini inclut 2 stratégies optimisées avec support prioritaire, parfait pour traders sérieux ($1,000-$5,000).",
+      "q4": "Où puis-je annuler mon abonnement?",
+      "a4": "Vous pouvez annuler votre abonnement à tout moment depuis votre panneau utilisateur dans la section 'Mon Compte' → 'Abonnements'. Vous pouvez aussi contacter le support et nous annulerons votre abonnement immédiatement."
+    },
+    "refunds": {
+      "q1": "Quel est l'investissement minimum?",
+      "a1": "Pour le plan Micro nous recommandons $100-$1,000. Pour le plan Mini nous recommandons $1,000-$5,000. Cependant, vous pouvez commencer avec moins sur compte démo pour vous familiariser avec la stratégie sans risque.",
+      "q2": "Quel est le profit attendu?",
+      "a2": "Nous ne garantissons pas de profits spécifiques car cela dépend des conditions de marché, du capital initial et de la gestion des risques. Nos stratégies ont montré des résultats historiques entre 8-25% annuel, mais les performances passées ne garantissent pas les résultats futurs.",
+      "q3": "Puis-je changer ma stratégie en milieu de mois si elle ne me convient pas?",
+      "a3": "Oui, si vous avez le plan Mini ou supérieur, vous pouvez changer entre les stratégies disponibles à tout moment. Pour le plan Micro, le changement peut être effectué lors du renouvellement de votre abonnement mensuel."
+    },
+    "strategies": {
+      "q1": "Combien de temps en moyenne ai-je besoin?",
+      "a1": "Nous recommandons d'évaluer toute stratégie pendant au moins 30-90 jours pour obtenir des résultats significatifs. Le trading algorithmique nécessite de la patience - les profits sont à moyen-long terme, pas du jour au lendemain.",
+      "q2": "Quel est l'avantage du trading algorithmique?",
+      "a2": "Élimine les émotions, opère 24/7 sans supervision, exécute les trades avec précision millimétrique, backtesting instantané sur années de données historiques, et gestion des risques systématique basée sur règles objectives.",
+      "q3": "Puis-je utiliser la stratégie sur plusieurs comptes?",
+      "a3": "La licence inclut l'utilisation sur UN compte de trading. Si vous devez utiliser sur plusieurs comptes (personnel/professionnel), contactez support@ainside.me pour des licences supplémentaires. Chaque licence supplémentaire a un coût séparé.",
+      "q4": "Quelles plateformes sont compatibles avec les stratégies?",
+      "a4": "Les stratégies sont au format EasyLanguage, compatibles UNIQUEMENT avec TradeStation et MultiCharts (PowerLanguage). Elles ne fonctionnent PAS sur TradingView, MetaTrader, NinjaTrader ou autres plateformes. Vous devez avoir TradeStation ou MultiCharts installé pour les utiliser."
+    },
+    "technical": {
+      "q1": "Comment installer le logiciel?",
+      "a1": "Après l'achat, vous recevrez des fichiers de stratégie au format EasyLanguage (.ELD pour TradeStation, .PLA pour MultiCharts), manuel d'installation PDF avec instructions étape par étape, paramètres recommandés en JSON, et accès au support technique. Importez les fichiers dans votre plateforme et testez d'abord en compte démo.",
+      "q2": "Quels sont les avantages du trading algorithmique?",
+      "a2": "Cohérence émotionnelle (pas de FOMO, panique ou revenge trading), disponibilité 24/7, exécution instantanée d'opérations complexes, backtesting scientifique, diversification multi-stratégies, et économie massive de temps (2,400+ heures par an).",
+      "q3": "Cherchez-vous une assistance supplémentaire pour appuyer votre décision?",
+      "a3": "Oui, nous offrons consultation gratuite de 30 minutes pour nouveaux clients. Contactez-nous par email (support@ainside.me) ou Telegram et un spécialiste vous guidera pour choisir la stratégie idéale selon votre profil de risque et capital.",
+      "q4": "Ai-je besoin d'expérience en programmation?",
+      "a4": "Non. Les stratégies viennent prêtes à l'emploi avec installation étape par étape. Vous devez juste suivre le manuel. Cependant, si vous souhaitez personnaliser des paramètres avancés, nous offrons support technique inclus dans tous les plans."
+    },
+    "investment": {
+      "q1": "Puis-je utiliser les stratégies sur appareils mobiles?",
+      "a1": "Les stratégies EasyLanguage nécessitent le logiciel de bureau TradeStation ou MultiCharts. Vous pouvez accéder à ces plateformes à distance via VPS (serveur privé virtuel) depuis des appareils mobiles, mais les stratégies elles-mêmes ne s'exécutent pas nativement sur smartphones ou tablettes.",
+      "q2": "Live trackrecord et backtesté",
+      "a2": "Tous nos plans incluent des rapports détaillés de backtesting (2-3 ans de données historiques) et accès aux résultats de trading en direct vérifiés. Les clients Mini+ obtiennent accès au tableau de bord en temps réel avec métriques transparentes.",
+      "q3": "Puis-je essayer gratuitement avant d'acheter?",
+      "a3": "Nous offrons une démo en direct gratuite où vous pouvez voir la stratégie opérer en temps réel. Examinez attentivement la démo et la documentation avant l'achat, car les produits numériques ne peuvent pas être remboursés après téléchargement."
+    },
+    "cta": {
+      "title": "Vous avez encore des questions?",
+      "description": "Notre équipe est là pour vous aider. Contactez-nous et nous vous répondrons sous 24 heures.",
+      "contact": "Contacter le Support",
+      "docs": "Voir Documentation"
+    }
+  },
+  "blog": {
+    "algoTradingGuide": {
+      "slug": "guide-complet-trading-algorithmique",
+      "seo": {
+        "title": "Guide Complet du Trading Algorithmique: Tout ce que Vous Devez Savoir",
+        "description": "Découvrez comment fonctionne le trading algorithmique, ses avantages, les stratégies les plus rentables et comment commencer. Guide complet avec exemples réels.",
+        "keywords": "trading algorithmique, algo trading, algorithmes de trading, stratégies automatisées, trading quantitatif, bots de trading, machine learning trading"
+      },
+      "hero": {
+        "badge": "Guide Complet",
+        "readTime": "15 min lecture",
+        "title": "Trading Algorithmique: Le Guide Définitif",
+        "description": "Tout ce que vous devez savoir sur les algorithmes de trading, des concepts de base aux stratégies institutionnelles avancées.",
+        "updated": "Récemment Mis à Jour",
+        "readers": "10,000+ lecteurs"
+      },
+      "toc": {
+        "title": "Table des Matières",
+        "items": {
+          "whatIs": "Qu'est-ce que le Trading Algorithmique?",
+          "howWorks": "Comment Fonctionne l'Algo Trading",
+          "advantages": "Avantages du Trading Algorithmique",
+          "strategies": "Stratégies les Plus Rentables",
+          "technology": "Technologie et Outils",
+          "risks": "Risques et Considérations",
+          "getStarted": "Comment Commencer"
+        }
+      },
+      "content": {
+        "whatIs": {
+          "title": "Qu'est-ce que le Trading Algorithmique?",
+          "intro1": "Le trading algorithmique (ou algo trading) est l'utilisation de programmes informatiques pour exécuter des opérations financières automatiquement, basées sur des règles mathématiques prédéfinies. Au lieu qu'un humain décide quand acheter ou vendre, un algorithme analyse le marché 24/7 et exécute des transactions en millisecondes.",
+          "intro2": "Les algorithmes de trading utilisent l'analyse quantitative, traitant des millions de données historiques pour identifier des patterns rentables. Les systèmes automatisés sont largement utilisés dans les marchés financiers modernes pour analyser les données et exécuter des opérations.",
+          "keyFact": {
+            "title": "Fait Clé",
+            "text": "Actuellement, une grande partie du volume de trading sur les marchés mondiaux est exécutée par des systèmes automatisés. L'automatisation est fondamentale dans le trading moderne."
+          },
+          "comparison": {
+            "title": "Différence entre Trading Manuel vs Algorithmique",
+            "manual": {
+              "title": "Trading Manuel",
+              "items": ["Décisions émotionnelles", "Analyse lente et subjective", "Erreurs humaines fréquentes", "Limité aux heures de marché", "Fatigue et burnout"]
+            },
+            "algo": {
+              "title": "Trading Algorithmique",
+              "items": ["Décisions objectives basées sur les données", "Analyse en microsecondes", "Précision mathématique", "Opération 24/7 automatisée", "Sans émotions ni fatigue"]
+            }
+          }
+        },
+        "howWorks": {
+          "title": "Comment Fonctionne l'Algo Trading",
+          "intro": "Un système de trading algorithmique fonctionne en 4 phases principales:",
+          "phases": [
+            {
+              "number": "01",
+              "title": "Collecte de Données",
+              "description": "L'algorithme ingère des données en temps réel: prix, volumes, carnet d'ordres, actualités, sentiment des réseaux sociaux, indicateurs macroéconomiques."
+            },
+            {
+              "number": "02",
+              "title": "Analyse Quantitative",
+              "description": "Applique des modèles mathématiques (Machine Learning, statistiques, analyse technique) pour identifier des opportunités de trading avec haute probabilité de succès."
+            },
+            {
+              "number": "03",
+              "title": "Génération de Signaux",
+              "description": "Lorsqu'il détecte une opportunité répondant aux critères prédéfinis, il génère un signal d'achat/vente avec taille de position calculée."
+            },
+            {
+              "number": "04",
+              "title": "Exécution Automatique",
+              "description": "Exécute l'ordre en microsecondes via les APIs des courtiers, avec gestion des risques intégrée (stop-loss, take-profit, trailing stops)."
+            }
+          ],
+          "exampleTitle": "Exemple d'Algorithme Réel",
+          "exampleCode": "# Stratégie: Mean Reversion sur S&P 500 (ES)\nIF prix_actuel < moyenne_mobile_20_jours - (2 * ecart_type):\n    ACHETER 1 contrat\n    STOP_LOSS = prix_entree - $50\n    TAKE_PROFIT = moyenne_mobile_20_jours\n    \nELIF prix_actuel > moyenne_mobile_20_jours + (2 * ecart_type):\n    VENDRE 1 contrat\n    STOP_LOSS = prix_entree + $50\n    TAKE_PROFIT = moyenne_mobile_20_jours",
+          "exampleNote": "Cet algorithme basique cherche une réversion à la moyenne quand le prix s'écarte de plus de 2 écarts-types."
+        },
+        "advantages": {
+          "title": "Avantages du Trading Algorithmique",
+          "intro": "Le trading algorithmique a révolutionné les marchés financiers pour des raisons fondamentales:",
+          "items": [
+            {
+              "title": "Vitesse Extrême",
+              "description": "Les algorithmes exécutent des transactions en microsecondes. Dans les marchés haute fréquence (HFT), la différence entre gagner et perdre peut être d'1 microseconde. Cette vitesse permet de capturer des opportunités d'arbitrage qui disparaissent en millisecondes.",
+              "stat": "< 1ms de latence"
+            },
+            {
+              "title": "Zéro Émotions",
+              "description": "Le plus grand ennemi du trader manuel est la peur et la cupidité. Les algorithmes éliminent complètement les émotions, suivant les règles sans déviation. Pas de FOMO, pas de revenge trading, seulement une exécution disciplinée.",
+              "stat": "100% objectif"
+            },
+            {
+              "title": "Backtesting Rigoureux",
+              "description": "Avant de risquer du capital réel, vous pouvez tester votre stratégie sur 10+ ans de données historiques. Cela montre exactement comment votre algorithme aurait performé dans différentes conditions de marché: haussier, baissier, latéral, crise.",
+              "stat": "10+ ans de données"
+            },
+            {
+              "title": "Gestion des Risques Automatique",
+              "description": "Les algorithmes incluent stop-loss, dimensionnement de position dynamique, corrélation de portefeuille et coupe-circuits. Si le marché évolue contre vous, le système ferme les positions automatiquement sans panique ni doutes.",
+              "stat": "Risk/Reward 1:3"
+            },
+            {
+              "title": "Diversification Multi-Stratégie",
+              "description": "Vous pouvez exécuter plusieurs stratégies non corrélées simultanément: momentum sur actions, mean reversion sur forex, statistical arbitrage sur crypto. Cela réduit le drawdown systémique du portefeuille.",
+              "stat": "5-10 stratégies"
+            },
+            {
+              "title": "Opération 24/7",
+              "description": "Pendant que vous dormez, votre algorithme continue de surveiller les marchés mondiaux. Capture les opportunités sur les marchés asiatiques, européens et américains sans avoir besoin d'être éveillé 24 heures.",
+              "stat": "24/7/365"
+            }
+          ]
+        },
+        "strategies": {
+          "title": "Stratégies de Trading Algorithmique les Plus Rentables",
+          "intro": "Il existe des centaines de stratégies algorithmiques, mais voici les plus utilisées par les traders professionnels en 2025:",
+          "list": [
+            {
+              "number": "1",
+              "title": "Momentum Trading",
+              "description": "Identifie les actifs avec forte tendance et suit le momentum jusqu'à épuisement. La prémisse: \"ce qui monte, tend à continuer de monter\".",
+              "details": [
+                "Indicateurs: RSI, MACD, Bandes de Bollinger, Rate of Change",
+                "Timeframe: 15 minutes à 4 heures",
+                "Win Rate typique: 45-55% mais avec R:R favorable (1:2 ou supérieur)"
+              ]
+            },
+            {
+              "number": "2",
+              "title": "Mean Reversion (Réversion à la Moyenne)",
+              "description": "Quand un actif s'écarte trop de sa moyenne historique, il tend à revenir. Vous achetez quand c'est \"bon marché\" et vendez quand c'est \"cher\" relativement.",
+              "details": [
+                "Indicateurs: Écart-type, Z-Score, Bandes de Bollinger",
+                "Meilleur dans: Marchés latéraux (ranging), pas dans fortes tendances",
+                "Win Rate typique: 60-70% mais avec R:R plus serré"
+              ]
+            },
+            {
+              "number": "3",
+              "title": "Statistical Arbitrage (Stat Arb)",
+              "description": "Exploite les inefficiences temporaires entre actifs corrélés. Par exemple, si Apple et Microsoft bougent généralement ensemble mais Apple monte de 5% et Microsoft seulement 1%, l'algorithme parie que Microsoft rattrapera Apple.",
+              "details": [
+                "Requiert: Analyse de cointégration, pairs trading, analyse de spread",
+                "Capital nécessaire: Élevé (pour diversification des paires)",
+                "Risque: Faible (market-neutral, ne dépend pas de la direction du marché)"
+              ]
+            },
+            {
+              "number": "4",
+              "title": "Machine Learning / AI Trading",
+              "description": "Utilise réseaux neuronaux, random forests, ou gradient boosting pour prédire les mouvements de prix basés sur des patterns complexes que les humains ne peuvent voir.",
+              "details": [
+                "Technologies: TensorFlow, PyTorch, scikit-learn",
+                "Avantage: Adapte automatiquement les stratégies aux nouveaux régimes de marché",
+                "Désavantage: Risque d'overfitting (apprendre le bruit au lieu du signal)"
+              ]
+            }
+          ]
+        },
+        "technology": {
+          "title": "Technologie et Outils Nécessaires",
+          "intro": "Pour exécuter du trading algorithmique professionnel, vous avez besoin du bon stack technologique:",
+          "stackTitle": "Stack Technologique Typique",
+          "categories": {
+            "languages": {
+              "title": "Langages de Programmation",
+              "items": ["Python (le plus populaire, 80% du marché)", "C++ (HFT ultra-faible latence)", "R (analyse statistique avancée)", "Java (systèmes enterprise)"]
+            },
+            "libraries": {
+              "title": "Bibliothèques Python Essentielles",
+              "items": ["pandas (manipulation de données)", "numpy (calculs numériques)", "scikit-learn (machine learning)", "backtrader / zipline (backtesting)"]
+            },
+            "brokers": {
+              "title": "Courtiers avec APIs",
+              "items": ["Interactive Brokers (le plus complet)", "Alpaca (crypto + actions)", "TD Ameritrade", "Binance (crypto)"]
+            },
+            "infrastructure": {
+              "title": "Infrastructure",
+              "items": ["VPS/Serveurs dédiés", "Co-location (pour HFT)", "Flux de données en temps réel", "Systèmes de monitoring 24/7"]
+            }
+          },
+          "investment": "Investissement initial: Vous pouvez commencer avec $0 en utilisant des plateformes comme QuantConnect ou Alpaca paper trading. Pour trading réel avec infrastructure professionnelle: $500-$2,000/mois en serveurs + flux de données.",
+          "alternative": {
+            "title": "Alternative: Plateformes Tout-en-Un",
+            "text": "Si vous ne voulez pas gérer toute l'infrastructure, des plateformes comme AIinside.me offrent des algorithmes pré-construits avec infrastructure incluse. $0 en coûts de setup, vous payez seulement pour le service."
+          }
+        },
+        "risks": {
+          "title": "Risques et Considérations Importantes",
+          "intro": "Le trading algorithmique N'EST PAS une imprimante à billets. Il a des risques sérieux que vous devez comprendre:",
+          "warning": {
+            "title": "Avertissement Légal",
+            "text": "Le trading algorithmique comporte un risque de perte de capital. Les résultats passés ne garantissent pas les résultats futurs. N'investissez jamais d'argent que vous ne pouvez vous permettre de perdre."
+          },
+          "list": [
+            {
+              "number": "1",
+              "title": "Overfitting (Surajustement)",
+              "description": "Votre algorithme peut fonctionner parfaitement en backtests mais échouer en trading réel parce qu'il a \"appris\" des patterns du passé qui ne se répètent pas. Solution: validation out-of-sample et walk-forward testing."
+            },
+            {
+              "number": "2",
+              "title": "Slippage et Coûts de Transaction",
+              "description": "En backtests vous supposez que vous exécutez au prix exact. En réalité il y a du slippage (différence entre prix attendu et exécuté) et des commissions. Les stratégies haute fréquence sont particulièrement sensibles à cela."
+            },
+            {
+              "number": "3",
+              "title": "Défaillances Techniques (Bugs)",
+              "description": "Un bug dans votre code peut coûter des milliers de dollars en minutes. Knight Capital a perdu $440 millions en 45 minutes à cause d'une erreur logicielle en 2012. Tests exhaustifs et coupe-circuits sont critiques."
+            },
+            {
+              "number": "4",
+              "title": "Changements de Régime de Marché",
+              "description": "Une stratégie qui fonctionne en marché haussier peut échouer en marché baissier. Les algorithmes nécessitent adaptation constante ou diversification de stratégies pour différents régimes."
+            },
+            {
+              "number": "5",
+              "title": "Concurrence Institutionnelle",
+              "description": "Vous êtes en compétition avec des fonds ayant des budgets de millions de dollars, des PhDs en mathématiques et des serveurs co-localisés. Les opportunités d'arbitrage évidentes disparaissent rapidement."
+            }
+          ]
+        },
+        "getStarted": {
+          "title": "Comment Commencer en Trading Algorithmique (Étape par Étape)",
+          "intro": "Si vous voulez commencer en algo trading, suivez ce chemin éprouvé:",
+          "steps": [
+            {
+              "step": "Étape 1",
+              "title": "Apprendre les Fondamentaux",
+              "description": "Avant d'écrire du code, comprenez l'analyse technique, la gestion des risques et la psychologie du trading. Commencez avec des livres sur l'analyse technique et la gestion des risques.",
+              "time": "1-2 mois"
+            },
+            {
+              "step": "Étape 2",
+              "title": "Apprendre Python",
+              "description": "Python est le langage standard pour l'algo trading. Concentrez-vous sur pandas, numpy et matplotlib. Cours recommandé: 'Python for Finance' sur Udemy ou Coursera.",
+              "time": "2-3 mois"
+            },
+            {
+              "step": "Étape 3",
+              "title": "Pratiquer le Backtesting",
+              "description": "Utilisez des plateformes comme QuantConnect, Backtrader ou Zipline pour tester des stratégies simples. Commencez avec quelque chose de basique comme le croisement de moyennes mobiles.",
+              "time": "1-2 mois"
+            },
+            {
+              "step": "Étape 4",
+              "title": "Paper Trading",
+              "description": "Exécutez votre algorithme en temps réel mais avec de l'argent simulé. Des courtiers comme Alpaca et Interactive Brokers offrent du paper trading gratuit.",
+              "time": "3-6 mois"
+            },
+            {
+              "step": "Étape 5",
+              "title": "Trading Réel (Petit)",
+              "description": "Commencez avec un capital minimum ($500-$1,000). Ne risquez pas plus de 1-2% par trade. Surveillez les résultats quotidiennement et ajustez.",
+              "time": "Continu"
+            }
+          ],
+          "cta": {
+            "title": "Vous Voulez Passer Directement aux Algorithmes Professionnels?",
+            "description": "Si vous n'avez pas le temps d'apprendre la programmation ou de gérer l'infrastructure, essayez notre plateforme de trading algorithmique prête à l'emploi. Algorithmes institutionnels sans code.",
+            "button1": "Voir la Plateforme AlgoTrading",
+            "button2": "Essayer la Démo Gratuite"
+          }
+        },
+        "conclusion": {
+          "title": "Conclusion",
+          "paragraphs": [
+            "Le trading algorithmique a démocratisé l'accès à des stratégies qui n'étaient auparavant disponibles que pour les hedge funds multimillionnaires. Avec les bons outils, l'éducation et la discipline, les traders individuels peuvent concurrencer sur les marchés mondiaux.",
+            "Cependant, ce n'est pas un raccourci magique. Cela nécessite du temps, un apprentissage constant, une gestion des risques stricte et une adaptation continue. Les meilleurs traders algorithmiques combinent une connaissance technique approfondie avec une compréhension fondamentale des marchés.",
+            "Si vous êtes prêt à franchir le pas, commencez avec une éducation solide, pratiquez exhaustivement en backtesting et paper trading, et quand vous passez au trading réel, faites-le avec du capital que vous pouvez vous permettre de perdre.",
+            "L'avenir du trading est algorithmique. La question n'est pas de savoir si vous devriez l'apprendre, mais quand vous commencerez."
+          ]
+        }
+      }
+    }
+  }
+}
