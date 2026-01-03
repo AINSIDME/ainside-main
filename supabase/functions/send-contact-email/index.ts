@@ -115,7 +115,7 @@ async function sendEmailNotification(data: ContactMessage): Promise<boolean> {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'AIinside <onboarding@resend.dev>',
+          from: 'AInside <onboarding@resend.dev>',
           to: ['jonathangolubok@gmail.com'],
           subject: `Contact Form: ${data.subject}`,
           html: `
@@ -152,7 +152,7 @@ async function sendEmailNotification(data: ContactMessage): Promise<boolean> {
             to: [{ email: 'jonathangolubok@gmail.com' }],
             subject: `Contact Form: ${data.subject}`
           }],
-          from: { email: 'noreply@ainside.me', name: 'AIinside Contact' },
+          from: { email: 'noreply@ainside.me', name: 'AInside Contact' },
           content: [{
             type: 'text/html',
             value: `
@@ -195,7 +195,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message Confirmation - AIinside</title>
+  <title>Message Confirmation - AInside</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f8fafc;">
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc;">
@@ -206,7 +206,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
           <!-- Header with Logo -->
           <tr>
             <td style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
-              <img src="https://ainside.me/brand/logo-master.png" alt="AIinside Logo" style="width: 180px; height: auto; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;" />
+              <img src="https://ainside.me/brand/logo-mono-white.png" alt="AInside Logo" style="width: 200px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
               <p style="margin: 8px 0 0; color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">
                 Algorithmic Trading Solutions
               </p>
@@ -239,7 +239,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
                 Best regards,
               </p>
               <p style="margin: 0; color: #1e293b; font-size: 16px; font-weight: 500;">
-                The AIinside Team
+                The AInside Team
               </p>
             </td>
           </tr>
@@ -251,7 +251,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
                 <tr>
                   <td style="text-align: center;">
                     <p style="margin: 0 0 15px; color: #64748b; font-size: 14px;">
-                      <strong style="color: #334155;">AIinside.me</strong> - Professional Algorithmic Trading Tools
+                      <strong style="color: #334155;">AInside.me</strong> - Professional Algorithmic Trading Tools
                     </p>
                     <p style="margin: 0 0 10px; color: #94a3b8; font-size: 12px;">
                       Compatible with TradeStation & MultiCharts
@@ -262,7 +262,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
                       </a>
                     </div>
                     <p style="margin: 15px 0 0; color: #94a3b8; font-size: 11px;">
-                      © ${new Date().getFullYear()} AIinside. All rights reserved.
+                      © ${new Date().getFullYear()} AInside. All rights reserved.
                     </p>
                   </td>
                 </tr>
@@ -312,9 +312,9 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'AIinside <noreply@ainside.me>',
+          from: 'AInside <noreply@ainside.me>',
           to: [data.email],
-          subject: `Message Received - AIinside Support`,
+          subject: `Message Received - AInside Support`,
           html: emailHTML
         })
       })
@@ -340,7 +340,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
             to: [{ email: data.email }],
             subject: 'Message Received - AIinside Support'
           }],
-          from: { email: 'noreply@ainside.me', name: 'AIinside' },
+          from: { email: 'noreply@ainside.me', name: 'AInside' },
           content: [{
             type: 'text/html',
             value: emailHTML
