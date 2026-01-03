@@ -115,7 +115,7 @@ async function sendEmailNotification(data: ContactMessage): Promise<boolean> {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'AIinside Contact <noreply@ainside.me>',
+          from: 'AIinside <onboarding@resend.dev>',
           to: ['jonathangolubok@gmail.com'],
           subject: `Contact Form: ${data.subject}`,
           html: `
