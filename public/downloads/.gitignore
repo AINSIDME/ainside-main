@@ -1,0 +1,11 @@
+# Ignore actual product files (only keep README.md)
+*.pdf
+*.zip
+*.rar
+*.7z
+*.exe
+*.dmg
+
+# Keep folder structure
+!.gitignore
+!README.md
