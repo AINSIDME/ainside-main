@@ -35,7 +35,7 @@ const Trading = () => {
           </h1>
           
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            {t('tradingPage.subtitle', 'Descubre cómo tomar decisiones informadas en los mercados financieros y por qué la tecnología de AIinside.me marca la diferencia')}
+            {t('tradingPage.subtitle', 'Descubre cómo tomar decisiones informadas en los mercados financieros y por qué la tecnología de AInside.me marca la diferencia')}
           </p>
         </div>
 
@@ -243,14 +243,14 @@ const Trading = () => {
           </Card>
         </section>
 
-        {/* AIinside.me Solution */}
+        {/* AInside.me Solution */}
         <section className="mb-20">
           <Card className="bg-gradient-to-br from-blue-900/30 via-cyan-900/20 to-blue-900/30 border-cyan-500/30 backdrop-blur">
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
                 <Zap className="w-8 h-8 text-cyan-400" />
                 <CardTitle className="text-3xl text-white">
-                  {t('tradingPage.solution.title', 'Por Qué AIinside.me es la Solución')}
+                  {t('tradingPage.solution.title', 'Por Qué AInside.me es la Solución')}
                 </CardTitle>
               </div>
               <CardDescription className="text-lg text-cyan-200">
@@ -260,7 +260,7 @@ const Trading = () => {
             <CardContent className="space-y-8">
               <div className="text-slate-200 text-lg leading-relaxed space-y-4">
                 <p>
-                  {t('tradingPage.solution.p1', 'AIinside.me no es otro curso de trading ni un grupo de señales. Es una plataforma de trading algorítmico con IA que te permite probar, optimizar y ejecutar estrategias de manera profesional.')}
+                  {t('tradingPage.solution.p1', 'AInside.me no es otro curso de trading ni un grupo de señales. Es una plataforma de trading algorítmico con IA que te permite probar, optimizar y ejecutar estrategias de manera profesional.')}
                 </p>
 
                 <p className="text-cyan-300 font-semibold text-xl">
@@ -280,7 +280,7 @@ const Trading = () => {
                   {
                     icon: Clock,
                     title: t('tradingPage.solution.time.title', 'Ahorro Masivo de Tiempo'),
-                    description: t('tradingPage.solution.time.desc', '¿Pasas 8 horas diarias analizando gráficos? Con AIinside.me, el sistema trabaja por ti. Recupera tu vida mientras la IA opera 24/7.'),
+                    description: t('tradingPage.solution.time.desc', '¿Pasas 8 horas diarias analizando gráficos? Con AInside.me, el sistema trabaja por ti. Recupera tu vida mientras la IA opera 24/7.'),
                     gradient: 'from-blue-500/20 to-cyan-500/20',
                     border: 'border-blue-500/30'
                   },
@@ -332,7 +332,7 @@ const Trading = () => {
 
                   <div className="space-y-3">
                     <h5 className="font-semibold text-green-400 text-lg">
-                      {t('tradingPage.solution.timeComparison.ai', 'Con AIinside.me')}
+                      {t('tradingPage.solution.timeComparison.ai', 'Con AInside.me')}
                     </h5>
                     <ul className="space-y-2 text-slate-300">
                       <li>• 30 min configurando estrategia (1 vez)</li>

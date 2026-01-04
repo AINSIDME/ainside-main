@@ -22,7 +22,8 @@ serve(async (req) => {
       });
     }
 
-    const { plan, intro } = await req.json();
+    const { plan, intro, language } = await req.json();
+    const userLang = language || 'en';
 
     // 🔐 Mapeo de planes en el servidor
     const PLANS: Record<
@@ -166,6 +167,7 @@ serve(async (req) => {
           description: applyIntro
             ? `${selected.description} - First month 50% off`
             : selected.description,
+          custom_id: `${plan}|${userLang}`, // Store language in custom_id
         },
       ],
       application_context: {

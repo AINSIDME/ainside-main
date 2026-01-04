@@ -1,5 +1,4 @@
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
-
+import { serve } from "https://deno.land/std@0.177.0/http/server.ts";import { getEmailTranslation } from "./email-translations.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -102,12 +101,17 @@ serve(async (req) => {
     
     // Extract payment details
     const capture = result?.purchase_units?.[0]?.payments?.captures?.[0];
+    const customId = result?.purchase_units?.[0]?.custom_id || '';
     const payerEmail = result?.payer?.email_address;
     const payerName = result?.payer?.name?.given_name + ' ' + (result?.payer?.name?.surname || '');
     const amount = capture?.amount?.value;
     const currency = capture?.amount?.currency_code;
     const status = result?.status;
     const planName = result?.purchase_units?.[0]?.description;
+    
+    // Extract language from custom_id (format: "plan|language")
+    const [, userLanguage] = customId.split('|');
+    const emailLanguage = userLanguage || 'en';
 
     // Verify payment is COMPLETED and APPROVED
     if (status !== 'COMPLETED' || capture?.status !== 'COMPLETED') {
@@ -141,7 +145,8 @@ serve(async (req) => {
       planName,
       amount,
       currency,
-      orderId: result.id
+      orderId: result.id,
+      language: emailLanguage
     });
 
     const debugId = captureResponse.headers.get("paypal-debug-id");
@@ -223,6 +228,46 @@ async function storePurchase(data: {
   }
 }
 
+function getPlanFeatures(planType: string, lang: string) {
+  const features: Record<string, Record<string, string[]>> = {
+    'micro-sp500': {
+      en: ['📈 Micro E-mini S&P 500 (MES) contract', '🎯 Exclusive focus on S&P 500', '📊 Algorithms optimized for indices', '💻 Compatible with EasyLanguage platforms', '💬 24/6 international support', '🔄 Monthly updates included', '🔒 Secure PayPal checkout'],
+      es: ['📈 Contrato Micro E-mini S&P 500 (MES)', '🎯 Enfoque exclusivo en S&P 500', '📊 Algoritmos optimizados para índices', '💻 Compatible con plataformas EasyLanguage', '💬 Soporte internacional 24/6', '🔄 Actualizaciones mensuales incluidas', '🔒 Checkout seguro con PayPal'],
+      fr: ['📈 Contrat Micro E-mini S&P 500 (MES)', '🎯 Focus exclusif sur S&P 500', '📊 Algorithmes optimisés pour les indices', '💻 Compatible avec les plateformes EasyLanguage', '💬 Support international 24/6', '🔄 Mises à jour mensuelles incluses', '🔒 Paiement sécurisé via PayPal'],
+      ru: ['📈 Контракт Micro E-mini S&P 500 (MES)', '🎯 Эксклюзивный фокус на S&P 500', '📊 Алгоритмы оптимизированы для индексов', '💻 Совместимость с платформами EasyLanguage', '💬 Международная поддержка 24/6', '🔄 Ежемесячные обновления включены', '🔒 Безопасная оплата через PayPal'],
+      ar: ['📈 عقد Micro E-mini S&P 500 (MES)', '🎯 تركيز حصري على S&P 500', '📊 خوارزميات محسّنة للمؤشرات', '💻 متوافق مع منصات EasyLanguage', '💬 دعم دولي 24/6', '🔄 تحديثات شهرية مضمنة', '🔒 دفع آمن عبر PayPal'],
+      he: ['📈 חוזה Micro E-mini S&P 500 (MES)', '🎯 התמקדות בלעדית ב-S&P 500', '📊 אלגוריתמים מותאמים למדדים', '💻 תואם לפלטפורמות EasyLanguage', '💬 תמיכה בינלאומית 24/6', '🔄 עדכונים חודשיים כלולים', '🔒 תשלום מאובטח דרך PayPal']
+    },
+    'micro-gold': {
+      en: ['🥇 Micro Gold (MGC) contract', '🎯 Exclusive focus on Gold', '📊 Algorithms optimized for commodities', '💻 Compatible with EasyLanguage platforms', '💬 24/6 international support', '🔄 Monthly updates included', '🔒 Secure PayPal checkout'],
+      es: ['🥇 Contrato Micro Gold (MGC)', '🎯 Enfoque exclusivo en Oro', '📊 Algoritmos optimizados para commodities', '💻 Compatible con plataformas EasyLanguage', '💬 Soporte internacional 24/6', '🔄 Actualizaciones mensuales incluidas', '🔒 Checkout seguro con PayPal'],
+      fr: ['🥇 Contrat Micro Gold (MGC)', '🎯 Focus exclusif sur l\'Or', '📊 Algorithmes optimisés pour les matières premières', '💻 Compatible avec les plateformes EasyLanguage', '💬 Support international 24/6', '🔄 Mises à jour mensuelles incluses', '🔒 Paiement sécurisé via PayPal'],
+      ru: ['🥇 Контракт Micro Gold (MGC)', '🎯 Эксклюзивный фокус на золоте', '📊 Алгоритмы оптимизированы для сырьевых товаров', '💻 Совместимость с платформами EasyLanguage', '💬 Международная поддержка 24/6', '🔄 Ежемесячные обновления включены', '🔒 Безопасная оплата через PayPal'],
+      ar: ['🥇 عقد Micro Gold (MGC)', '🎯 تركيز حصري على الذهب', '📊 خوارزميات محسّنة للسلع', '💻 متوافق مع منصات EasyLanguage', '💬 دعم دولي 24/6', '🔄 تحديثات شهرية مضمنة', '🔒 دفع آمن عبر PayPal'],
+      he: ['🥇 חוזה Micro Gold (MGC)', '🎯 התמקדות בלעדית בזהב', '📊 אלגוריתמים מותאמים לסחורות', '💻 תואם לפלטפורמות EasyLanguage', '💬 תמיכה בינלאומית 24/6', '🔄 עדכונים חודשיים כלולים', '🔒 תשלום מאובטח דרך PayPal']
+    },
+    'mini-sp500': {
+      en: ['📈 E-mini S&P 500 (ES) contract', '🎯 Exclusive focus on S&P 500', '📊 Advanced algorithms for indices', '💻 Compatible with EasyLanguage platforms', '💬 24/6 international support', '🔄 Monthly updates included', '🔒 Secure PayPal checkout', '⚡ Priority execution'],
+      es: ['📈 Contrato E-mini S&P 500 (ES)', '🎯 Enfoque exclusivo en S&P 500', '📊 Algoritmos avanzados para índices', '💻 Compatible con plataformas EasyLanguage', '💬 Soporte internacional 24/6', '🔄 Actualizaciones mensuales incluidas', '🔒 Checkout seguro con PayPal', '⚡ Ejecución prioritaria'],
+      fr: ['📈 Contrat E-mini S&P 500 (ES)', '🎯 Focus exclusif sur S&P 500', '📊 Algorithmes avancés pour les indices', '💻 Compatible avec les plateformes EasyLanguage', '💬 Support international 24/6', '🔄 Mises à jour mensuelles incluses', '🔒 Paiement sécurisé via PayPal', '⚡ Exécution prioritaire'],
+      ru: ['📈 Контракт E-mini S&P 500 (ES)', '🎯 Эксклюзивный фокус на S&P 500', '📊 Продвинутые алгоритмы для индексов', '💻 Совместимость с платформами EasyLanguage', '💬 Международная поддержка 24/6', '🔄 Ежемесячные обновления включены', '🔒 Безопасная оплата через PayPal', '⚡ Приоритетное исполнение'],
+      ar: ['📈 عقد E-mini S&P 500 (ES)', '🎯 تركيز حصري على S&P 500', '📊 خوارزميات متقدمة للمؤشرات', '💻 متوافق مع منصات EasyLanguage', '💬 دعم دولي 24/6', '🔄 تحديثات شهرية مضمنة', '🔒 دفع آمن عبر PayPal', '⚡ تنفيذ ذو أولوية'],
+      he: ['📈 חוזה E-mini S&P 500 (ES)', '🎯 התמקדות בלעדית ב-S&P 500', '📊 אלגוריתמים מתקדמים למדדים', '💻 תואם לפלטפורמות EasyLanguage', '💬 תמיכה בינלאומית 24/6', '🔄 עדכונים חודשיים כלולים', '🔒 תשלום מאובטח דרך PayPal', '⚡ ביצוע בעדיפות']
+    },
+    'mini-gold': {
+      en: ['🥇 Gold (GC) contract', '🎯 Exclusive focus on Gold', '📊 Advanced algorithms for commodities', '💻 Compatible with EasyLanguage platforms', '💬 24/6 international support', '🔄 Monthly updates included', '🔒 Secure PayPal checkout', '⚡ Priority execution'],
+      es: ['🥇 Contrato Gold (GC)', '🎯 Enfoque exclusivo en Oro', '📊 Algoritmos avanzados para commodities', '💻 Compatible con plataformas EasyLanguage', '💬 Soporte internacional 24/6', '🔄 Actualizaciones mensuales incluidas', '🔒 Checkout seguro con PayPal', '⚡ Ejecución prioritaria'],
+      fr: ['🥇 Contrat Gold (GC)', '🎯 Focus exclusif sur l\'Or', '📊 Algorithmes avancés pour les matières premières', '💻 Compatible avec les plateformes EasyLanguage', '💬 Support international 24/6', '🔄 Mises à jour mensuelles incluses', '🔒 Paiement sécurisé via PayPal', '⚡ Exécution prioritaire'],
+      ru: ['🥇 Контракт Gold (GC)', '🎯 Эксклюзивный фокус на золоте', '📊 Продвинутые алгоритмы для сырьевых товаров', '💻 Совместимость с платформами EasyLanguage', '💬 Международная поддержка 24/6', '🔄 Ежемесячные обновления включены', '🔒 Безопасная оплата через PayPal', '⚡ Приоритетное исполнение'],
+      ar: ['🥇 عقد Gold (GC)', '🎯 تركيز حصري على الذهب', '📊 خوارزميات متقدمة للسلع', '💻 متوافق مع منصات EasyLanguage', '💬 دعم دولي 24/6', '🔄 تحديثات شهرية مضمنة', '🔒 دفع آمن عبر PayPal', '⚡ تنفيذ ذو أولوية'],
+      he: ['🥇 חוזה Gold (GC)', '🎯 התמקדות בלעדית בזהב', '📊 אלגוריתמים מתקדמים לסחורות', '💻 תואם לפלטפורמות EasyLanguage', '💬 תמיכה בינלאומית 24/6', '🔄 עדכונים חודשיים כלולים', '🔒 תשלום מאובטח דרך PayPal', '⚡ ביצוע בעדיפות']
+    }
+  };
+
+  const langCode = lang.toLowerCase().split('-')[0];
+  return features[planType]?.[langCode] || features[planType]?.['en'] || [];
+}
+
 async function sendProductEmail(data: {
   email: string;
   name: string;
@@ -230,6 +275,7 @@ async function sendProductEmail(data: {
   amount: string;
   currency: string;
   orderId: string;
+  language?: string;
 }): Promise<boolean> {
   try {
     const resendKey = Deno.env.get('RESEND_API_KEY');
@@ -239,6 +285,9 @@ async function sendProductEmail(data: {
       return false;
     }
 
+    // Get translations for user's language
+    const t = getEmailTranslation(data.language || 'en');
+
     // Determine plan type and instrument from plan name
     const isMicro = data.planName.toLowerCase().includes('micro');
     const isMini = data.planName.toLowerCase().includes('mini');
@@ -247,15 +296,28 @@ async function sendProductEmail(data: {
     const isMonthly = data.planName.toLowerCase().includes('mensual') || data.planName.toLowerCase().includes('monthly') || data.planName.toLowerCase().includes('mes');
     const isAnnual = data.planName.toLowerCase().includes('anual') || data.planName.toLowerCase().includes('annual') || data.planName.toLowerCase().includes('año');
     
+    // Calculate expiration time based on plan type (Mini plans get more time)
+    const downloadHours = (isMini) ? 48 : 24; // Mini: 48 hours, Micro: 24 hours
+    const expirationDate = new Date(Date.now() + downloadHours * 60 * 60 * 1000);
+    
     // Billing cycle info
     const billingInfo = {
-      cycle: isAnnual ? 'Anual' : 'Mensual',
-      renewalDate: new Date(Date.now() + (isAnnual ? 365 : 30) * 24 * 60 * 60 * 1000).toLocaleDateString('es-ES', { 
+      cycle: isAnnual ? t.annual : t.monthly,
+      renewalDate: new Date(Date.now() + (isAnnual ? 365 : 30) * 24 * 60 * 60 * 1000).toLocaleDateString(data.language || 'en', { 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
       }),
-      benefit: isAnnual ? '💰 Ahorras 30% con el plan anual' : '📅 Renovación mensual automática'
+      benefit: isAnnual ? t.savings : t.autoRenewal,
+      expirationDateTime: expirationDate.toLocaleString(data.language || 'en', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }),
+      downloadHours: downloadHours
     };
 
     // Determine plan key
@@ -278,7 +340,8 @@ async function sendProductEmail(data: {
           '📈 Contrato Micro E-mini S&P 500 (MES)',
           '🎯 Enfoque exclusivo en S&P 500',
           '📊 Algoritmos optimizados para índices',
-          '💬 Soporte internacional 24/6',
+          '� Compatible con plataformas EasyLanguage',
+          '�💬 Soporte internacional 24/6',
           '🔄 Actualizaciones mensuales incluidas',
           '🔒 Checkout seguro con PayPal'
         ]
@@ -293,7 +356,8 @@ async function sendProductEmail(data: {
           '🥇 Contrato Micro Gold (MGC)',
           '🎯 Enfoque exclusivo en Oro',
           '📊 Algoritmos optimizados para commodities',
-          '💬 Soporte internacional 24/6',
+          '� Compatible con plataformas EasyLanguage',
+          '�💬 Soporte internacional 24/6',
           '🔄 Actualizaciones mensuales incluidas',
           '🔒 Checkout seguro con PayPal'
         ]
@@ -308,7 +372,8 @@ async function sendProductEmail(data: {
           '📈 Contrato E-mini S&P 500 (ES)',
           '🎯 Enfoque exclusivo en S&P 500',
           '📊 Algoritmos avanzados para índices',
-          '💼 Mayor potencial de ganancias',
+          '� Compatible con plataformas EasyLanguage',
+          '�💼 Mayor potencial de ganancias',
           '💬 Soporte internacional 24/6',
           '🔄 Actualizaciones mensuales incluidas',
           '🔒 Checkout seguro con PayPal',
@@ -325,7 +390,8 @@ async function sendProductEmail(data: {
           '🥇 Contrato Gold (GC)',
           '🎯 Enfoque exclusivo en Oro',
           '📊 Algoritmos avanzados para commodities',
-          '💼 Mayor potencial de ganancias',
+          '� Compatible con plataformas EasyLanguage',
+          '�💼 Mayor potencial de ganancias',
           '💬 Soporte internacional 24/6',
           '🔄 Actualizaciones mensuales incluidas',
           '🔒 Checkout seguro con PayPal',
@@ -335,6 +401,7 @@ async function sendProductEmail(data: {
     };
 
     const plan = planContent[planType as keyof typeof planContent];
+    const planFeatures = getPlanFeatures(planType, data.language || 'en');
 
     const emailHTML = `
 <!DOCTYPE html>
@@ -344,96 +411,121 @@ async function sendProductEmail(data: {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Purchase Confirmation - AInside</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f8fafc;">
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc;">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, hsl(215, 60%, 16%) 0%, hsl(215, 50%, 25%) 100%);">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, hsl(215, 60%, 16%) 0%, hsl(215, 50%, 25%) 100%); padding: 50px 0;">
     <tr>
-      <td style="padding: 40px 20px;">
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <td style="padding: 0 20px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 650px; margin: 0 auto; background-color: #ffffff; border-radius: 0; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);">
           
-          <!-- Header -->
+          <!-- Header with Corporate Navy -->
           <tr>
-            <td style="background: #f8fafc; padding: 40px 40px 30px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 2px solid #e2e8f0;">
-              <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 220px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
-              <h1 style="margin: 0; color: #059669; font-size: 24px; font-weight: 600;">✓ Payment Successful</h1>
-              <p style="margin: 10px 0 0; color: ${plan.color}; font-size: 18px; font-weight: 600;">${plan.icon} ${plan.title}</p>
+            <td style="background: linear-gradient(180deg, hsl(215, 15%, 96%) 0%, hsl(0, 0%, 100%) 100%); padding: 60px 50px 50px; text-align: center; border-bottom: 3px solid hsl(215, 60%, 16%);">
+              <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 240px; height: auto; margin-bottom: 35px; display: block; margin-left: auto; margin-right: auto;" />
+              <h1 style="margin: 0; color: hsl(215, 60%, 16%); font-size: 28px; font-weight: 700; letter-spacing: -0.8px;">${t.paymentSuccessful}</h1>
+              <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid hsl(215, 15%, 90%);">
+                <p style="margin: 0; color: hsl(215, 15%, 45%); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">
+                  ${plan.title}
+                </p>
+              </div>
             </td>
           </tr>
 
           <!-- Content -->
           <tr>
-            <td style="padding: 40px;">
-              <p style="margin: 0 0 20px; color: #475569; font-size: 16px; line-height: 1.6;">
-                Dear ${data.name},
+            <td style="padding: 50px 50px 40px;">
+              <p style="margin: 0 0 15px; color: hsl(215, 15%, 45%); font-size: 15px; line-height: 1.6;">
+                ${t.dear} <strong style="color: hsl(215, 25%, 15%);">${data.name}</strong>,
               </p>
 
-              <p style="margin: 0 0 20px; color: #475569; font-size: 16px; line-height: 1.6;">
-                Thank you for purchasing the <strong style="color: ${plan.color};">${plan.title}</strong>! Your payment has been successfully processed.
+              <p style="margin: 0 0 35px; color: hsl(215, 25%, 15%); font-size: 15px; line-height: 1.8;">
+                ${t.thankYou} <strong style="color: hsl(215, 60%, 16%);">${plan.title}</strong>. ${t.paymentProcessed}
               </p>
 
-              <p style="margin: 0 0 20px; color: #475569; font-size: 16px; line-height: 1.6;">
-                ${plan.description}
-              </p>
-
-              <!-- What's Included -->
-              <div style="background-color: #f8fafc; border: 2px solid ${plan.color}; padding: 25px; margin: 30px 0; border-radius: 8px;">
-                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 18px;">${plan.icon} What's Included in Your Plan</h3>
-                ${plan.features.map(feature => `<p style="margin: 8px 0; color: #475569; font-size: 14px; line-height: 1.6;">${feature}</p>`).join('')}
-              </div>
-Download Your Files</h3>
-                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Access your ${plan.title} materials below
-              <div style="background-color: #f1f5f9; border-left: 4px solid #3b82f6; padding: 20px; margin: 30px 0; border-radius: 4px;">
-                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 16px;">Order Details</h3>
-                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Plan:</strong> ${data.planName}</p>
-                <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Amount:</strong> ${data.amount} ${data.currency}</p>
-                <p style="margin: 0; color: #475569; font-size: 14px;"><strong>Order ID:</strong> ${data.orderId}</p>
+              <!-- What's Included - Corporate Style -->
+              <div style="background: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(215, 10%, 98%) 100%); border: 1px solid hsl(215, 15%, 90%); padding: 30px; margin: 35px 0; border-radius: 0;">
+                <h3 style="margin: 0 0 22px; color: hsl(215, 60%, 16%); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 2px solid hsl(215, 15%, 90%); padding-bottom: 12px;">${t.whatsIncluded}</h3>
+                ${planFeatures.map(feature => `<p style="margin: 12px 0; color: hsl(215, 15%, 45%); font-size: 14px; line-height: 1.8; padding-left: 5px;">${feature}</p>`).join('')}
               </div>
 
-              <!-- Download Links -->
-              <div style="background-color: #ecfdf5; border: 2px solid #10b981; padding: 25px; margin: 30px 0; border-radius: 8px; text-align: center;">
-                <h3 style="margin: 0 0 15px; color: #065f46; font-size: 18px;">📦 Your Product Files</h3>
-                <p style="margin: 0 0 20px; color: #047857; font-size: 14px;">Click the buttons below to download your files:</p>
+              <!-- Order Details - Corporate Box -->
+              <div style="background-color: hsl(215, 15%, 96%); border-left: 4px solid hsl(215, 60%, 16%); padding: 25px 30px; margin: 35px 0; border-radius: 0;">
+                <h3 style="margin: 0 0 18px; color: hsl(215, 60%, 16%); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">${t.orderDetails}</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; color: hsl(215, 15%, 45%); font-size: 14px; font-weight: 600;">${t.plan}:</td>
+                    <td style="padding: 8px 0; color: hsl(215, 25%, 15%); font-size: 14px; text-align: right;">${data.planName}</td>
+                  </tr>
+                  <tr style="border-top: 1px solid hsl(215, 15%, 90%);">
+                    <td style="padding: 8px 0; color: hsl(215, 15%, 45%); font-size: 14px; font-weight: 600;">${t.amount}:</td>
+                    <td style="padding: 8px 0; color: hsl(215, 60%, 16%); font-size: 16px; font-weight: 700; text-align: right;">${data.amount} ${data.currency}</td>
+                  </tr>
+                  <tr style="border-top: 1px solid hsl(215, 15%, 90%);">
+                    <td style="padding: 8px 0; color: hsl(215, 15%, 45%); font-size: 14px; font-weight: 600;">${t.orderId}:</td>
+                    <td style="padding: 8px 0; color: hsl(215, 15%, 45%); font-size: 13px; font-family: monospace; text-align: right;">${data.orderId}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Download Links - Navy Background with Neon Buttons -->
+              <div style="background: linear-gradient(135deg, hsl(215, 60%, 16%) 0%, hsl(215, 50%, 25%) 100%); padding: 45px 35px; margin: 40px 0; border-radius: 0; text-align: center; border-top: 3px solid hsl(215, 60%, 16%); border-bottom: 3px solid hsl(215, 60%, 16%);">
+                <h3 style="margin: 0 0 10px; color: #ffffff; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">📦 ${t.yourProductFiles}</h3>
+                <p style="margin: 0 0 30px; color: hsl(215, 10%, 75%); font-size: 13px; letter-spacing: 0.5px;">${t.clickToDownload}</p>
                 
                 <a href="https://ainside.me/download?order=${data.orderId}&plan=${planType}&file=plan" 
-                   style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, ${plan.color} 0%, #2563eb 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
-                  📄 Descargar Guía PDF
+                   style="display: inline-block; width: 240px; margin: 10px 8px; padding: 18px 30px; background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; box-shadow: 0 10px 35px rgba(59, 130, 246, 0.5); border: 2px solid rgba(255, 255, 255, 0.1);">
+                  📄 ${t.downloadGuide}
                 </a>
                 
                 <a href="https://ainside.me/download?order=${data.orderId}&plan=${planType}&file=files" 
-                   style="display: inline-block; margin: 10px; padding: 14px 30px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600;">
-                  📦 Descargar Archivos (.ZIP)
+                   style="display: inline-block; width: 240px; margin: 10px 8px; padding: 18px 30px; background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #6366f1 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; box-shadow: 0 10px 35px rgba(16, 185, 129, 0.5); border: 2px solid rgba(255, 255, 255, 0.1);">
+                  📦 ${t.downloadFiles}
                 </a>
               </div>
 
-              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.6;">
-                  <strong>⚠️ Importante:</strong> Los enlaces de descarga expiran en 1 hora por seguridad. Si expiran, contáctanos a <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a> con tu Order ID para obtener nuevos enlaces.
+              <!-- Warning Box - Corporate Blue -->
+              <div style="background-color: hsl(213, 97%, 97%); border-left: 4px solid hsl(213, 94%, 68%); padding: 22px 25px; margin: 30px 0; border-radius: 0;">
+                <p style="margin: 0; color: hsl(215, 60%, 16%); font-size: 13px; line-height: 1.8;">
+                  <strong style="font-weight: 700; color: hsl(213, 94%, 68%);">⚠️ ${t.important}:</strong> ${t.linksExpireIn || 'Los enlaces de descarga expiran en'} <strong style="color: hsl(215, 60%, 16%);">${billingInfo.downloadHours} ${t.hoursText || 'horas'}</strong> ${t.forSecurity || 'por seguridad'}. ${t.ifExpired || 'Si expiran, contáctanos en'} <a href="mailto:inquiries@ainside.me" style="color: hsl(213, 94%, 68%); text-decoration: none; font-weight: 600;">inquiries@ainside.me</a> ${t.withOrderId}
+                </p>
+                <p style="margin: 15px 0 0; padding-top: 15px; border-top: 1px solid hsl(213, 97%, 90%); color: hsl(215, 60%, 16%); font-size: 13px;">
+                  <strong style="font-weight: 700;">⏰ ${t.expiresOn || 'Expira el'}:</strong> ${billingInfo.expirationDateTime}
                 </p>
               </div>
 
-              <div style="background-color: #f1f5f9; border-left: 4px solid #64748b; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                <p style="margin: 0; color: #475569; font-size: 13px; line-height: 1.6;">
-                  <strong>🔄 Gestiona tu suscripción:</strong> Para cancelar o modificar tu suscripción ${billingInfo.cycle.toLowerCase()}, ingresa a tu cuenta de PayPal o contáctanos a <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a>
+              <!-- Subscription Info -->
+              <div style="background-color: hsl(215, 15%, 96%); border: 1px solid hsl(215, 15%, 90%); padding: 20px 25px; margin: 30px 0; border-radius: 0;">
+                <p style="margin: 0; color: hsl(215, 25%, 15%); font-size: 13px; line-height: 1.7;">
+                  <strong style="font-weight: 700; color: hsl(215, 60%, 16%);">🔄 ${t.manageSubscription}:</strong> ${t.manageInfo} ${billingInfo.cycle.toLowerCase()}, ${t.loginPaypal} <a href="mailto:inquiries@ainside.me" style="color: hsl(215, 60%, 16%); text-decoration: none; font-weight: 600;">inquiries@ainside.me</a>
                 </p>
               </div>
 
-              <p style="margin: 0 0 10px; color: #475569; font-size: 16px; line-height: 1.6;">
-                Need help? Contact us at <a href="mailto:inquiries@ainside.me" style="color: #3b82f6; text-decoration: none;">inquiries@ainside.me</a>
-              </p>
+              <!-- Support -->
+              <div style="margin: 40px 0 30px; padding: 25px 0; border-top: 2px solid hsl(215, 15%, 90%); border-bottom: 2px solid hsl(215, 15%, 90%); text-align: center;">
+                <p style="margin: 0; color: hsl(215, 15%, 45%); font-size: 13px; font-weight: 600; letter-spacing: 0.5px;">
+                  ${t.needHelp}
+                </p>
+                <p style="margin: 10px 0 0;">
+                  <a href="mailto:inquiries@ainside.me" style="color: hsl(215, 60%, 16%); text-decoration: none; font-size: 15px; font-weight: 700;">inquiries@ainside.me</a>
+                </p>
+              </div>
 
-              <p style="margin: 20px 0 0; color: #475569; font-size: 16px; line-height: 1.6;">
-                Best regards,<br/>
-                <strong style="color: #1e293b;">The AInside Team</strong>
+              <p style="margin: 0; color: hsl(215, 15%, 45%); font-size: 14px; line-height: 1.6; text-align: center;">
+                ${t.bestRegards},<br/>
+                <strong style="color: hsl(215, 60%, 16%); font-size: 15px;">${t.theTeam}</strong>
               </p>
             </td>
           </tr>
 
-          <!-- Footer -->
+          <!-- Footer - Corporate -->
           <tr>
-            <td style="background-color: #f8fafc; padding: 30px 40px; border-radius: 0 0 12px 12px; border-top: 1px solid #e2e8f0; text-align: center;">
-              <p style="margin: 0 0 10px; color: #64748b; font-size: 14px;">
-                <strong style="color: #334155;">AInside.me</strong> - Professional Algorithmic Trading Tools
+            <td style="background: linear-gradient(180deg, hsl(215, 10%, 98%) 0%, hsl(215, 15%, 96%) 100%); padding: 35px 50px; border-top: 3px solid hsl(215, 60%, 16%); text-align: center;">
+              <p style="margin: 0 0 8px; color: hsl(215, 60%, 16%); font-size: 15px; font-weight: 700; letter-spacing: 0.5px;">
+                AInside.me
               </p>
-              <p style="margin: 0; color: #94a3b8; font-size: 11px;">
+              <p style="margin: 0 0 15px; color: hsl(215, 15%, 45%); font-size: 12px;">
+                ${t.footer}
+              </p>
+              <p style="margin: 0; color: hsl(215, 15%, 45%); font-size: 11px; letter-spacing: 0.3px;">
                 © ${new Date().getFullYear()} AInside. All rights reserved.
               </p>
             </td>
@@ -456,7 +548,7 @@ Download Your Files</h3>
       body: JSON.stringify({
         from: 'AInside <onboarding@resend.dev>',
         to: [data.email],
-        subject: `✓ Purchase Confirmed - ${data.planName} - AInside`,
+        subject: `${t.subject} - ${data.planName} - AInside`,
         html: emailHTML
       })
     });

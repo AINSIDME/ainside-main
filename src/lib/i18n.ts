@@ -24,20 +24,25 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: 'es',
+    lng: 'es', // Set default language to Spanish
     // Remove fixed lng to allow auto-detection
     debug: false,
-    // Expose all available languages; missing keys fall back to EN
+    // Expose all available languages; missing keys fall back to ES
     supportedLngs: ['en', 'es', 'fr', 'he', 'ar', 'ru'],
     nonExplicitSupportedLngs: true,
     load: 'languageOnly',
     lowerCaseLng: true,
 
     detection: {
-      // Prefer saved choice; otherwise detect from browser, then default to EN
+      // Prefer saved choice; otherwise detect from browser, then default to ES
       order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],
-      convertDetectedLanguage: (lng: string) => lng?.toLowerCase?.() ?? 'en',
+      convertDetectedLanguage: (lng: string) => {
+        const detected = lng?.toLowerCase?.() ?? 'es';
+        // If detected language is not supported, use Spanish
+        return ['en', 'es', 'fr', 'he', 'ar', 'ru'].includes(detected) ? detected : 'es';
+      },
     },
 
     interpolation: {

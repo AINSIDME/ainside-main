@@ -1,4 +1,4 @@
-# Contact Form Setup - AIinside.me
+# Contact Form Setup - AInside.me
 
 ## 📋 Overview
 Sistema profesional de formulario de contacto con:

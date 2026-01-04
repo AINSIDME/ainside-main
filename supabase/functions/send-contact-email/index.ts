@@ -338,7 +338,7 @@ async function sendAutoReply(data: { name: string; email: string; subject: strin
         body: JSON.stringify({
           personalizations: [{
             to: [{ email: data.email }],
-            subject: 'Message Received - AIinside Support'
+            subject: 'Message Received - AInside Support'
           }],
           from: { email: 'noreply@ainside.me', name: 'AInside' },
           content: [{

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { loadPayPalSDK } from "@/lib/loadPayPal";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   amount: string;                 // "99.00"
@@ -26,6 +27,7 @@ export default function PayPalButton({
   onCancel,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     let destroyed = false;
@@ -44,7 +46,11 @@ export default function PayPalButton({
 
           // 1) Crear orden (backend)
           createOrder: async () => {
-            const { data, error } = await supabase.functions.invoke("create-payment", {
+            const { da
+                plan: description || "Plan", 
+                amount: Number(amount),
+                language: i18n.language || 'en'
+             te-payment", {
               body: { plan: description || "Plan", amount: Number(amount) },
             });
             if (error || !data?.orderId) throw new Error("Falló crear la orden");
