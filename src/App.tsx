@@ -33,6 +33,10 @@ import Accessibility from "./pages/Accessibility";
 import Status from "./pages/Status";
 import FAQ from "./pages/FAQ";
 import Crypto from "./pages/Crypto";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import AdminControl from "./pages/AdminControl";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
 
@@ -101,6 +105,10 @@ const App = () => {
                 <Route path="/accessibility" element={<Accessibility />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/crypto" element={<Crypto />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin/control" element={<AdminControl />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
