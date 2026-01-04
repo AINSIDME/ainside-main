@@ -52,7 +52,7 @@ const PLAN_I18N: Record<string, { nameKey: string; descKey: string }> = {
 type PlanInfo = { id: string; amount: number; currency: string };
 
 export default function Checkout() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<string>("micro_monthly");
   const [instrument, setInstrument] = useState<"sp500" | "gold">("sp500");
@@ -103,6 +103,7 @@ export default function Checkout() {
         body: {
           plan: plan.id,
           intro: !!(intro && plan.id.includes('_monthly')),
+          language: i18n.language || 'en',
         },
       });
 

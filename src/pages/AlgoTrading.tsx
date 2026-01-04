@@ -189,7 +189,7 @@ const AlgoTrading = () => {
           </div>
         </section>
 
-        {/* Why AIinside.me */}
+        {/* Why AInside.me */}
         <section className="mb-32 bg-slate-800/30 border border-slate-800/50 rounded-3xl p-12 md:p-16 backdrop-blur-lg relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5"></div>
           
@@ -199,7 +199,7 @@ const AlgoTrading = () => {
             </div>
 
             <h2 className="text-4xl md:text-6xl font-light text-slate-100 tracking-tight">
-              {t('algoTradingPage.solution.title', 'Por Qué AIinside.me')}
+              {t('algoTradingPage.solution.title', 'Por Qué AInside.me')}
             </h2>
 
             <p className="text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-light">
