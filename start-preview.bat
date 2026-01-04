@@ -1,7 +1,10 @@
 @echo off
 REM Build and preview production build for ainside-main
 SETLOCAL
-set PROJECT_PATH=c:\Users\jonat\Downloads\ainside-main\ainside-main
+set PROJECT_PATH=%~dp0
+
+REM Remove trailing backslash
+if "%PROJECT_PATH:~-1%"=="\" set PROJECT_PATH=%PROJECT_PATH:~0,-1%
 
 IF NOT EXIST "%PROJECT_PATH%" (
   echo Project path not found: %PROJECT_PATH%

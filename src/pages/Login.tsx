@@ -10,6 +10,12 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Mail, Lock, LogIn } from "lucide-react";
 
+const getAppOrigin = () => {
+  const configured = (import.meta.env.VITE_APP_ORIGIN as string | undefined)?.trim();
+  if (configured) return configured.replace(/\/$/, "");
+  return window.location.origin;
+};
+
 const Login = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -53,11 +59,13 @@ const Login = () => {
     setIsGoogleLoading(true);
     try {
       console.log("🔵 Intentando login con Google...");
+
+      const appOrigin = getAppOrigin();
       
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
+          redirectTo: `${appOrigin}/dashboard`,
         },
       });
 
@@ -93,8 +101,9 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      const appOrigin = getAppOrigin();
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: `${appOrigin}/reset-password`,
       });
 
       if (error) throw error;
