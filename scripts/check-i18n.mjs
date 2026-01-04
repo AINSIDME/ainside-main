@@ -5,7 +5,16 @@ const localesDir = path.resolve('src/locales');
 const baseLang = 'en.json';
 const files = fs.readdirSync(localesDir).filter(f => f.endsWith('.json'));
 
-const loadJson = (file) => JSON.parse(fs.readFileSync(path.join(localesDir, file), 'utf-8'));
+const loadJson = (file) => {
+  const fullPath = path.join(localesDir, file);
+  const raw = fs.readFileSync(fullPath, 'utf-8').replace(/^\uFEFF/, '');
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error(`Invalid JSON in locale file: ${file}`);
+    throw e;
+  }
+};
 
 const flatten = (obj, prefix = '') => {
   const out = {};
