@@ -2,9 +2,10 @@
 # Usage: Right-click > Run with PowerShell, or execute from terminal
 
 param(
-    [string]$ProjectPath = "c:\Users\jonat\Downloads\ainside-main\ainside-main"
+    [string]$ProjectPath = $PSScriptRoot
 )
 
+$ProjectPath = (Resolve-Path -LiteralPath $ProjectPath).Path
 Write-Host "Building and previewing in: $ProjectPath" -ForegroundColor Cyan
 
 if (-not (Test-Path $ProjectPath)) {

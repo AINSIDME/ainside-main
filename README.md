@@ -32,6 +32,12 @@ npm run dev
 
 ## Environment variables
 
+### Frontend (Vite)
+
+- `VITE_APP_ORIGIN` (optional): canonical origin used for Supabase Auth redirects (OAuth + password reset).
+	- Example local: `http://127.0.0.1:5173`
+	- Example production: `https://ainside.me`
+
 Create a `.env` file in the project root. See `.env.example` for required values.
 
 ### PayPal (client-side)
