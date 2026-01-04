@@ -37,6 +37,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AdminControl from "./pages/AdminControl";
+import AdminVerify2FA from "./pages/AdminVerify2FA";
 import NotFound from "./pages/NotFound";
 import "./lib/i18n";
 
@@ -108,6 +109,7 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
                 <Route path="/admin/control" element={<AdminControl />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

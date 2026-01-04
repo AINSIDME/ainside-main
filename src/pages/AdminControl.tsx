@@ -74,6 +74,32 @@ const AdminControl = () => {
           return;
         }
 
+        // VERIFICACIÓN 2FA OBLIGATORIA
+        const session2FA = sessionStorage.getItem('admin_2fa_verified');
+        const timestamp = sessionStorage.getItem('admin_2fa_timestamp');
+        
+        // Verificar si la sesión 2FA sigue válida (4 horas máximo)
+        if (!session2FA || !timestamp) {
+          navigate('/admin/verify-2fa');
+          return;
+        }
+
+        const fourHoursInMs = 4 * 60 * 60 * 1000;
+        const sessionAge = Date.now() - parseInt(timestamp);
+        
+        if (sessionAge > fourHoursInMs) {
+          // Sesión 2FA expirada
+          sessionStorage.removeItem('admin_2fa_verified');
+          sessionStorage.removeItem('admin_2fa_timestamp');
+          toast({
+            title: "Sesión Expirada",
+            description: "Tu sesión de verificación 2FA ha expirado. Verifica nuevamente.",
+            variant: "destructive"
+          });
+          navigate('/admin/verify-2fa');
+          return;
+        }
+
         setIsAdmin(true);
       } catch (error) {
         console.error('Error checking admin access:', error);
