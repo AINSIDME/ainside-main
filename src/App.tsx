@@ -35,10 +35,12 @@ import FAQ from "./pages/FAQ";
 import Crypto from "./pages/Crypto";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import AdminControl from "./pages/AdminControl";
 import AdminVerify2FA from "./pages/AdminVerify2FA";
 import NotFound from "./pages/NotFound";
+import Trading from "./pages/Trading";
 import "./lib/i18n";
 
 const queryClient = new QueryClient();
@@ -108,7 +110,9 @@ const App = () => {
                 <Route path="/crypto" element={<Crypto />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/trading" element={<Trading />} />
                 <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
                 <Route path="/admin/control" element={<AdminControl />} />
                 <Route path="*" element={<NotFound />} />
