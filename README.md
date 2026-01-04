@@ -45,7 +45,7 @@ Configure these secrets in your Supabase functions environment:
 
 - `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`
 - `PAYPAL_ENV` (`sandbox` or `live`)
-- `APP_ORIGIN` (e.g. `http://localhost:8080` or your LAN host)
+- `APP_ORIGIN` (e.g. `http://localhost:5173` or your LAN host)
 
 Pricing uses PayPal Buttons with Supabase:
 

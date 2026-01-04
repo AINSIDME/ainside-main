@@ -92,7 +92,7 @@ Mensaje:
 # Iniciar dev server
 npm run dev
 
-# Ir a http://localhost:8080/contact
+# Ir a http://localhost:5173/contact
 # Llenar y enviar formulario
 ```
 
