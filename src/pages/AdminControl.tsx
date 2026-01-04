@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,8 @@ import {
   RefreshCw,
   CheckCircle,
   XCircle,
-  Clock
+  Clock,
+  ShieldAlert
 } from "lucide-react";
 
 interface ClientConnection {
@@ -32,9 +34,57 @@ interface ClientConnection {
 const AdminControl = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [clients, setClients] = useState<ClientConnection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  // Lista de emails autorizados como administradores
+  const ADMIN_EMAILS = [
+    'jonathangolubok@gmail.com',
+    'admin@ainside.me'
+  ];
+
+  // Verificar autenticación y rol de administrador
+  useEffect(() => {
+    const checkAdminAccess = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          toast({
+            title: "Acceso Denegado",
+            description: "Debes iniciar sesión para acceder al panel de administración",
+            variant: "destructive"
+          });
+          navigate('/login');
+          return;
+        }
+
+        // Verificar si el email está en la lista de administradores
+        if (!ADMIN_EMAILS.includes(user.email || '')) {
+          toast({
+            title: "Acceso Denegado",
+            description: "No tienes permisos de administrador",
+            variant: "destructive"
+          });
+          navigate('/dashboard');
+          return;
+        }
+
+        setIsAdmin(true);
+      } catch (error) {
+        console.error('Error checking admin access:', error);
+        navigate('/login');
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
+    checkAdminAccess();
+  }, [navigate, toast]);
 
   // Fetch clients data
   const fetchClients = async () => {
@@ -141,13 +191,36 @@ const AdminControl = () => {
     return `${Math.floor(diff / 86400)}d`;
   };
 
+  // Mostrar pantalla de carga mientras verifica permisos
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
+        <Card className="w-96 bg-slate-800/50 border-slate-700">
+          <CardContent className="p-8 text-center">
+            <ShieldAlert className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
+            <h2 className="text-xl font-semibold text-white mb-2">Verificando permisos...</h2>
+            <p className="text-slate-400">Validando acceso de administrador</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Si no es admin, no mostrar nada (ya se redirigió)
+  if (!isAdmin) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
       {/* Header */}
       <div className="container mx-auto max-w-7xl mb-8">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">Panel de Control</h1>
+            <h1 className="text-4xl font-bold text-white mb-2">
+              <ShieldAlert className="inline-block w-8 h-8 mr-2 text-blue-500" />
+              Panel de Control Administrador
+            </h1>
             <p className="text-slate-400">Monitoreo y control de clientes en tiempo real</p>
           </div>
           <div className="flex gap-3">
