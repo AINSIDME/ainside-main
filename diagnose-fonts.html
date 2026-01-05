@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Fuentes - AInside.me</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', Arial, sans-serif !important;
+        padding: 20px;
+        background: #0f172a;
+        color: #f1f5f9;
+        line-height: 1.6;
+      }
+      .container { max-width: 1400px; margin: 0 auto; }
+      h1 { 
+        font-size: 28px; 
+        margin-bottom: 30px; 
+        padding-bottom: 15px; 
+        border-bottom: 2px solid #3b82f6;
+        color: #60a5fa;
+      }
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .test-box {
+        background: #1e293b;
+        border: 2px solid #334155;
+        border-radius: 8px;
+        padding: 20px;
+      }
+      .test-box.arabic { border-color: #10b981; }
+      .test-box.russian { border-color: #3b82f6; }
+      .test-box.hebrew { border-color: #f59e0b; }
+      .test-box.spanish { border-color: #ef4444; }
+      .test-box.french { border-color: #8b5cf6; }
+      
+      .test-box h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .arabic h2 { color: #10b981; }
+      .russian h2 { color: #3b82f6; }
+      .hebrew h2 { color: #f59e0b; }
+      .spanish h2 { color: #ef4444; }
+      .french h2 { color: #8b5cf6; }
+      
+      .sample-text {
+        font-size: 24px;
+        margin: 15px 0;
+        padding: 15px;
+        background: #0f172a;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+      .small-text {
+        font-size: 16px;
+        color: #94a3b8;
+        margin-top: 10px;
+      }
+      .font-info {
+        background: #0f172a;
+        padding: 15px;
+        border-radius: 4px;
+        margin-top: 10px;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+      .status {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 10px;
+      }
+      .status.success { background: #10b981; color: white; }
+      .status.error { background: #ef4444; color: white; }
+      .status.warning { background: #f59e0b; color: white; }
+      
+      .diagnostic-panel {
+        background: #1e293b;
+        border: 2px solid #3b82f6;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 30px;
+      }
+      .diagnostic-panel h2 {
+        color: #60a5fa;
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+      pre {
+        background: #0f172a;
+        padding: 15px;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+      button {
+        background: #3b82f6;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnóstico Completo de Fuentes Multi-Idioma</h1>
+        
+        <div class="test-grid">
+            <div class="test-box arabic">
+                <h2>🇸🇦 Árabe (العربية)</h2>
+                <div class="sample-text" dir="rtl" style="font-family: 'Noto Sans Arabic', Arial, sans-serif !important;">
+                    تحليلات في الوقت الفعلي
+                </div>
+                <div class="small-text" dir="rtl">منصة التحليل المتقدم • إدارة المخاطر</div>
+                <div class="font-info" id="arabic-font"></div>
+                <div class="status success" id="arabic-status">Verificando...</div>
+            </div>
+            
+            <div class="test-box russian">
+                <h2>🇷🇺 Ruso (Русский)</h2>
+                <div class="sample-text" style="font-family: 'Noto Sans', Arial, sans-serif !important;">
+                    Аналитика в Реальном Времени
+                </div>
+                <div class="small-text">Услуги • Сумма • Спасибо за покупку</div>
+                <div class="font-info" id="russian-font"></div>
+                <div class="status success" id="russian-status">Verificando...</div>
+            </div>
+            
+            <div class="test-box hebrew">
+                <h2>🇮🇱 Hebreo (עברית)</h2>
+                <div class="sample-text" dir="rtl" style="font-family: 'Noto Sans Hebrew', Arial, sans-serif !important;">
+                    ניתוח בזמן אמת
+                </div>
+                <div class="small-text" dir="rtl">צור קשר עם תמיכה • גישה מהירה</div>
+                <div class="font-info" id="hebrew-font"></div>
+                <div class="status success" id="hebrew-status">Verificando...</div>
+            </div>
+            
+            <div class="test-box spanish">
+                <h2>🇪🇸 Español</h2>
+                <div class="sample-text" style="font-family: 'Noto Sans', Arial, sans-serif !important;">
+                    Análisis en Tiempo Real
+                </div>
+                <div class="small-text">Gestión de Riesgos • Seguimiento</div>
+                <div class="font-info" id="spanish-font"></div>
+                <div class="status success" id="spanish-status">Verificando...</div>
+            </div>
+            
+            <div class="test-box french">
+                <h2>🇫🇷 Francés</h2>
+                <div class="sample-text" style="font-family: 'Noto Sans', Arial, sans-serif !important;">
+                    Analyse en Temps Réel
+                </div>
+                <div class="small-text">À propos • Gestion des Risques</div>
+                <div class="font-info" id="french-font"></div>
+                <div class="status success" id="french-status">Verificando...</div>
+            </div>
+        </div>
+        
+        <div class="diagnostic-panel">
+            <h2>📊 Información del Sistema</h2>
+            <pre id="system-info"></pre>
+            <button onclick="copyDiagnostic()">📋 Copiar Diagnóstico Completo</button>
+        </div>
+        
+        <div class="diagnostic-panel" style="border-color: #10b981;">
+            <h2>✅ Instrucciones para Verificar</h2>
+            <div style="padding: 15px; background: #0f172a; border-radius: 4px;">
+                <p style="margin-bottom: 10px;"><strong>SI VES SÍMBOLOS (□ o ?):</strong></p>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li>Abre DevTools (F12)</li>
+                    <li>Ve a la pestaña "Network"</li>
+                    <li>Busca las fuentes "Noto Sans"</li>
+                    <li>Verifica que el status sea "200 OK"</li>
+                    <li>Si ves "Failed" o "404", hay problema de red</li>
+                    <li>Si ves "200 OK" pero aún símbolos, copia el diagnóstico abajo</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let diagnosticData = {};
+        
+        async function checkFonts() {
+            await document.fonts.ready;
+            
+            const fonts = [
+                { name: 'Noto Sans Arabic', element: 'arabic', text: 'العربية' },
+                { name: 'Noto Sans Hebrew', element: 'hebrew', text: 'עברית' },
+                { name: 'Noto Sans', element: 'russian', text: 'Русский' },
+                { name: 'Noto Sans', element: 'spanish', text: 'Español' },
+                { name: 'Noto Sans', element: 'french', text: 'Français' }
+            ];
+            
+            diagnosticData.fonts = [];
+            
+            for (const font of fonts) {
+                const loaded = document.fonts.check(`16px "${font.name}"`);
+                const el = document.getElementById(`${font.element}-font`);
+                const status = document.getElementById(`${font.element}-status`);
+                
+                const fontData = {
+                    name: font.name,
+                    loaded: loaded,
+                    test: font.text
+                };
+                
+                diagnosticData.fonts.push(fontData);
+                
+                if (loaded) {
+                    el.textContent = `✓ ${font.name} CARGADA`;
+                    status.textContent = '✓ OK';
+                    status.className = 'status success';
+                } else {
+                    el.textContent = `✗ ${font.name} NO ENCONTRADA`;
+                    status.textContent = '✗ ERROR';
+                    status.className = 'status error';
+                }
+            }
+            
+            updateSystemInfo();
+        }
+        
+        function updateSystemInfo() {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl');
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            
+            diagnosticData.system = {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                resolution: `${window.screen.width}x${window.screen.height}`,
+                devicePixelRatio: window.devicePixelRatio,
+                gpu: gl ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown',
+                fontsList: Array.from(document.fonts).map(f => `${f.family} ${f.weight} ${f.style}`),
+                fontsCount: document.fonts.size
+            };
+            
+            const info = `
+═══════════════════════════════════════════════════════════
+DIAGNÓSTICO COMPLETO - ${new Date().toLocaleString()}
+═══════════════════════════════════════════════════════════
+
+FUENTES CARGADAS:
+${diagnosticData.fonts.map(f => `  ${f.loaded ? '✓' : '✗'} ${f.name} - Test: ${f.test}`).join('\n')}
+
+SISTEMA:
+  User Agent: ${diagnosticData.system.userAgent}
+  Platform: ${diagnosticData.system.platform}
+  Language: ${diagnosticData.system.language}
+  Resolution: ${diagnosticData.system.resolution}
+  Device Pixel Ratio: ${diagnosticData.system.devicePixelRatio}
+  GPU: ${diagnosticData.system.gpu}
+  Fonts Registered: ${diagnosticData.system.fontsCount}
+
+FUENTES EN DOCUMENT.FONTS:
+${diagnosticData.system.fontsList.slice(0, 10).join('\n  ')}
+${diagnosticData.system.fontsCount > 10 ? `\n  ... y ${diagnosticData.system.fontsCount - 10} más` : ''}
+
+═══════════════════════════════════════════════════════════
+            `.trim();
+            
+            document.getElementById('system-info').textContent = info;
+        }
+        
+        function copyDiagnostic() {
+            const text = document.getElementById('system-info').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✓ Diagnóstico copiado al portapapeles!\n\nPega esto en el chat para que pueda ver el problema exacto.');
+            });
+        }
+        
+        // Run diagnostics
+        checkFonts();
+        
+        // Recheck every 2 seconds
+        setInterval(checkFonts, 2000);
+    </script>
+</body>
+</html>

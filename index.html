@@ -14,46 +14,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AGGRESSIVE FONT FIX: Force fonts at the highest CSS specificity level -->
     <style>
-      /* Force proper font loading for multi-script content */
-      * {
-        font-synthesis: none;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      /* CRITICAL: Universal font configuration */
+      *, *::before, *::after,
+      html, body, div, span, p, h1, h2, h3, h4, h5, h6,
+      a, button, input, textarea, select, label {
+        font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+        font-synthesis: none !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
       }
       
-      /* Explicit font stacks for different scripts */
-      :root {
-        --font-latin: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-        --font-arabic: 'Noto Sans Arabic', 'Noto Sans', 'Arial', sans-serif;
-        --font-hebrew: 'Noto Sans Hebrew', 'Noto Sans', 'Arial', sans-serif;
-        --font-cyrillic: 'Noto Sans', -apple-system, 'Segoe UI', 'Arial', sans-serif;
+      /* FORCE per language - Maximum specificity */
+      html[lang="ar"] *, html[lang="ar"] *::before, html[lang="ar"] *::after,
+      [lang="ar"], [lang="ar"] *, [dir="rtl"], [dir="rtl"] * {
+        font-family: 'Noto Sans Arabic', 'Noto Sans', 'Traditional Arabic', 'Arial', sans-serif !important;
       }
       
-      /* Apply specific fonts based on language attribute */
-      html[lang="ar"],
-      html[lang="ar"] * {
-        font-family: var(--font-arabic) !important;
+      html[lang="he"] *, html[lang="he"] *::before, html[lang="he"] *::after,
+      [lang="he"], [lang="he"] * {
+        font-family: 'Noto Sans Hebrew', 'Noto Sans', 'Arial Hebrew', 'Arial', sans-serif !important;
       }
       
-      html[lang="he"],
-      html[lang="he"] * {
-        font-family: var(--font-hebrew) !important;
+      html[lang="ru"] *, html[lang="ru"] *::before, html[lang="ru"] *::after,
+      [lang="ru"], [lang="ru"] * {
+        font-family: 'Noto Sans', -apple-system, 'Segoe UI', 'Arial', sans-serif !important;
       }
       
-      html[lang="ru"],
-      html[lang="ru"] * {
-        font-family: var(--font-cyrillic) !important;
-      }
-      
-      html[lang="en"],
-      html[lang="es"],
-      html[lang="fr"],
-      html[lang="en"] *,
-      html[lang="es"] *,
-      html[lang="fr"] * {
-        font-family: var(--font-latin) !important;
+      /* Override ALL possible conflicting styles */
+      .font-sans, .font-mono, .font-serif,
+      [class*="font-"], [style*="font-family"] {
+        font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
       }
     </style>
 
