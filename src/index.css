@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CRITICAL OVERRIDE: Force multi-language fonts everywhere */
+@layer base {
+  *, *::before, *::after {
+    font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  }
+}
+
+@layer components {
+  /* Override any component that might set fonts */
+  [class], [class] * {
+    font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  }
+}
+
+@layer utilities {
+  /* Override ALL Tailwind font utilities */
+  .font-sans, .font-serif, .font-mono {
+    font-family: 'Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */

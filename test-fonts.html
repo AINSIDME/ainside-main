@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Multi-Language Fonts - AInside.me</title>
+    
+    <!-- Same fonts as production -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        :root {
+            --font-latin: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --font-arabic: 'Noto Sans Arabic', 'Noto Sans', 'Arial', sans-serif;
+            --font-hebrew: 'Noto Sans Hebrew', 'Noto Sans', 'Arial', sans-serif;
+            --font-cyrillic: 'Noto Sans', -apple-system, 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-latin);
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, hsl(215, 60%, 16%) 0%, hsl(215, 50%, 25%) 100%);
+            color: white;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 3px solid white;
+            padding-bottom: 20px;
+        }
+        
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid white;
+        }
+        
+        .test-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #60a5fa;
+        }
+        
+        .test-text {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        .arabic { font-family: var(--font-arabic) !important; }
+        .hebrew { font-family: var(--font-hebrew) !important; }
+        .russian { font-family: var(--font-cyrillic) !important; }
+        .spanish { font-family: var(--font-latin) !important; }
+        .french { font-family: var(--font-latin) !important; }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            background: #10b981;
+            color: white;
+            margin-left: 10px;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔤 Test de Renderizado Multi-Idioma</h1>
+    
+    <div class="test-section">
+        <h2>🇸🇦 Árabe (العربية) <span class="status">✓ ACTIVO</span></h2>
+        <p><strong>Font:</strong> <code>Noto Sans Arabic</code></p>
+        <div class="test-text arabic" dir="rtl">
+            <strong>تحليلات في الوقت الفعلي</strong><br>
+            منصة التحليل المتقدم<br>
+            رسوم بيانية متقدمة<br>
+            إدارة المخاطر<br>
+            تتبع الأداء<br>
+            أدوات برمجية تعليمية لتحليل السوق والبحث
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🇷🇺 Ruso (Русский) <span class="status">✓ ACTIVO</span></h2>
+        <p><strong>Font:</strong> <code>Noto Sans (Cyrillic subset)</code></p>
+        <div class="test-text russian">
+            <strong>Аналитика в Реальном Времени</strong><br>
+            Платформа Продвинутой Аналитики<br>
+            Продвинутые Графики<br>
+            Управление Рисками<br>
+            Отслеживание Производительности<br>
+            Услуги • Сумма • Спасибо за покупку!
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🇮🇱 Hebreo (עברית) <span class="status">✓ ACTIVO</span></h2>
+        <p><strong>Font:</strong> <code>Noto Sans Hebrew</code></p>
+        <div class="test-text hebrew" dir="rtl">
+            <strong>ניתוח בזמן אמת</strong><br>
+            פלטפורמת ניתוח מתקדמת<br>
+            גרפים מתקדמים<br>
+            ניהול סיכונים<br>
+            מעקב ביצועים<br>
+            צור קשר עם תמיכה • גישה מהירה
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🇪🇸 Español <span class="status">✓ ACTIVO</span></h2>
+        <p><strong>Font:</strong> <code>Noto Sans (Latin)</code></p>
+        <div class="test-text spanish">
+            <strong>Análisis en Tiempo Real</strong><br>
+            Plataforma de Análisis Avanzado<br>
+            Gráficos Avanzados<br>
+            Gestión de Riesgos<br>
+            Seguimiento de Rendimiento<br>
+            Herramientas educativas de software para análisis de mercado
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🇫🇷 Francés <span class="status">✓ ACTIVO</span></h2>
+        <p><strong>Font:</strong> <code>Noto Sans (Latin)</code></p>
+        <div class="test-text french">
+            <strong>Analyse en Temps Réel</strong><br>
+            Plateforme d'Analyse Avancée<br>
+            Graphiques Avancés<br>
+            Gestion des Risques<br>
+            Suivi des Performances<br>
+            À propos • Tarifs • Données Historiques
+        </div>
+    </div>
+    
+    <div class="test-section" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981;">
+        <h2>✅ Verificación de Calidad</h2>
+        <div class="test-text">
+            <p>✓ <strong>Árabe:</strong> Si ves caracteres árabes claros (no símbolos □ o ?), funciona correctamente</p>
+            <p>✓ <strong>Ruso:</strong> Si ves letras cirílicas claras (Русский con letras rusas, no símbolos), funciona correctamente</p>
+            <p>✓ <strong>Hebreo:</strong> Si ves caracteres hebreos claros (עברית, no símbolos), funciona correctamente</p>
+            <p>✓ <strong>Español/Francés:</strong> Debe verse con acentos perfectos (À, É, Í, Ó, Ú, Ñ)</p>
+        </div>
+    </div>
+    
+    <div class="test-section" style="background: rgba(59, 130, 246, 0.1); border-left-color: #3b82f6;">
+        <h2>🔧 Información Técnica</h2>
+        <div class="test-text">
+            <p><strong>Estado de Google Fonts:</strong> <span id="font-status" class="status" style="background: #f59e0b;">Cargando...</span></p>
+            <p><strong>Resolución:</strong> <span id="resolution"></span></p>
+            <p><strong>User Agent:</strong> <code id="user-agent" style="font-size: 12px;"></code></p>
+        </div>
+    </div>
+    
+    <script>
+        // Detectar resolución
+        document.getElementById('resolution').textContent = `${window.screen.width}x${window.screen.height}`;
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        
+        // Verificar carga de fuentes
+        document.fonts.ready.then(() => {
+            const fontStatus = document.getElementById('font-status');
+            fontStatus.textContent = '✓ FUENTES CARGADAS';
+            fontStatus.style.background = '#10b981';
+            
+            // Verificar fuentes específicas
+            const arabicLoaded = document.fonts.check('16px Noto Sans Arabic');
+            const hebrewLoaded = document.fonts.check('16px Noto Sans Hebrew');
+            const notoSansLoaded = document.fonts.check('16px Noto Sans');
+            
+            console.log('✅ Font Loading Status:');
+            console.log('Noto Sans Arabic:', arabicLoaded ? '✓' : '✗');
+            console.log('Noto Sans Hebrew:', hebrewLoaded ? '✓' : '✗');
+            console.log('Noto Sans:', notoSansLoaded ? '✓' : '✗');
+        });
+    </script>
+</body>
+</html>
