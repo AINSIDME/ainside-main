@@ -20,12 +20,13 @@ const flatten = (obj, prefix = '') => {
 };
 
 const en = flatten(load('en.json'));
-const he = flatten(load('he.json'));
+const locale = (process.argv[2] ?? 'he').trim();
+const other = flatten(load(`${locale}.json`));
 
 const same = [];
 for (const [k, v] of Object.entries(en)) {
-  if (!(k in he)) continue;
-  const hv = he[k];
+  if (!(k in other)) continue;
+  const hv = other[k];
   if (typeof v === 'string' && typeof hv === 'string' && v === hv) {
     same.push(k);
   }
@@ -39,7 +40,7 @@ for (const k of same) {
 
 const sorted = [...byTop.entries()].sort((a, b) => b[1] - a[1]);
 
-console.log(`Keys with identical en==he strings: ${same.length} / ${Object.keys(en).length}`);
+console.log(`Keys with identical en==${locale} strings: ${same.length} / ${Object.keys(en).length}`);
 console.log('--- Top sections still English (top 25) ---');
 for (const [k, v] of sorted.slice(0, 25)) {
   console.log(`${k}: ${v}`);

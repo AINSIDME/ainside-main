@@ -37,6 +37,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import MFA from "./pages/MFA";
 import AdminControl from "./pages/AdminControl";
 import AdminVerify2FA from "./pages/AdminVerify2FA";
 import NotFound from "./pages/NotFound";
@@ -111,6 +112,7 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/mfa" element={<MFA />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/trading" element={<Trading />} />
                 <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />

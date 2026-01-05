@@ -1,133 +1,122 @@
-# 🔐 Configuración de Autenticación 2FA para Panel de Administración
+# 🔐 Configuración de Autenticación 2FA (Admin) – Supabase Edge Functions
 
-## 📱 Configurar Google Authenticator
+Este proyecto usa un flujo 2FA **server-side**:
 
-### Para jonathangolubok@gmail.com:
+- El admin debe estar autenticado con Supabase (JWT en `Authorization`).
+- Luego debe validar TOTP en `verify-admin-2fa`.
+- Si es correcto, el servidor emite un token y lo guarda en `admin_2fa_sessions`.
+- Las Edge Functions críticas exigen `x-admin-2fa-token` + sesión Supabase.
 
-1. **Abre Google Authenticator** en tu teléfono
-2. **Escanea este código QR** o ingresa la clave manual:
-
-```
-Clave secreta: JBSWY3DPEHPK3PXP
-```
-
-**Código QR:**
-```
-https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/AInside:jonathangolubok@gmail.com?secret=JBSWY3DPEHPK3PXP&issuer=AInside
-```
-
-3. **Configuración manual en Google Authenticator:**
-   - Nombre de la cuenta: AInside Admin
-   - Tu clave: JBSWY3DPEHPK3PXP
-   - Tipo de clave: Basada en tiempo
+> Importante: **NO** se guardan secretos 2FA en el repo. Se configuran con Supabase Secrets.
 
 ---
 
-## 🔄 Cambiar Secretos de Seguridad (IMPORTANTE)
+## ✅ Paso 1 — Configurar Secrets en Supabase
 
-### Los secretos actuales son de EJEMPLO. Debes cambiarlos:
+En Supabase Dashboard → **Project Settings → Functions → Secrets**, define:
 
-**1. Generar nuevos secretos:**
+1) **Allowlist de admins**
 
-Ejecuta esto en Node.js o un generador online:
-```javascript
-const crypto = require('crypto');
-const base32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-let secret = '';
-for (let i = 0; i < 16; i++) {
-  secret += base32[Math.floor(Math.random() * 32)];
-}
-console.log(secret);
-```
+- `ADMIN_EMAILS` = `jonathangolubok@gmail.com`
 
-**2. Actualizar en Supabase Function:**
+2) **Secretos TOTP** (elige una opción)
 
-Edita: `supabase/functions/verify-admin-2fa/index.ts`
+Opción A (recomendada): secreto por email
 
-```typescript
-const ADMIN_2FA_SECRETS: Record<string, string> = {
-  'jonathangolubok@gmail.com': 'TU_NUEVO_SECRETO_AQUI',
-  'admin@ainside.me': 'OTRO_NUEVO_SECRETO_AQUI'
+- `ADMIN_2FA_SECRETS_JSON` =
+
+```json
+{
+  "jonathangolubok@gmail.com": "BASE32_SECRET_1"
 }
 ```
 
-**3. Redesplegar la función:**
-```bash
-cd C:\Users\jonat\Downloads\ainside-main\ainside-main
-supabase functions deploy verify-admin-2fa
-```
+Opción B (más simple, menos ideal): secreto compartido
+
+- `ADMIN_2FA_SHARED_SECRET` = `BASE32_SECRET`
+
+> Nota: `SUPABASE_URL`, `SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` normalmente ya están disponibles en el runtime de Supabase Edge Functions.
 
 ---
 
-## 🗄️ Crear Tabla de Logs de Acceso
+## ✅ Paso 2 — Aplicar Migraciones en Supabase
 
-Ejecuta en Supabase SQL Editor:
+En Supabase Dashboard → SQL Editor, aplica estas migraciones del repo:
 
-```sql
--- Tabla para logs de acceso al panel de administración
-CREATE TABLE IF NOT EXISTS admin_access_logs (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  admin_email TEXT NOT NULL,
-  action TEXT NOT NULL,
-  ip_address TEXT,
-  user_agent TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+- `supabase/migrations/20260104_create_admin_logs.sql`
+- `supabase/migrations/20260104_create_admin_2fa_sessions.sql`
 
--- Índices para búsquedas rápidas
-CREATE INDEX idx_admin_logs_email ON admin_access_logs(admin_email);
-CREATE INDEX idx_admin_logs_created ON admin_access_logs(created_at DESC);
+Estas crean:
 
--- Habilitar Row Level Security
-ALTER TABLE admin_access_logs ENABLE ROW LEVEL SECURITY;
+- `admin_access_logs` (logs 2FA)
+- `admin_2fa_sessions` (tokens 2FA server-side)
 
--- Policy: Solo service role puede insertar
-CREATE POLICY "Service role can insert logs"
-  ON admin_access_logs
-  FOR INSERT
-  TO service_role
-  WITH CHECK (true);
-
--- Policy: Solo service role puede leer
-CREATE POLICY "Service role can read logs"
-  ON admin_access_logs
-  FOR SELECT
-  TO service_role
-  USING (true);
-```
+Ambas con RLS habilitado y policies solo para `service_role`.
 
 ---
 
-## 🚀 Desplegar Sistema 2FA
+## ✅ Paso 3 — Desplegar Edge Functions
 
-### 1. Desplegar Supabase Function:
+Desde la carpeta del proyecto:
 
 ```powershell
 cd C:\Users\jonat\Downloads\ainside-main\ainside-main
-supabase functions deploy verify-admin-2fa
+supabase functions deploy
 ```
 
-### 2. Verificar que la función esté activa:
+## ✅ Paso 3.1 — Generar tu secreto TOTP (local)
 
-Ve a: https://supabase.com/dashboard/project/odlxhgatqyodxdessxts/functions
+Genera un secreto fuerte (BASE32) para tu cuenta admin:
 
-Deberías ver `verify-admin-2fa` en la lista.
+```powershell
+cd C:\Users\jonat\Downloads\ainside-main\ainside-main
+node .\scripts\generate-admin-totp.mjs jonathangolubok@gmail.com AInside
+```
 
-### 3. Probar el sistema:
+El script imprime:
+
+- `BASE32 Secret`
+- `OTPAuth URI`
+- un `QR URL` (para escanear desde el teléfono)
+- y el `ADMIN_2FA_SECRETS_JSON` listo para pegar.
+
+## ✅ Paso 3.2 — Setear secrets con CLI (opcional, recomendado)
+
+Si tienes Supabase CLI logueado y el proyecto linkeado, puedes setear secrets así:
+
+```powershell
+supabase secrets set ADMIN_EMAILS="jonathangolubok@gmail.com"
+supabase secrets set ADMIN_2FA_SECRETS_JSON="{\"jonathangolubok@gmail.com\":\"BASE32_SECRET_1\"}"
+```
+
+Luego redeploy:
+
+```powershell
+supabase functions deploy verify-admin-2fa get-clients-status toggle-strategy change-client-plan
+```
+
+Funciones relevantes para Admin 2FA:
+
+- `verify-admin-2fa`
+- `get-clients-status`
+- `toggle-strategy`
+- `change-client-plan`
+
+## ✅ Paso 4 — Probar el flujo
 
 1. Ve a: https://ainside.me/admin/control
 2. Si no estás logueado → Te redirige a /login
 3. Después de login → Te redirige a /admin/verify-2fa
 4. Ingresa código de Google Authenticator
-5. Si es correcto → Acceso al panel de control
+5. Si el código es correcto → acceso a `/admin/control`
 
 ---
 
-## 🔒 Características de Seguridad
+## 🔒 Seguridad implementada
 
 ✅ **Autenticación de 2 factores obligatoria**
 ✅ **Bloqueo después de 3 intentos fallidos (15 minutos)**
-✅ **Sesión 2FA válida por 4 horas máximo**
+✅ **Sesión 2FA válida por 1 hora máximo** (server + client)
 ✅ **Logs de todos los intentos de acceso**
 ✅ **Códigos TOTP cambian cada 30 segundos**
 ✅ **Solo emails autorizados en lista blanca**
@@ -161,25 +150,23 @@ GROUP BY admin_email;
 
 ---
 
-## ⚠️ IMPORTANTE - Antes de Producción
+## ⚠️ Antes de producción
 
-1. **Genera secretos únicos nuevos** (no uses los de ejemplo)
-2. **Guarda los secretos en lugar seguro** (1Password, LastPass, etc.)
+1. **Genera secretos únicos nuevos** (no reuses secretos)
+2. **Guarda los secretos en lugar seguro** (1Password, etc.)
 3. **Configura Google Authenticator en tu teléfono**
 4. **Prueba el login completo antes de desplegar**
 5. **Crea backup de los códigos de recuperación**
 
 ---
 
-## 🆘 Recuperación de Acceso
+## 🆘 Recuperación de acceso
 
 Si pierdes acceso a Google Authenticator:
 
-1. Accede a Supabase Functions
-2. Edita `verify-admin-2fa/index.ts`
-3. Genera nuevo secreto
-4. Redespliega la función
-5. Configura Google Authenticator con el nuevo secreto
+1. Cambia `ADMIN_2FA_SECRETS_JSON` (o `ADMIN_2FA_SHARED_SECRET`) en Supabase Secrets
+2. Redeploy `verify-admin-2fa`
+3. Reconfigura Google Authenticator con el nuevo secreto
 
 ---
 

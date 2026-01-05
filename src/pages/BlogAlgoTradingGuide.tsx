@@ -41,7 +41,14 @@ const BlogAlgoTradingGuide = () => {
 
   // Detect language from URL and set it
   useEffect(() => {
-    const currentSlug = location.pathname.split('/').pop() || '';
+    const currentSlugEncoded = location.pathname.split('/').pop() || '';
+    let currentSlug = currentSlugEncoded;
+    try {
+      currentSlug = decodeURIComponent(currentSlugEncoded);
+    } catch {
+      // keep encoded slug if decoding fails
+    }
+
     const detectedLanguage = SLUG_TO_LANGUAGE[currentSlug];
     
     if (detectedLanguage && detectedLanguage !== i18n.language) {

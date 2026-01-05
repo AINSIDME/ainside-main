@@ -5,6 +5,17 @@
   "framework": "vite",
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ainside.me"
+        }
+      ],
+      "destination": "https://ainside.me/$1",
+      "permanent": true
+    },
+    {
       "source": "/trading",
       "destination": "/algotrading",
       "permanent": true
