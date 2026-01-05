@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -42,10 +42,18 @@ const AdminControl = () => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   // Lista de emails autorizados como administradores
-  const ADMIN_EMAILS = [
-    'jonathangolubok@gmail.com',
-    'admin@ainside.me'
-  ];
+  const adminEmails = useMemo(() => {
+    const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
+    if (raw) {
+      return String(raw)
+        .split(',')
+        .map((s: string) => s.trim().toLowerCase())
+        .filter(Boolean);
+    }
+    return ['jonathangolubok@gmail.com'];
+  }, []);
+
+  const get2FAToken = useCallback(() => sessionStorage.getItem('admin_2fa_token') || '', []);
 
   // Verificar autenticación y rol de administrador
   useEffect(() => {
@@ -59,44 +67,48 @@ const AdminControl = () => {
             description: "Debes iniciar sesión para acceder al panel de administración",
             variant: "destructive"
           });
-          navigate('/login');
+          navigate('/login', { replace: true, state: { redirectTo: '/admin/control' } as any });
           return;
         }
 
         // Verificar si el email está en la lista de administradores
-        if (!ADMIN_EMAILS.includes(user.email || '')) {
+        const email = (user.email || '').toLowerCase();
+        if (!adminEmails.includes(email)) {
+          await supabase.auth.signOut();
           toast({
             title: "Acceso Denegado",
-            description: "No tienes permisos de administrador",
+            description: "Inicia sesión con la cuenta de administrador",
             variant: "destructive"
           });
-          navigate('/dashboard');
+          navigate('/login', { replace: true, state: { redirectTo: '/admin/control' } as any });
           return;
         }
 
         // VERIFICACIÓN 2FA OBLIGATORIA
         const session2FA = sessionStorage.getItem('admin_2fa_verified');
         const timestamp = sessionStorage.getItem('admin_2fa_timestamp');
+        const token = get2FAToken();
         
-        // Verificar si la sesión 2FA sigue válida (4 horas máximo)
-        if (!session2FA || !timestamp) {
-          navigate('/admin/verify-2fa');
+        // Verificar si la sesión 2FA sigue válida (1 hora máximo)
+        if (!session2FA || !timestamp || !token) {
+          navigate('/admin/verify-2fa', { replace: true });
           return;
         }
 
-        const fourHoursInMs = 4 * 60 * 60 * 1000;
+        const oneHourInMs = 60 * 60 * 1000;
         const sessionAge = Date.now() - parseInt(timestamp);
         
-        if (sessionAge > fourHoursInMs) {
+        if (sessionAge > oneHourInMs) {
           // Sesión 2FA expirada
           sessionStorage.removeItem('admin_2fa_verified');
           sessionStorage.removeItem('admin_2fa_timestamp');
+          sessionStorage.removeItem('admin_2fa_token');
           toast({
             title: "Sesión Expirada",
             description: "Tu sesión de verificación 2FA ha expirado. Verifica nuevamente.",
             variant: "destructive"
           });
-          navigate('/admin/verify-2fa');
+          navigate('/admin/verify-2fa', { replace: true });
           return;
         }
 
@@ -110,12 +122,14 @@ const AdminControl = () => {
     };
 
     checkAdminAccess();
-  }, [navigate, toast]);
+  }, [adminEmails, get2FAToken, navigate, toast]);
 
   // Fetch clients data
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
-      const { data, error } = await supabase.functions.invoke('get-clients-status');
+      const { data, error } = await supabase.functions.invoke('get-clients-status', {
+        headers: { 'x-admin-2fa-token': get2FAToken() }
+      });
       
       if (error) throw error;
       
@@ -130,17 +144,18 @@ const AdminControl = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [get2FAToken, toast]);
 
   // Toggle strategy for a client
-  const toggleStrategy = async (clientId: string, strategy: string, enable: boolean) => {
+  const toggleStrategy = useCallback(async (clientId: string, strategy: string, enable: boolean) => {
     try {
       const { error } = await supabase.functions.invoke('toggle-strategy', {
         body: {
           clientId,
           strategy,
           enable
-        }
+        },
+        headers: { 'x-admin-2fa-token': get2FAToken() }
       });
 
       if (error) throw error;
@@ -159,16 +174,17 @@ const AdminControl = () => {
         variant: "destructive"
       });
     }
-  };
+  }, [fetchClients, get2FAToken, toast]);
 
   // Change client plan
-  const changePlan = async (clientId: string, newPlan: string) => {
+  const changePlan = useCallback(async (clientId: string, newPlan: string) => {
     try {
       const { error } = await supabase.functions.invoke('change-client-plan', {
         body: {
           clientId,
           planName: newPlan
-        }
+        },
+        headers: { 'x-admin-2fa-token': get2FAToken() }
       });
 
       if (error) throw error;
@@ -187,7 +203,7 @@ const AdminControl = () => {
         variant: "destructive"
       });
     }
-  };
+  }, [fetchClients, get2FAToken, toast]);
 
   // Auto-refresh every 10 seconds
   useEffect(() => {
@@ -200,7 +216,7 @@ const AdminControl = () => {
       
       return () => clearInterval(interval);
     }
-  }, [autoRefresh]);
+  }, [autoRefresh, fetchClients]);
 
   const getStatusColor = (status: string) => {
     return status === 'online' ? 'bg-green-500' : 'bg-gray-500';

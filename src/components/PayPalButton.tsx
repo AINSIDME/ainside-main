@@ -46,12 +46,12 @@ export default function PayPalButton({
 
           // 1) Crear orden (backend)
           createOrder: async () => {
-            const { da
-                plan: description || "Plan", 
+            const { data, error } = await supabase.functions.invoke("create-payment", {
+              body: {
+                plan: description || "Plan",
                 amount: Number(amount),
-                language: i18n.language || 'en'
-             te-payment", {
-              body: { plan: description || "Plan", amount: Number(amount) },
+                language: i18n.language || "en",
+              },
             });
             if (error || !data?.orderId) throw new Error("Falló crear la orden");
             return data.orderId;

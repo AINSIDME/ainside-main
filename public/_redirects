@@ -1,4 +1,7 @@
 # Redirect /download to Supabase Edge Function for secure downloads
 /download  https://odlxhgatqyodxdessxts.supabase.co/functions/v1/download:splat  200!
 
+# Canonical host (avoid losing Supabase session between www and non-www)
+https://www.ainside.me/*  https://ainside.me/:splat  301!
+
 /* /index.html 200

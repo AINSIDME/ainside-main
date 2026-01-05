@@ -49,6 +49,19 @@ const Dashboard = () => {
         return;
       }
 
+      // If user has MFA enabled, require AAL2 before showing protected data.
+      try {
+        const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+        const currentLevel = (data as any)?.currentLevel as string | undefined;
+        const nextLevel = (data as any)?.nextLevel as string | undefined;
+        if (currentLevel !== "aal2" && nextLevel === "aal2") {
+          navigate("/mfa", { replace: true, state: { redirectTo: "/dashboard" } });
+          return;
+        }
+      } catch {
+        // MFA not enabled/available; continue.
+      }
+
       setUser(user);
 
       // Get user registration data
@@ -109,7 +122,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="text-white">Cargando...</div>
+        <div className="text-white">{t("dashboard.loading", { defaultValue: "Cargando..." })}</div>
       </div>
     );
   }
@@ -129,7 +142,7 @@ const Dashboard = () => {
           </div>
           <Button onClick={handleLogout} variant="outline" className="gap-2">
             <LogOut className="h-4 w-4" />
-            {t("dashboard.logout", { defaultValue: "Cerrar Sesión" })}
+            {t("dashboard.logout.button", { defaultValue: "Cerrar Sesión" })}
           </Button>
         </div>
 
@@ -146,14 +159,18 @@ const Dashboard = () => {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-slate-400" />
                 <div>
-                  <p className="text-sm text-slate-400">Email</p>
+                    <p className="text-sm text-slate-400">
+                      {t("dashboard.profile.emailLabel", { defaultValue: "Email" })}
+                    </p>
                   <p className="text-white font-medium">{userData?.email}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="h-4 w-4 text-slate-400" />
                 <div>
-                  <p className="text-sm text-slate-400">Miembro desde</p>
+                    <p className="text-sm text-slate-400">
+                      {t("dashboard.profile.memberSince", { defaultValue: "Miembro desde" })}
+                    </p>
                   <p className="text-white font-medium">
                     {new Date(userData?.created_at || "").toLocaleDateString()}
                   </p>
@@ -163,11 +180,33 @@ const Dashboard = () => {
                 <div className="flex items-center gap-3">
                   <Settings className="h-4 w-4 text-slate-400" />
                   <div>
-                    <p className="text-sm text-slate-400">Plan</p>
+                      <p className="text-sm text-slate-400">
+                        {t("dashboard.plan.label", { defaultValue: "Plan" })}
+                      </p>
                     <Badge className="bg-blue-600 mt-1">{userData.plan_name}</Badge>
                   </div>
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Security Card */}
+          <Card className="bg-slate-900/50 border-slate-800">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Settings className="h-5 w-5" />
+                {t("dashboard.security.title", { defaultValue: "Seguridad" })}
+              </CardTitle>
+              <CardDescription className="text-slate-400">
+                {t("dashboard.security.description", {
+                  defaultValue: "Activa verificación en dos pasos (2FA) para proteger tu cuenta.",
+                })}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => navigate("/mfa")} className="w-full">
+                {t("dashboard.security.mfa", { defaultValue: "Configurar 2FA" })}
+              </Button>
             </CardContent>
           </Card>
 
@@ -185,7 +224,9 @@ const Dashboard = () => {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-400 mt-0.5" />
                     <div>
-                      <p className="text-white font-medium">HWID Registrado</p>
+                      <p className="text-white font-medium">
+                        {t("dashboard.hwid.registered.title", { defaultValue: "HWID Registrado" })}
+                      </p>
                       <p className="text-sm text-slate-400 font-mono mt-1">
                         {userData.hwid.substring(0, 20)}...
                       </p>
@@ -194,17 +235,23 @@ const Dashboard = () => {
                   <div className="flex items-center gap-3">
                     <Activity className="h-4 w-4 text-slate-400" />
                     <div>
-                      <p className="text-sm text-slate-400">Estado de Conexión</p>
+                      <p className="text-sm text-slate-400">
+                        {t("dashboard.hwid.connectionStatus.label", { defaultValue: "Estado de Conexión" })}
+                      </p>
                       <div className="flex items-center gap-2 mt-1">
                         {userData.status === "online" ? (
                           <>
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-green-400 font-medium">En Línea</span>
+                            <span className="text-green-400 font-medium">
+                              {t("dashboard.hwid.connectionStatus.online", { defaultValue: "En Línea" })}
+                            </span>
                           </>
                         ) : (
                           <>
                             <div className="w-2 h-2 rounded-full bg-gray-500" />
-                            <span className="text-gray-400 font-medium">Fuera de Línea</span>
+                            <span className="text-gray-400 font-medium">
+                              {t("dashboard.hwid.connectionStatus.offline", { defaultValue: "Fuera de Línea" })}
+                            </span>
                           </>
                         )}
                       </div>
@@ -212,7 +259,9 @@ const Dashboard = () => {
                   </div>
                   {userData.strategies_active && userData.strategies_active.length > 0 && (
                     <div>
-                      <p className="text-sm text-slate-400 mb-2">Estrategias Activas</p>
+                      <p className="text-sm text-slate-400 mb-2">
+                        {t("dashboard.hwid.activeStrategies.label", { defaultValue: "Estrategias Activas" })}
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {userData.strategies_active.map((strategy) => (
                           <Badge key={strategy} variant="outline" className="text-green-400 border-green-400">
@@ -228,9 +277,11 @@ const Dashboard = () => {
                   <div className="flex items-start gap-3">
                     <XCircle className="h-5 w-5 text-yellow-400 mt-0.5" />
                     <div>
-                      <p className="text-white font-medium">HWID No Registrado</p>
+                      <p className="text-white font-medium">
+                        {t("dashboard.hwid.notRegistered.title", { defaultValue: "HWID No Registrado" })}
+                      </p>
                       <p className="text-sm text-slate-400 mt-1">
-                        Registra tu HWID para activar tu licencia
+                        {t("dashboard.hwid.notRegistered.desc", { defaultValue: "Registra tu HWID para activar tu licencia" })}
                       </p>
                     </div>
                   </div>
@@ -239,7 +290,7 @@ const Dashboard = () => {
                     className="w-full gap-2"
                   >
                     <Key className="h-4 w-4" />
-                    Registrar HWID
+                    {t("dashboard.hwid.registerButton", { defaultValue: "Registrar HWID" })}
                   </Button>
                 </>
               )}

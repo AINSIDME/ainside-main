@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PageSEO } from "@/components/seo/PageSEO";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,12 @@ import { Loader2, Mail, Lock, LogIn } from "lucide-react";
 const getAppOrigin = () => {
   const configured = (import.meta.env.VITE_APP_ORIGIN as string | undefined)?.trim();
   if (configured) return configured.replace(/\/$/, "");
+
+  // Avoid www/non-www session split in localStorage.
+  if (window.location.hostname === 'www.ainside.me') {
+    return `${window.location.protocol}//ainside.me`;
+  }
+
   return window.location.origin;
 };
 
@@ -20,11 +26,26 @@ const Login = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [isResetMode, setIsResetMode] = useState(false);
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+
+  const redirectTo = (() => {
+    const state = (location.state as any) ?? null;
+    const candidate = typeof state?.redirectTo === "string" ? state.redirectTo : null;
+    if (candidate && candidate.startsWith("/")) return candidate;
+    return "/dashboard";
+  })();
+
+  const setMode = (mode: "login" | "reset" | "signup") => {
+    setIsResetMode(mode === "reset");
+    setIsSignUpMode(mode === "signup");
+  };
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,11 +64,85 @@ const Login = () => {
         description: t("login.success.message", { defaultValue: "Has iniciado sesión correctamente" }),
       });
 
-      navigate("/dashboard");
+      try {
+        const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+        const currentLevel = (data as any)?.currentLevel as string | undefined;
+        const nextLevel = (data as any)?.nextLevel as string | undefined;
+        if (currentLevel !== "aal2" && nextLevel === "aal2") {
+          navigate("/mfa", { replace: true, state: { redirectTo } });
+          return;
+        }
+      } catch {
+        // If MFA isn't enabled/available, proceed normally.
+      }
+
+      navigate(redirectTo);
     } catch (error: any) {
       toast({
         title: t("login.error.title", { defaultValue: "Error" }),
         description: error.message || t("login.error.message", { defaultValue: "No se pudo iniciar sesión. Verifica tus credenciales." }),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleEmailSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const appOrigin = getAppOrigin();
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${appOrigin}/dashboard`,
+          data: fullName ? { full_name: fullName } : undefined,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        toast({
+          title: t("login.success.title", { defaultValue: "¡Bienvenido!" }),
+          description: t("login.success.message", { defaultValue: "Has iniciado sesión correctamente" }),
+        });
+
+        try {
+          const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+          const currentLevel = (aal as any)?.currentLevel as string | undefined;
+          const nextLevel = (aal as any)?.nextLevel as string | undefined;
+          if (currentLevel !== "aal2" && nextLevel === "aal2") {
+            navigate("/mfa", { replace: true, state: { redirectTo } });
+            return;
+          }
+        } catch {
+          // Ignore and continue
+        }
+
+        navigate(redirectTo);
+        return;
+      }
+
+      toast({
+        title: t("login.signup.success.title", { defaultValue: "Cuenta creada" }),
+        description: t("login.signup.success.message", {
+          defaultValue: "Revisa tu email para confirmar tu cuenta (si la confirmación está activada).",
+        }),
+      });
+
+      setMode("login");
+    } catch (error: any) {
+      toast({
+        title: t("login.error.title", { defaultValue: "Error" }),
+        description:
+          error.message ||
+          t("login.signup.error.message", {
+            defaultValue: "No se pudo crear la cuenta. Intenta nuevamente.",
+          }),
         variant: "destructive",
       });
     } finally {
@@ -65,21 +160,23 @@ const Login = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${appOrigin}/dashboard`,
+          redirectTo: `${appOrigin}${redirectTo}`,
         },
       });
 
       console.log("🔵 Respuesta de Supabase:", { data, error });
 
       if (error) throw error;
-    } catch (error: any) {
+      } catch (error: any) {
       console.error("🔴 Google OAuth error completo:", error);
       
       // Check if it's a provider not enabled error
       if (error.message?.includes("provider is not enabled") || error.error_code === "validation_failed") {
         toast({
-          title: "⚠️ Google OAuth no habilitado",
-          description: "Ve a Supabase Dashboard → Authentication → Providers → Google y activa el toggle 'Enable Sign in with Google'",
+             title: t("login.googleOAuthNotEnabled.title", { defaultValue: "⚠️ Google OAuth no habilitado" }),
+             description: t("login.googleOAuthNotEnabled.description", { 
+               defaultValue: "Ve a Supabase Dashboard → Authentication → Providers → Google y activa el toggle 'Enable Sign in con Google'" 
+             }),
           variant: "destructive",
           duration: 8000,
         });
@@ -142,16 +239,18 @@ const Login = () => {
               {t("login.badge", { defaultValue: "Acceso Seguro" })}
             </div>
             <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
-              {isResetMode 
+              {isResetMode
                 ? t("login.reset.title", { defaultValue: "Restablecer Contraseña" })
-                : t("login.title", { defaultValue: "Iniciar Sesión" })
-              }
+                : isSignUpMode
+                  ? t("login.signup.title", { defaultValue: "Crear Cuenta" })
+                  : t("login.title", { defaultValue: "Iniciar Sesión" })}
             </h1>
             <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
               {isResetMode
                 ? t("login.reset.subtitle", { defaultValue: "Ingresa tu email para recibir instrucciones" })
-                : t("login.subtitle", { defaultValue: "Accede a tu cuenta de AInside" })
-              }
+                : isSignUpMode
+                  ? t("login.signup.subtitle", { defaultValue: "Crea tu cuenta con email y contraseña" })
+                  : t("login.subtitle", { defaultValue: "Accede a tu cuenta de AInside" })}
             </p>
           </div>
         </section>
@@ -161,8 +260,8 @@ const Login = () => {
           <div className="container mx-auto max-w-md">
             <Card className="bg-slate-900/50 border-slate-600/40 backdrop-blur-sm shadow-2xl">
               <CardContent className="pt-8 space-y-6">
-                {/* Google Login */}
-                {!isResetMode && (
+                {/* Google Login (only in login mode) */}
+                {!isResetMode && !isSignUpMode && (
                   <>
                     <Button
                       type="button"
@@ -210,7 +309,28 @@ const Login = () => {
                 )}
 
                 {/* Email/Password Form */}
-                <form onSubmit={isResetMode ? handlePasswordReset : handleEmailLogin} className="space-y-6">
+                <form
+                  onSubmit={
+                    isResetMode ? handlePasswordReset : isSignUpMode ? handleEmailSignUp : handleEmailLogin
+                  }
+                  className="space-y-6"
+                >
+                  {isSignUpMode && (
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName" className="text-slate-200">
+                        {t("login.signup.name.label", { defaultValue: "Nombre" })}
+                      </Label>
+                      <Input
+                        id="fullName"
+                        type="text"
+                        placeholder={t("login.signup.name.placeholder", { defaultValue: "Tu nombre" })}
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-6 rounded-xl"
+                      />
+                    </div>
+                  )}
+
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-slate-200">
                       <Mail className="inline h-4 w-4 mr-2" />
@@ -260,8 +380,9 @@ const Login = () => {
                         <LogIn className="mr-2 h-4 w-4" />
                         {isResetMode
                           ? t("login.reset.button", { defaultValue: "Enviar Email" })
-                          : t("login.button", { defaultValue: "Iniciar Sesión" })
-                        }
+                          : isSignUpMode
+                            ? t("login.signup.submit", { defaultValue: "Crear Cuenta" })
+                            : t("login.button", { defaultValue: "Iniciar Sesión" })}
                       </>
                     )}
                   </Button>
@@ -271,7 +392,13 @@ const Login = () => {
                 <div className="space-y-3 text-center text-sm pt-4">
                   <button
                     type="button"
-                    onClick={() => setIsResetMode(!isResetMode)}
+                    onClick={() => {
+                      if (isResetMode) {
+                        setMode("login");
+                      } else {
+                        setMode("reset");
+                      }
+                    }}
                     className="text-blue-400 hover:text-blue-300 transition-colors block w-full"
                   >
                     {isResetMode
@@ -282,9 +409,16 @@ const Login = () => {
                   
                   <div className="text-slate-300">
                     {t("login.noAccount", { defaultValue: "¿No tienes cuenta?" })}{" "}
-                    <a href="/register" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">
-                      {t("login.register", { defaultValue: "Regístrate" })}
-                    </a>
+                    <button
+                      type="button"
+                      className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                      onClick={() => setMode(isSignUpMode ? "login" : "signup")}
+                      disabled={isResetMode}
+                    >
+                      {isSignUpMode
+                        ? t("login.backToLogin", { defaultValue: "Volver a iniciar sesión" })
+                        : t("login.register", { defaultValue: "Regístrate" })}
+                    </button>
                   </div>
                 </div>
               </CardContent>

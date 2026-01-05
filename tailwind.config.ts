@@ -17,8 +17,9 @@ export default {
 				'2xl': '1400px'
 			}
 		},
-		extend: {
-			colors: {
+		extend: {				fontFamily: {
+					sans: ['Noto Sans', 'Noto Sans Arabic', 'Noto Sans Hebrew', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'system-ui', 'sans-serif'],
+				},			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

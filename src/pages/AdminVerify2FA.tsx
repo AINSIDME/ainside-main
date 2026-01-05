@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -25,27 +25,88 @@ const AdminVerify2FA = () => {
   const [attempts, setAttempts] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isChecking, setIsChecking] = useState(true);
 
-  useEffect(() => {
-    checkAuth();
+  const adminEmails = useMemo(() => {
+    const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
+    if (raw) {
+      return String(raw)
+        .split(',')
+        .map((s: string) => s.trim().toLowerCase())
+        .filter(Boolean);
+    }
+    return ['jonathangolubok@gmail.com'];
   }, []);
 
-  const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    
+  const checkAuth = useCallback(async () => {
+    setIsChecking(true);
+
+    const waitForUser = async (): Promise<any | null> => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.user) return sessionData.session.user;
+
+      return await new Promise((resolve) => {
+        const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+          if (session?.user) {
+            data.subscription.unsubscribe();
+            resolve(session.user);
+          }
+        });
+
+        setTimeout(() => {
+          data.subscription.unsubscribe();
+          resolve(null);
+        }, 1200);
+      });
+    };
+
+    const user = await waitForUser();
     if (!user) {
-      navigate('/login');
+      navigate('/login', { replace: true, state: { redirectTo: '/admin/verify-2fa' } as any });
       return;
     }
 
-    setUserEmail(user.email || '');
+    const email = (user.email || '').toLowerCase();
+    setUserEmail(email);
+
+    // Extra hardening: only allow admin emails into the 2FA flow
+    if (!adminEmails.includes(email)) {
+      await supabase.auth.signOut();
+      toast({
+        title: "Acceso Denegado",
+        description: "Inicia sesión con la cuenta de administrador",
+        variant: "destructive"
+      });
+      navigate('/login', { replace: true, state: { redirectTo: '/admin/verify-2fa' } as any });
+      return;
+    }
 
     // Verificar si ya tiene sesión 2FA activa
     const session2FA = sessionStorage.getItem('admin_2fa_verified');
     if (session2FA === 'true') {
       navigate('/admin/control');
     }
-  };
+
+    setIsChecking(false);
+  }, [adminEmails, navigate, toast]);
+
+  useEffect(() => {
+    void checkAuth();
+  }, [checkAuth]);
+
+  if (isChecking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
+        <Card className="w-96 bg-slate-800/50 border-slate-700">
+          <CardContent className="p-8 text-center">
+            <Loader2 className="w-10 h-10 text-blue-500 mx-auto mb-4 animate-spin" />
+            <h2 className="text-xl font-semibold text-white mb-2">Cargando sesión...</h2>
+            <p className="text-slate-400">Validando acceso de administrador</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   const verify2FACode = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,17 +135,17 @@ const AdminVerify2FA = () => {
       // Llamar a la función de Supabase para verificar el código 2FA
       const { data, error } = await supabase.functions.invoke('verify-admin-2fa', {
         body: {
-          email: userEmail,
           code: code
         }
       });
 
       if (error) throw error;
 
-      if (data.verified) {
+      if (data.verified && data.token) {
         // Guardar verificación en sessionStorage (válido solo para esta sesión)
         sessionStorage.setItem('admin_2fa_verified', 'true');
         sessionStorage.setItem('admin_2fa_timestamp', Date.now().toString());
+        sessionStorage.setItem('admin_2fa_token', data.token);
 
         toast({
           title: "✓ Verificación Exitosa",
