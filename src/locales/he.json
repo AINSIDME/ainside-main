@@ -153,17 +153,7 @@
       "toast": {
         "title": "ההודעה נשלחה",
         "desc": "תודה על פנייתך. הצוות שלנו יחזור אליך בהקדם האפשרי."
-      },
-      "placeholders": {
-        "name": "שם שלך",
-        "email": "email@example.com",
-        "organization": "שם החברה שלך",
-        "subject": "איך נוכל לעזור?",
-        "message": "ספר לנו על הצרכים שלך..."
-      },
-      "sending": "שולח...",
-      "success": "ההודעה נשלחה בהצלחה!",
-      "error": "שגיאה בשליחת ההודעה"
+      }
     },
     "info": {
       "email": {
@@ -201,10 +191,6 @@
       "p1": "צוות הפיתוח שלנו זמין לשיחה על שירותי השכרת אלגוריתמים ולספק מידע על כלי המסחר והאינדיקטורים הטכניים שלנו.",
       "rememberLabel": "לתשומת לבך:",
       "remember": "אנחנו מפתחים כלי טכנולוגיה בלבד – איננו מספקים ייעוץ פיננסי."
-    },
-    "seo": {
-      "title": "צור קשר - AInside",
-      "desc": "צור קשר עם צוות הפיתוח האלגוריתמי שלנו"
     }
   },
   "liveDemo": {
@@ -284,7 +270,7 @@
     "toggleMenu": "החלף תפריט"
   },
   "gettingStarted": {
-    "title": "Getting Started â€¢ EasyLanguage",
+    "title": "Getting Started ⬢ EasyLanguage",
     "description": "EasyLanguage compatibility (TradeStation/MultiCharts), installation, data, logic and optimization.",
     "deliverables": {
       "title": "Compatibility and deliverables",
@@ -300,7 +286,7 @@
     },
     "requirements": {
       "title": "Minimum requirements",
-      "conn": "Stable connection (â‰¥ 20 Mbps) and machine with 8 GB RAM or more.",
+      "conn": "Stable connection (≥ 20 Mbps) and machine with 8 GB RAM or more.",
       "platform": "Compatible platform to execute: TradeStation or MultiCharts (EasyLanguage).",
       "provider": "Data provider/broker enabled for chosen instruments (ES/MES or GC/MGC)."
     },
@@ -314,16 +300,16 @@
       },
       "s2": {
         "title": "2) TradeStation (.ELD)",
-        "l1": "File â†’ Import/Export EasyLanguage â†’ Import â†’ select the .ELD.",
+        "l1": "File → Import/Export EasyLanguage → Import → select the .ELD.",
         "l2": "Open a chart of the symbol (ES/MES or GC/MGC), 1m/5m timeframe.",
-        "l3": "Insert the Strategy via Insert â†’ Strategy and select the AInside strategy.",
+        "l3": "Insert the Strategy via Insert → Strategy and select the AInside strategy.",
         "l4": "Set Inputs according to /params/*.json (plan and cycle).",
         "l5": "Sessions: use recommended session template (CME RTH) per instrument."
       },
       "s3": {
         "title": "3) MultiCharts (.PLA) + QuoteManager",
-        "l1": "File â†’ Import PLA â†’ select the .PLA.",
-        "l2": "Open QuoteManager â†’ File â†’ Import Data â†’ ASCII to load /data/*.csv.",
+        "l1": "File → Import PLA → select the .PLA.",
+        "l2": "Open QuoteManager → File → Import Data → ASCII to load /data/*.csv.",
         "l3": "CSV mapping: timestamp,open,high,low,close,volume (UTC). 1m/5m interval.",
         "l4": "On chart, insert the Signal/Study and set Inputs like /params.",
         "l5": "Sessions: select proper CME session template for the symbol."
@@ -331,14 +317,14 @@
       "s4": {
         "title": "4) Parameters, backtest and optimization",
         "l1": "Load Inputs from /params (micro/mini, monthly/annual).",
-        "l2": "Backtest â‰¥ 2 years; metrics: Profit Factor, Max Drawdown, Win%, Sharpe.",
+        "l2": "Backtest ≥ 2 years; metrics: Profit Factor, Max Drawdown, Win%, Sharpe.",
         "l3": "Optimize within sensible ranges; use out-of-sample to avoid overfitting.",
         "l4": "Risk: position sizing, stop (ATR/fixed), daily loss limits."
       },
       "s5": {
         "title": "5) Trading and best practices",
         "l1": "Sync system clock; minimize feed latency.",
-        "l2": "Start in demo for 2â€“4 weeks before going live.",
+        "l2": "Start in demo for 2–4 weeks before going live.",
         "l3": "Keep a disciplined journal and update when new versions release."
       }
     },
@@ -363,11 +349,11 @@
     "tsViz": {
       "title": "Visualization in TradeStation",
       "desc": "In TradeStation, the strategy shows entry/exit arrows, trade lines, ATRStopL/S labels, Long/Short markers, and events like EndOfDay. If you don't see them:",
-      "l1": "Right-click chart â†’ Format Strategies â†’ Properties tab:",
+      "l1": "Right-click chart → Format Strategies → Properties tab:",
       "l2": "Enable 'Show strategy orders on chart' and 'Show entries/exits'.",
       "l3": "In Settings: turn on 'Use Look-Inside-Bar Back-testing (LIBB)' at 1 tick for realistic stops.",
       "l4": "Verify Session template (CME RTH) and correct symbol/contract (e.g., MGCZ25, SILZ25).",
-      "l5": "Recommended timeframe: 1â€“5 minutes; standard bars, not Heikin Ashi.",
+      "l5": "Recommended timeframe: 1–5 minutes; standard bars, not Heikin Ashi.",
       "tip": "Tip: open Strategy Performance Report to validate metrics and equity curve."
     },
     "validation": {
@@ -376,16 +362,16 @@
       "l2": "Proper session template (CME RTH) and expected time zone.",
       "l3": "Strategy inserted and Inputs loaded from /params.",
       "l4": "LIBB/IOG configured for realistic backtest; arrows/trades visible.",
-      "l5": "Data without gaps: range â‰¥ 2 years for backtest/optimization."
+      "l5": "Data without gaps: range ≥ 2 years for backtest/optimization."
     },
     "faq": {
       "title": "Frequently asked questions (EasyLanguage)",
       "q1": "I don't see entries/exits on the chart",
-      "a1": "Check Format Strategies â†’ Properties: enable showing orders/entries and apply the correct session. Ensure you are not using synthetic bars (Heikin Ashi).",
+      "a1": "Check Format Strategies → Properties: enable showing orders/entries and apply the correct session. Ensure you are not using synthetic bars (Heikin Ashi).",
       "q2": "Backtest results look unrealistic",
       "a2": "Enable Look-Inside-Bar Back-testing (1 tick) and use high-resolution data. Adjust slippage/commissions in Properties.",
       "q3": "CSV data won't import in MultiCharts",
-      "a3": "Import via QuoteManager â†’ File â†’ Import Data â†’ ASCII with columns timestamp,open,high,low,close,volume (UTC) and comma separator.",
+      "a3": "Import via QuoteManager → File → Import Data → ASCII with columns timestamp,open,high,low,close,volume (UTC) and comma separator.",
       "q4": "What do ATRStopL/ATRStopS mean?",
       "a4": "Dynamic ATR-based stop levels for Long/Short positions. They update intrabar if LIBB/IOG is enabled."
     },
@@ -574,8 +560,8 @@
       "loading": "Loading...",
       "perPoint": "$50 per point",
       "position": "Position",
-      "marketOpen": "â— MARKET OPEN",
-      "marketClosed": "â— MARKET CLOSED",
+      "marketOpen": "● MARKET OPEN",
+      "marketClosed": "● MARKET CLOSED",
       "closedMessage": "Market Closed: Live simulation is paused. E-mini S&P 500 futures markets operate from Sunday 6:00 PM to Friday 5:00 PM ET, with a daily maintenance break from 5:00-6:00 PM ET.",
       "longEntry": "Long Entry",
       "shortEntry": "Short Entry",
@@ -679,33 +665,33 @@
   "docsPage": {
     "seo": {
       "title": "Documentation",
-      "desc": "Professional product documentation: legal policies, system status, and getting started guides."
+      "desc": "תיעוד מוצר מקצועי: מדיניות משפטית, מצב מערכת, ומדריכים להתחלה."
     },
-    "badge": "Product Documentation",
-    "title": "Documentation & Policies",
-    "subtitle": "Professional documentation for AInside.me software: legal policies, system status, and getting started guides. Educational tools only â€” no financial advice.",
-    "subtitleFull": "Professional documentation for AInside.me software: rental plans overview, legal policies, system status, and getting started guides. Educational tools only â€” no financial advice.",
+    "badge": "תיעוד מוצר",
+    "title": "תיעוד ומדיניות",
+    "subtitle": "תיעוד מקצועי של תוכנת AInside.me: מדיניות משפטית, מצב מערכת, ומדריכים להתחלה. כלים חינוכיים בלבד — לא ייעוץ פיננסי.",
+    "subtitleFull": "תיעוד מקצועי של תוכנת AInside.me: סקירת תוכניות השכרה, מדיניות משפטית, מצב מערכת, ומדריכים להתחלה. כלים חינוכיים בלבד — לא ייעוץ פיננסי.",
     "quick": {
-      "title": "Quick Access",
+      "title": "גישה מהירה",
       "plans": {
-        "title": "Rental Plans",
-        "desc": "Overview of Micro/Mini contracts and billing options."
+        "title": "תוכניות השכרה",
+        "desc": "סקירה של חוזי Micro/Mini ואפשרויות חיוב."
       },
       "support": {
-        "title": "Contact Support",
-        "desc": "Get assistance from our support team."
+        "title": "צור קשר עם תמיכה",
+        "desc": "קבל סיוע מצוות התמיכה שלנו."
       },
       "terms": {
-        "title": "Terms & Conditions",
-        "desc": "Educational use only â€” software provided â€œAS ISâ€."
+        "title": "תנאים והגבלות",
+        "desc": "לשימוש חינוכי בלבד — התוכנה מסופקת “כמו שהיא”."
       },
       "privacy": {
-        "title": "Privacy Policy",
-        "desc": "Minimal technical data only. No financial data stored."
+        "title": "מדיניות פרטיות",
+        "desc": "רק נתונים טכניים מינימליים. לא נשמרים נתונים פיננסיים."
       },
       "status": {
-        "title": "System Status",
-        "desc": "Current operational status for platform components."
+        "title": "מצב מערכת",
+        "desc": "מצב תפעולי נוכחי של רכיבי הפלטפורמה."
       }
     },
     "cta": {
@@ -904,8 +890,8 @@
     "placeholder": "Write your analysis question...",
     "writeMessage": "Write message",
     "sendMessage": "Send message",
-    "instructions": "Enter to send â€¢ Shift+Enter for new line",
-    "backToMenu": "ðŸ”„ Back to main menu",
+    "instructions": "Enter to send ⬢ Shift+Enter for new line",
+    "backToMenu": "🔄 Back to main menu",
     "questions": {
       "q1": "What do I see in this live stream?",
       "q2": "Are these real positions?",
@@ -917,21 +903,21 @@
       "q8": "What type of company are you exactly?"
     },
     "answers": {
-      "a1": "ðŸ“º This stream shows REAL S&P 500 futures trading (/ES and /MES) with current positions, professional charts, technical indicators like VWAP and real-time operations.",
-      "a2": "âœ… YES, all positions shown are REAL operations with real money. It's not simulation - you can see our current capital and P&L live.",
-      "a3": "ðŸ“Š VWAP (Volume Weighted Average Price) is the volume-weighted average price. Blue/red lines show institutional support/resistance zones we use to open real positions.",
-      "a4": "ðŸ”§ We rent STUDY TOOLS and technical indicators for market analysis. They are educational tools, NOT financial advice.",
-      "a5": "ðŸ“š You can study our operations as educational material. Compatible ONLY with EasyLanguage platforms: TradeStation, TradeStation Global, and MultiCharts (PowerLanguage). IMPORTANT: For study only, not advice.",
-      "a6": "ðŸ’° Tool rental: $99/month or $999/year (save $189). Includes 24/7 access to indicators and study tools. Educational use only.",
-      "a7": "ðŸ’° NO. Your money stays in your broker account (TradeStation, etc.). We only rent the tools/algorithms. You maintain full control of your capital.",
-      "a8": "ðŸ¢ We are a software development company specialized in CREATING trading algorithms and RENTING analytical tools. We don't handle money, we only develop and rent technology."
+      "a1": "📺 This stream shows REAL S&P 500 futures trading (/ES and /MES) with current positions, professional charts, technical indicators like VWAP and real-time operations.",
+      "a2": "✅ YES, all positions shown are REAL operations with real money. It's not simulation - you can see our current capital and P&L live.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) is the volume-weighted average price. Blue/red lines show institutional support/resistance zones we use to open real positions.",
+      "a4": "🔧 We rent STUDY TOOLS and technical indicators for market analysis. They are educational tools, NOT financial advice.",
+      "a5": "📚 You can study our operations as educational material. Compatible ONLY with EasyLanguage platforms: TradeStation, TradeStation Global, and MultiCharts (PowerLanguage). IMPORTANT: For study only, not advice.",
+      "a6": "💰 Tool rental: $99/month or $999/year (save $189). Includes 24/7 access to indicators and study tools. Educational use only.",
+      "a7": "💰 NO. Your money stays in your broker account (TradeStation, etc.). We only rent the tools/algorithms. You maintain full control of your capital.",
+      "a8": "🏢 We are a software development company specialized in CREATING trading algorithms and RENTING analytical tools. We don't handle money, we only develop and rent technology."
     },
     "responses": {
-      "vwap": "ðŸ“Š VWAP shows volume-weighted average price. Lines help you identify institutional support and resistance levels in real time.",
-      "real": "ðŸ“Š This is an educational visualization showing how strategies would work with real market data. For educational purposes.",
-      "pnl": "ðŸ“Š Data shown are illustrative examples based on historical backtesting. Not live operations.",
-      "stream": "ðŸ“º This visualization shows how strategies analyze the S&P 500. Educational example, not real operations.",
-      "default": "ðŸ¤– I can help you with questions about the stream, indicators, P&L simulator, trading strategies and more. What would you like to know?",
+      "vwap": "📊 VWAP shows volume-weighted average price. Lines help you identify institutional support and resistance levels in real time.",
+      "real": "📊 This is an educational visualization showing how strategies would work with real market data. For educational purposes.",
+      "pnl": "📊 Data shown are illustrative examples based on historical backtesting. Not live operations.",
+      "stream": "📺 This visualization shows how strategies analyze the S&P 500. Educational example, not real operations.",
+      "default": "🤖 I can help you with questions about the stream, indicators, P&L simulator, trading strategies and more. What would you like to know?",
       "fallback": "Thank you for your question. An analyst will respond shortly."
     }
   },
@@ -946,17 +932,7 @@
     "back": "חזור",
     "next": "הבא",
     "yes": "כן",
-    "no": "לא",
-    "success": "הצלחה",
-    "confirm": "אישור",
-    "delete": "מחק",
-    "edit": "ערוך",
-    "previous": "קודם",
-    "search": "חיפוש",
-    "filter": "סינון",
-    "sort": "מיון",
-    "required": "שדה חובה",
-    "optional": "אופציונלי"
+    "no": "לא"
   },
   "services": {
     "badge": "Professional Services",
@@ -1363,7 +1339,7 @@
       "q3": "What are the differences between the Micro, Mini plans?",
       "a3": "Micro offers access to 1 proven strategy ideal for small accounts ($100-$1,000). Mini includes 2 optimized strategies with priority support, perfect for serious traders ($1,000-$5,000).",
       "q4": "Where can I cancel my subscription?",
-      "a4": "You can cancel your subscription anytime from your user panel in 'My Account' â†’ 'Subscriptions' section. You can also contact support and we'll cancel your subscription immediately."
+      "a4": "You can cancel your subscription anytime from your user panel in 'My Account' → 'Subscriptions' section. You can also contact support and we'll cancel your subscription immediately."
     },
     "refunds": {
       "q1": "What is the minimum investment?",
@@ -1410,308 +1386,308 @@
   },
   "blog": {
     "algoTradingGuide": {
-      "slug": "complete-algorithmic-trading-guide",
+      "slug": "מדריך-מסחר-אלגוריתמי-מלא",
       "seo": {
-        "title": "Complete Algorithmic Trading Guide: Everything You Need to Know",
-        "description": "Discover how algorithmic trading works, its advantages, most profitable strategies and how to get started. Complete guide with real examples and institutional metrics.",
-        "keywords": "algorithmic trading, algo trading, trading algorithms, automated strategies, quantitative trading, trading bots, machine learning trading, high frequency trading, backtesting, python trading"
+        "title": "מדריך מסחר אלגוריתמי מלא: כל מה שצריך לדעת",
+        "description": "גלו איך עובד מסחר אלגוריתמי, מה היתרונות שלו, אילו אסטרטגיות נחשבות לרווחיות ביותר ואיך מתחילים. מדריך מקיף עם דוגמאות אמיתיות ומדדים מוסדיים.",
+        "keywords": "מסחר אלגוריתמי, אלגו טריידינג, אלגוריתמים למסחר, אסטרטגיות אוטומטיות, מסחר כמותי, בוטים למסחר, מסחר עם למידת מכונה, מסחר בתדירות גבוהה, בק-טסט, מסחר בפייתון"
       },
       "hero": {
-        "badge": "Complete Guide",
-        "readTime": "15 min read",
-        "title": "Algorithmic Trading: The Definitive Guide",
-        "description": "Everything you need to know about trading algorithms, from basic concepts to advanced institutional strategies. Learn how professionals make millions with automated systems.",
-        "updated": "Recently Updated",
-        "readers": "10,000+ readers"
+        "badge": "מדריך מלא",
+        "readTime": "קריאה של 15 דקות",
+        "title": "מסחר אלגוריתמי: המדריך המלא",
+        "description": "כל מה שצריך לדעת על אלגוריתמים למסחר — מהבסיס ועד אסטרטגיות מוסדיות מתקדמות. ללמוד איך מקצוענים משתמשים במערכות אוטומטיות כדי להפיק תוצאות עקביות.",
+        "updated": "עודכן לאחרונה",
+        "readers": "10,000+ קוראים"
       },
       "toc": {
-        "title": "Table of Contents",
+        "title": "תוכן עניינים",
         "items": {
-          "whatIs": "What is Algorithmic Trading?",
-          "howWorks": "How Algo Trading Works",
-          "advantages": "Advantages of Algorithmic Trading",
-          "strategies": "Most Profitable Strategies",
-          "technology": "Technology and Tools",
-          "risks": "Risks and Considerations",
-          "getStarted": "How to Get Started"
+          "whatIs": "מהו מסחר אלגוריתמי?",
+          "howWorks": "איך מסחר אלגוריתמי עובד",
+          "advantages": "היתרונות של מסחר אלגוריתמי",
+          "strategies": "האסטרטגיות הרווחיות ביותר",
+          "technology": "טכנולוגיה וכלים",
+          "risks": "סיכונים ושיקולים",
+          "getStarted": "איך מתחילים"
         }
       },
       "content": {
         "whatIs": {
-          "title": "What is Algorithmic Trading?",
-          "intro1": "Algorithmic trading (or algo trading) is the use of computer programs to execute financial operations automatically, based on predefined mathematical rules. Instead of a human deciding when to buy or sell, an algorithm analyzes the market 24/7 and executes trades in milliseconds.",
-          "intro2": "Trading algorithms use quantitative analysis, processing millions of historical data points to identify profitable patterns. Automated systems are widely used in modern financial markets to analyze data and execute operations.",
+          "title": "מהו מסחר אלגוריתמי?",
+          "intro1": "מסחר אלגוריתמי (Algo Trading) הוא שימוש בתוכנות מחשב כדי לבצע פעולות פיננסיות באופן אוטומטי, לפי כללים מתמטיים שהוגדרו מראש. במקום שאדם יחליט מתי לקנות או למכור, האלגוריתם מנתח את השוק 24/7 ומבצע פעולות בתוך מילישניות.",
+          "intro2": "אלגוריתמים למסחר משתמשים בניתוח כמותי ומעבדים מיליוני נקודות נתונים היסטוריות כדי לזהות דפוסים בעלי פוטנציאל. מערכות אוטומטיות נמצאות בשימוש נרחב בשווקים מודרניים לצורך ניתוח נתונים וביצוע עסקאות.",
           "keyFact": {
-            "title": "Key Fact",
-            "text": "Currently, a large portion of trading volume in global markets is executed by automated systems. Automation is fundamental in modern trading."
+            "title": "עובדה חשובה",
+            "text": "כיום חלק משמעותי מנפח המסחר בשווקים הגלובליים מבוצע באמצעות מערכות אוטומטיות. אוטומציה היא רכיב יסוד במסחר מודרני."
           },
           "comparison": {
-            "title": "Difference between Manual vs Algorithmic Trading",
+            "title": "ההבדל בין מסחר ידני למסחר אלגוריתמי",
             "manual": {
-              "title": "Manual Trading",
+              "title": "מסחר ידני",
               "items": [
-                "Emotional decisions",
-                "Slow and subjective analysis",
-                "Frequent human errors",
-                "Limited to market hours",
-                "Fatigue and burnout"
+                "החלטות רגשיות",
+                "ניתוח איטי וסובייקטיבי",
+                "טעויות אנוש תכופות",
+                "מוגבל לשעות מסחר",
+                "עייפות ושחיקה"
               ]
             },
             "algo": {
-              "title": "Algorithmic Trading",
+              "title": "מסחר אלגוריתמי",
               "items": [
-                "Objective data-driven decisions",
-                "Microsecond analysis",
-                "Mathematical precision",
-                "24/7 automated operation",
-                "No emotions or fatigue"
+                "החלטות אובייקטיביות מבוססות נתונים",
+                "ניתוח במהירות גבוהה (מיקרו-שניות)",
+                "דיוק מתמטי",
+                "פעולה אוטומטית 24/7",
+                "בלי רגשות ובלי עייפות"
               ]
             }
           }
         },
         "howWorks": {
-          "title": "How Algo Trading Works",
-          "intro": "An algorithmic trading system works in 4 main phases:",
+          "title": "איך מסחר אלגוריתמי עובד",
+          "intro": "מערכת מסחר אלגוריתמית פועלת בדרך כלל ב-4 שלבים מרכזיים:",
           "phases": [
             {
               "number": "01",
-              "title": "Data Collection",
-              "description": "The algorithm ingests real-time data: prices, volumes, order book, news, social media sentiment, macroeconomic indicators."
+              "title": "איסוף נתונים",
+              "description": "האלגוריתם קולט נתונים בזמן אמת: מחירים, נפחים, ספר פקודות, חדשות, סנטימנט ברשתות חברתיות, ומדדים מאקרו-כלכליים."
             },
             {
               "number": "02",
-              "title": "Quantitative Analysis",
-              "description": "Applies mathematical models (Machine Learning, statistics, technical analysis) to identify trading opportunities with high probability of success."
+              "title": "ניתוח כמותי",
+              "description": "מיישם מודלים מתמטיים (סטטיסטיקה, ניתוח טכני, למידת מכונה) כדי לזהות הזדמנויות מסחר עם הסתברות גבוהה להצלחה."
             },
             {
               "number": "03",
-              "title": "Signal Generation",
-              "description": "When it detects an opportunity that meets predefined criteria, it generates a buy/sell signal with calculated position size."
+              "title": "יצירת איתות",
+              "description": "כאשר מזוהה הזדמנות שעומדת בקריטריונים שהוגדרו מראש, נוצרת הוראת קנייה/מכירה יחד עם גודל פוזיציה מחושב."
             },
             {
               "number": "04",
-              "title": "Automatic Execution",
-              "description": "Executes the order in microseconds through broker APIs, with integrated risk management (stop-loss, take-profit, trailing stops)."
+              "title": "ביצוע אוטומטי",
+              "description": "מבצע את הפקודה תוך מיקרו-שניות דרך API של הברוקר, עם ניהול סיכונים מובנה (סטופ-לוס, טייק-פרופיט, סטופים נגררים)."
             }
           ],
-          "exampleTitle": "Real Algorithm Example",
+          "exampleTitle": "דוגמה אמיתית לאלגוריתם",
           "exampleCode": "# Strategy: Mean Reversion on S&P 500 (ES)\nIF current_price < 20_day_moving_average - (2 * standard_deviation):\n    BUY 1 contract\n    STOP_LOSS = entry_price - $50\n    TAKE_PROFIT = 20_day_moving_average\n    \nELIF current_price > 20_day_moving_average + (2 * standard_deviation):\n    SELL 1 contract\n    STOP_LOSS = entry_price + $50\n    TAKE_PROFIT = 20_day_moving_average",
-          "exampleNote": "This basic algorithm seeks mean reversion when price deviates more than 2 standard deviations."
+          "exampleNote": "האלגוריתם הבסיסי הזה מחפש חזרה לממוצע כאשר המחיר חורג ביותר מ-2 סטיות תקן."
         },
         "advantages": {
-          "title": "Advantages of Algorithmic Trading",
-          "intro": "Algorithmic trading has revolutionized financial markets for fundamental reasons:",
+          "title": "היתרונות של מסחר אלגוריתמי",
+          "intro": "מסחר אלגוריתמי שינה את השווקים הפיננסיים מהיסוד מכמה סיבות מרכזיות:",
           "items": [
             {
-              "title": "Extreme Speed",
-              "description": "Algorithms execute trades in microseconds. In high-frequency markets (HFT), the difference between winning and losing can be 1 microsecond. This speed allows capturing arbitrage opportunities that disappear in milliseconds.",
+              "title": "מהירות קיצונית",
+              "description": "אלגוריתמים מבצעים עסקאות במיקרו-שניות. בשווקים בתדירות גבוהה (HFT) ההבדל בין רווח להפסד יכול להיות מיקרו-שנייה אחת. המהירות הזו מאפשרת לנצל הזדמנויות ארביטראז' שנעלמות בתוך מילישניות.",
               "stat": "< 1ms latency"
             },
             {
-              "title": "Zero Emotions",
-              "description": "The manual trader's greatest enemy is fear and greed. Algorithms completely eliminate emotions, following rules without deviation. No FOMO (fear of missing out), no revenge trading, only disciplined execution.",
+              "title": "אפס רגשות",
+              "description": "האויב הגדול של הסוחר הידני הוא פחד ותאוות בצע. אלגוריתמים מבטלים רגשות לחלוטין ופועלים לפי כללים בלי סטייה. בלי FOMO, בלי נקמה בשוק — רק ביצוע ממושמע.",
               "stat": "100% objective"
             },
             {
-              "title": "Rigorous Backtesting",
-              "description": "Before risking real capital, you can test your strategy on 10+ years of historical data. This shows exactly how your algorithm would have performed in different market conditions: bullish, bearish, sideways, crisis.",
+              "title": "בק-טסט קפדני",
+              "description": "לפני שמסכנים הון אמיתי, אפשר לבדוק אסטרטגיה על 10+ שנים של נתונים היסטוריים. כך רואים איך האלגוריתם היה מתפקד בתרחישים שונים: שוק עולה, שוק יורד, דשדוש ומשברים.",
               "stat": "10+ years of data"
             },
             {
-              "title": "Automatic Risk Management",
-              "description": "Algorithms include stop-loss, dynamic position sizing, portfolio correlation and circuit breakers. If the market moves against you, the system closes positions automatically without panic or doubts.",
+              "title": "ניהול סיכונים אוטומטי",
+              "description": "אלגוריתמים כוללים סטופ-לוס, התאמת גודל פוזיציה דינמית, מדידת קורלציה בתיק ומנגנוני הגנה (circuit breakers). אם השוק נע נגדך, המערכת סוגרת פוזיציות אוטומטית — בלי פאניקה ובלי ספק.",
               "stat": "Risk/Reward 1:3"
             },
             {
-              "title": "Multi-Strategy Diversification",
-              "description": "You can execute multiple uncorrelated strategies simultaneously: momentum on stocks, mean reversion on forex, statistical arbitrage on crypto. This reduces systemic portfolio drawdown.",
+              "title": "דיברסיפיקציה רב-אסטרטגית",
+              "description": "אפשר להריץ כמה אסטרטגיות לא-מתואמות במקביל: מומנטום במניות, חזרה לממוצע בפורקס, ארביטראז' סטטיסטי בקריפטו. זה מפחית ירידות מערכתיות (drawdown) בתיק.",
               "stat": "5-10 strategies"
             },
             {
-              "title": "24/7 Operation",
-              "description": "While you sleep, your algorithm keeps monitoring global markets. Captures opportunities in Asian, European and American markets without needing to be awake 24 hours.",
+              "title": "פעולה 24/7",
+              "description": "גם כשאתה ישן, האלגוריתם ממשיך לנטר שווקים גלובליים. הוא יכול לזהות הזדמנויות באסיה, אירופה וארה״ב בלי שתצטרך להיות ער 24 שעות.",
               "stat": "24/7/365"
             }
           ]
         },
         "strategies": {
-          "title": "Most Profitable Algorithmic Trading Strategies",
-          "intro": "There are hundreds of algorithmic strategies, but these are the most used by professional traders in 2025:",
+          "title": "האסטרטגיות הרווחיות ביותר במסחר אלגוריתמי",
+          "intro": "יש מאות אסטרטגיות אלגוריתמיות, אבל אלו הנפוצות ביותר בקרב סוחרים מקצועיים בשנת 2025:",
           "list": [
             {
               "number": "1",
-              "title": "Momentum Trading",
-              "description": "Identifies assets with strong trend and follows momentum until it exhausts. The premise: \"what goes up, tends to keep going up\".",
+              "title": "מסחר מומנטום",
+              "description": "מזהה נכסים עם מגמה חזקה ורוכב על המומנטום עד שהוא נחלש. ההנחה: \"מה שעולה — נוטה להמשיך לעלות\".",
               "details": [
-                "Indicators: RSI, MACD, Bollinger Bands, Rate of Change",
-                "Timeframe: 15 minutes to 4 hours",
-                "Typical Win Rate: 45-55% but with favorable R:R (1:2 or higher)"
+                "אינדיקטורים: RSI, MACD, Bollinger Bands, Rate of Change",
+                "טיימפריים: 15 דקות עד 4 שעות",
+                "שיעור הצלחה טיפוסי: 45–55% אך עם יחס סיכון/סיכוי עדיף (1:2 או יותר)"
               ]
             },
             {
               "number": "2",
-              "title": "Mean Reversion",
-              "description": "When an asset moves too far from its historical average, it tends to return. You buy when it's \"cheap\" and sell when it's \"expensive\" relatively.",
+              "title": "חזרה לממוצע",
+              "description": "כאשר נכס מתרחק יותר מדי מהממוצע ההיסטורי שלו, הוא נוטה לחזור אליו. קונים כשהוא \"זול\" יחסית ומוכרים כשהוא \"יקר\" יחסית.",
               "details": [
-                "Indicators: Standard deviation, Z-Score, Bollinger Bands",
-                "Best in: Ranging markets, not in strong trends",
-                "Typical Win Rate: 60-70% but with tighter R:R"
+                "אינדיקטורים: סטיית תקן, Z-Score, Bollinger Bands",
+                "מיטבית ב: שווקים מדשדשים, לא במגמות חזקות",
+                "שיעור הצלחה טיפוסי: 60–70% אך עם יחס סיכון/סיכוי הדוק יותר"
               ]
             },
             {
               "number": "3",
-              "title": "Statistical Arbitrage (Stat Arb)",
-              "description": "Exploits temporary inefficiencies between correlated assets. For example, if Apple and Microsoft usually move together but Apple rises 5% and Microsoft only 1%, the algorithm bets Microsoft will catch up to Apple.",
+              "title": "ארביטראז' סטטיסטי (Stat Arb)",
+              "description": "מנצל חוסר יעילות זמני בין נכסים מתואמים. לדוגמה: אם Apple ו-Microsoft בדרך כלל נעות יחד אבל Apple עולה 5% ו-Microsoft רק 1%, האלגוריתם מהמר שמיקרוסופט \"תדביק\" את אפל.",
               "details": [
-                "Requires: Cointegration analysis, pairs trading, spread analysis",
-                "Capital needed: High (for pair diversification)",
-                "Risk: Low (market-neutral, doesn't depend on market direction)"
+                "נדרש: ניתוח Cointegration, מסחר זוגות (Pairs), ניתוח Spread",
+                "הון נדרש: גבוה (לדיברסיפיקציה בין זוגות)",
+                "סיכון: נמוך יחסית (נייטרלי לשוק — לא תלוי בכיוון השוק)"
               ]
             },
             {
               "number": "4",
-              "title": "Machine Learning / AI Trading",
-              "description": "Uses neural networks, random forests, or gradient boosting to predict price movements based on complex patterns humans cannot see.",
+              "title": "מסחר עם למידת מכונה / AI",
+              "description": "משתמש ברשתות נוירונים, Random Forests או Gradient Boosting כדי לחזות תנועות מחיר על סמך דפוסים מורכבים שקשה לאדם לזהות.",
               "details": [
-                "Technologies: TensorFlow, PyTorch, scikit-learn",
-                "Advantage: Automatically adapts strategies to new market regimes",
-                "Disadvantage: Overfitting risk (learning noise instead of signal)"
+                "טכנולוגיות: TensorFlow, PyTorch, scikit-learn",
+                "יתרון: התאמה אוטומטית למשטרי שוק חדשים",
+                "חיסרון: סיכון Overfitting (למידת \"רעש\" במקום סיגנל)"
               ]
             }
           ]
         },
         "technology": {
-          "title": "Technology and Tools Needed",
-          "intro": "To execute professional algorithmic trading, you need the right technology stack:",
-          "stackTitle": "Typical Technology Stack",
+          "title": "טכנולוגיה וכלים נדרשים",
+          "intro": "כדי לבצע מסחר אלגוריתמי ברמה מקצועית, צריך סטאק טכנולוגי מתאים:",
+          "stackTitle": "סטאק טכנולוגי טיפוסי",
           "categories": {
             "languages": {
-              "title": "Programming Languages",
+              "title": "שפות תכנות",
               "items": [
-                "Python (most popular, 80% of market)",
-                "C++ (ultra-low latency HFT)",
-                "R (advanced statistical analysis)",
-                "Java (enterprise systems)"
+                "Python (הכי נפוצה, ~80% מהשוק)",
+                "C++ (HFT עם השהייה נמוכה מאוד)",
+                "R (ניתוח סטטיסטי מתקדם)",
+                "Java (מערכות ארגוניות)"
               ]
             },
             "libraries": {
-              "title": "Essential Python Libraries",
+              "title": "ספריות Python חיוניות",
               "items": [
-                "pandas (data manipulation)",
-                "numpy (numerical calculations)",
-                "scikit-learn (machine learning)",
-                "backtrader / zipline (backtesting)"
+                "pandas (עיבוד נתונים)",
+                "numpy (חישובים נומריים)",
+                "scikit-learn (למידת מכונה)",
+                "backtrader / zipline (בק-טסט)"
               ]
             },
             "brokers": {
-              "title": "Brokers with APIs",
+              "title": "ברוקרים עם API",
               "items": [
-                "Interactive Brokers (most complete)",
-                "Alpaca (crypto + stocks)",
+                "Interactive Brokers (הכי מקיף)",
+                "Alpaca (קריפטו + מניות)",
                 "TD Ameritrade",
-                "Binance (crypto)"
+                "Binance (קריפטו)"
               ]
             },
             "infrastructure": {
-              "title": "Infrastructure",
+              "title": "תשתיות",
               "items": [
-                "VPS/Dedicated servers",
-                "Co-location (for HFT)",
-                "Real-time data feeds",
-                "24/7 monitoring systems"
+                "VPS / שרתים ייעודיים",
+                "Co-location (ל-HFT)",
+                "פידים של נתונים בזמן אמת",
+                "מערכות ניטור 24/7"
               ]
             }
           },
-          "investment": "Initial investment: You can start with $0 using platforms like QuantConnect or Alpaca paper trading. For real trading with professional infrastructure: $500-$2,000/month on servers + data feeds.",
+          "investment": "השקעה התחלתית: אפשר להתחיל ב-$0 באמצעות פלטפורמות כמו QuantConnect או מסחר דמו (Paper Trading) של Alpaca. למסחר אמיתי עם תשתית מקצועית: $500–$2,000 בחודש על שרתים + פידי נתונים.",
           "alternative": {
-            "title": "Alternative: All-in-One Platforms",
-            "text": "If you don't want to manage all the infrastructure, platforms like AIinside.me offer pre-built algorithms with included infrastructure. $0 setup costs, you only pay for the service."
+            "title": "אלטרנטיבה: פלטפורמות All-in-One",
+            "text": "אם לא רוצים לנהל תשתיות בעצמכם, פלטפורמות כמו AInside.me מציעות אלגוריתמים מוכנים עם תשתית כלולה. עלויות הקמה $0 — משלמים רק על השירות."
           }
         },
         "risks": {
-          "title": "Risks and Important Considerations",
-          "intro": "Algorithmic trading is NOT a money printer. It has serious risks you must understand:",
+          "title": "סיכונים ושיקולים חשובים",
+          "intro": "מסחר אלגוריתמי הוא לא \"מכונת כסף\". יש בו סיכונים משמעותיים שחייבים להבין:",
           "warning": {
-            "title": "Legal Warning",
-            "text": "Algorithmic trading carries risk of capital loss. Past results do not guarantee future results. Never invest money you cannot afford to lose."
+            "title": "אזהרה משפטית",
+            "text": "מסחר אלגוריתמי כרוך בסיכון להפסד הון. ביצועי עבר אינם מבטיחים ביצועים עתידיים. לעולם אל תשקיעו כסף שאינכם יכולים להרשות לעצמכם להפסיד."
           },
           "list": [
             {
               "number": "1",
               "title": "Overfitting",
-              "description": "Your algorithm may work perfectly in backtests but fail in real trading because it \"learned\" past patterns that don't repeat. Solution: out-of-sample validation and walk-forward testing."
+              "description": "האלגוריתם יכול לעבוד מצוין בבק-טסט אבל להיכשל במסחר אמיתי כי הוא \"למד\" דפוסים היסטוריים שלא חוזרים. פתרון: בדיקות Out-of-sample ו-Walk-forward testing."
             },
             {
               "number": "2",
-              "title": "Slippage and Transaction Costs",
-              "description": "In backtests you assume you execute at exact price. In reality there is slippage (difference between expected and executed price) and commissions. High-frequency strategies are especially sensitive to this."
+              "title": "החלקה (Slippage) ועלויות עסקה",
+              "description": "בבק-טסט מניחים ביצוע במחיר המדויק. בפועל יש Slippage (פער בין המחיר הצפוי למחיר הביצוע) ועמלות. אסטרטגיות בתדירות גבוהה רגישות במיוחד לכך."
             },
             {
               "number": "3",
-              "title": "Technical Failures (Bugs)",
-              "description": "A bug in your code can cost thousands of dollars in minutes. Knight Capital lost $440 million in 45 minutes due to a software error in 2012. Exhaustive testing and circuit breakers are critical."
+              "title": "כשלים טכניים (באגים)",
+              "description": "באג בקוד יכול לעלות אלפי דולרים בתוך דקות. Knight Capital הפסידה $440 מיליון ב-45 דקות בגלל תקלה בתוכנה בשנת 2012. בדיקות מקיפות ומנגנוני הגנה הם קריטיים."
             },
             {
               "number": "4",
-              "title": "Market Regime Changes",
-              "description": "A strategy that works in bull market can fail in bear market. Algorithms need constant adaptation or strategy diversification for different regimes."
+              "title": "שינויים במשטר שוק",
+              "description": "אסטרטגיה שעובדת בשוק עולה יכולה להיכשל בשוק יורד. אלגוריתמים דורשים התאמה מתמדת או דיברסיפיקציה של אסטרטגיות למשטרים שונים."
             },
             {
               "number": "5",
-              "title": "Institutional Competition",
-              "description": "You compete against funds with million-dollar budgets, PhDs in mathematics and co-located servers. Obvious arbitrage opportunities disappear quickly."
+              "title": "תחרות מול מוסדיים",
+              "description": "אתם מתחרים מול קרנות עם תקציבי ענק, דוקטורים למתמטיקה ושרתים ב-Co-location. הזדמנויות ארביטראז' \"ברורות\" נעלמות מהר מאוד."
             }
           ]
         },
         "getStarted": {
-          "title": "How to Get Started in Algorithmic Trading (Step by Step)",
-          "intro": "If you want to start in algo trading, follow this proven path:",
+          "title": "איך להתחיל במסחר אלגוריתמי (שלב אחר שלב)",
+          "intro": "אם אתם רוצים להתחיל באלגו-טריידינג, זו דרך מוכחת להתחלה נכונה:",
           "steps": [
             {
-              "step": "Step 1",
-              "title": "Learn the Fundamentals",
-              "description": "Before writing code, understand technical analysis, risk management and trading psychology. Start with books on technical analysis and risk management.",
-              "time": "1-2 months"
+              "step": "שלב 1",
+              "title": "ללמוד את היסודות",
+              "description": "לפני כתיבת קוד, חשוב להבין ניתוח טכני, ניהול סיכונים ופסיכולוגיית מסחר. התחילו מספרים ומקורות על ניתוח טכני וניהול סיכונים.",
+              "time": "1–2 חודשים"
             },
             {
-              "step": "Step 2",
-              "title": "Learn Python",
-              "description": "Python is the standard language for algo trading. Focus on pandas, numpy and matplotlib. Recommended course: 'Python for Finance' on Udemy or Coursera.",
-              "time": "2-3 months"
+              "step": "שלב 2",
+              "title": "ללמוד Python",
+              "description": "Python היא שפת הסטנדרט לאלגו-טריידינג. התמקדו ב-pandas, numpy ו-matplotlib. קורס מומלץ: 'Python for Finance' ב-Udemy או Coursera.",
+              "time": "2–3 חודשים"
             },
             {
-              "step": "Step 3",
-              "title": "Practice Backtesting",
-              "description": "Use platforms like QuantConnect, Backtrader or Zipline to test simple strategies. Start with something basic like moving average crossover.",
-              "time": "1-2 months"
+              "step": "שלב 3",
+              "title": "להתאמן בבק-טסט",
+              "description": "השתמשו בפלטפורמות כמו QuantConnect, Backtrader או Zipline כדי לבדוק אסטרטגיות פשוטות. התחילו במשהו בסיסי כמו חציית ממוצעים נעים.",
+              "time": "1–2 חודשים"
             },
             {
-              "step": "Step 4",
-              "title": "Paper Trading",
-              "description": "Execute your algorithm in real-time but with simulated money. Brokers like Alpaca and Interactive Brokers offer free paper trading.",
-              "time": "3-6 months"
+              "step": "שלב 4",
+              "title": "מסחר דמו (Paper Trading)",
+              "description": "הריצו את האלגוריתם בזמן אמת אבל עם כסף מדומה. ברוקרים כמו Alpaca ו-Interactive Brokers מציעים Paper Trading בחינם.",
+              "time": "3–6 חודשים"
             },
             {
-              "step": "Step 5",
-              "title": "Real Trading (Small)",
-              "description": "Start with minimum capital ($500-$1,000). Don't risk more than 1-2% per trade. Monitor results daily and adjust.",
-              "time": "Ongoing"
+              "step": "שלב 5",
+              "title": "מסחר אמיתי (קטן)",
+              "description": "התחילו בהון מינימלי ($500–$1,000). אל תסכנו יותר מ-1–2% לעסקה. עקבו אחרי התוצאות יום-יום ושפרו בהתאם.",
+              "time": "מתמשך"
             }
           ],
           "cta": {
-            "title": "Want to Jump Straight to Professional Algorithms?",
-            "description": "If you don't have time to learn programming or manage infrastructure, try our ready-to-use algorithmic trading platform. Institutional algorithms without code.",
-            "button1": "View AlgoTrading Platform",
-            "button2": "Try Free Demo"
+            "title": "רוצים לקפוץ ישר לאלגוריתמים מקצועיים?",
+            "description": "אם אין לכם זמן ללמוד תכנות או לנהל תשתיות, נסו את פלטפורמת המסחר האלגוריתמי המוכנה שלנו. אלגוריתמים מוסדיים בלי כתיבת קוד.",
+            "button1": "צפו בפלטפורמת AlgoTrading",
+            "button2": "נסו דמו בחינם"
           }
         },
         "conclusion": {
-          "title": "Conclusion",
+          "title": "סיכום",
           "paragraphs": [
-            "Algorithmic trading has democratized access to strategies that were previously only available to multi-million dollar hedge funds. With the right tools, education and discipline, individual traders can compete in global markets.",
-            "However, it's not a magic shortcut. It requires time, constant learning, strict risk management and continuous adaptation. The best algorithmic traders combine deep technical knowledge with fundamental understanding of markets.",
-            "If you're ready to take the leap, start with solid education, practice exhaustively in backtesting and paper trading, and when you move to real trading, do it with capital you can afford to lose.",
-            "The future of trading is algorithmic. The question is not whether you should learn it, but when you will start."
+            "מסחר אלגוריתמי הנגיש אסטרטגיות שבעבר היו זמינות רק לקרנות גידור עם תקציבי ענק. עם הכלים הנכונים, לימוד ומשמעת — גם סוחרים פרטיים יכולים להתחרות בשווקים גלובליים.",
+            "עם זאת, זו לא דרך קסם. זה דורש זמן, למידה מתמדת, ניהול סיכונים קפדני והתאמה רציפה. הסוחרים האלגוריתמיים הטובים ביותר משלבים ידע טכני עמוק עם הבנה יסודית של השוק.",
+            "אם אתם מוכנים לעשות את הצעד, התחילו בחינוך יציב, התאמנו לעומק בבק-טסט ובמסחר דמו, וכשתעברו למסחר אמיתי — עשו זאת עם הון שאתם יכולים להרשות לעצמכם להפסיד.",
+            "העתיד של המסחר הוא אלגוריתמי. השאלה היא לא אם ללמוד את זה — אלא מתי מתחילים."
           ]
         }
       }
@@ -1785,152 +1761,156 @@
     "seo": {
       "title": "הרשמה - AInside",
       "description": "Register your Hardware ID (HWID) to activate your algorithm license",
-      "keywords": "HWID, registration, algorithm, license, activation",
-      "desc": "צור חשבון חדש"
+      "keywords": "HWID, registration, algorithm, license, activation"
     },
-    "title": "צור חשבון חדש",
-    "name": "שם מלא",
-    "email": "אימייל",
-    "password": "סיסמה",
-    "confirmPassword": "אשר סיסמה",
-    "submit": "הירשם",
-    "googleSignUp": "הירשם עם Google",
-    "haveAccount": "כבר יש לך חשבון?",
-    "login": "התחבר כאן",
-    "errors": {
-      "passwordMismatch": "הסיסמאות לא תואמות",
-      "weakPassword": "הסיסמה חלשה מדי",
-      "emailExists": "האימייל כבר קיים",
-      "general": "שגיאה בהרשמה"
-    }
+    "title": "צור חשבון חדש"
   },
-  "instrument": {
-    "sp500": {
-      "name": "S&P 500"
-    },
-    "gold": {
-      "name": "זהב"
-    }
-  },
-  "loginPage": {
+  "login": {
     "seo": {
-      "title": "התחבר - AInside",
-      "desc": "התחבר לחשבון שלך"
+      "title": "התחברות - AInside",
+      "description": "התחברו לחשבון AInside כדי לנהל את הרישיון והאסטרטגיות",
+      "keywords": "התחברות, כניסה, חשבון, לוח בקרה"
     },
-    "title": "התחבר לחשבון",
-    "subtitle": "גש לפאנל המשתמש שלך",
-    "email": "אימייל",
-    "password": "סיסמה",
-    "submit": "התחבר",
-    "googleSignIn": "התחבר עם Google",
-    "forgotPassword": "שכחת סיסמה?",
-    "noAccount": "אין לך חשבון?",
-    "register": "הירשם כאן",
-    "errors": {
-      "invalidCredentials": "אימייל או סיסמה לא נכונים",
-      "general": "שגיאה בהתחברות"
+    "badge": "גישה מאובטחת",
+    "title": "התחברות",
+    "subtitle": "היכנסו לחשבון AInside שלכם",
+    "email": {
+      "label": "אימייל",
+      "placeholder": "you@email.com"
+    },
+    "password": {
+      "label": "סיסמה"
+    },
+    "button": "התחבר",
+    "loading": "טוען...",
+    "google": "המשך עם Google",
+    "or": "או",
+    "success": {
+      "title": "ברוכים הבאים!",
+      "message": "התחברת בהצלחה"
+    },
+    "error": {
+      "title": "שגיאה",
+      "message": "לא ניתן להתחבר. בדקו את הפרטים.",
+      "googleError": "לא ניתן להתחבר עם Google. נסו אימייל/סיסמה."
+    },
+    "googleOAuthNotEnabled": {
+      "title": "⚠️ Google OAuth לא מופעל",
+      "description": "עברו ל‑Supabase Dashboard → Authentication → Providers → Google והפעילו 'Enable Sign in with Google'"
+    },
+    "forgotPassword": "שכחתם סיסמה?",
+    "backToLogin": "חזרה להתחברות",
+    "noAccount": "אין לכם חשבון?",
+    "register": "הירשמו",
+    "reset": {
+      "title": "איפוס סיסמה",
+      "subtitle": "הכניסו אימייל כדי לקבל הוראות",
+      "button": "שלח אימייל",
+      "success": {
+        "title": "נשלח אימייל",
+        "message": "בדקו את האימייל כדי לאפס את הסיסמה"
+      }
+    },
+    "signup": {
+      "title": "יצירת חשבון",
+      "subtitle": "צרו חשבון עם אימייל וסיסמה",
+      "submit": "צור חשבון",
+      "name": {
+        "label": "שם",
+        "placeholder": "השם שלך"
+      },
+      "success": {
+        "title": "החשבון נוצר",
+        "message": "בדקו את האימייל כדי לאשר את החשבון"
+      },
+      "error": {
+        "message": "לא ניתן ליצור חשבון. נסו שוב."
+      }
     }
   },
-  "dashboardPage": {
-    "seo": {
-      "title": "לוח בקרה - AInside",
-      "desc": "ניהול חשבון המשתמש שלך"
+  "mfa": {
+    "title": "אבטחת 2FA",
+    "subtitle": "הפעילו אימות דו-שלבי באמצעות אפליקציה (Google Authenticator / Authy).",
+    "loading": "טוען...",
+    "enable": "הפעל 2FA",
+    "enabling": "מפעיל...",
+    "secret": "מפתח:",
+    "qr": {
+      "fallback": "QR:"
     },
-    "title": "לוח בקרה",
-    "welcome": "ברוך הבא, {{name}}!",
+    "code": {
+      "label": "קוד 2FA",
+      "placeholder": "123456"
+    },
+    "verifying": "מאמת...",
+    "back": "חזרה",
+    "error": {
+      "title": "שגיאה",
+      "message": "לא ניתן לטעון 2FA."
+    },
+    "enroll": {
+      "title": "2FA התחיל",
+      "message": "סרקו את ה‑QR ב‑Google Authenticator / Authy ואשרו עם הקוד.",
+      "error": "לא ניתן להפעיל 2FA.",
+      "startError": "לא ניתן להתחיל רישום 2FA."
+    },
+    "verify": {
+      "button": "אמת",
+      "noFactor": "קודם הפעילו 2FA.",
+      "success": {
+        "title": "אומת",
+        "message": "2FA אומת בהצלחה."
+      },
+      "error": "קוד לא תקין.",
+      "challengeStartError": "לא ניתן להתחיל אתגר 2FA."
+    }
+  },
+  "dashboard": {
+    "loading": "טוען...",
+    "title": "לוח הבקרה שלי",
+    "subtitle": "ניהול החשבון וההגדרות",
+    "error": "שגיאה",
+    "logout": {
+      "button": "התנתק",
+      "success": "התנתקת",
+      "message": "התנתקת בהצלחה"
+    },
     "profile": {
-      "title": "פרופיל",
-      "email": "אימייל",
+      "title": "פרטי משתמש",
+      "emailLabel": "אימייל",
       "memberSince": "חבר מאז"
     },
-    "subscription": {
-      "title": "מנוי",
-      "active": "פעיל",
-      "inactive": "לא פעיל",
-      "plan": "תוכנית",
-      "renews": "מתחדש ב"
-    },
-    "logout": "התנתק"
-  },
-  "adminControl": {
-    "seo": {
-      "title": "פאנל אדמין - AInside",
-      "desc": "ניהול מערכת"
-    },
-    "title": "פאנל בקרת אדמין",
-    "verifying": "מאמת הרשאות...",
-    "unauthorized": "אין לך הרשאה לגשת לדף זה",
-    "registrations": {
-      "title": "רישומי HWID",
-      "total": "סה\"כ רישומים",
-      "active": "פעילים"
-    }
-  },
-  "adminVerify2FA": {
-    "seo": {
-      "title": "אימות 2FA - AInside Admin",
-      "desc": "אימות דו-שלבי לפאנל אדמין"
-    },
-    "title": "אימות דו-שלבי",
-    "subtitle": "הזן קוד אימות מ-Google Authenticator",
-    "codeLabel": "קוד אימות (6 ספרות)",
-    "codePlaceholder": "000000",
-    "verifyButton": "אמת קוד",
-    "verifying": "מאמת...",
-    "instructions": {
-      "title": "איך להשתמש:",
-      "step1": "פתח את אפליקציית Google Authenticator",
-      "step2": "מצא את הקוד עבור 'AInside Admin'",
-      "step3": "הזן את קוד ה-6 ספרות למעלה"
+    "plan": {
+      "label": "תוכנית"
     },
     "security": {
-      "connection": "חיבור מוצפן",
-      "email": "מחובר בתור"
+      "title": "אבטחה",
+      "description": "הפעילו 2FA כדי להגן על החשבון.",
+      "mfa": "הגדרת 2FA"
     },
-    "errors": {
-      "invalidCode": "קוד לא תקין. נותרו {{attempts}} ניסיונות",
-      "locked": "חשבון נעול למשך 15 דקות",
-      "general": "שגיאה באימות"
-    }
-  },
-  "pricingPage": {
-    "seo": {
-      "title": "מחירים - AInside",
-      "desc": "בחר את התוכנית המושלמת עבורך"
+    "hwid": {
+      "title": "סטטוס HWID",
+      "registered": {
+        "title": "HWID רשום"
+      },
+      "notRegistered": {
+        "title": "HWID לא רשום",
+        "desc": "רשמו את ה‑HWID כדי להפעיל את הרישיון"
+      },
+      "registerButton": "רישום HWID",
+      "connectionStatus": {
+        "label": "סטטוס חיבור",
+        "online": "מחובר",
+        "offline": "מנותק"
+      },
+      "activeStrategies": {
+        "label": "אסטרטגיות פעילות"
+      }
     },
-    "title": "תוכניות מחירים",
-    "subtitle": "בחר את התוכנית המתאימה לך",
-    "monthly": "חודשי",
-    "annual": "שנתי",
-    "perMonth": "/חודש",
-    "perYear": "/שנה",
-    "selectPlan": "בחר תוכנית",
-    "popular": "פופולרי"
-  },
-  "faqPage": {
-    "seo": {
-      "title": "שאלות נפוצות - AInside",
-      "desc": "תשובות לשאלות נפוצות"
-    },
-    "title": "שאלות נפוצות",
-    "subtitle": "תשובות לשאלות הנפוצות ביותר"
-  },
-  "legalPage": {
-    "seo": {
-      "title": "מידע משפטי - AInside",
-      "desc": "תנאי שימוש ומדיניות פרטיות"
-    },
-    "terms": {
-      "title": "תנאי שימוש",
-      "lastUpdated": "עודכן לאחרונה"
-    },
-    "privacy": {
-      "title": "מדיניות פרטיות",
-      "lastUpdated": "עודכן לאחרונה"
-    },
-    "disclaimer": {
-      "title": "הצהרת אחריות משפטית",
-      "content": "השירותים המוצעים הם כלי טכנולוגיים בלבד. איננו מספקים ייעוץ פיננסי או המלצות השקעה."
+    "software": {
+      "title": "AInside HWID Tool",
+      "description": "הורידו את התוכנה הרשמית לניהול HWID ולהתחברות בזמן אמת",
+      "download": "הורדה ל‑Windows"
     }
   }
 }

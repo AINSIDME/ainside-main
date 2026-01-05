@@ -25,8 +25,8 @@ i18n
   .init({
     resources,
     fallbackLng: 'es',
-    lng: 'es', // Set default language to Spanish
-    // Remove fixed lng to allow auto-detection
+    // No fixed `lng`: LanguageDetector will pick from localStorage/browser;
+    // fallbackLng keeps Spanish as the default.
     debug: false,
     // Expose all available languages; missing keys fall back to ES
     supportedLngs: ['en', 'es', 'fr', 'he', 'ar', 'ru'],
