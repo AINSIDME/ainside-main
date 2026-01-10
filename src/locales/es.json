@@ -1,11 +1,14 @@
 {
+  "header": {
+    "login": "Iniciar sesión"
+  },
   "nav": {
     "home": "Inicio",
     "about": "Acerca de",
     "services": "Servicios",
     "demo": "Estrategia",
     "crypto": "Cripto",
-    "liveDemoMini": "Live",
+    "liveChat": "Chat en Vivo",
     "pricing": "Precios",
     "blog": "Blog",
     "faq": "FAQ",
@@ -1911,6 +1914,65 @@
       "title": "Software AInside HWID Tool",
       "description": "Descarga el software oficial para gestionar tu HWID y conectarte en tiempo real",
       "download": "Descargar para Windows"
+    }
+  },
+  "cryptoPage": {
+    "seo": {
+      "title": "Trading de Criptomonedas en Vivo - AInside",
+      "description": "Dashboard profesional de trading de criptomonedas con datos en tiempo real, indicadores técnicos avanzados y señales impulsadas por IA"
+    },
+    "hero": {
+      "badge": "Terminal de Trading Profesional",
+      "title": "Trading de Cripto",
+      "titleHighlight": "Dashboard",
+      "description": "Análisis profesional del mercado de criptomonedas con datos en tiempo real e indicadores de trading avanzados",
+      "ctaDemo": "Probar Demo en Vivo",
+      "ctaPricing": "Ver Precios"
+    },
+    "sentiment": {
+      "title": "Sentimiento del Mercado IA",
+      "liveUpdate": "Actualización en vivo",
+      "level": "Nivel"
+    },
+    "stats": {
+      "topGainer": "Mayor Ganancia",
+      "topLoser": "Mayor Pérdida",
+      "volumeLeader": "Líder en Volumen",
+      "volumeSpike": "Pico de Volumen"
+    },
+    "screener": {
+      "title": "Screener de Trading Profesional",
+      "description": "Análisis de mercado de nivel institucional con indicadores técnicos en tiempo real, análisis de volumen y señales de trading impulsadas por IA",
+      "liveData": "Datos de Mercado en Vivo",
+      "tabs": {
+        "gainers": "Ganadoras",
+        "losers": "Perdedoras",
+        "volume": "Volumen"
+      }
+    },
+    "table": {
+      "headers": {
+        "symbol": "Símbolo",
+        "price": "Precio",
+        "change24h": "Cambio 24h",
+        "volume24h": "Volumen 24h",
+        "volChange": "Cambio Vol",
+        "strength": "Fuerza",
+        "score": "Puntuación",
+        "signal": "Señal",
+        "time": "Tiempo",
+        "pattern": "Patrón",
+        "atr": "ATR%",
+        "action": "Acción"
+      },
+      "loading": "Cargando datos del mercado...",
+      "noData": "No hay datos disponibles",
+      "trade": "Ver Gráfico"
+    },
+    "signals": {
+      "long": "Long",
+      "short": "Short",
+      "neutral": "Neutral"
     }
   }
 }

@@ -38,3 +38,16 @@ create-test-products.ps1
 create-test-purchases.ps1
 cleanup-exposed-keys.ps1
 temp-products/
+
+# Local admin 2FA artifacts (do not commit)
+admin-2fa-secret.json
+admin-2fa-qr.png
+
+# Local schema/debug dumps
+remote-public-schema.sql
+
+# Supabase temp artifacts
+supabase/.temp/
+
+.vercel
+.env*.local

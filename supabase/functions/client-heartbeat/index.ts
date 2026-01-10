@@ -1,15 +1,13 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
 
 serve(async (req) => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return handleCorsPreflightRequest(req);
   }
 
   try {
@@ -22,6 +20,29 @@ serve(async (req) => {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // 🔐 Licensing gate: only registered/active HWIDs can connect.
+    const { data: reg, error: regError } = await supabase
+      .from("hwid_registrations")
+      .select("status")
+      .eq("hwid", hwid)
+      .eq("status", "active")
+      .limit(1);
+
+    if (regError) {
+      console.error("HWID lookup error:", regError);
+      return new Response(JSON.stringify({ error: "server_error" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
+    }
+
+    if (!reg?.[0]) {
+      return new Response(JSON.stringify({ error: "unregistered_hwid" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 403,
+      });
+    }
 
     // Update or create connection record
     const now = new Date().toISOString();

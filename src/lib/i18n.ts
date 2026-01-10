@@ -10,6 +10,19 @@ import he from '../locales/he.json';
 import ar from '../locales/ar.json';
 import ru from '../locales/ru.json';
 
+// Clear old i18next cache on version change
+const I18N_VERSION = '1.0.6';
+const storedVersion = localStorage.getItem('i18n_version');
+if (storedVersion !== I18N_VERSION) {
+  // Clear all i18next related localStorage keys
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('i18next') || key.includes('lng')) {
+      localStorage.removeItem(key);
+    }
+  });
+  localStorage.setItem('i18n_version', I18N_VERSION);
+}
+
 const resources = {
   en: { translation: en },
   es: { translation: es },

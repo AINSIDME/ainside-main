@@ -1,11 +1,14 @@
 {
+  "header": {
+    "login": "Sign In"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
     "services": "Services",
     "demo": "Strategy",
     "crypto": "Crypto",
-    "liveDemoMini": "Live",
+    "liveChat": "Live Chat",
     "pricing": "Pricing",
     "blog": "Blog",
     "faq": "FAQ",
@@ -882,9 +885,9 @@
     "compliant": "Regulation Compliant"
   },
   "chat": {
-    "title": "Live Stream",
+    "title": "Live Chat",
     "subtitle": "Real-time trading analysis",
-    "welcome": "Welcome to live stream. You can ask any questions about the live demo.",
+    "welcome": "Welcome to live chat. You can ask any questions about the live stream.",
     "assistant": "Trading Assistant",
     "frequentQuestions": "Frequently Asked Questions",
     "placeholder": "Write your analysis question...",
@@ -903,10 +906,10 @@
       "q8": "What type of company are you exactly?"
     },
     "answers": {
-      "a1": "📺 This stream shows REAL S&P 500 futures trading (/ES and /MES) with current positions, professional charts, technical indicators like VWAP and real-time operations.",
-      "a2": "✅ YES, all positions shown are REAL operations with real money. It's not simulation - you can see our current capital and P&L live.",
-      "a3": "📊 VWAP (Volume Weighted Average Price) is the volume-weighted average price. Blue/red lines show institutional support/resistance zones we use to open real positions.",
-      "a4": "🔧 We rent STUDY TOOLS and technical indicators for market analysis. They are educational tools, NOT financial advice.",
+      "a1": "📺 This visualization shows S&P 500 futures analysis (/ES and /MES) with technical indicators like VWAP. Educational example with real market data.",
+      "a2": "📊 This is an educational example showing how strategies would work. The data shown is illustrative for educational purposes.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) is the volume-weighted average price. Blue/red lines show support/resistance zones that can be used for trading analysis.",
+      "a4": "🔧 We are a company that DEVELOPS trading algorithms and RENTS analytical tools. Your money stays in your broker account, you only rent our tools.",
       "a5": "📚 You can study our operations as educational material. Compatible ONLY with EasyLanguage platforms: TradeStation, TradeStation Global, and MultiCharts (PowerLanguage). IMPORTANT: For study only, not advice.",
       "a6": "💰 Tool rental: $99/month or $999/year (save $189). Includes 24/7 access to indicators and study tools. Educational use only.",
       "a7": "💰 NO. Your money stays in your broker account (TradeStation, etc.). We only rent the tools/algorithms. You maintain full control of your capital.",
@@ -1911,6 +1914,65 @@
       "title": "AInside HWID Tool",
       "description": "Download the official software to manage your HWID and connect in real time",
       "download": "Download for Windows"
+    }
+  },
+  "cryptoPage": {
+    "seo": {
+      "title": "Live Crypto Trading - AInside",
+      "description": "Professional cryptocurrency trading dashboard with real-time data, advanced technical indicators, and AI-powered trading signals"
+    },
+    "hero": {
+      "badge": "Professional Trading Terminal",
+      "title": "Crypto Trading",
+      "titleHighlight": "Dashboard",
+      "description": "Professional cryptocurrency market analysis with real-time data and advanced trading indicators",
+      "ctaDemo": "Try Live Demo",
+      "ctaPricing": "View Pricing"
+    },
+    "sentiment": {
+      "title": "AI Market Sentiment",
+      "liveUpdate": "Live update",
+      "level": "Level"
+    },
+    "stats": {
+      "topGainer": "Top Gainer",
+      "topLoser": "Top Loser",
+      "volumeLeader": "Volume Leader",
+      "volumeSpike": "Volume Spike"
+    },
+    "screener": {
+      "title": "Professional Trading Screener",
+      "description": "Institutional-grade market analysis with real-time technical indicators, volume analytics, and AI-powered trading signals",
+      "liveData": "Live Market Data",
+      "tabs": {
+        "gainers": "Gainers",
+        "losers": "Losers",
+        "volume": "Volume"
+      }
+    },
+    "table": {
+      "headers": {
+        "symbol": "Symbol",
+        "price": "Price",
+        "change24h": "24h Change",
+        "volume24h": "Volume 24h",
+        "volChange": "Vol Change",
+        "strength": "Strength",
+        "score": "Score",
+        "signal": "Signal",
+        "time": "Time",
+        "pattern": "Pattern",
+        "atr": "ATR%",
+        "action": "Action"
+      },
+      "loading": "Loading market data...",
+      "noData": "No data available",
+      "trade": "View Chart"
+    },
+    "signals": {
+      "long": "Long",
+      "short": "Short",
+      "neutral": "Neutral"
     }
   }
 }

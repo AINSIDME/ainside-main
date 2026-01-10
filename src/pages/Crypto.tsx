@@ -20,6 +20,8 @@ interface CryptoData {
   score?: number;
   strength?: number;
   signal?: string;
+  signalPrice?: number;
+  signalTimestamp?: number;
   atr?: number;
 }
 
@@ -30,6 +32,7 @@ interface AdvancedCryptoData extends CryptoData {
   ema?: { ema12: number; ema26: number };
   momentum?: number;
   trend?: 'bullish' | 'bearish' | 'neutral';
+  pattern?: string;
 }
 
 const Crypto = () => {
@@ -38,7 +41,14 @@ const Crypto = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTab, setSelectedTab] = useState("gainers");
+  const [marketSentiment, setMarketSentiment] = useState<{
+    score: number;
+    label: string;
+    trend: 'bullish' | 'neutral' | 'bearish';
+    strength: number;
+  }>({ score: 50, label: 'Neutral', trend: 'neutral', strength: 0 });
   const volumeHistoryRef = useRef<{ [key: string]: number[] }>({});
+  const signalTimestampsRef = useRef<{ [key: string]: { signal: string; timestamp: number; price: number } }>({});
 
   // Obtener datos reales de Binance API
   useEffect(() => {
@@ -61,10 +71,13 @@ const Crypto = () => {
 
         const newData: AdvancedCryptoData[] = responses
           .filter(data => data && !data.code) // Filtrar errores
-          .map((data) => {
+          .map((data, index) => {
             const symbol = data.symbol.replace('USDT', '/USDT');
             const currentVolume = parseFloat(data.quoteVolume);
             const currentPrice = parseFloat(data.lastPrice);
+            
+            // Encontrar datos previos para este símbolo
+            const prevData = cryptoData.find(c => c.symbol === symbol);
             
             // Mantener historial de volúmenes (últimos 100 registros = ~5 minutos)
             if (!volumeHistoryRef.current[symbol]) {
@@ -143,6 +156,99 @@ const Crypto = () => {
               signal = 'Short';
             }
 
+            // Detectar patrones técnicos (umbrales reducidos para mayor detección)
+            let pattern = '';
+            const priceRange = parseFloat(data.highPrice) - parseFloat(data.lowPrice);
+            const priceRangePercent = (priceRange / currentPrice) * 100;
+            const closeNearHigh = priceRange > 0 ? (currentPrice - parseFloat(data.lowPrice)) / priceRange > 0.75 : false;
+            const closeNearLow = priceRange > 0 ? (currentPrice - parseFloat(data.lowPrice)) / priceRange < 0.25 : false;
+
+            // Breakout (precio cerca del máximo + volumen o momentum)
+            if (closeNearHigh && (volumeChange > 15 || priceChange > 1.5)) {
+              pattern = 'Breakout';
+            }
+            // Breakdown (precio cerca del mínimo + volumen o momentum)
+            else if (closeNearLow && (volumeChange > 15 || priceChange < -1.5)) {
+              pattern = 'Breakdown';
+            }
+            // Strong Uptrend (precio subiendo fuerte)
+            else if (priceChange > 2.5) {
+              pattern = 'Strong Up';
+            }
+            // Strong Downtrend (precio bajando fuerte)
+            else if (priceChange < -2.5) {
+              pattern = 'Strong Down';
+            }
+            // Volume Spike (volumen muy alto)
+            else if (volumeChange > 50 && Math.abs(priceChange) < 3) {
+              pattern = 'Volume Spike';
+            }
+            // Bullish momentum
+            else if (priceChange > 1 && volumeChange > 10) {
+              pattern = 'Bullish';
+            }
+            // Bearish momentum
+            else if (priceChange < -1 && volumeChange > 10) {
+              pattern = 'Bearish';
+            }
+            // Consolidation (rango estrecho)
+            else if (priceRangePercent < 2.5 && Math.abs(priceChange) < 0.8) {
+              pattern = 'Consolidation';
+            }
+            // Trending up
+            else if (priceChange > 0.5) {
+              pattern = 'Trending Up';
+            }
+            // Trending down
+            else if (priceChange < -0.5) {
+              pattern = 'Trending Down';
+            }
+
+            // Usar el ref para mantener timestamps persistentes
+            const SIGNAL_VALIDITY_MS = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+            let finalSignal = signal;
+            let finalSignalPrice = signal !== 'Neutral' ? currentPrice : undefined;
+            let finalSignalTimestamp = signal !== 'Neutral' ? Date.now() : undefined;
+
+            // Verificar si hay timestamp almacenado en el ref
+            const storedSignal = signalTimestampsRef.current[symbol];
+            
+            if (signal !== 'Neutral') {
+              // Si existe un timestamp previo Y la señal es la MISMA
+              if (storedSignal && storedSignal.signal === signal) {
+                const timeElapsed = Date.now() - storedSignal.timestamp;
+                
+                // Si NO ha expirado (menos de 24 horas), mantener el timestamp original
+                if (timeElapsed < SIGNAL_VALIDITY_MS) {
+                  finalSignalTimestamp = storedSignal.timestamp;
+                  finalSignalPrice = storedSignal.price;
+                } else {
+                  // Señal expirada, crear nueva
+                  finalSignalTimestamp = Date.now();
+                  finalSignalPrice = currentPrice;
+                  signalTimestampsRef.current[symbol] = {
+                    signal,
+                    timestamp: finalSignalTimestamp,
+                    price: finalSignalPrice
+                  };
+                }
+              } else {
+                // Nueva señal o señal diferente
+                finalSignalTimestamp = Date.now();
+                finalSignalPrice = currentPrice;
+                signalTimestampsRef.current[symbol] = {
+                  signal,
+                  timestamp: finalSignalTimestamp,
+                  price: finalSignalPrice
+                };
+              }
+            } else {
+              // Si la señal es Neutral, limpiar el timestamp almacenado
+              if (storedSignal) {
+                delete signalTimestampsRef.current[symbol];
+              }
+            }
+
             return {
               symbol,
               price: currentPrice,
@@ -155,11 +261,54 @@ const Crypto = () => {
               atr: atrPercent,
               strength,
               score,
-              signal
+              signal: finalSignal,
+              signalPrice: finalSignalPrice,
+              signalTimestamp: finalSignalTimestamp,
+              pattern
             };
           });
 
         setCryptoData(newData);
+        
+        // Calcular sentimiento del mercado (AI-based)
+        if (newData.length > 0) {
+          const avgChange = newData.reduce((sum, c) => sum + c.change24h, 0) / newData.length;
+          const avgScore = newData.reduce((sum, c) => sum + (c.score || 50), 0) / newData.length;
+          const longSignals = newData.filter(c => c.signal === 'Long').length;
+          const shortSignals = newData.filter(c => c.signal === 'Short').length;
+          const totalSignals = longSignals + shortSignals;
+          const bullishRatio = totalSignals > 0 ? longSignals / totalSignals : 0.5;
+          
+          // Score ponderado: 40% cambio precio, 30% score promedio, 30% señales
+          const sentimentScore = Math.round(
+            (avgChange * 10 + 50) * 0.4 + 
+            avgScore * 0.3 + 
+            bullishRatio * 100 * 0.3
+          );
+          
+          const clampedScore = Math.max(0, Math.min(100, sentimentScore));
+          const strength = Math.abs(clampedScore - 50) * 2; // 0-100
+          
+          let label = 'Neutral';
+          let trend: 'bullish' | 'neutral' | 'bearish' = 'neutral';
+          
+          if (clampedScore >= 65) {
+            label = clampedScore >= 80 ? 'Extremely Bullish' : 'Bullish';
+            trend = 'bullish';
+          } else if (clampedScore <= 35) {
+            label = clampedScore <= 20 ? 'Extremely Bearish' : 'Bearish';
+            trend = 'bearish';
+          } else if (clampedScore > 50) {
+            label = 'Slightly Bullish';
+            trend = 'bullish';
+          } else if (clampedScore < 50) {
+            label = 'Slightly Bearish';
+            trend = 'bearish';
+          }
+          
+          setMarketSentiment({ score: clampedScore, label, trend, strength });
+        }
+        
         setIsLoading(false);
         setError(null);
       } catch (error) {
@@ -191,6 +340,21 @@ const Crypto = () => {
     return `$${volume.toFixed(2)}`;
   };
 
+  const formatTimeElapsed = (timestamp: number) => {
+    const now = Date.now();
+    const elapsed = now - timestamp;
+    
+    if (elapsed < 0) return '0m';
+    
+    const hours = Math.floor(elapsed / (60 * 60 * 1000));
+    const minutes = Math.floor((elapsed % (60 * 60 * 1000)) / (60 * 1000));
+    
+    if (hours > 0) {
+      return `${hours}h ${minutes}m`;
+    }
+    return `${minutes}m`;
+  };
+
   const getFilteredData = () => {
     switch (selectedTab) {
       case "gainers":
@@ -207,8 +371,8 @@ const Crypto = () => {
   return (
     <>
       <PageSEO
-        title="Crypto Trading Dashboard - Professional Market Analysis"
-        description="Professional cryptocurrency trading screener with real-time data, technical indicators, volume analysis, and automated trading signals"
+        title={t('cryptoPage.seo.title')}
+        description={t('cryptoPage.seo.description')}
         canonical="/crypto"
         ogType="website"
       />
@@ -219,29 +383,29 @@ const Crypto = () => {
           <div className="container mx-auto text-center max-w-5xl">
             <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
               <Activity className="w-3 h-3 inline mr-2" />
-              Professional Trading Terminal
+              {t('cryptoPage.hero.badge')}
             </div>
             
             <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
-              Crypto Trading
+              {t('cryptoPage.hero.title')}
               <br />
               <span className="font-normal bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Dashboard
+                {t('cryptoPage.hero.titleHighlight')}
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-              Professional cryptocurrency market analysis with real-time data and advanced trading indicators
+              {t('cryptoPage.hero.description')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-medium shadow-lg hover:shadow-blue-500/25 transition-all duration-200 border-0">
                 <Link to="/demo">
-                  Try Live Demo
+                  {t('cryptoPage.hero.ctaDemo')}
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 border-slate-600/40 text-slate-200 hover:bg-slate-700/50 rounded-xl font-medium backdrop-blur-sm hover:border-slate-500/50 transition-all duration-200">
-                <Link to="/pricing">View Pricing</Link>
+                <Link to="/pricing">{t('cryptoPage.hero.ctaPricing')}</Link>
               </Button>
             </div>
           </div>
@@ -249,14 +413,110 @@ const Crypto = () => {
 
         {/* Market Overview */}
         <section className="py-20 px-4">
-          <div className="container mx-auto max-w-7xl">
+          <div className="container mx-auto max-w-[1600px]">
+            {/* AI Market Sentiment Bar */}
+            <div className="mb-12">
+              <Card className="bg-slate-800/40 border-slate-700/50 backdrop-blur-sm overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent animate-shimmer" 
+                     style={{ backgroundSize: '200% 100%' }} />
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <Activity className="w-5 h-5 text-blue-400" />
+                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-light text-slate-100">{t('cryptoPage.sentiment.title')}</h3>
+                        <p className="text-xs text-slate-400">Real-time analysis powered by advanced algorithms</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-light text-slate-100 mb-1">{marketSentiment.score}</div>
+                      <Badge
+                        variant="outline"
+                        className={
+                          marketSentiment.trend === 'bullish'
+                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                            : marketSentiment.trend === 'bearish'
+                            ? "bg-rose-500/10 text-rose-400 border-rose-500/30"
+                            : "bg-slate-700/30 text-slate-400 border-slate-600/30"
+                        }
+                      >
+                        {marketSentiment.label}
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  {/* Neon Sentiment Bar */}
+                  <div className="relative h-8 bg-slate-900/50 rounded-full overflow-hidden border border-slate-700/50">
+                    {/* Background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 via-slate-500/20 to-emerald-500/20" />
+                    
+                    {/* Animated glow effect */}
+                    <div 
+                      className="absolute inset-y-0 left-0 transition-all duration-1000 ease-out"
+                      style={{
+                        width: `${marketSentiment.score}%`,
+                        background: marketSentiment.trend === 'bullish'
+                          ? 'linear-gradient(90deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.6) 50%, rgba(16, 185, 129, 0.3) 100%)'
+                          : marketSentiment.trend === 'bearish'
+                          ? 'linear-gradient(90deg, rgba(244, 63, 94, 0.3) 0%, rgba(244, 63, 94, 0.6) 50%, rgba(244, 63, 94, 0.3) 100%)'
+                          : 'linear-gradient(90deg, rgba(100, 116, 139, 0.3) 0%, rgba(100, 116, 139, 0.6) 50%, rgba(100, 116, 139, 0.3) 100%)',
+                        boxShadow: marketSentiment.trend === 'bullish'
+                          ? `0 0 20px rgba(16, 185, 129, ${0.3 + marketSentiment.strength / 200}), inset 0 0 20px rgba(16, 185, 129, ${0.2 + marketSentiment.strength / 300})`
+                          : marketSentiment.trend === 'bearish'
+                          ? `0 0 20px rgba(244, 63, 94, ${0.3 + marketSentiment.strength / 200}), inset 0 0 20px rgba(244, 63, 94, ${0.2 + marketSentiment.strength / 300})`
+                          : '0 0 10px rgba(100, 116, 139, 0.2)'
+                      }}
+                    >
+                      {/* Neon edge */}
+                      <div 
+                        className="absolute right-0 inset-y-0 w-1 transition-all duration-1000"
+                        style={{
+                          background: marketSentiment.trend === 'bullish'
+                            ? 'linear-gradient(180deg, transparent, rgba(16, 185, 129, 1), transparent)'
+                            : marketSentiment.trend === 'bearish'
+                            ? 'linear-gradient(180deg, transparent, rgba(244, 63, 94, 1), transparent)'
+                            : 'linear-gradient(180deg, transparent, rgba(100, 116, 139, 1), transparent)',
+                          boxShadow: marketSentiment.trend === 'bullish'
+                            ? `0 0 10px rgba(16, 185, 129, ${0.8 + marketSentiment.strength / 100}), 0 0 20px rgba(16, 185, 129, ${0.5 + marketSentiment.strength / 150})`
+                            : marketSentiment.trend === 'bearish'
+                            ? `0 0 10px rgba(244, 63, 94, ${0.8 + marketSentiment.strength / 100}), 0 0 20px rgba(244, 63, 94, ${0.5 + marketSentiment.strength / 150})`
+                            : '0 0 5px rgba(100, 116, 139, 0.5)'
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Scale markers */}
+                    <div className="absolute inset-0 flex items-center justify-between px-2 text-[10px] text-slate-500 font-medium">
+                      <span>Bearish</span>
+                      <span>Neutral</span>
+                      <span>Bullish</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
+                    <span className="flex items-center gap-1">
+                      <TrendingUp className="w-3 h-3" />
+                      Strength: {marketSentiment.strength.toFixed(0)}%
+                    </span>
+                    <span>Updated every 10s</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               <Card className="bg-slate-800/40 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/60 transition-all duration-200">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
                     <TrendingUp className="w-4 h-4" />
-                    Top Gainer
+                    {t('cryptoPage.stats.topGainer')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -278,7 +538,7 @@ const Crypto = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
                     <ArrowDownRight className="w-4 h-4" />
-                    Top Loser
+                    {t('cryptoPage.stats.topLoser')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -300,7 +560,7 @@ const Crypto = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
                     <BarChart3 className="w-4 h-4" />
-                    Volume Leader
+                    {t('cryptoPage.stats.volumeLeader')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -321,7 +581,7 @@ const Crypto = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
                     <Zap className="w-4 h-4" />
-                    Volume Spike
+                    {t('cryptoPage.stats.volumeSpike')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -344,9 +604,9 @@ const Crypto = () => {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle className="text-2xl font-light text-slate-100">Professional Trading Screener</CardTitle>
+                    <CardTitle className="text-2xl font-light text-slate-100">{t('cryptoPage.screener.title')}</CardTitle>
                     <CardDescription className="text-slate-400 mt-2">
-                      Institutional-grade market analysis with real-time technical indicators, volume analytics, and AI-powered trading signals
+                      {t('cryptoPage.screener.description')}
                     </CardDescription>
                   </div>
                   <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30">
@@ -354,7 +614,7 @@ const Crypto = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    Live Market Data
+                    {t('cryptoPage.screener.liveData')}
                   </Badge>
                 </div>
               </CardHeader>
@@ -363,49 +623,197 @@ const Crypto = () => {
                   <TabsList className="grid w-full grid-cols-3 mb-6 sm:mb-8 bg-slate-900/50 border border-slate-700/50">
                     <TabsTrigger value="gainers" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm data-[state=active]:bg-slate-700/50 data-[state=active]:text-blue-400">
                       <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="hidden sm:inline">Top </span>Gainers
+                      {t('cryptoPage.screener.tabs.gainers')}
                     </TabsTrigger>
                     <TabsTrigger value="losers" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm data-[state=active]:bg-slate-700/50 data-[state=active]:text-blue-400">
                       <ArrowDownRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="hidden sm:inline">Top </span>Losers
+                      {t('cryptoPage.screener.tabs.losers')}
                     </TabsTrigger>
                     <TabsTrigger value="volume" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm data-[state=active]:bg-slate-700/50 data-[state=active]:text-blue-400">
                       <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4" />
-                      Volume<span className="hidden sm:inline"> Spikes</span>
+                      {t('cryptoPage.screener.tabs.volume')}
                     </TabsTrigger>
                   </TabsList>
 
                   <TabsContent value={selectedTab} className="mt-0">
-                    <div className="overflow-x-auto -mx-4 sm:mx-0">
-                      <div className="min-w-[800px] px-4 sm:px-0">
+                    {/* Mobile Card View */}
+                    <div className="block lg:hidden space-y-4">
+                      {isLoading ? (
+                        <div className="text-center py-12 text-slate-500">
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                            {t('cryptoPage.table.loading')}
+                          </div>
+                        </div>
+                      ) : error ? (
+                        <div className="text-center py-12">
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="text-red-400">{error}</div>
+                            <div className="text-sm text-slate-500">Attempting to reconnect...</div>
+                          </div>
+                        </div>
+                      ) : (
+                        getFilteredData().map((crypto, index) => (
+                          <Card key={index} className="bg-slate-800/40 border-slate-700/50">
+                            <CardContent className="p-4">
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 flex items-center justify-center">
+                                    <span className="text-xs font-semibold text-blue-400">
+                                      {crypto.symbol.split('/')[0].substring(0, 3)}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <div className="font-medium text-slate-200 text-sm">{crypto.symbol}</div>
+                                    <div className="font-mono text-slate-300 text-xs">{formatPrice(crypto.price)}</div>
+                                  </div>
+                                </div>
+                                <Button
+                                  size="sm"
+                                  className="bg-blue-600 hover:bg-blue-500 text-white border-0 text-xs px-3 py-1"
+                                  onClick={() => {
+                                    const tradingViewSymbol = crypto.symbol.replace('/', '');
+                                    window.open(`https://www.tradingview.com/chart/?symbol=BINANCE:${tradingViewSymbol}`, '_blank');
+                                  }}
+                                >
+                                  {t('cryptoPage.table.trade')}
+                                </Button>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-3 mb-3">
+                                <div>
+                                  <div className="text-xs text-slate-400 mb-1">24h Change</div>
+                                  <div className={`flex items-center gap-1 font-medium text-sm ${
+                                    crypto.change24h >= 0 ? 'text-green-400' : 'text-red-400'
+                                  }`}>
+                                    {crypto.change24h >= 0 ? (
+                                      <ArrowUpRight className="w-3 h-3" />
+                                    ) : (
+                                      <ArrowDownRight className="w-3 h-3" />
+                                    )}
+                                    {Math.abs(crypto.change24h).toFixed(2)}%
+                                  </div>
+                                </div>
+                                <div>
+                                  <div className="text-xs text-slate-400 mb-1">Volume</div>
+                                  <div className="font-mono text-slate-300 text-sm">{formatVolume(crypto.volume24h)}</div>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="text-xs text-slate-400">Score</div>
+                                <Badge
+                                  variant="outline"
+                                  className={
+                                    crypto.score && crypto.score > 70
+                                      ? "bg-green-500/10 text-green-400 border-green-500/30 text-xs"
+                                      : crypto.score && crypto.score > 50
+                                      ? "bg-blue-500/10 text-blue-400 border-blue-500/30 text-xs"
+                                      : "bg-slate-800/50 text-slate-400 border-slate-700/50 text-xs"
+                                  }
+                                >
+                                  {crypto.score}
+                                </Badge>
+                              </div>
+                              
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="text-xs text-slate-400">Signal</div>
+                                <div className="flex items-center gap-2">
+                                  <div
+                                    className={`w-2 h-2 rounded-full ${
+                                      crypto.signal === 'Long'
+                                        ? 'bg-emerald-500'
+                                        : crypto.signal === 'Short'
+                                        ? 'bg-rose-500'
+                                        : 'bg-slate-600'
+                                    }`}
+                                    style={{
+                                      opacity: crypto.signal === 'Neutral'
+                                        ? 0.3
+                                        : Math.min(0.4 + (crypto.strength / 100) * 0.6, 1),
+                                      boxShadow: crypto.signal === 'Long'
+                                        ? `0 0 8px rgba(16, 185, 129, 0.6)`
+                                        : crypto.signal === 'Short'
+                                        ? `0 0 8px rgba(244, 63, 94, 0.6)`
+                                        : 'none'
+                                    }}
+                                  />
+                                  <span className="text-xs text-slate-300">{crypto.signal}</span>
+                                </div>
+                              </div>
+                              
+                              {crypto.signalTimestamp && crypto.signal !== 'Neutral' && (
+                                <div className="flex items-center justify-between mb-2">
+                                  <div className="text-xs text-slate-400">Tiempo activa</div>
+                                  <Badge
+                                    variant="outline"
+                                    className="bg-blue-500/10 text-blue-400 border-blue-500/30 text-xs"
+                                  >
+                                    ⏱️ {formatTimeElapsed(crypto.signalTimestamp)}
+                                  </Badge>
+                                </div>
+                              )}
+                              
+                              {crypto.pattern && (
+                                <div className="flex items-center justify-between">
+                                  <div className="text-xs text-slate-400">Pattern</div>
+                                  <Badge
+                                    variant="outline"
+                                    className={
+                                      crypto.pattern.includes('Breakout') || crypto.pattern.includes('Bullish') || crypto.pattern.includes('Up')
+                                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-xs"
+                                        : crypto.pattern.includes('Breakdown') || crypto.pattern.includes('Bearish') || crypto.pattern.includes('Down')
+                                        ? "bg-rose-500/10 text-rose-400 border-rose-500/30 text-xs"
+                                        : crypto.pattern.includes('Volume')
+                                        ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/30 text-xs"
+                                        : crypto.pattern.includes('Strong')
+                                        ? "bg-purple-500/10 text-purple-400 border-purple-500/30 text-xs"
+                                        : "bg-slate-700/30 text-slate-400 border-slate-600/30 text-xs"
+                                    }
+                                  >
+                                    {crypto.pattern}
+                                  </Badge>
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
+                        ))
+                      )}
+                    </div>
+                    
+                    {/* Desktop Table View */}
+                    <div className="hidden lg:block overflow-x-auto">
+                      <div className="w-full">
                         <table className="w-full">
                           <thead>
                             <tr className="border-b border-slate-700/50">
-                              <th className="text-left py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">Symbol</th>
-                              <th className="text-right py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">Price</th>
-                              <th className="text-right py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">24h Change</th>
-                              <th className="text-right py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm hidden md:table-cell">Volume 24h</th>
-                              <th className="text-right py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm hidden lg:table-cell">Vol Change</th>
-                              <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm hidden xl:table-cell">Strength</th>
-                              <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">Score</th>
-                              <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">Signal</th>
-                              <th className="text-right py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm hidden lg:table-cell">ATR%</th>
-                              <th className="text-center py-3 px-2 sm:py-4 sm:px-4 font-medium text-slate-400 text-xs sm:text-sm">Action</th>
+                              <th className="text-left py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.symbol')}</th>
+                              <th className="text-right py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.price')}</th>
+                              <th className="text-right py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.change24h')}</th>
+                              <th className="text-right py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.volume24h')}</th>
+                              <th className="text-right py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.volChange')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.strength')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.score')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.signal')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.time')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.pattern')}</th>
+                              <th className="text-right py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.atr')}</th>
+                              <th className="text-center py-2 px-2 font-medium text-slate-400 text-xs">{t('cryptoPage.table.headers.action')}</th>
                             </tr>
                           </thead>
                         <tbody>
                           {isLoading ? (
                             <tr>
-                              <td colSpan={10} className="text-center py-12 text-slate-500">
+                              <td colSpan={11} className="text-center py-12 text-slate-500">
                                 <div className="flex flex-col items-center gap-3">
                                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-                                  Loading market data...
+                                  {t('cryptoPage.table.loading')}
                                 </div>
                               </td>
                             </tr>
                           ) : error ? (
                             <tr>
-                              <td colSpan={10} className="text-center py-12">
+                              <td colSpan={12} className="text-center py-12">
                                 <div className="flex flex-col items-center gap-3">
                                   <div className="text-red-400">{error}</div>
                                   <div className="text-sm text-slate-500">Attempting to reconnect...</div>
@@ -415,37 +823,37 @@ const Crypto = () => {
                           ) : (
                             getFilteredData().map((crypto, index) => (
                               <tr key={index} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
-                                <td className="py-3 px-2 sm:py-4 sm:px-4">
+                                <td className="py-2 px-2">
                                   <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 flex items-center justify-center">
-                                      <span className="text-[10px] sm:text-xs font-semibold text-blue-400">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 flex items-center justify-center">
+                                      <span className="text-[10px] font-semibold text-blue-400">
                                         {crypto.symbol.split('/')[0].substring(0, 3)}
                                       </span>
                                     </div>
-                                    <span className="font-medium text-slate-200 text-xs sm:text-sm">{crypto.symbol}</span>
+                                    <span className="font-medium text-slate-200 text-xs">{crypto.symbol}</span>
                                   </div>
                                 </td>
-                                <td className="text-right py-3 px-2 sm:py-4 sm:px-4 font-mono text-slate-200 text-xs sm:text-sm">
+                                <td className="text-right py-2 px-2 font-mono text-slate-200 text-xs">
                                   {formatPrice(crypto.price)}
                                 </td>
-                                <td className="text-right py-3 px-2 sm:py-4 sm:px-4">
+                                <td className="text-right py-2 px-2">
                                   <span
-                                    className={`flex items-center justify-end gap-1 font-medium text-xs sm:text-sm ${
+                                    className={`flex items-center justify-end gap-1 font-medium text-xs ${
                                       crypto.change24h >= 0 ? 'text-green-400' : 'text-red-400'
                                     }`}
                                   >
                                     {crypto.change24h >= 0 ? (
-                                      <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                                      <ArrowUpRight className="w-3 h-3" />
                                     ) : (
-                                      <ArrowDownRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                                      <ArrowDownRight className="w-3 h-3" />
                                     )}
                                     {Math.abs(crypto.change24h).toFixed(2)}%
                                   </span>
                                 </td>
-                                <td className="text-right py-3 px-2 sm:py-4 sm:px-4 font-mono text-slate-300 text-xs sm:text-sm hidden md:table-cell">
+                                <td className="text-right py-2 px-2 font-mono text-slate-300 text-xs">
                                   {formatVolume(crypto.volume24h)}
                                 </td>
-                                <td className="text-right py-3 px-2 sm:py-4 sm:px-4 hidden lg:table-cell">
+                                <td className="text-right py-2 px-2">
                                   <Badge
                                     variant={crypto.volumeChange > 100 ? "default" : "outline"}
                                     className={
@@ -458,9 +866,9 @@ const Crypto = () => {
                                     {crypto.volumeChange.toFixed(0)}%
                                   </Badge>
                                 </td>
-                                <td className="text-center py-3 px-2 sm:py-4 sm:px-4 hidden xl:table-cell">
+                                <td className="text-center py-2 px-2">
                                   <div className="flex items-center justify-center gap-2">
-                                    <div className="w-12 sm:w-16 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                    <div className="w-12 h-2 bg-slate-700 rounded-full overflow-hidden">
                                       <div 
                                         className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300"
                                         style={{ width: `${crypto.strength}%` }}
@@ -469,7 +877,7 @@ const Crypto = () => {
                                     <span className="text-xs text-slate-400">{crypto.strength}%</span>
                                   </div>
                                 </td>
-                                <td className="text-center py-3 px-2 sm:py-4 sm:px-4">
+                                <td className="text-center py-2 px-2">
                                   <Badge
                                     variant="outline"
                                     className={
@@ -483,7 +891,7 @@ const Crypto = () => {
                                     {crypto.score}
                                   </Badge>
                                 </td>
-                                <td className="text-center py-3 px-2 sm:py-4 sm:px-4">
+                                <td className="text-center py-2 px-2">
                                   <div className="flex justify-center">
                                     <div 
                                       className={`w-3 h-3 rounded-full shadow-lg ${
@@ -507,19 +915,53 @@ const Crypto = () => {
                                     />
                                   </div>
                                 </td>
-                                <td className="text-right py-3 px-2 sm:py-4 sm:px-4 font-mono text-slate-300 text-xs sm:text-sm hidden lg:table-cell">
+                                <td className="text-center py-2 px-2">
+                                  {crypto.signalTimestamp && crypto.signal !== 'Neutral' ? (
+                                    <Badge
+                                      variant="outline"
+                                      className="bg-blue-500/10 text-blue-400 border-blue-500/30 text-xs"
+                                    >
+                                      ⏱️ {formatTimeElapsed(crypto.signalTimestamp)}
+                                    </Badge>
+                                  ) : (
+                                    <span className="text-slate-600 text-xs">-</span>
+                                  )}
+                                </td>
+                                <td className="text-center py-2 px-2">
+                                  {crypto.pattern ? (
+                                    <Badge
+                                      variant="outline"
+                                      className={
+                                        crypto.pattern.includes('Breakout') || crypto.pattern.includes('Bullish')
+                                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-xs whitespace-nowrap"
+                                          : crypto.pattern.includes('Breakdown') || crypto.pattern.includes('Bearish')
+                                          ? "bg-rose-500/10 text-rose-400 border-rose-500/30 text-xs whitespace-nowrap"
+                                          : crypto.pattern.includes('Volume Spike')
+                                          ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/30 text-xs whitespace-nowrap"
+                                          : crypto.pattern.includes('Strong')
+                                          ? "bg-purple-500/10 text-purple-400 border-purple-500/30 text-xs whitespace-nowrap"
+                                          : "bg-slate-700/30 text-slate-400 border-slate-600/30 text-xs whitespace-nowrap"
+                                      }
+                                    >
+                                      {crypto.pattern}
+                                    </Badge>
+                                  ) : (
+                                    <span className="text-slate-600 text-xs">-</span>
+                                  )}
+                                </td>
+                                <td className="text-right py-2 px-2 font-mono text-slate-300 text-xs">
                                   {crypto.atr?.toFixed(2)}%
                                 </td>
-                                <td className="text-center py-3 px-2 sm:py-4 sm:px-4">
+                                <td className="text-center py-2 px-2">
                                   <Button 
                                     size="sm" 
-                                    className="bg-blue-600 hover:bg-blue-500 text-white border-0 text-xs sm:text-sm px-2 sm:px-3"
+                                    className="bg-blue-600 hover:bg-blue-500 text-white border-0 text-xs px-2"
                                     onClick={() => {
                                       const tradingViewSymbol = crypto.symbol.replace('/', '');
                                       window.open(`https://www.tradingview.com/chart/?symbol=BINANCE:${tradingViewSymbol}`, '_blank');
                                     }}
                                   >
-                                    Trade
+                                    {t('cryptoPage.table.trade')}
                                   </Button>
                                 </td>
                               </tr>

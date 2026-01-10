@@ -1,15 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { AccessibilityControls } from '@/components/accessibility/AccessibilityControls';
-import { Building2, Menu, X } from "lucide-react";
+import { supabase } from '@/integrations/supabase/client';
+import { LogIn, Menu, UserRound, X } from "lucide-react";
 
 export const Header = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userDisplayName, setUserDisplayName] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const getDisplayName = (user: any): string => {
+      const meta = (user?.user_metadata ?? {}) as Record<string, any>;
+      const first = (meta.first_name ?? meta.given_name ?? '').toString().trim();
+      const last = (meta.last_name ?? meta.family_name ?? '').toString().trim();
+      const full = (meta.full_name ?? meta.name ?? '').toString().trim();
+
+      const combined = `${first} ${last}`.trim();
+      if (combined) return combined;
+      if (full) return full;
+
+      const email = (user?.email ?? '').toString().trim();
+      if (email) return email;
+      return t('header.account', { defaultValue: 'Cuenta' });
+    };
+
+    let alive = true;
+
+    const refresh = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!alive) return;
+
+      const user = data?.user ?? null;
+      setIsAuthenticated(Boolean(user));
+      setUserDisplayName(user ? getDisplayName(user) : null);
+    };
+
+    void refresh();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      const user = session?.user ?? null;
+      setIsAuthenticated(Boolean(user));
+      setUserDisplayName(user ? getDisplayName(user) : null);
+    });
+
+    return () => {
+      alive = false;
+      authListener.subscription.unsubscribe();
+    };
+  }, [t]);
 
   const navItems = [
     { key: 'home', path: '/' },
@@ -17,7 +61,7 @@ export const Header = () => {
     { key: 'services', path: '/services' },
     { key: 'demo', path: '/demo' },
     { key: 'crypto', path: '/crypto' },
-    { key: 'liveDemoMini', path: '/live-demo-mini' },
+    { key: 'liveChat', path: '/live-chat' },
     { key: 'pricing', path: '/pricing' },
     { key: 'faq', path: '/faq' },
     { key: 'contact', path: '/contact' },
@@ -69,6 +113,55 @@ export const Header = () => {
           <div className="flex items-center gap-2">
             <AccessibilityControls />
             <LanguageSwitcher />
+
+            {/* Login / Account */}
+            {isAuthenticated ? (
+              <Button asChild variant="ghost" size="sm" className="focus-visible">
+                <Link
+                  to="/dashboard"
+                  aria-label={t('header.account', { defaultValue: 'Cuenta' })}
+                  className="flex items-center gap-2"
+                >
+                  <UserRound className="h-4 w-4" />
+                  <span className="hidden sm:inline max-w-[180px] truncate">
+                    {userDisplayName ?? t('header.account', { defaultValue: 'Cuenta' })}
+                  </span>
+                </Link>
+              </Button>
+            ) : (
+              <Button asChild variant="ghost" size="sm" className="focus-visible p-2">
+                <Link
+                  to="/login"
+                  aria-label={t('header.login', { defaultValue: 'Iniciar sesión' })}
+                  className="flex items-center gap-2"
+                >
+                  <div className="relative w-7 h-7 flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                      <defs>
+                        <linearGradient id="loginGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style={{ stopColor: '#0EA5E9', stopOpacity: 1 }} />
+                          <stop offset="100%" style={{ stopColor: '#1E40AF', stopOpacity: 1 }} />
+                        </linearGradient>
+                      </defs>
+                      {/* Letter A with keyhole */}
+                      <path 
+                        d="M 20 90 L 35 30 L 50 10 L 65 30 L 80 90 L 65 90 L 60 70 L 40 70 L 35 90 Z M 45 55 L 55 55 L 50 35 Z" 
+                        fill="url(#loginGradient)"
+                        opacity="0.9"
+                      />
+                      {/* Keyhole */}
+                      <circle cx="50" cy="45" r="4" fill="white" />
+                      <path d="M 48 49 L 48 58 L 52 58 L 52 49 Z" fill="white" />
+                      {/* Sparkles */}
+                      <circle cx="75" cy="20" r="1.5" fill="#38BDF8" opacity="0.8" />
+                      <circle cx="82" cy="15" r="2" fill="#38BDF8" opacity="0.8" />
+                      <circle cx="78" cy="28" r="1" fill="#60A5FA" opacity="0.6" />
+                    </svg>
+                  </div>
+                  <span className="sr-only">{t('header.login', { defaultValue: 'Iniciar sesión' })}</span>
+                </Link>
+              </Button>
+            )}
             
             {/* Mobile menu button */}
             <Button

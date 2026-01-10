@@ -86,7 +86,7 @@ export const StructuredData = () => {
       {
         "@type": "ListItem",
         "position": 5,
-        "name": t('nav.liveDemoMini'), 
+        "name": t('nav.liveChat'), 
         "item": `${baseUrl}/live-demo-mini`
       },
       {

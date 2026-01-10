@@ -1,11 +1,14 @@
 {
+  "header": {
+    "login": "Se connecter"
+  },
   "nav": {
     "home": "Accueil",
     "about": "À propos",
     "services": "Services",
     "demo": "Stratégie",
     "crypto": "Crypto",
-    "liveDemoMini": "Live",
+    "liveChat": "Chat en Direct",
     "pricing": "Tarifs",
     "blog": "Blog",
     "faq": "FAQ",
@@ -537,8 +540,8 @@
       "subtitle": "Analyse de trading professionnelle et suivi des performances"
     },
     "status": {
-      "active": "ACTIVE",
-      "standby": "STANDBY"
+      "active": "ACTIF",
+      "standby": "EN ATTENTE"
     },
     "controls": {
       "start": "Démarrer",
@@ -554,8 +557,8 @@
     "liveChart": {
       "title": "E-mini S&P 500 (@ES) - Simulation",
       "subtitle": "Données historiques réelles + simulation d'entrées/sorties automatiques",
-      "entryAt": "Entry",
-      "currentPnL": "Current P&L",
+      "entryAt": "Entrée",
+      "currentPnL": "P&L Actuel",
       "instrument": "E-mini S&P 500",
       "loading": "Chargement...",
       "perPoint": "$50 par point",
@@ -563,26 +566,26 @@
       "marketOpen": "● MARCHÉ OUVERT",
       "marketClosed": "● MARCHÉ FERMÉ",
       "closedMessage": "Marché Fermé: La simulation en direct est en pause. Les marchés à terme E-mini S&P 500 fonctionnent du dimanche 18h00 au vendredi 17h00 ET, avec une pause de maintenance quotidienne de 17h00-18h00 ET.",
-      "longEntry": "Long Entry",
-      "shortEntry": "Short Entry",
-      "exit": "Exit",
+      "longEntry": "Entrée Long",
+      "shortEntry": "Entrée Short",
+      "exit": "Sortie",
       "totalTrades": "Total Trades",
-      "winRate": "Win Rate",
+      "winRate": "Taux de Réussite",
       "totalPnL": "P&L Total",
       "winningTrades": "Trades Gagnants",
       "losingTrades": "Trades Perdants",
-      "winsLosses": "W/L",
+      "winsLosses": "G/P",
       "recentTrades": "Derniers Trades",
       "noPosition": "Aucune position active",
       "statistics": "Statistiques",
       "noTrades": "Pas encore de trades"
     },
     "charts": {
-      "netProfit": "Net Profit Evolution",
-      "gainPct": "Percentage Gains"
+      "netProfit": "Évolution du Profit Net",
+      "gainPct": "Gains en Pourcentage"
     },
     "tooltip": {
-      "netProfit": "Net Profit",
+      "netProfit": "Profit Net",
       "gainPct": "% Gain"
     },
     "features": {
@@ -627,8 +630,8 @@
       "point5": "Ceci est une simulation éducative. Les performances passées ne garantissent pas les résultats futurs. Le trading comporte un risque de perte en capital."
     },
     "sidebar": {
-      "disclaimerTitle": "Important Notice",
-      "disclaimer1": "This is an educational simulation showing how an automated algorithm could work.",
+      "disclaimerTitle": "Avis Important",
+      "disclaimer1": "Ceci est une simulation éducative montrant comment un algorithme automatisé pourrait fonctionner.",
       "disclaimer2": "Les performances passées ne garantissent pas les résultats futurs. Toutes les données affichées sont hypothétiques.",
       "disclaimer3": "Le trading comporte des risques. Cet outil est uniquement à des fins éducatives.",
       "howItWorks": "Comment ça marche",
@@ -645,7 +648,7 @@
       "button": "Nous contacter",
       "pricing": "Voir les Prix",
       "contact": "Nous Contacter",
-      "viewPricing": "Voir les tarifs"
+      "viewPricing": "Voir les Tarifs"
     },
     "chartType": {
       "area": "Graphique en Aires",
@@ -899,25 +902,25 @@
       "q4": "Quel service offrez-vous exactement ?",
       "q5": "Puis-je copier ces opérations ?",
       "q6": "Combien coûte l'accès ?",
-      "q7": "Do I have to give you my money?",
-      "q8": "What type of company are you exactly?"
+      "q7": "Dois-je vous donner mon argent ?",
+      "q8": "Quel type d'entreprise êtes-vous exactement ?"
     },
     "answers": {
-      "a1": "📺 Ce stream montre du trading RÉEL sur les futures S&P 500 (/ES et /MES) avec positions actuelles, graphiques professionnels, indicateurs techniques comme VWAP et opérations en temps réel.",
-      "a2": "✅ OUI, toutes les positions montrées sont des opérations RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre capital et P&L actuels en direct.",
-      "a3": "📊 VWAP (Volume Weighted Average Price) est le prix moyen pondéré par volume. Les lignes bleues/rouges montrent les zones institutionnelles de support/résistance que nous utilisons pour ouvrir de vraies positions.",
-      "a4": "🔧 Nous louons des OUTILS D'ÉTUDE et des indicateurs techniques pour l'analyse de marché. Ce sont des outils éducatifs, PAS de conseil financier.",
-      "a5": "📚 Vous pouvez étudier nos opérations comme matériel éducatif. Compatible SEULEMENT avec les plateformes EasyLanguage: TradeStation, TradeStation Global et MultiCharts (PowerLanguage). IMPORTANT: Pour étude seulement, pas de conseil.",
-      "a6": "💰 Location d'outils: $99/mois ou $999/an (économisez $189). Inclut accès 24/7 aux indicateurs et outils d'étude. Usage éducatif uniquement.",
-      "a7": "💰 NO. Your money stays in your broker account (TradeStation, etc.). We only rent the tools/algorithms. You maintain full control of your capital.",
-      "a8": "🏢 We are a software development company specialized in CREATING trading algorithms and RENTING analytical tools. We don't handle money, we only develop and rent technology."
+      "a1": "📺 Cette visualisation montre une analyse des contrats à terme S&P 500 (/ES et /MES) avec des indicateurs techniques comme VWAP. Exemple éducatif avec des données de marché réelles.",
+      "a2": "📊 Ceci est un exemple éducatif montrant comment les stratégies fonctionneraient. Les données affichées sont illustratives à des fins éducatives.",
+      "a3": "📊 VWAP (Volume Weighted Average Price) est le prix moyen pondéré par volume. Les lignes bleues/rouges montrent des zones de support/résistance pouvant être utilisées pour l'analyse de trading.",
+      "a4": "🔧 Nous sommes une entreprise qui DÉVELOPPE des algorithmes de trading et LOUE des outils analytiques. Votre argent reste dans votre compte de courtier, vous louez seulement nos outils.",
+      "a5": "📚 Vous pouvez étudier nos opérations comme matériel éducatif. Compatible SEULEMENT avec les plateformes EasyLanguage : TradeStation, TradeStation Global et MultiCharts (PowerLanguage). IMPORTANT : Pour étude seulement, pas de conseil.",
+      "a6": "💰 Location d'outils : 99$/mois ou 999$/an (économisez 189$). Inclut un accès 24/7 aux indicateurs et outils d'étude. Usage éducatif uniquement.",
+      "a7": "💰 NON. Votre argent reste dans votre compte de courtier (TradeStation, etc.). Nous louons seulement les outils/algorithmes. Vous gardez le contrôle total de votre capital.",
+      "a8": "🏢 Nous sommes une entreprise de développement logiciel spécialisée dans la CRÉATION d'algorithmes de trading et la LOCATION d'outils analytiques. Nous ne gérons pas d'argent, nous développons et louons seulement de la technologie."
     },
     "responses": {
       "vwap": "📊 VWAP montre le prix moyen pondéré par volume. Les lignes vous aident à identifier les niveaux institutionnels de support et résistance en temps réel.",
-      "real": "✅ OUI, toutes les positions sont RÉELLES avec de l'argent réel. Ce n'est pas une simulation - vous pouvez voir notre P&L actuel en direct et comment nous tradons réellement.",
-      "pnl": "💰 Vous voyez le P&L RÉEL de nos opérations en temps réel. Chaque gain et perte que vous voyez est avec de l'argent réel, pas simulé.",
-      "stream": "📺 Ce stream montre du trading RÉEL du S&P 500 avec positions actuelles. Vous pouvez voir de vraies opérations, pas des démonstrations.",
-      "default": "🤖 Je peux vous aider avec des questions sur le stream, indicateurs, simulateur P&L, stratégies de trading et plus. Que souhaitez-vous savoir ?",
+      "real": "📊 Ceci est une visualisation éducative montrant comment les stratégies fonctionneraient avec des données de marché réelles. À des fins éducatives.",
+      "pnl": "📊 Les données affichées sont des exemples illustratifs basés sur un backtesting historique. Pas d'opérations en direct.",
+      "stream": "📺 Cette visualisation montre comment les stratégies analysent le S&P 500. Exemple éducatif, pas d'opérations réelles.",
+      "default": "🤖 Je peux vous aider avec des questions sur le stream, les indicateurs, le simulateur P&L, les stratégies de trading et plus. Que souhaitez-vous savoir ?",
       "fallback": "Merci pour votre question. Un analyste répondra sous peu."
     }
   },
@@ -1909,6 +1912,65 @@
       "title": "Outil HWID AInside",
       "description": "Téléchargez le logiciel officiel pour gérer votre HWID et vous connecter en temps réel",
       "download": "Télécharger pour Windows"
+    }
+  },
+  "cryptoPage": {
+    "seo": {
+      "title": "Trading Crypto en Direct - AInside",
+      "description": "Tableau de bord professionnel de trading de cryptomonnaies avec données en temps réel, indicateurs techniques avancés et signaux de trading alimentés par IA"
+    },
+    "hero": {
+      "badge": "Terminal de Trading Professionnel",
+      "title": "Trading Crypto",
+      "titleHighlight": "Dashboard",
+      "description": "Analyse professionnelle du marché des cryptomonnaies avec données en temps réel et indicateurs de trading avancés",
+      "ctaDemo": "Essayer la Démo en Direct",
+      "ctaPricing": "Voir les Tarifs"
+    },
+    "sentiment": {
+      "title": "Sentiment du Marché IA",
+      "liveUpdate": "Mise à jour en direct",
+      "level": "Niveau"
+    },
+    "stats": {
+      "topGainer": "Meilleur Gain",
+      "topLoser": "Plus Grande Perte",
+      "volumeLeader": "Leader en Volume",
+      "volumeSpike": "Pic de Volume"
+    },
+    "screener": {
+      "title": "Screener de Trading Professionnel",
+      "description": "Analyse de marché de niveau institutionnel avec indicateurs techniques en temps réel, analyse de volume et signaux de trading alimentés par IA",
+      "liveData": "Données de Marché en Direct",
+      "tabs": {
+        "gainers": "Gagnants",
+        "losers": "Perdants",
+        "volume": "Volume"
+      }
+    },
+    "table": {
+      "headers": {
+        "symbol": "Symbole",
+        "price": "Prix",
+        "change24h": "Variation 24h",
+        "volume24h": "Volume 24h",
+        "volChange": "Variation Vol",
+        "strength": "Force",
+        "score": "Score",
+        "signal": "Signal",
+        "time": "Temps",
+        "pattern": "Motif",
+        "atr": "ATR%",
+        "action": "Action"
+      },
+      "loading": "Chargement des données de marché...",
+      "noData": "Aucune donnée disponible",
+      "trade": "Voir Graphique"
+    },
+    "signals": {
+      "long": "Long",
+      "short": "Short",
+      "neutral": "Neutre"
     }
   }
 }
