@@ -2,11 +2,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import * as OTPAuth from "https://esm.sh/otpauth@9.1.4";
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
 
 function getAdminEmailAllowlist(): string[] {
   const raw = Deno.env.get('ADMIN_EMAILS') ?? '';
@@ -49,24 +45,27 @@ function extractBearerToken(authHeader: string | null): string {
 }
 
 serve(async (req) => {
+  const origin = req.headers.get('origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return handleCorsPreflightRequest(req);
   }
 
   try {
     const { code } = await req.json().catch(() => ({ code: '' }));
     if (!code) {
       return new Response(
-        JSON.stringify({ error: 'Código requerido' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ verified: false, error: 'Código requerido' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     const jwt = extractBearerToken(req.headers.get('Authorization'));
     if (!jwt) {
       return new Response(
-        JSON.stringify({ error: 'Missing Authorization bearer token' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ verified: false, error: 'Missing Authorization bearer token' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -75,8 +74,8 @@ serve(async (req) => {
     const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
     if (!supabaseUrl || !supabaseServiceKey || !supabaseAnonKey) {
       return new Response(
-        JSON.stringify({ error: 'Server misconfigured' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ verified: false, error: 'Server misconfigured' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -89,8 +88,8 @@ serve(async (req) => {
     const { data: userData, error: userErr } = await supabaseAuth.auth.getUser();
     if (userErr || !userData?.user) {
       return new Response(
-        JSON.stringify({ error: 'Invalid session' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ verified: false, error: 'Invalid session' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -98,8 +97,8 @@ serve(async (req) => {
     const email = (userData.user.email ?? '').toLowerCase();
     if (!email) {
       return new Response(
-        JSON.stringify({ error: 'Missing user email' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ verified: false, error: 'Missing user email' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -107,7 +106,7 @@ serve(async (req) => {
     if (!allowlist.includes(email)) {
       return new Response(
         JSON.stringify({ verified: false, error: 'Usuario no autorizado' }),
-        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -116,7 +115,7 @@ serve(async (req) => {
     if (!secret) {
       return new Response(
         JSON.stringify({ verified: false, error: '2FA secret not configured' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -171,8 +170,11 @@ serve(async (req) => {
     if (sessionErr) {
       console.error('Failed to create admin_2fa_sessions row:', sessionErr);
       return new Response(
-        JSON.stringify({ verified: false, error: 'Failed to create 2FA session' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({
+          verified: false,
+          error: `Failed to create 2FA session: ${String((sessionErr as any)?.message ?? sessionErr)}`,
+        }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -183,8 +185,8 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error en verify-admin-2fa:', error);
     return new Response(
-      JSON.stringify({ error: (error as Error).message ?? 'Unknown error' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ verified: false, error: (error as Error).message ?? 'Unknown error' }),
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });

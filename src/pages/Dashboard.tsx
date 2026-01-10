@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -16,7 +18,8 @@ import {
   Activity,
   Settings,
   Mail,
-  Calendar
+  Calendar,
+  ShieldCheck
 } from "lucide-react";
 
 interface UserData {
@@ -35,6 +38,15 @@ const Dashboard = () => {
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [needsMfa, setNeedsMfa] = useState(false);
+  const [mfaEnabled, setMfaEnabled] = useState(false);
+  const [mfaVerifiedCount, setMfaVerifiedCount] = useState(0);
+  const [mfaCurrentLevel, setMfaCurrentLevel] = useState<string | null>(null);
+  const [mfaNextLevel, setMfaNextLevel] = useState<string | null>(null);
+  const [downloadEmailOtpSent, setDownloadEmailOtpSent] = useState(false);
+  const [downloadEmailOtpValue, setDownloadEmailOtpValue] = useState("");
+  const [downloadEmailOtpLoading, setDownloadEmailOtpLoading] = useState(false);
+  const [downloadVerifying, setDownloadVerifying] = useState(false);
 
   useEffect(() => {
     checkUser();
@@ -49,23 +61,41 @@ const Dashboard = () => {
         return;
       }
 
+      setNeedsMfa(false);
+
       // If user has MFA enabled, require AAL2 before showing protected data.
       try {
         const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
         const currentLevel = (data as any)?.currentLevel as string | undefined;
         const nextLevel = (data as any)?.nextLevel as string | undefined;
+
+        setMfaCurrentLevel(currentLevel ?? null);
+        setMfaNextLevel(nextLevel ?? null);
+
         if (currentLevel !== "aal2" && nextLevel === "aal2") {
-          navigate("/mfa", { replace: true, state: { redirectTo: "/dashboard" } });
+          setNeedsMfa(true);
           return;
         }
       } catch {
         // MFA not enabled/available; continue.
       }
 
+      // MFA status (for UX): show whether any factors exist and are verified.
+      try {
+        const { data } = await supabase.auth.mfa.listFactors();
+        const allFactors = [...(data?.totp ?? []), ...(data as any)?.phone ?? []];
+        const verified = (allFactors ?? []).filter((f: any) => f?.status === "verified");
+        setMfaEnabled((allFactors?.length ?? 0) > 0);
+        setMfaVerifiedCount(verified.length);
+      } catch {
+        setMfaEnabled(false);
+        setMfaVerifiedCount(0);
+      }
+
       setUser(user);
 
       // Get user registration data
-      const { data: registration } = await supabase
+      const { data: registration } = await (supabase as any)
         .from("hwid_registrations")
         .select("*")
         .eq("email", user.email)
@@ -73,7 +103,7 @@ const Dashboard = () => {
 
       // Get connection status
       if (registration?.hwid) {
-        const { data: connection } = await supabase
+        const { data: connection } = await (supabase as any)
           .from("client_connections")
           .select("*")
           .eq("hwid", registration.hwid)
@@ -102,8 +132,92 @@ const Dashboard = () => {
     }
   };
 
+  const handleSignOutOtherSessions = async () => {
+    try {
+      // Supabase JS supports scopes in v2; using any to avoid type mismatches in some setups.
+      await (supabase.auth as any).signOut({ scope: "others" });
+      toast({
+        title: t("dashboard.security.sessions.successTitle", { defaultValue: "Sesiones cerradas" }),
+        description: t("dashboard.security.sessions.successDesc", {
+          defaultValue: "Se cerró la sesión en otros dispositivos.",
+        }),
+      });
+    } catch (e: any) {
+      console.error("Sign out others error:", e);
+      toast({
+        title: t("dashboard.error", { defaultValue: "Error" }),
+        description: e?.message || t("dashboard.security.sessions.errorDesc", { defaultValue: "No se pudo cerrar sesiones." }),
+        variant: "destructive",
+      });
+    }
+  };
+
+  const requestDownloadEmailOtp = async () => {
+    setDownloadEmailOtpLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+
+      const { error } = await supabase.functions.invoke("request-download-email-otp");
+      if (error) throw error;
+
+      setDownloadEmailOtpSent(true);
+      toast({
+        title: t("dashboard.software.otpSentTitle", { defaultValue: "Código enviado" }),
+        description: t("dashboard.software.otpSentDesc", { defaultValue: "Revisá tu email e ingresá el código para descargar." }),
+      });
+    } catch (e: any) {
+      console.error("OTP request error:", e);
+      toast({
+        title: t("dashboard.error", { defaultValue: "Error" }),
+        description: e?.message || t("dashboard.software.otpErrorDesc", { defaultValue: "No se pudo enviar el código." }),
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadEmailOtpLoading(false);
+    }
+  };
+
+  const downloadWithEmailOtp = async () => {
+    setDownloadVerifying(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("download-hwid-tool", {
+        body: { emailOtp: downloadEmailOtpValue },
+      });
+
+      if (error) throw error;
+      if (!data?.url) throw new Error("Missing download URL");
+
+      window.open(data.url, "_blank");
+      setDownloadEmailOtpValue("");
+    } catch (e: any) {
+      console.error("Download with email OTP error:", e);
+      toast({
+        title: t("dashboard.error", { defaultValue: "Error" }),
+        description: e?.message || t("dashboard.software.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadVerifying(false);
+    }
+  };
+
   const handleLogout = async () => {
     try {
+      // Limpiar tokens de 2FA
+      localStorage.removeItem('admin_2fa_verified');
+      localStorage.removeItem('admin_2fa_timestamp');
+      localStorage.removeItem('admin_2fa_token');
+      
       await supabase.auth.signOut();
       toast({
         title: t("dashboard.logout.success", { defaultValue: "Sesión cerrada" }),
@@ -123,6 +237,41 @@ const Dashboard = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
         <div className="text-white">{t("dashboard.loading", { defaultValue: "Cargando..." })}</div>
+      </div>
+    );
+  }
+
+  if (needsMfa) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6 flex items-center justify-center">
+        <div className="container mx-auto max-w-md">
+          <Card className="bg-slate-900/50 border-slate-800">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5" />
+                {t("dashboard.mfaRequired.title", { defaultValue: "Verificación 2FA requerida" })}
+              </CardTitle>
+              <CardDescription className="text-slate-400">
+                {t("dashboard.mfaRequired.message", {
+                  defaultValue:
+                    "Para ver tu panel, primero tenés que verificar tu 2FA (nivel AAL2).",
+                })}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button
+                className="w-full"
+                onClick={() => navigate("/mfa", { state: { redirectTo: "/dashboard" } })}
+              >
+                {t("dashboard.mfaRequired.cta", { defaultValue: "Ir a 2FA" })}
+              </Button>
+              <Button variant="outline" className="w-full" onClick={() => navigate("/")}
+              >
+                {t("dashboard.mfaRequired.back", { defaultValue: "Volver" })}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -199,14 +348,59 @@ const Dashboard = () => {
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {t("dashboard.security.description", {
-                  defaultValue: "Activa verificación en dos pasos (2FA) para proteger tu cuenta.",
+                  defaultValue:
+                    "Protegé tu cuenta con 2FA, cerrá sesiones en otros dispositivos y asegurá descargas.",
                 })}
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Button onClick={() => navigate("/mfa")} className="w-full">
-                {t("dashboard.security.mfa", { defaultValue: "Configurar 2FA" })}
-              </Button>
+            <CardContent className="space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <p className="text-sm text-slate-400">
+                    {t("dashboard.security.mfaStatusLabel", { defaultValue: "Estado 2FA" })}
+                  </p>
+                  <p className="text-white font-medium">
+                    {mfaEnabled
+                      ? t("dashboard.security.mfaEnabled", { defaultValue: "Activado" })
+                      : t("dashboard.security.mfaDisabled", { defaultValue: "Desactivado" })}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    {t("dashboard.security.aal", {
+                      defaultValue: "Nivel de sesión: {{current}} (siguiente: {{next}})",
+                      current: mfaCurrentLevel ?? "-",
+                      next: mfaNextLevel ?? "-",
+                    })}
+                  </p>
+                </div>
+                <Badge variant="outline" className="text-slate-200 border-slate-600">
+                  {mfaEnabled
+                    ? t("dashboard.security.mfaFactors", {
+                        defaultValue: "Verificados: {{count}}",
+                        count: mfaVerifiedCount,
+                      })
+                    : t("dashboard.security.mfaNoFactors", { defaultValue: "Sin 2FA" })}
+                </Badge>
+              </div>
+
+              <div className="grid gap-2">
+                <Button onClick={() => navigate("/mfa", { state: { redirectTo: "/dashboard" } })} className="w-full">
+                  {mfaEnabled
+                    ? t("dashboard.security.mfaManage", { defaultValue: "Administrar 2FA" })
+                    : t("dashboard.security.mfaEnable", { defaultValue: "Activar 2FA" })}
+                </Button>
+                <Button onClick={handleSignOutOtherSessions} variant="outline" className="w-full">
+                  {t("dashboard.security.sessions.cta", { defaultValue: "Cerrar sesión en otros dispositivos" })}
+                </Button>
+              </div>
+
+              <div className="rounded-md border border-slate-800 bg-slate-950/30 p-3">
+                <p className="text-xs text-slate-400">
+                  {t("dashboard.security.downloadsNote", {
+                    defaultValue:
+                      "Las descargas se generan con enlaces temporales y pueden requerir 2FA (recomendado). Además, podés recibir un email cuando se genere un enlace.",
+                  })}
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -310,12 +504,87 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <Button 
-                onClick={() => window.open('/downloads/ainside_hwid_tool_premium_v5.exe', '_blank')}
+                onClick={async () => {
+                  try {
+                    const { data: { session } } = await supabase.auth.getSession();
+
+                    if (!session) {
+                      navigate("/login");
+                      return;
+                    }
+
+                    const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+                    if (aalData?.nextLevel === "aal2" && aalData?.currentLevel !== "aal2") {
+                      navigate("/mfa");
+                      return;
+                    }
+
+                    if (aalData?.currentLevel !== "aal2") {
+                      await requestDownloadEmailOtp();
+                      return;
+                    }
+
+                    const { data, error } = await supabase.functions.invoke("download-hwid-tool");
+                    if (error) throw error;
+                    if (!data?.url) throw new Error("Missing download URL");
+
+                    window.open(data.url, "_blank");
+                  } catch (e: any) {
+                    console.error("Download error:", e);
+                    toast({
+                      title: t("dashboard.software.downloadErrorTitle", { defaultValue: "Error" }),
+                      description: e?.message || t("dashboard.software.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+                      variant: "destructive",
+                    });
+                  }
+                }}
                 className="gap-2 bg-blue-600 hover:bg-blue-700"
               >
                 <Download className="h-4 w-4" />
                 {t("dashboard.software.download", { defaultValue: "Descargar para Windows" })}
               </Button>
+
+              {downloadEmailOtpSent && (
+                <div className="mt-4 rounded-md border border-blue-500/20 bg-slate-950/20 p-4 space-y-3">
+                  <div className="space-y-2">
+                    <Label htmlFor="dashboard-download-email-otp" className="text-slate-200">
+                      {t("dashboard.software.otpLabel", { defaultValue: "Código por email" })}
+                    </Label>
+                    <Input
+                      id="dashboard-download-email-otp"
+                      value={downloadEmailOtpValue}
+                      onChange={(e) => setDownloadEmailOtpValue(e.target.value)}
+                      placeholder={t("dashboard.software.otpPlaceholder", { defaultValue: "Ingresá el código de 6 dígitos" })}
+                      className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button
+                      type="button"
+                      onClick={downloadWithEmailOtp}
+                      disabled={downloadVerifying || !downloadEmailOtpValue}
+                      className="flex-1"
+                    >
+                      {downloadVerifying
+                        ? t("dashboard.software.otpVerifying", { defaultValue: "Verificando..." })
+                        : t("dashboard.software.otpDownload", { defaultValue: "Verificar y descargar" })}
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={requestDownloadEmailOtp}
+                      disabled={downloadEmailOtpLoading}
+                      className="flex-1 border-slate-600/40 text-slate-200"
+                    >
+                      {downloadEmailOtpLoading
+                        ? t("dashboard.software.otpResendLoading", { defaultValue: "Enviando..." })
+                        : t("dashboard.software.otpResend", { defaultValue: "Reenviar código" })}
+                    </Button>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

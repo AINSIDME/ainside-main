@@ -21,9 +21,14 @@ import {
 
 interface ClientConnection {
   id: string;
+  order_id?: string;
   email: string;
   name: string;
   hwid: string;
+  registration_status?: 'active' | 'inactive' | 'transferred' | string;
+  registered_at?: string;
+  updated_at?: string;
+  notes?: string | null;
   plan_name: string;
   status: 'online' | 'offline';
   last_seen: string;
@@ -36,10 +41,23 @@ const AdminControl = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [clients, setClients] = useState<ClientConnection[]>([]);
+  const [meta, setMeta] = useState<null | {
+    registrationsCount: number;
+    connectionsCount: number;
+    purchasesCount: number;
+  }>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [accessGate, setAccessGate] = useState<
+    | null
+    | 'login-required'
+    | 'admin-required'
+    | '2fa-required'
+    | '2fa-expired'
+    | 'error'
+  >(null);
 
   // Lista de emails autorizados como administradores
   const adminEmails = useMemo(() => {
@@ -53,7 +71,7 @@ const AdminControl = () => {
     return ['jonathangolubok@gmail.com'];
   }, []);
 
-  const get2FAToken = useCallback(() => sessionStorage.getItem('admin_2fa_token') || '', []);
+  const get2FAToken = useCallback(() => localStorage.getItem('admin_2fa_token') || '', []);
 
   // Verificar autenticación y rol de administrador
   useEffect(() => {
@@ -62,12 +80,8 @@ const AdminControl = () => {
         const { data: { user } } = await supabase.auth.getUser();
         
         if (!user) {
-          toast({
-            title: "Acceso Denegado",
-            description: "Debes iniciar sesión para acceder al panel de administración",
-            variant: "destructive"
-          });
-          navigate('/login', { replace: true, state: { redirectTo: '/admin/control' } as any });
+          setIsAdmin(false);
+          setAccessGate('login-required');
           return;
         }
 
@@ -75,47 +89,42 @@ const AdminControl = () => {
         const email = (user.email || '').toLowerCase();
         if (!adminEmails.includes(email)) {
           await supabase.auth.signOut();
-          toast({
-            title: "Acceso Denegado",
-            description: "Inicia sesión con la cuenta de administrador",
-            variant: "destructive"
-          });
-          navigate('/login', { replace: true, state: { redirectTo: '/admin/control' } as any });
+          setIsAdmin(false);
+          setAccessGate('admin-required');
           return;
         }
 
         // VERIFICACIÓN 2FA OBLIGATORIA
-        const session2FA = sessionStorage.getItem('admin_2fa_verified');
-        const timestamp = sessionStorage.getItem('admin_2fa_timestamp');
+        const session2FA = localStorage.getItem('admin_2fa_verified');
+        const timestamp = localStorage.getItem('admin_2fa_timestamp');
         const token = get2FAToken();
         
-        // Verificar si la sesión 2FA sigue válida (1 hora máximo)
+        // Verificar si la sesión 2FA sigue válida (12 horas)
         if (!session2FA || !timestamp || !token) {
-          navigate('/admin/verify-2fa', { replace: true });
+          setIsAdmin(false);
+          setAccessGate('2fa-required');
           return;
         }
 
-        const oneHourInMs = 60 * 60 * 1000;
+        const twelveHoursInMs = 12 * 60 * 60 * 1000; // 12 horas
         const sessionAge = Date.now() - parseInt(timestamp);
         
-        if (sessionAge > oneHourInMs) {
+        if (sessionAge > twelveHoursInMs) {
           // Sesión 2FA expirada
-          sessionStorage.removeItem('admin_2fa_verified');
-          sessionStorage.removeItem('admin_2fa_timestamp');
-          sessionStorage.removeItem('admin_2fa_token');
-          toast({
-            title: "Sesión Expirada",
-            description: "Tu sesión de verificación 2FA ha expirado. Verifica nuevamente.",
-            variant: "destructive"
-          });
-          navigate('/admin/verify-2fa', { replace: true });
+          localStorage.removeItem('admin_2fa_verified');
+          localStorage.removeItem('admin_2fa_timestamp');
+          localStorage.removeItem('admin_2fa_token');
+          setIsAdmin(false);
+          setAccessGate('2fa-expired');
           return;
         }
 
         setIsAdmin(true);
+        setAccessGate(null);
       } catch (error) {
         console.error('Error checking admin access:', error);
-        navigate('/login');
+        setIsAdmin(false);
+        setAccessGate('error');
       } finally {
         setIsCheckingAuth(false);
       }
@@ -127,18 +136,36 @@ const AdminControl = () => {
   // Fetch clients data
   const fetchClients = useCallback(async () => {
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
       const { data, error } = await supabase.functions.invoke('get-clients-status', {
-        headers: { 'x-admin-2fa-token': get2FAToken() }
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        }
       });
       
       if (error) throw error;
+
+      if ((data as any)?.error) {
+        setClients([]);
+        setMeta((data as any)?.meta ?? null);
+        toast({
+          title: "Error",
+          description: String((data as any).error),
+          variant: "destructive",
+        });
+        return;
+      }
       
       setClients(data.clients || []);
+      setMeta((data as any)?.meta ?? null);
     } catch (error) {
       console.error('Error fetching clients:', error);
       toast({
         title: "Error",
-        description: "No se pudo cargar la lista de clientes",
+        description: (error as any)?.message || "No se pudo cargar la lista de clientes",
         variant: "destructive"
       });
     } finally {
@@ -149,13 +176,19 @@ const AdminControl = () => {
   // Toggle strategy for a client
   const toggleStrategy = useCallback(async (clientId: string, strategy: string, enable: boolean) => {
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
       const { error } = await supabase.functions.invoke('toggle-strategy', {
         body: {
           clientId,
           strategy,
           enable
         },
-        headers: { 'x-admin-2fa-token': get2FAToken() }
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        }
       });
 
       if (error) throw error;
@@ -179,12 +212,18 @@ const AdminControl = () => {
   // Change client plan
   const changePlan = useCallback(async (clientId: string, newPlan: string) => {
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
       const { error } = await supabase.functions.invoke('change-client-plan', {
         body: {
           clientId,
           planName: newPlan
         },
-        headers: { 'x-admin-2fa-token': get2FAToken() }
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        }
       });
 
       if (error) throw error;
@@ -207,16 +246,18 @@ const AdminControl = () => {
 
   // Auto-refresh every 10 seconds
   useEffect(() => {
+    if (!isAdmin) return;
+
     fetchClients();
-    
+
     if (autoRefresh) {
       const interval = setInterval(() => {
         fetchClients();
       }, 10000);
-      
+
       return () => clearInterval(interval);
     }
-  }, [autoRefresh, fetchClients]);
+  }, [autoRefresh, fetchClients, isAdmin]);
 
   const getStatusColor = (status: string) => {
     return status === 'online' ? 'bg-green-500' : 'bg-gray-500';
@@ -248,9 +289,76 @@ const AdminControl = () => {
     );
   }
 
-  // Si no es admin, no mostrar nada (ya se redirigió)
   if (!isAdmin) {
-    return null;
+    const title =
+      accessGate === 'login-required'
+        ? t('admin.access.loginRequired.title', { defaultValue: 'Iniciar sesión requerido' })
+        : accessGate === 'admin-required'
+          ? t('admin.access.adminRequired.title', { defaultValue: 'Acceso restringido' })
+          : accessGate === '2fa-required'
+            ? t('admin.access.2faRequired.title', { defaultValue: 'Verificación 2FA requerida' })
+            : accessGate === '2fa-expired'
+              ? t('admin.access.2faExpired.title', { defaultValue: 'Sesión 2FA expirada' })
+              : t('admin.access.error.title', { defaultValue: 'No se pudo validar el acceso' });
+
+    const message =
+      accessGate === 'login-required'
+        ? t('admin.access.loginRequired.message', {
+            defaultValue: 'Debes iniciar sesión para acceder al panel de administración.',
+          })
+        : accessGate === 'admin-required'
+          ? t('admin.access.adminRequired.message', {
+              defaultValue: 'Necesitas iniciar sesión con una cuenta de administrador autorizada.',
+            })
+          : accessGate === '2fa-required'
+            ? t('admin.access.2faRequired.message', {
+                defaultValue: 'Para continuar, completa la verificación 2FA de administrador.',
+              })
+            : accessGate === '2fa-expired'
+              ? t('admin.access.2faExpired.message', {
+                  defaultValue: 'Tu sesión de verificación 2FA expiró. Verifica nuevamente.',
+                })
+              : t('admin.access.error.message', {
+                  defaultValue: 'Ocurrió un error al validar tu sesión. Intenta nuevamente.',
+                });
+
+    const primaryCtaLabel =
+      accessGate === '2fa-required' || accessGate === '2fa-expired'
+        ? t('admin.access.cta.verify2fa', { defaultValue: 'Verificar 2FA' })
+        : t('admin.access.cta.login', { defaultValue: 'Ir a iniciar sesión' });
+
+    const primaryCtaAction = () => {
+      if (accessGate === '2fa-required' || accessGate === '2fa-expired') {
+        navigate('/admin/verify-2fa', { replace: true });
+        return;
+      }
+      navigate('/login', { state: { redirectTo: '/admin/control' } as any });
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6 flex items-center justify-center">
+        <div className="container mx-auto max-w-md">
+          <Card className="bg-slate-900/50 border-slate-800">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <ShieldAlert className="h-5 w-5" />
+                {title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-slate-300 text-sm">{message}</p>
+              <Button className="w-full" onClick={primaryCtaAction}>
+                {primaryCtaLabel}
+              </Button>
+              <Button variant="outline" className="w-full" onClick={() => navigate('/')}
+              >
+                {t('admin.access.cta.back', { defaultValue: 'Volver' })}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -351,7 +459,14 @@ const AdminControl = () => {
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-8 text-center text-slate-400">
                 <Users className="h-8 w-8 mx-auto mb-3 opacity-50" />
-                No hay clientes registrados
+                <div>No hay clientes registrados</div>
+                {meta ? (
+                  <div className="mt-3 text-xs text-slate-500 space-y-1">
+                    <div>Registros HWID: {meta.registrationsCount}</div>
+                    <div>Conexiones: {meta.connectionsCount}</div>
+                    <div>Compras: {meta.purchasesCount}</div>
+                  </div>
+                ) : null}
               </CardContent>
             </Card>
           ) : (
@@ -374,9 +489,27 @@ const AdminControl = () => {
                         <h3 className="text-xl font-bold text-white mb-1">{client.name}</h3>
                         <p className="text-sm text-slate-400 mb-2">{client.email}</p>
                         <div className="flex gap-2 flex-wrap">
+                          {client.order_id ? (
+                            <Badge variant="outline" className="text-xs">
+                              Order ID: {client.order_id}
+                            </Badge>
+                          ) : null}
                           <Badge variant="outline" className="text-xs">
                             HWID: {client.hwid.substring(0, 16)}...
                           </Badge>
+                          {client.registration_status ? (
+                            <Badge
+                              className={`text-xs ${
+                                client.registration_status === 'active'
+                                  ? 'bg-green-600'
+                                  : client.registration_status === 'inactive'
+                                    ? 'bg-gray-600'
+                                    : 'bg-yellow-600'
+                              }`}
+                            >
+                              Registro: {client.registration_status}
+                            </Badge>
+                          ) : null}
                           <Badge className="text-xs bg-blue-600">
                             {client.plan_name}
                           </Badge>
@@ -392,6 +525,21 @@ const AdminControl = () => {
                             </Badge>
                           )}
                         </div>
+
+                        {(client.registered_at || client.notes) ? (
+                          <div className="mt-3 text-xs text-slate-400 space-y-1">
+                            {client.registered_at ? (
+                              <div>
+                                Registrado: {new Date(client.registered_at).toLocaleString()}
+                              </div>
+                            ) : null}
+                            {client.notes ? (
+                              <div>
+                                Notas: {client.notes}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 

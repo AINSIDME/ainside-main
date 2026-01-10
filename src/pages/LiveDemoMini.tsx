@@ -153,7 +153,7 @@ const LiveDemoMini = () => {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white font-medium text-sm shadow-lg">
                 A
               </div>
-              <span className="text-slate-100">{t('nav.liveDemoMini')}</span>
+              <span className="text-slate-100">{t('nav.liveChat')}</span>
             </div>
             <div className="flex items-center gap-2" aria-live="polite">
               <div className={`w-2 h-2 rounded-full ${
@@ -180,7 +180,7 @@ const LiveDemoMini = () => {
                 autoPlay
                 muted
                 playsInline
-                aria-label={`${t('header.brand')} ${t('nav.liveDemoMini')}`}
+                aria-label={`${t('header.brand')} ${t('nav.liveChat')}`}
               />
             </div>
           </div>
@@ -231,7 +231,7 @@ const LiveDemoMini = () => {
               </div>
               
               <div className="text-xs text-slate-400 hidden md:block font-light">
-                {t('header.brand')} — {t('nav.liveDemoMini')}
+                {t('header.brand')} — {t('nav.liveChat')}
               </div>
             </div>
           </div>

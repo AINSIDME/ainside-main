@@ -1,12 +1,7 @@
 // @ts-nocheck
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-admin-2fa-token",
-};
+import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
 
 function getAdminEmailAllowlist(): string[] {
   const raw = Deno.env.get('ADMIN_EMAILS') ?? '';
@@ -64,12 +59,22 @@ async function requireAdmin2FA(req: Request) {
 }
 
 serve(async (req) => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return handleCorsPreflightRequest(req);
   }
 
   try {
     const { supabaseAdmin: supabase } = await requireAdmin2FA(req);
+
+    // Meta counts for diagnostics (admin-only)
+    const [{ count: registrationsCount }, { count: connectionsCount }, { count: purchasesCount }] = await Promise.all([
+      supabase.from("hwid_registrations").select("id", { count: "exact", head: true }),
+      supabase.from("client_connections").select("id", { count: "exact", head: true }),
+      supabase.from("purchases").select("id", { count: "exact", head: true }),
+    ]);
 
     // Get all registered clients with their status
     const { data: registrations, error: regError } = await supabase
@@ -98,9 +103,14 @@ serve(async (req) => {
 
       return {
         id: reg.id,
+        order_id: reg.order_id,
         email: reg.email,
         name: reg.name,
         hwid: reg.hwid,
+        registration_status: reg.status,
+        registered_at: reg.created_at,
+        updated_at: reg.updated_at,
+        notes: reg.notes,
         plan_name: conn?.plan_name || "Basic",
         status,
         last_seen: lastSeen,
@@ -116,18 +126,26 @@ serve(async (req) => {
     });
 
     return new Response(
-      JSON.stringify({ clients }),
+      JSON.stringify({
+        clients,
+        meta: {
+          registrationsCount: registrationsCount ?? 0,
+          connectionsCount: connectionsCount ?? 0,
+          purchasesCount: purchasesCount ?? 0,
+        },
+      }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       }
     );
   } catch (error) {
+    const message = (error as Error)?.message ?? 'Unknown error';
     return new Response(
-      JSON.stringify({ error: (error as Error).message ?? 'Unknown error' }),
+      JSON.stringify({ clients: [], error: message, meta: null }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 400,
+        status: 200,
       }
     );
   }

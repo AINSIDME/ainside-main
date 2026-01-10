@@ -70,15 +70,15 @@ Genera un secreto fuerte (BASE32) para tu cuenta admin:
 
 ```powershell
 cd C:\Users\jonat\Downloads\ainside-main\ainside-main
-node .\scripts\generate-admin-totp.mjs jonathangolubok@gmail.com AInside
+node .\scripts\generate-admin-totp.mjs jonathangolubok@gmail.com AInside --out .\admin-2fa-qr.png --jsonOut .\admin-2fa-secret.json --quiet
 ```
 
-El script imprime:
+El script genera archivos locales:
 
-- `BASE32 Secret`
-- `OTPAuth URI`
-- un `QR URL` (para escanear desde el teléfono)
-- y el `ADMIN_2FA_SECRETS_JSON` listo para pegar.
+- `admin-2fa-qr.png` (QR para escanear con Google Authenticator)
+- `admin-2fa-secret.json` (contiene el `ADMIN_2FA_SECRETS_JSON` listo para usar)
+
+Luego, abre `admin-2fa-qr.png` y escanéalo con Google Authenticator.
 
 ## ✅ Paso 3.2 — Setear secrets con CLI (opcional, recomendado)
 
@@ -86,7 +86,9 @@ Si tienes Supabase CLI logueado y el proyecto linkeado, puedes setear secrets as
 
 ```powershell
 supabase secrets set ADMIN_EMAILS="jonathangolubok@gmail.com"
-supabase secrets set ADMIN_2FA_SECRETS_JSON="{\"jonathangolubok@gmail.com\":\"BASE32_SECRET_1\"}"
+# Cargar el JSON desde archivo para no copiar el secret a mano
+$json = Get-Content .\admin-2fa-secret.json -Raw
+supabase secrets set "ADMIN_2FA_SECRETS_JSON=$json"
 ```
 
 Luego redeploy:
@@ -172,12 +174,8 @@ Si pierdes acceso a Google Authenticator:
 
 ## 📱 Generar Código QR Personalizado
 
-Para cada administrador, genera su QR:
+Usa el script local para generar un PNG escaneable (evita depender de servicios externos):
 
+```powershell
+node .\scripts\generate-admin-totp.mjs [EMAIL] AInside --out .\admin-2fa-qr.png --jsonOut .\admin-2fa-secret.json --quiet
 ```
-https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/AInside:[EMAIL]?secret=[SECRET]&issuer=AInside
-```
-
-Reemplaza:
-- `[EMAIL]` con el email del admin
-- `[SECRET]` con su secreto único

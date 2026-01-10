@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, CheckCircle, Copy, Info, Shield, LogIn } from "lucide-react";
+import { LoginCard } from "./Login";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -18,6 +19,10 @@ const Register = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [downloadEmailOtpSent, setDownloadEmailOtpSent] = useState(false);
+  const [downloadEmailOtpValue, setDownloadEmailOtpValue] = useState("");
+  const [downloadEmailOtpLoading, setDownloadEmailOtpLoading] = useState(false);
+  const [downloadVerifying, setDownloadVerifying] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,12 +48,22 @@ const Register = () => {
     setIsSubmitting(true);
 
     try {
-      // Validate all fields
-      if (!formData.name || !formData.email || !formData.orderId || !formData.hwid) {
+      // Validate fields
+      if (!formData.orderId || !formData.hwid) {
         toast({
           title: t("registerPage.form.toast.errorTitle", { defaultValue: "Missing Information" }),
-          description: t("registerPage.form.toast.errorMissing", { defaultValue: "Please fill in all fields" }),
+          description: t("registerPage.form.toast.errorMissing", { defaultValue: "Please fill in Order ID and HWID" }),
           variant: "destructive"
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.email && !formData.name) {
+        toast({
+          title: t("registerPage.form.toast.errorTitle", { defaultValue: "Missing Information" }),
+          description: t("registerPage.form.toast.errorMissingNameOrEmail", { defaultValue: "Please provide your name or email." }),
+          variant: "destructive",
         });
         setIsSubmitting(false);
         return;
@@ -69,15 +84,21 @@ const Register = () => {
 
       toast({
         title: t("registerPage.form.toast.successTitle", { defaultValue: "Registration Successful" }),
-        description: t("registerPage.form.toast.successDesc", { defaultValue: "Your HWID has been registered successfully" }),
+        description: data?.alreadyRegistered
+          ? t("registerPage.form.toast.successAlready", { defaultValue: "This order was already registered." })
+          : t("registerPage.form.toast.successDesc", { defaultValue: "Your HWID has been registered successfully" }),
       });
       
       setIsRegistered(true);
     } catch (error: any) {
       console.error('Error registering HWID:', error);
+      const backendMessage =
+        error?.context?.body?.error ||
+        error?.context?.body?.message ||
+        error?.message;
       toast({
         title: t("registerPage.form.toast.errorTitle", { defaultValue: "Error" }),
-        description: error.message || t("registerPage.form.toast.errorDesc", { defaultValue: "Failed to register HWID. Please contact support." }),
+        description: backendMessage || t("registerPage.form.toast.errorDesc", { defaultValue: "Failed to register HWID. Please contact support." }),
         variant: "destructive"
       });
     } finally {
@@ -90,6 +111,65 @@ const Register = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const requestDownloadEmailOtp = async () => {
+    setDownloadEmailOtpLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+
+      const { error } = await supabase.functions.invoke("request-download-email-otp");
+      if (error) throw error;
+
+      setDownloadEmailOtpSent(true);
+      toast({
+        title: t("registerPage.downloadSoftware.otpSentTitle", { defaultValue: "Código enviado" }),
+        description: t("registerPage.downloadSoftware.otpSentDesc", { defaultValue: "Revisá tu email e ingresá el código para descargar." }),
+      });
+    } catch (e: any) {
+      console.error("OTP request error:", e);
+      const message = e?.message || "No se pudo enviar el código.";
+      toast({
+        title: t("registerPage.downloadSoftware.otpErrorTitle", { defaultValue: "Error" }),
+        description: message,
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadEmailOtpLoading(false);
+    }
+  };
+
+  const downloadWithEmailOtp = async () => {
+    setDownloadVerifying(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("download-hwid-tool", {
+        body: { emailOtp: downloadEmailOtpValue },
+      });
+      if (error) throw error;
+      if (!data?.url) throw new Error("Missing download URL");
+
+      window.open(data.url, "_blank");
+      setDownloadEmailOtpValue("");
+    } catch (e: any) {
+      console.error("Download with email OTP error:", e);
+      toast({
+        title: t("registerPage.downloadSoftware.downloadErrorTitle", { defaultValue: "Error" }),
+        description: e?.message || t("registerPage.downloadSoftware.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadVerifying(false);
+    }
   };
 
   return (
@@ -119,35 +199,20 @@ const Register = () => {
         {/* Download Software Section */}
         <section className="py-12 px-4">
           <div className="container mx-auto max-w-4xl">
-            {/* Authentication Section - Show only if not authenticated */}
+            {/* Login window at the top (same UI as /login) */}
             {!isAuthenticated && (
-              <Card className="border-blue-500/30 bg-slate-900/50 backdrop-blur-md shadow-2xl mb-8">
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-3 text-2xl text-slate-100">
-                    <LogIn className="w-7 h-7 text-blue-400" />
-                    {t("registerPage.auth.title", { defaultValue: "Create Your Account First" })}
-                  </CardTitle>
-                  <CardDescription className="text-slate-300 text-base">
-                    {t("registerPage.auth.description", { defaultValue: "Create an account or login to register your HWID and access your personal dashboard" })}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button
-                      onClick={() => navigate('/login')}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-6 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-blue-500/25 text-base"
-                    >
-                      <LogIn className="w-5 h-5" />
-                      {t("registerPage.auth.loginButton", { defaultValue: "Login to Existing Account" })}
-                    </Button>
-                  </div>
-                  <div className="bg-blue-500/10 border border-blue-500/30 p-5 rounded-lg backdrop-blur-sm">
-                    <p className="text-sm text-slate-300">
-                      <strong className="text-blue-200">{t("registerPage.auth.note", { defaultValue: "Note:" })}</strong> {t("registerPage.auth.noteText", { defaultValue: "You need to create an account or login before registering your HWID. After authentication, you can download the software and complete the HWID registration." })}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="max-w-md mx-auto mb-10">
+                <LoginCard redirectTo="/register" />
+                <div className="mt-4 bg-blue-500/10 border border-blue-500/30 p-5 rounded-lg backdrop-blur-sm">
+                  <p className="text-sm text-slate-300">
+                    <strong className="text-blue-200">{t("registerPage.auth.note", { defaultValue: "Note:" })}</strong>{" "}
+                    {t("registerPage.auth.noteText", {
+                      defaultValue:
+                        "You need to create an account or login before registering your HWID. After authentication, you can download the software and complete the HWID registration.",
+                    })}
+                  </p>
+                </div>
+              </div>
             )}
 
             {/* Show Download Software only if authenticated */}
@@ -167,7 +232,40 @@ const Register = () => {
               <CardContent className="space-y-5">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
-                    onClick={() => window.open('/downloads/ainside_hwid_tool_premium_v5.exe', '_blank')}
+                    onClick={async () => {
+                      try {
+                        const { data: { session } } = await supabase.auth.getSession();
+
+                        if (!session) {
+                          navigate("/login");
+                          return;
+                        }
+
+                        const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+                        if (aalData?.nextLevel === "aal2" && aalData?.currentLevel !== "aal2") {
+                          navigate("/mfa");
+                          return;
+                        }
+
+                        if (aalData?.currentLevel !== "aal2") {
+                          await requestDownloadEmailOtp();
+                          return;
+                        }
+
+                        const { data, error } = await supabase.functions.invoke("download-hwid-tool");
+                        if (error) throw error;
+                        if (!data?.url) throw new Error("Missing download URL");
+
+                        window.open(data.url, "_blank");
+                      } catch (e: any) {
+                        console.error("Download error:", e);
+                        toast({
+                          title: t("registerPage.downloadSoftware.downloadErrorTitle", { defaultValue: "Error" }),
+                          description: e?.message || t("registerPage.downloadSoftware.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+                          variant: "destructive",
+                        });
+                      }
+                    }}
                     className="flex-1 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-6 px-8 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-blue-500/25 text-base"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,6 +284,48 @@ const Register = () => {
                     {t("registerPage.downloadSoftware.viewSource", { defaultValue: "View Source" })}
                   </Button>
                 </div>
+
+                {downloadEmailOtpSent && (
+                  <div className="rounded-xl border border-slate-600/40 bg-slate-950/20 p-4 space-y-3">
+                    <div className="space-y-2">
+                      <Label htmlFor="download-email-otp" className="text-slate-200">
+                        {t("registerPage.downloadSoftware.otpLabel", { defaultValue: "Código por email" })}
+                      </Label>
+                      <Input
+                        id="download-email-otp"
+                        value={downloadEmailOtpValue}
+                        onChange={(e) => setDownloadEmailOtpValue(e.target.value)}
+                        placeholder={t("registerPage.downloadSoftware.otpPlaceholder", { defaultValue: "Ingresá el código de 6 dígitos" })}
+                        className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400"
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                      />
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button
+                        type="button"
+                        onClick={downloadWithEmailOtp}
+                        disabled={downloadVerifying || !downloadEmailOtpValue}
+                        className="flex-1"
+                      >
+                        {downloadVerifying
+                          ? t("registerPage.downloadSoftware.otpVerifying", { defaultValue: "Verificando..." })
+                          : t("registerPage.downloadSoftware.otpDownload", { defaultValue: "Verificar y descargar" })}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={requestDownloadEmailOtp}
+                        disabled={downloadEmailOtpLoading}
+                        className="flex-1 border-slate-600/40 text-slate-200"
+                      >
+                        {downloadEmailOtpLoading
+                          ? t("registerPage.downloadSoftware.otpResendLoading", { defaultValue: "Enviando..." })
+                          : t("registerPage.downloadSoftware.otpResend", { defaultValue: "Reenviar código" })}
+                      </Button>
+                    </div>
+                  </div>
+                )}
                 <div className="bg-blue-500/10 border border-blue-500/30 p-5 rounded-xl backdrop-blur-sm">
                   <p className="text-sm font-medium mb-3 text-blue-200">
                     {t("registerPage.downloadSoftware.features.title", { defaultValue: "Features:" })}
