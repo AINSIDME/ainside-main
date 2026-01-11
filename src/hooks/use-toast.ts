@@ -6,13 +6,19 @@ import type {
 } from "@/components/ui/toast"
 
 const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 1000000
+// How long a dismissed toast stays in state before removal.
+// Keep this short so closed toasts don't linger.
+const TOAST_REMOVE_DELAY = 1000
+
+// Default time a toast stays visible before auto-dismissing.
+const DEFAULT_TOAST_DURATION = 5000
 
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  duration?: number
 }
 
 const actionTypes = {
@@ -160,6 +166,14 @@ function toast({ ...props }: Toast) {
       },
     },
   })
+
+  // Auto-dismiss after duration (ms). If not provided, use default.
+  const duration = typeof (props as any)?.duration === "number" ? (props as any).duration : DEFAULT_TOAST_DURATION
+  if (duration > 0) {
+    setTimeout(() => {
+      dismiss()
+    }, duration)
+  }
 
   return {
     id: id,
