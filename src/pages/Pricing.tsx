@@ -464,7 +464,10 @@ export default function Pricing() {
           <Card className="h-full flex flex-col justify-between rounded-xl border border-slate-800 bg-slate-950">
             <CardHeader className="pb-2">
               <CardTitle className="text-slate-100 text-xl">
-                {t("pricing.micro.name", { defaultValue: "Contrato Micro" })}
+                {t("pricing.micro.name", { 
+                  defaultValue: "Contrato Micro {{instrument}}",
+                  instrument: currentInstrument.name
+                })}
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {t("pricing.micro.description", { 
@@ -523,7 +526,10 @@ export default function Pricing() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-slate-100 text-xl">
-                    {t("pricing.mini.name", { defaultValue: "Contrato Mini" })}
+                    {t("pricing.mini.name", { 
+                      defaultValue: "Contrato Mini {{instrument}}",
+                      instrument: currentInstrument.name
+                    })}
                   </CardTitle>
                   <CardDescription className="text-slate-400">
                     {t("pricing.mini.description", { 
