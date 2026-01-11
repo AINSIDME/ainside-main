@@ -40,7 +40,7 @@ export default function Pricing() {
     if (!couponCode.trim()) {
       toast({
         title: t("pricing.coupon.error", { defaultValue: "Error" }),
-        description: t("pricing.coupon.enterCode", { defaultValue: "Ingrese un código de cupón" }),
+        description: t("pricing.coupon.enterCode", { defaultValue: "Please enter a coupon code" }),
         variant: "destructive",
       });
       return;
@@ -60,9 +60,9 @@ export default function Pricing() {
 
       if (data.valid) {
         toast({
-          title: t("pricing.coupon.success", { defaultValue: "¡Cupón aplicado!" }),
+          title: t("pricing.coupon.success", { defaultValue: "Coupon applied!" }),
           description: t("pricing.coupon.successDesc", {
-            defaultValue: "Descuento del {{percent}}% por {{months}} meses",
+            defaultValue: "{{percent}}% discount applied for {{months}} months",
             percent: data.discount_percent,
             months: data.duration_months
           }),
@@ -71,8 +71,8 @@ export default function Pricing() {
         setIntro(false);
       } else {
         toast({
-          title: t("pricing.coupon.invalid", { defaultValue: "Cupón inválido" }),
-          description: data.message || t("pricing.coupon.invalidDesc", { defaultValue: "El cupón no es válido" }),
+          title: t("pricing.coupon.invalid", { defaultValue: "Invalid coupon" }),
+          description: data.message || t("pricing.coupon.invalidDesc", { defaultValue: "The coupon is not valid" }),
           variant: "destructive",
         });
       }
@@ -80,7 +80,7 @@ export default function Pricing() {
       console.error('Error validating coupon:', error);
       toast({
         title: t("pricing.coupon.error", { defaultValue: "Error" }),
-        description: t("pricing.coupon.errorDesc", { defaultValue: "No se pudo validar el cupón" }),
+        description: t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" }),
         variant: "destructive",
       });
     } finally {
@@ -252,7 +252,7 @@ export default function Pricing() {
         console.error("create-payment error", data);
         toast({
           title: t("pricing.error", { defaultValue: "Error" }),
-          description: `${t("pricing.errorDesc", { defaultValue: "No se pudo procesar el pago." })} ${(data as any)?.details ?? JSON.stringify(data)}`,
+          description: `${t("pricing.errorDesc", { defaultValue: "Could not process payment." })} ${(data as any)?.details ?? JSON.stringify(data)}`,
           variant: "destructive",
         });
         return;
@@ -263,7 +263,7 @@ export default function Pricing() {
       } else {
         toast({
           title: t("pricing.error", { defaultValue: "Error" }),
-          description: `${t("pricing.errorDesc", { defaultValue: "No se pudo obtener la URL de aprobación." })} ${(data as any)?.details ?? JSON.stringify(data)}`,
+          description: `${t("pricing.errorDesc", { defaultValue: "Could not get approval URL." })} ${(data as any)?.details ?? JSON.stringify(data)}`,
           variant: "destructive",
         });
       }
@@ -271,7 +271,7 @@ export default function Pricing() {
       console.error(e);
       toast({
         title: t("pricing.error", { defaultValue: "Error" }),
-        description: t("pricing.errorDesc", { defaultValue: "No se pudo procesar el pago." }),
+        description: t("pricing.errorDesc", { defaultValue: "Could not process payment." }),
         variant: "destructive",
       });
     } finally {
@@ -284,18 +284,18 @@ export default function Pricing() {
     const symbol = currentInstrument.symbolByPlan[plan];
     return [
       t("pricing.feature.instrument", {
-        defaultValue: "Instrumento: {{instrument}} ({{symbol}})",
+        defaultValue: "Instrument: {{instrument}} ({{symbol}})",
         instrument: currentInstrument.name,
         symbol,
       }),
       t("pricing.feature.focusInstrument", {
-        defaultValue: "Enfoque exclusivo en {{instrument}}",
+        defaultValue: "Exclusive focus on {{instrument}}",
         instrument: currentInstrument.name,
       }),
-      t("pricing.feature.liveSupport",   { defaultValue: "Soporte internacional por chat 24/6" }),
-      t("pricing.feature.secure",        { defaultValue: "Checkout seguro con PayPal" }),
-      t("pricing.feature.updatesMonthly",{ defaultValue: "Actualizaciones mensuales incluidas" }),
-      t("pricing.feature.noGuarantees",  { defaultValue: "Sin compromiso de resultados" }),
+      t("pricing.feature.liveSupport",   { defaultValue: "Email support: support@ainside.me" }),
+      t("pricing.feature.secure",        { defaultValue: "Secure checkout with PayPal" }),
+      t("pricing.feature.updatesMonthly",{ defaultValue: "Monthly updates included" }),
+      t("pricing.feature.noGuarantees",  { defaultValue: "No performance guarantees" }),
     ];
   };
 
@@ -308,7 +308,7 @@ export default function Pricing() {
           {/* Toggle Mensual/Anual (segmentado, formal) */}
           <div className="rounded-xl border border-slate-800 bg-slate-950 p-5">
             <h3 className="text-slate-200 font-medium mb-3">
-              {t("pricing.billingCycle", { defaultValue: "Ciclo de Facturación" })}
+              {t("pricing.billingCycle", { defaultValue: "Billing Cycle" })}
             </h3>
             <div className="inline-flex rounded-lg border border-slate-700 overflow-hidden">
               <button
@@ -319,7 +319,7 @@ export default function Pricing() {
                     ? "bg-slate-800 text-white"
                     : "text-slate-300 hover:bg-slate-900"}`}
               >
-                {t("pricing.monthly", { defaultValue: "Mensual" })}
+                {t("pricing.monthly", { defaultValue: "Monthly" })}
               </button>
               <button
                 onClick={() => setBilling("annual")}
@@ -329,17 +329,17 @@ export default function Pricing() {
                     ? "bg-slate-800 text-white"
                     : "text-slate-300 hover:bg-slate-900"}`}
               >
-                {t("pricing.annual", { defaultValue: "Anual" })}
+                {t("pricing.annual", { defaultValue: "Annual" })}
                 <span className="ml-2">
                   <Badge className="bg-emerald-700 text-white border-0">
-                    {t("pricing.save", { defaultValue: "Pagá 10, Usá 12" })}
+                    {t("pricing.save", { defaultValue: "Pay 10, Use 12" })}
                   </Badge>
                 </span>
               </button>
             </div>
             <p className="text-xs text-slate-400 mt-2">
               {t("pricing.renews", {
-                defaultValue: "Renovación automática. Podés cancelar cuando quieras.",
+                defaultValue: "Auto-renews. You can cancel anytime.",
               })}
             </p>
           </div>
@@ -347,7 +347,7 @@ export default function Pricing() {
           {/* Selector de Instrumento (radio formal) */}
           <div className="rounded-xl border border-slate-800 bg-slate-950 p-5">
             <h3 className="text-slate-200 font-medium mb-3">
-              {t("pricing.chooseInstrument", { defaultValue: "Elegí Instrumento" })}
+              {t("pricing.chooseInstrument", { defaultValue: "Choose Instrument" })}
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {(["sp500", "gold"] as Instrument[]).map((key) => {
@@ -391,11 +391,11 @@ export default function Pricing() {
             <CardHeader>
               <CardTitle className="text-slate-100 text-lg flex items-center gap-2">
                 <Shield className="h-5 w-5 text-blue-400" />
-                {t("pricing.coupon.title", { defaultValue: "¿Tenés un cupón de descuento?" })}
+                {t("pricing.coupon.title", { defaultValue: "Have a discount coupon?" })}
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {t("pricing.coupon.description", { 
-                  defaultValue: "Ingresá tu código para aplicar el descuento correspondiente" 
+                  defaultValue: "Enter your code to apply the corresponding discount" 
                 })}
               </CardDescription>
             </CardHeader>
@@ -417,8 +417,8 @@ export default function Pricing() {
                     className="bg-blue-600 hover:bg-blue-700 text-white"
                   >
                     {validatingCoupon 
-                      ? t("pricing.coupon.validating", { defaultValue: "Validando..." })
-                      : t("pricing.coupon.apply", { defaultValue: "Aplicar" })
+                      ? t("pricing.coupon.validating", { defaultValue: "Validating..." })
+                      : t("pricing.coupon.apply", { defaultValue: "Apply" })
                     }
                   </Button>
                 </div>
@@ -431,7 +431,7 @@ export default function Pricing() {
                     </div>
                     <p className="text-sm text-green-300">
                       {t("pricing.coupon.applied", {
-                        defaultValue: "Descuento del {{percent}}% aplicado por {{months}} meses",
+                        defaultValue: "{{percent}}% discount applied for {{months}} months",
                         percent: couponValid.discount_percent,
                         months: couponValid.duration_months
                       })}
@@ -443,7 +443,7 @@ export default function Pricing() {
                     size="sm"
                     className="border-green-500/50 text-green-400 hover:bg-green-500/10"
                   >
-                    {t("pricing.coupon.remove", { defaultValue: "Quitar" })}
+                    {t("pricing.coupon.remove", { defaultValue: "Remove" })}
                   </Button>
                 </div>
               )}
@@ -460,13 +460,13 @@ export default function Pricing() {
             <CardHeader className="pb-2">
               <CardTitle className="text-slate-100 text-xl">
                 {t("pricing.micro.name", { 
-                  defaultValue: "Contrato Micro {{instrument}}",
+                  defaultValue: "Micro Contract {{instrument}}",
                   instrument: currentInstrument.name
                 })}
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {t("pricing.micro.description", { 
-                  defaultValue: "Operación con contratos micro ({{symbol}}).",
+                  defaultValue: "Trading with micro contracts ({{symbol}}).",
                   symbol: currentInstrument.symbolByPlan.Micro
                 })}
               </CardDescription>
@@ -476,17 +476,17 @@ export default function Pricing() {
               {billing === "monthly" ? (
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MICRO_MONTHLY_EFFECTIVE)}</span>
-                  <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/mes" })}</span>
+                  <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/month" })}</span>
                 </div>
               ) : (
                 <>
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MICRO_ANNUAL)}</span>
-                    <span className="text-slate-400 text-lg">{t("pricing.perYear", { defaultValue: "/año" })}</span>
+                    <span className="text-slate-400 text-lg">{t("pricing.perYear", { defaultValue: "/year" })}</span>
                   </div>
                   <div className="text-slate-400 text-xs mt-1">
                     {t("pricing.compareMicro", {
-                      defaultValue: "Equivale a {{perMonth}}/mes (antes: {{fullYear}}/año).",
+                      defaultValue: "Equals {{perMonth}}/month (was: {{fullYear}}/year).",
                       perMonth: fmtCurrency(+(MICRO_ANNUAL / 12).toFixed(2)),
                       fullYear: fmtCurrency(MICRO_MONTHLY * 12),
                     })}
@@ -510,7 +510,7 @@ export default function Pricing() {
                 disabled={isProcessing}
                 className="w-full h-11 font-semibold bg-slate-800 hover:bg-slate-700 text-white"
               >
-                {isProcessing ? t("pricing.processing", { defaultValue: "Procesando..." }) : t("pricing.cta", { defaultValue: "Suscribirme" })}
+                {isProcessing ? t("pricing.processing", { defaultValue: "Processing..." }) : t("pricing.cta", { defaultValue: "Subscribe" })}
               </Button>
             </CardFooter>
           </Card>
@@ -522,19 +522,19 @@ export default function Pricing() {
                 <div>
                   <CardTitle className="text-slate-100 text-xl">
                     {t("pricing.mini.name", { 
-                      defaultValue: "Contrato Mini {{instrument}}",
+                      defaultValue: "Mini Contract {{instrument}}",
                       instrument: currentInstrument.name
                     })}
                   </CardTitle>
                   <CardDescription className="text-slate-400">
                     {t("pricing.mini.description", { 
-                      defaultValue: "Operación con contratos mini ({{symbol}}).",
+                      defaultValue: "Trading with mini contracts ({{symbol}}).",
                       symbol: currentInstrument.symbolByPlan.Mini
                     })}
                   </CardDescription>
                 </div>
                 <Badge className="bg-slate-800 text-slate-200 border border-slate-700">
-                  {t("pricing.popular", { defaultValue: "Recomendado" })}
+                  {t("pricing.popular", { defaultValue: "Recommended" })}
                 </Badge>
               </div>
             </CardHeader>
@@ -543,17 +543,17 @@ export default function Pricing() {
               {billing === "monthly" ? (
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MINI_MONTHLY_EFFECTIVE)}</span>
-                  <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/mes" })}</span>
+                  <span className="text-slate-400 text-lg">{t("pricing.perMonth", { defaultValue: "/month" })}</span>
                 </div>
               ) : (
                 <>
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-semibold text-slate-100">{fmtCurrency(MINI_ANNUAL)}</span>
-                    <span className="text-slate-400 text-lg">{t("pricing.perYear", { defaultValue: "/año" })}</span>
+                    <span className="text-slate-400 text-lg">{t("pricing.perYear", { defaultValue: "/year" })}</span>
                   </div>
                   <div className="text-slate-400 text-xs mt-1">
                     {t("pricing.compareMini", {
-                      defaultValue: "Equivale a {{perMonth}}/mes (antes: {{fullYear}}/año).",
+                      defaultValue: "Equals {{perMonth}}/month (was: {{fullYear}}/year).",
                       perMonth: fmtCurrency(+(MINI_ANNUAL / 12).toFixed(2)),
                       fullYear: fmtCurrency(MINI_MONTHLY * 12),
                     })}
@@ -577,7 +577,7 @@ export default function Pricing() {
                 disabled={isProcessing}
                 className="w-full h-11 font-semibold bg-blue-800 hover:bg-blue-700 text-white"
               >
-                {isProcessing ? t("pricing.processing", { defaultValue: "Procesando..." }) : t("pricing.cta", { defaultValue: "Suscribirme" })}
+                {isProcessing ? t("pricing.processing", { defaultValue: "Processing..." }) : t("pricing.cta", { defaultValue: "Subscribe" })}
               </Button>
             </CardFooter>
           </Card>
@@ -587,32 +587,32 @@ export default function Pricing() {
         <div className="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-slate-800 pt-8">
           <div className="text-center">
             <Shield className="h-6 w-6 mx-auto text-slate-200" />
-            <h3 className="mt-2 text-slate-200 font-medium">{t("trust.ssl", { defaultValue: "Seguridad SSL/TLS" })}</h3>
+            <h3 className="mt-2 text-slate-200 font-medium">{t("trust.ssl", { defaultValue: "SSL Security" })}</h3>
             <p className="text-slate-400 text-sm mt-1">
               {t("homepage.capabilities.security.description", {
-                defaultValue: "Protección de extremo a extremo y mejores prácticas de seguridad.",
+                defaultValue: "End-to-end protection and security best practices.",
               })}
             </p>
           </div>
           <div className="text-center">
             <Globe className="h-6 w-6 mx-auto text-slate-200" />
             <h3 className="mt-2 text-slate-200 font-medium">
-              {t("homepage.capabilities.analytics.title", { defaultValue: "Analítica Avanzada" })}
+              {t("homepage.capabilities.analytics.title", { defaultValue: "Advanced Analytics" })}
             </h3>
             <p className="text-slate-400 text-sm mt-1">
               {t("homepage.capabilities.analytics.description", {
-                defaultValue: "Métricas clave y seguimiento de rendimiento de forma continua.",
+                defaultValue: "Key metrics and continuous performance tracking.",
               })}
             </p>
           </div>
           <div className="text-center">
             <Clock className="h-6 w-6 mx-auto text-slate-200" />
             <h3 className="mt-2 text-slate-200 font-medium">
-              {t("trust.compliant", { defaultValue: "Cumplimiento" })}
+              {t("trust.compliant", { defaultValue: "Compliance" })}
             </h3>
             <p className="text-slate-400 text-sm mt-1">
               {t("pricing.billingInfo", {
-                defaultValue: "Facturación mensual o anual (20% OFF en anual). Podés cancelar en cualquier momento.",
+                defaultValue: "Monthly or annual billing (20% OFF on annual). Cancel anytime.",
               })}
             </p>
           </div>
@@ -621,11 +621,11 @@ export default function Pricing() {
         {/* CTA de soporte */}
         <div className="max-w-5xl mx-auto text-center mt-10">
           <p className="text-slate-300 mb-4">
-            {t("pricing.support", { defaultValue: "¿Necesitás ayuda? Nuestro equipo está disponible 24/6." })}
+            {t("pricing.support", { defaultValue: "Need help? Our team is available 24/6." })}
           </p>
           <Link to="/contact">
             <Button variant="outline" className="border-slate-700 text-slate-200 hover:bg-slate-900">
-              {t("contact.title", { defaultValue: "Contactar" })}
+              {t("contact.title", { defaultValue: "Contact" })}
             </Button>
           </Link>
         </div>
