@@ -42,6 +42,7 @@ export default function Pricing() {
         title: t("pricing.coupon.error", { defaultValue: "Error" }),
         description: t("pricing.coupon.enterCode", { defaultValue: "Please enter a coupon code" }),
         variant: "destructive",
+        duration: 3000,
       });
       return;
     }
@@ -66,6 +67,7 @@ export default function Pricing() {
             percent: data.discount_percent,
             months: data.duration_months
           }),
+          duration: 5000,
         });
         // Desactivar intro discount si se aplica cupón
         setIntro(false);
@@ -74,6 +76,7 @@ export default function Pricing() {
           title: t("pricing.coupon.invalid", { defaultValue: "Invalid coupon" }),
           description: data.message || t("pricing.coupon.invalidDesc", { defaultValue: "The coupon is not valid" }),
           variant: "destructive",
+          duration: 4000,
         });
       }
     } catch (error) {
@@ -82,6 +85,7 @@ export default function Pricing() {
         title: t("pricing.coupon.error", { defaultValue: "Error" }),
         description: t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" }),
         variant: "destructive",
+        duration: 3000,
       });
     } finally {
       setValidatingCoupon(false);
