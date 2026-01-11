@@ -25,6 +25,75 @@ export default function Pricing() {
   const [billing, setBilling] = useState<Billing>("monthly"); // Mensual / Anual
   const [intro, setIntro] = useState<boolean>(false); // Primer mes 50% OFF
 
+  // ===== Sistema de Cupones =====
+  const [couponCode, setCouponCode] = useState<string>("");
+  const [validatingCoupon, setValidatingCoupon] = useState(false);
+  const [couponValid, setCouponValid] = useState<{
+    valid: boolean;
+    code?: string;
+    discount_percent?: number;
+    duration_months?: number;
+    error?: string;
+    message?: string;
+  } | null>(null);
+
+  const validateCoupon = async () => {
+    if (!couponCode.trim()) {
+      toast({
+        title: t("pricing.coupon.error", { defaultValue: "Error" }),
+        description: t("pricing.coupon.enterCode", { defaultValue: "Ingrese un código de cupón" }),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setValidatingCoupon(true);
+    try {
+      const { data, error } = await supabase.rpc('validate_coupon', {
+        coupon_code_input: couponCode.trim()
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      setCouponValid(data);
+
+      if (data.valid) {
+        toast({
+          title: t("pricing.coupon.success", { defaultValue: "¡Cupón aplicado!" }),
+          description: t("pricing.coupon.successDesc", {
+            defaultValue: "Descuento del {{percent}}% por {{months}} meses",
+            percent: data.discount_percent,
+            months: data.duration_months
+          }),
+        });
+        // Desactivar intro discount si se aplica cupón
+        setIntro(false);
+      } else {
+        toast({
+          title: t("pricing.coupon.invalid", { defaultValue: "Cupón inválido" }),
+          description: data.message || t("pricing.coupon.invalidDesc", { defaultValue: "El cupón no es válido" }),
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error validating coupon:', error);
+      toast({
+        title: t("pricing.coupon.error", { defaultValue: "Error" }),
+        description: t("pricing.coupon.errorDesc", { defaultValue: "No se pudo validar el cupón" }),
+        variant: "destructive",
+      });
+    } finally {
+      setValidatingCoupon(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setCouponCode("");
+    setCouponValid(null);
+  };
+
   // ===== Meta de instrumentos (reacciona al idioma) =====
   const instrumentMeta = useMemo(
     () => ({
@@ -51,10 +120,40 @@ export default function Pricing() {
   const DISCOUNT = 0.30; // 30% OFF anual
   const MICRO_MONTHLY = 99;
   const MINI_MONTHLY = 999;
-  const MICRO_MONTHLY_EFFECTIVE = intro && billing === "monthly" ? +(MICRO_MONTHLY * 0.5).toFixed(2) : MICRO_MONTHLY;
-  const MINI_MONTHLY_EFFECTIVE  = intro && billing === "monthly" ? +(MINI_MONTHLY  * 0.5).toFixed(2) : MINI_MONTHLY;
-  const MICRO_ANNUAL = useMemo(() => +(MICRO_MONTHLY * 12 * (1 - DISCOUNT)).toFixed(2), []);
-  const MINI_ANNUAL  = useMemo(() => +(MINI_MONTHLY  * 12 * (1 - DISCOUNT)).toFixed(2), []);
+  
+  // Si hay cupón válido, aplicar su descuento en lugar del intro
+  const applyCouponDiscount = (basePrice: number) => {
+    if (couponValid?.valid && couponValid.discount_percent) {
+      return +(basePrice * (1 - couponValid.discount_percent / 100)).toFixed(2);
+    }
+    return basePrice;
+  };
+
+  const MICRO_MONTHLY_EFFECTIVE = couponValid?.valid 
+    ? applyCouponDiscount(MICRO_MONTHLY)
+    : intro && billing === "monthly" 
+      ? +(MICRO_MONTHLY * 0.5).toFixed(2) 
+      : MICRO_MONTHLY;
+  
+  const MINI_MONTHLY_EFFECTIVE = couponValid?.valid
+    ? applyCouponDiscount(MINI_MONTHLY)
+    : intro && billing === "monthly"
+      ? +(MINI_MONTHLY * 0.5).toFixed(2)
+      : MINI_MONTHLY;
+  
+  const MICRO_ANNUAL = useMemo(() => 
+    couponValid?.valid 
+      ? applyCouponDiscount(MICRO_MONTHLY * 12)
+      : +(MICRO_MONTHLY * 12 * (1 - DISCOUNT)).toFixed(2), 
+    [couponValid]
+  );
+  
+  const MINI_ANNUAL = useMemo(() => 
+    couponValid?.valid
+      ? applyCouponDiscount(MINI_MONTHLY * 12)
+      : +(MINI_MONTHLY * 12 * (1 - DISCOUNT)).toFixed(2),
+    [couponValid]
+  );
 
   // ===== Utilidades dependientes del idioma =====
   const fmtCurrency = (n: number) =>
@@ -106,6 +205,19 @@ export default function Pricing() {
         ? (isAnnual ? "micro_annual" : "micro_monthly")
         : (isAnnual ? "mini_annual" : "mini_monthly");
 
+      // Prepare payment data
+      const paymentData: any = {
+        plan: planId,
+        intro: !!(intro && billing === "monthly" && !couponValid?.valid), // Intro solo si no hay cupón
+      };
+
+      // Si hay cupón válido, agregarlo al payload
+      if (couponValid?.valid && couponValid.code) {
+        paymentData.coupon_code = couponValid.code;
+        paymentData.coupon_discount = couponValid.discount_percent;
+        paymentData.coupon_duration = couponValid.duration_months;
+      }
+
       // Call Supabase Edge Function via HTTP POST with JSON body
       const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || SUPABASE_PUBLISHABLE_KEY;
       const res = await fetch(
@@ -117,7 +229,7 @@ export default function Pricing() {
             // Always supply anon key (env or exported fallback)
             Authorization: `Bearer ${anonKey}`,
           },
-          body: JSON.stringify({ plan: planId, intro: !!(intro && billing === "monthly") }),
+          body: JSON.stringify(paymentData),
         }
       );
 
@@ -294,6 +406,74 @@ export default function Pricing() {
               })}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Cupón de Descuento */}
+      <section className="px-4 pb-8">
+        <div className="max-w-5xl mx-auto">
+          <Card className="rounded-xl border border-slate-800 bg-slate-950">
+            <CardHeader>
+              <CardTitle className="text-slate-100 text-lg flex items-center gap-2">
+                <Shield className="h-5 w-5 text-blue-400" />
+                {t("pricing.coupon.title", { defaultValue: "¿Tenés un cupón de descuento?" })}
+              </CardTitle>
+              <CardDescription className="text-slate-400">
+                {t("pricing.coupon.description", { 
+                  defaultValue: "Ingresá tu código para recibir un descuento especial del 30% durante 12 meses" 
+                })}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {!couponValid?.valid ? (
+                <div className="flex gap-3">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                    placeholder={t("pricing.coupon.placeholder", { defaultValue: "XXXX-XXXX-XXXX" })}
+                    className="flex-1 px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    maxLength={14}
+                    disabled={validatingCoupon}
+                  />
+                  <Button
+                    onClick={validateCoupon}
+                    disabled={validatingCoupon || !couponCode.trim()}
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    {validatingCoupon 
+                      ? t("pricing.coupon.validating", { defaultValue: "Validando..." })
+                      : t("pricing.coupon.apply", { defaultValue: "Aplicar" })
+                    }
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between p-4 bg-green-500/10 border border-green-500/50 rounded-lg">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Check className="h-5 w-5 text-green-400" />
+                      <span className="font-mono font-bold text-green-400">{couponValid.code}</span>
+                    </div>
+                    <p className="text-sm text-green-300">
+                      {t("pricing.coupon.applied", {
+                        defaultValue: "Descuento del {{percent}}% aplicado por {{months}} meses",
+                        percent: couponValid.discount_percent,
+                        months: couponValid.duration_months
+                      })}
+                    </p>
+                  </div>
+                  <Button
+                    onClick={removeCoupon}
+                    variant="outline"
+                    size="sm"
+                    className="border-green-500/50 text-green-400 hover:bg-green-500/10"
+                  >
+                    {t("pricing.coupon.remove", { defaultValue: "Quitar" })}
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </section>
 

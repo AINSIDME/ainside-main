@@ -109,9 +109,21 @@ serve(async (req) => {
     const status = result?.status;
     const planName = result?.purchase_units?.[0]?.description;
     
-    // Extract language from custom_id (format: "plan|language")
-    const [, userLanguage] = customId.split('|');
-    const emailLanguage = userLanguage || 'en';
+    // Extract language and coupon data from custom_id
+    // Format: "plan|language" or "plan|language|coupon:CODE|PERCENT|DURATION"
+    const customParts = customId.split('|');
+    const userLanguage = customParts[1] || 'en';
+    const emailLanguage = userLanguage;
+    
+    let couponCode: string | null = null;
+    let couponDiscount: number | null = null;
+    let couponDuration: number | null = null;
+    
+    if (customParts.length >= 5 && customParts[2]?.startsWith('coupon:')) {
+      couponCode = customParts[2].replace('coupon:', '');
+      couponDiscount = parseInt(customParts[3] || '0');
+      couponDuration = parseInt(customParts[4] || '0');
+    }
 
     // Verify payment is COMPLETED and APPROVED
     if (status !== 'COMPLETED' || capture?.status !== 'COMPLETED') {
@@ -135,8 +147,16 @@ serve(async (req) => {
       email: payerEmail,
       planName,
       amount,
-      currency
+      currency,
+      couponCode: couponCode,
+      couponDiscount: couponDiscount,
+      couponDuration: couponDuration
     });
+
+    // If coupon was used, mark it as used
+    if (couponCode) {
+      await markCouponAsUsed(couponCode);
+    }
 
     // Send email with product files
     const emailSent = await sendProductEmail({
@@ -183,6 +203,9 @@ async function storePurchase(data: {
   planName: string;
   amount: string;
   currency: string;
+  couponCode: string | null;
+  couponDiscount: number | null;
+  couponDuration: number | null;
 }): Promise<void> {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
@@ -208,7 +231,7 @@ async function storePurchase(data: {
     else if (!isMicro && isGold) planType = 'mini-gold';
     else planType = 'micro-sp500';
     
-    const { error } = await supabase.from('purchases').insert({
+    const purchaseData: any = {
       order_id: data.orderId,
       email: data.email,
       plan_name: data.planName,
@@ -216,7 +239,17 @@ async function storePurchase(data: {
       amount: data.amount,
       currency: data.currency,
       status: 'completed'
-    });
+    };
+
+    // Add coupon data if present
+    if (data.couponCode) {
+      purchaseData.coupon_code = data.couponCode;
+      purchaseData.coupon_discount_percent = data.couponDiscount;
+      purchaseData.coupon_duration_months = data.couponDuration;
+      purchaseData.coupon_applied_at = new Date().toISOString();
+    }
+    
+    const { error } = await supabase.from('purchases').insert(purchaseData);
 
     if (error) {
       console.error('Error storing purchase:', error);
@@ -564,5 +597,35 @@ async function sendProductEmail(data: {
   } catch (error) {
     console.error('Error sending product email:', error);
     return false;
+  }
+}
+
+// Mark coupon as used
+async function markCouponAsUsed(couponCode: string): Promise<void> {
+  try {
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    if (!supabaseUrl || !supabaseKey) {
+      console.warn('Supabase credentials not configured');
+      return;
+    }
+
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    const { data, error } = await supabase.rpc('mark_coupon_as_used', {
+      coupon_code_input: couponCode
+    });
+
+    if (error) {
+      console.error('Error marking coupon as used:', error);
+    } else if (data) {
+      console.log('Coupon marked as used successfully:', couponCode);
+    } else {
+      console.warn('Coupon could not be marked as used (might already be used):', couponCode);
+    }
+  } catch (error) {
+    console.error('Error in markCouponAsUsed:', error);
   }
 }

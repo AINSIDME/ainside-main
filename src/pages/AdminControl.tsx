@@ -375,6 +375,14 @@ const AdminControl = () => {
           </div>
           <div className="flex gap-3">
             <Button
+              onClick={() => navigate('/admin/coupons')}
+              variant="outline"
+              className="gap-2 border-blue-500/50 text-blue-400 hover:bg-blue-500/10"
+            >
+              <Settings className="h-4 w-4" />
+              Cupones
+            </Button>
+            <Button
               onClick={() => setAutoRefresh(!autoRefresh)}
               variant={autoRefresh ? "default" : "outline"}
               className="gap-2"
