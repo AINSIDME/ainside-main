@@ -1056,7 +1056,7 @@
     "chooseInstrument": "Elegí Instrumento",
     "billingInfo": "Facturación mensual o anual (30% OFF en anual). Podés cancelar en cualquier momento.",
     "micro": {
-      "name": "Alquiler Micro S&P 500",
+      "name": "Contrato Micro {{instrument}}",
       "price": "$99",
       "period": "/mes",
       "description": "Estrategia para contrato /MES. Requiere TradeStation o MultiCharts.",
@@ -1072,7 +1072,7 @@
       ]
     },
     "mini": {
-      "name": "Alquiler Mini S&P 500",
+      "name": "Contrato Mini {{instrument}}",
       "price": "$999",
       "period": "/mes",
       "description": "Estrategia para contrato /ES. Requiere TradeStation o MultiCharts.",

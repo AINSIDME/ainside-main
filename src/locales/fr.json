@@ -1056,7 +1056,7 @@
     "chooseInstrument": "Choisir l'Instrument",
     "billingInfo": "Facturé mensuellement ⬢ Annulation à tout moment",
     "micro": {
-      "name": "Contrat Micro",
+      "name": "Contrat Micro {{instrument}}",
       "price": "$99",
       "period": "/mois",
       "description": "Négociation avec contrats micro (MES/MGC).",
@@ -1071,7 +1071,7 @@
       ]
     },
     "mini": {
-      "name": "Contrat Mini",
+      "name": "Contrat Mini {{instrument}}",
       "price": "$999",
       "period": "/mois",
       "description": "Négociation avec contrats mini (ES/GC).",

@@ -1056,7 +1056,7 @@
     "chooseInstrument": "Choose Instrument",
     "billingInfo": "Monthly or annual billing (30% OFF on annual). Cancel anytime.",
     "micro": {
-      "name": "استراتيجية Micro",
+      "name": "استراتيجية Micro {{instrument}}",
       "price": "25.00",
       "period": "/ شهر",
       "description": "مثالية للمبتدئين والحسابات الصغيرة",
@@ -1072,7 +1072,7 @@
       ]
     },
     "mini": {
-      "name": "استراتيجية Mini",
+      "name": "استراتيجية Mini {{instrument}}",
       "price": "45.00",
       "period": "/ شهر",
       "description": "للمتداولين الجادين الذين يسعون للنمو",

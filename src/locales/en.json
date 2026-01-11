@@ -1056,7 +1056,7 @@
     "chooseInstrument": "Choose Instrument",
     "billingInfo": "Monthly or annual billing (30% OFF on annual). Cancel anytime.",
     "micro": {
-      "name": "Micro Contract",
+      "name": "Micro Contract {{instrument}}",
       "price": "$99",
       "period": "/month",
       "description": "Trading with micro contracts (MES/MGC).",
@@ -1072,7 +1072,7 @@
       ]
     },
     "mini": {
-      "name": "Mini Contract",
+      "name": "Mini Contract {{instrument}}",
       "price": "$999",
       "period": "/month",
       "description": "Trading with mini contracts (ES/GC).",

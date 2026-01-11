@@ -1056,7 +1056,7 @@
     "chooseInstrument": "בחר נכס",
     "billingInfo": "חיוב חודשי או שנתי (30% הנחה בשנתי). ניתן לבטל בכל עת.",
     "micro": {
-      "name": "חוזה Micro",
+      "name": "חוזה Micro {{instrument}}",
       "price": "$99",
       "period": "/חודש",
       "description": "מסחר בחוזי Micro (MES/MGC).",
@@ -1072,7 +1072,7 @@
       ]
     },
     "mini": {
-      "name": "חוזה Mini",
+      "name": "חוזה Mini {{instrument}}",
       "price": "$999",
       "period": "/חודש",
       "description": "מסחר בחוזי Mini (ES/GC).",

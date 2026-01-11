@@ -1056,7 +1056,7 @@
     "chooseInstrument": "Выберите Инструмент",
     "billingInfo": "Месячная или годовая оплата (30% СКИДКА на годовой). Отмена в любое время.",
     "micro": {
-      "name": "Контракт Micro",
+      "name": "Контракт Micro {{instrument}}",
       "price": "$99",
       "period": "/месяц",
       "description": "Торговля микроконтрактами (MES/MGC).",
@@ -1072,7 +1072,7 @@
       ]
     },
     "mini": {
-      "name": "Контракт Mini",
+      "name": "Контракт Mini {{instrument}}",
       "price": "$999",
       "period": "/месяц",
       "description": "Торговля мини-контрактами (ES/GC).",
