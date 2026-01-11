@@ -70,8 +70,6 @@
     "subtitle": "Finalisez votre achat rapidement et en toute sécurité",
     "selectPlan": "Sélectionnez votre plan",
     "instrument": {
-      "sp500": "S&P 500",
-      "gold": "Or",
       "sp500": {
         "name": "S&P 500"
       },
