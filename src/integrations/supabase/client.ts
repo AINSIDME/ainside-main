@@ -2,8 +2,19 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const sanitizeEnv = (value: string | undefined) =>
+  value
+    ?.trim()
+    // Handle accidental quoting from env providers
+    .replace(/^"|"$/g, '')
+    .replace(/^'|'$/g, '')
+    // Handle accidental literal "\n" plus real newlines
+    .replace(/\\n/g, '')
+    .replace(/[\r\n]/g, '')
+    .trim();
+
+const SUPABASE_URL = sanitizeEnv(import.meta.env.VITE_SUPABASE_URL);
+const SUPABASE_PUBLISHABLE_KEY = sanitizeEnv(import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
   throw new Error(
