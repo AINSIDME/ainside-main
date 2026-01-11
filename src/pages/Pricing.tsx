@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
@@ -27,6 +27,7 @@ export default function Pricing() {
   // ===== Sistema de Cupones =====
   const [couponCode, setCouponCode] = useState<string>("");
   const [validatingCoupon, setValidatingCoupon] = useState(false);
+  const couponValidationInFlight = useRef(false);
   const [couponValid, setCouponValid] = useState<{
     valid: boolean;
     code?: string;
@@ -37,6 +38,9 @@ export default function Pricing() {
   } | null>(null);
 
   const validateCoupon = async () => {
+    // Hard lock to prevent double-submit before React state updates.
+    if (couponValidationInFlight.current) return;
+
     if (!couponCode.trim()) {
       toast({
         title: t("pricing.coupon.error", { defaultValue: "Error" }),
@@ -47,6 +51,7 @@ export default function Pricing() {
       return;
     }
 
+    couponValidationInFlight.current = true;
     setValidatingCoupon(true);
     try {
       console.log('Validating coupon:', couponCode.trim());
@@ -110,6 +115,7 @@ export default function Pricing() {
       }
     } finally {
       setValidatingCoupon(false);
+      couponValidationInFlight.current = false;
     }
   };
 
@@ -431,7 +437,12 @@ export default function Pricing() {
                     type="text"
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                    onKeyDown={(e) => e.key === 'Enter' && !validatingCoupon && couponCode.trim() && validateCoupon()}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        validateCoupon();
+                      }
+                    }}
                     placeholder={t("pricing.coupon.placeholder", { defaultValue: "XXXX-XXXX-XXXX" })}
                     className="flex-1 px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     maxLength={14}
