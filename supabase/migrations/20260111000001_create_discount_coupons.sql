@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS public.discount_coupons (
   notes TEXT -- Notas del admin sobre el cupón
 );
 
--- Agregar campo coupon_code a la tabla orders
-ALTER TABLE public.orders 
+-- Agregar campo coupon_code a la tabla purchases
+ALTER TABLE public.purchases 
 ADD COLUMN IF NOT EXISTS coupon_code TEXT,
 ADD COLUMN IF NOT EXISTS coupon_discount_percent INTEGER,
 ADD COLUMN IF NOT EXISTS coupon_duration_months INTEGER,
@@ -23,61 +23,45 @@ ADD COLUMN IF NOT EXISTS coupon_applied_at TIMESTAMPTZ;
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_discount_coupons_code ON public.discount_coupons(code);
 CREATE INDEX IF NOT EXISTS idx_discount_coupons_active ON public.discount_coupons(is_active);
-CREATE INDEX IF NOT EXISTS idx_orders_coupon_code ON public.orders(coupon_code);
+CREATE INDEX IF NOT EXISTS idx_purchases_coupon_code ON public.purchases(coupon_code);
 
 -- RLS Policies
 ALTER TABLE public.discount_coupons ENABLE ROW LEVEL SECURITY;
 
--- Solo admins pueden ver todos los cupones
-CREATE POLICY "Admins can view all coupons"
+-- Solo el admin específico puede ver todos los cupones
+CREATE POLICY "Admin can view all coupons"
 ON public.discount_coupons
 FOR SELECT
 TO authenticated
 USING (
-  EXISTS (
-    SELECT 1 FROM public.admins
-    WHERE admins.email = auth.jwt() ->> 'email'
-    AND admins.is_active = true
-  )
+  auth.jwt() ->> 'email' = 'jonathangolubok@gmail.com'
 );
 
--- Solo admins pueden crear cupones
-CREATE POLICY "Admins can create coupons"
+-- Solo el admin puede crear cupones
+CREATE POLICY "Admin can create coupons"
 ON public.discount_coupons
 FOR INSERT
 TO authenticated
 WITH CHECK (
-  EXISTS (
-    SELECT 1 FROM public.admins
-    WHERE admins.email = auth.jwt() ->> 'email'
-    AND admins.is_active = true
-  )
+  auth.jwt() ->> 'email' = 'jonathangolubok@gmail.com'
 );
 
--- Solo admins pueden actualizar cupones
-CREATE POLICY "Admins can update coupons"
+-- Solo el admin puede actualizar cupones
+CREATE POLICY "Admin can update coupons"
 ON public.discount_coupons
 FOR UPDATE
 TO authenticated
 USING (
-  EXISTS (
-    SELECT 1 FROM public.admins
-    WHERE admins.email = auth.jwt() ->> 'email'
-    AND admins.is_active = true
-  )
+  auth.jwt() ->> 'email' = 'jonathangolubok@gmail.com'
 );
 
--- Solo admins pueden eliminar cupones
-CREATE POLICY "Admins can delete coupons"
+-- Solo el admin puede eliminar cupones
+CREATE POLICY "Admin can delete coupons"
 ON public.discount_coupons
 FOR DELETE
 TO authenticated
 USING (
-  EXISTS (
-    SELECT 1 FROM public.admins
-    WHERE admins.email = auth.jwt() ->> 'email'
-    AND admins.is_active = true
-  )
+  auth.jwt() ->> 'email' = 'jonathangolubok@gmail.com'
 );
 
 -- Función para validar y aplicar un cupón
