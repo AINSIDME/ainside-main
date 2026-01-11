@@ -558,10 +558,14 @@ const AdminControl = () => {
                         onChange={(e) => changePlan(client.id, e.target.value)}
                         className="bg-slate-700 text-white text-sm rounded px-3 py-1 border border-slate-600"
                       >
-                        <option value="Basic">Basic</option>
-                        <option value="Pro">Pro</option>
-                        <option value="Premium">Premium</option>
-                        <option value="Enterprise">Enterprise</option>
+                        <option value="Contrato Micro S&P 500 - Monthly">Contrato Micro S&P 500 - Monthly</option>
+                        <option value="Contrato Micro S&P 500 - Annual">Contrato Micro S&P 500 - Annual</option>
+                        <option value="Contrato Mini S&P 500 - Monthly">Contrato Mini S&P 500 - Monthly</option>
+                        <option value="Contrato Mini S&P 500 - Annual">Contrato Mini S&P 500 - Annual</option>
+                        <option value="Contrato Micro Oro - Monthly">Contrato Micro Oro - Monthly</option>
+                        <option value="Contrato Micro Oro - Annual">Contrato Micro Oro - Annual</option>
+                        <option value="Contrato Mini Oro - Monthly">Contrato Mini Oro - Monthly</option>
+                        <option value="Contrato Mini Oro - Annual">Contrato Mini Oro - Annual</option>
                       </select>
                     </div>
                   </div>

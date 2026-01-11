@@ -33,43 +33,43 @@ serve(async (req) => {
       micro_monthly: {
         amount: 99.0,
         currency: "USD",
-        description: "Micro S&P 500 Monthly",
+        description: "Contrato Micro S&P 500 - Monthly",
       },
       micro_annual: {
         amount: 831.6,
         currency: "USD",
-        description: "Micro S&P 500 Annual",
+        description: "Contrato Micro S&P 500 - Annual",
       },
       mini_monthly: {
         amount: 999.0,
         currency: "USD",
-        description: "Mini S&P 500 Monthly",
+        description: "Contrato Mini S&P 500 - Monthly",
       },
       mini_annual: {
         amount: 8391.6,
         currency: "USD",
-        description: "Mini S&P 500 Annual",
+        description: "Contrato Mini S&P 500 - Annual",
       },
       // Gold variants
       micro_gold_monthly: {
         amount: 99.0,
         currency: "USD",
-        description: "Micro Gold Monthly",
+        description: "Contrato Micro Oro - Monthly",
       },
       micro_gold_annual: {
         amount: 831.6,
         currency: "USD",
-        description: "Micro Gold Annual",
+        description: "Contrato Micro Oro - Annual",
       },
       mini_gold_monthly: {
         amount: 999.0,
         currency: "USD",
-        description: "Mini Gold Monthly",
+        description: "Contrato Mini Oro - Monthly",
       },
       mini_gold_annual: {
         amount: 8391.6,
         currency: "USD",
-        description: "Mini Gold Annual",
+        description: "Contrato Mini Oro - Annual",
       },
     };
 

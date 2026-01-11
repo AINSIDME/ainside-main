@@ -195,10 +195,23 @@ export default function Pricing() {
     setIsProcessing(true);
     try {
       const isAnnual = billing === "annual";
+      const isGold = instrument === "gold";
+      
       // Map client selection → server plan id (must match server PLANS keys)
-      const planId = (plan === "Micro")
-        ? (isAnnual ? "micro_annual" : "micro_monthly")
-        : (isAnnual ? "mini_annual" : "mini_monthly");
+      let planId: string;
+      if (plan === "Micro") {
+        if (isGold) {
+          planId = isAnnual ? "micro_gold_annual" : "micro_gold_monthly";
+        } else {
+          planId = isAnnual ? "micro_annual" : "micro_monthly";
+        }
+      } else { // Mini
+        if (isGold) {
+          planId = isAnnual ? "mini_gold_annual" : "mini_gold_monthly";
+        } else {
+          planId = isAnnual ? "mini_annual" : "mini_monthly";
+        }
+      }
 
       // Prepare payment data
       const paymentData: any = {
