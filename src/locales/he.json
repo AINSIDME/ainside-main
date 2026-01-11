@@ -71,7 +71,13 @@
     "selectPlan": "בחר תוכנית",
     "instrument": {
       "sp500": "S&P 500",
-      "gold": "זהב"
+      "gold": "זהב",
+      "sp500": {
+        "name": "S&P 500"
+      },
+      "gold": {
+        "name": "זהב"
+      }
     },
     "summary": "סיכום הזמנה",
     "total": "סה״כ",

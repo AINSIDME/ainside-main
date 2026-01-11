@@ -71,7 +71,13 @@
     "selectPlan": "Sélectionnez votre plan",
     "instrument": {
       "sp500": "S&P 500",
-      "gold": "Or"
+      "gold": "Or",
+      "sp500": {
+        "name": "S&P 500"
+      },
+      "gold": {
+        "name": "Or"
+      }
     },
     "summary": "Récapitulatif",
     "total": "Total",
