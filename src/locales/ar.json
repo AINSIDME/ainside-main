@@ -467,7 +467,7 @@
       "description": "احصل على خوارزميات التداول وأدوات التحليل الاحترافية من خلال خطط إيجار شهرية مرنة.",
       "demo": "مشاهدة العرض التوضيحي المباشر",
       "contact": "اتصل بنا",
-      "pricing": "Pricing",
+      "pricing": "الأسعار",
       "services": "خدماتنا",
       "consultation": "جدولة استشارة"
     },
@@ -630,22 +630,22 @@
       "point5": "هذه محاكاة تعليمية. الأداء السابق لا يضمن النتائج المستقبلية. التداول ينطوي على خطر خسارة رأس المال."
     },
     "sidebar": {
-      "disclaimerTitle": "Important Notice",
-      "disclaimer1": "This is an educational simulation showing how an automated algorithm could work.",
-      "disclaimer2": "Past performance does not guarantee future results. All data shown is hypothetical.",
-      "disclaimer3": "Trading involves risk. This tool is for educational purposes only.",
-      "howItWorks": "How It Works",
-      "step1Title": "Market Analysis",
-      "step1Desc": "Algorithm analyzes price movements and patterns",
-      "step2Title": "Entry Signal",
-      "step2Desc": "Identifies optimal entry points automatically",
-      "step3Title": "Exit Management",
-      "step3Desc": "Manages exits based on profit targets and stops"
+      "disclaimerTitle": "إشعار مهم",
+      "disclaimer1": "هذه محاكاة تعليمية توضح كيف يمكن لخوارزمية تلقائية أن تعمل.",
+      "disclaimer2": "الأداء السابق لا يضمن النتائج المستقبلية. جميع البيانات المعروضة افتراضية.",
+      "disclaimer3": "التداول ينطوي على مخاطر. هذه الأداة لأغراض تعليمية فقط.",
+      "howItWorks": "كيف يعمل",
+      "step1Title": "تحليل السوق",
+      "step1Desc": "الخوارزمية تحلل حركات الأسعار والأنماط",
+      "step2Title": "إشارة الدخول",
+      "step2Desc": "تحدد نقاط الدخول المثلى تلقائياً",
+      "step3Title": "إدارة الخروج",
+      "step3Desc": "تدير المخارج بناءً على أهداف الربح والوقف"
     },
     "cta": {
       "title": "هل أنت مستعد للبدء?",
       "desc": "اتصل بفريقنا لمعرفة المزيد عن خدمة تأجير الخوارزميات.",
-      "button": "Contact Us",
+      "button": "اتصل بنا",
       "pricing": "عرض الأسعار",
       "contact": "اتصل بنا",
       "viewPricing": "View Pricing"
@@ -1061,13 +1061,13 @@
       "description": "مثالية للمبتدئين والحسابات الصغيرة",
       "short": "Micro",
       "features": [
-        "Access to /MES (E-mini S&P 500)",
-        "All technical indicators",
-        "Real-time analysis",
-        "Monthly automatic updates",
-        "Email support",
-        "Live market data",
-        "Educational tools"
+        "الوصول إلى /MES (E-mini S&P 500)",
+        "جميع المؤشرات الفنية",
+        "تحليل في الوقت الفعلي",
+        "تحديثات تلقائية شهرية",
+        "دعم عبر البريد الإلكتروني",
+        "بيانات السوق المباشرة",
+        "أدوات تعليمية"
       ]
     },
     "mini": {
@@ -1077,31 +1077,31 @@
       "description": "للمتداولين الجادين الذين يسعون للنمو",
       "short": "Mini",
       "features": [
-        "Full access to /ES and /MES",
-        "Complete indicator suite",
-        "Advanced analytics",
-        "Monthly premium updates",
-        "Priority email support",
-        "EasyLanguage files (.ELD/.PLA)",
-        "Extended documentation",
-        "Installation guide PDF",
-        "Monthly updates"
+        "وصول كامل إلى /ES و /MES",
+        "مجموعة مؤشرات كاملة",
+        "تحليلات متقدمة",
+        "تحديثات مميزة شهرية",
+        "دعم ذو أولوية عبر البريد",
+        "ملفات EasyLanguage (.ELD/.PLA)",
+        "توثيق موسع",
+        "دليل التثبيت PDF",
+        "تحديثات شهرية"
       ],
       "popular": "الأكثر شعبية"
     },
-    "cta": "Subscribe",
+    "cta": "اشترك",
     "processing": "جارٍ المعالجة...",
-    "perMonth": "/month",
-    "perYear": "/year",
-    "compareMicro": "Equals {{perMonth}}/month (before: {{fullYear}}/year).",
-    "compareMini": "Equals {{perMonth}}/month (before: {{fullYear}}/year).",
+    "perMonth": "/شهر",
+    "perYear": "/سنة",
+    "compareMicro": "يعادل {{perMonth}}/شهر (قبل: {{fullYear}}/سنة).",
+    "compareMini": "يعادل {{perMonth}}/شهر (قبل: {{fullYear}}/سنة).",
     "feature": {
-      "instrument": "Instrument: {{instrument}} ({{symbol}})",
-      "focusInstrument": "Exclusive focus on {{instrument}}",
-      "liveSupport": "Email support: support@ainside.me",
-      "secure": "Secure checkout with PayPal",
-      "updatesMonthly": "Monthly updates included",
-      "noGuarantees": "No performance guarantees"
+      "instrument": "الأداة: {{instrument}} ({{symbol}})",
+      "focusInstrument": "تركيز حصري على {{instrument}}",
+      "liveSupport": "دعم عبر البريد: support@ainside.me",
+      "secure": "دفع آمن عبر PayPal",
+      "updatesMonthly": "تحديثات شهرية متضمنة",
+      "noGuarantees": "لا يوجد ضمان للأداء"
     },
     "guarantee": "Digital product - No refund after download",
     "secure": "Secure and reliable",
