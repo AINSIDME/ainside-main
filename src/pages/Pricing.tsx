@@ -23,15 +23,6 @@ export default function Pricing() {
   // ===== Selecciones globales =====
   const [instrument, setInstrument] = useState<Instrument>("sp500");
   const [billing, setBilling] = useState<Billing>("monthly"); // Mensual / Anual
-  const [intro, setIntro] = useState<boolean>(false); // Primer mes 50% OFF
-
-  // Activar automáticamente intro cuando se selecciona plan anual
-  const handleBillingChange = (newBilling: Billing) => {
-    setBilling(newBilling);
-    if (newBilling === "annual") {
-      setIntro(true);
-    }
-  };
 
   // ===== Sistema de Cupones =====
   const [couponCode, setCouponCode] = useState<string>("");
@@ -125,11 +116,11 @@ export default function Pricing() {
   const currentInstrument = instrumentMeta[instrument];
 
   // ===== Precios =====
-  const DISCOUNT = 0.30; // 30% OFF anual
+  const DISCOUNT = 0.20; // 20% OFF anual (paga 10 meses, usa 12)
   const MICRO_MONTHLY = 99;
   const MINI_MONTHLY = 999;
   
-  // Si hay cupón válido, aplicar su descuento en lugar del intro
+  // Si hay cupón válido, aplicar su descuento
   const applyCouponDiscount = (basePrice: number) => {
     if (couponValid?.valid && couponValid.discount_percent) {
       return +(basePrice * (1 - couponValid.discount_percent / 100)).toFixed(2);
@@ -139,15 +130,11 @@ export default function Pricing() {
 
   const MICRO_MONTHLY_EFFECTIVE = couponValid?.valid 
     ? applyCouponDiscount(MICRO_MONTHLY)
-    : intro
-      ? +(MICRO_MONTHLY * 0.5).toFixed(2) 
-      : MICRO_MONTHLY;
+    : MICRO_MONTHLY;
   
   const MINI_MONTHLY_EFFECTIVE = couponValid?.valid
     ? applyCouponDiscount(MINI_MONTHLY)
-    : intro
-      ? +(MINI_MONTHLY * 0.5).toFixed(2)
-      : MINI_MONTHLY;
+    : MINI_MONTHLY;
   
   const MICRO_ANNUAL = useMemo(() => 
     couponValid?.valid 
@@ -216,7 +203,7 @@ export default function Pricing() {
       // Prepare payment data
       const paymentData: any = {
         plan: planId,
-        intro: !!(intro && billing === "monthly" && !couponValid?.valid), // Intro solo si no hay cupón
+        intro: false, // No intro discount
       };
 
       // Si hay cupón válido, agregarlo al payload
@@ -330,7 +317,7 @@ export default function Pricing() {
             </h3>
             <div className="inline-flex rounded-lg border border-slate-700 overflow-hidden">
               <button
-                onClick={() => handleBillingChange("monthly")}
+                onClick={() => setBilling("monthly")}
                 aria-pressed={billing === "monthly"}
                 className={`px-4 py-2 text-sm
                   ${billing === "monthly"
@@ -340,7 +327,7 @@ export default function Pricing() {
                 {t("pricing.monthly", { defaultValue: "Mensual" })}
               </button>
               <button
-                onClick={() => handleBillingChange("annual")}
+                onClick={() => setBilling("annual")}
                 aria-pressed={billing === "annual"}
                 className={`px-4 py-2 text-sm border-l border-slate-700
                   ${billing === "annual"
@@ -350,7 +337,7 @@ export default function Pricing() {
                 {t("pricing.annual", { defaultValue: "Anual" })}
                 <span className="ml-2">
                   <Badge className="bg-emerald-700 text-white border-0">
-                    {t("pricing.save", { defaultValue: "Ahorra 30%" })}
+                    {t("pricing.save", { defaultValue: "Pagá 10, Usá 12" })}
                   </Badge>
                 </span>
               </button>
@@ -360,31 +347,6 @@ export default function Pricing() {
                 defaultValue: "Renovación automática. Podés cancelar cuando quieras.",
               })}
             </p>
-            <div className="mt-4 flex items-center justify-between rounded-lg border border-slate-700 p-3">
-              <div>
-                <div className="text-slate-200 font-medium">{t("pricing.intro.title", { defaultValue: "Primer mes 50% OFF" })}</div>
-                <div className="text-slate-400 text-xs">
-                  {billing === "annual" 
-                    ? t("pricing.intro.noteAnnual", { defaultValue: "Se aplica automáticamente en plan anual" })
-                    : t("pricing.intro.note", { defaultValue: "Activá esta opción para obtener el descuento" })
-                  }
-                </div>
-              </div>
-              <button
-                aria-pressed={intro}
-                onClick={() => setIntro(v => !v)}
-                disabled={billing === "annual"}
-                className={`px-3 py-1 text-sm rounded-md border ${
-                  billing === "annual" 
-                    ? "bg-emerald-700 text-white border-emerald-600 opacity-100 cursor-not-allowed"
-                    : intro 
-                      ? "bg-emerald-700 text-white border-emerald-600" 
-                      : "bg-slate-900 text-slate-300 border-slate-700"
-                }`}
-              >
-                {intro ? t("pricing.intro.on", { defaultValue: "Activado" }) : t("pricing.intro.off", { defaultValue: "Desactivado" })}
-              </button>
-            </div>
           </div>
 
           {/* Selector de Instrumento (radio formal) */}

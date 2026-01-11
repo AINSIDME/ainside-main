@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS public.discount_coupons (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   code TEXT UNIQUE NOT NULL,
-  discount_percent INTEGER NOT NULL DEFAULT 30, -- 30% de descuento
+  discount_percent INTEGER NOT NULL DEFAULT 50, -- 50% de descuento
   duration_months INTEGER NOT NULL DEFAULT 12, -- Válido por 12 meses
   max_uses INTEGER NOT NULL DEFAULT 1, -- Número máximo de usos (1 = uso único)
   current_uses INTEGER NOT NULL DEFAULT 0, -- Contador de usos actuales

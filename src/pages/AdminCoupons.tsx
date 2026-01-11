@@ -121,7 +121,7 @@ const AdminCoupons = () => {
         .from('discount_coupons')
         .insert({
           code: newCode,
-          discount_percent: 30,
+          discount_percent: 50,
           duration_months: 12,
           max_uses: 1,
           current_uses: 0,
@@ -283,8 +283,8 @@ const AdminCoupons = () => {
         <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
           <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
           <div className="text-xs sm:text-sm text-blue-300">
-            <p className="font-semibold mb-1">30% por 12 meses - Uso único</p>
-            <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y reemplaza el descuento del 59% del primer mes con un 30% durante todo el año.</p>
+            <p className="font-semibold mb-1">50% de descuento por 12 meses - Uso único</p>
+            <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y ofrece un <strong>50% de descuento</strong> durante todo el año.</p>
           </div>
         </div>
 
