@@ -870,14 +870,14 @@
     "motion": "Motion"
   },
   "status": {
-    "title": "System Status",
-    "operational": "All Systems Operational",
-    "degraded": "Degraded Performance",
-    "outage": "Service Outage",
-    "maintenance": "Scheduled Maintenance",
-    "dataFeed": "Market Data Feed",
-    "charts": "Chart Services",
-    "api": "API Services"
+    "title": "סטטוס המערכת",
+    "operational": "כל המערכות פעילות",
+    "degraded": "ביצועים מופחתים",
+    "outage": "הפסקת שירות",
+    "maintenance": "תחזוקה מתוכננת",
+    "dataFeed": "הזנת נתוני שוק",
+    "charts": "שירותי גרפים",
+    "api": "שירותי API"
   },
   "trust": {
     "ssl": "SSL Secured",
@@ -927,11 +927,11 @@
   "common": {
     "loading": "טוען...",
     "error": "שגיאה",
-    "retry": "Retry",
+    "retry": "נסה שוב",
     "close": "סגור",
     "save": "שמור",
     "cancel": "ביטול",
-    "continue": "Continue",
+    "continue": "המשך",
     "back": "חזור",
     "next": "הבא",
     "yes": "כן",
@@ -1061,13 +1061,13 @@
       "description": "מסחר בחוזי Micro (MES/MGC).",
       "short": "Micro",
       "features": [
-        "גישה ל-/MES (E-mini S&P 500)",
-        "כל האינדיקטורים הטכניים",
-        "ניתוח בזמן אמת",
-        "עדכונים אוטומטיים חודשיים",
-        "תמיכה באימייל",
-        "נתוני שוק בזמן אמת",
-        "כלים לימודיים"
+        "אסטרטגיה עבור /MES (E-mini S&P 500 Micro)",
+        "פורמט EasyLanguage (.ELD/.PLA)",
+        "פרמטרים אופטימליים כלולים",
+        "עדכוני אסטרטגיה חודשיים",
+        "תמיכה טכנית באימייל",
+        "מדריך התקנה PDF",
+        "תיעוד מלא"
       ]
     },
     "mini": {
@@ -1077,15 +1077,15 @@
       "description": "מסחר בחוזי Mini (ES/GC).",
       "short": "Mini",
       "features": [
-        "גישה מלאה ל-/ES ול-/MES",
-        "ערכת אינדיקטורים מלאה",
-        "אנליטיקה מתקדמת",
-        "עדכוני פרימיום חודשיים",
-        "תמיכה באימייל בעדיפות",
-        "קבצי EasyLanguage (.ELD/.PLA)",
-        "תיעוד מורחב",
-        "מדריך התקנה PDF",
-        "עדכונים חודשיים"
+        "אסטרטגיה עבור /ES (E-mini S&P 500)",
+        "גישה גם ל-/MES",
+        "פורמט EasyLanguage (.ELD/.PLA)",
+        "פרמטרים אופטימליים מתקדמים",
+        "עדכונים חודשיים עם עדיפות",
+        "תמיכה טכנית עם עדיפות",
+        "מדריך התקנה מתקדם",
+        "דוגמאות לסביבת עבודה",
+        "תיעוד מורחב"
       ],
       "popular": "מומלץ"
     },
@@ -1228,10 +1228,10 @@
       "timeSavedDesc": "That's 2,400+ hours per year you can dedicate to what really matters"
     },
     "cta": {
-      "title": "Ready to Transform Your Trading?",
-      "description": "Try our strategies in demo, risk-free. Discover how AI can change the way you trade.",
-      "demoButton": "See Live Demo",
-      "pricingButton": "View Plans and Pricing"
+      "title": "מוכן לשנות את המסחר שלך?",
+      "description": "נסה את האסטרטגיות שלנו בדמו, ללא סיכון. גלה כיצד AI יכול לשנות את אופן המסחר שלך.",
+      "demoButton": "צפה בדמו חי",
+      "pricingButton": "צפה בתוכניות ומחירים"
     }
   },
   "algoTradingPage": {
