@@ -311,12 +311,7 @@ export default function Pricing() {
               {t("pricing.title", { defaultValue: "Planes y Precios" })}
             </h1>
           </div>
-          <p className="text-base md:text-lg text-slate-300 max-w-2xl mx-auto">
-            {t("pricing.subtitle", {
-              defaultValue:
-                "Contratos Micro y Mini. Elegí Mensual o Anual (ahorro 30%).",
-            })}
-          </p>
+
         </div>
       </section>
 
