@@ -1065,8 +1065,12 @@
       "successDesc": "הנחה של {{discount}}% הוחלה למשך {{duration}} חודשים",
       "invalid": "קופון לא תקין",
       "invalidDesc": "הקופון אינו תקף",
-      "errorDesc": "לא ניתן לאמת את הקופון"
+      "errorDesc": "לא ניתן לאמת את הקופון",
+      "validating": "מאמת...",
+      "applied": "הנחה של {{percent}}% הוחלה למשך {{months}} חודשים",
+      "remove": "הסר"
     },
+    "popular": "מומלץ",
     "micro": {
       "name": "חוזה Micro {{instrument}}",
       "price": "$99",

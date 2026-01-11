@@ -1066,8 +1066,12 @@
       "successDesc": "Une réduction de {{discount}}% a été appliquée pour {{duration}} mois",
       "invalid": "Coupon invalide",
       "invalidDesc": "Le coupon n'est pas valide",
-      "errorDesc": "Impossible de valider le coupon"
+      "errorDesc": "Impossible de valider le coupon",
+      "validating": "Validation...",
+      "applied": "Réduction de {{percent}}% appliquée pour {{months}} mois",
+      "remove": "Retirer"
     },
+    "popular": "Recommandé",
     "micro": {
       "name": "Contrat Micro {{instrument}}",
       "price": "$99",

@@ -1066,8 +1066,12 @@
       "successDesc": "Скидка {{discount}}% применена на {{duration}} месяцев",
       "invalid": "Недействительный купон",
       "invalidDesc": "Купон недействителен",
-      "errorDesc": "Не удалось проверить купон"
+      "errorDesc": "Не удалось проверить купон",
+      "validating": "Проверка...",
+      "applied": "Скидка {{percent}}% применена на {{months}} месяцев",
+      "remove": "Удалить"
     },
+    "popular": "Рекомендуется",
     "micro": {
       "name": "Контракт Micro {{instrument}}",
       "price": "$99",

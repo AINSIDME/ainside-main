@@ -1066,8 +1066,12 @@
       "successDesc": "A {{discount}}% discount has been applied for {{duration}} months",
       "invalid": "Invalid coupon",
       "invalidDesc": "The coupon is not valid",
-      "errorDesc": "Could not validate the coupon"
+      "errorDesc": "Could not validate the coupon",
+      "validating": "Validating...",
+      "applied": "{{percent}}% discount applied for {{months}} months",
+      "remove": "Remove"
     },
+    "popular": "Recommended",
     "micro": {
       "name": "Micro Contract {{instrument}}",
       "price": "$99",

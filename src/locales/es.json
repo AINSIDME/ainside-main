@@ -1066,8 +1066,12 @@
       "successDesc": "Se aplicó un descuento del {{discount}}% durante {{duration}} meses",
       "invalid": "Cupón inválido",
       "invalidDesc": "El cupón no es válido",
-      "errorDesc": "No se pudo validar el cupón"
+      "errorDesc": "No se pudo validar el cupón",
+      "validating": "Validando...",
+      "applied": "Descuento del {{percent}}% aplicado por {{months}} meses",
+      "remove": "Quitar"
     },
+    "popular": "Recomendado",
     "micro": {
       "name": "Contrato Micro {{instrument}}",
       "price": "$99",

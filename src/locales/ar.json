@@ -1065,8 +1065,12 @@
       "successDesc": "تم تطبيق خصم {{discount}}٪ لمدة {{duration}} شهر",
       "invalid": "كوبون غير صالح",
       "invalidDesc": "الكوبون غير صالح",
-      "errorDesc": "تعذر التحقق من صحة الكوبون"
+      "errorDesc": "تعذر التحقق من صحة الكوبون",
+      "validating": "جارٍ التحقق...",
+      "applied": "تم تطبيق خصم {{percent}}٪ لمدة {{months}} شهر",
+      "remove": "إزالة"
     },
+    "popular": "مُوصى به",
     "micro": {
       "name": "استراتيجية Micro {{instrument}}",
       "price": "25.00",
