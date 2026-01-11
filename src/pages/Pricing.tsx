@@ -106,9 +106,15 @@ export default function Pricing() {
       console.error('Error validating coupon:', error);
       // Solo mostrar error si no hay cupón válido guardado
       if (!couponValid?.valid) {
+        const err = error as any;
+        const details =
+          (typeof err?.message === 'string' && err.message) ||
+          (typeof err?.details === 'string' && err.details) ||
+          (typeof err?.error_description === 'string' && err.error_description) ||
+          '';
         toast({
           title: t("pricing.coupon.error", { defaultValue: "Error" }),
-          description: t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" }),
+          description: `${t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" })}${details ? `: ${details}` : ''}`,
           variant: "destructive",
           duration: 3000,
         });
