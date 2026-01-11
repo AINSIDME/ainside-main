@@ -19,9 +19,12 @@ serve(async (req) => {
       });
     }
 
-    const { plan, intro, language } = await req.json();
+    const { plan, intro, language, coupon_code, coupon_discount, coupon_duration } = await req.json();
     const userLang = language || 'en';
 
+    // Si hay cupón, usarlo en lugar del intro discount
+    const hasCoupon = !!coupon_code && typeof coupon_discount === 'number';
+    
     // 🔐 Mapeo de planes en el servidor
     const PLANS: Record<
       string,
@@ -85,8 +88,23 @@ serve(async (req) => {
       );
     }
 
-    const applyIntro = !!intro && String(plan).endsWith("_monthly");
-    const finalAmount = applyIntro ? Number((selected.amount * 0.5).toFixed(2)) : selected.amount;
+    // Calcular precio final basado en cupón o intro discount
+    let finalAmount: number;
+    let descriptionSuffix = "";
+
+    if (hasCoupon) {
+      // Aplicar descuento de cupón
+      finalAmount = Number((selected.amount * (1 - coupon_discount / 100)).toFixed(2));
+      descriptionSuffix = ` - Coupon ${coupon_discount}% off for ${coupon_duration} months`;
+    } else {
+      // Aplicar descuento intro si corresponde
+      const applyIntro = !!intro && String(plan).endsWith("_monthly");
+      finalAmount = applyIntro ? Number((selected.amount * 0.5).toFixed(2)) : selected.amount;
+      if (applyIntro) {
+        descriptionSuffix = " - First month 50% off";
+      }
+    }
+
     const amountStr = finalAmount.toFixed(2); // "99.00"
 
     const PAYPAL_CLIENT_ID = Deno.env.get("PAYPAL_CLIENT_ID");
@@ -153,6 +171,10 @@ serve(async (req) => {
     const { access_token } = await authResponse.json();
 
     // 2) ORDEN de PayPal (versión mínima súper estricta)
+    const customIdData = hasCoupon
+      ? `${plan}|${userLang}|coupon:${coupon_code}|${coupon_discount}|${coupon_duration}`
+      : `${plan}|${userLang}`;
+
     const orderData = {
       intent: "CAPTURE",
       purchase_units: [
@@ -161,10 +183,8 @@ serve(async (req) => {
             currency_code: selected.currency,
             value: amountStr,
           },
-          description: applyIntro
-            ? `${selected.description} - First month 50% off`
-            : selected.description,
-          custom_id: `${plan}|${userLang}`, // Store language in custom_id
+          description: `${selected.description}${descriptionSuffix}`,
+          custom_id: customIdData,
         },
       ],
       application_context: {
