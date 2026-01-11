@@ -192,56 +192,54 @@ const AdminCoupons = () => {
     <div className="min-h-screen bg-black text-white py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Button
-              onClick={() => navigate('/admin/control')}
-              variant="outline"
-              className="border-slate-700 text-slate-300 hover:bg-slate-800"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver
-            </Button>
-            <h1 className="text-3xl font-light">Sistema de Cupones</h1>
-          </div>
+        <div className="mb-6 sm:mb-8">
+          <Button
+            onClick={() => navigate('/admin/control')}
+            variant="outline"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 mb-4"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Volver
+          </Button>
+          <h1 className="text-2xl sm:text-3xl font-light">Sistema de Cupones</h1>
         </div>
 
         {/* Info Alert */}
-        <div className="mb-8 p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-          <div className="text-sm text-blue-300">
-            <p className="font-semibold mb-1">Sistema de Cupones con Descuento del 30% por 12 meses</p>
-            <p>Cada cupón es de <strong>uso único</strong> y reemplaza el descuento del 59% del primer mes con un 30% durante todo el año.</p>
+        <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
+          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm text-blue-300">
+            <p className="font-semibold mb-1">30% por 12 meses - Uso único</p>
+            <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y reemplaza el descuento del 59% del primer mes con un 30% durante todo el año.</p>
           </div>
         </div>
 
         {/* Create Coupon Form */}
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 mb-8">
-          <h2 className="text-xl font-medium mb-4">Crear Nuevo Cupón</h2>
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="text-lg sm:text-xl font-medium mb-4">Crear Nuevo Cupón</h2>
           
-          <div className="grid gap-4 mb-4">
+          <div className="grid gap-3 sm:gap-4 mb-4">
             <div>
-              <label className="block text-sm text-slate-400 mb-2">
-                Notas (Opcional) - Para quién es este cupón
+              <label className="block text-xs sm:text-sm text-slate-400 mb-2">
+                Notas (Opcional)
               </label>
               <Textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Ej: Cupón para cliente Juan Pérez - Referido por..."
-                className="bg-slate-800 border-slate-700 text-white"
+                placeholder="Ej: Cupón para Juan Pérez"
+                className="bg-slate-800 border-slate-700 text-white text-sm"
                 rows={2}
               />
             </div>
 
             <div>
-              <label className="block text-sm text-slate-400 mb-2">
-                Fecha de Expiración (Opcional)
+              <label className="block text-xs sm:text-sm text-slate-400 mb-2">
+                Expiración (Opcional)
               </label>
               <Input
                 type="datetime-local"
                 value={expiresAt}
                 onChange={(e) => setExpiresAt(e.target.value)}
-                className="bg-slate-800 border-slate-700 text-white"
+                className="bg-slate-800 border-slate-700 text-white text-sm"
               />
             </div>
           </div>
@@ -249,7 +247,7 @@ const AdminCoupons = () => {
           <Button
             onClick={createCoupon}
             disabled={creating}
-            className="bg-blue-600 hover:bg-blue-700 text-white"
+            className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
           >
             <Plus className="w-4 h-4 mr-2" />
             {creating ? 'Creando...' : 'Generar Cupón'}
@@ -257,8 +255,8 @@ const AdminCoupons = () => {
         </div>
 
         {/* Coupons List */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-medium">
+        <div className="space-y-3 sm:space-y-4">
+          <h2 className="text-lg sm:text-xl font-medium">
             Cupones Creados ({coupons.length})
           </h2>
 
@@ -267,95 +265,93 @@ const AdminCoupons = () => {
               No hay cupones creados
             </div>
           ) : (
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {coupons.map((coupon) => (
                 <div
                   key={coupon.id}
-                  className={`bg-slate-900/50 border rounded-lg p-4 ${
+                  className={`bg-slate-900/50 border rounded-lg p-3 sm:p-4 ${
                     coupon.is_active && coupon.current_uses < coupon.max_uses
                       ? 'border-blue-500/50'
                       : 'border-slate-700'
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      {/* Coupon Code */}
-                      <div className="flex items-center gap-3 mb-3">
-                        <code className="text-2xl font-mono font-bold text-blue-400 bg-slate-800 px-3 py-1 rounded">
-                          {coupon.code}
-                        </code>
-                        <Button
-                          onClick={() => copyCouponCode(coupon.code)}
-                          variant="outline"
-                          size="sm"
-                          className="border-slate-700"
-                        >
-                          {copiedCode === coupon.code ? (
-                            <>
-                              <Check className="w-4 h-4 mr-1" />
-                              Copiado
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4 mr-1" />
-                              Copiar
-                            </>
-                          )}
-                        </Button>
-                      </div>
-
-                      {/* Details */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
-                        <div>
-                          <span className="text-slate-500">Descuento:</span>
-                          <div className="font-semibold text-green-400">
-                            {coupon.discount_percent}%
-                          </div>
-                        </div>
-                        <div>
-                          <span className="text-slate-500">Duración:</span>
-                          <div className="font-semibold">
-                            {coupon.duration_months} meses
-                          </div>
-                        </div>
-                        <div>
-                          <span className="text-slate-500">Usos:</span>
-                          <div className="font-semibold">
-                            {coupon.current_uses} / {coupon.max_uses}
-                          </div>
-                        </div>
-                        <div>
-                          <span className="text-slate-500">Estado:</span>
-                          <div
-                            className={`font-semibold ${
-                              coupon.is_active && coupon.current_uses < coupon.max_uses
-                                ? 'text-green-400'
-                                : 'text-red-400'
-                            }`}
-                          >
-                            {coupon.is_active && coupon.current_uses < coupon.max_uses
-                              ? 'Disponible'
-                              : coupon.current_uses >= coupon.max_uses
-                              ? 'Usado'
-                              : 'Inactivo'}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Notes */}
-                      {coupon.notes && (
-                        <div className="text-sm text-slate-400 mb-2">
-                          <span className="text-slate-500">Notas:</span> {coupon.notes}
-                        </div>
-                      )}
-
-                      {/* Dates */}
-                      <div className="text-xs text-slate-500">
-                        Creado: {new Date(coupon.created_at).toLocaleString('es-ES')}
-                        {coupon.expires_at && (
-                          <> • Expira: {new Date(coupon.expires_at).toLocaleString('es-ES')}</>
+                  <div className="space-y-3">
+                    {/* Coupon Code */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                      <code className="text-lg sm:text-2xl font-mono font-bold text-blue-400 bg-slate-800 px-2 sm:px-3 py-1 rounded break-all">
+                        {coupon.code}
+                      </code>
+                      <Button
+                        onClick={() => copyCouponCode(coupon.code)}
+                        variant="outline"
+                        size="sm"
+                        className="border-slate-700 w-full sm:w-auto"
+                      >
+                        {copiedCode === coupon.code ? (
+                          <>
+                            <Check className="w-4 h-4 mr-1" />
+                            Copiado
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4 mr-1" />
+                            Copiar
+                          </>
                         )}
+                      </Button>
+                    </div>
+
+                    {/* Details */}
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
+                      <div className="bg-slate-800/50 p-2 rounded">
+                        <span className="text-slate-500 text-xs">Descuento</span>
+                        <div className="font-semibold text-green-400">
+                          {coupon.discount_percent}%
+                        </div>
                       </div>
+                      <div className="bg-slate-800/50 p-2 rounded">
+                        <span className="text-slate-500 text-xs">Duración</span>
+                        <div className="font-semibold">
+                          {coupon.duration_months} meses
+                        </div>
+                      </div>
+                      <div className="bg-slate-800/50 p-2 rounded">
+                        <span className="text-slate-500 text-xs">Usos</span>
+                        <div className="font-semibold">
+                          {coupon.current_uses} / {coupon.max_uses}
+                        </div>
+                      </div>
+                      <div className="bg-slate-800/50 p-2 rounded">
+                        <span className="text-slate-500 text-xs">Estado</span>
+                        <div
+                          className={`font-semibold ${
+                            coupon.is_active && coupon.current_uses < coupon.max_uses
+                              ? 'text-green-400'
+                              : 'text-red-400'
+                          }`}
+                        >
+                          {coupon.is_active && coupon.current_uses < coupon.max_uses
+                            ? 'Disponible'
+                            : coupon.current_uses >= coupon.max_uses
+                            ? 'Usado'
+                            : 'Inactivo'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Notes */}
+                    {coupon.notes && (
+                      <div className="text-xs sm:text-sm text-slate-400 bg-slate-800/30 p-2 rounded">
+                        <span className="text-slate-500 font-medium">Notas:</span> {coupon.notes}
+                      </div>
+                    )}
+
+                    {/* Dates */}
+                    <div className="text-xs text-slate-500">
+                      <div>Creado: {new Date(coupon.created_at).toLocaleString('es-ES')}</div>
+                      {coupon.expires_at && (
+                        <div>Expira: {new Date(coupon.expires_at).toLocaleString('es-ES')}</div>
+                      )}
                     </div>
 
                     {/* Actions */}
@@ -364,7 +360,7 @@ const AdminCoupons = () => {
                         onClick={() => toggleCouponActive(coupon.id, coupon.is_active)}
                         variant="outline"
                         size="sm"
-                        className="border-slate-700"
+                        className="border-slate-700 flex-1 sm:flex-none"
                         disabled={coupon.current_uses >= coupon.max_uses}
                       >
                         {coupon.is_active ? 'Desactivar' : 'Activar'}
