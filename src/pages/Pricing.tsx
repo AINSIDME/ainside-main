@@ -91,8 +91,6 @@ export default function Pricing() {
           }),
           duration: 5000,
         });
-        // Desactivar intro discount si se aplica cupón
-        setIntro(false);
       } else {
         // Cupón inválido (existe pero no es válido)
         toast({
