@@ -104,7 +104,7 @@ export default function Pricing() {
         icon: <LineChart className="h-5 w-5" />,
       },
       gold: {
-        name: t("instrument.gold.name", { defaultValue: "Oro" }),
+        name: t("instrument.gold.name", { defaultValue: "Gold" }),
         pair: "GC/MGC",
         symbolByPlan: { Micro: "MGC", Mini: "GC" } as Record<Plan, string>,
         colorRing: "ring-amber-900/40",
