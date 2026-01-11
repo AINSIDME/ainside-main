@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Plus, Copy, Check, Trash2, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useToast } from '@/hooks/use-toast';
 
 interface Coupon {
   id: string;
@@ -22,6 +23,7 @@ interface Coupon {
 
 const AdminCoupons = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,27 +34,30 @@ const AdminCoupons = () => {
   const [notes, setNotes] = useState('');
   const [expiresAt, setExpiresAt] = useState('');
 
+  // Lista de emails autorizados como administradores
+  const adminEmails = ['jonathangolubok@gmail.com'];
+
   useEffect(() => {
     checkAdminAndLoadCoupons();
   }, []);
 
   const checkAdminAndLoadCoupons = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { user } } = await supabase.auth.getUser();
       
-      if (!session) {
+      if (!user) {
         navigate('/login');
         return;
       }
 
-      const { data: adminData, error: adminError } = await supabase
-        .from('admins')
-        .select('*')
-        .eq('email', session.user.email)
-        .eq('is_active', true)
-        .single();
-
-      if (adminError || !adminData) {
+      // Verificar si el email está en la lista de administradores
+      const email = (user.email || '').toLowerCase();
+      if (!adminEmails.includes(email)) {
+        toast({
+          title: "Acceso denegado",
+          description: "No tienes permisos de administrador",
+          variant: "destructive",
+        });
         navigate('/');
         return;
       }
@@ -60,6 +65,11 @@ const AdminCoupons = () => {
       await loadCoupons();
     } catch (error) {
       console.error('Error checking admin:', error);
+      toast({
+        title: "Error",
+        description: "Error al verificar permisos",
+        variant: "destructive",
+      });
       navigate('/');
     } finally {
       setLoading(false);

@@ -14,13 +14,264 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      purchases: {
+        Row: {
+          id: string
+          order_id: string
+          email: string
+          plan_name: string
+          plan_type: string
+          amount: string
+          currency: string
+          status: string
+          created_at: string
+          last_download_at: string | null
+          coupon_code: string | null
+          coupon_discount_percent: number | null
+          coupon_duration_months: number | null
+          coupon_applied_at: string | null
+        }
+        Insert: {
+          id?: string
+          order_id: string
+          email: string
+          plan_name: string
+          plan_type: string
+          amount: string
+          currency: string
+          status?: string
+          created_at?: string
+          last_download_at?: string | null
+          coupon_code?: string | null
+          coupon_discount_percent?: number | null
+          coupon_duration_months?: number | null
+          coupon_applied_at?: string | null
+        }
+        Update: {
+          id?: string
+          order_id?: string
+          email?: string
+          plan_name?: string
+          plan_type?: string
+          amount?: string
+          currency?: string
+          status?: string
+          created_at?: string
+          last_download_at?: string | null
+          coupon_code?: string | null
+          coupon_discount_percent?: number | null
+          coupon_duration_months?: number | null
+          coupon_applied_at?: string | null
+        }
+      }
+      discount_coupons: {
+        Row: {
+          id: string
+          code: string
+          discount_percent: number
+          duration_months: number
+          max_uses: number
+          current_uses: number
+          is_active: boolean
+          created_by: string | null
+          created_at: string
+          expires_at: string | null
+          notes: string | null
+        }
+        Insert: {
+          id?: string
+          code: string
+          discount_percent?: number
+          duration_months?: number
+          max_uses?: number
+          current_uses?: number
+          is_active?: boolean
+          created_by?: string | null
+          created_at?: string
+          expires_at?: string | null
+          notes?: string | null
+        }
+        Update: {
+          id?: string
+          code?: string
+          discount_percent?: number
+          duration_months?: number
+          max_uses?: number
+          current_uses?: number
+          is_active?: boolean
+          created_by?: string | null
+          created_at?: string
+          expires_at?: string | null
+          notes?: string | null
+        }
+      }
+      contact_messages: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          message: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          message: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          message?: string
+          created_at?: string
+        }
+      }
+      admin_2fa_sessions: {
+        Row: {
+          id: string
+          user_id: string
+          totp_secret: string
+          is_verified: boolean
+          verified_at: string | null
+          created_at: string
+          expires_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          totp_secret: string
+          is_verified?: boolean
+          verified_at?: string | null
+          created_at?: string
+          expires_at: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          totp_secret?: string
+          is_verified?: boolean
+          verified_at?: string | null
+          created_at?: string
+          expires_at?: string
+        }
+      }
+      admin_access_logs: {
+        Row: {
+          id: string
+          user_id: string
+          action: string
+          details: Json | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          action: string
+          details?: Json | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          action?: string
+          details?: Json | null
+          created_at?: string
+        }
+      }
+      client_connections: {
+        Row: {
+          id: string
+          hwid: string
+          ip_address: string
+          user_agent: string | null
+          connected_at: string
+        }
+        Insert: {
+          id?: string
+          hwid: string
+          ip_address: string
+          user_agent?: string | null
+          connected_at?: string
+        }
+        Update: {
+          id?: string
+          hwid?: string
+          ip_address?: string
+          user_agent?: string | null
+          connected_at?: string
+        }
+      }
+      hwid_registrations: {
+        Row: {
+          id: string
+          hwid: string
+          order_id: string
+          email: string
+          registered_at: string
+        }
+        Insert: {
+          id?: string
+          hwid: string
+          order_id: string
+          email: string
+          registered_at?: string
+        }
+        Update: {
+          id?: string
+          hwid?: string
+          order_id?: string
+          email?: string
+          registered_at?: string
+        }
+      }
+      download_email_otps: {
+        Row: {
+          id: string
+          email: string
+          otp: string
+          order_id: string
+          created_at: string
+          expires_at: string
+          verified: boolean
+        }
+        Insert: {
+          id?: string
+          email: string
+          otp: string
+          order_id: string
+          created_at?: string
+          expires_at: string
+          verified?: boolean
+        }
+        Update: {
+          id?: string
+          email?: string
+          otp?: string
+          order_id?: string
+          created_at?: string
+          expires_at?: string
+          verified?: boolean
+        }
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      validate_coupon: {
+        Args: {
+          coupon_code_input: string
+        }
+        Returns: Json
+      }
+      mark_coupon_as_used: {
+        Args: {
+          coupon_code_input: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
