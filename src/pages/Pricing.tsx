@@ -302,21 +302,8 @@ export default function Pricing() {
   // ===== UI =====
   return (
     <div className="min-h-screen bg-[color:#0b1220]">
-      {/* Hero sobrio */}
-      <section className="py-16 px-4 border-b border-slate-800">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <DollarSign className="h-6 w-6 text-amber-400" />
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-100">
-              {t("pricing.title", { defaultValue: "Planes y Precios" })}
-            </h1>
-          </div>
-
-        </div>
-      </section>
-
       {/* Controles superiores simétricos */}
-      <section className="px-4">
+      <section className="px-4 pt-8">
         <div className="max-w-5xl mx-auto py-6 grid gap-6 md:grid-cols-2">
           {/* Toggle Mensual/Anual (segmentado, formal) */}
           <div className="rounded-xl border border-slate-800 bg-slate-950 p-5">
