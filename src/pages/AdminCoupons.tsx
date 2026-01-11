@@ -4,7 +4,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Plus, Copy, Check, Trash2, AlertCircle } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { ArrowLeft, Plus, Copy, Check, Trash2, AlertCircle, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 
@@ -33,6 +34,13 @@ const AdminCoupons = () => {
   // Form state
   const [notes, setNotes] = useState('');
   const [expiresAt, setExpiresAt] = useState('');
+
+  // Email dialog state
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [recipientName, setRecipientName] = useState('');
+  const [sendingEmail, setSendingEmail] = useState(false);
 
   // Lista de emails autorizados como administradores
   const adminEmails = ['jonathangolubok@gmail.com'];
@@ -178,6 +186,65 @@ const AdminCoupons = () => {
     }
 
     await loadCoupons();
+  };
+
+  const openEmailDialog = (coupon: Coupon) => {
+    setSelectedCoupon(coupon);
+    setRecipientEmail('');
+    setRecipientName('');
+    setEmailDialogOpen(true);
+  };
+
+  const sendCouponByEmail = async () => {
+    if (!selectedCoupon || !recipientEmail) {
+      toast({
+        title: "Error",
+        description: "Por favor ingresa un email válido",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSendingEmail(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-coupon-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          recipientEmail,
+          recipientName: recipientName || 'Cliente',
+          couponCode: selectedCoupon.code,
+          discountPercent: selectedCoupon.discount_percent,
+          durationMonths: selectedCoupon.duration_months,
+          expiresAt: selectedCoupon.expires_at,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar email');
+      }
+
+      toast({
+        title: "Email enviado",
+        description: `Cupón enviado exitosamente a ${recipientEmail}`,
+      });
+
+      setEmailDialogOpen(false);
+      setRecipientEmail('');
+      setRecipientName('');
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo enviar el email. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setSendingEmail(false);
+    }
   };
 
   if (loading) {
@@ -357,6 +424,16 @@ const AdminCoupons = () => {
                     {/* Actions */}
                     <div className="flex gap-2">
                       <Button
+                        onClick={() => openEmailDialog(coupon)}
+                        variant="outline"
+                        size="sm"
+                        className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 flex-1 sm:flex-none"
+                        disabled={!coupon.is_active || coupon.current_uses >= coupon.max_uses}
+                      >
+                        <Mail className="w-4 h-4 sm:mr-1" />
+                        <span className="hidden sm:inline">Enviar</span>
+                      </Button>
+                      <Button
                         onClick={() => toggleCouponActive(coupon.id, coupon.is_active)}
                         variant="outline"
                         size="sm"
@@ -381,6 +458,76 @@ const AdminCoupons = () => {
           )}
         </div>
       </div>
+
+      {/* Email Dialog */}
+      <Dialog open={emailDialogOpen} onOpenChange={setEmailDialogOpen}>
+        <DialogContent className="bg-slate-900 border-slate-800 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-xl">Enviar Cupón por Email</DialogTitle>
+            <DialogDescription className="text-slate-400">
+              Envía el cupón <code className="text-blue-400 bg-slate-800 px-2 py-0.5 rounded">{selectedCoupon?.code}</code> directamente al cliente.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4 mt-4">
+            <div>
+              <label className="block text-sm text-slate-400 mb-2">
+                Email del destinatario *
+              </label>
+              <Input
+                type="email"
+                value={recipientEmail}
+                onChange={(e) => setRecipientEmail(e.target.value)}
+                placeholder="cliente@ejemplo.com"
+                className="bg-slate-800 border-slate-700 text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-slate-400 mb-2">
+                Nombre del destinatario (Opcional)
+              </label>
+              <Input
+                type="text"
+                value={recipientName}
+                onChange={(e) => setRecipientName(e.target.value)}
+                placeholder="Juan Pérez"
+                className="bg-slate-800 border-slate-700 text-white"
+              />
+            </div>
+
+            <div className="bg-blue-500/10 border border-blue-500/50 rounded-lg p-3 text-sm">
+              <p className="text-blue-300">
+                <strong>Descuento:</strong> {selectedCoupon?.discount_percent}% por {selectedCoupon?.duration_months} meses
+              </p>
+              {selectedCoupon?.expires_at && (
+                <p className="text-blue-300 mt-1">
+                  <strong>Expira:</strong> {new Date(selectedCoupon.expires_at).toLocaleDateString('es-ES')}
+                </p>
+              )}
+            </div>
+
+            <div className="flex gap-2 pt-2">
+              <Button
+                onClick={() => setEmailDialogOpen(false)}
+                variant="outline"
+                className="flex-1 border-slate-700"
+                disabled={sendingEmail}
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={sendCouponByEmail}
+                className="flex-1 bg-blue-600 hover:bg-blue-700"
+                disabled={sendingEmail || !recipientEmail}
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                {sendingEmail ? 'Enviando...' : 'Enviar Email'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
