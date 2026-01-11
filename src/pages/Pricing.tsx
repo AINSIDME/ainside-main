@@ -85,9 +85,13 @@ export default function Pricing() {
         toast({
           title: t("pricing.coupon.success", { defaultValue: "Coupon applied!" }),
           description: t("pricing.coupon.successDesc", {
-            defaultValue: "{{percent}}% discount applied for {{months}} months",
+            defaultValue: "A {{discount}}% discount has been applied for {{duration}} months",
+            // Match placeholders used in locale JSON files
+            discount: data.discount_percent,
+            duration: data.duration_months,
+            // Backward/defensive: support older placeholder names if any exist
             percent: data.discount_percent,
-            months: data.duration_months
+            months: data.duration_months,
           }),
           duration: 5000,
         });
