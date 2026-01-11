@@ -53,12 +53,21 @@ export default function Pricing() {
         coupon_code_input: couponCode.trim()
       });
 
+      // Si hay error de RPC, lanzar excepción
       if (error) {
+        console.error('RPC error:', error);
         throw error;
       }
 
+      // Si no hay data, es un error
+      if (!data) {
+        throw new Error('No data received from validation');
+      }
+
+      // Guardar resultado de validación
       setCouponValid(data);
 
+      // Mostrar resultado basado en validación
       if (data.valid) {
         toast({
           title: t("pricing.coupon.success", { defaultValue: "Coupon applied!" }),
@@ -72,6 +81,7 @@ export default function Pricing() {
         // Desactivar intro discount si se aplica cupón
         setIntro(false);
       } else {
+        // Cupón inválido (existe pero no es válido)
         toast({
           title: t("pricing.coupon.invalid", { defaultValue: "Invalid coupon" }),
           description: data.message || t("pricing.coupon.invalidDesc", { defaultValue: "The coupon is not valid" }),
@@ -81,12 +91,15 @@ export default function Pricing() {
       }
     } catch (error) {
       console.error('Error validating coupon:', error);
-      toast({
-        title: t("pricing.coupon.error", { defaultValue: "Error" }),
-        description: t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" }),
-        variant: "destructive",
-        duration: 3000,
-      });
+      // Solo mostrar error si no hay cupón válido guardado
+      if (!couponValid?.valid) {
+        toast({
+          title: t("pricing.coupon.error", { defaultValue: "Error" }),
+          description: t("pricing.coupon.errorDesc", { defaultValue: "Could not validate coupon" }),
+          variant: "destructive",
+          duration: 3000,
+        });
+      }
     } finally {
       setValidatingCoupon(false);
     }
