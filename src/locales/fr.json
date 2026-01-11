@@ -223,14 +223,14 @@
       "empty": "Placez des captures dans /public/guide pour montrer des exemples réels ici."
     },
     "execution": {
-      "title": "Real execution (EasyLanguage)",
-      "p1": "The strategy runs natively on ",
-      "p2": " and ",
-      "p3": " using ",
-      "p4": "The browser only shows a visual representation. To install it in your platform see the "
+      "title": "Exécution réelle (EasyLanguage)",
+      "p1": "La stratégie s'exécute nativement sur ",
+      "p2": " et ",
+      "p3": " en utilisant ",
+      "p4": "Le navigateur affiche uniquement une représentation visuelle. Pour l'installer sur votre plateforme, consultez le "
     },
     "metrics": {
-      "title": "Example metrics",
+      "title": "Métriques d'exemple",
       "executed": "Trades Exécutés:",
       "winners": "Trades Gagnants:",
       "netPnl": "P&L Net:",
@@ -646,7 +646,7 @@
       "title": "Prêt à Commencer?",
       "desc": "Contactez notre équipe pour en savoir plus sur notre service de location d'algorithmes.",
       "button": "Nous contacter",
-      "pricing": "Voir les Prix",
+      "pricing": "Voir les Tarifs",
       "contact": "Nous Contacter",
       "viewPricing": "Voir les Tarifs"
     },
@@ -871,12 +871,12 @@
   },
   "status": {
     "title": "État du Système",
-    "operational": "All Systems Operational",
-    "degraded": "Degraded Performance",
-    "outage": "Service Outage",
+    "operational": "Tous les Systèmes Opérationnels",
+    "degraded": "Performance Dégradée",
+    "outage": "Interruption de Service",
     "maintenance": "Maintenance",
-    "dataFeed": "Market Data Feed",
-    "charts": "Chart Services",
+    "dataFeed": "Flux de Données de Marché",
+    "charts": "Services de Graphiques",
     "api": "API"
   },
   "trust": {

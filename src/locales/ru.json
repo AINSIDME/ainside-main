@@ -223,14 +223,14 @@
       "empty": "Поместите скриншоты в /public/guide, чтобы показать реальные примеры здесь."
     },
     "execution": {
-      "title": "Real execution (EasyLanguage)",
-      "p1": "The strategy runs natively on ",
-      "p2": " and ",
-      "p3": " using ",
-      "p4": "The browser only shows a visual representation. To install it in your platform see the "
+      "title": "Реальное исполнение (EasyLanguage)",
+      "p1": "Стратегия работает нативно на ",
+      "p2": " и ",
+      "p3": " используя ",
+      "p4": "Браузер показывает только визуальное представление. Чтобы установить на вашу платформу, см. "
     },
     "metrics": {
-      "title": "Example metrics",
+      "title": "Примеры метрик",
       "executed": "Выполненных Сделок:",
       "winners": "Прибыльных Сделок:",
       "netPnl": "Чистый P&L:",
@@ -467,7 +467,7 @@
       "description": "Получите доступ к нашим торговым алгоритмам и профессиональным аналитическим инструментам через гибкие планы месячной аренды.",
       "demo": "Посмотреть Живую Демонстрацию",
       "contact": "Связаться с Нами",
-      "pricing": "Pricing",
+      "pricing": "Цены",
       "services": "Наши Услуги",
       "consultation": "Запланировать Консультацию"
     },
@@ -645,10 +645,10 @@
     "cta": {
       "title": "Готовы Начать?",
       "desc": "Свяжитесь с нашей командой, чтобы узнать больше о нашей услуге аренды алгоритмов.",
-      "button": "Contact Us",
+      "button": "Связаться с Нами",
       "pricing": "Смотреть Цены",
       "contact": "Связаться с Нами",
-      "viewPricing": "View Pricing"
+      "viewPricing": "Смотреть Цены"
     },
     "chartType": {
       "area": "График Площади",
