@@ -207,11 +207,16 @@ const AdminCoupons = () => {
 
     setSendingEmail(true);
     try {
+      console.log('Sending coupon email to:', recipientEmail);
+      console.log('Coupon code:', selectedCoupon.code);
+
+      const { data: { session } } = await supabase.auth.getSession();
+      
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-coupon-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
         body: JSON.stringify({
           recipientEmail,
@@ -223,12 +228,15 @@ const AdminCoupons = () => {
         }),
       });
 
+      const result = await response.json();
+      console.log('Response:', result);
+
       if (!response.ok) {
-        throw new Error('Error al enviar email');
+        throw new Error(result.error || 'Error al enviar email');
       }
 
       toast({
-        title: "Email enviado",
+        title: "✅ Email enviado",
         description: `Cupón enviado exitosamente a ${recipientEmail}`,
       });
 
@@ -238,8 +246,8 @@ const AdminCoupons = () => {
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
-        title: "Error",
-        description: "No se pudo enviar el email. Inténtalo de nuevo.",
+        title: "❌ Error",
+        description: error instanceof Error ? error.message : "No se pudo enviar el email. Inténtalo de nuevo.",
         variant: "destructive",
       });
     } finally {

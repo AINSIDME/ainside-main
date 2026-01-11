@@ -29,8 +29,23 @@ serve(async (req) => {
       expiresAt 
     }: CouponEmailData = await req.json()
 
+    console.log('Received request to send coupon email:', {
+      recipientEmail,
+      recipientName,
+      couponCode,
+      discountPercent,
+      durationMonths
+    })
+
     // Validate required fields
     if (!recipientEmail || !recipientName || !couponCode || !discountPercent || !durationMonths) {
+      console.error('Missing required fields:', {
+        hasEmail: !!recipientEmail,
+        hasName: !!recipientName,
+        hasCode: !!couponCode,
+        hasDiscount: !!discountPercent,
+        hasDuration: !!durationMonths
+      })
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -48,9 +63,11 @@ serve(async (req) => {
     })
 
     if (!emailSent) {
+      console.error('Email sending failed')
       throw new Error('Failed to send email')
     }
 
+    console.log('Email sent successfully to:', recipientEmail)
     return new Response(
       JSON.stringify({ 
         success: true, 
@@ -81,6 +98,11 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
   try {
     const resendKey = Deno.env.get('RESEND_API_KEY')
     const sendgridKey = Deno.env.get('SENDGRID_API_KEY')
+
+    console.log('Email service configuration:', {
+      hasResend: !!resendKey,
+      hasSendGrid: !!sendgridKey
+    })
 
     const expirationText = data.expiresAt 
       ? `<p><strong>⏰ Válido hasta:</strong> ${new Date(data.expiresAt).toLocaleDateString('es-ES', { 
