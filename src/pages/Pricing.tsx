@@ -467,7 +467,10 @@ export default function Pricing() {
                 {t("pricing.micro.name", { defaultValue: "Contrato Micro" })}
               </CardTitle>
               <CardDescription className="text-slate-400">
-                {t("pricing.micro.description", { defaultValue: "Operación con contratos micro (MES/MGC)." })}
+                {t("pricing.micro.description", { 
+                  defaultValue: "Operación con contratos micro ({{symbol}}).",
+                  symbol: currentInstrument.symbolByPlan.Micro
+                })}
               </CardDescription>
             </CardHeader>
 
@@ -523,7 +526,10 @@ export default function Pricing() {
                     {t("pricing.mini.name", { defaultValue: "Contrato Mini" })}
                   </CardTitle>
                   <CardDescription className="text-slate-400">
-                    {t("pricing.mini.description", { defaultValue: "Operación con contratos mini (ES/GC)." })}
+                    {t("pricing.mini.description", { 
+                      defaultValue: "Operación con contratos mini ({{symbol}}).",
+                      symbol: currentInstrument.symbolByPlan.Mini
+                    })}
                   </CardDescription>
                 </div>
                 <Badge className="bg-slate-800 text-slate-200 border border-slate-700">
@@ -605,7 +611,7 @@ export default function Pricing() {
             </h3>
             <p className="text-slate-400 text-sm mt-1">
               {t("pricing.billingInfo", {
-                defaultValue: "Facturación mensual o anual (30% OFF en anual). Podés cancelar en cualquier momento.",
+                defaultValue: "Facturación mensual o anual (20% OFF en anual). Podés cancelar en cualquier momento.",
               })}
             </p>
           </div>
