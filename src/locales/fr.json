@@ -1051,10 +1051,10 @@
       "on": "Activé",
       "off": "Désactivé"
     },
-    "save": "Économisez 30%",
+    "save": "Économisez 20%",
     "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
     "chooseInstrument": "Choisir l'Instrument",
-    "billingInfo": "Facturé mensuellement ⬢ Annulation à tout moment",
+    "billingInfo": "Facturation mensuelle ou annuelle (20% de réduction sur l'annuel). Annulation à tout moment.",
     "micro": {
       "name": "Contrat Micro {{instrument}}",
       "price": "$99",

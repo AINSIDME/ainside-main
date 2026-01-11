@@ -240,32 +240,32 @@
     }
   },
   "a11yPage": {
-    "title": "Accessibility Statement",
-    "description": "Commitment to WCAG 2.1 AA, usability and inclusion.",
+    "title": "Заявление о доступности",
+    "description": "Наша приверженность инклюзивному дизайну",
     "commitment": {
-      "title": "Commitment",
-      "text": "AInside is committed to an inclusive experience aligned with WCAG 2.1 AA. If you encounter any accessibility barriers, contact us and we will assist and correct issues.",
+      "title": "Обязательство",
+      "text": "Мы стремимся соответствовать стандартам WCAG 2.1 AA. Если вы столкнулись с барьерами доступности, свяжитесь с нами, и мы поможем.",
       "items": {
-        "langDir": "Document language and direction set per locale.",
-        "keyboard": "Keyboard shortcuts and navigation, 'Skip to content' link.",
-        "controls": "High contrast and font size controls.",
-        "aria": "Accessible labels, ARIA roles and semantic landmarks.",
-        "readers": "Screen reader compatibility and motion reduction."
+        "langDir": "Язык документа и направление текста устанавливаются по локали.",
+        "keyboard": "Навигация с клавиатуры и горячие клавиши, включая ссылку 'Перейти к содержимому'.",
+        "controls": "Элементы управления высокой контрастностью и размером шрифта.",
+        "aria": "Доступные метки, роли ARIA и семантические ориентиры.",
+        "readers": "Совместимость с программами чтения с экрана и уменьшение движения."
       }
     },
     "features": {
-      "title": "Accessibility features",
-      "skip": "Skip to content: visible on focus before main navigation.",
-      "controls": "High contrast and font size controls in the header accessibility menu.",
-      "keyboard": "Keyboard compatibility: all controls navigable with Tab/Shift+Tab; visible focus states.",
-      "i18n": "Internationalization: lang and dir attributes update by locale.",
-      "motion": "Reduced motion: respect system prefers-reduced-motion."
+      "title": "Функции доступности",
+      "skip": "Перейти к содержимому: видимо при фокусе перед основной навигацией.",
+      "controls": "Элементы управления высокой контрастностью и размером шрифта в меню доступности в заголовке.",
+      "keyboard": "Совместимость с клавиатурой: все элементы управления доступны для навигации с помощью Tab/Shift+Tab; видимые состояния фокуса.",
+      "i18n": "Интернационализация: атрибуты lang и dir обновляются по локали.",
+      "motion": "Уменьшенное движение: соблюдение системного prefers-reduced-motion."
     },
     "contact": {
-      "title": "Contact and assistance",
-      "text": "If you need a reasonable accommodation or found an accessibility issue, contact us. We will respond as soon as possible.",
-      "form": "Via form: ",
-      "email": "Support email: support@ainside.me"
+      "title": "Контакты и помощь",
+      "text": "Если вам нужны разумные приспособления или вы обнаружили проблему с доступностью, свяжитесь с нами. Мы ответим как можно скорее.",
+      "form": "Через форму: ",
+      "email": "Email поддержки: support@ainside.me"
     }
   },
   "header": {
@@ -1051,10 +1051,10 @@
       "on": "Вкл",
       "off": "Выкл"
     },
-    "save": "Экономия 30%",
+    "save": "Экономия 20%",
     "renews": "Автоматическое продление. Вы можете отменить в любое время.",
     "chooseInstrument": "Выберите Инструмент",
-    "billingInfo": "Месячная или годовая оплата (30% СКИДКА на годовой). Отмена в любое время.",
+    "billingInfo": "Месячная или годовая оплата (20% СКИДКА на годовой). Отмена в любое время.",
     "micro": {
       "name": "Контракт Micro {{instrument}}",
       "price": "$99",

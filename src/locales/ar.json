@@ -240,32 +240,32 @@
     }
   },
   "a11yPage": {
-    "title": "Accessibility Statement",
-    "description": "Commitment to WCAG 2.1 AA, usability and inclusion.",
+    "title": "بيان إمكانية الوصول",
+    "description": "التزامنا بمعايير WCAG 2.1 AA، وسهولة الاستخدام والشمولية.",
     "commitment": {
-      "title": "Commitment",
-      "text": "AInside is committed to an inclusive experience aligned with WCAG 2.1 AA. If you encounter any accessibility barriers, contact us and we will assist and correct issues.",
+      "title": "الالتزام",
+      "text": "تلتزم AInside بتقديم تجربة شاملة متوافقة مع معايير WCAG 2.1 AA. إذا واجهت أي عوائق في إمكانية الوصول، اتصل بنا وسنساعدك ونصحح المشكلات.",
       "items": {
-        "langDir": "Document language and direction set per locale.",
-        "keyboard": "Keyboard shortcuts and navigation, 'Skip to content' link.",
-        "controls": "High contrast and font size controls.",
-        "aria": "Accessible labels, ARIA roles and semantic landmarks.",
-        "readers": "Screen reader compatibility and motion reduction."
+        "langDir": "لغة المستند والاتجاه محددة وفقًا للغة المحلية.",
+        "keyboard": "اختصارات لوحة المفاتيح والتنقل، رابط 'الانتقال إلى المحتوى الرئيسي'.",
+        "controls": "عناصر التحكم في التباين العالي وحجم الخط.",
+        "aria": "تسميات يسهل الوصول إليها، أدوار ARIA ومعالم دلالية.",
+        "readers": "التوافق مع قارئات الشاشة وتقليل الحركة."
       }
     },
     "features": {
-      "title": "Accessibility features",
-      "skip": "Skip to content: visible on focus before main navigation.",
-      "controls": "High contrast and font size controls in the header accessibility menu.",
-      "keyboard": "Keyboard compatibility: all controls navigable with Tab/Shift+Tab; visible focus states.",
-      "i18n": "Internationalization: lang and dir attributes update by locale.",
-      "motion": "Reduced motion: respect system prefers-reduced-motion."
+      "title": "ميزات إمكانية الوصول",
+      "skip": "الانتقال إلى المحتوى: مرئي عند التركيز قبل التنقل الرئيسي.",
+      "controls": "عناصر التحكم في التباين العالي وحجم الخط في قائمة إمكانية الوصول في الرأس.",
+      "keyboard": "التوافق مع لوحة المفاتيح: جميع عناصر التحكم قابلة للتنقل باستخدام Tab/Shift+Tab؛ حالات تركيز مرئية.",
+      "i18n": "الدولية: يتم تحديث سمات اللغة والاتجاه حسب اللغة المحلية.",
+      "motion": "تقليل الحركة: احترام تفضيلات النظام لتقليل الحركة."
     },
     "contact": {
-      "title": "Contact and assistance",
-      "text": "If you need a reasonable accommodation or found an accessibility issue, contact us. We will respond as soon as possible.",
-      "form": "Via form: ",
-      "email": "Support email: support@ainside.me"
+      "title": "الاتصال والمساعدة",
+      "text": "إذا كنت بحاجة إلى تسهيلات معقولة أو وجدت مشكلة في إمكانية الوصول، اتصل بنا. سنرد في أقرب وقت ممكن.",
+      "form": "عبر النموذج: ",
+      "email": "بريد الدعم: support@ainside.me"
     }
   },
   "header": {
@@ -1039,21 +1039,21 @@
   },
   "pricing": {
     "title": "اختر الخطة المناسبة لك",
-    "monthly": "Monthly",
-    "annual": "Annual",
-    "monthlyShort": "Monthly",
-    "annualShort": "Annual",
-    "billingCycle": "Billing Cycle",
+    "monthly": "شهري",
+    "annual": "سنوي",
+    "monthlyShort": "شهري",
+    "annualShort": "سنوي",
+    "billingCycle": "دورة الفوترة",
     "intro": {
-      "title": "First month 50% off",
-      "note": "Applies only to monthly plans",
-      "on": "On",
-      "off": "Off"
+      "title": "خصم 50٪ على الشهر الأول",
+      "note": "ينطبق فقط على الخطط الشهرية",
+      "on": "مفعل",
+      "off": "معطل"
     },
-    "save": "Save 30%",
-    "renews": "Auto-renews. You can cancel anytime.",
-    "chooseInstrument": "Choose Instrument",
-    "billingInfo": "Monthly or annual billing (30% OFF on annual). Cancel anytime.",
+    "save": "وفر 20%",
+    "renews": "التجديد التلقائي. يمكنك الإلغاء في أي وقت.",
+    "chooseInstrument": "اختر الأداة",
+    "billingInfo": "فوترة شهرية أو سنوية (خصم 20% على السنوية). الإلغاء في أي وقت.",
     "micro": {
       "name": "استراتيجية Micro {{instrument}}",
       "price": "25.00",
