@@ -6,7 +6,7 @@
   ...
   "coupon": {
     "title": "¿Tenés un cupón de descuento?",
-    "description": "Ingresá tu código para recibir un descuento especial del 30% durante 12 meses",
+    "description": "Ingresá tu código para aplicar el descuento correspondiente",
     "placeholder": "XXXX-XXXX-XXXX",
     "apply": "Aplicar",
     "validating": "Validando...",

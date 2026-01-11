@@ -420,7 +420,7 @@ export default function Pricing() {
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {t("pricing.coupon.description", { 
-                  defaultValue: "Ingresá tu código para recibir un descuento especial del 30% durante 12 meses" 
+                  defaultValue: "Ingresá tu código para aplicar el descuento correspondiente" 
                 })}
               </CardDescription>
             </CardHeader>
