@@ -49,13 +49,21 @@ export default function Pricing() {
 
     setValidatingCoupon(true);
     try {
+      console.log('Validating coupon:', couponCode.trim());
       const { data, error } = await supabase.rpc('validate_coupon', {
         coupon_code_input: couponCode.trim()
       });
 
+      console.log('Validation response:', { data, error });
+
       // Si hay error de RPC, lanzar excepción
       if (error) {
-        console.error('RPC error:', error);
+        console.error('RPC error details:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        });
         throw error;
       }
 
