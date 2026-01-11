@@ -25,6 +25,14 @@ export default function Pricing() {
   const [billing, setBilling] = useState<Billing>("monthly"); // Mensual / Anual
   const [intro, setIntro] = useState<boolean>(false); // Primer mes 50% OFF
 
+  // Activar automáticamente intro cuando se selecciona plan anual
+  const handleBillingChange = (newBilling: Billing) => {
+    setBilling(newBilling);
+    if (newBilling === "annual") {
+      setIntro(true);
+    }
+  };
+
   // ===== Sistema de Cupones =====
   const [couponCode, setCouponCode] = useState<string>("");
   const [validatingCoupon, setValidatingCoupon] = useState(false);
@@ -131,13 +139,13 @@ export default function Pricing() {
 
   const MICRO_MONTHLY_EFFECTIVE = couponValid?.valid 
     ? applyCouponDiscount(MICRO_MONTHLY)
-    : intro && billing === "monthly" 
+    : intro
       ? +(MICRO_MONTHLY * 0.5).toFixed(2) 
       : MICRO_MONTHLY;
   
   const MINI_MONTHLY_EFFECTIVE = couponValid?.valid
     ? applyCouponDiscount(MINI_MONTHLY)
-    : intro && billing === "monthly"
+    : intro
       ? +(MINI_MONTHLY * 0.5).toFixed(2)
       : MINI_MONTHLY;
   
@@ -322,7 +330,7 @@ export default function Pricing() {
             </h3>
             <div className="inline-flex rounded-lg border border-slate-700 overflow-hidden">
               <button
-                onClick={() => setBilling("monthly")}
+                onClick={() => handleBillingChange("monthly")}
                 aria-pressed={billing === "monthly"}
                 className={`px-4 py-2 text-sm
                   ${billing === "monthly"
@@ -332,7 +340,7 @@ export default function Pricing() {
                 {t("pricing.monthly", { defaultValue: "Mensual" })}
               </button>
               <button
-                onClick={() => setBilling("annual")}
+                onClick={() => handleBillingChange("annual")}
                 aria-pressed={billing === "annual"}
                 className={`px-4 py-2 text-sm border-l border-slate-700
                   ${billing === "annual"
@@ -352,21 +360,31 @@ export default function Pricing() {
                 defaultValue: "Renovación automática. Podés cancelar cuando quieras.",
               })}
             </p>
-            {billing === "monthly" && (
-              <div className="mt-4 flex items-center justify-between rounded-lg border border-slate-700 p-3">
-                <div>
-                  <div className="text-slate-200 font-medium">{t("pricing.intro.title", { defaultValue: "Primer mes 50% OFF" })}</div>
-                  <div className="text-slate-400 text-xs">{t("pricing.intro.note", { defaultValue: "Aplica solo a planes mensuales" })}</div>
+            <div className="mt-4 flex items-center justify-between rounded-lg border border-slate-700 p-3">
+              <div>
+                <div className="text-slate-200 font-medium">{t("pricing.intro.title", { defaultValue: "Primer mes 50% OFF" })}</div>
+                <div className="text-slate-400 text-xs">
+                  {billing === "annual" 
+                    ? t("pricing.intro.noteAnnual", { defaultValue: "Se aplica automáticamente en plan anual" })
+                    : t("pricing.intro.note", { defaultValue: "Activá esta opción para obtener el descuento" })
+                  }
                 </div>
-                <button
-                  aria-pressed={intro}
-                  onClick={() => setIntro(v => !v)}
-                  className={`px-3 py-1 text-sm rounded-md border ${intro ? "bg-emerald-700 text-white border-emerald-600" : "bg-slate-900 text-slate-300 border-slate-700"}`}
-                >
-                  {intro ? t("pricing.intro.on", { defaultValue: "Activado" }) : t("pricing.intro.off", { defaultValue: "Desactivado" })}
-                </button>
               </div>
-            )}
+              <button
+                aria-pressed={intro}
+                onClick={() => setIntro(v => !v)}
+                disabled={billing === "annual"}
+                className={`px-3 py-1 text-sm rounded-md border ${
+                  billing === "annual" 
+                    ? "bg-emerald-700 text-white border-emerald-600 opacity-100 cursor-not-allowed"
+                    : intro 
+                      ? "bg-emerald-700 text-white border-emerald-600" 
+                      : "bg-slate-900 text-slate-300 border-slate-700"
+                }`}
+              >
+                {intro ? t("pricing.intro.on", { defaultValue: "Activado" }) : t("pricing.intro.off", { defaultValue: "Desactivado" })}
+              </button>
+            </div>
           </div>
 
           {/* Selector de Instrumento (radio formal) */}
