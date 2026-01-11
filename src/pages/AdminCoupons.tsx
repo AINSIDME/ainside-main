@@ -40,6 +40,7 @@ const AdminCoupons = () => {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
+  const [emailLanguage, setEmailLanguage] = useState('en');
   const [sendingEmail, setSendingEmail] = useState(false);
 
   // Lista de emails autorizados como administradores
@@ -192,6 +193,7 @@ const AdminCoupons = () => {
     setSelectedCoupon(coupon);
     setRecipientEmail('');
     setRecipientName('');
+    setEmailLanguage('en');
     setEmailDialogOpen(true);
   };
 
@@ -225,6 +227,7 @@ const AdminCoupons = () => {
           discountPercent: selectedCoupon.discount_percent,
           durationMonths: selectedCoupon.duration_months,
           expiresAt: selectedCoupon.expires_at,
+          language: emailLanguage,
         }),
       });
 
@@ -502,6 +505,24 @@ const AdminCoupons = () => {
                 placeholder="Juan Pérez"
                 className="bg-slate-800 border-slate-700 text-white"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm text-slate-400 mb-2">
+                🌍 Idioma del email *
+              </label>
+              <select
+                value={emailLanguage}
+                onChange={(e) => setEmailLanguage(e.target.value)}
+                className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="he">🇮🇱 עברית (Hebrew)</option>
+                <option value="ar">🇸🇦 العربية (Arabic)</option>
+                <option value="ru">🇷🇺 Русский (Russian)</option>
+              </select>
             </div>
 
             <div className="bg-blue-500/10 border border-blue-500/50 rounded-lg p-3 text-sm">
