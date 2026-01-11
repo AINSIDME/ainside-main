@@ -1054,6 +1054,19 @@
     "renews": "מתחדש אוטומטית. ניתן לבטל בכל עת.",
     "chooseInstrument": "בחר נכס",
     "billingInfo": "חיוב חודשי או שנתי (20% הנחה בשנתי). ניתן לבטל בכל עת.",
+    "coupon": {
+      "title": "יש לך קופון הנחה?",
+      "description": "הזן את הקוד שלך כדי להחיל את ההנחה המתאימה",
+      "placeholder": "הזן קוד קופון",
+      "apply": "החל קופון",
+      "error": "שגיאה",
+      "enterCode": "אנא הזן קוד קופון",
+      "success": "הקופון הוחל!",
+      "successDesc": "הנחה של {{discount}}% הוחלה למשך {{duration}} חודשים",
+      "invalid": "קופון לא תקין",
+      "invalidDesc": "הקופון אינו תקף",
+      "errorDesc": "לא ניתן לאמת את הקופון"
+    },
     "micro": {
       "name": "חוזה Micro {{instrument}}",
       "price": "$99",

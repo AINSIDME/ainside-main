@@ -1055,6 +1055,19 @@
     "renews": "Renouvellement automatique. Vous pouvez annuler à tout moment.",
     "chooseInstrument": "Choisir l'Instrument",
     "billingInfo": "Facturation mensuelle ou annuelle (20% de réduction sur l'annuel). Annulation à tout moment.",
+    "coupon": {
+      "title": "Vous avez un coupon de réduction?",
+      "description": "Entrez votre code pour appliquer la réduction correspondante",
+      "placeholder": "Entrez le code du coupon",
+      "apply": "Appliquer le coupon",
+      "error": "Erreur",
+      "enterCode": "Veuillez entrer un code de coupon",
+      "success": "Coupon appliqué!",
+      "successDesc": "Une réduction de {{discount}}% a été appliquée pour {{duration}} mois",
+      "invalid": "Coupon invalide",
+      "invalidDesc": "Le coupon n'est pas valide",
+      "errorDesc": "Impossible de valider le coupon"
+    },
     "micro": {
       "name": "Contrat Micro {{instrument}}",
       "price": "$99",

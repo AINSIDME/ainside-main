@@ -1051,10 +1051,23 @@
       "on": "Activado",
       "off": "Desactivado"
     },
-    "save": "Ahorra 30%",
+    "save": "Pagá 10, Usá 12",
     "renews": "Renovación automática. Podés cancelar cuando quieras.",
     "chooseInstrument": "Elegí Instrumento",
-    "billingInfo": "Facturación mensual o anual (30% OFF en anual). Podés cancelar en cualquier momento.",
+    "billingInfo": "Facturación mensual o anual (20% OFF en anual). Podés cancelar en cualquier momento.",
+    "coupon": {
+      "title": "¿Tenés un cupón de descuento?",
+      "description": "Ingresá tu código para aplicar el descuento correspondiente",
+      "placeholder": "Ingresá el código de cupón",
+      "apply": "Aplicar cupón",
+      "error": "Error",
+      "enterCode": "Ingrese un código de cupón",
+      "success": "¡Cupón aplicado!",
+      "successDesc": "Se aplicó un descuento del {{discount}}% durante {{duration}} meses",
+      "invalid": "Cupón inválido",
+      "invalidDesc": "El cupón no es válido",
+      "errorDesc": "No se pudo validar el cupón"
+    },
     "micro": {
       "name": "Contrato Micro {{instrument}}",
       "price": "$99",

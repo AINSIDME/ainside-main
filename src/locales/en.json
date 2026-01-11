@@ -1051,10 +1051,23 @@
       "on": "On",
       "off": "Off"
     },
-    "save": "Save 30%",
+    "save": "Pay 10, Use 12",
     "renews": "Auto-renews. You can cancel anytime.",
     "chooseInstrument": "Choose Instrument",
-    "billingInfo": "Monthly or annual billing (30% OFF on annual). Cancel anytime.",
+    "billingInfo": "Monthly or annual billing (20% OFF on annual). Cancel anytime.",
+    "coupon": {
+      "title": "Have a discount coupon?",
+      "description": "Enter your code to apply the corresponding discount",
+      "placeholder": "Enter coupon code",
+      "apply": "Apply coupon",
+      "error": "Error",
+      "enterCode": "Please enter a coupon code",
+      "success": "Coupon applied!",
+      "successDesc": "A {{discount}}% discount has been applied for {{duration}} months",
+      "invalid": "Invalid coupon",
+      "invalidDesc": "The coupon is not valid",
+      "errorDesc": "Could not validate the coupon"
+    },
     "micro": {
       "name": "Micro Contract {{instrument}}",
       "price": "$99",
