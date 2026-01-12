@@ -36,3 +36,17 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     autoRefreshToken: true,
   }
 });
+
+// SQL statements
+/*
+insert into storage.buckets (id, name, public)
+values ('email-assets', 'email-assets', false)
+on conflict (id) do update set name = excluded.name, public = false;
+
+drop policy if exists "Service role can manage email assets" on storage.objects;
+create policy "Service role can manage email assets"
+on storage.objects
+for all
+to service_role
+using (bucket_id = 'email-assets');
+*/

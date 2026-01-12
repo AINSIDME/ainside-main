@@ -206,7 +206,7 @@ const Crypto = () => {
 
             // Usar el ref para mantener timestamps persistentes
             const SIGNAL_VALIDITY_MS = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
-            let finalSignal = signal;
+            const finalSignal = signal;
             let finalSignalPrice = signal !== 'Neutral' ? currentPrice : undefined;
             let finalSignalTimestamp = signal !== 'Neutral' ? Date.now() : undefined;
 

@@ -46,6 +46,8 @@ const AdminCoupons = () => {
   // Lista de emails autorizados como administradores
   const adminEmails = ['jonathangolubok@gmail.com'];
 
+  const get2FAToken = () => localStorage.getItem('admin_2fa_token') || '';
+
   useEffect(() => {
     checkAdminAndLoadCoupons();
   }, []);
@@ -71,6 +73,24 @@ const AdminCoupons = () => {
         return;
       }
 
+      // 2FA obligatorio (12 horas)
+      const session2FA = localStorage.getItem('admin_2fa_verified');
+      const timestamp = localStorage.getItem('admin_2fa_timestamp');
+      const token = get2FAToken();
+      if (!session2FA || !timestamp || !token) {
+        navigate('/admin/verify-2fa', { replace: true });
+        return;
+      }
+      const twelveHoursInMs = 12 * 60 * 60 * 1000;
+      const sessionAge = Date.now() - parseInt(timestamp);
+      if (sessionAge > twelveHoursInMs) {
+        localStorage.removeItem('admin_2fa_verified');
+        localStorage.removeItem('admin_2fa_timestamp');
+        localStorage.removeItem('admin_2fa_token');
+        navigate('/admin/verify-2fa', { replace: true });
+        return;
+      }
+
       await loadCoupons();
     } catch (error) {
       console.error('Error checking admin:', error);
@@ -86,17 +106,23 @@ const AdminCoupons = () => {
   };
 
   const loadCoupons = async () => {
-    const { data, error } = await supabase
-      .from('discount_coupons')
-      .select('*')
-      .order('created_at', { ascending: false });
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token;
+
+    const { data, error } = await supabase.functions.invoke('admin-coupons', {
+      headers: {
+        'x-admin-2fa-token': get2FAToken(),
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      },
+      body: { action: 'list' },
+    });
 
     if (error) {
       console.error('Error loading coupons:', error);
       return;
     }
 
-    setCoupons(data || []);
+    setCoupons((data as any)?.data || []);
   };
 
   const generateCouponCode = () => {
@@ -113,28 +139,30 @@ const AdminCoupons = () => {
     setCreating(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      const accessToken = session?.access_token;
+      if (!accessToken) return;
 
-      const { data: userData } = await supabase.auth.getUser();
       const newCode = generateCouponCode();
 
-      const { error } = await supabase
-        .from('discount_coupons')
-        .insert({
+      const { error } = await supabase.functions.invoke('admin-coupons', {
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: {
+          action: 'create',
           code: newCode,
           discount_percent: 50,
           duration_months: 12,
           max_uses: 1,
-          current_uses: 0,
-          is_active: true,
-          created_by: userData.user?.id,
           expires_at: expiresAt || null,
-          notes: notes || null
-        });
+          notes: notes || null,
+        },
+      });
 
       if (error) {
         console.error('Error creating coupon:', error);
-        alert('Error al crear cupón: ' + error.message);
+        alert('Error al crear cupón: ' + (error as any).message);
         return;
       }
 
@@ -160,10 +188,21 @@ const AdminCoupons = () => {
   };
 
   const toggleCouponActive = async (id: string, currentActive: boolean) => {
-    const { error } = await supabase
-      .from('discount_coupons')
-      .update({ is_active: !currentActive })
-      .eq('id', id);
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token;
+    if (!accessToken) return;
+
+    const { error } = await supabase.functions.invoke('admin-coupons', {
+      headers: {
+        'x-admin-2fa-token': get2FAToken(),
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: {
+        action: 'toggleActive',
+        id,
+        is_active: !currentActive,
+      },
+    });
 
     if (error) {
       console.error('Error updating coupon:', error);
@@ -176,10 +215,17 @@ const AdminCoupons = () => {
   const deleteCoupon = async (id: string, code: string) => {
     if (!confirm(`¿Eliminar cupón ${code}?`)) return;
 
-    const { error } = await supabase
-      .from('discount_coupons')
-      .delete()
-      .eq('id', id);
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token;
+    if (!accessToken) return;
+
+    const { error } = await supabase.functions.invoke('admin-coupons', {
+      headers: {
+        'x-admin-2fa-token': get2FAToken(),
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: { action: 'delete', id },
+    });
 
     if (error) {
       console.error('Error deleting coupon:', error);
@@ -213,16 +259,25 @@ const AdminCoupons = () => {
       console.log('Coupon code:', selectedCoupon.code);
 
       const { data: { session } } = await supabase.auth.getSession();
+      const twoFaToken = get2FAToken();
       
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-coupon-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${session?.access_token || ''}`,
+          'x-admin-2fa-token': twoFaToken,
         },
         body: JSON.stringify({
           recipientEmail,
-          recipientName: recipientName || 'Cliente',
+          recipientName: (recipientName || '').trim() || (
+            emailLanguage === 'es' ? 'Cliente' :
+            emailLanguage === 'fr' ? 'Client' :
+            emailLanguage === 'he' ? 'לקוח' :
+            emailLanguage === 'ar' ? 'عميل' :
+            emailLanguage === 'ru' ? 'Клиент' :
+            'Customer'
+          ),
           couponCode: selectedCoupon.code,
           discountPercent: selectedCoupon.discount_percent,
           durationMonths: selectedCoupon.duration_months,
@@ -272,7 +327,7 @@ const AdminCoupons = () => {
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <Button
-            onClick={() => navigate('/admin/control')}
+              onClick={() => navigate('/admin')}
             variant="outline"
             className="border-slate-700 text-slate-300 hover:bg-slate-800 mb-4"
           >

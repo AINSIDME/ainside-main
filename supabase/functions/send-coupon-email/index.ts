@@ -1,6 +1,8 @@
+// @ts-nocheck
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { getCorsHeaders, handleCorsPreflightRequest } from '../_shared/cors.ts';
+import { requireAdmin2FA } from '../_shared/admin.ts';
 
 interface CouponEmailData {
   recipientEmail: string
@@ -31,7 +33,7 @@ const translations = {
     ctaButton: 'Ver Planes y Usar Cupón',
     questions: 'Si tienes alguna pregunta, no dudes en contactarnos en',
     footer: 'Acceso a tecnología inteligente con IA',
-    subject: 'AInside License Token'
+    subject: 'Token de licencia AInside'
   },
   en: {
     title: 'AInside License Token',
@@ -71,7 +73,7 @@ const translations = {
     ctaButton: 'Voir les Plans et Utiliser le Coupon',
     questions: 'Si vous avez des questions, n\'hésitez pas à nous contacter à',
     footer: 'Accès à une technologie intelligente avec IA',
-    subject: 'AInside License Token'
+    subject: 'Jeton de licence AInside'
   },
   he: {
     title: 'AInside License Token',
@@ -91,7 +93,7 @@ const translations = {
     ctaButton: 'צפה בתוכניות והשתמש בקופון',
     questions: 'אם יש לך שאלות, אל תהסס לפנות אלינו בכתובת',
     footer: 'גישה לטכנולוגיה חכמה עם בינה מלאכותית',
-    subject: 'AInside License Token'
+    subject: 'טוקן רישיון AInside'
   },
   ar: {
     title: 'AInside License Token',
@@ -111,7 +113,7 @@ const translations = {
     ctaButton: 'عرض الخطط واستخدام القسيمة',
     questions: 'إذا كان لديك أي أسئلة، لا تتردد في الاتصال بنا على',
     footer: 'الوصول إلى تقنية ذكية بالذكاء الاصطناعي',
-    subject: 'AInside License Token'
+    subject: 'رمز ترخيص AInside'
   },
   ru: {
     title: 'AInside License Token',
@@ -131,8 +133,19 @@ const translations = {
     ctaButton: 'Посмотреть Планы и Использовать Купон',
     questions: 'Если у вас есть вопросы, свяжитесь с нами по адресу',
     footer: 'Доступ к интеллектуальной технологии с ИИ',
-    subject: 'AInside License Token'
+    subject: 'Лицензионный токен AInside'
   }
+}
+
+function normalizeLanguage(input: string | undefined): keyof typeof translations {
+  const raw = (input || '').trim()
+  const primary = (raw.split(/[-_]/)[0] || '').toLowerCase()
+
+  if (primary === 'es' || primary === 'en' || primary === 'fr' || primary === 'he' || primary === 'ar' || primary === 'ru') {
+    return primary
+  }
+
+  return 'en'
 }
 
 serve(async (req) => {
@@ -145,6 +158,8 @@ serve(async (req) => {
   }
 
   try {
+    await requireAdmin2FA(req);
+
     const { 
       recipientEmail, 
       recipientName, 
@@ -199,7 +214,9 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Coupon email sent successfully'
+        message: 'Coupon email sent successfully',
+        languageReceived: language ?? null,
+        languageUsed: normalizeLanguage(language)
       }),
       { 
         status: 200,
@@ -232,8 +249,8 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
       hasSendGrid: !!sendgridKey
     })
 
-    const lang = data.language || 'en'
-    const t = translations[lang] || translations.en
+    const lang = normalizeLanguage(data.language)
+    const t = translations[lang]
     const isRTL = lang === 'he' || lang === 'ar'
     const direction = isRTL ? 'rtl' : 'ltr'
 

@@ -13,6 +13,7 @@ import {
   PowerOff, 
   Settings, 
   RefreshCw,
+  Plus,
   CheckCircle,
   XCircle,
   Clock,
@@ -34,6 +35,15 @@ interface ClientConnection {
   last_seen: string;
   strategies_active: string[];
   strategies_available: string[];
+
+  purchase_count?: number;
+  last_purchase_at?: string | null;
+  last_purchase_status?: string | null;
+  last_purchase_plan_name?: string | null;
+  last_purchase_plan_type?: string | null;
+  last_purchase_amount?: string | null;
+  last_purchase_currency?: string | null;
+  last_coupon_code?: string | null;
 }
 
 const AdminControl = () => {
@@ -172,6 +182,74 @@ const AdminControl = () => {
       setIsLoading(false);
     }
   }, [get2FAToken, toast]);
+
+  const createDemoClient = useCallback(async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
+      const { data, error } = await supabase.functions.invoke('admin-create-test-client', {
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
+        body: {},
+      });
+
+      if (error) throw error;
+      if ((data as any)?.error) throw new Error(String((data as any).error));
+
+      toast({
+        title: 'Cliente demo creado',
+        description: `Order: ${(data as any)?.client?.order_id ?? ''}`,
+      });
+
+      fetchClients();
+    } catch (error) {
+      console.error('Error creating demo client:', error);
+      toast({
+        title: 'Error',
+        description: (error as any)?.message || 'No se pudo crear el cliente demo',
+        variant: 'destructive',
+      });
+    }
+  }, [fetchClients, get2FAToken, toast]);
+
+  const resetDeviceHwid = useCallback(async (orderId: string, newHwid: string, reason?: string) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
+      const { data, error } = await supabase.functions.invoke('admin-device-reset', {
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
+        body: {
+          orderId,
+          newHwid,
+          reason: reason || 'support_reset',
+        },
+      });
+
+      if (error) throw error;
+      if ((data as any)?.error) throw new Error(String((data as any).error));
+
+      toast({
+        title: 'HWID transferido',
+        description: `Order ${orderId} actualizado`,
+      });
+
+      fetchClients();
+    } catch (error) {
+      console.error('Error resetting device HWID:', error);
+      toast({
+        title: 'Error',
+        description: (error as any)?.message || 'No se pudo transferir el HWID',
+        variant: 'destructive',
+      });
+    }
+  }, [fetchClients, get2FAToken, toast]);
 
   // Toggle strategy for a client
   const toggleStrategy = useCallback(async (clientId: string, strategy: string, enable: boolean) => {
@@ -375,6 +453,22 @@ const AdminControl = () => {
           </div>
           <div className="flex gap-3">
             <Button
+              onClick={() => navigate('/admin')}
+              variant="outline"
+              className="gap-2 border-slate-600 text-slate-200 hover:bg-slate-800/40"
+            >
+              <Settings className="h-4 w-4" />
+              Dashboard
+            </Button>
+            <Button
+              onClick={createDemoClient}
+              variant="outline"
+              className="gap-2 border-emerald-500/50 text-emerald-300 hover:bg-emerald-500/10"
+            >
+              <Plus className="h-4 w-4" />
+              Crear cliente demo
+            </Button>
+            <Button
               onClick={() => navigate('/admin/coupons')}
               variant="outline"
               className="gap-2 border-blue-500/50 text-blue-400 hover:bg-blue-500/10"
@@ -498,12 +592,55 @@ const AdminControl = () => {
                         <p className="text-sm text-slate-400 mb-2">{client.email}</p>
                         <div className="flex gap-2 flex-wrap">
                           {client.order_id ? (
-                            <Badge variant="outline" className="text-xs">
+                            <Badge
+                              variant="outline"
+                              className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                            >
                               Order ID: {client.order_id}
                             </Badge>
                           ) : null}
-                          <Badge variant="outline" className="text-xs">
-                            HWID: {client.hwid.substring(0, 16)}...
+
+                          {typeof client.purchase_count === 'number' ? (
+                            <Badge
+                              variant="outline"
+                              className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                            >
+                              Compras: {client.purchase_count}
+                            </Badge>
+                          ) : null}
+
+                          {client.last_purchase_plan_name ? (
+                            <Badge
+                              variant="outline"
+                              className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                            >
+                              Plan: {client.last_purchase_plan_name}
+                            </Badge>
+                          ) : null}
+
+                          {client.last_purchase_status ? (
+                            <Badge
+                              variant="outline"
+                              className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                            >
+                              Pago: {client.last_purchase_status}
+                            </Badge>
+                          ) : null}
+
+                          {client.last_coupon_code ? (
+                            <Badge
+                              variant="outline"
+                              className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                            >
+                              Cupón: {client.last_coupon_code}
+                            </Badge>
+                          ) : null}
+
+                          <Badge
+                            variant="outline"
+                            className="text-xs text-slate-200 border-slate-600 whitespace-normal break-all max-w-full"
+                          >
+                            HWID: {client.hwid}
                           </Badge>
                           {client.registration_status ? (
                             <Badge
@@ -552,7 +689,7 @@ const AdminControl = () => {
                     </div>
 
                     {/* Plan Controls */}
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                       <select
                         value={client.plan_name}
                         onChange={(e) => changePlan(client.id, e.target.value)}
@@ -567,6 +704,25 @@ const AdminControl = () => {
                         <option value="Contrato Mini Oro - Monthly">Contrato Mini Oro - Monthly</option>
                         <option value="Contrato Mini Oro - Annual">Contrato Mini Oro - Annual</option>
                       </select>
+
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="border-slate-600 text-slate-200 hover:bg-slate-800/40"
+                        disabled={!client.order_id}
+                        onClick={async () => {
+                          const orderId = (client.order_id || '').trim();
+                          if (!orderId) return;
+
+                          const newHwid = window.prompt('Nuevo HWID (PC nueva):');
+                          if (!newHwid || !newHwid.trim()) return;
+
+                          const reason = window.prompt('Motivo (opcional):', 'support_reset') || 'support_reset';
+                          await resetDeviceHwid(orderId, newHwid.trim(), reason.trim());
+                        }}
+                      >
+                        Transferir HWID
+                      </Button>
                     </div>
                   </div>
 

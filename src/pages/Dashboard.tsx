@@ -13,6 +13,7 @@ import {
   LogOut, 
   Download,
   Key,
+  Copy,
   CheckCircle,
   XCircle,
   Activity,
@@ -47,6 +48,7 @@ const Dashboard = () => {
   const [downloadEmailOtpValue, setDownloadEmailOtpValue] = useState("");
   const [downloadEmailOtpLoading, setDownloadEmailOtpLoading] = useState(false);
   const [downloadVerifying, setDownloadVerifying] = useState(false);
+  const [hwidCopied, setHwidCopied] = useState(false);
 
   useEffect(() => {
     checkUser();
@@ -421,9 +423,36 @@ const Dashboard = () => {
                       <p className="text-white font-medium">
                         {t("dashboard.hwid.registered.title", { defaultValue: "HWID Registrado" })}
                       </p>
-                      <p className="text-sm text-slate-400 font-mono mt-1">
-                        {userData.hwid.substring(0, 20)}...
-                      </p>
+                      <div className="mt-2 flex items-start gap-2">
+                        <p className="text-sm text-slate-200 font-mono whitespace-normal break-all">
+                          {userData.hwid}
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="shrink-0 border-slate-700 text-slate-200"
+                          onClick={async () => {
+                            try {
+                              const value = userData.hwid || "";
+                              await navigator.clipboard.writeText(value);
+                              setHwidCopied(true);
+                              window.setTimeout(() => setHwidCopied(false), 1200);
+                            } catch {
+                              toast({
+                                title: t("dashboard.error", { defaultValue: "Error" }),
+                                description: t("dashboard.hwid.copyError", { defaultValue: "No se pudo copiar el HWID." }),
+                                variant: "destructive",
+                              });
+                            }
+                          }}
+                        >
+                          <Copy className="h-4 w-4" />
+                          {hwidCopied
+                            ? t("dashboard.hwid.copied", { defaultValue: "Copiado" })
+                            : t("dashboard.hwid.copy", { defaultValue: "Copiar" })}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

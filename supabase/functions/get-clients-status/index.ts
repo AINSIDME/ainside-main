@@ -2,60 +2,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
+import { requireAdmin2FA } from "../_shared/admin.ts";
 
-function getAdminEmailAllowlist(): string[] {
-  const raw = Deno.env.get('ADMIN_EMAILS') ?? '';
-  const parsed = raw
-    .split(',')
-    .map((s: string) => s.trim().toLowerCase())
-    .filter(Boolean);
-  return parsed.length ? parsed : ['jonathangolubok@gmail.com'];
+
+function toLowerSafe(value: unknown): string {
+  return String(value ?? '').trim().toLowerCase();
 }
 
-function extractBearerToken(authHeader: string | null): string {
-  const header = authHeader ?? '';
-  return header.toLowerCase().startsWith('bearer ') ? header.slice('bearer '.length) : '';
-}
-
-async function requireAdmin2FA(req: Request) {
-  const jwt = extractBearerToken(req.headers.get('Authorization'));
-  if (!jwt) throw new Error('Unauthorized');
-  const twoFaToken = (req.headers.get('x-admin-2fa-token') ?? '').trim();
-  if (!twoFaToken) throw new Error('2FA required');
-
-  const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
-  const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-  const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
-  if (!supabaseUrl || !supabaseServiceKey || !supabaseAnonKey) throw new Error('Server misconfigured');
-
-  const supabaseAuth = createClient(supabaseUrl, supabaseAnonKey, {
-    global: { headers: { Authorization: `Bearer ${jwt}` } },
-    auth: { persistSession: false },
-  });
-  const { data: userData, error: userErr } = await supabaseAuth.auth.getUser();
-  if (userErr || !userData?.user) throw new Error('Unauthorized');
-
-  const userId = userData.user.id;
-  const email = (userData.user.email ?? '').toLowerCase();
-  if (!email) throw new Error('Unauthorized');
-
-  const allowlist = getAdminEmailAllowlist();
-  if (!allowlist.includes(email)) throw new Error('Forbidden');
-
-  const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
-  const { data: session, error: sessionErr } = await supabaseAdmin
-    .from('admin_2fa_sessions')
-    .select('token,user_id,admin_email,expires_at,revoked')
-    .eq('token', twoFaToken)
-    .maybeSingle();
-
-  if (sessionErr || !session) throw new Error('2FA invalid');
-  if (session.revoked) throw new Error('2FA invalid');
-  if (session.user_id !== userId) throw new Error('2FA invalid');
-  if (String(session.admin_email ?? '').toLowerCase() !== email) throw new Error('2FA invalid');
-  if (new Date(session.expires_at).getTime() <= Date.now()) throw new Error('2FA expired');
-
-  return { supabaseAdmin, userId, email };
+function pickLatestPurchase(purchases: any[]): any | null {
+  if (!Array.isArray(purchases) || purchases.length === 0) return null;
+  return purchases
+    .slice()
+    .sort((a, b) => new Date(String(b?.created_at ?? 0)).getTime() - new Date(String(a?.created_at ?? 0)).getTime())[0] ?? null;
 }
 
 serve(async (req) => {
@@ -67,7 +25,20 @@ serve(async (req) => {
   }
 
   try {
-    const { supabaseAdmin: supabase } = await requireAdmin2FA(req);
+    const { supabaseAdmin: supabase, userId, email } = await requireAdmin2FA(req);
+
+    // Audit log (best-effort)
+    try {
+      await supabase
+        .from('admin_access_logs')
+        .insert({
+          user_id: userId,
+          action: 'admin.clients.view',
+          details: { endpoint: 'get-clients-status', admin_email: email },
+        });
+    } catch (_) {
+      // ignore
+    }
 
     // Meta counts for diagnostics (admin-only)
     const [{ count: registrationsCount }, { count: connectionsCount }, { count: purchasesCount }] = await Promise.all([
@@ -90,9 +61,37 @@ serve(async (req) => {
 
     if (connError) throw connError;
 
+    // Purchases (for client context)
+    const { data: purchases, error: purchasesError } = await supabase
+      .from('purchases')
+      .select('order_id,email,plan_name,plan_type,status,amount,currency,created_at,coupon_code');
+    if (purchasesError) throw purchasesError;
+
+    const purchasesByOrderId = new Map<string, any>();
+    const purchasesByEmail = new Map<string, any[]>();
+
+    (purchases ?? []).forEach((p: any) => {
+      const orderId = String(p?.order_id ?? '').trim();
+      const emailKey = toLowerSafe(p?.email);
+      if (orderId) purchasesByOrderId.set(orderId, p);
+      if (emailKey) {
+        const arr = purchasesByEmail.get(emailKey) ?? [];
+        arr.push(p);
+        purchasesByEmail.set(emailKey, arr);
+      }
+    });
+
     // Merge data
     const clients = registrations.map((reg: any) => {
       const conn = connections?.find((c: any) => c.hwid === reg.hwid);
+
+      const regOrderId = String(reg?.order_id ?? '').trim();
+      const regEmail = toLowerSafe(reg?.email);
+      const byOrder = regOrderId ? purchasesByOrderId.get(regOrderId) : null;
+      const byEmailLatest = regEmail ? pickLatestPurchase(purchasesByEmail.get(regEmail) ?? []) : null;
+      const purchase = byOrder || byEmailLatest;
+      const purchaseCount = regEmail ? (purchasesByEmail.get(regEmail)?.length ?? 0) : 0;
+
       const lastSeen = conn?.last_seen || reg.created_at;
       const now = new Date().getTime();
       const lastSeenTime = new Date(lastSeen).getTime();
@@ -122,6 +121,16 @@ serve(async (req) => {
           "Breakout Strategy",
           "Grid Trading"
         ],
+
+        // Purchase summary (optional)
+        purchase_count: purchaseCount,
+        last_purchase_at: purchase?.created_at ?? null,
+        last_purchase_status: purchase?.status ?? null,
+        last_purchase_plan_name: purchase?.plan_name ?? null,
+        last_purchase_plan_type: purchase?.plan_type ?? null,
+        last_purchase_amount: purchase?.amount ?? null,
+        last_purchase_currency: purchase?.currency ?? null,
+        last_coupon_code: purchase?.coupon_code ?? null,
       };
     });
 

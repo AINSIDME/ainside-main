@@ -90,7 +90,7 @@ const AdminVerify2FA = () => {
       const twelveHours = 12 * 60 * 60 * 1000; // 12 horas en milisegundos
       
       if (elapsed < twelveHours) {
-        navigate('/admin/control');
+        navigate('/admin');
         return;
       } else {
         // Expiró, limpiar
@@ -209,7 +209,7 @@ const AdminVerify2FA = () => {
           description: "Acceso al panel de administración autorizado",
         });
 
-        navigate('/admin/control');
+        navigate('/admin');
       } else {
         const serverMsg = (data?.error || data?.message || '').toString().trim();
         if (serverMsg && serverMsg !== 'Código inválido') {
