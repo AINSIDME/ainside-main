@@ -324,20 +324,34 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
                 ${t.intro} <strong style="font-weight: 600; color: rgba(201,163,91,0.95);">AInside</strong>.
               </p>
 
-              <!-- Token card image with code overlay (fallback code below for strict email clients) -->
+              <!-- Token card with code INSIDE the image (email-safe). Gmail strips absolute positioning, so we use a background-image cell + centered text. -->
               ${heroImageUrl ? `
-              <div style="margin: 18px 0 14px;">
-                <div style="position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(201,163,91,0.25);">
-                  <img src="${heroImageUrl}" alt="AInside token" style="display:block; width:100%; height:auto; border:0; line-height:100%; outline:none; text-decoration:none;" />
-                  <div style="position:absolute; left:0; right:0; top:52%; transform: translateY(-50%); text-align:center; padding: 0 16px;">
-                    <span style="display:inline-block; padding: 10px 14px; border-radius: 10px; background: rgba(10, 12, 16, 0.72); border: 1px solid rgba(201,163,91,0.35);">
-                      <span style="font-size: 22px; font-weight: 800; color: #f9fafb; letter-spacing: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">
-                        ${data.couponCode}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 18px 0 14px; border: 1px solid rgba(201,163,91,0.25); border-radius: 12px; overflow: hidden;">
+                <tr>
+                  <td align="center" valign="middle" height="380" background="${heroImageUrl}" style="background-image: url('${heroImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <!--[if gte mso 9]>
+                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:680px;height:380px;">
+                      <v:fill type="frame" src="${heroImageUrl}" color="#0f1217" />
+                      <v:textbox inset="0,0,0,0">
+                    <![endif]-->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td align="center" valign="middle" height="380" style="padding: 0 16px;">
+                          <span style="display:inline-block; padding: 12px 16px; border-radius: 12px; background: rgba(10, 12, 16, 0.78); border: 1px solid rgba(201,163,91,0.40);">
+                            <span style="font-size: 24px; font-weight: 900; color: #f9fafb; letter-spacing: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">
+                              ${data.couponCode}
+                            </span>
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
+                    <!--[if gte mso 9]>
+                      </v:textbox>
+                    </v:rect>
+                    <![endif]-->
+                  </td>
+                </tr>
+              </table>
               ` : ''}
 
               <p style="margin: 0 0 10px; font-size: 13px; color: rgba(229,231,235,0.80); line-height: 1.7;">
