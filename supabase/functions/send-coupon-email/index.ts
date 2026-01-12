@@ -328,17 +328,19 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
               ${heroImageUrl ? `
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 18px 0 14px; border: 1px solid rgba(201,163,91,0.25); border-radius: 12px; overflow: hidden;">
                 <tr>
-                  <td align="center" valign="middle" height="380" background="${heroImageUrl}" style="background-image: url('${heroImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                  <td align="center" valign="top" height="408" background="${heroImageUrl}" style="background-image: url('${heroImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
                     <!--[if gte mso 9]>
-                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:680px;height:380px;">
+                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:680px;height:408px;">
                       <v:fill type="frame" src="${heroImageUrl}" color="#0f1217" />
                       <v:textbox inset="0,0,0,0">
                     <![endif]-->
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                       <tr>
-                        <td align="center" valign="middle" height="380" style="padding: 0 16px;">
-                          <span style="display:inline-block; padding: 12px 16px; border-radius: 12px; background: rgba(10, 12, 16, 0.78); border: 1px solid rgba(201,163,91,0.40);">
-                            <span style="font-size: 24px; font-weight: 900; color: #f9fafb; letter-spacing: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">
+                        <td align="center" valign="top" height="408" style="padding: 0 16px;">
+                          <!-- Spacer to position the code over the card's code slot -->
+                          <div style="height: 250px; line-height: 250px; font-size: 1px;">&nbsp;</div>
+                          <span style="display:inline-block; padding: 10px 14px; border-radius: 12px; background: #0b0d10; border: 1px solid rgba(201,163,91,0.45); box-shadow: 0 6px 18px rgba(0,0,0,0.55);">
+                            <span style="font-size: 22px; font-weight: 900; color: #f9fafb; letter-spacing: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; text-shadow: 0 1px 0 rgba(0,0,0,0.65);">
                               ${data.couponCode}
                             </span>
                           </span>
