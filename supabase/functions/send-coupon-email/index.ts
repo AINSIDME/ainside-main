@@ -14,9 +14,9 @@ interface CouponEmailData {
 
 const translations = {
   es: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'Hola',
-    intro: 'Te enviamos un cupón especial de descuento para los planes de trading automático de',
+    intro: 'Te enviamos un token de descuento especial para acceder a la tecnología de',
     couponLabel: 'Tu Código de Cupón',
     copyText: 'Copia este código y úsalo al momento de realizar tu compra',
     benefitsTitle: 'Beneficios del cupón',
@@ -30,13 +30,13 @@ const translations = {
     validUntil: 'Válido hasta:',
     ctaButton: 'Ver Planes y Usar Cupón',
     questions: 'Si tienes alguna pregunta, no dudes en contactarnos en',
-    footer: 'Trading automático inteligente con IA',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'Acceso a tecnología inteligente con IA',
+    subject: 'AInside License Token'
   },
   en: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'Hello',
-    intro: 'We are sending you a special discount coupon for',
+    intro: 'We are sending you a special discount token for access to',
     couponLabel: 'Your Coupon Code',
     copyText: 'Copy this code and use it when making your purchase',
     benefitsTitle: 'Coupon benefits',
@@ -50,13 +50,13 @@ const translations = {
     validUntil: 'Valid until:',
     ctaButton: 'View Plans and Use Coupon',
     questions: 'If you have any questions, feel free to contact us at',
-    footer: 'Intelligent automated trading with AI',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'Access to intelligent AI technology',
+    subject: 'AInside License Token'
   },
   fr: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'Bonjour',
-    intro: 'Nous vous envoyons un coupon de réduction spécial pour les plans de trading automatique de',
+    intro: 'Nous vous envoyons un token de réduction spécial pour accéder à la technologie de',
     couponLabel: 'Votre Code de Coupon',
     copyText: 'Copiez ce code et utilisez-le lors de votre achat',
     benefitsTitle: 'Avantages du coupon',
@@ -70,13 +70,13 @@ const translations = {
     validUntil: 'Valable jusqu\'au :',
     ctaButton: 'Voir les Plans et Utiliser le Coupon',
     questions: 'Si vous avez des questions, n\'hésitez pas à nous contacter à',
-    footer: 'Trading automatique intelligent avec IA',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'Accès à une technologie intelligente avec IA',
+    subject: 'AInside License Token'
   },
   he: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'שלום',
-    intro: 'אנו שולחים לך קופון הנחה מיוחד עבור תוכניות המסחר האוטומטי של',
+    intro: 'אנו שולחים לך טוקן הנחה מיוחד לגישה לטכנולוגיה של',
     couponLabel: 'קוד הקופון שלך',
     copyText: 'העתק את הקוד הזה והשתמש בו בעת ביצוע הרכישה',
     benefitsTitle: 'היתרונות של הקופון',
@@ -90,13 +90,13 @@ const translations = {
     validUntil: 'תקף עד:',
     ctaButton: 'צפה בתוכניות והשתמש בקופון',
     questions: 'אם יש לך שאלות, אל תהסס לפנות אלינו בכתובת',
-    footer: 'מסחר אוטומטי חכם עם בינה מלאכותית',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'גישה לטכנולוגיה חכמה עם בינה מלאכותית',
+    subject: 'AInside License Token'
   },
   ar: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'مرحباً',
-    intro: 'نرسل لك قسيمة خصم خاصة لخطط التداول الآلي من',
+    intro: 'نرسل لك رمز خصم خاص للوصول إلى تقنية',
     couponLabel: 'رمز القسيمة الخاص بك',
     copyText: 'انسخ هذا الرمز واستخدمه عند إجراء عملية الشراء',
     benefitsTitle: 'فوائد القسيمة',
@@ -110,13 +110,13 @@ const translations = {
     validUntil: 'صالح حتى:',
     ctaButton: 'عرض الخطط واستخدام القسيمة',
     questions: 'إذا كان لديك أي أسئلة، لا تتردد في الاتصال بنا على',
-    footer: 'تداول آلي ذكي بالذكاء الاصطناعي',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'الوصول إلى تقنية ذكية بالذكاء الاصطناعي',
+    subject: 'AInside License Token'
   },
   ru: {
-    title: 'AINSIDE LICENSE TOKEN',
+    title: 'AInside License Token',
     greeting: 'Здравствуйте',
-    intro: 'Мы отправляем вам специальный купон на скидку для планов автоматической торговли от',
+    intro: 'Мы отправляем вам специальный токен скидки для доступа к технологии',
     couponLabel: 'Ваш Код Купона',
     copyText: 'Скопируйте этот код и используйте его при совершении покупки',
     benefitsTitle: 'Преимущества купона',
@@ -130,8 +130,8 @@ const translations = {
     validUntil: 'Действителен до:',
     ctaButton: 'Посмотреть Планы и Использовать Купон',
     questions: 'Если у вас есть вопросы, свяжитесь с нами по адресу',
-    footer: 'Интеллектуальная автоматическая торговля с ИИ',
-    subject: 'AINSIDE LICENSE TOKEN'
+    footer: 'Доступ к интеллектуальной технологии с ИИ',
+    subject: 'AInside License Token'
   }
 }
 
@@ -305,7 +305,7 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
           <tr>
             <td style="padding: 22px 26px; border-bottom: 1px solid rgba(201,163,91,0.18); text-align: ${isRTL ? 'right' : 'left'};">
               <p style="margin: 0; font-size: 12px; letter-spacing: 0.18em; color: rgba(229,231,235,0.65); text-transform: uppercase;">
-                AInside Trading
+                AInside
               </p>
               <h1 style="margin: 10px 0 0; font-size: 18px; font-weight: 700; color: #f9fafb;">
                 ${t.title}
