@@ -13,7 +13,7 @@ interface CouponEmailData {
 
 const translations = {
   es: {
-    title: 'Tu Token de Descuento',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'Hola',
     intro: 'Te enviamos un cupón especial de descuento para los planes de trading automático de',
     couponLabel: 'Tu Código de Cupón',
@@ -30,10 +30,10 @@ const translations = {
     ctaButton: 'Ver Planes y Usar Cupón',
     questions: 'Si tienes alguna pregunta, no dudes en contactarnos en',
     footer: 'Trading automático inteligente con IA',
-    subject: 'Token de Descuento'
+    subject: 'AINSIDE LICENSE TOKEN'
   },
   en: {
-    title: 'Your Discount Token',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'Hello',
     intro: 'We are sending you a special discount coupon for',
     couponLabel: 'Your Coupon Code',
@@ -50,10 +50,10 @@ const translations = {
     ctaButton: 'View Plans and Use Coupon',
     questions: 'If you have any questions, feel free to contact us at',
     footer: 'Intelligent automated trading with AI',
-    subject: 'Discount Token'
+    subject: 'AINSIDE LICENSE TOKEN'
   },
   fr: {
-    title: 'Votre Token de Réduction',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'Bonjour',
     intro: 'Nous vous envoyons un coupon de réduction spécial pour les plans de trading automatique de',
     couponLabel: 'Votre Code de Coupon',
@@ -70,10 +70,10 @@ const translations = {
     ctaButton: 'Voir les Plans et Utiliser le Coupon',
     questions: 'Si vous avez des questions, n\'hésitez pas à nous contacter à',
     footer: 'Trading automatique intelligent avec IA',
-    subject: 'Token de Réduction'
+    subject: 'AINSIDE LICENSE TOKEN'
   },
   he: {
-    title: 'טוקן ההנחה שלך',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'שלום',
     intro: 'אנו שולחים לך קופון הנחה מיוחד עבור תוכניות המסחר האוטומטי של',
     couponLabel: 'קוד הקופון שלך',
@@ -90,10 +90,10 @@ const translations = {
     ctaButton: 'צפה בתוכניות והשתמש בקופון',
     questions: 'אם יש לך שאלות, אל תהסס לפנות אלינו בכתובת',
     footer: 'מסחר אוטומטי חכם עם בינה מלאכותית',
-    subject: 'טוקן הנחה'
+    subject: 'AINSIDE LICENSE TOKEN'
   },
   ar: {
-    title: 'رمز الخصم الخاص بك',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'مرحباً',
     intro: 'نرسل لك قسيمة خصم خاصة لخطط التداول الآلي من',
     couponLabel: 'رمز القسيمة الخاص بك',
@@ -110,10 +110,10 @@ const translations = {
     ctaButton: 'عرض الخطط واستخدام القسيمة',
     questions: 'إذا كان لديك أي أسئلة، لا تتردد في الاتصال بنا على',
     footer: 'تداول آلي ذكي بالذكاء الاصطناعي',
-    subject: 'رمز خصم'
+    subject: 'AINSIDE LICENSE TOKEN'
   },
   ru: {
-    title: 'Ваш Токен Скидки',
+    title: 'AINSIDE LICENSE TOKEN',
     greeting: 'Здравствуйте',
     intro: 'Мы отправляем вам специальный купон на скидку для планов автоматической торговли от',
     couponLabel: 'Ваш Код Купона',
@@ -130,7 +130,7 @@ const translations = {
     ctaButton: 'Посмотреть Планы и Использовать Купон',
     questions: 'Если у вас есть вопросы, свяжитесь с нами по адресу',
     footer: 'Интеллектуальная автоматическая торговля с ИИ',
-    subject: 'Токен Скидки'
+    subject: 'AINSIDE LICENSE TOKEN'
   }
 }
 
