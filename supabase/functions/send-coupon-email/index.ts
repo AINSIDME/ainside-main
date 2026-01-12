@@ -150,7 +150,8 @@ serve(async (req) => {
       couponCode, 
       discountPercent, 
       durationMonths,
-      expiresAt 
+      expiresAt,
+      language,
     }: CouponEmailData = await req.json()
 
     console.log('Received request to send coupon email:', {
@@ -158,7 +159,8 @@ serve(async (req) => {
       recipientName,
       couponCode,
       discountPercent,
-      durationMonths
+      durationMonths,
+      language,
     })
 
     // Validate required fields
@@ -183,7 +185,8 @@ serve(async (req) => {
       couponCode,
       discountPercent,
       durationMonths,
-      expiresAt
+      expiresAt,
+      language,
     })
 
     if (!emailSent) {
@@ -243,12 +246,13 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
     }
 
     const expirationText = data.expiresAt 
-      ? `<p style="margin: 20px 0 0; padding: 20px; background-color: rgba(251, 191, 36, 0.1); border-left: 4px solid #fbbf24; border-radius: 8px; font-size: 15px; color: #fbbf24;">
-          <strong>${t.validUntil}</strong> ${new Date(data.expiresAt).toLocaleDateString(localeMap[lang], { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}
+      ? `<p style="margin: 24px 0 0; padding: 14px 16px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 14px; color: #111827;">
+          <strong style="font-weight: 600;">${t.validUntil}</strong>
+          <span style="color:#374151;">${new Date(data.expiresAt).toLocaleDateString(localeMap[lang], {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}</span>
         </p>`
       : ''
 
@@ -260,19 +264,19 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${t.title} - AInside</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #000000 0%, #0f172a 100%);">
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #000000 0%, #0f172a 100%);">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f3f4f6;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #f3f4f6;">
     <tr>
-      <td style="padding: 40px 20px;">
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #0a0a0a 0%, #1e1b4b 100%); border: 2px solid #3b82f6; border-radius: 16px; box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);">
-          
-          <!-- Header with gradient -->
+      <td style="padding: 40px 16px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 14px; box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08); overflow: hidden;">
+
+          <!-- Header (minimal) -->
           <tr>
-            <td style="padding: 50px 40px 30px; text-align: center; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%); border-radius: 14px 14px 0 0;">
-              <div style="display: inline-block; padding: 15px 25px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-radius: 50px; margin-bottom: 20px;">
-                <span style="font-size: 36px;">🎁</span>
-              </div>
-              <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">
+            <td style="padding: 28px 32px; border-bottom: 1px solid #e5e7eb; text-align: ${isRTL ? 'right' : 'left'};">
+              <p style="margin: 0; font-size: 14px; letter-spacing: 0.06em; color: #6b7280; text-transform: uppercase;">
+                AInside Trading
+              </p>
+              <h1 style="margin: 10px 0 0; font-size: 22px; font-weight: 700; color: #111827;">
                 ${t.title}
               </h1>
             </td>
@@ -280,90 +284,70 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
 
           <!-- Content -->
           <tr>
-            <td style="padding: 40px;" dir="${direction}">
-              <p style="margin: 0 0 20px; font-size: 18px; line-height: 1.6; color: #e2e8f0;">
-                ${t.greeting} <strong style="color: #ffffff; font-size: 20px;">${data.recipientName}</strong> 👋
+            <td style="padding: 28px 32px;" dir="${direction}">
+              <p style="margin: 0 0 14px; font-size: 16px; line-height: 1.6; color: #111827;">
+                ${t.greeting} <strong style="font-weight: 700;">${data.recipientName}</strong>
               </p>
 
-              <p style="margin: 0 0 35px; font-size: 16px; line-height: 1.7; color: #cbd5e1;">
-                ${t.intro} <strong style="color: #60a5fa; font-weight: 600;">AInside</strong>.
+              <p style="margin: 0 0 18px; font-size: 14px; line-height: 1.7; color: #374151;">
+                ${t.intro} <strong style="font-weight: 600;">AInside</strong>.
               </p>
 
-              <!-- Coupon Code Box - Elegant Design -->
-              <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%); border-radius: 16px; padding: 40px; text-align: center; margin: 35px 0; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); position: relative; overflow: hidden;">
-                <div style="position: absolute; top: -50px; ${isRTL ? 'left' : 'right'}: -50px; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; z-index: 0;"></div>
-                <div style="position: absolute; bottom: -30px; ${isRTL ? 'right' : 'left'}: -30px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; z-index: 0;"></div>
-                
-                <p style="position: relative; z-index: 1; margin: 0 0 20px; font-size: 14px; color: #dbeafe; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
-                  ✨ ${t.couponLabel} ✨
+              <!-- Coupon code -->
+              <div style="margin: 22px 0; padding: 18px 18px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; text-align: center;">
+                <p style="margin: 0 0 10px; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;">
+                  ${t.couponLabel}
                 </p>
-                <div style="position: relative; z-index: 1; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 3px dashed rgba(255, 255, 255, 0.4); border-radius: 12px; padding: 25px; margin: 0 0 25px;">
-                  <code style="font-size: 36px; font-weight: 900; color: #ffffff; letter-spacing: 4px; font-family: 'Courier New', monospace; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">
-                    ${data.couponCode}
-                  </code>
-                </div>
-                <p style="position: relative; z-index: 1; margin: 0; font-size: 14px; color: #dbeafe; line-height: 1.5;">
+                <code style="display: inline-block; font-size: 26px; font-weight: 800; color: #111827; letter-spacing: 3px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; padding: 10px 14px; border: 1px dashed #d1d5db; border-radius: 10px; background: #ffffff;">
+                  ${data.couponCode}
+                </code>
+                <p style="margin: 12px 0 0; font-size: 13px; color: #4b5563; line-height: 1.6;">
                   ${t.copyText}
                 </p>
               </div>
 
-              <!-- Benefits - Modern Cards -->
-              <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 2px solid #334155; border-radius: 12px; padding: 30px; margin: 35px 0; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
-                <p style="margin: 0 0 25px; font-size: 20px; font-weight: 700; color: #ffffff; text-align: center;">
+              <!-- Benefits (simple list) -->
+              <div style="margin: 22px 0; padding: 18px 18px; border: 1px solid #e5e7eb; border-radius: 12px;">
+                <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700; color: #111827;">
                   ${t.benefitsTitle}
                 </p>
-                <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 10px; padding: 18px 25px; margin: 0 0 15px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                  <span style="font-size: 24px; margin-${isRTL ? 'left' : 'right'}: 15px;">💰</span>
-                  <span style="font-size: 16px; color: #ffffff; font-weight: 600;">
-                    <strong style="font-size: 22px;">${data.discountPercent}%</strong> ${t.discount} ${t.during} <strong>${data.durationMonths}</strong> ${t.months}
-                  </span>
-                </div>
-                <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border-radius: 10px; padding: 18px 25px; margin: 0 0 15px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
-                  <span style="font-size: 24px; margin-${isRTL ? 'left' : 'right'}: 15px;">🎯</span>
-                  <span style="font-size: 16px; color: #ffffff; font-weight: 600;">
-                    <strong>${t.singleUse}</strong> ${t.exclusive}
-                  </span>
-                </div>
-                <div style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-radius: 10px; padding: 18px 25px; margin: 0; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
-                  <span style="font-size: 24px; margin-${isRTL ? 'left' : 'right'}: 15px;">✓</span>
-                  <span style="font-size: 16px; color: #ffffff; font-weight: 600;">
-                    <strong>${t.applicable}</strong> ${t.allPlans}
-                  </span>
-                </div>
+                <p style="margin: 0 0 8px; font-size: 14px; color: #111827; line-height: 1.6;">
+                  <span style="color:#111827;">✓</span>
+                  <strong>${data.discountPercent}%</strong> ${t.discount} ${t.during} <strong>${data.durationMonths}</strong> ${t.months}
+                </p>
+                <p style="margin: 0 0 8px; font-size: 14px; color: #111827; line-height: 1.6;">
+                  <span style="color:#111827;">✓</span>
+                  <strong>${t.singleUse}</strong> ${t.exclusive}
+                </p>
+                <p style="margin: 0; font-size: 14px; color: #111827; line-height: 1.6;">
+                  <span style="color:#111827;">✓</span>
+                  <strong>${t.applicable}</strong> ${t.allPlans}
+                </p>
               </div>
 
               ${expirationText}
 
-              <!-- CTA Button - Premium Style -->
-              <div style="text-align: center; margin: 45px 0 35px;">
-                <a href="https://ainside.me/pricing" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1e40af 100%); color: #ffffff; text-decoration: none; padding: 18px 45px; border-radius: 12px; font-weight: 700; font-size: 17px; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
-                  🚀 ${t.ctaButton}
+              <!-- CTA -->
+              <div style="text-align: center; margin: 28px 0 12px;">
+                <a href="https://ainside.me/pricing" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 12px 18px; border-radius: 10px; font-weight: 700; font-size: 14px;">
+                  ${t.ctaButton}
                 </a>
               </div>
 
-              <p style="margin: 35px 0 0; font-size: 14px; line-height: 1.7; color: #94a3b8; text-align: center; padding: 25px; background: rgba(15, 23, 42, 0.5); border-radius: 10px; border: 1px solid #1e293b;">
-                ${t.questions}<br>
-                <a href="mailto:support@ainside.me" style="color: #60a5fa; text-decoration: none; font-weight: 600;">support@ainside.me</a>
+              <p style="margin: 18px 0 0; font-size: 13px; line-height: 1.7; color: #6b7280; text-align: ${isRTL ? 'right' : 'left'};">
+                ${t.questions} <a href="mailto:support@ainside.me" style="color: #111827; text-decoration: underline; font-weight: 600;">support@ainside.me</a>
               </p>
             </td>
           </tr>
 
-          <!-- Footer - Elegant -->
+          <!-- Footer (minimal) -->
           <tr>
-            <td style="padding: 35px 40px; text-align: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 0 0 14px 14px; border-top: 2px solid #3b82f6;">
-              <div style="margin-bottom: 15px;">
-                <span style="font-size: 40px;">🤖</span>
-              </div>
-              <p style="margin: 0 0 10px; font-size: 18px; font-weight: 700; color: #ffffff;">
-                AInside Trading
-              </p>
-              <p style="margin: 0 0 20px; font-size: 13px; color: #94a3b8; line-height: 1.6;">
+            <td style="padding: 18px 32px; border-top: 1px solid #e5e7eb; text-align: ${isRTL ? 'right' : 'left'};">
+              <p style="margin: 0; font-size: 12px; color: #6b7280; line-height: 1.6;">
                 ${t.footer}
               </p>
-              <p style="margin: 0; font-size: 13px;">
-                <a href="https://ainside.me" style="color: #60a5fa; text-decoration: none; font-weight: 600; padding: 8px 20px; background: rgba(59, 130, 246, 0.1); border-radius: 20px; display: inline-block;">
-                  🌐 ainside.me
-                </a>
+              <p style="margin: 10px 0 0; font-size: 12px;">
+                <a href="https://ainside.me" style="color: #111827; text-decoration: underline; font-weight: 600;">ainside.me</a>
               </p>
             </td>
           </tr>
@@ -387,7 +371,7 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
         body: JSON.stringify({
           from: 'AInside <noreply@ainside.me>',
           to: [data.recipientEmail],
-          subject: `🎁 ${t.subject} ${data.discountPercent}% - AInside`,
+          subject: `${t.subject} ${data.discountPercent}% - AInside`,
           html: emailHTML
         })
       })
@@ -412,7 +396,7 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
         body: JSON.stringify({
           personalizations: [{
             to: [{ email: data.recipientEmail, name: data.recipientName }],
-            subject: `🎁 ${t.subject} ${data.discountPercent}% - AInside`
+            subject: `${t.subject} ${data.discountPercent}% - AInside`
           }],
           from: { email: 'noreply@ainside.me', name: 'AInside' },
           content: [{
