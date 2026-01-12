@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { getCorsHeaders, handleCorsPreflightRequest } from '../_shared/cors.ts';
 
 interface CouponEmailData {
@@ -236,9 +237,35 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
     const isRTL = lang === 'he' || lang === 'ar'
     const direction = isRTL ? 'rtl' : 'ltr'
 
-    // Configure the hero image used for the token-card look.
-    // Recommended: host it on your site (e.g. Vercel public/) and keep it stable.
-    const heroImageUrl = Deno.env.get('COUPON_EMAIL_HERO_IMAGE_URL') || 'https://ainside.me/brand/license-token.jpg'
+    // Token-card hero image
+    // Priority:
+    // 1) COUPON_EMAIL_HERO_IMAGE_URL (explicit URL)
+    // 2) Supabase Storage signed URL (private bucket/object)
+    // 3) No image (template still includes plain code fallback)
+    let heroImageUrl: string | null = Deno.env.get('COUPON_EMAIL_HERO_IMAGE_URL') || null
+
+    if (!heroImageUrl) {
+      const bucket = Deno.env.get('COUPON_EMAIL_HERO_BUCKET') || ''
+      const path = Deno.env.get('COUPON_EMAIL_HERO_PATH') || ''
+      const ttlSeconds = Number(Deno.env.get('COUPON_EMAIL_HERO_SIGNED_URL_TTL') || '2592000') // default 30 days
+
+      if (bucket && path) {
+        const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+        const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+        const supabase = createClient(supabaseUrl, supabaseKey)
+
+        const { data: signed, error: signedError } = await supabase.storage
+          .from(bucket)
+          .createSignedUrl(path, ttlSeconds)
+
+        if (signedError) {
+          console.error('Error generating signed hero image URL:', signedError)
+          heroImageUrl = null
+        } else {
+          heroImageUrl = signed?.signedUrl || null
+        }
+      }
+    }
 
     const localeMap = {
       es: 'es-ES',
@@ -298,6 +325,7 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
               </p>
 
               <!-- Token card image with code overlay (fallback code below for strict email clients) -->
+              ${heroImageUrl ? `
               <div style="margin: 18px 0 14px;">
                 <div style="position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(201,163,91,0.25);">
                   <img src="${heroImageUrl}" alt="AInside token" style="display:block; width:100%; height:auto; border:0; line-height:100%; outline:none; text-decoration:none;" />
@@ -310,6 +338,7 @@ async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
                   </div>
                 </div>
               </div>
+              ` : ''}
 
               <p style="margin: 0 0 10px; font-size: 13px; color: rgba(229,231,235,0.80); line-height: 1.7;">
                 <strong style="color: rgba(249,250,251,0.92);">${t.couponLabel}:</strong>
