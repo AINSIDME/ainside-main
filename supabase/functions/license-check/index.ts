@@ -163,11 +163,15 @@ serve(async (req) => {
       ["sign"],
     );
 
-    const payloadBytes = new TextEncoder().encode(JSON.stringify(payload));
+    // IMPORTANT: return the exact JSON string that was signed.
+    // Clients (DLL/local service) must verify the signature against payloadJson bytes,
+    // not a re-serialized object, to avoid key-order/canonicalization differences.
+    const payloadJson = JSON.stringify(payload);
+    const payloadBytes = new TextEncoder().encode(payloadJson);
     const sigBuf = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, payloadBytes);
     const signature = base64UrlEncode(new Uint8Array(sigBuf));
 
-    return new Response(JSON.stringify({ payload, signature, alg: "RS256" }), {
+    return new Response(JSON.stringify({ payload, payloadJson, signature, alg: "RS256" }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

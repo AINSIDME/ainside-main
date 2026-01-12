@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "eQvZu4jjlWo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jonat\\Downloads\\ainside-main\\ainside-main\\dll\\AInsideLicenseBridge\\AInsideLicenseBridge.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jonat\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.18\\microsoft.dotnet.ilcompiler.8.0.18.nupkg.sha512",
+    "C:\\Users\\jonat\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.18\\microsoft.net.illink.tasks.8.0.18.nupkg.sha512",
+    "C:\\Users\\jonat\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.18\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.18.nupkg.sha512"
+  ],
+  "logs": []
+}

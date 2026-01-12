@@ -1,0 +1,62 @@
+{ Example Strategy with AInside License Protection }
+{
+  This strategy demonstrates how to integrate AInsideLicenseGuard
+  into your trading logic to enforce per-PC licensing.
+}
+
+Inputs:
+	FastLength(9),
+	SlowLength(18),
+	CheckLicenseEveryBars(10),  // Check license every N bars (not every tick for performance)
+	DebugMode(1);  // 1 = show license errors, 0 = silent
+
+Vars:
+	LicenseOK(0),
+	BarsSinceCheck(0);
+
+{ ========== LICENSE CHECK ========== }
+{ Check license periodically (not every tick to reduce overhead) }
+BarsSinceCheck = BarsSinceCheck + 1;
+if BarsSinceCheck >= CheckLicenseEveryBars then begin
+	LicenseOK = AInsideLicenseGuard(DebugMode);
+	BarsSinceCheck = 0;
+	
+	if DebugMode = 1 then begin
+		if LicenseOK = 1 then
+			Print("License: Active")
+		else
+			Print("License: BLOCKED - Strategy will not trade");
+	end;
+end;
+
+{ CRITICAL: Exit immediately if license is invalid }
+if LicenseOK = 0 then begin
+	{ Close any open positions if license becomes invalid }
+	if MarketPosition <> 0 then begin
+		if MarketPosition = 1 then
+			Sell("License_Exit_Long") this bar close
+		else if MarketPosition = -1 then
+			BuyToCover("License_Exit_Short") this bar close;
+	end;
+	
+	{ Do NOT execute any trading logic }
+	Value1 = 0;  // Dummy statement to exit gracefully
+end
+else begin
+	{ ========== YOUR TRADING LOGIC HERE ========== }
+	{ Only executes if LicenseOK = 1 }
+	
+	// Example: Simple moving average crossover
+	Vars:
+		FastMA(0),
+		SlowMA(0);
+	
+	FastMA = Average(Close, FastLength);
+	SlowMA = Average(Close, SlowLength);
+	
+	if FastMA crosses above SlowMA then
+		Buy("MA_Cross_Long") next bar at market;
+	
+	if FastMA crosses below SlowMA then
+		Sell("MA_Cross_Exit") next bar at market;
+end;

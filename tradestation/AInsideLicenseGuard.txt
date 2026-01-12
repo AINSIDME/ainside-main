@@ -1,0 +1,40 @@
+{ AInsideLicenseGuard - Function for TradeStation }
+{ 
+  Returns: 1 if license is valid and active, 0 if blocked
+  
+  SETUP INSTRUCTIONS:
+  1. Build the DLL: dll/AInsideLicenseBridgeCpp (Release|Win32) using Visual Studio
+  2. Copy the compiled DLL to TradeStation folder (same as ORTrade.exe)
+     - Default: C:\Program Files (x86)\TradeStation 10.0\Program\
+  3. Copy license-public.pem to the same folder
+  4. Run the local service: python scripts/HWID.py --service
+     (must be running in background while trading)
+  5. Import this function into TradeStation Strategy Editor
+  6. Call it from your strategy (see example below)
+}
+
+Inputs:
+	DebugMode(NumericSimple);  // 1 = show debug alerts, 0 = silent
+
+Vars:
+	IsAllowed(0),
+	ErrorBuffer(""),
+	ErrorCode(0);
+
+{ Declare external DLL functions }
+DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_IsAllowed";
+DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_GetLastError", lpstr, int;
+
+{ Call the DLL to check license status }
+IsAllowed = AInside_IsAllowed;
+
+{ Optional: retrieve error details if blocked }
+if IsAllowed = 0 and DebugMode = 1 then begin
+	ErrorBuffer = " ";  // Pre-allocate space (EL string quirk)
+	ErrorCode = AInside_GetLastError(ErrorBuffer, 255);
+	if ErrorCode > 0 then
+		Print("AInside License Error: ", ErrorBuffer);
+end;
+
+{ Return the result: 1 = allowed, 0 = blocked }
+AInsideLicenseGuard = IsAllowed;

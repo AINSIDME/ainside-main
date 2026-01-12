@@ -524,6 +524,7 @@ class _LicenseState:
         self.last_check_ts = 0
         self.hwid = ""
         self.payload = None
+        self.payload_json = None
         self.signature = None
         self.alg = None
 
@@ -552,6 +553,12 @@ class LocalLicenseHandler(BaseHTTPRequestHandler):
 
         if self.path.startswith("/status"):
             with LICENSE_STATE.lock:
+                payload_json_b64u = None
+                try:
+                    if isinstance(LICENSE_STATE.payload_json, str) and LICENSE_STATE.payload_json:
+                        payload_json_b64u = base64.urlsafe_b64encode(LICENSE_STATE.payload_json.encode("utf-8")).decode("ascii").rstrip("=")
+                except Exception:
+                    payload_json_b64u = None
                 return _json_response(
                     self,
                     200,
@@ -562,6 +569,8 @@ class LocalLicenseHandler(BaseHTTPRequestHandler):
                         "lastCheckTs": LICENSE_STATE.last_check_ts,
                         "license": {
                             "payload": LICENSE_STATE.payload,
+                            "payloadJson": LICENSE_STATE.payload_json,
+                            "payloadJsonB64u": payload_json_b64u,
                             "signature": LICENSE_STATE.signature,
                             "alg": LICENSE_STATE.alg,
                         },
@@ -587,6 +596,7 @@ def start_local_license_service(hwid: str, host: str = "127.0.0.1", port: int = 
                         LICENSE_STATE.allowed = False
                         LICENSE_STATE.reason = "not_activated"
                         LICENSE_STATE.payload = None
+                        LICENSE_STATE.payload_json = None
                         LICENSE_STATE.signature = None
                         LICENSE_STATE.alg = None
                         LICENSE_STATE.last_check_ts = int(time.time())
@@ -595,6 +605,7 @@ def start_local_license_service(hwid: str, host: str = "127.0.0.1", port: int = 
 
                 data = license_check(hwid, device_secret)
                 payload = data.get("payload") if isinstance(data, dict) else None
+                payload_json = data.get("payloadJson") if isinstance(data, dict) else None
                 signature = data.get("signature") if isinstance(data, dict) else None
                 alg = data.get("alg") if isinstance(data, dict) else None
 
@@ -605,6 +616,7 @@ def start_local_license_service(hwid: str, host: str = "127.0.0.1", port: int = 
                     LICENSE_STATE.allowed = allowed
                     LICENSE_STATE.reason = reason
                     LICENSE_STATE.payload = payload
+                    LICENSE_STATE.payload_json = payload_json
                     LICENSE_STATE.signature = signature
                     LICENSE_STATE.alg = alg
                     LICENSE_STATE.last_check_ts = int(time.time())
@@ -613,6 +625,7 @@ def start_local_license_service(hwid: str, host: str = "127.0.0.1", port: int = 
                     LICENSE_STATE.allowed = False
                     LICENSE_STATE.reason = f"error:{e}"
                     LICENSE_STATE.payload = None
+                    LICENSE_STATE.payload_json = None
                     LICENSE_STATE.signature = None
                     LICENSE_STATE.alg = None
                     LICENSE_STATE.last_check_ts = int(time.time())
