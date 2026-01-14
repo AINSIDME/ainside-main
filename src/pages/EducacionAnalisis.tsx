@@ -186,17 +186,17 @@ export default function EducacionAnalisis() {
               Análisis Fundamental
             </span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
             Descubre las dos escuelas principales de análisis de mercados. Aprende cuándo usar cada una 
             y cómo combinarlas para maximizar tus probabilidades de éxito.
           </p>
         </div>
 
         <Tabs defaultValue="tecnico" className="space-y-8">
-          <TabsList className="grid grid-cols-3 gap-2 h-auto p-2 bg-card">
+          <TabsList className="grid grid-cols-3 gap-2 h-auto p-2 bg-white border-2 border-gray-200 shadow-md">
             <TabsTrigger 
               value="tecnico"
-              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold p-3"
             >
               <LineChart className="w-5 h-5" />
               <span>Análisis Técnico</span>

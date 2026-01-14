@@ -77,27 +77,27 @@ export default function EducacionLenguaje() {
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-[1.1] tracking-tight">
             El Lenguaje de los Traders
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Domina la jerga, términos técnicos y expresiones que usan los traders profesionales. 
             Desde conceptos básicos hasta slang avanzado de las comunidades de trading.
           </p>
         </div>
 
         {/* Términos Básicos */}
-        <Card className="mb-8">
+        <Card className="mb-8 bg-white border-2 border-blue-200 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">📚 Términos Básicos Esenciales</CardTitle>
-            <CardDescription>Vocabulario fundamental que todo trader debe conocer</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">📚 Términos Básicos Esenciales</CardTitle>
+            <CardDescription className="text-gray-700 font-medium">Vocabulario fundamental que todo trader debe conocer</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {terminosBasicos.map((item, idx) => (
-                <div key={idx} className="p-4 bg-secondary/30 rounded-lg border hover:border-slate-600/60 transition-colors">
+                <div key={idx} className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200 hover:border-blue-400 transition-colors">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-2xl">{item.emoji}</span>
-                    <h3 className="font-semibold">{item.termino}</h3>
+                    <h3 className="font-bold text-gray-900">{item.termino}</h3>
                   </div>
-                  <p className="text-sm text-muted-foreground">{item.significado}</p>
+                  <p className="text-sm text-gray-700 font-medium">{item.significado}</p>
                 </div>
               ))}
             </div>
@@ -128,21 +128,21 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Tipos de Órdenes */}
-        <Card className="mb-8 bg-slate-800/40 border border-slate-700/40">
+        <Card className="mb-8 bg-white border-2 border-purple-200 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">📋 Tipos de Órdenes</CardTitle>
-            <CardDescription>Órdenes de ejecución que todo trader debe dominar</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">📋 Tipos de Órdenes</CardTitle>
+            <CardDescription className="text-gray-700 font-medium">Órdenes de ejecución que todo trader debe dominar</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {ordenesEjecucion.map((orden, idx) => (
-                <div key={idx} className="p-4 bg-background rounded-lg border flex flex-col md:flex-row md:items-center gap-4">
+                <div key={idx} className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200 flex flex-col md:flex-row md:items-center gap-4">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">{orden.tipo}</h3>
-                    <p className="text-sm text-muted-foreground">{orden.descripcion}</p>
+                    <h3 className="font-bold text-lg mb-1 text-gray-900">{orden.tipo}</h3>
+                    <p className="text-sm text-gray-700 font-medium">{orden.descripcion}</p>
                   </div>
                   <div className="md:w-1/3">
-                    <Badge className="whitespace-normal">Cuándo usar: {orden.cuando}</Badge>
+                    <Badge className="whitespace-normal bg-purple-600 text-white font-bold">Cuándo usar: {orden.cuando}</Badge>
                   </div>
                 </div>
               ))}
@@ -151,19 +151,19 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Ratios y Métricas */}
-        <Card className="mb-8 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+        <Card className="mb-8 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">📊 Ratios y Métricas de Performance</CardTitle>
-            <CardDescription>Indicadores clave para medir tu rendimiento como trader</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">📊 Ratios y Métricas de Performance</CardTitle>
+            <CardDescription className="text-gray-800 font-medium">Indicadores clave para medir tu rendimiento como trader</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4">
               {ratiosComunes.map((ratio, idx) => (
-                <div key={idx} className="p-5 bg-background rounded-lg border">
-                  <h3 className="font-bold text-lg mb-2 text-slate-300">{ratio.ratio}</h3>
-                  <p className="text-sm mb-3">{ratio.explicacion}</p>
-                  <div className="bg-secondary/30 p-3 rounded">
-                    <p className="text-sm font-mono">
+                <div key={idx} className="p-5 bg-white rounded-lg border-2 border-purple-200">
+                  <h3 className="font-bold text-lg mb-2 text-gray-900">{ratio.ratio}</h3>
+                  <p className="text-sm mb-3 text-gray-700 font-medium">{ratio.explicacion}</p>
+                  <div className="bg-purple-50 p-3 rounded border-2 border-purple-100">
+                    <p className="text-sm font-mono text-gray-800 font-semibold">
                       <strong>Ejemplo:</strong> {ratio.ejemplo}
                     </p>
                   </div>
@@ -174,30 +174,30 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Sesiones de Trading */}
-        <Card className="mb-8 bg-gradient-to-r from-green-500/10 to-emerald-500/10">
+        <Card className="mb-8 bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-300 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">🌍 Sesiones Horarias Globales (Forex)</CardTitle>
-            <CardDescription>Horarios de mayor actividad en mercados internacionales</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">🌍 Sesiones Horarias Globales (Forex)</CardTitle>
+            <CardDescription className="text-gray-800 font-medium">Horarios de mayor actividad en mercados internacionales</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b-2">
-                    <th className="text-left p-3">Sesión</th>
-                    <th className="text-left p-3">Horario (ET)</th>
-                    <th className="text-left p-3">Pares más activos</th>
-                    <th className="text-center p-3">Volatilidad</th>
+                  <tr className="border-b-2 border-green-300">
+                    <th className="text-left p-3 font-bold text-gray-900">Sesión</th>
+                    <th className="text-left p-3 font-bold text-gray-900">Horario (ET)</th>
+                    <th className="text-left p-3 font-bold text-gray-900">Pares más activos</th>
+                    <th className="text-center p-3 font-bold text-gray-900">Volatilidad</th>
                   </tr>
                 </thead>
                 <tbody>
                   {sesionesHorarias.map((sesion, idx) => (
-                    <tr key={idx} className="border-b hover:bg-secondary/20">
-                      <td className="p-3 font-semibold">{sesion.sesion}</td>
-                      <td className="p-3 font-mono">{sesion.horario}</td>
-                      <td className="p-3">{sesion.pares}</td>
+                    <tr key={idx} className="border-b border-green-200 hover:bg-green-50">
+                      <td className="p-3 font-bold text-gray-900">{sesion.sesion}</td>
+                      <td className="p-3 font-mono text-gray-800 font-semibold">{sesion.horario}</td>
+                      <td className="p-3 text-gray-700 font-medium">{sesion.pares}</td>
                       <td className="text-center p-3">
-                        <Badge variant={sesion.volatilidad.includes('Alta') || sesion.volatilidad.includes('Máxima') ? 'default' : 'secondary'}>
+                        <Badge variant={sesion.volatilidad.includes('Alta') || sesion.volatilidad.includes('Máxima') ? 'default' : 'secondary'} className="bg-green-600 text-white font-bold">
                           {sesion.volatilidad}
                         </Badge>
                       </td>
@@ -206,7 +206,7 @@ export default function EducacionLenguaje() {
                 </tbody>
               </table>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm text-gray-700 mt-4 font-medium">
               💡 <strong>Tip:</strong> El overlap Londres-Nueva York (08:00-12:00 ET) es el período de mayor liquidez 
               y volatilidad en forex. Ideal para day trading de pares EUR/USD y GBP/USD.
             </p>
@@ -214,49 +214,49 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Expresiones de Estado Emocional */}
-        <Card className="border border-slate-700/40">
+        <Card className="border-2 border-blue-200 bg-white shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">🎭 Estados Emocionales del Trader</CardTitle>
-            <CardDescription>Expresiones que describen el estado mental en trading</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">🎭 Estados Emocionales del Trader</CardTitle>
+            <CardDescription className="text-gray-700 font-medium">Expresiones que describen el estado mental en trading</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h3 className="font-semibold text-lg text-slate-300 mb-3">✅ Estados Positivos</h3>
+                <h3 className="font-bold text-lg text-gray-900 mb-3">✅ Estados Positivos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">En la Zona</p>
-                    <p className="text-sm text-muted-foreground">Estado de flow perfecto, todo sale bien</p>
+                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                    <p className="font-bold text-gray-900">En la Zona</p>
+                    <p className="text-sm text-gray-700 font-medium">Estado de flow perfecto, todo sale bien</p>
                   </div>
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Aplastándola</p>
-                    <p className="text-sm text-muted-foreground">Racha ganadora espectacular</p>
+                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                    <p className="font-bold text-gray-900">Aplastándola</p>
+                    <p className="text-sm text-gray-700 font-medium">Racha ganadora espectacular</p>
                   </div>
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Imprimiendo Dinero 🖨️💰</p>
-                    <p className="text-sm text-muted-foreground">Ganancias fáciles y consistentes</p>
+                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                    <p className="font-bold text-gray-900">Imprimiendo Dinero 🖨️💰</p>
+                    <p className="text-sm text-gray-700 font-medium">Ganancias fáciles y consistentes</p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <h3 className="font-semibold text-lg text-slate-300 mb-3">⚠️ Estados Negativos</h3>
+                <h3 className="font-bold text-lg text-gray-900 mb-3">⚠️ Estados Negativos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Descontrolado / Tilt</p>
-                    <p className="text-sm text-muted-foreground">Estado emocional comprometido, revenge trading</p>
+                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                    <p className="font-bold text-gray-900">Descontrolado / Tilt</p>
+                    <p className="text-sm text-gray-700 font-medium">Estado emocional comprometido, revenge trading</p>
                   </div>
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Cuenta Reventada</p>
-                    <p className="text-sm text-muted-foreground">Cuenta liquidada, pérdida total</p>
+                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                    <p className="font-bold text-gray-900">Cuenta Reventada</p>
+                    <p className="text-sm text-gray-700 font-medium">Cuenta liquidada, pérdida total</p>
                   </div>
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Atrapar Cuchillos Cayendo</p>
-                    <p className="text-sm text-muted-foreground">Intentar comprar en caída libre (muy peligroso)</p>
+                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                    <p className="font-bold text-gray-900">Atrapar Cuchillos Cayendo</p>
+                    <p className="text-sm text-gray-700 font-medium">Intentar comprar en caída libre (muy peligroso)</p>
                   </div>
-                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Trampa FOMO</p>
-                    <p className="text-sm text-muted-foreground">Entrar tarde por miedo a perderse el movimiento</p>
+                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                    <p className="font-bold text-gray-900">Trampa FOMO</p>
+                    <p className="text-sm text-gray-700 font-medium">Entrar tarde por miedo a perderse el movimiento</p>
                   </div>
                 </div>
               </div>
@@ -265,9 +265,9 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Recursos adicionales */}
-        <Card className="mt-8 bg-slate-800/40 border border-slate-700/40">
+        <Card className="mt-8 bg-white border-2 border-blue-200 shadow-xl">
           <CardHeader>
-            <CardTitle>🎓 Domina el Lenguaje</CardTitle>
+            <CardTitle className="text-gray-900 font-bold">🎓 Domina el Lenguaje</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
