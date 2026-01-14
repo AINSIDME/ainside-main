@@ -203,14 +203,14 @@ export default function EducacionAnalisis() {
             </TabsTrigger>
             <TabsTrigger 
               value="fundamental"
-              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold p-3"
             >
               <Building2 className="w-5 h-5" />
               <span>Análisis Fundamental</span>
             </TabsTrigger>
             <TabsTrigger 
               value="comparacion"
-              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold p-3"
             >
               <Scale className="w-5 h-5" />
               <span>Comparación</span>
@@ -219,11 +219,11 @@ export default function EducacionAnalisis() {
 
           {/* ANÁLISIS TÉCNICO */}
           <TabsContent value="tecnico" className="space-y-6">
-            <Card className="border border-slate-700/40">
-              <CardHeader className="bg-slate-800/60">
+            <Card className="border-2 border-blue-200 bg-white shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-100 to-cyan-100">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-blue-500/20 rounded-lg">
-                    <LineChart className="w-8 h-8 text-slate-300" />
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
+                    <LineChart className="w-8 h-8 text-white" />
                   </div>
                   <div>
                     <CardTitle className="text-3xl">Análisis Técnico</CardTitle>
@@ -235,22 +235,22 @@ export default function EducacionAnalisis() {
               </CardHeader>
               <CardContent className="space-y-6 pt-6">
                 {/* Definición */}
-                <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                  <h3 className="text-xl font-semibold mb-3">📖 ¿Qué es?</h3>
-                  <p className="text-muted-foreground">{analisisTecnico.definicion}</p>
+                <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900">📖 ¿Qué es?</h3>
+                  <p className="text-gray-700 font-medium">{analisisTecnico.definicion}</p>
                 </div>
 
                 {/* Principios */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">🎯 Principios Fundamentales</h3>
+                  <h3 className="text-xl font-bold mb-4 text-gray-900">🎯 Principios Fundamentales</h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     {analisisTecnico.principios.map((principio, idx) => (
-                      <Card key={idx}>
+                      <Card key={idx} className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
                         <CardHeader>
-                          <CardTitle className="text-lg">{principio.titulo}</CardTitle>
+                          <CardTitle className="text-lg text-gray-900 font-bold">{principio.titulo}</CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-muted-foreground">{principio.descripcion}</p>
+                          <p className="text-sm text-gray-700 font-medium">{principio.descripcion}</p>
                         </CardContent>
                       </Card>
                     ))}
@@ -258,15 +258,15 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Herramientas */}
-                <div className="bg-slate-800/40 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-4">🛠️ Herramientas Principales</h3>
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900">🛠️ Herramientas Principales</h3>
                   <div className="grid md:grid-cols-2 gap-3">
                     {analisisTecnico.herramientas.map((herr, idx) => (
-                      <div key={idx} className="flex items-start gap-3 bg-background p-4 rounded border">
-                        <span className="text-slate-400 text-xl">▸</span>
+                      <div key={idx} className="flex items-start gap-3 bg-white p-4 rounded border-2 border-green-100">
+                        <span className="text-green-600 text-xl font-bold">▸</span>
                         <div>
-                          <p className="font-semibold">{herr.nombre}</p>
-                          <p className="text-sm text-muted-foreground">{herr.uso}</p>
+                          <p className="font-bold text-gray-900">{herr.nombre}</p>
+                          <p className="text-sm text-gray-700 font-medium">{herr.uso}</p>
                         </div>
                       </div>
                     ))}
@@ -275,30 +275,30 @@ export default function EducacionAnalisis() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Ventajas */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ✅ Ventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisTecnico.ventajas.map((vent, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-slate-400 mt-1">+</span>
-                          <span className="text-sm">{vent}</span>
+                          <span className="text-green-600 mt-1 font-bold">+</span>
+                          <span className="text-sm text-gray-800 font-medium">{vent}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   {/* Desventajas */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ⚠️ Desventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisTecnico.desventajas.map((desv, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-slate-400 mt-1">−</span>
-                          <span className="text-sm">{desv}</span>
+                          <span className="text-red-600 mt-1 font-bold">−</span>
+                          <span className="text-sm text-gray-800 font-medium">{desv}</span>
                         </li>
                       ))}
                     </ul>
@@ -306,11 +306,11 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Mejor para */}
-                <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                  <h3 className="text-lg font-semibold mb-3">👥 Mejor para:</h3>
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900">👥 Mejor para:</h3>
                   <div className="flex flex-wrap gap-2">
                     {analisisTecnico.mejorPara.map((item, idx) => (
-                      <span key={idx} className="bg-background px-3 py-1 rounded-full text-sm border">
+                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-yellow-200 text-gray-900 font-bold">
                         {item}
                       </span>
                     ))}
@@ -322,11 +322,11 @@ export default function EducacionAnalisis() {
 
           {/* ANÁLISIS FUNDAMENTAL */}
           <TabsContent value="fundamental" className="space-y-6">
-            <Card className="border-2 border-green-500/30">
-              <CardHeader className="bg-gradient-to-r from-green-500/10 to-emerald-500/10">
+            <Card className="border-2 border-green-200 bg-white shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-green-100 to-emerald-100">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-800/60 rounded-lg">
-                    <Building2 className="w-8 h-8 text-green-600 dark:text-green-400" />
+                  <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
+                    <Building2 className="w-8 h-8 text-white" />
                   </div>
                   <div>
                     <CardTitle className="text-3xl">Análisis Fundamental</CardTitle>
@@ -338,22 +338,22 @@ export default function EducacionAnalisis() {
               </CardHeader>
               <CardContent className="space-y-6 pt-6">
                 {/* Definición */}
-                <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                  <h3 className="text-xl font-semibold mb-3">📖 ¿Qué es?</h3>
-                  <p className="text-muted-foreground">{analisisFundamental.definicion}</p>
+                <div className="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900">📖 ¿Qué es?</h3>
+                  <p className="text-gray-700 font-medium">{analisisFundamental.definicion}</p>
                 </div>
 
                 {/* Principios */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">🎯 Principios Fundamentales</h3>
+                  <h3 className="text-xl font-bold mb-4 text-gray-900">🎯 Principios Fundamentales</h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     {analisisFundamental.principios.map((principio, idx) => (
-                      <Card key={idx}>
+                      <Card key={idx} className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200">
                         <CardHeader>
-                          <CardTitle className="text-lg">{principio.titulo}</CardTitle>
+                          <CardTitle className="text-lg text-gray-900 font-bold">{principio.titulo}</CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-muted-foreground">{principio.descripcion}</p>
+                          <p className="text-sm text-gray-700 font-medium">{principio.descripcion}</p>
                         </CardContent>
                       </Card>
                     ))}
@@ -361,15 +361,15 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Herramientas */}
-                <div className="bg-secondary/30 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-4">🛠️ Herramientas y Métricas</h3>
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900">🛠️ Herramientas y Métricas</h3>
                   <div className="space-y-4">
                     {analisisFundamental.herramientas.map((cat, idx) => (
-                      <div key={idx} className="bg-background p-4 rounded border">
-                        <h4 className="font-semibold mb-2 text-green-600 dark:text-green-400">{cat.categoria}</h4>
+                      <div key={idx} className="bg-white p-4 rounded border-2 border-purple-100">
+                        <h4 className="font-bold mb-2 text-green-600">{cat.categoria}</h4>
                         <div className="flex flex-wrap gap-2">
                           {cat.items.map((item, i) => (
-                            <span key={i} className="bg-slate-700/40 px-3 py-1 rounded text-sm">
+                            <span key={i} className="bg-gradient-to-r from-purple-100 to-pink-100 px-3 py-1 rounded text-sm text-gray-900 font-bold border border-purple-200">
                               {item}
                             </span>
                           ))}
@@ -381,30 +381,30 @@ export default function EducacionAnalisis() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Ventajas */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ✅ Ventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisFundamental.ventajas.map((vent, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-slate-400 mt-1">+</span>
-                          <span className="text-sm">{vent}</span>
+                          <span className="text-green-600 mt-1 font-bold">+</span>
+                          <span className="text-sm text-gray-800 font-medium">{vent}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   {/* Desventajas */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ⚠️ Desventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisFundamental.desventajas.map((desv, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-slate-400 mt-1">−</span>
-                          <span className="text-sm">{desv}</span>
+                          <span className="text-red-600 mt-1 font-bold">−</span>
+                          <span className="text-sm text-gray-800 font-medium">{desv}</span>
                         </li>
                       ))}
                     </ul>
@@ -412,11 +412,11 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Mejor para */}
-                <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                  <h3 className="text-lg font-semibold mb-3">👥 Mejor para:</h3>
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900">👥 Mejor para:</h3>
                   <div className="flex flex-wrap gap-2">
                     {analisisFundamental.mejorPara.map((item, idx) => (
-                      <span key={idx} className="bg-background px-3 py-1 rounded-full text-sm border">
+                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-yellow-200 text-gray-900 font-bold">
                         {item}
                       </span>
                     ))}
