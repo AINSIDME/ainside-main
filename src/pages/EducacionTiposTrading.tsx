@@ -257,28 +257,28 @@ const tiposTrading = [
 export default function EducacionTiposTrading() {
   return (
     <LanguageGate allowedLanguages={['es']}>
-    <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
+          <div className="inline-block px-6 py-3 text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full mb-8 tracking-wide uppercase shadow-lg">
             EDUCACIÓN TRADING
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-[1.1] tracking-tight">
             Tipos de Trading: Encuentra Tu Estilo
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Explora los diferentes estilos de trading desde scalping hasta inversión de largo plazo. 
             Descubre cuál se adapta mejor a tu personalidad, capital y disponibilidad de tiempo.
           </p>
         </div>
 
         <Tabs defaultValue={tiposTrading[0].id} className="space-y-8">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 h-auto p-2 bg-card">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 h-auto p-2 bg-white border-2 border-gray-200 shadow-md">
             {tiposTrading.map((tipo) => (
               <TabsTrigger 
                 key={tipo.id} 
                 value={tipo.id}
-                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
+                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold p-3"
               >
                 {tipo.icono}
                 <span>{tipo.nombre}</span>
@@ -288,10 +288,10 @@ export default function EducacionTiposTrading() {
 
           {tiposTrading.map((tipo) => (
             <TabsContent key={tipo.id} value={tipo.id} className="space-y-6">
-              <Card className="border border-slate-700/40">
+              <Card className="border-2 border-blue-200 bg-white shadow-xl">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
+                    <div className="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg text-blue-700">
                       {tipo.icono}
                     </div>
                     <div>
@@ -304,37 +304,37 @@ export default function EducacionTiposTrading() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Definición */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-3">📖 Definición</h3>
-                    <p className="text-muted-foreground mb-4">{tipo.definicion}</p>
+                  <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                    <h3 className="text-xl font-bold mb-3 text-gray-900">📖 Definición</h3>
+                    <p className="text-gray-700 font-medium mb-4">{tipo.definicion}</p>
                     <div className="grid md:grid-cols-4 gap-4 text-sm">
-                      <div className="bg-background p-3 rounded border">
-                        <p className="font-semibold mb-1">⏱️ Timeframes</p>
-                        <p className="text-muted-foreground">{tipo.timeframe}</p>
+                      <div className="bg-white p-3 rounded border-2 border-blue-100">
+                        <p className="font-bold mb-1 text-gray-900">⏱️ Timeframes</p>
+                        <p className="text-gray-700 font-medium">{tipo.timeframe}</p>
                       </div>
-                      <div className="bg-background p-3 rounded border">
-                        <p className="font-semibold mb-1">⏳ Duración</p>
-                        <p className="text-muted-foreground">{tipo.duracion}</p>
+                      <div className="bg-white p-3 rounded border-2 border-blue-100">
+                        <p className="font-bold mb-1 text-gray-900">⏳ Duración</p>
+                        <p className="text-gray-700 font-medium">{tipo.duracion}</p>
                       </div>
-                      <div className="bg-background p-3 rounded border">
-                        <p className="font-semibold mb-1">🎯 Objetivo</p>
-                        <p className="text-muted-foreground">{tipo.objetivo}</p>
+                      <div className="bg-white p-3 rounded border-2 border-blue-100">
+                        <p className="font-bold mb-1 text-gray-900">🎯 Objetivo</p>
+                        <p className="text-gray-700 font-medium">{tipo.objetivo}</p>
                       </div>
-                      <div className="bg-background p-3 rounded border">
-                        <p className="font-semibold mb-1">💰 Capital</p>
-                        <p className="text-muted-foreground">{tipo.capital}</p>
+                      <div className="bg-white p-3 rounded border-2 border-blue-100">
+                        <p className="font-bold mb-1 text-gray-900">💰 Capital</p>
+                        <p className="text-gray-700 font-medium">{tipo.capital}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Características */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold mb-4">⚙️ Características Principales</h3>
+                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">⚙️ Características Principales</h3>
                     <ul className="grid md:grid-cols-2 gap-3">
                       {tipo.caracteristicas.map((car, idx) => (
-                        <li key={idx} className="flex items-start gap-2 bg-background p-3 rounded border">
-                          <span className="text-slate-400 mt-1">▪</span>
-                          <span className="text-sm">{car}</span>
+                        <li key={idx} className="flex items-start gap-2 bg-white p-3 rounded border-2 border-purple-100">
+                          <span className="text-purple-600 mt-1 font-bold">▪</span>
+                          <span className="text-sm text-gray-800 font-medium">{car}</span>
                         </li>
                       ))}
                     </ul>
@@ -342,30 +342,30 @@ export default function EducacionTiposTrading() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Ventajas */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ✅ Ventajas
                       </h3>
                       <ul className="space-y-2">
                         {tipo.ventajas.map((vent, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-green-600 dark:text-green-400 mt-1">+</span>
-                            <span className="text-sm">{vent}</span>
+                            <span className="text-green-600 mt-1 font-bold">+</span>
+                            <span className="text-sm text-gray-800 font-medium">{vent}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     {/* Desventajas */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ⚠️ Desventajas
                       </h3>
                       <ul className="space-y-2">
                         {tipo.desventajas.map((desv, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-red-600 dark:text-red-400 mt-1">−</span>
-                            <span className="text-sm">{desv}</span>
+                            <span className="text-red-600 mt-1 font-bold">−</span>
+                            <span className="text-sm text-gray-800 font-medium">{desv}</span>
                           </li>
                         ))}
                       </ul>
@@ -373,11 +373,11 @@ export default function EducacionTiposTrading() {
                   </div>
 
                   {/* Perfil Ideal */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-lg font-semibold mb-3">👤 Perfil Ideal del Trader</h3>
-                    <p className="text-sm mb-4">{tipo.perfil}</p>
-                    <div className="pt-3 border-t">
-                      <p className="text-sm">
+                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                    <h3 className="text-lg font-bold mb-3 text-gray-900">👤 Perfil Ideal del Trader</h3>
+                    <p className="text-sm mb-4 text-gray-800 font-medium">{tipo.perfil}</p>
+                    <div className="pt-3 border-t border-yellow-300">
+                      <p className="text-sm text-gray-800 font-medium">
                         <strong>Mercados recomendados:</strong> {tipo.mercados}
                       </p>
                     </div>
@@ -462,33 +462,33 @@ export default function EducacionTiposTrading() {
         </Card>
 
         {/* Consejo final */}
-        <Card className="mt-8 bg-slate-800/40 border border-slate-700/40">
+        <Card className="mt-8 bg-white border-2 border-blue-200 shadow-xl">
           <CardHeader>
-            <CardTitle>💡 Consejo Profesional</CardTitle>
+            <CardTitle className="text-gray-900 font-bold">💡 Consejo Profesional</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>
+            <p className="text-gray-800 font-medium">
               <strong>No existe un estilo "mejor"</strong> que otro. El mejor estilo de trading es el que:
             </p>
             <ul className="space-y-2 ml-6">
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
-                <span>Se adapta a tu personalidad y nivel de estrés</span>
+                <span className="text-blue-600 mt-1 font-bold">✓</span>
+                <span className="text-gray-800 font-medium">Se adapta a tu personalidad y nivel de estrés</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
-                <span>Es compatible con tu disponibilidad de tiempo</span>
+                <span className="text-blue-600 mt-1 font-bold">✓</span>
+                <span className="text-gray-800 font-medium">Es compatible con tu disponibilidad de tiempo</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
-                <span>Se ajusta a tu capital disponible</span>
+                <span className="text-blue-600 mt-1 font-bold">✓</span>
+                <span className="text-gray-800 font-medium">Se ajusta a tu capital disponible</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
-                <span>Coincide con tu nivel de experiencia</span>
+                <span className="text-blue-600 mt-1 font-bold">✓</span>
+                <span className="text-gray-800 font-medium">Coincide con tu nivel de experiencia</span>
               </li>
             </ul>
-            <p className="text-muted-foreground mt-4">
+            <p className="text-gray-700 mt-4 font-medium">
               <strong>Recomendación:</strong> Los principiantes deberían comenzar con swing trading o copy trading 
               para aprender sin el estrés del intradiario. Una vez dominados conceptos fundamentales, 
               pueden progresar a estilos más activos si lo desean.

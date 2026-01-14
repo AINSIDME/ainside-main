@@ -173,13 +173,13 @@ const enfoqueHibrido = [
 export default function EducacionAnalisis() {
   return (
     <LanguageGate allowedLanguages={['es']}>
-    <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
+          <div className="inline-block px-6 py-3 text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full mb-8 tracking-wide uppercase shadow-lg">
             EDUCACIÓN TRADING
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-[1.1] tracking-tight">
             Análisis Técnico vs
             <br />
             <span className="font-normal bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">

@@ -288,28 +288,28 @@ const conceptosAvanzados = [
 export default function EducacionInstrumentos() {
   return (
     <LanguageGate allowedLanguages={['es']}>
-    <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
+          <div className="inline-block px-6 py-3 text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full mb-8 tracking-wide uppercase shadow-lg">
             EDUCACIÓN TRADING
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-[1.1] tracking-tight">
             Guía Completa de Instrumentos Financieros
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Aprende todo sobre acciones, futuros, divisas, criptomonedas y conceptos avanzados 
             como swaps y derivados. Educación profesional para traders serios.
           </p>
         </div>
 
         <Tabs defaultValue={instrumentos[0].id} className="space-y-8">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 h-auto p-2 bg-card">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 h-auto p-2 bg-white border-2 border-gray-200 shadow-md">
             {instrumentos.map((inst) => (
               <TabsTrigger 
                 key={inst.id} 
                 value={inst.id}
-                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
+                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold p-3"
               >
                 {inst.icono}
                 <span>{inst.nombre}</span>
@@ -319,10 +319,10 @@ export default function EducacionInstrumentos() {
 
           {instrumentos.map((inst) => (
             <TabsContent key={inst.id} value={inst.id} className="space-y-6">
-              <Card className="border border-slate-700/40">
+              <Card className="border-2 border-blue-200 bg-white shadow-xl">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
+                    <div className="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg text-blue-700">
                       {inst.icono}
                     </div>
                     <div>
@@ -335,19 +335,19 @@ export default function EducacionInstrumentos() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Definición */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-3">📖 ¿Qué es?</h3>
-                    <p className="text-muted-foreground">{inst.definicion}</p>
+                  <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                    <h3 className="text-xl font-bold mb-3 text-gray-900">📖 ¿Qué es?</h3>
+                    <p className="text-gray-700 font-medium">{inst.definicion}</p>
                   </div>
 
                   {/* Características */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold mb-4">⚙️ Características Clave</h3>
+                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">⚙️ Características Clave</h3>
                     <ul className="grid md:grid-cols-2 gap-3">
                       {inst.caracteristicas.map((car, idx) => (
-                        <li key={idx} className="flex items-start gap-2 bg-background p-3 rounded border">
-                          <span className="text-slate-400 mt-1">▪</span>
-                          <span className="text-sm">{car}</span>
+                        <li key={idx} className="flex items-start gap-2 bg-white p-3 rounded border-2 border-purple-100">
+                          <span className="text-purple-600 mt-1 font-bold">▪</span>
+                          <span className="text-sm text-gray-800 font-medium">{car}</span>
                         </li>
                       ))}
                     </ul>
@@ -355,30 +355,30 @@ export default function EducacionInstrumentos() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Ventajas */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ✅ Ventajas
                       </h3>
                       <ul className="space-y-2">
                         {inst.ventajas.map((vent, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-green-600 dark:text-green-400 mt-1">+</span>
-                            <span className="text-sm">{vent}</span>
+                            <span className="text-green-600 mt-1 font-bold">+</span>
+                            <span className="text-sm text-gray-800 font-medium">{vent}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     {/* Riesgos */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ⚠️ Riesgos
                       </h3>
                       <ul className="space-y-2">
                         {inst.riesgos.map((riesgo, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-red-600 dark:text-red-400 mt-1">−</span>
-                            <span className="text-sm">{riesgo}</span>
+                            <span className="text-red-600 mt-1 font-bold">−</span>
+                            <span className="text-sm text-gray-800 font-medium">{riesgo}</span>
                           </li>
                         ))}
                       </ul>
@@ -386,9 +386,9 @@ export default function EducacionInstrumentos() {
                   </div>
 
                   {/* Ejemplos */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-lg font-semibold mb-3">🎯 Ejemplos Populares</h3>
-                    <p className="text-sm font-mono bg-background p-3 rounded">{inst.ejemplos}</p>
+                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                    <h3 className="text-lg font-bold mb-3 text-gray-900">🎯 Ejemplos Populares</h3>
+                    <p className="text-sm font-mono bg-white p-3 rounded text-gray-900 font-semibold border-2 border-yellow-200">{inst.ejemplos}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -397,9 +397,9 @@ export default function EducacionInstrumentos() {
         </Tabs>
 
         {/* Conceptos Avanzados */}
-        <Card className="mt-12 border-2 border-purple-500/30">
-          <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-            <CardTitle className="text-3xl flex items-center gap-3">
+        <Card className="mt-12 border-2 border-purple-300 bg-white shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-purple-100 to-pink-100">
+            <CardTitle className="text-3xl flex items-center gap-3 text-gray-900 font-bold">
               <ShieldCheck className="w-8 h-8" />
               Conceptos Avanzados
             </CardTitle>
@@ -410,14 +410,14 @@ export default function EducacionInstrumentos() {
           <CardContent className="pt-6">
             <div className="grid md:grid-cols-2 gap-6">
               {conceptosAvanzados.map((concepto, idx) => (
-                <Card key={idx} className="border border-slate-700/40 hover:border-slate-600/60 transition-colors">
+                <Card key={idx} className="border-2 border-purple-200 hover:border-purple-400 transition-colors bg-white">
                   <CardHeader>
-                    <CardTitle className="text-xl">{concepto.nombre}</CardTitle>
-                    <CardDescription>{concepto.descripcion}</CardDescription>
+                    <CardTitle className="text-xl text-gray-900 font-bold">{concepto.nombre}</CardTitle>
+                    <CardDescription className="text-gray-700 font-medium">{concepto.descripcion}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <h4 className="font-semibold mb-2 text-sm">Detalles:</h4>
+                      <h4 className="font-bold mb-2 text-sm text-gray-900">Detalles:</h4>
                       <ul className="space-y-1">
                         {concepto.detalles.map((det, i) => (
                           <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">

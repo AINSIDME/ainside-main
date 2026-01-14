@@ -209,32 +209,32 @@ const indicadores = [
 export default function EducacionIndicadores() {
   return (
     <LanguageGate allowedLanguages={['es']}>
-    <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
+          <div className="inline-block px-6 py-3 text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full mb-8 tracking-wide uppercase shadow-lg">
             EDUCACIÓN TRADING
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-[1.1] tracking-tight">
             10 Herramientas Esenciales
             <br />
-            <span className="font-normal bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
               del Algotrading
             </span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
             Domina los indicadores técnicos más utilizados en trading algorítmico. 
             Aprende sus fórmulas, interpretación y aplicaciones prácticas.
           </p>
         </div>
 
         <Tabs defaultValue={indicadores[0].id} className="space-y-8">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 h-auto p-2 bg-card">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 h-auto p-2 bg-white border-2 border-gray-200 shadow-md">
             {indicadores.map((ind) => (
               <TabsTrigger 
                 key={ind.id} 
                 value={ind.id}
-                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100"
+                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white font-semibold"
               >
                 {ind.icono}
                 <span className="hidden sm:inline">{ind.nombre.split('(')[0]}</span>
@@ -244,10 +244,10 @@ export default function EducacionIndicadores() {
 
           {indicadores.map((ind) => (
             <TabsContent key={ind.id} value={ind.id} className="space-y-6">
-              <Card className="border border-slate-700/40">
+              <Card className="border-2 border-blue-200 bg-white shadow-xl">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
+                    <div className="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg text-blue-700">
                       {ind.icono}
                     </div>
                     <div>
@@ -260,44 +260,44 @@ export default function EducacionIndicadores() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Fórmula */}
-                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                  <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                    <h3 className="text-xl font-bold mb-3 flex items-center gap-2 text-gray-900">
                       📐 Fórmula Matemática
                     </h3>
-                    <code className="block text-sm bg-background p-4 rounded border font-mono">
+                    <code className="block text-sm bg-white p-4 rounded border-2 border-blue-300 font-mono text-gray-900 font-semibold">
                       {ind.formula}
                     </code>
-                    <p className="text-sm text-muted-foreground mt-3">
+                    <p className="text-sm text-gray-700 mt-3 font-medium">
                       <strong>Parámetros:</strong> {ind.parametros}
                     </p>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Interpretación */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         🔍 Interpretación
                       </h3>
                       <ul className="space-y-2">
                         {ind.interpretacion.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-slate-400 mt-1">•</span>
-                            <span className="text-sm">{item}</span>
+                            <span className="text-blue-600 mt-1 font-bold">•</span>
+                            <span className="text-sm text-gray-800 font-medium">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     {/* Usos Prácticos */}
-                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ⚙️ Usos Prácticos
                       </h3>
                       <ul className="space-y-2">
                         {ind.usos.map((uso, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-green-600 dark:text-green-400 mt-1">✓</span>
-                            <span className="text-sm">{uso}</span>
+                            <span className="text-green-600 mt-1 font-bold">✓</span>
+                            <span className="text-sm text-gray-800 font-medium">{uso}</span>
                           </li>
                         ))}
                       </ul>
@@ -305,11 +305,11 @@ export default function EducacionIndicadores() {
                   </div>
 
                   {/* Consejos */}
-                  <div className="bg-slate-800/60 p-6 rounded-lg border border-slate-700/50">
-                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                    <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-gray-900">
                       💡 Consejo Profesional
                     </h3>
-                    <p className="text-sm">
+                    <p className="text-sm text-gray-800 font-medium">
                       {ind.id === 'rsi' && "Combina RSI con análisis de tendencia. En tendencias fuertes, el RSI puede permanecer en zonas extremas por períodos prolongados."}
                       {ind.id === 'macd' && "El MACD funciona mejor en mercados con tendencia. En mercados laterales, puede generar señales falsas frecuentes."}
                       {ind.id === 'bollinger' && "Las bandas de Bollinger son excelentes para identificar volatilidad. Un 'squeeze' (contracción) a menudo precede movimientos explosivos."}
@@ -329,26 +329,26 @@ export default function EducacionIndicadores() {
         </Tabs>
 
         {/* Sección adicional */}
-        <Card className="mt-12 bg-slate-800/40 border border-slate-700/40">
+        <Card className="mt-12 bg-white border-2 border-blue-200 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">🎯 Combinando Indicadores</CardTitle>
+            <CardTitle className="text-2xl font-bold text-gray-900">🎯 Combinando Indicadores</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
+            <p className="text-gray-700 font-medium">
               Los traders profesionales rara vez usan un solo indicador. Las estrategias más exitosas combinan:
             </p>
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-semibold mb-2">📊 Tendencia</h4>
-                <p className="text-sm text-muted-foreground">EMA, ADX, Ichimoku para confirmar dirección</p>
+              <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                <h4 className="font-bold mb-2 text-gray-900">📊 Tendencia</h4>
+                <p className="text-sm text-gray-700 font-medium">EMA, ADX, Ichimoku para confirmar dirección</p>
               </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-semibold mb-2">⚡ Momentum</h4>
-                <p className="text-sm text-muted-foreground">RSI, MACD, Stochastic para timing de entrada</p>
+              <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+                <h4 className="font-bold mb-2 text-gray-900">⚡ Momentum</h4>
+                <p className="text-sm text-gray-700 font-medium">RSI, MACD, Stochastic para timing de entrada</p>
               </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-semibold mb-2">📈 Volatilidad</h4>
-                <p className="text-sm text-muted-foreground">ATR, Bollinger para gestión de riesgo</p>
+              <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
+                <h4 className="font-bold mb-2 text-gray-900">📈 Volatilidad</h4>
+                <p className="text-sm text-gray-700 font-medium">ATR, Bollinger para gestión de riesgo</p>
               </div>
             </div>
           </CardContent>
