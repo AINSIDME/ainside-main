@@ -232,7 +232,7 @@ export default function EducacionIndicadores() {
               <TabsTrigger 
                 key={ind.id} 
                 value={ind.id}
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100"
               >
                 {ind.icono}
                 <span className="hidden sm:inline">{ind.nombre.split('(')[0]}</span>
@@ -242,10 +242,10 @@ export default function EducacionIndicadores() {
 
           {indicadores.map((ind) => (
             <TabsContent key={ind.id} value={ind.id} className="space-y-6">
-              <Card className="border-2 border-primary/20">
+              <Card className="border border-slate-700/40">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
                       {ind.icono}
                     </div>
                     <div>
@@ -272,14 +272,14 @@ export default function EducacionIndicadores() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Interpretación */}
-                    <div className="bg-blue-50 dark:bg-blue-950/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         🔍 Interpretación
                       </h3>
                       <ul className="space-y-2">
                         {ind.interpretacion.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+                            <span className="text-slate-400 mt-1">•</span>
                             <span className="text-sm">{item}</span>
                           </li>
                         ))}
@@ -327,7 +327,7 @@ export default function EducacionIndicadores() {
         </Tabs>
 
         {/* Sección adicional */}
-        <Card className="mt-12 bg-gradient-to-r from-primary/10 to-blue-600/10 border-2">
+        <Card className="mt-12 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle className="text-2xl">🎯 Combinando Indicadores</CardTitle>
           </CardHeader>

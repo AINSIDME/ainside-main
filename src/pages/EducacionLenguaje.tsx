@@ -90,7 +90,7 @@ export default function EducacionLenguaje() {
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {terminosBasicos.map((item, idx) => (
-                <div key={idx} className="p-4 bg-secondary/30 rounded-lg border hover:border-primary/50 transition-colors">
+                <div key={idx} className="p-4 bg-secondary/30 rounded-lg border hover:border-slate-600/60 transition-colors">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-2xl">{item.emoji}</span>
                     <h3 className="font-semibold">{item.termino}</h3>
@@ -126,7 +126,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Tipos de Órdenes */}
-        <Card className="mb-8 bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
+        <Card className="mb-8 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle className="text-2xl">📋 Tipos de Órdenes</CardTitle>
             <CardDescription>Órdenes de ejecución que todo trader debe dominar</CardDescription>
@@ -158,7 +158,7 @@ export default function EducacionLenguaje() {
             <div className="grid md:grid-cols-2 gap-4">
               {ratiosComunes.map((ratio, idx) => (
                 <div key={idx} className="p-5 bg-background rounded-lg border">
-                  <h3 className="font-bold text-lg mb-2 text-primary">{ratio.ratio}</h3>
+                  <h3 className="font-bold text-lg mb-2 text-slate-300">{ratio.ratio}</h3>
                   <p className="text-sm mb-3">{ratio.explicacion}</p>
                   <div className="bg-secondary/30 p-3 rounded">
                     <p className="text-sm font-mono">
@@ -212,7 +212,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Expresiones de Estado Emocional */}
-        <Card className="border-2 border-primary/30">
+        <Card className="border border-slate-700/40">
           <CardHeader>
             <CardTitle className="text-2xl">🎭 Estados Emocionales del Trader</CardTitle>
             <CardDescription>Expresiones que describen el estado mental en trading</CardDescription>
@@ -263,7 +263,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Recursos adicionales */}
-        <Card className="mt-8 bg-gradient-to-r from-primary/10 to-blue-600/10">
+        <Card className="mt-8 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle>🎓 Domina el Lenguaje</CardTitle>
           </CardHeader>
@@ -274,23 +274,23 @@ export default function EducacionLenguaje() {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
+                <span className="text-slate-400 mt-1">✓</span>
                 <span><strong>Comunicarte efectivamente</strong> en comunidades de trading</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
+                <span className="text-slate-400 mt-1">✓</span>
                 <span><strong>Entender análisis</strong> de traders profesionales en redes</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
+                <span className="text-slate-400 mt-1">✓</span>
                 <span><strong>Interpretar noticias</strong> y reportes financieros correctamente</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✓</span>
+                <span className="text-slate-400 mt-1">✓</span>
                 <span><strong>Evitar confusiones</strong> al ejecutar órdenes o gestionar riesgo</span>
               </li>
             </ul>
-            <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800 mt-4">
+            <div className="bg-slate-800/60 p-4 rounded-lg border border-slate-700/50 mt-4">
               <p className="text-sm">
                 <strong>⚠️ Advertencia:</strong> Aunque la jerga y memes son parte de la cultura trading, 
                 nunca bases decisiones de inversión en FOMO, hype o presión social. Mantén siempre 

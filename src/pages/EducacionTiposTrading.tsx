@@ -276,7 +276,7 @@ export default function EducacionTiposTrading() {
               <TabsTrigger 
                 key={tipo.id} 
                 value={tipo.id}
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-3"
+                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
               >
                 {tipo.icono}
                 <span>{tipo.nombre}</span>
@@ -286,10 +286,10 @@ export default function EducacionTiposTrading() {
 
           {tiposTrading.map((tipo) => (
             <TabsContent key={tipo.id} value={tipo.id} className="space-y-6">
-              <Card className="border-2 border-primary/20">
+              <Card className="border border-slate-700/40">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
                       {tipo.icono}
                     </div>
                     <div>
@@ -302,7 +302,7 @@ export default function EducacionTiposTrading() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Definición */}
-                  <div className="bg-blue-50 dark:bg-blue-950/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                     <h3 className="text-xl font-semibold mb-3">📖 Definición</h3>
                     <p className="text-muted-foreground mb-4">{tipo.definicion}</p>
                     <div className="grid md:grid-cols-4 gap-4 text-sm">
@@ -331,7 +331,7 @@ export default function EducacionTiposTrading() {
                     <ul className="grid md:grid-cols-2 gap-3">
                       {tipo.caracteristicas.map((car, idx) => (
                         <li key={idx} className="flex items-start gap-2 bg-background p-3 rounded border">
-                          <span className="text-primary mt-1">▪</span>
+                          <span className="text-slate-400 mt-1">▪</span>
                           <span className="text-sm">{car}</span>
                         </li>
                       ))}
@@ -460,7 +460,7 @@ export default function EducacionTiposTrading() {
         </Card>
 
         {/* Consejo final */}
-        <Card className="mt-8 border-2 border-primary/30">
+        <Card className="mt-8 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle>💡 Consejo Profesional</CardTitle>
           </CardHeader>

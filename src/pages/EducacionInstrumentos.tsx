@@ -307,7 +307,7 @@ export default function EducacionInstrumentos() {
               <TabsTrigger 
                 key={inst.id} 
                 value={inst.id}
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-3"
+                className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
               >
                 {inst.icono}
                 <span>{inst.nombre}</span>
@@ -317,10 +317,10 @@ export default function EducacionInstrumentos() {
 
           {instrumentos.map((inst) => (
             <TabsContent key={inst.id} value={inst.id} className="space-y-6">
-              <Card className="border-2 border-primary/20">
+              <Card className="border border-slate-700/40">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                    <div className="p-3 bg-slate-700/40 rounded-lg text-slate-300">
                       {inst.icono}
                     </div>
                     <div>
@@ -333,7 +333,7 @@ export default function EducacionInstrumentos() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Definición */}
-                  <div className="bg-blue-50 dark:bg-blue-950/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                     <h3 className="text-xl font-semibold mb-3">📖 ¿Qué es?</h3>
                     <p className="text-muted-foreground">{inst.definicion}</p>
                   </div>
@@ -344,7 +344,7 @@ export default function EducacionInstrumentos() {
                     <ul className="grid md:grid-cols-2 gap-3">
                       {inst.caracteristicas.map((car, idx) => (
                         <li key={idx} className="flex items-start gap-2 bg-background p-3 rounded border">
-                          <span className="text-primary mt-1">▪</span>
+                          <span className="text-slate-400 mt-1">▪</span>
                           <span className="text-sm">{car}</span>
                         </li>
                       ))}
@@ -408,7 +408,7 @@ export default function EducacionInstrumentos() {
           <CardContent className="pt-6">
             <div className="grid md:grid-cols-2 gap-6">
               {conceptosAvanzados.map((concepto, idx) => (
-                <Card key={idx} className="border-2 hover:border-primary/50 transition-colors">
+                <Card key={idx} className="border border-slate-700/40 hover:border-slate-600/60 transition-colors">
                   <CardHeader>
                     <CardTitle className="text-xl">{concepto.nombre}</CardTitle>
                     <CardDescription>{concepto.descripcion}</CardDescription>
@@ -419,7 +419,7 @@ export default function EducacionInstrumentos() {
                       <ul className="space-y-1">
                         {concepto.detalles.map((det, i) => (
                           <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                            <span className="text-primary">•</span>
+                            <span className="text-slate-400">•</span>
                             <span>{det}</span>
                           </li>
                         ))}
@@ -438,7 +438,7 @@ export default function EducacionInstrumentos() {
         </Card>
 
         {/* Comparativa rápida */}
-        <Card className="mt-12 bg-gradient-to-r from-blue-500/10 to-purple-500/10">
+        <Card className="mt-12 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle className="text-2xl">📊 Comparativa Rápida</CardTitle>
           </CardHeader>

@@ -194,21 +194,21 @@ export default function EducacionAnalisis() {
           <TabsList className="grid grid-cols-3 gap-2 h-auto p-2 bg-card">
             <TabsTrigger 
               value="tecnico"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
             >
               <LineChart className="w-5 h-5" />
               <span>Análisis Técnico</span>
             </TabsTrigger>
             <TabsTrigger 
               value="fundamental"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
             >
               <Building2 className="w-5 h-5" />
               <span>Análisis Fundamental</span>
             </TabsTrigger>
             <TabsTrigger 
               value="comparacion"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-3"
+              className="flex items-center gap-2 data-[state=active]:bg-slate-700/60 data-[state=active]:text-slate-100 p-3"
             >
               <Scale className="w-5 h-5" />
               <span>Comparación</span>
@@ -217,11 +217,11 @@ export default function EducacionAnalisis() {
 
           {/* ANÁLISIS TÉCNICO */}
           <TabsContent value="tecnico" className="space-y-6">
-            <Card className="border-2 border-blue-500/30">
-              <CardHeader className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
+            <Card className="border border-slate-700/40">
+              <CardHeader className="bg-slate-800/60">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-blue-500/20 rounded-lg">
-                    <LineChart className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                    <LineChart className="w-8 h-8 text-slate-300" />
                   </div>
                   <div>
                     <CardTitle className="text-3xl">Análisis Técnico</CardTitle>
@@ -261,7 +261,7 @@ export default function EducacionAnalisis() {
                   <div className="grid md:grid-cols-2 gap-3">
                     {analisisTecnico.herramientas.map((herr, idx) => (
                       <div key={idx} className="flex items-start gap-3 bg-background p-4 rounded border">
-                        <span className="text-blue-600 dark:text-blue-400 text-xl">▸</span>
+                        <span className="text-slate-400 text-xl">▸</span>
                         <div>
                           <p className="font-semibold">{herr.nombre}</p>
                           <p className="text-sm text-muted-foreground">{herr.uso}</p>
@@ -469,11 +469,11 @@ export default function EducacionAnalisis() {
             </Card>
 
             {/* Enfoque Híbrido */}
-            <Card className="border-2 border-primary/30">
-              <CardHeader className="bg-gradient-to-r from-primary/10 to-orange-500/10">
+            <Card className="border border-slate-700/40">
+              <CardHeader className="bg-slate-800/60">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/20 rounded-lg">
-                    <TrendingUp className="w-8 h-8 text-primary" />
+                    <TrendingUp className="w-8 h-8 text-slate-300" />
                   </div>
                   <div>
                     <CardTitle className="text-2xl">Enfoque Híbrido: Lo Mejor de Ambos Mundos</CardTitle>
@@ -486,7 +486,7 @@ export default function EducacionAnalisis() {
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   {enfoqueHibrido.map((enfoque, idx) => (
-                    <Card key={idx} className="border-2 hover:border-primary/50 transition-colors">
+                    <Card key={idx} className="border border-slate-700/40 hover:border-slate-600/60 transition-colors">
                       <CardHeader>
                         <CardTitle className="text-lg">{enfoque.estrategia}</CardTitle>
                         <CardDescription>{enfoque.descripcion}</CardDescription>
@@ -507,7 +507,7 @@ export default function EducacionAnalisis() {
         </Tabs>
 
         {/* Conclusión */}
-        <Card className="mt-12 border-2 border-primary/30">
+        <Card className="mt-12 bg-slate-800/40 border border-slate-700/40">
           <CardHeader>
             <CardTitle className="text-2xl">🎯 ¿Cuál Deberías Usar?</CardTitle>
           </CardHeader>
@@ -517,8 +517,8 @@ export default function EducacionAnalisis() {
             </p>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <h3 className="font-bold text-lg mb-3 text-blue-600 dark:text-blue-400">
+              <div className="p-6 bg-slate-800/40 rounded-lg border border-slate-700/40">
+                <h3 className="font-bold text-lg mb-3 text-slate-300">
                   Solo Técnico
                 </h3>
                 <ul className="space-y-2 text-sm">
