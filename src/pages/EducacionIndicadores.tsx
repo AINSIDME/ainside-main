@@ -208,7 +208,8 @@ const indicadores = [
 
 export default function EducacionIndicadores() {
   return (
-    <LanguageGate allowedLanguages={['es']}>
+    <>
+    <GoogleTranslate />
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
@@ -355,6 +356,6 @@ export default function EducacionIndicadores() {
         </Card>
       </div>
     </div>
-    </LanguageGate>
+    </>
   );
 }

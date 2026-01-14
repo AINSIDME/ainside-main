@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { LanguageGate } from "@/components/LanguageGate";
+import { GoogleTranslate } from "@/components/GoogleTranslate";
 
 const terminosBasicos = [
   { termino: "Bull / Alcista", significado: "Mercado o trader que espera subidas de precio", emoji: "🐂" },
@@ -67,7 +67,8 @@ const sesionesHorarias = [
 
 export default function EducacionLenguaje() {
   return (
-    <LanguageGate allowedLanguages={['es']}>
+    <>
+    <GoogleTranslate />
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
@@ -303,6 +304,6 @@ export default function EducacionLenguaje() {
         </Card>
       </div>
     </div>
-    </LanguageGate>
+    </>
   );
 }
