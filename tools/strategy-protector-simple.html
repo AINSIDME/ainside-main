@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AInside License Protector</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1e3a5f 0%, #3dd5af 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .content { padding: 30px; }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 1.3em; color: #1e3a5f; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #3dd5af; }
+        textarea { width: 100%; min-height: 300px; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 13px; resize: vertical; }
+        textarea:focus { outline: none; border-color: #3dd5af; }
+        .btn { background: linear-gradient(135deg, #1e3a5f 0%, #3dd5af 100%); color: white; border: none; padding: 15px 40px; font-size: 1.1em; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(61, 213, 175, 0.4); }
+        .btn-copy { background: #28a745; padding: 10px 30px; font-size: 0.95em; margin-top: 10px; }
+        .output { background: #f8f9fa; border: 2px solid #3dd5af; border-radius: 8px; padding: 20px; min-height: 400px; font-family: 'Courier New', monospace; font-size: 13px; white-space: pre-wrap; max-height: 600px; overflow-y: auto; }
+        .hidden { display: none; }
+        .button-container { text-align: center; margin: 30px 0; }
+        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ AInside License Protector</h1>
+            <p>Protege tus estrategias de TradeStation con licencias HWID</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Estrategia Original</div>
+                <textarea id="inputStrategy" placeholder="Pega tu estrategia aquí..."></textarea>
+            </div>
+            
+            <div class="button-container">
+                <button class="btn" onclick="protectStrategy()">🛡️ PROTEGER ESTRATEGIA</button>
+            </div>
+            
+            <div class="section hidden" id="outputSection">
+                <div class="section-title">Estrategia Protegida</div>
+                <div class="alert alert-success">✅ Estrategia protegida. Copia e importa en TradeStation.</div>
+                <div class="output" id="outputStrategy"></div>
+                <div class="button-container">
+                    <button class="btn btn-copy" onclick="copyCode()">📋 COPIAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function protectStrategy() {
+            const input = document.getElementById('inputStrategy').value.trim();
+            if (!input) { alert('Pega tu estrategia primero'); return; }
+            
+            const protected = addLicense(input);
+            document.getElementById('outputStrategy').textContent = protected;
+            document.getElementById('outputSection').classList.remove('hidden');
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function addLicense(code) {
+            // PRIMERO: Reemplazar TODAS las ocurrencias de "Variables:" por "Vars:"
+            code = code.replace(/\bVariables\s*:/gi, 'Vars:');
+            
+            let result = '{=================================================================\n';
+            result += '  ESTRATEGIA PROTEGIDA CON AINSIDE LICENSE\n';
+            result += '=================================================================}\n\n';
+            result += '// PROTECCION DE LICENCIA\n';
+            result += 'DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_IsAllowed";\n\n';
+            
+            // Extraer Inputs
+            let inputs = code.match(/Inputs?:[^;]*;/is);
+            if (inputs) {
+                result += inputs[0].replace(/;/, ',\n    DebugLicense(1);') + '\n\n';
+                code = code.replace(inputs[0], '');
+            } else {
+                result += 'Inputs:\n    DebugLicense(1);\n\n';
+            }
+            
+            // Extraer Variables (FORZAR Vars: nunca Variables:)
+            let vars = code.match(/(Variables?|Vars):\s*([^;]*);/is);
+            if (vars) {
+                // Si ya tiene variables, agregarlas con IsAllowed
+                let existingVars = vars[2].trim();
+                if (existingVars) {
+                    result += 'Vars:\n    ' + existingVars + ',\n    IsAllowed(0);\n\n';
+                } else {
+                    result += 'Vars:\n    IsAllowed(0);\n\n';
+                }
+                code = code.replace(vars[0], '');
+            } else {
+                result += 'Vars:\n    IsAllowed(0);\n\n';
+            }
+            
+            // Verificación de licencia
+            result += '// VERIFICACION\n';
+            result += 'IsAllowed = AInside_IsAllowed();\n\n';
+            result += 'if DebugLicense = 1 then begin\n';
+            result += '    if IsAllowed = 1 then Print("Licencia: ACTIVA") else Print("Licencia: BLOQUEADA");\n';
+            result += 'end;\n\n';
+            result += 'if IsAllowed = 0 then begin\n';
+            result += '    if MarketPosition = 1 then Sell("Lic_Exit") this bar at close;\n';
+            result += '    if MarketPosition = -1 then BuyToCover("Lic_Exit") this bar at close;\n';
+            result += 'end;\n\n';
+            
+            // Separar código
+            const lines = code.trim().split('\n');
+            let calcs = [];
+            let orders = [];
+            
+            for (let line of lines) {
+                const lower = line.trim().toLowerCase();
+                if (lower.includes('buy(') || lower.includes('sell(') || lower.includes('buytocover(') || lower.includes('sellshort(')) {
+                    orders.push(line);
+                } else {
+                    calcs.push(line);
+                }
+            }
+            
+            // Cálculos (siempre se ejecutan)
+            if (calcs.length > 0) {
+                result += '// CALCULOS\n';
+                result += calcs.join('\n') + '\n\n';
+            }
+            
+            // Órdenes (solo con licencia)
+            if (orders.length > 0) {
+                result += '// ORDENES (protegidas)\n';
+                result += 'if IsAllowed = 1 then begin\n';
+                orders.forEach(order => {
+                    result += '    ' + order + '\n';
+                });
+                result += 'end;\n';
+            }
+            
+            return result;
+        }
+        
+        function copyCode() {
+            const text = document.getElementById('outputStrategy').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Copiado al portapapeles');
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('✅ Copiado');
+            });
+        }
+    </script>
+</body>
+</html>

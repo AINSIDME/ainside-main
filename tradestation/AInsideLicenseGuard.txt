@@ -21,12 +21,12 @@ Vars:
 	ErrorBuffer(""),
 	ErrorCode(0);
 
-{ Declare external DLL functions }
-DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_IsAllowed";
+{ Declare external DLL functions - use DefineDLLFunc with correct syntax }
+DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_IsAllowed", ;
 DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_GetLastError", lpstr, int;
 
 { Call the DLL to check license status }
-IsAllowed = AInside_IsAllowed;
+IsAllowed = AInside_IsAllowed();
 
 { Optional: retrieve error details if blocked }
 if IsAllowed = 0 and DebugMode = 1 then begin

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AInside Strategy Protector</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.4em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 350px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            padding: 12px 35px;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+        
+        .btn-copy:hover {
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+        }
+        
+        .output {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .output::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .output::-webkit-scrollbar-track {
+            background: #2d3748;
+            border-radius: 10px;
+        }
+        
+        .output::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .alert {
+            background: #d4edda;
+            color: #155724;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #48bb78;
+            font-weight: 500;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .feature-title {
+            font-size: 1.1em;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature-desc {
+            color: #718096;
+            font-size: 0.95em;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ AInside Strategy Protector</h1>
+            <p>Sistema de protección HWID para estrategias TradeStation</p>
+        </div>
+        
+        <div class="content">
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Protección HWID</div>
+                    <div class="feature-desc">Vincula estrategias a hardware específico</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Cero Duplicados</div>
+                    <div class="feature-desc">Parser inteligente sin errores</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Plug & Play</div>
+                    <div class="feature-desc">Copia, pega y protege en segundos</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Estrategia Original</div>
+                <textarea id="inputStrategy" placeholder="Pega aquí el código completo de tu estrategia TradeStation...
+
+Ejemplo:
+Inputs: Length(10);
+Variables: MA(0);
+MA = Average(Close, Length);
+if Close crosses above MA then Buy this bar at close;
+if Close crosses below MA then Sell this bar at close;"></textarea>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn" onclick="protectStrategy()">🛡️ PROTEGER ESTRATEGIA</button>
+            </div>
+            
+            <div class="card hidden fade-in" id="outputSection">
+                <div class="card-title">✅ Estrategia Protegida</div>
+                <div class="alert">
+                    <strong>¡Listo!</strong> Copia el código protegido e impórtalo en TradeStation. Las órdenes solo se ejecutarán con licencia activa.
+                </div>
+                <div class="output" id="outputStrategy"></div>
+                <div class="btn-container">
+                    <button class="btn btn-copy" onclick="copyToClipboard()">📋 COPIAR AL PORTAPAPELES</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function protectStrategy() {
+            const input = document.getElementById('inputStrategy').value.trim();
+            
+            if (!input) {
+                alert('❌ Pega tu estrategia en el campo de arriba primero');
+                return;
+            }
+            
+            try {
+                const protectedCode = generateProtectedCode(input);
+                document.getElementById('outputStrategy').textContent = protectedCode;
+                
+                const outputSection = document.getElementById('outputSection');
+                outputSection.classList.remove('hidden');
+                outputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } catch (error) {
+                alert('❌ Error al procesar la estrategia: ' + error.message);
+            }
+        }
+        
+        function generateProtectedCode(originalCode) {
+            // Reemplazar Variables: por Vars: en TODO el código
+            originalCode = originalCode.replace(/\bVariables\s*:/gi, 'Vars:');
+            
+            let result = '';
+            result += '{=================================================================}\n';
+            result += '{  ESTRATEGIA PROTEGIDA - AINSIDE LICENSE SYSTEM                }\n';
+            result += '{  Proteccion HWID - Solo se ejecuta con licencia valida        }\n';
+            result += '{=================================================================}\n\n';
+            
+            // DLL Declaration
+            result += 'DefineDLLFunc: "AInsideLicenseBridgeCpp.dll", int, "AInside_IsAllowed";\n\n';
+            
+            // Procesar Inputs
+            const inputMatch = originalCode.match(/Inputs?\s*:\s*([^;]+);/is);
+            if (inputMatch) {
+                result += 'Inputs:\n    ' + inputMatch[1].trim() + ';\n\n';
+                originalCode = originalCode.replace(inputMatch[0], '');
+            }
+            
+            // Procesar Variables/Vars (agregar variables de sistema)
+            const varsMatch = originalCode.match(/Vars\s*:\s*([^;]+);/is);
+            if (varsMatch) {
+                result += 'Vars:\n    ' + varsMatch[1].trim() + ',\n    AInside_Lic(0);\n\n';
+                originalCode = originalCode.replace(varsMatch[0], '');
+            } else {
+                result += 'Vars:\n    AInside_Lic(0);\n\n';
+            }
+            
+            // Sistema de verificacion (SIEMPRE verifica HWID con servidor)
+            result += '{===== VERIFICACION HWID =====}\n';
+            result += 'AInside_Lic = AInside_IsAllowed();\n';
+            result += '{1 = HWID autorizado | 0 = HWID bloqueado}\n\n';
+            
+            // Cierre de posiciones si no hay licencia
+            result += '{Cerrar posiciones si HWID no autorizado}\n';
+            result += 'if AInside_Lic = 0 then begin\n';
+            result += '    if MarketPosition = 1 then Sell("AInsideLicExit_L") this bar at close;\n';
+            result += '    if MarketPosition = -1 then BuyToCover("AInsideLicExit_S") this bar at close;\n';
+            result += 'end;\n\n';
+            
+            // Procesar línea por línea - solo proteger órdenes
+            const lines = originalCode.trim().split('\n');
+            
+            for (const line of lines) {
+                if (!line.trim()) {
+                    result += '\n';
+                    continue;
+                }
+                
+                const lower = line.toLowerCase();
+                
+                // Detectar órdenes (Buy, Sell, etc)
+                if ((lower.includes('buy(') || lower.includes('sell(') || 
+                     lower.includes('buytocover(') || lower.includes('sellshort(')) &&
+                    !lower.includes('if ')) { // No modificar si ya tiene if
+                    
+                    result += 'if AInside_Lic = 1 then ' + line.trim() + '\n';
+                } else {
+                    // Todo lo demás se mantiene igual
+                    result += line + '\n';
+                }
+            }
+            
+            return result;
+        }
+        
+        function copyToClipboard() {
+            const code = document.getElementById('outputStrategy').textContent;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => {
+                    alert('✅ Código copiado al portapapeles\n\nAhora puedes importarlo en TradeStation');
+                }).catch(() => {
+                    fallbackCopy(code);
+                });
+            } else {
+                fallbackCopy(code);
+            }
+        }
+        
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                alert('✅ Código copiado al portapapeles');
+            } catch (err) {
+                alert('❌ No se pudo copiar automáticamente. Por favor, copia manualmente el código.');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>

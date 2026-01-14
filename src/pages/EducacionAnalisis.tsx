@@ -171,13 +171,20 @@ const enfoqueHibrido = [
 
 export default function EducacionAnalisis() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-20">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-            Análisis Técnico vs Análisis Fundamental
+          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
+            EDUCACIÓN TRADING
+          </div>
+          <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
+            Análisis Técnico vs
+            <br />
+            <span className="font-normal bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Análisis Fundamental
+            </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
             Descubre las dos escuelas principales de análisis de mercados. Aprende cuándo usar cada una 
             y cómo combinarlas para maximizar tus probabilidades de éxito.
           </p>

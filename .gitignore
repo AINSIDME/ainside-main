@@ -49,6 +49,12 @@ remote-public-schema.sql
 # Supabase temp artifacts
 supabase/.temp/
 
+# Trading strategies (confidential - keep local only)
+tradestation/*.txt
+!tradestation/README.txt
+dist/*Strategy*.txt
+dist/AInsideLicenseGuard.txt
+
 # Licensing keys (never commit private key)
 license-private.b64
 

@@ -342,7 +342,7 @@ static bool verify_rs256(const std::vector<unsigned char>& payloadBytes, const s
   return true;
 }
 
-extern "C" __declspec(dllexport) int __stdcall AInside_IsAllowed() {
+extern "C" __declspec(dllexport) int __cdecl AInside_IsAllowed() {
   try {
     std::string statusJson;
     if (!http_get_local_status(statusJson)) {
@@ -410,6 +410,6 @@ extern "C" __declspec(dllexport) int __stdcall AInside_IsAllowed() {
   }
 }
 
-extern "C" __declspec(dllexport) int __stdcall AInside_GetLastError(char* buffer, int bufferLen) {
+extern "C" __declspec(dllexport) int __cdecl AInside_GetLastError(char* buffer, int bufferLen) {
   return write_utf8(buffer, bufferLen, g_lastError);
 }
