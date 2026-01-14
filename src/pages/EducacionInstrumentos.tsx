@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrendingUp, DollarSign, Building2, Bitcoin, Globe, Gem, Wheat, Fuel, ShieldCheck, RefreshCw } from "lucide-react";
+import { LanguageGate } from "@/components/LanguageGate";
 
 const instrumentos = [
   {
@@ -286,6 +287,7 @@ const conceptosAvanzados = [
 
 export default function EducacionInstrumentos() {
   return (
+    <LanguageGate allowedLanguages={['es']}>
     <div className="min-h-screen bg-gradient-to-b from-slate-900/95 to-slate-950/98 backdrop-blur-sm py-20">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
@@ -497,5 +499,6 @@ export default function EducacionInstrumentos() {
         </Card>
       </div>
     </div>
+    </LanguageGate>
   );
 }
