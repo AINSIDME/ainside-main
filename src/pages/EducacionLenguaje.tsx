@@ -220,17 +220,17 @@ export default function EducacionLenguaje() {
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h3 className="font-semibold text-lg text-green-600 dark:text-green-400 mb-3">✅ Estados Positivos</h3>
+                <h3 className="font-semibold text-lg text-slate-300 mb-3">✅ Estados Positivos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded border border-green-200 dark:border-green-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">In the Zone</p>
                     <p className="text-sm text-muted-foreground">Estado de flow perfecto, todo sale bien</p>
                   </div>
-                  <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded border border-green-200 dark:border-green-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">Crushing it</p>
                     <p className="text-sm text-muted-foreground">Racha ganadora espectacular</p>
                   </div>
-                  <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded border border-green-200 dark:border-green-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">Printing Money 🖨️💰</p>
                     <p className="text-sm text-muted-foreground">Ganancias fáciles y consistentes</p>
                   </div>
@@ -238,21 +238,21 @@ export default function EducacionLenguaje() {
               </div>
 
               <div className="space-y-3">
-                <h3 className="font-semibold text-lg text-red-600 dark:text-red-400 mb-3">⚠️ Estados Negativos</h3>
+                <h3 className="font-semibold text-lg text-slate-300 mb-3">⚠️ Estados Negativos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded border border-red-200 dark:border-red-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">Tilted / On Tilt</p>
                     <p className="text-sm text-muted-foreground">Estado emocional comprometido, revenge trading</p>
                   </div>
-                  <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded border border-red-200 dark:border-red-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">Blown Account</p>
                     <p className="text-sm text-muted-foreground">Cuenta liquidada, pérdida total</p>
                   </div>
-                  <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded border border-red-200 dark:border-red-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">Catching Falling Knives</p>
                     <p className="text-sm text-muted-foreground">Intentar comprar en caída libre (muy peligroso)</p>
                   </div>
-                  <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded border border-red-200 dark:border-red-800">
+                  <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
                     <p className="font-semibold">FOMO Trap</p>
                     <p className="text-sm text-muted-foreground">Entrar tarde por miedo a perderse el movimiento</p>
                   </div>

@@ -258,7 +258,7 @@ export default function EducacionIndicadores() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Fórmula */}
-                  <div className="bg-secondary/30 p-6 rounded-lg border border-primary/10">
+                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                     <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
                       📐 Fórmula Matemática
                     </h3>
@@ -287,7 +287,7 @@ export default function EducacionIndicadores() {
                     </div>
 
                     {/* Usos Prácticos */}
-                    <div className="bg-green-50 dark:bg-green-950/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         ⚙️ Usos Prácticos
                       </h3>
@@ -303,7 +303,7 @@ export default function EducacionIndicadores() {
                   </div>
 
                   {/* Consejos */}
-                  <div className="bg-amber-50 dark:bg-amber-950/20 p-6 rounded-lg border border-amber-200 dark:border-amber-800">
+                  <div className="bg-slate-800/60 p-6 rounded-lg border border-slate-700/50">
                     <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                       💡 Consejo Profesional
                     </h3>

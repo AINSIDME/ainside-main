@@ -339,7 +339,7 @@ export default function EducacionInstrumentos() {
                   </div>
 
                   {/* Características */}
-                  <div className="bg-secondary/30 p-6 rounded-lg">
+                  <div className="bg-slate-800/40 p-6 rounded-lg">
                     <h3 className="text-xl font-semibold mb-4">⚙️ Características Clave</h3>
                     <ul className="grid md:grid-cols-2 gap-3">
                       {inst.caracteristicas.map((car, idx) => (
@@ -353,7 +353,7 @@ export default function EducacionInstrumentos() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Ventajas */}
-                    <div className="bg-green-50 dark:bg-green-950/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         ✅ Ventajas
                       </h3>
@@ -368,7 +368,7 @@ export default function EducacionInstrumentos() {
                     </div>
 
                     {/* Riesgos */}
-                    <div className="bg-red-50 dark:bg-red-950/20 p-6 rounded-lg border border-red-200 dark:border-red-800">
+                    <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         ⚠️ Riesgos
                       </h3>
@@ -384,7 +384,7 @@ export default function EducacionInstrumentos() {
                   </div>
 
                   {/* Ejemplos */}
-                  <div className="bg-purple-50 dark:bg-purple-950/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <div className="bg-slate-800/40 p-6 rounded-lg border border-slate-700/40">
                     <h3 className="text-lg font-semibold mb-3">🎯 Ejemplos Populares</h3>
                     <p className="text-sm font-mono bg-background p-3 rounded">{inst.ejemplos}</p>
                   </div>
