@@ -45,6 +45,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogs from "./pages/AdminLogs";
 import NotFound from "./pages/NotFound";
 import Trading from "./pages/Trading";
+import EducacionIndicadores from "./pages/EducacionIndicadores";
+import EducacionInstrumentos from "./pages/EducacionInstrumentos";
+import EducacionTiposTrading from "./pages/EducacionTiposTrading";
+import EducacionLenguaje from "./pages/EducacionLenguaje";
+import EducacionAnalisis from "./pages/EducacionAnalisis";
 import "./lib/i18n";
 
 const queryClient = new QueryClient();
@@ -118,6 +123,11 @@ const App = () => {
                 <Route path="/mfa" element={<MFA />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/trading" element={<Trading />} />
+                <Route path="/educacion/indicadores" element={<EducacionIndicadores />} />
+                <Route path="/educacion/instrumentos" element={<EducacionInstrumentos />} />
+                <Route path="/educacion/tipos-trading" element={<EducacionTiposTrading />} />
+                <Route path="/educacion/lenguaje" element={<EducacionLenguaje />} />
+                <Route path="/educacion/analisis" element={<EducacionAnalisis />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/logs" element={<AdminLogs />} />
                 <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
