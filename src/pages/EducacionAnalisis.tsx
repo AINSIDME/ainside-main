@@ -245,7 +245,7 @@ export default function EducacionAnalisis() {
                   <h3 className="text-xl font-bold mb-4 text-gray-900">🎯 Principios Fundamentales</h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     {analisisTecnico.principios.map((principio, idx) => (
-                      <Card key={idx} className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
+                      <Card key={idx} className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200">
                         <CardHeader>
                           <CardTitle className="text-lg text-gray-900 font-bold">{principio.titulo}</CardTitle>
                         </CardHeader>
@@ -258,12 +258,12 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Herramientas */}
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                   <h3 className="text-xl font-bold mb-4 text-gray-900">🛠️ Herramientas Principales</h3>
                   <div className="grid md:grid-cols-2 gap-3">
                     {analisisTecnico.herramientas.map((herr, idx) => (
-                      <div key={idx} className="flex items-start gap-3 bg-white p-4 rounded border-2 border-green-100">
-                        <span className="text-green-600 text-xl font-bold">▸</span>
+                      <div key={idx} className="flex items-start gap-3 bg-white p-4 rounded border-2 border-blue-100">
+                        <span className="text-blue-600 text-xl font-bold">▸</span>
                         <div>
                           <p className="font-bold text-gray-900">{herr.nombre}</p>
                           <p className="text-sm text-gray-700 font-medium">{herr.uso}</p>
@@ -275,14 +275,14 @@ export default function EducacionAnalisis() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Ventajas */}
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ✅ Ventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisTecnico.ventajas.map((vent, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-green-600 mt-1 font-bold">+</span>
+                          <span className="text-blue-600 mt-1 font-bold">+</span>
                           <span className="text-sm text-gray-800 font-medium">{vent}</span>
                         </li>
                       ))}
@@ -290,14 +290,14 @@ export default function EducacionAnalisis() {
                   </div>
 
                   {/* Desventajas */}
-                  <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-lg border-2 border-cyan-200">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ⚠️ Desventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisTecnico.desventajas.map((desv, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-red-600 mt-1 font-bold">−</span>
+                          <span className="text-cyan-600 mt-1 font-bold">−</span>
                           <span className="text-sm text-gray-800 font-medium">{desv}</span>
                         </li>
                       ))}
@@ -306,11 +306,11 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Mejor para */}
-                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                   <h3 className="text-lg font-bold mb-3 text-gray-900">👥 Mejor para:</h3>
                   <div className="flex flex-wrap gap-2">
                     {analisisTecnico.mejorPara.map((item, idx) => (
-                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-yellow-200 text-gray-900 font-bold">
+                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-blue-200 text-gray-900 font-bold">
                         {item}
                       </span>
                     ))}
@@ -322,10 +322,10 @@ export default function EducacionAnalisis() {
 
           {/* ANÁLISIS FUNDAMENTAL */}
           <TabsContent value="fundamental" className="space-y-6">
-            <Card className="border-2 border-green-200 bg-white shadow-xl">
-              <CardHeader className="bg-gradient-to-r from-green-100 to-emerald-100">
+            <Card className="border-2 border-blue-200 bg-white shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-100 to-cyan-100">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
                     <Building2 className="w-8 h-8 text-white" />
                   </div>
                   <div>
@@ -338,7 +338,7 @@ export default function EducacionAnalisis() {
               </CardHeader>
               <CardContent className="space-y-6 pt-6">
                 {/* Definición */}
-                <div className="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+                <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
                   <h3 className="text-xl font-bold mb-3 text-gray-900">📖 ¿Qué es?</h3>
                   <p className="text-gray-700 font-medium">{analisisFundamental.definicion}</p>
                 </div>
@@ -361,15 +361,15 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Herramientas */}
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                   <h3 className="text-xl font-bold mb-4 text-gray-900">🛠️ Herramientas y Métricas</h3>
                   <div className="space-y-4">
                     {analisisFundamental.herramientas.map((cat, idx) => (
-                      <div key={idx} className="bg-white p-4 rounded border-2 border-purple-100">
-                        <h4 className="font-bold mb-2 text-green-600">{cat.categoria}</h4>
+                      <div key={idx} className="bg-white p-4 rounded border-2 border-blue-100">
+                        <h4 className="font-bold mb-2 text-blue-600">{cat.categoria}</h4>
                         <div className="flex flex-wrap gap-2">
                           {cat.items.map((item, i) => (
-                            <span key={i} className="bg-gradient-to-r from-purple-100 to-pink-100 px-3 py-1 rounded text-sm text-gray-900 font-bold border border-purple-200">
+                            <span key={i} className="bg-gradient-to-r from-blue-100 to-cyan-100 px-3 py-1 rounded text-sm text-gray-900 font-bold border border-blue-200">
                               {item}
                             </span>
                           ))}
@@ -381,14 +381,14 @@ export default function EducacionAnalisis() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Ventajas */}
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ✅ Ventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisFundamental.ventajas.map((vent, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-green-600 mt-1 font-bold">+</span>
+                          <span className="text-blue-600 mt-1 font-bold">+</span>
                           <span className="text-sm text-gray-800 font-medium">{vent}</span>
                         </li>
                       ))}
@@ -396,14 +396,14 @@ export default function EducacionAnalisis() {
                   </div>
 
                   {/* Desventajas */}
-                  <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-lg border-2 border-cyan-200">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                       ⚠️ Desventajas
                     </h3>
                     <ul className="space-y-2">
                       {analisisFundamental.desventajas.map((desv, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-red-600 mt-1 font-bold">−</span>
+                          <span className="text-cyan-600 mt-1 font-bold">−</span>
                           <span className="text-sm text-gray-800 font-medium">{desv}</span>
                         </li>
                       ))}
@@ -412,11 +412,11 @@ export default function EducacionAnalisis() {
                 </div>
 
                 {/* Mejor para */}
-                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                   <h3 className="text-lg font-bold mb-3 text-gray-900">👥 Mejor para:</h3>
                   <div className="flex flex-wrap gap-2">
                     {analisisFundamental.mejorPara.map((item, idx) => (
-                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-yellow-200 text-gray-900 font-bold">
+                      <span key={idx} className="bg-white px-3 py-1 rounded-full text-sm border-2 border-blue-200 text-gray-900 font-bold">
                         {item}
                       </span>
                     ))}
@@ -428,11 +428,11 @@ export default function EducacionAnalisis() {
 
           {/* COMPARACIÓN */}
           <TabsContent value="comparacion" className="space-y-6">
-            <Card className="border-2 border-purple-500/30">
-              <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+            <Card className="border-2 border-blue-200 bg-white shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-100 to-cyan-100">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-800/60 rounded-lg">
-                    <Scale className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
+                    <Scale className="w-8 h-8 text-white" />
                   </div>
                   <div>
                     <CardTitle className="text-3xl">Comparación Directa</CardTitle>
@@ -446,22 +446,22 @@ export default function EducacionAnalisis() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b-2">
-                        <th className="text-left p-4 font-bold text-lg">Aspecto</th>
-                        <th className="text-left p-4 font-bold text-lg bg-blue-50 dark:bg-blue-950/20">
+                      <tr className="border-b-2 border-blue-200">
+                        <th className="text-left p-4 font-bold text-lg text-gray-900">Aspecto</th>
+                        <th className="text-left p-4 font-bold text-lg bg-blue-50 text-gray-900">
                           Análisis Técnico
                         </th>
-                        <th className="text-left p-4 font-bold text-lg bg-slate-800/40">
+                        <th className="text-left p-4 font-bold text-lg bg-cyan-50 text-gray-900">
                           Análisis Fundamental
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {diferenciasClaves.map((diff, idx) => (
-                        <tr key={idx} className="border-b hover:bg-slate-800/20">
-                          <td className="p-4 font-semibold">{diff.aspecto}</td>
-                          <td className="p-4 bg-blue-50/50 dark:bg-blue-950/10">{diff.tecnico}</td>
-                          <td className="p-4 bg-slate-800/30">{diff.fundamental}</td>
+                        <tr key={idx} className="border-b border-blue-200 hover:bg-blue-50">
+                          <td className="p-4 font-semibold text-gray-900">{diff.aspecto}</td>
+                          <td className="p-4 bg-blue-50/50 text-gray-700 font-medium">{diff.tecnico}</td>
+                          <td className="p-4 bg-cyan-50/50 text-gray-700 font-medium">{diff.fundamental}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -471,15 +471,15 @@ export default function EducacionAnalisis() {
             </Card>
 
             {/* Enfoque Híbrido */}
-            <Card className="border border-slate-700/40">
-              <CardHeader className="bg-slate-800/60">
+            <Card className="border-2 border-blue-200 bg-white shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-100 to-cyan-100">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-primary/20 rounded-lg">
-                    <TrendingUp className="w-8 h-8 text-slate-300" />
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
+                    <TrendingUp className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl">Enfoque Híbrido: Lo Mejor de Ambos Mundos</CardTitle>
-                    <CardDescription className="text-base mt-2">
+                    <CardTitle className="text-2xl text-gray-900 font-bold">Enfoque Híbrido: Lo Mejor de Ambos Mundos</CardTitle>
+                    <CardDescription className="text-base mt-2 text-gray-700 font-medium">
                       Los traders profesionales combinan ambos análisis para maximizar probabilidades
                     </CardDescription>
                   </div>
@@ -488,14 +488,14 @@ export default function EducacionAnalisis() {
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   {enfoqueHibrido.map((enfoque, idx) => (
-                    <Card key={idx} className="border border-slate-700/40 hover:border-slate-600/60 transition-colors">
+                    <Card key={idx} className="border-2 border-blue-200 hover:border-blue-300 transition-colors bg-white">
                       <CardHeader>
-                        <CardTitle className="text-lg">{enfoque.estrategia}</CardTitle>
-                        <CardDescription>{enfoque.descripcion}</CardDescription>
+                        <CardTitle className="text-lg text-gray-900 font-bold">{enfoque.estrategia}</CardTitle>
+                        <CardDescription className="text-gray-700 font-medium">{enfoque.descripcion}</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <div className="bg-slate-800/40 p-4 rounded-lg">
-                          <p className="text-sm">
+                        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border-2 border-blue-200">
+                          <p className="text-sm text-gray-800 font-medium">
                             <strong>📌 Ejemplo:</strong> {enfoque.ejemplo}
                           </p>
                         </div>
@@ -509,21 +509,21 @@ export default function EducacionAnalisis() {
         </Tabs>
 
         {/* Conclusión */}
-        <Card className="mt-12 bg-slate-800/40 border border-slate-700/40">
-          <CardHeader>
-            <CardTitle className="text-2xl">🎯 ¿Cuál Deberías Usar?</CardTitle>
+        <Card className="mt-12 bg-white border-2 border-blue-200 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-blue-100 to-cyan-100">
+            <CardTitle className="text-2xl text-gray-900 font-bold">🎯 ¿Cuál Deberías Usar?</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <p className="text-lg">
+          <CardContent className="space-y-6 pt-6">
+            <p className="text-lg text-gray-700 font-medium">
               La respuesta depende de tu <strong>estilo de trading</strong>, <strong>horizonte temporal</strong> y <strong>objetivos</strong>:
             </p>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 bg-slate-800/40 rounded-lg border border-slate-700/40">
-                <h3 className="font-bold text-lg mb-3 text-slate-300">
+              <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200">
+                <h3 className="font-bold text-lg mb-3 text-gray-900">
                   Solo Técnico
                 </h3>
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-sm text-gray-700 font-medium">
                   <li>• Scalping y day trading</li>
                   <li>• Trading de forex/futuros</li>
                   <li>• Horizontes &lt; 1 semana</li>
@@ -531,11 +531,11 @@ export default function EducacionAnalisis() {
                 </ul>
               </div>
 
-              <div className="p-6 bg-slate-800/40 rounded-lg border border-slate-700/40">
-                <h3 className="font-bold text-lg mb-3 text-slate-300">
+              <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200">
+                <h3 className="font-bold text-lg mb-3 text-gray-900">
                   Solo Fundamental
                 </h3>
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-sm text-gray-700 font-medium">
                   <li>• Value investing</li>
                   <li>• Horizontes &gt; 1 año</li>
                   <li>• Construcción de portafolio</li>
@@ -543,11 +543,11 @@ export default function EducacionAnalisis() {
                 </ul>
               </div>
 
-              <div className="p-6 bg-slate-800/40 rounded-lg border border-slate-700/40">
-                <h3 className="font-bold text-lg mb-3 text-slate-300">
+              <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200">
+                <h3 className="font-bold text-lg mb-3 text-gray-900">
                   Híbrido (Recomendado)
                 </h3>
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-sm text-gray-700 font-medium">
                   <li>• Swing trading</li>
                   <li>• Position trading</li>
                   <li>• Horizontes 1 semana - 6 meses</li>
@@ -556,9 +556,9 @@ export default function EducacionAnalisis() {
               </div>
             </div>
 
-            <div className="bg-slate-800/60 p-6 rounded-lg border border-slate-700/50">
-              <h3 className="font-semibold mb-3">💡 Consejo de Experto</h3>
-              <p className="text-sm mb-3">
+            <div className="bg-gradient-to-r from-blue-100 to-cyan-100 p-6 rounded-lg border-2 border-blue-200">
+              <h3 className="font-semibold mb-3 text-gray-900">💡 Consejo de Experto</h3>
+              <p className="text-sm mb-3 text-gray-800 font-medium">
                 <strong>Warren Buffett</strong> (fundamental puro) y <strong>George Soros</strong> (híbrido técnico-macro) 
                 son billonarios con enfoques opuestos. Ambos funcionan si se aplican correctamente.
               </p>

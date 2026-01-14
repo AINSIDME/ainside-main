@@ -328,12 +328,12 @@ export default function EducacionTiposTrading() {
                   </div>
 
                   {/* Características */}
-                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                     <h3 className="text-xl font-bold mb-4 text-gray-900">⚙️ Características Principales</h3>
                     <ul className="grid md:grid-cols-2 gap-3">
                       {tipo.caracteristicas.map((car, idx) => (
-                        <li key={idx} className="flex items-start gap-2 bg-white p-3 rounded border-2 border-purple-100">
-                          <span className="text-purple-600 mt-1 font-bold">▪</span>
+                        <li key={idx} className="flex items-start gap-2 bg-white p-3 rounded border-2 border-blue-100">
+                          <span className="text-blue-600 mt-1 font-bold">▪</span>
                           <span className="text-sm text-gray-800 font-medium">{car}</span>
                         </li>
                       ))}
@@ -342,14 +342,14 @@ export default function EducacionTiposTrading() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Ventajas */}
-                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                       <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ✅ Ventajas
                       </h3>
                       <ul className="space-y-2">
                         {tipo.ventajas.map((vent, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-green-600 mt-1 font-bold">+</span>
+                            <span className="text-blue-600 mt-1 font-bold">+</span>
                             <span className="text-sm text-gray-800 font-medium">{vent}</span>
                           </li>
                         ))}
@@ -357,14 +357,14 @@ export default function EducacionTiposTrading() {
                     </div>
 
                     {/* Desventajas */}
-                    <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-2 border-red-200">
+                    <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-lg border-2 border-cyan-200">
                       <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ⚠️ Desventajas
                       </h3>
                       <ul className="space-y-2">
                         {tipo.desventajas.map((desv, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-red-600 mt-1 font-bold">−</span>
+                            <span className="text-cyan-600 mt-1 font-bold">−</span>
                             <span className="text-sm text-gray-800 font-medium">{desv}</span>
                           </li>
                         ))}
@@ -373,10 +373,10 @@ export default function EducacionTiposTrading() {
                   </div>
 
                   {/* Perfil Ideal */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                     <h3 className="text-lg font-bold mb-3 text-gray-900">👤 Perfil Ideal del Trader</h3>
                     <p className="text-sm mb-4 text-gray-800 font-medium">{tipo.perfil}</p>
-                    <div className="pt-3 border-t border-yellow-300">
+                    <div className="pt-3 border-t border-blue-300">
                       <p className="text-sm text-gray-800 font-medium">
                         <strong>Mercados recomendados:</strong> {tipo.mercados}
                       </p>

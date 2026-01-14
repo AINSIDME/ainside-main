@@ -289,14 +289,14 @@ export default function EducacionIndicadores() {
                     </div>
 
                     {/* Usos Prácticos */}
-                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-200">
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                       <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900">
                         ⚙️ Usos Prácticos
                       </h3>
                       <ul className="space-y-2">
                         {ind.usos.map((uso, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-green-600 mt-1 font-bold">✓</span>
+                            <span className="text-blue-600 mt-1 font-bold">✓</span>
                             <span className="text-sm text-gray-800 font-medium">{uso}</span>
                           </li>
                         ))}
@@ -305,7 +305,7 @@ export default function EducacionIndicadores() {
                   </div>
 
                   {/* Consejos */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-6 rounded-lg border-2 border-yellow-300">
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
                     <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-gray-900">
                       💡 Consejo Profesional
                     </h3>
@@ -342,11 +342,11 @@ export default function EducacionIndicadores() {
                 <h4 className="font-bold mb-2 text-gray-900">📊 Tendencia</h4>
                 <p className="text-sm text-gray-700 font-medium">EMA, ADX, Ichimoku para confirmar dirección</p>
               </div>
-              <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+              <div className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200">
                 <h4 className="font-bold mb-2 text-gray-900">⚡ Momentum</h4>
                 <p className="text-sm text-gray-700 font-medium">RSI, MACD, Stochastic para timing de entrada</p>
               </div>
-              <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
+              <div className="p-4 bg-cyan-50 rounded-lg border-2 border-cyan-200">
                 <h4 className="font-bold mb-2 text-gray-900">📈 Volatilidad</h4>
                 <p className="text-sm text-gray-700 font-medium">ATR, Bollinger para gestión de riesgo</p>
               </div>

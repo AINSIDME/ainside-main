@@ -128,7 +128,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Tipos de Órdenes */}
-        <Card className="mb-8 bg-white border-2 border-purple-200 shadow-xl">
+        <Card className="mb-8 bg-white border-2 border-blue-200 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl text-gray-900 font-bold">📋 Tipos de Órdenes</CardTitle>
             <CardDescription className="text-gray-700 font-medium">Órdenes de ejecución que todo trader debe dominar</CardDescription>
@@ -136,13 +136,13 @@ export default function EducacionLenguaje() {
           <CardContent>
             <div className="space-y-4">
               {ordenesEjecucion.map((orden, idx) => (
-                <div key={idx} className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200 flex flex-col md:flex-row md:items-center gap-4">
+                <div key={idx} className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200 flex flex-col md:flex-row md:items-center gap-4">
                   <div className="flex-1">
                     <h3 className="font-bold text-lg mb-1 text-gray-900">{orden.tipo}</h3>
                     <p className="text-sm text-gray-700 font-medium">{orden.descripcion}</p>
                   </div>
                   <div className="md:w-1/3">
-                    <Badge className="whitespace-normal bg-purple-600 text-white font-bold">Cuándo usar: {orden.cuando}</Badge>
+                    <Badge className="whitespace-normal bg-blue-600 text-white font-bold">Cuándo usar: {orden.cuando}</Badge>
                   </div>
                 </div>
               ))}
@@ -151,7 +151,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Ratios y Métricas */}
-        <Card className="mb-8 bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 shadow-xl">
+        <Card className="mb-8 bg-gradient-to-r from-blue-100 to-cyan-100 border-2 border-blue-200 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl text-gray-900 font-bold">📊 Ratios y Métricas de Performance</CardTitle>
             <CardDescription className="text-gray-800 font-medium">Indicadores clave para medir tu rendimiento como trader</CardDescription>
@@ -159,10 +159,10 @@ export default function EducacionLenguaje() {
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4">
               {ratiosComunes.map((ratio, idx) => (
-                <div key={idx} className="p-5 bg-white rounded-lg border-2 border-purple-200">
+                <div key={idx} className="p-5 bg-white rounded-lg border-2 border-blue-200">
                   <h3 className="font-bold text-lg mb-2 text-gray-900">{ratio.ratio}</h3>
                   <p className="text-sm mb-3 text-gray-700 font-medium">{ratio.explicacion}</p>
-                  <div className="bg-purple-50 p-3 rounded border-2 border-purple-100">
+                  <div className="bg-blue-50 p-3 rounded border-2 border-blue-100">
                     <p className="text-sm font-mono text-gray-800 font-semibold">
                       <strong>Ejemplo:</strong> {ratio.ejemplo}
                     </p>
@@ -174,7 +174,7 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Sesiones de Trading */}
-        <Card className="mb-8 bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-300 shadow-xl">
+        <Card className="mb-8 bg-gradient-to-r from-blue-100 to-cyan-100 border-2 border-blue-200 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl text-gray-900 font-bold">🌍 Sesiones Horarias Globales (Forex)</CardTitle>
             <CardDescription className="text-gray-800 font-medium">Horarios de mayor actividad en mercados internacionales</CardDescription>
@@ -183,7 +183,7 @@ export default function EducacionLenguaje() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b-2 border-green-300">
+                  <tr className="border-b-2 border-blue-300">
                     <th className="text-left p-3 font-bold text-gray-900">Sesión</th>
                     <th className="text-left p-3 font-bold text-gray-900">Horario (ET)</th>
                     <th className="text-left p-3 font-bold text-gray-900">Pares más activos</th>
@@ -192,12 +192,12 @@ export default function EducacionLenguaje() {
                 </thead>
                 <tbody>
                   {sesionesHorarias.map((sesion, idx) => (
-                    <tr key={idx} className="border-b border-green-200 hover:bg-green-50">
+                    <tr key={idx} className="border-b border-blue-200 hover:bg-blue-50">
                       <td className="p-3 font-bold text-gray-900">{sesion.sesion}</td>
                       <td className="p-3 font-mono text-gray-800 font-semibold">{sesion.horario}</td>
                       <td className="p-3 text-gray-700 font-medium">{sesion.pares}</td>
                       <td className="text-center p-3">
-                        <Badge variant={sesion.volatilidad.includes('Alta') || sesion.volatilidad.includes('Máxima') ? 'default' : 'secondary'} className="bg-green-600 text-white font-bold">
+                        <Badge variant={sesion.volatilidad.includes('Alta') || sesion.volatilidad.includes('Máxima') ? 'default' : 'secondary'} className="bg-blue-600 text-white font-bold">
                           {sesion.volatilidad}
                         </Badge>
                       </td>
@@ -224,15 +224,15 @@ export default function EducacionLenguaje() {
               <div className="space-y-3">
                 <h3 className="font-bold text-lg text-gray-900 mb-3">✅ Estados Positivos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                  <div className="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border-2 border-blue-200">
                     <p className="font-bold text-gray-900">En la Zona</p>
                     <p className="text-sm text-gray-700 font-medium">Estado de flow perfecto, todo sale bien</p>
                   </div>
-                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                  <div className="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border-2 border-blue-200">
                     <p className="font-bold text-gray-900">Aplastándola</p>
                     <p className="text-sm text-gray-700 font-medium">Racha ganadora espectacular</p>
                   </div>
-                  <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border-2 border-green-200">
+                  <div className="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border-2 border-blue-200">
                     <p className="font-bold text-gray-900">Imprimiendo Dinero 🖨️💰</p>
                     <p className="text-sm text-gray-700 font-medium">Ganancias fáciles y consistentes</p>
                   </div>
@@ -242,19 +242,19 @@ export default function EducacionLenguaje() {
               <div className="space-y-3">
                 <h3 className="font-bold text-lg text-gray-900 mb-3">⚠️ Estados Negativos</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                  <div className="p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded border-2 border-cyan-200">
                     <p className="font-bold text-gray-900">Descontrolado / Tilt</p>
                     <p className="text-sm text-gray-700 font-medium">Estado emocional comprometido, revenge trading</p>
                   </div>
-                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                  <div className="p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded border-2 border-cyan-200">
                     <p className="font-bold text-gray-900">Cuenta Reventada</p>
                     <p className="text-sm text-gray-700 font-medium">Cuenta liquidada, pérdida total</p>
                   </div>
-                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                  <div className="p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded border-2 border-cyan-200">
                     <p className="font-bold text-gray-900">Atrapar Cuchillos Cayendo</p>
                     <p className="text-sm text-gray-700 font-medium">Intentar comprar en caída libre (muy peligroso)</p>
                   </div>
-                  <div className="p-3 bg-gradient-to-r from-red-50 to-orange-50 rounded border-2 border-red-200">
+                  <div className="p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded border-2 border-cyan-200">
                     <p className="font-bold text-gray-900">Trampa FOMO</p>
                     <p className="text-sm text-gray-700 font-medium">Entrar tarde por miedo a perderse el movimiento</p>
                   </div>
@@ -270,30 +270,30 @@ export default function EducacionLenguaje() {
             <CardTitle className="text-gray-900 font-bold">🎓 Domina el Lenguaje</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>
+            <p className="text-gray-700 font-medium">
               El lenguaje de trading evoluciona constantemente, especialmente con nuevas generaciones 
               de traders en redes sociales (Twitter, Discord, Reddit). Familiarizarte con estos términos te ayudará a:
             </p>
             <ul className="space-y-2 ml-6">
               <li className="flex items-start gap-2">
-                <span className="text-slate-400 mt-1">✓</span>
-                <span><strong>Comunicarte efectivamente</strong> en comunidades de trading</span>
+                <span className="text-blue-600 mt-1">✓</span>
+                <span className="text-gray-700 font-medium"><strong>Comunicarte efectivamente</strong> en comunidades de trading</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-slate-400 mt-1">✓</span>
-                <span><strong>Entender análisis</strong> de traders profesionales en redes</span>
+                <span className="text-blue-600 mt-1">✓</span>
+                <span className="text-gray-700 font-medium"><strong>Entender análisis</strong> de traders profesionales en redes</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-slate-400 mt-1">✓</span>
-                <span><strong>Interpretar noticias</strong> y reportes financieros correctamente</span>
+                <span className="text-blue-600 mt-1">✓</span>
+                <span className="text-gray-700 font-medium"><strong>Interpretar noticias</strong> y reportes financieros correctamente</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-slate-400 mt-1">✓</span>
-                <span><strong>Evitar confusiones</strong> al ejecutar órdenes o gestionar riesgo</span>
+                <span className="text-blue-600 mt-1">✓</span>
+                <span className="text-gray-700 font-medium"><strong>Evitar confusiones</strong> al ejecutar órdenes o gestionar riesgo</span>
               </li>
             </ul>
-            <div className="bg-slate-800/60 p-4 rounded-lg border border-slate-700/50 mt-4">
-              <p className="text-sm">
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border-2 border-blue-200 mt-4">
+              <p className="text-sm text-gray-800 font-medium">
                 <strong>⚠️ Advertencia:</strong> Aunque la jerga y memes son parte de la cultura trading, 
                 nunca bases decisiones de inversión en FOMO, hype o presión social. Mantén siempre 
                 un enfoque disciplinado y basado en análisis.
