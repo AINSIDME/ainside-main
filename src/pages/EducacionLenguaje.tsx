@@ -106,20 +106,20 @@ export default function EducacionLenguaje() {
         </Card>
 
         {/* Jerga Avanzada */}
-        <Card className="mb-8 bg-gradient-to-r from-orange-500/10 to-red-500/10">
+        <Card className="mb-8 bg-gradient-to-r from-blue-100 to-cyan-100 border-2 border-blue-200 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">🚀 Jerga y Slang de Traders</CardTitle>
-            <CardDescription>Expresiones populares en comunidades de trading y redes sociales</CardDescription>
+            <CardTitle className="text-2xl text-gray-900 font-bold">🚀 Jerga y Slang de Traders</CardTitle>
+            <CardDescription className="text-gray-700 font-medium">Expresiones populares en comunidades de trading y redes sociales</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {jergaAvanzada.map((item, idx) => (
-                <div key={idx} className="p-4 bg-background rounded-lg border">
+                <div key={idx} className="p-4 bg-white rounded-lg border-2 border-blue-200">
                   <div className="flex items-center gap-3 mb-2">
-                    <Badge variant="outline" className="text-sm font-bold">{item.termino}</Badge>
-                    <p className="text-sm flex-1">{item.significado}</p>
+                    <Badge className="text-sm font-bold bg-blue-600 text-white">{item.termino}</Badge>
+                    <p className="text-sm flex-1 text-gray-700 font-medium">{item.significado}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground italic ml-2 mt-2">
+                  <p className="text-sm text-gray-600 italic ml-2 mt-2">
                     💬 Ejemplo: "{item.contexto}"
                   </p>
                 </div>
