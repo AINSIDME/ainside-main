@@ -223,15 +223,15 @@ export default function EducacionLenguaje() {
                 <h3 className="font-semibold text-lg text-slate-300 mb-3">✅ Estados Positivos</h3>
                 <div className="space-y-2">
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">In the Zone</p>
+                    <p className="font-semibold">En la Zona</p>
                     <p className="text-sm text-muted-foreground">Estado de flow perfecto, todo sale bien</p>
                   </div>
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Crushing it</p>
+                    <p className="font-semibold">Aplastándola</p>
                     <p className="text-sm text-muted-foreground">Racha ganadora espectacular</p>
                   </div>
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Printing Money 🖨️💰</p>
+                    <p className="font-semibold">Imprimiendo Dinero 🖨️💰</p>
                     <p className="text-sm text-muted-foreground">Ganancias fáciles y consistentes</p>
                   </div>
                 </div>
@@ -241,19 +241,19 @@ export default function EducacionLenguaje() {
                 <h3 className="font-semibold text-lg text-slate-300 mb-3">⚠️ Estados Negativos</h3>
                 <div className="space-y-2">
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Tilted / On Tilt</p>
+                    <p className="font-semibold">Descontrolado / Tilt</p>
                     <p className="text-sm text-muted-foreground">Estado emocional comprometido, revenge trading</p>
                   </div>
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Blown Account</p>
+                    <p className="font-semibold">Cuenta Reventada</p>
                     <p className="text-sm text-muted-foreground">Cuenta liquidada, pérdida total</p>
                   </div>
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">Catching Falling Knives</p>
+                    <p className="font-semibold">Atrapar Cuchillos Cayendo</p>
                     <p className="text-sm text-muted-foreground">Intentar comprar en caída libre (muy peligroso)</p>
                   </div>
                   <div className="p-3 bg-slate-800/40 rounded border border-slate-700/40">
-                    <p className="font-semibold">FOMO Trap</p>
+                    <p className="font-semibold">Trampa FOMO</p>
                     <p className="text-sm text-muted-foreground">Entrar tarde por miedo a perderse el movimiento</p>
                   </div>
                 </div>

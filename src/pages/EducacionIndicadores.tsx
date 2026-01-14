@@ -53,14 +53,14 @@ const indicadores = [
     interpretacion: [
       "Precio toca banda superior: Posible sobrecompra",
       "Precio toca banda inferior: Posible sobreventa",
-      "Squeeze (bandas estrechas): Baja volatilidad, posible breakout",
+      "Compresión (bandas estrechas): Baja volatilidad, posible ruptura",
       "Expansión: Alta volatilidad, tendencia fuerte"
     ],
     usos: [
       "Identificar niveles de sobrecompra/sobreventa",
       "Medir volatilidad",
-      "Detectar breakouts (expansiones)",
-      "Mean reversion strategies"
+      "Detectar rupturas (expansiones)",
+      "Estrategias de reversión a la media"
     ]
   },
   {
@@ -73,8 +73,8 @@ const indicadores = [
     interpretacion: [
       "Precio sobre EMA: Tendencia alcista",
       "Precio bajo EMA: Tendencia bajista",
-      "Cruce EMA rápida sobre lenta: Golden Cross (alcista)",
-      "Cruce EMA rápida bajo lenta: Death Cross (bajista)"
+      "Cruce EMA rápida sobre lenta: Cruz Dorada (alcista)",
+      "Cruce EMA rápida bajo lenta: Cruz de la Muerte (bajista)"
     ],
     usos: [
       "Identificar dirección de tendencia",
@@ -177,8 +177,8 @@ const indicadores = [
       "Desviaciones del VWAP: Bandas de volatilidad"
     ],
     usos: [
-      "Benchmark de ejecución institucional",
-      "Identificar fair value intraday",
+      "Referencia de ejecución institucional",
+      "Identificar valor justo intradiario",
       "Niveles de soporte/resistencia",
       "Filtro direccional para scalping"
     ]
@@ -191,9 +191,9 @@ const indicadores = [
     formula: "Tenkan: (9-high + 9-low)/2, Kijun: (26-high + 26-low)/2, Senkou A: (Tenkan+Kijun)/2, Senkou B: (52-high + 52-low)/2",
     parametros: "Tenkan: 9, Kijun: 26, Senkou B: 52",
     interpretacion: [
-      "Precio sobre Kumo (nube): Tendencia alcista",
+      "Precio sobre Nube: Tendencia alcista",
       "Tenkan cruza Kijun: Señal de entrada",
-      "Kumo verde: Soporte, Kumo roja: Resistencia",
+      "Nube verde: Soporte, Nube roja: Resistencia",
       "Chikou sobre precio: Confirmación alcista"
     ],
     usos: [
