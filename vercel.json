@@ -1,5 +1,4 @@
 {
-  "_comment": "Build 2026-01-24 16:30 - Force CSP refresh",
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
