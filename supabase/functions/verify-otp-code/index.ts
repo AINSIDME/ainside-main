@@ -56,42 +56,47 @@ serve(async (req) => {
       .update({ used: true })
       .eq("id", otpRecord.id);
 
-    // Crear o actualizar usuario en Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-      email: email.toLowerCase().trim(),
-      email_confirm: true,
-      user_metadata: {
-        email_verified: true,
-        auth_method: "otp_email",
-      },
-    });
-
-    if (authError && authError.message !== "User already registered") {
-      console.error("Error creando usuario:", authError);
+    // Buscar usuario existente
+    const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
+    
+    if (listError) {
+      console.error("Error listando usuarios:", listError);
       throw new Error("Error al autenticar");
     }
 
-    // Si el usuario ya existe, obtenerlo
-    let userId = authData?.user?.id;
-    
-    if (!userId) {
-      const { data: existingUser } = await supabase.auth.admin.listUsers();
-      const user = existingUser?.users?.find(u => u.email?.toLowerCase() === email.toLowerCase().trim());
-      userId = user?.id;
+    let user = existingUsers?.users?.find(u => u.email?.toLowerCase() === email.toLowerCase().trim());
+
+    // Si el usuario no existe, crearlo
+    if (!user) {
+      const { data: newUserData, error: createError } = await supabase.auth.admin.createUser({
+        email: email.toLowerCase().trim(),
+        email_confirm: true,
+        user_metadata: {
+          email_verified: true,
+          auth_method: "otp_email",
+        },
+      });
+
+      if (createError) {
+        console.error("Error creando usuario:", createError);
+        throw new Error("Error al crear usuario");
+      }
+
+      user = newUserData.user;
     }
 
-    if (!userId) {
+    if (!user?.id) {
       throw new Error("Error al obtener usuario");
     }
 
-    // Generar sesión
-    const { data: sessionData, error: sessionError } = await supabase.auth.admin.generateLink({
+    // Generar enlace mágico para autenticación
+    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: "magiclink",
       email: email.toLowerCase().trim(),
     });
 
-    if (sessionError) {
-      console.error("Error generando sesión:", sessionError);
+    if (linkError) {
+      console.error("Error generando enlace:", linkError);
       throw new Error("Error al crear sesión");
     }
 
@@ -100,10 +105,11 @@ serve(async (req) => {
         success: true,
         message: "Autenticación exitosa",
         user: {
-          id: userId,
+          id: user.id,
           email: email.toLowerCase().trim(),
         },
-        session: sessionData,
+        access_token: linkData.properties.action_link.split("#")[1]?.split("&")[0]?.split("=")[1] || linkData.properties.hashed_token,
+        refresh_token: linkData.properties.hashed_token,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );

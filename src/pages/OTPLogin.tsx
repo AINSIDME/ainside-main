@@ -92,16 +92,29 @@ export default function OTPLogin() {
         throw new Error(data.error || "Error al verificar código");
       }
 
-      if (data?.success) {
+      if (data?.success && data?.access_token) {
+        // Establecer la sesión en Supabase
+        const { error: sessionError } = await supabase.auth.setSession({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token || data.access_token,
+        });
+
+        if (sessionError) {
+          throw sessionError;
+        }
+
         toast({
           title: "🎉 ¡Bienvenido!",
           description: "Autenticación exitosa",
         });
         
-        // Aquí puedes redirigir al dashboard o actualizar el estado de autenticación
-        window.location.href = "/dashboard";
+        // Redirigir al dashboard
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 1000);
       }
     } catch (error: any) {
+      console.error("Error en verificación:", error);
       toast({
         title: "Error",
         description: error.message || "Código inválido",
