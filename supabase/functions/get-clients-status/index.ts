@@ -52,20 +52,36 @@ serve(async (req) => {
       .from("hwid_registrations")
       .select("*");
 
-    if (regError) throw regError;
+    if (regError) {
+      console.error('[get-clients-status] Error fetching registrations:', regError);
+      throw new Error(`Failed to fetch registrations: ${regError.message}`);
+    }
+
+    console.log(`[get-clients-status] Fetched ${registrations?.length || 0} registrations`);
 
     // Get connection status for each client
     const { data: connections, error: connError } = await supabase
       .from("client_connections")
       .select("*");
 
-    if (connError) throw connError;
+    if (connError) {
+      console.error('[get-clients-status] Error fetching connections:', connError);
+      throw new Error(`Failed to fetch connections: ${connError.message}`);
+    }
+
+    console.log(`[get-clients-status] Fetched ${connections?.length || 0} connections`);
 
     // Purchases (for client context)
     const { data: purchases, error: purchasesError } = await supabase
       .from('purchases')
       .select('order_id,email,plan_name,plan_type,status,amount,currency,created_at,coupon_code');
-    if (purchasesError) throw purchasesError;
+    
+    if (purchasesError) {
+      console.error('[get-clients-status] Error fetching purchases:', purchasesError);
+      throw new Error(`Failed to fetch purchases: ${purchasesError.message}`);
+    }
+
+    console.log(`[get-clients-status] Fetched ${purchases?.length || 0} purchases`);
 
     const purchasesByOrderId = new Map<string, any>();
     const purchasesByEmail = new Map<string, any[]>();

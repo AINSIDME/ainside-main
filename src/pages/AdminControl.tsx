@@ -149,6 +149,10 @@ const AdminControl = () => {
       const { data: { session } } = await supabase.auth.getSession();
       const accessToken = session?.access_token;
 
+      console.log('[AdminControl] Fetching clients...');
+      console.log('[AdminControl] 2FA Token:', get2FAToken() ? 'Present' : 'Missing');
+      console.log('[AdminControl] Access Token:', accessToken ? 'Present' : 'Missing');
+
       const { data, error } = await supabase.functions.invoke('get-clients-status', {
         headers: {
           'x-admin-2fa-token': get2FAToken(),
@@ -156,26 +160,35 @@ const AdminControl = () => {
         }
       });
       
+      console.log('[AdminControl] Response data:', data);
+      console.log('[AdminControl] Response error:', error);
+      
       if (error) throw error;
 
       if ((data as any)?.error) {
+        console.error('[AdminControl] Server returned error:', (data as any).error);
         setClients([]);
         setMeta((data as any)?.meta ?? null);
         toast({
-          title: "Error",
+          title: "Error del servidor",
           description: String((data as any).error),
           variant: "destructive",
         });
         return;
       }
       
+      console.log('[AdminControl] Clients received:', (data as any)?.clients?.length || 0);
+      console.log('[AdminControl] Meta:', (data as any)?.meta);
+      
       setClients(data.clients || []);
       setMeta((data as any)?.meta ?? null);
     } catch (error) {
-      console.error('Error fetching clients:', error);
+      console.error('[AdminControl] Error fetching clients:', error);
+      const errorMsg = (error as any)?.message || "No se pudo cargar la lista de clientes";
+      console.error('[AdminControl] Final error message:', errorMsg);
       toast({
-        title: "Error",
-        description: (error as any)?.message || "No se pudo cargar la lista de clientes",
+        title: "Error de conexión",
+        description: errorMsg,
         variant: "destructive"
       });
     } finally {
