@@ -6,6 +6,8 @@ const ALLOWED_ORIGINS = [
   "https://ainside-trading.vercel.app", 
   "https://ainside.me",
   "https://www.ainside.me",
+  "https://ainside-main-1f0irplxy-ainsidmes-projects.vercel.app",
+  "https://ainside-main.vercel.app",
   "http://localhost:5173",
   "http://localhost:8080",
 ];
