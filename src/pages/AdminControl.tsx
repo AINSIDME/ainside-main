@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { AdminGuard } from "@/components/AdminGuard";
 import { 
   Users, 
   Activity, 
@@ -453,7 +454,8 @@ const AdminControl = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+    <AdminGuard requireAdmin={true} require2FA={true}>
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
       {/* Header */}
       <div className="container mx-auto max-w-7xl mb-8">
         <div className="flex justify-between items-center mb-6">
@@ -774,6 +776,7 @@ const AdminControl = () => {
         </div>
       </div>
     </div>
+    </AdminGuard>
   );
 };
 

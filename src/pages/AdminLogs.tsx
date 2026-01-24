@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { FileText, RefreshCw, ShieldAlert } from "lucide-react";
+import { AdminGuard } from "@/components/AdminGuard";
 
 type AdminLogRow = {
   id: string;
@@ -199,7 +200,8 @@ const AdminLogs = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+    <AdminGuard requireAdmin={true} require2FA={true}>
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
       <div className="container mx-auto max-w-5xl">
         <div className="flex items-start justify-between gap-4 mb-8">
           <div>
@@ -251,6 +253,7 @@ const AdminLogs = () => {
         </Card>
       </div>
     </div>
+    </AdminGuard>
   );
 };
 

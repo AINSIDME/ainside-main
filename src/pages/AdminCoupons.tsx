@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { ArrowLeft, Plus, Copy, Check, Trash2, AlertCircle, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
+import { AdminGuard } from '@/components/AdminGuard';
 
 interface Coupon {
   id: string;
@@ -315,14 +316,17 @@ const AdminCoupons = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white font-mono">Cargando...</div>
-      </div>
+      <AdminGuard requireAdmin={true} require2FA={true}>
+        <div className="min-h-screen bg-black flex items-center justify-center">
+          <div className="text-white font-mono">Cargando...</div>
+        </div>
+      </AdminGuard>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white py-12 px-4">
+    <AdminGuard requireAdmin={true} require2FA={true}>
+      <div className="min-h-screen bg-black text-white py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -613,6 +617,7 @@ const AdminCoupons = () => {
         </DialogContent>
       </Dialog>
     </div>
+    </AdminGuard>
   );
 };
 

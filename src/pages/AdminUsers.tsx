@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { AdminGuard } from "@/components/AdminGuard";
 import { Users, RefreshCw, ArrowLeft, Mail, Calendar, Shield } from "lucide-react";
 
 interface AuthUser {
@@ -119,7 +120,8 @@ const AdminUsers = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+    <AdminGuard requireAdmin={true} require2FA={true}>
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -256,6 +258,7 @@ const AdminUsers = () => {
         </Card>
       </div>
     </div>
+    </AdminGuard>
   );
 };
 
