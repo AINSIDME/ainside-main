@@ -59,90 +59,8 @@ const AdminControl = () => {
   }>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [accessGate, setAccessGate] = useState<
-    | null
-    | 'login-required'
-    | 'admin-required'
-    | '2fa-required'
-    | '2fa-expired'
-    | 'error'
-  >(null);
-
-  // Lista de emails autorizados como administradores
-  const adminEmails = useMemo(() => {
-    const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
-    if (raw) {
-      return String(raw)
-        .split(',')
-        .map((s: string) => s.trim().toLowerCase())
-        .filter(Boolean);
-    }
-    return ['jonathangolubok@gmail.com'];
-  }, []);
 
   const get2FAToken = useCallback(() => localStorage.getItem('admin_2fa_token') || '', []);
-
-  // Verificar autenticación y rol de administrador
-  useEffect(() => {
-    const checkAdminAccess = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        
-        if (!user) {
-          setIsAdmin(false);
-          setAccessGate('login-required');
-          return;
-        }
-
-        // Verificar si el email está en la lista de administradores
-        const email = (user.email || '').toLowerCase();
-        if (!adminEmails.includes(email)) {
-          await supabase.auth.signOut();
-          setIsAdmin(false);
-          setAccessGate('admin-required');
-          return;
-        }
-
-        // VERIFICACIÓN 2FA OBLIGATORIA
-        const session2FA = localStorage.getItem('admin_2fa_verified');
-        const timestamp = localStorage.getItem('admin_2fa_timestamp');
-        const token = get2FAToken();
-        
-        // Verificar si la sesión 2FA sigue válida (12 horas)
-        if (!session2FA || !timestamp || !token) {
-          setIsAdmin(false);
-          setAccessGate('2fa-required');
-          return;
-        }
-
-        const twelveHoursInMs = 12 * 60 * 60 * 1000; // 12 horas
-        const sessionAge = Date.now() - parseInt(timestamp);
-        
-        if (sessionAge > twelveHoursInMs) {
-          // Sesión 2FA expirada
-          localStorage.removeItem('admin_2fa_verified');
-          localStorage.removeItem('admin_2fa_timestamp');
-          localStorage.removeItem('admin_2fa_token');
-          setIsAdmin(false);
-          setAccessGate('2fa-expired');
-          return;
-        }
-
-        setIsAdmin(true);
-        setAccessGate(null);
-      } catch (error) {
-        console.error('Error checking admin access:', error);
-        setIsAdmin(false);
-        setAccessGate('error');
-      } finally {
-        setIsCheckingAuth(false);
-      }
-    };
-
-    checkAdminAccess();
-  }, [adminEmails, get2FAToken, navigate, toast]);
 
   // Fetch clients data
   const fetchClients = useCallback(async () => {
@@ -338,8 +256,6 @@ const AdminControl = () => {
 
   // Auto-refresh every 10 seconds
   useEffect(() => {
-    if (!isAdmin) return;
-
     fetchClients();
 
     if (autoRefresh) {
@@ -349,7 +265,7 @@ const AdminControl = () => {
 
       return () => clearInterval(interval);
     }
-  }, [autoRefresh, fetchClients, isAdmin]);
+  }, [autoRefresh, fetchClients]);
 
   const getStatusColor = (status: string) => {
     return status === 'online' ? 'bg-green-500' : 'bg-gray-500';
@@ -365,93 +281,6 @@ const AdminControl = () => {
     if (diff < 86400) return `${Math.floor(diff / 3600)}h`;
     return `${Math.floor(diff / 86400)}d`;
   };
-
-  // Mostrar pantalla de carga mientras verifica permisos
-  if (isCheckingAuth) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <Card className="w-96 bg-slate-800/50 border-slate-700">
-          <CardContent className="p-8 text-center">
-            <ShieldAlert className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
-            <h2 className="text-xl font-semibold text-white mb-2">Verificando permisos...</h2>
-            <p className="text-slate-400">Validando acceso de administrador</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  if (!isAdmin) {
-    const title =
-      accessGate === 'login-required'
-        ? t('admin.access.loginRequired.title', { defaultValue: 'Iniciar sesión requerido' })
-        : accessGate === 'admin-required'
-          ? t('admin.access.adminRequired.title', { defaultValue: 'Acceso restringido' })
-          : accessGate === '2fa-required'
-            ? t('admin.access.2faRequired.title', { defaultValue: 'Verificación 2FA requerida' })
-            : accessGate === '2fa-expired'
-              ? t('admin.access.2faExpired.title', { defaultValue: 'Sesión 2FA expirada' })
-              : t('admin.access.error.title', { defaultValue: 'No se pudo validar el acceso' });
-
-    const message =
-      accessGate === 'login-required'
-        ? t('admin.access.loginRequired.message', {
-            defaultValue: 'Debes iniciar sesión para acceder al panel de administración.',
-          })
-        : accessGate === 'admin-required'
-          ? t('admin.access.adminRequired.message', {
-              defaultValue: 'Necesitas iniciar sesión con una cuenta de administrador autorizada.',
-            })
-          : accessGate === '2fa-required'
-            ? t('admin.access.2faRequired.message', {
-                defaultValue: 'Para continuar, completa la verificación 2FA de administrador.',
-              })
-            : accessGate === '2fa-expired'
-              ? t('admin.access.2faExpired.message', {
-                  defaultValue: 'Tu sesión de verificación 2FA expiró. Verifica nuevamente.',
-                })
-              : t('admin.access.error.message', {
-                  defaultValue: 'Ocurrió un error al validar tu sesión. Intenta nuevamente.',
-                });
-
-    const primaryCtaLabel =
-      accessGate === '2fa-required' || accessGate === '2fa-expired'
-        ? t('admin.access.cta.verify2fa', { defaultValue: 'Verificar 2FA' })
-        : t('admin.access.cta.login', { defaultValue: 'Ir a iniciar sesión' });
-
-    const primaryCtaAction = () => {
-      if (accessGate === '2fa-required' || accessGate === '2fa-expired') {
-        navigate('/admin/verify-2fa', { replace: true });
-        return;
-      }
-      navigate('/login', { state: { redirectTo: '/admin/control' } as any });
-    };
-
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6 flex items-center justify-center">
-        <div className="container mx-auto max-w-md">
-          <Card className="bg-slate-900/50 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <ShieldAlert className="h-5 w-5" />
-                {title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-slate-300 text-sm">{message}</p>
-              <Button className="w-full" onClick={primaryCtaAction}>
-                {primaryCtaLabel}
-              </Button>
-              <Button variant="outline" className="w-full" onClick={() => navigate('/')}
-              >
-                {t('admin.access.cta.back', { defaultValue: 'Volver' })}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <AdminGuard requireAdmin={true} require2FA={true}>

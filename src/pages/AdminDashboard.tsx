@@ -53,14 +53,25 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [clientsRes, usersRes] = await Promise.all([
-          supabase.from('hwid_registrations').select('id', { count: 'exact', head: true }),
-          supabase.from('auth.users').select('id', { count: 'exact', head: true })
-        ]);
+        const { data: { session } } = await supabase.auth.getSession();
+        const accessToken = session?.access_token;
+
+        // Get clients count
+        const clientsRes = await supabase
+          .from('hwid_registrations')
+          .select('id', { count: 'exact', head: true });
+
+        // Get users count from Edge Function
+        const { data: usersData } = await supabase.functions.invoke('get-registered-users', {
+          headers: {
+            'x-admin-2fa-token': get2FAToken(),
+            ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+          }
+        });
         
         setStats({
           clients: clientsRes.count || 0,
-          registeredUsers: usersRes.count || 0
+          registeredUsers: (usersData as any)?.count || 0
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -70,7 +81,7 @@ const AdminDashboard = () => {
     if (isAdmin) {
       fetchStats();
     }
-  }, [isAdmin]);
+  }, [isAdmin, get2FAToken]);
 
   useEffect(() => {
     const checkAdminAccess = async () => {

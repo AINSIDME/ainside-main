@@ -22,40 +22,8 @@ const AdminUsers = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState<AuthUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  const adminEmails = useMemo(() => {
-    const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
-    if (raw) {
-      return String(raw)
-        .split(",")
-        .map((s: string) => s.trim().toLowerCase())
-        .filter(Boolean);
-    }
-    return ["jonathangolubok@gmail.com"];
-  }, []);
-
-  useEffect(() => {
-    const checkAdmin = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user || !adminEmails.includes(user.email?.toLowerCase() || "")) {
-          navigate("/admin");
-          return;
-        }
-        setIsAdmin(true);
-      } catch (error) {
-        console.error("Error checking admin:", error);
-        navigate("/admin");
-      }
-    };
-
-    checkAdmin();
-  }, [adminEmails, navigate]);
 
   const fetchUsers = useCallback(async () => {
-    if (!isAdmin) return;
-
     setIsLoading(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
@@ -95,13 +63,11 @@ const AdminUsers = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [isAdmin, toast]);
+  }, [toast]);
 
   useEffect(() => {
-    if (isAdmin) {
-      fetchUsers();
-    }
-  }, [isAdmin, fetchUsers]);
+    fetchUsers();
+  }, [fetchUsers]);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "Nunca";
@@ -114,10 +80,6 @@ const AdminUsers = () => {
       minute: '2-digit'
     });
   };
-
-  if (!isAdmin) {
-    return null;
-  }
 
   return (
     <AdminGuard requireAdmin={true} require2FA={true}>
