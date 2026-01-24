@@ -267,8 +267,9 @@ export default function Pricing() {
 
       // Call Supabase Edge Function via HTTP POST with JSON body
       const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || SUPABASE_PUBLISHABLE_KEY;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://odlxhgatqyodxdessxts.supabase.co';
       const res = await fetch(
-        "https://odlxhgatqyodxdessxts.supabase.co/functions/v1/create-payment",
+        `${supabaseUrl}/functions/v1/create-payment`,
         {
           method: "POST",
           headers: {
