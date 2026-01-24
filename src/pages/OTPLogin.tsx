@@ -25,11 +25,22 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
+      console.log("🔍 Intentando invocar request-otp-code...");
+      console.log("📧 Email:", email);
+      console.log("🔑 Anon Key:", supabaseAnonKey ? "✅ Presente" : "❌ Falta");
+      console.log("🌐 URL:", supabaseDirectUrl);
+      
       const { data, error } = await supabaseFunctions.functions.invoke("request-otp-code", {
         body: { email },
       });
 
-      if (error) throw error;
+      console.log("📦 Respuesta data:", data);
+      console.log("❌ Error:", error);
+
+      if (error) {
+        console.error("🔴 Error completo:", JSON.stringify(error, null, 2));
+        throw error;
+      }
 
       if (data?.success) {
         setStep("code");
