@@ -74,11 +74,21 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
-      // Usar URL directa de Supabase para Edge Functions (no funciona con proxy)
-      const { data, error } = await supabase.functions.invoke("verify-otp-code", {
-      const { data, error } = await supabaseFunctions.functions.invoke("verify-otp-code", {
+      // Usar fetch directo para evitar proxy de Vercel
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-otp-code`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ email, code }),
+      });
 
-      if (error) throw error;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al verificar código");
+      }
 
       if (data?.success) {
         toast({
