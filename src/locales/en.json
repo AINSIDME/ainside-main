@@ -1995,5 +1995,13 @@
       "short": "Short",
       "neutral": "Neutral"
     }
+  },
+  "chat": {
+    "title": "AInside Assistant",
+    "subtitle": "Virtual assistant",
+    "welcome": "Hello! 👋 I'm the AInside virtual assistant. How can I help you today? I can answer questions about our products, pricing, installation, and more.",
+    "placeholder": "Type your question...",
+    "messagesRemaining": "{{count}} messages remaining",
+    "poweredBy": "Powered by OpenAI • Max 10 messages/hour"
   }
 }

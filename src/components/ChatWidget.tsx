@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/lib/supabase';
+import { useTranslation } from 'react-i18next';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -11,6 +12,7 @@ interface Message {
 }
 
 export default function ChatWidget() {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -30,14 +32,16 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Mensaje de bienvenida
+      // Mensaje de bienvenida en el idioma actual
       setMessages([{
         role: 'assistant',
-        content: '¡Hola! 👋 Soy el asistente virtual de AInside. ¿En qué puedo ayudarte hoy? Puedo responder preguntas sobre nuestros productos, precios, instalación y más.',
+        content: t('chat.welcome', { 
+          defaultValue: '¡Hola! 👋 Soy el asistente virtual de AInside. ¿En qué puedo ayudarte hoy? Puedo responder preguntas sobre nuestros productos, precios, instalación y más.'
+        }),
         timestamp: new Date().toISOString()
       }]);
     }
-  }, [isOpen]);
+  }, [isOpen, t]);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -121,9 +125,12 @@ export default function ChatWidget() {
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div>
-              <h3 className="font-semibold">AInside Assistant</h3>
+              <h3 className="font-semibold">{t('chat.title', { defaultValue: 'AInside Assistant' })}</h3>
               <p className="text-xs text-blue-100">
-                {remainingMessages !== null ? `${remainingMessages} mensajes restantes` : 'Asistente virtual'}
+                {remainingMessages !== null 
+                  ? t('chat.messagesRemaining', { count: remainingMessages, defaultValue: `${remainingMessages} mensajes restantes` })
+                  : t('chat.subtitle', { defaultValue: 'Asistente virtual' })
+                }
               </p>
             </div>
             <Button
@@ -154,7 +161,7 @@ export default function ChatWidget() {
                   <p className={`text-xs mt-1 ${
                     msg.role === 'user' ? 'text-blue-100' : 'text-gray-400'
                   }`}>
-                    {new Date(msg.timestamp).toLocaleTimeString('es-ES', { 
+                    {new Date(msg.timestamp).toLocaleTimeString(i18n.language || 'es-ES', { 
                       hour: '2-digit', 
                       minute: '2-digit' 
                     })}
@@ -191,7 +198,7 @@ export default function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Escribe tu pregunta..."
+                placeholder={t('chat.placeholder', { defaultValue: 'Escribe tu pregunta...' })}
                 disabled={loading}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
               />
@@ -205,7 +212,7 @@ export default function ChatWidget() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Powered by OpenAI • Máx. 10 mensajes/hora
+              {t('chat.poweredBy', { defaultValue: 'Powered by OpenAI • Máx. 10 mensajes/hora' })}
             </p>
           </div>
         </Card>
