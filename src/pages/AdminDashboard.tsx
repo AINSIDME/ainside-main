@@ -33,6 +33,7 @@ const AdminDashboard = () => {
     | "2fa-expired"
     | "error"
   >(null);
+  const [stats, setStats] = useState({ clients: 0, registeredUsers: 0 });
 
   const adminEmails = useMemo(() => {
     const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
@@ -46,6 +47,29 @@ const AdminDashboard = () => {
   }, []);
 
   const get2FAToken = useCallback(() => localStorage.getItem("admin_2fa_token") || "", []);
+
+  // Fetch stats
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [clientsRes, usersRes] = await Promise.all([
+          supabase.from('hwid_registrations').select('id', { count: 'exact', head: true }),
+          supabase.from('auth.users').select('id', { count: 'exact', head: true })
+        ]);
+        
+        setStats({
+          clients: clientsRes.count || 0,
+          registeredUsers: usersRes.count || 0
+        });
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    if (isAdmin) {
+      fetchStats();
+    }
+  }, [isAdmin]);
 
   useEffect(() => {
     const checkAdminAccess = async () => {
@@ -276,6 +300,35 @@ const AdminDashboard = () => {
             <Settings className="h-4 w-4" />
             Volver al sitio
           </Button>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Clientes (con compra)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">{stats.clients}</div>
+              <p className="text-xs text-slate-400 mt-1">Registros en hwid_registrations</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Usuarios Registrados (OTP)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">{stats.registeredUsers}</div>
+              <p className="text-xs text-slate-400 mt-1">Usuarios en auth.users</p>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
