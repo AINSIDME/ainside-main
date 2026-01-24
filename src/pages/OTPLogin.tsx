@@ -5,14 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { createClient } from "@supabase/supabase-js";
 
-// Cliente específico para Edge Functions (requiere URL directa, no proxy)
-const supabaseDirectUrl = "https://odlxhgatqyodxdessxts.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyMzY5MTMsImV4cCI6MjA3MjgxMjkxM30.btScPRHOEIdRShS7kYNFdzHKpQrwMZKRJ54KlGCl52s";
-const supabaseFunctions = createClient(supabaseDirectUrl, supabaseAnonKey, {
-  auth: { persistSession: false }
-});
+// URL y key para Edge Functions (bypass proxy de Vercel)
+const SUPABASE_URL = "https://odlxhgatqyodxdessxts.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyMzY5MTMsImV4cCI6MjA3MjgxMjkxM30.btScPRHOEIdRShS7kYNFdzHKpQrwMZKRJ54KlGCl52s";
 
 export default function OTPLogin() {
   const [email, setEmail] = useState("");
@@ -27,21 +23,20 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
-      console.log("🔍 Intentando invocar request-otp-code...");
-      console.log("📧 Email:", email);
-      console.log("🔑 Anon Key:", supabaseAnonKey ? "✅ Presente" : "❌ Falta");
-      console.log("🌐 URL:", supabaseDirectUrl);
-      
-      const { data, error } = await supabaseFunctions.functions.invoke("request-otp-code", {
-        body: { email },
+      // Usar fetch directo para evitar proxy de Vercel
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/request-otp-code`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ email }),
       });
 
-      console.log("📦 Respuesta data:", data);
-      console.log("❌ Error:", error);
+      const data = await response.json();
 
-      if (error) {
-        console.error("🔴 Error completo:", JSON.stringify(error, null, 2));
-        throw error;
+      if (!response.ok) {
+        throw new Error(data.error || "Error al enviar código");
       }
 
       if (data?.success) {
