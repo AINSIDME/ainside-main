@@ -76,7 +76,7 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
-      // Usar fetch directo para evitar proxy de Vercel
+      // Primero verificar el código con nuestro backend
       const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-otp-code`, {
         method: "POST",
         headers: {
@@ -92,15 +92,17 @@ export default function OTPLogin() {
         throw new Error(data.error || "Error al verificar código");
       }
 
-      if (data?.success && data?.access_token) {
-        // Establecer la sesión en Supabase
-        const { error: sessionError } = await supabase.auth.setSession({
-          access_token: data.access_token,
-          refresh_token: data.refresh_token || data.access_token,
+      if (data?.success) {
+        // Ahora usar el método nativo de Supabase para establecer la sesión
+        const { error: verifyError } = await supabase.auth.verifyOtp({
+          email: email.toLowerCase().trim(),
+          token: code,
+          type: 'email',
         });
 
-        if (sessionError) {
-          throw sessionError;
+        if (verifyError) {
+          console.error("Error en verifyOtp:", verifyError);
+          throw verifyError;
         }
 
         toast({

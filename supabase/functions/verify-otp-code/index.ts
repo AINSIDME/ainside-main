@@ -56,7 +56,7 @@ serve(async (req) => {
       .update({ used: true })
       .eq("id", otpRecord.id);
 
-    // Buscar usuario existente
+    // Crear o obtener usuario
     const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
     
     if (listError) {
@@ -89,27 +89,14 @@ serve(async (req) => {
       throw new Error("Error al obtener usuario");
     }
 
-    // Generar enlace mágico para autenticación
-    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
-      type: "magiclink",
-      email: email.toLowerCase().trim(),
-    });
-
-    if (linkError) {
-      console.error("Error generando enlace:", linkError);
-      throw new Error("Error al crear sesión");
-    }
-
+    // Devolver datos para que el frontend llame a verifyOtp
     return new Response(
       JSON.stringify({ 
         success: true,
-        message: "Autenticación exitosa",
-        user: {
-          id: user.id,
-          email: email.toLowerCase().trim(),
-        },
-        access_token: linkData.properties.action_link.split("#")[1]?.split("&")[0]?.split("=")[1] || linkData.properties.hashed_token,
-        refresh_token: linkData.properties.hashed_token,
+        message: "Código verificado",
+        email: email.toLowerCase().trim(),
+        code: code,
+        // El frontend debe usar estos datos con supabase.auth.verifyOtp()
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
