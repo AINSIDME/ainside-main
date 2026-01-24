@@ -9,6 +9,7 @@ import { setDocumentDirection } from "@/lib/i18n";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/seo/StructuredData";
+import ChatWidget from "@/components/ChatWidget";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -143,6 +144,7 @@ const App = () => {
               </Routes>
             </main>
             <Footer />
+            <ChatWidget />
           </div>
         </BrowserRouter>
       </TooltipProvider>
