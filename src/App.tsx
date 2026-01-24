@@ -44,6 +44,7 @@ import AdminVerify2FA from "./pages/AdminVerify2FA";
 import AdminCoupons from "./pages/AdminCoupons";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsers";
+import AdminMessages from "./pages/AdminMessages";
 import AdminLogs from "./pages/AdminLogs";
 import NotFound from "./pages/NotFound";
 import Trading from "./pages/Trading";
@@ -136,6 +137,7 @@ const App = () => {
                 <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
                 <Route path="/admin/control" element={<AdminControl />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
+                <Route path="/admin/messages" element={<AdminMessages />} />
                 <Route path="/admin/coupons" element={<AdminCoupons />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -115,7 +115,8 @@ async function sendEmailNotification(data: ContactMessage): Promise<boolean> {
         },
         body: JSON.stringify({
           from: 'AInside <onboarding@resend.dev>',
-          to: ['inquiries@ainside.me'],
+          to: ['jonathangolubok@gmail.com'], // Admin email
+          reply_to: [data.email], // Allow admin to reply directly
           subject: `Contact Form: ${data.subject}`,
           html: `
             <h2>New Contact Form Submission</h2>
@@ -148,10 +149,11 @@ async function sendEmailNotification(data: ContactMessage): Promise<boolean> {
         },
         body: JSON.stringify({
           personalizations: [{
-            to: [{ email: 'inquiries@ainside.me' }],
+            to: [{ email: 'jonathangolubok@gmail.com' }], // Admin email
             subject: `Contact Form: ${data.subject}`
           }],
           from: { email: 'noreply@ainside.me', name: 'AInside Contact' },
+          reply_to: { email: data.email, name: data.name }, // Allow admin to reply directly
           content: [{
             type: 'text/html',
             value: `

@@ -280,7 +280,8 @@ const AdminDashboard = () => {
       title: "Mensajes",
       description: "Mensajes del formulario de contacto.",
       icon: Mail,
-      enabled: false,
+      route: "/admin/messages",
+      enabled: true,
     },
     {
       key: "downloads",
