@@ -232,6 +232,14 @@ const AdminDashboard = () => {
       enabled: true,
     },
     {
+      key: "users",
+      title: "Usuarios Registrados",
+      description: "Usuarios con login OTP (auth.users).",
+      icon: Users,
+      route: "/admin/users",
+      enabled: true,
+    },
+    {
       key: "coupons",
       title: "Cupones",
       description: "Crear/activar/desactivar cupones y enviar email.",

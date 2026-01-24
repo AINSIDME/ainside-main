@@ -1,0 +1,255 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Users, RefreshCw, ArrowLeft, Mail, Calendar, Shield } from "lucide-react";
+
+interface AuthUser {
+  id: string;
+  email: string;
+  created_at: string;
+  email_confirmed_at: string | null;
+  last_sign_in_at: string | null;
+  user_metadata?: Record<string, any>;
+}
+
+const AdminUsers = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [users, setUsers] = useState<AuthUser[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const adminEmails = useMemo(() => {
+    const raw = (import.meta as any)?.env?.VITE_ADMIN_EMAILS;
+    if (raw) {
+      return String(raw)
+        .split(",")
+        .map((s: string) => s.trim().toLowerCase())
+        .filter(Boolean);
+    }
+    return ["jonathangolubok@gmail.com"];
+  }, []);
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user || !adminEmails.includes(user.email?.toLowerCase() || "")) {
+          navigate("/admin");
+          return;
+        }
+        setIsAdmin(true);
+      } catch (error) {
+        console.error("Error checking admin:", error);
+        navigate("/admin");
+      }
+    };
+
+    checkAdmin();
+  }, [adminEmails, navigate]);
+
+  const fetchUsers = useCallback(async () => {
+    if (!isAdmin) return;
+
+    setIsLoading(true);
+    try {
+      // Note: auth.users can only be queried with service_role key
+      // So we need to use an Edge Function or direct API call
+      const { data, error } = await supabase
+        .from('auth.users')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        // Fallback: If direct query fails, we can't access auth.users from client
+        console.error("Cannot query auth.users from client:", error);
+        toast({
+          title: "Acceso limitado",
+          description: "Solo el administrador puede ver usuarios registrados",
+          variant: "destructive"
+        });
+        setUsers([]);
+        return;
+      }
+
+      setUsers(data || []);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      toast({
+        title: "Error",
+        description: "No se pudo cargar la lista de usuarios",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isAdmin, toast]);
+
+  useEffect(() => {
+    if (isAdmin) {
+      fetchUsers();
+    }
+  }, [isAdmin, fetchUsers]);
+
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return "Nunca";
+    const date = new Date(dateString);
+    return date.toLocaleString('es-ES', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  if (!isAdmin) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+      <div className="container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              onClick={() => navigate("/admin")}
+              className="gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Volver
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+                <Users className="h-8 w-8 text-blue-500" />
+                Usuarios Registrados (OTP)
+              </h1>
+              <p className="text-slate-400">Gestión de usuarios en auth.users</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={fetchUsers} variant="outline" className="gap-2">
+              <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+              Actualizar
+            </Button>
+          </div>
+        </div>
+
+        {/* Stats Card */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Total Usuarios
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">{users.length}</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
+                <Shield className="h-4 w-4" />
+                Email Verificado
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">
+                {users.filter(u => u.email_confirmed_at).length}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Último Login
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-white">
+                {users.filter(u => u.last_sign_in_at).length}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Users Table */}
+        <Card className="bg-slate-800/50 border-slate-700">
+          <CardHeader>
+            <CardTitle className="text-white">Lista de Usuarios</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {isLoading ? (
+              <div className="text-center py-8 text-slate-400">
+                Cargando usuarios...
+              </div>
+            ) : users.length === 0 ? (
+              <div className="text-center py-8 text-slate-400">
+                No hay usuarios registrados
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-slate-700">
+                      <th className="text-left py-3 px-4 text-slate-400 font-medium">Email</th>
+                      <th className="text-left py-3 px-4 text-slate-400 font-medium">Estado</th>
+                      <th className="text-left py-3 px-4 text-slate-400 font-medium">Registrado</th>
+                      <th className="text-left py-3 px-4 text-slate-400 font-medium">Último Login</th>
+                      <th className="text-left py-3 px-4 text-slate-400 font-medium">ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => (
+                      <tr key={user.id} className="border-b border-slate-700/50 hover:bg-slate-700/20">
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2 text-white">
+                            <Mail className="h-4 w-4 text-slate-400" />
+                            {user.email}
+                          </div>
+                        </td>
+                        <td className="py-3 px-4">
+                          {user.email_confirmed_at ? (
+                            <Badge className="bg-green-500/20 text-green-400 border-green-500/50">
+                              Verificado
+                            </Badge>
+                          ) : (
+                            <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/50">
+                              Pendiente
+                            </Badge>
+                          )}
+                        </td>
+                        <td className="py-3 px-4 text-slate-300 text-sm">
+                          {formatDate(user.created_at)}
+                        </td>
+                        <td className="py-3 px-4 text-slate-300 text-sm">
+                          {formatDate(user.last_sign_in_at)}
+                        </td>
+                        <td className="py-3 px-4 text-slate-400 text-xs font-mono">
+                          {user.id.substring(0, 8)}...
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default AdminUsers;
