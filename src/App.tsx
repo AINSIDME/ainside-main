@@ -35,6 +35,7 @@ import FAQ from "./pages/FAQ";
 import Crypto from "./pages/Crypto";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import OTPLogin from "./pages/OTPLogin";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import MFA from "./pages/MFA";
@@ -118,7 +119,8 @@ const App = () => {
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/crypto" element={<Crypto />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<OTPLogin />} />
+                <Route path="/login-oauth" element={<Login />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/mfa" element={<MFA />} />
                 <Route path="/dashboard" element={<Dashboard />} />
