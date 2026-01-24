@@ -89,35 +89,23 @@ serve(async (req) => {
       throw new Error("Error al obtener usuario");
     }
 
-    // Generar token de acceso usando admin API
-    const { data: tokenData, error: tokenError } = await supabase.auth.admin.generateLink({
+    // Generar magic link con token de sesión
+    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'magiclink',
       email: email.toLowerCase().trim(),
-      options: {
-        redirectTo: 'https://ainside.me/dashboard'
-      }
     });
 
-    if (tokenError) {
-      console.error("Error generando token:", tokenError);
+    if (linkError || !linkData) {
+      console.error("Error generando link:", linkError);
       throw new Error("Error al crear sesión");
     }
 
-    // Extraer tokens del magic link
-    const url = new URL(tokenData.properties.action_link);
-    const accessToken = url.searchParams.get('access_token');
-    const refreshToken = url.searchParams.get('refresh_token');
-
-    if (!accessToken || !refreshToken) {
-      throw new Error("Error al generar tokens de sesión");
-    }
-
+    // El action_link contiene todos los tokens necesarios
     return new Response(
       JSON.stringify({ 
         success: true,
         message: "Código verificado",
-        access_token: accessToken,
-        refresh_token: refreshToken,
+        magic_link: linkData.properties.action_link,
         user: {
           id: user.id,
           email: email.toLowerCase().trim(),

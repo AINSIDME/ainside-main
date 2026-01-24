@@ -92,27 +92,37 @@ export default function OTPLogin() {
         throw new Error(data.error || "Error al verificar código");
       }
 
-      if (data?.success && data?.access_token && data?.refresh_token) {
-        // Establecer la sesión con los tokens recibidos
-        const { error: sessionError } = await supabase.auth.setSession({
-          access_token: data.access_token,
-          refresh_token: data.refresh_token,
-        });
+      if (data?.success && data?.magic_link) {
+        // Usar el magic link para establecer la sesión
+        // Extraer el token del fragment (#) del magic link
+        const url = new URL(data.magic_link);
+        const hashParams = new URLSearchParams(url.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
 
-        if (sessionError) {
-          console.error("Error estableciendo sesión:", sessionError);
-          throw sessionError;
+        if (accessToken && refreshToken) {
+          const { error: sessionError } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+
+          if (sessionError) {
+            console.error("Error estableciendo sesión:", sessionError);
+            throw sessionError;
+          }
+
+          toast({
+            title: "🎉 ¡Bienvenido!",
+            description: "Autenticación exitosa",
+          });
+          
+          // Redirigir al dashboard
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 1000);
+        } else {
+          throw new Error("No se pudieron obtener los tokens de sesión");
         }
-
-        toast({
-          title: "🎉 ¡Bienvenido!",
-          description: "Autenticación exitosa",
-        });
-        
-        // Redirigir al dashboard
-        setTimeout(() => {
-          window.location.href = "/dashboard";
-        }, 1000);
       }
     } catch (error: any) {
       console.error("Error en verificación:", error);
