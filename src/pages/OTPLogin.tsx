@@ -76,7 +76,7 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
-      // Primero verificar el código con nuestro backend
+      // Verificar el código con nuestro backend
       const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-otp-code`, {
         method: "POST",
         headers: {
@@ -92,17 +92,16 @@ export default function OTPLogin() {
         throw new Error(data.error || "Error al verificar código");
       }
 
-      if (data?.success) {
-        // Ahora usar el método nativo de Supabase para establecer la sesión
-        const { error: verifyError } = await supabase.auth.verifyOtp({
-          email: email.toLowerCase().trim(),
-          token: code,
-          type: 'email',
+      if (data?.success && data?.access_token && data?.refresh_token) {
+        // Establecer la sesión con los tokens recibidos
+        const { error: sessionError } = await supabase.auth.setSession({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
         });
 
-        if (verifyError) {
-          console.error("Error en verifyOtp:", verifyError);
-          throw verifyError;
+        if (sessionError) {
+          console.error("Error estableciendo sesión:", sessionError);
+          throw sessionError;
         }
 
         toast({

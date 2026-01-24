@@ -89,14 +89,39 @@ serve(async (req) => {
       throw new Error("Error al obtener usuario");
     }
 
-    // Devolver datos para que el frontend llame a verifyOtp
+    // Generar token de acceso usando admin API
+    const { data: tokenData, error: tokenError } = await supabase.auth.admin.generateLink({
+      type: 'magiclink',
+      email: email.toLowerCase().trim(),
+      options: {
+        redirectTo: 'https://ainside.me/dashboard'
+      }
+    });
+
+    if (tokenError) {
+      console.error("Error generando token:", tokenError);
+      throw new Error("Error al crear sesión");
+    }
+
+    // Extraer tokens del magic link
+    const url = new URL(tokenData.properties.action_link);
+    const accessToken = url.searchParams.get('access_token');
+    const refreshToken = url.searchParams.get('refresh_token');
+
+    if (!accessToken || !refreshToken) {
+      throw new Error("Error al generar tokens de sesión");
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true,
         message: "Código verificado",
-        email: email.toLowerCase().trim(),
-        code: code,
-        // El frontend debe usar estos datos con supabase.auth.verifyOtp()
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        user: {
+          id: user.id,
+          email: email.toLowerCase().trim(),
+        }
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
