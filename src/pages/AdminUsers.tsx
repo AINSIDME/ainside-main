@@ -57,26 +57,33 @@ const AdminUsers = () => {
 
     setIsLoading(true);
     try {
-      // Note: auth.users can only be queried with service_role key
-      // So we need to use an Edge Function or direct API call
-      const { data, error } = await supabase
-        .from('auth.users')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
 
-      if (error) {
-        // Fallback: If direct query fails, we can't access auth.users from client
-        console.error("Cannot query auth.users from client:", error);
+      console.log('[AdminUsers] Fetching users...');
+
+      const { data, error } = await supabase.functions.invoke('get-registered-users', {
+        headers: {
+          'x-admin-2fa-token': localStorage.getItem("admin_2fa_token") || "",
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        }
+      });
+
+      console.log('[AdminUsers] Response:', data);
+
+      if (error) throw error;
+
+      if ((data as any)?.error) {
+        console.error('[AdminUsers] Server error:', (data as any).error);
         toast({
-          title: "Acceso limitado",
-          description: "Solo el administrador puede ver usuarios registrados",
+          title: "Error del servidor",
+          description: String((data as any).error),
           variant: "destructive"
         });
-        setUsers([]);
         return;
       }
 
-      setUsers(data || []);
+      setUsers((data as any)?.users || []);
     } catch (error) {
       console.error("Error fetching users:", error);
       toast({
