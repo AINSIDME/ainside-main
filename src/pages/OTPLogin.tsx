@@ -5,6 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@supabase/supabase-js";
+
+// Cliente específico para Edge Functions (requiere URL directa, no proxy)
+const supabaseDirectUrl = "https://odlxhgatqyodxdessxts.supabase.co";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
+const supabaseFunctions = createClient(supabaseDirectUrl, supabaseAnonKey);
 
 export default function OTPLogin() {
   const [email, setEmail] = useState("");
@@ -19,7 +25,7 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("request-otp-code", {
+      const { data, error } = await supabaseFunctions.functions.invoke("request-otp-code", {
         body: { email },
       });
 
@@ -60,9 +66,9 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
+      // Usar URL directa de Supabase para Edge Functions (no funciona con proxy)
       const { data, error } = await supabase.functions.invoke("verify-otp-code", {
-        body: { email, code },
-      });
+      const { data, error } = await supabaseFunctions.functions.invoke("verify-otp-code", {
 
       if (error) throw error;
 
