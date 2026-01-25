@@ -1999,9 +1999,43 @@
   "chat": {
     "title": "AInside Assistant",
     "subtitle": "Virtual assistant",
+    "assistant": "Assistant",
     "welcome": "Hello! 👋 I'm the AInside virtual assistant. How can I help you today? I can answer questions about our products, pricing, installation, and more.",
     "placeholder": "Type your question...",
     "messagesRemaining": "{{count}} messages remaining",
-    "poweredBy": "Powered by OpenAI • Max 10 messages/hour"
+    "poweredBy": "Powered by OpenAI • Max 10 messages/hour",
+    "frequentQuestions": "Frequent Questions",
+    "backToMenu": "← Back to main menu",
+    "writeMessage": "Write a message",
+    "sendMessage": "Send message",
+    "instructions": "Press Enter to send, Shift+Enter for new line",
+    "questions": {
+      "q1": "What is AInside and what do you offer?",
+      "q2": "What are your product prices?",
+      "q3": "How does the subscription system work?",
+      "q4": "Which platforms are compatible?",
+      "q5": "How do I install the strategies?",
+      "q6": "Is there a results guarantee?",
+      "q7": "Can I cancel my subscription?",
+      "q8": "What technical support do you offer?"
+    },
+    "answers": {
+      "a1": "AInside is a company specialized in automated trading algorithm development. We offer strategies for S&P 500 and Gold with monthly/annual subscription.",
+      "a2": "Micro S&P 500 or Micro Gold: $99/month or $990/year (20% discount).\nMini S&P 500 or Mini Gold: $999/month or $9,990/year (20% discount).",
+      "a3": "It works with automatic monthly or annual renewal. You can cancel anytime from your PayPal account. Access is valid during the paid period.",
+      "a4": "Our strategies are compatible with TradeStation and MultiCharts. The code is in EasyLanguage/PowerLanguage.",
+      "a5": "After subscription, you'll receive EasyLanguage code + HWID license + documentation. Simply import the file into your platform following the included guide.",
+      "a6": "NO. Trading involves substantial risk. We do NOT guarantee profits or results. Past results do NOT predict future ones. Each trader is responsible for their decisions.",
+      "a7": "Yes, you can cancel anytime from your PayPal account. No refunds for active period, but you can use the service until your paid period ends.",
+      "a8": "We offer technical support via email (support@ainside.me) with 24-48h response. We help with installation, configuration and technical issues with our strategies."
+    },
+    "responses": {
+      "vwap": "VWAP (Volume Weighted Average Price) is an indicator showing volume-weighted average price. In our strategies, we use it as market fair value reference.",
+      "real": "Yes, this is live streaming of a real account trading with our strategies. We show real trades to demonstrate how algorithms work in real market conditions.",
+      "pnl": "P&L (Profit & Loss) shows accumulated profits and losses. Remember these are real-time and past results, they do NOT guarantee future results. Trading involves risk.",
+      "stream": "This stream shows live operations using our strategies. It's for educational demonstration only. NOT financial advice or results guarantee.",
+      "default": "Thanks for your question. For specific inquiries, contact:\n• Commercial: inquiries@ainside.me\n• Support: support@ainside.me\n• General: service@ainside.me",
+      "fallback": "Sorry, I didn't understand your question. Can you rephrase it? You can also contact us directly at support@ainside.me"
+    }
   }
 }
