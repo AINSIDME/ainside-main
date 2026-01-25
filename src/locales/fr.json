@@ -657,7 +657,23 @@
     "chartType": {
       "area": "Graphique en Aires",
       "candlestick": "Graphique en Chandeliers"
-    }
+    },
+    "ready": "Vidéo prête",
+    "manifestLoaded": "Manifeste chargé",
+    "receiving": "Réception du stream...",
+    "fatalError": "Erreur fatale du stream",
+    "reconnecting": "Reconnexion...",
+    "notSupported": "HLS non pris en charge dans ce navigateur",
+    "urlCopied": "URL copiée dans le presse-papiers",
+    "connected": "Connecté au stream",
+    "copyError": "Erreur lors de la copie de l'URL",
+    "pause": "Pause",
+    "play": "Lecture",
+    "mute": "Couper le son",
+    "unmute": "Activer le son",
+    "copyUrl": "Copier l'URL du stream",
+    "fullscreen": "Plein écran",
+    "exitFullscreen": "Quitter le plein écran"
   },
   "products": {
     "title": "Outils d'Analyse Professionnel",

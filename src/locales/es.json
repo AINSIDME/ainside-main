@@ -657,7 +657,23 @@
     "chartType": {
       "area": "Gráfico de área",
       "candlestick": "Gráfico de Velas"
-    }
+    },
+    "ready": "Video listo",
+    "manifestLoaded": "Manifiesto cargado",
+    "receiving": "Recibiendo stream...",
+    "fatalError": "Error fatal en el stream",
+    "reconnecting": "Reconectando...",
+    "notSupported": "HLS no soportado en este navegador",
+    "urlCopied": "URL copiada al portapapeles",
+    "connected": "Conectado al stream",
+    "copyError": "Error al copiar URL",
+    "pause": "Pausar",
+    "play": "Reproducir",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido",
+    "copyUrl": "Copiar URL del stream",
+    "fullscreen": "Pantalla completa",
+    "exitFullscreen": "Salir de pantalla completa"
   },
   "products": {
     "title": "Herramientas de Análisis Profesional",

@@ -657,7 +657,23 @@
     "chartType": {
       "area": "Area Chart",
       "candlestick": "Candlestick Chart"
-    }
+    },
+    "ready": "Video ready",
+    "manifestLoaded": "Manifest loaded",
+    "receiving": "Receiving stream...",
+    "fatalError": "Fatal stream error",
+    "reconnecting": "Reconnecting...",
+    "notSupported": "HLS not supported in this browser",
+    "urlCopied": "URL copied to clipboard",
+    "connected": "Connected to stream",
+    "copyError": "Error copying URL",
+    "pause": "Pause",
+    "play": "Play",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "copyUrl": "Copy stream URL",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen"
   },
   "products": {
     "title": "Professional Analysis Tools",

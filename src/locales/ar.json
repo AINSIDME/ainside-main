@@ -657,7 +657,23 @@
     "chartType": {
       "area": "رسم بياني مساحي",
       "candlestick": "رسم بياني بالشموع"
-    }
+    },
+    "ready": "الفيديو جاهز",
+    "manifestLoaded": "تم تحميل المانيفست",
+    "receiving": "استقبال البث...",
+    "fatalError": "خطأ فادح في البث",
+    "reconnecting": "إعادة الاتصال...",
+    "notSupported": "HLS غير مدعوم في هذا المتصفح",
+    "urlCopied": "تم نسخ الرابط",
+    "connected": "متصل بالبث",
+    "copyError": "خطأ في نسخ الرابط",
+    "pause": "إيقاف مؤقت",
+    "play": "تشغيل",
+    "mute": "كتم الصوت",
+    "unmute": "إلغاء الكتم",
+    "copyUrl": "نسخ رابط البث",
+    "fullscreen": "ملء الشاشة",
+    "exitFullscreen": "الخروج من ملء الشاشة"
   },
   "products": {
     "title": "أدوات التحليل المهنية",

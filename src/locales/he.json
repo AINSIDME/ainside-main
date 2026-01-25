@@ -657,7 +657,23 @@
     "chartType": {
       "area": "גרף שטח",
       "candlestick": "גרף נרות"
-    }
+    },
+    "ready": "וידאו מוכן",
+    "manifestLoaded": "מניפסט נטען",
+    "receiving": "מקבל stream...",
+    "fatalError": "שגיאה קריטית ב-stream",
+    "reconnecting": "מתחבר מחדש...",
+    "notSupported": "HLS לא נתמך בדפדפן זה",
+    "urlCopied": "URL הועתק ללוח",
+    "connected": "מחובר ל-stream",
+    "copyError": "שגיאה בהעתקת URL",
+    "pause": "השהה",
+    "play": "הפעל",
+    "mute": "השתק",
+    "unmute": "בטל השתקה",
+    "copyUrl": "העתק URL של stream",
+    "fullscreen": "מסך מלא",
+    "exitFullscreen": "צא ממסך מלא"
   },
   "products": {
     "title": "Professional Analysis Tools",
