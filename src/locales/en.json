@@ -955,7 +955,28 @@
     "back": "Back",
     "next": "Next",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "email": "Email"
+  },
+  "otpLogin": {
+    "title": "Login",
+    "emailDescription": "We'll send you a code to your email",
+    "codeDescription": "Enter the code you received",
+    "emailPlaceholder": "your@email.com",
+    "sendCode": "Send code",
+    "sending": "Sending...",
+    "verificationCode": "Verification Code",
+    "login": "Login",
+    "verifying": "Verifying...",
+    "useAnotherEmail": "Use another email",
+    "codeSent": "✅ Code sent",
+    "checkEmail": "Check your email",
+    "sendError": "Could not send code",
+    "codeSentTo": "Code sent to",
+    "expiresIn": "Expires in",
+    "invalidCode": "Invalid code",
+    "noAuthLink": "Authentication link not received",
+    "termsAcceptance": "By continuing, you accept our terms and conditions"
   },
   "services": {
     "badge": "Professional Services",

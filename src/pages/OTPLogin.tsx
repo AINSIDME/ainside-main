@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 // URL y key para Edge Functions (bypass proxy de Vercel)
 const SUPABASE_URL = "https://odlxhgatqyodxdessxts.supabase.co";
@@ -13,6 +14,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Rebuild timestamp: 2026-01-24
 
 export default function OTPLogin() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [step, setStep] = useState<"email" | "code">("email");
@@ -45,8 +47,8 @@ export default function OTPLogin() {
         setStep("code");
         setExpiresIn(data.expiresIn || 600);
         toast({
-          title: "✅ Código enviado",
-          description: `Revisa tu email: ${email}`,
+          title: t('otpLogin.codeSent'),
+          description: `${t('otpLogin.checkEmail')}: ${email}`,
         });
         
         // Countdown timer
@@ -62,8 +64,8 @@ export default function OTPLogin() {
       }
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "No se pudo enviar el código",
+        title: t('common.error'),
+        description: error.message || t('otpLogin.sendError'),
         variant: "destructive",
       });
     } finally {
@@ -99,13 +101,13 @@ export default function OTPLogin() {
         // Redirigir directamente al magic link - Supabase Auth lo manejará
         window.location.href = data.magic_link;
       } else {
-        throw new Error("No se recibió el enlace de autenticación");
+        throw new Error(t('otpLogin.noAuthLink'));
       }
     } catch (error: any) {
       console.error("Error en verificación:", error);
       toast({
-        title: "Error",
-        description: error.message || "Código inválido",
+        title: t('common.error'),
+        description: error.message || t('otpLogin.invalidCode'),
         variant: "destructive",
       });
     } finally {
@@ -124,12 +126,12 @@ export default function OTPLogin() {
       <Card className="w-full max-w-md bg-slate-900/50 border-slate-800 backdrop-blur">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-            🔐 Iniciar Sesión
+            🔐 {t('otpLogin.title')}
           </CardTitle>
           <CardDescription className="text-slate-400">
             {step === "email" 
-              ? "Te enviaremos un código a tu email"
-              : "Ingresa el código que recibiste"}
+              ? t('otpLogin.emailDescription')
+              : t('otpLogin.codeDescription')}
           </CardDescription>
         </CardHeader>
 
@@ -138,13 +140,13 @@ export default function OTPLogin() {
             <form onSubmit={handleRequestCode} className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-300">
-                  Email
+                  {t('common.email')}
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <Input
                     type="email"
-                    placeholder="tu@email.com"
+                    placeholder={t('otpLogin.emailPlaceholder')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -161,11 +163,11 @@ export default function OTPLogin() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enviando...
+                    {t('otpLogin.sending')}
                   </>
                 ) : (
                   <>
-                    Enviar código
+                    {t('otpLogin.sendCode')}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </>
                 )}
@@ -176,18 +178,18 @@ export default function OTPLogin() {
               <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700 mb-4">
                 <div className="flex items-center gap-2 text-sm text-slate-300 mb-2">
                   <CheckCircle2 className="h-4 w-4 text-green-500" />
-                  Código enviado a: <span className="font-medium text-white">{email}</span>
+                  {t('otpLogin.codeSentTo')}: <span className="font-medium text-white">{email}</span>
                 </div>
                 {expiresIn > 0 && (
                   <div className="text-xs text-slate-400">
-                    ⏱️ Expira en: <span className="font-mono text-amber-400">{formatTime(expiresIn)}</span>
+                    ⏱️ {t('otpLogin.expiresIn')}: <span className="font-mono text-amber-400">{formatTime(expiresIn)}</span>
                   </div>
                 )}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-300">
-                  Código de Verificación
+                  {t('otpLogin.verificationCode')}
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
@@ -211,10 +213,10 @@ export default function OTPLogin() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Verificando...
+                    {t('otpLogin.verifying')}
                   </>
                 ) : (
-                  "Iniciar Sesión"
+                  t('otpLogin.login')
                 )}
               </Button>
 
@@ -227,13 +229,13 @@ export default function OTPLogin() {
                 }}
                 className="w-full text-slate-400 hover:text-white"
               >
-                ← Usar otro email
+                ← {t('otpLogin.useAnotherEmail')}
               </Button>
             </form>
           )}
 
           <div className="mt-6 text-center text-xs text-slate-500">
-            Al continuar, aceptas nuestros términos y condiciones
+            {t('otpLogin.termsAcceptance')}
           </div>
         </CardContent>
       </Card>

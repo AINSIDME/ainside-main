@@ -955,7 +955,28 @@
     "back": "رجوع",
     "next": "التالي",
     "yes": "نعم",
-    "no": "لا"
+    "no": "لا",
+    "email": "البريد الإلكتروني"
+  },
+  "otpLogin": {
+    "title": "تسجيل الدخول",
+    "emailDescription": "سنرسل لك رمزًا إلى بريدك الإلكتروني",
+    "codeDescription": "أدخل الرمز الذي تلقيته",
+    "emailPlaceholder": "your@email.com",
+    "sendCode": "إرسال الرمز",
+    "sending": "جارٍ الإرسال...",
+    "verificationCode": "رمز التحقق",
+    "login": "تسجيل الدخول",
+    "verifying": "جارٍ التحقق...",
+    "useAnotherEmail": "استخدام بريد إلكتروني آخر",
+    "codeSent": "✅ تم إرسال الرمز",
+    "checkEmail": "تحقق من بريدك الإلكتروني",
+    "sendError": "تعذر إرسال الرمز",
+    "codeSentTo": "تم إرسال الرمز إلى",
+    "expiresIn": "ينتهي في",
+    "invalidCode": "رمز غير صالح",
+    "noAuthLink": "لم يتم استلام رابط المصادقة",
+    "termsAcceptance": "بالمتابعة، أنت توافق على الشروط والأحكام الخاصة بنا"
   },
   "services": {
     "badge": "خدماتنا",

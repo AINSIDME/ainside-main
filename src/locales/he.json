@@ -955,7 +955,28 @@
     "back": "חזור",
     "next": "הבא",
     "yes": "כן",
-    "no": "לא"
+    "no": "לא",
+    "email": "אימייל"
+  },
+  "otpLogin": {
+    "title": "התחברות",
+    "emailDescription": "נשלח לך קוד לאימייל",
+    "codeDescription": "הזן את הקוד שקיבלת",
+    "emailPlaceholder": "your@email.com",
+    "sendCode": "שלח קוד",
+    "sending": "שולח...",
+    "verificationCode": "קוד אימות",
+    "login": "התחבר",
+    "verifying": "מאמת...",
+    "useAnotherEmail": "השתמש באימייל אחר",
+    "codeSent": "✅ קוד נשלח",
+    "checkEmail": "בדוק את האימייל שלך",
+    "sendError": "לא ניתן לשלוח קוד",
+    "codeSentTo": "קוד נשלח ל",
+    "expiresIn": "פג תוקף ב",
+    "invalidCode": "קוד לא תקין",
+    "noAuthLink": "קישור אימות לא התקבל",
+    "termsAcceptance": "בהמשך, אתה מקבל את התנאים וההגבלות שלנו"
   },
   "services": {
     "badge": "Professional Services",

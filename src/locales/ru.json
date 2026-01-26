@@ -955,7 +955,28 @@
     "back": "Назад",
     "next": "Далее",
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+    "email": "Email"
+  },
+  "otpLogin": {
+    "title": "Вход",
+    "emailDescription": "Мы отправим вам код на email",
+    "codeDescription": "Введите полученный код",
+    "emailPlaceholder": "your@email.com",
+    "sendCode": "Отправить код",
+    "sending": "Отправка...",
+    "verificationCode": "Код подтверждения",
+    "login": "Войти",
+    "verifying": "Проверка...",
+    "useAnotherEmail": "Использовать другой email",
+    "codeSent": "✅ Код отправлен",
+    "checkEmail": "Проверьте свой email",
+    "sendError": "Не удалось отправить код",
+    "codeSentTo": "Код отправлен на",
+    "expiresIn": "Истекает через",
+    "invalidCode": "Неверный код",
+    "noAuthLink": "Ссылка для аутентификации не получена",
+    "termsAcceptance": "Продолжая, вы принимаете наши условия и положения"
   },
   "services": {
     "badge": "Профессиональные Услуги",

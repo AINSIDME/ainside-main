@@ -955,7 +955,28 @@
     "back": "Atrás",
     "next": "Siguiente",
     "yes": "sí",
-    "no": "No"
+    "no": "No",
+    "email": "Email"
+  },
+  "otpLogin": {
+    "title": "Iniciar Sesión",
+    "emailDescription": "Te enviaremos un código a tu email",
+    "codeDescription": "Ingresa el código que recibiste",
+    "emailPlaceholder": "tu@email.com",
+    "sendCode": "Enviar código",
+    "sending": "Enviando...",
+    "verificationCode": "Código de Verificación",
+    "login": "Iniciar Sesión",
+    "verifying": "Verificando...",
+    "useAnotherEmail": "Usar otro email",
+    "codeSent": "✅ Código enviado",
+    "checkEmail": "Revisa tu email",
+    "sendError": "No se pudo enviar el código",
+    "codeSentTo": "Código enviado a",
+    "expiresIn": "Expira en",
+    "invalidCode": "Código inválido",
+    "noAuthLink": "No se recibió el enlace de autenticación",
+    "termsAcceptance": "Al continuar, aceptas nuestros términos y condiciones"
   },
   "services": {
     "badge": "Servicios Profesionales",
