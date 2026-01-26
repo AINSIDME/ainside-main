@@ -84,68 +84,75 @@ const App = () => {
         <BrowserRouter>
           <ScrollToTop />
           <StructuredData />
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main id="main-content" className="flex-1" role="main" aria-label="Main content">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/demo" element={<Demo />} />
-                <Route path="/live-demo" element={<LiveDemo />} />
-                <Route path="/live-chat" element={<LiveDemoMini />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/documentation" element={<Documentation />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/payment-success" element={<PaymentSuccess />} />
-                <Route path="/payment-cancel" element={<PaymentCancel />} />
-                <Route path="/getting-started" element={<GettingStarted />} />
-                <Route path="/algotrading" element={<AlgoTrading />} />
-                {/* Blog routes - multilingual */}
-                <Route path="/blog/guia-completa-trading-algoritmico" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/complete-algorithmic-trading-guide" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/guide-complet-trading-algorithmique" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/dalil-kamil-altadawul-alalgorithmiat" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/دليل-التداول-الخوارزمي-الكامل" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/polnoe-rukovodstvo-algoritmicheskoj-torgovli" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/полное-руководство-алгоритмическому-трейдингу" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/madrich-male-lamischar-algorithmi" element={<BlogAlgoTradingGuide />} />
-                <Route path="/blog/מדריך-מסחר-אלגוריתמי-מלא" element={<BlogAlgoTradingGuide />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/legal" element={<Legal />} />
-                <Route path="/legal/terms" element={<LegalTerms />} />
-                <Route path="/legal/privacy" element={<LegalPrivacy />} />
-                <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
-                <Route path="/status" element={<Status />} />
-                <Route path="/accessibility" element={<Accessibility />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/crypto" element={<Crypto />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<OTPLogin />} />
-                <Route path="/login-oauth" element={<Login />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/mfa" element={<MFA />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/trading" element={<Trading />} />
-                <Route path="/educacion/indicadores" element={<EducacionIndicadores />} />
-                <Route path="/educacion/instrumentos" element={<EducacionInstrumentos />} />
-                <Route path="/educacion/tipos-trading" element={<EducacionTiposTrading />} />
-                <Route path="/educacion/lenguaje" element={<EducacionLenguaje />} />
-                <Route path="/educacion/analisis" element={<EducacionAnalisis />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/logs" element={<AdminLogs />} />
-                <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
-                <Route path="/admin/control" element={<AdminControl />} />
-                <Route path="/admin/users" element={<AdminUsers />} />
-                <Route path="/admin/messages" element={<AdminMessages />} />
-                <Route path="/admin/coupons" element={<AdminCoupons />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-            <ChatWidget />
-          </div>
+          <Routes>
+            {/* Rutas sin Header - pantalla completa */}
+            <Route path="/login" element={<OTPLogin />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            
+            {/* Rutas con Header y layout normal */}
+            <Route path="/*" element={
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main id="main-content" className="flex-1" role="main" aria-label="Main content">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/demo" element={<Demo />} />
+                    <Route path="/live-demo" element={<LiveDemo />} />
+                    <Route path="/live-chat" element={<LiveDemoMini />} />
+                    <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/documentation" element={<Documentation />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/payment-success" element={<PaymentSuccess />} />
+                    <Route path="/payment-cancel" element={<PaymentCancel />} />
+                    <Route path="/getting-started" element={<GettingStarted />} />
+                    <Route path="/algotrading" element={<AlgoTrading />} />
+                    {/* Blog routes - multilingual */}
+                    <Route path="/blog/guia-completa-trading-algoritmico" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/complete-algorithmic-trading-guide" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/guide-complet-trading-algorithmique" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/dalil-kamil-altadawul-alalgorithmiat" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/دليل-التداول-الخوارزمي-الكامل" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/polnoe-rukovodstvo-algoritmicheskoj-torgovli" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/полное-руководство-алгоритмическому-трейдингу" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/madrich-male-lamischar-algorithmi" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/blog/מדריך-מסחר-אלגוריתמי-מלא" element={<BlogAlgoTradingGuide />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/legal" element={<Legal />} />
+                    <Route path="/legal/terms" element={<LegalTerms />} />
+                    <Route path="/legal/privacy" element={<LegalPrivacy />} />
+                    <Route path="/legal/disclaimer" element={<LegalDisclaimer />} />
+                    <Route path="/status" element={<Status />} />
+                    <Route path="/accessibility" element={<Accessibility />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/crypto" element={<Crypto />} />
+                    <Route path="/login-oauth" element={<Login />} />
+                    <Route path="/mfa" element={<MFA />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/trading" element={<Trading />} />
+                    <Route path="/educacion/indicadores" element={<EducacionIndicadores />} />
+                    <Route path="/educacion/instrumentos" element={<EducacionInstrumentos />} />
+                    <Route path="/educacion/tipos-trading" element={<EducacionTiposTrading />} />
+                    <Route path="/educacion/lenguaje" element={<EducacionLenguaje />} />
+                    <Route path="/educacion/analisis" element={<EducacionAnalisis />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/logs" element={<AdminLogs />} />
+                    <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
+                    <Route path="/admin/control" element={<AdminControl />} />
+                    <Route path="/admin/users" element={<AdminUsers />} />
+                    <Route path="/admin/messages" element={<AdminMessages />} />
+                    <Route path="/admin/coupons" element={<AdminCoupons />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+                <ChatWidget />
+              </div>
+            } />
+          </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
