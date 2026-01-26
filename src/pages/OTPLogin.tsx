@@ -226,15 +226,18 @@ export default function OTPLogin() {
               <Button
                 type="submit"
                 disabled={loading || code.length !== 6}
-                className="w-full h-12 bg-black hover:bg-neutral-800 text-white rounded-none font-normal tracking-wide disabled:bg-neutral-300 disabled:text-neutral-500"
+                className="w-full h-14 bg-black hover:bg-neutral-800 text-white rounded-none font-medium tracking-wider text-base disabled:bg-neutral-300 disabled:text-neutral-500 border-2 border-black"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                     {t('otpLogin.verifying')}
                   </>
                 ) : (
-                  t('otpLogin.login')
+                  <>
+                    {t('otpLogin.login')}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </>
                 )}
               </Button>
 
