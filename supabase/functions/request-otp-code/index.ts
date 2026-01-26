@@ -3,92 +3,189 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
 
+// Traducciones multiidioma
+const translations = {
+  es: {
+    subject: "🔐 Tu código de verificación:",
+    title: "AInside",
+    subtitle: "Algotrading Inteligente",
+    yourCode: "Tu código de verificación es:",
+    instructions: "Ingresa este código en la página de inicio de sesión para acceder a tu cuenta.",
+    expiresWarning: "Este código expira en 10 minutos",
+    securityTitle: "🛡️ Medidas de Seguridad:",
+    securityTips: [
+      "No compartas este código con nadie",
+      "AInside nunca te pedirá este código por teléfono o email",
+      "Si no solicitaste este código, ignora este email"
+    ],
+    emailSentTo: "Email enviado a:",
+    support: "Si tienes problemas, contacta a",
+    footer: "© 2026 AInside. Todos los derechos reservados."
+  },
+  en: {
+    subject: "🔐 Your verification code:",
+    title: "AInside",
+    subtitle: "Intelligent Algotrading",
+    yourCode: "Your verification code is:",
+    instructions: "Enter this code on the login page to access your account.",
+    expiresWarning: "This code expires in 10 minutes",
+    securityTitle: "🛡️ Security Measures:",
+    securityTips: [
+      "Do not share this code with anyone",
+      "AInside will never ask for this code by phone or email",
+      "If you didn't request this code, ignore this email"
+    ],
+    emailSentTo: "Email sent to:",
+    support: "If you have problems, contact",
+    footer: "© 2026 AInside. All rights reserved."
+  },
+  fr: {
+    subject: "🔐 Votre code de vérification:",
+    title: "AInside",
+    subtitle: "Algotrading Intelligent",
+    yourCode: "Votre code de vérification est:",
+    instructions: "Entrez ce code sur la page de connexion pour accéder à votre compte.",
+    expiresWarning: "Ce code expire dans 10 minutes",
+    securityTitle: "🛡️ Mesures de Sécurité:",
+    securityTips: [
+      "Ne partagez pas ce code avec qui que ce soit",
+      "AInside ne vous demandera jamais ce code par téléphone ou email",
+      "Si vous n'avez pas demandé ce code, ignorez cet email"
+    ],
+    emailSentTo: "Email envoyé à:",
+    support: "Si vous avez des problèmes, contactez",
+    footer: "© 2026 AInside. Tous droits réservés."
+  },
+  he: {
+    subject: "🔐 קוד האימות שלך:",
+    title: "AInside",
+    subtitle: "אלגו-טריידינג חכם",
+    yourCode: "קוד האימות שלך הוא:",
+    instructions: "הזן קוד זה בעמוד ההתחברות כדי לגשת לחשבונך.",
+    expiresWarning: "קוד זה פג תוקף בעוד 10 דקות",
+    securityTitle: "🛡️ אמצעי אבטחה:",
+    securityTips: [
+      "אל תשתף קוד זה עם אף אחד",
+      "AInside לעולם לא תבקש ממך קוד זה בטלפון או באימייל",
+      "אם לא ביקשת קוד זה, התעלם מאימייל זה"
+    ],
+    emailSentTo: "אימייל נשלח אל:",
+    support: "אם יש לך בעיות, צור קשר עם",
+    footer: "© 2026 AInside. כל הזכויות שמורות."
+  },
+  ar: {
+    subject: "🔐 رمز التحقق الخاص بك:",
+    title: "AInside",
+    subtitle: "تداول خوارزمي ذكي",
+    yourCode: "رمز التحقق الخاص بك هو:",
+    instructions: "أدخل هذا الرمز في صفحة تسجيل الدخول للوصول إلى حسابك.",
+    expiresWarning: "ينتهي صلاحية هذا الرمز خلال 10 دقائق",
+    securityTitle: "🛡️ إجراءات الأمان:",
+    securityTips: [
+      "لا تشارك هذا الرمز مع أي شخص",
+      "AInside لن تطلب منك هذا الرمز عبر الهاتف أو البريد الإلكتروني",
+      "إذا لم تطلب هذا الرمز، تجاهل هذا البريد الإلكتروني"
+    ],
+    emailSentTo: "تم إرسال البريد الإلكتروني إلى:",
+    support: "إذا كان لديك مشاكل، اتصل بـ",
+    footer: "© 2026 AInside. جميع الحقوق محفوظة."
+  },
+  ru: {
+    subject: "🔐 Ваш код подтверждения:",
+    title: "AInside",
+    subtitle: "Интеллектуальный Алготрейдинг",
+    yourCode: "Ваш код подтверждения:",
+    instructions: "Введите этот код на странице входа, чтобы получить доступ к вашей учетной записи.",
+    expiresWarning: "Этот код истекает через 10 минут",
+    securityTitle: "🛡️ Меры Безопасности:",
+    securityTips: [
+      "Не делитесь этим кодом ни с кем",
+      "AInside никогда не попросит у вас этот код по телефону или электронной почте",
+      "Если вы не запрашивали этот код, проигнорируйте это письмо"
+    ],
+    emailSentTo: "Электронное письмо отправлено:",
+    support: "Если у вас есть проблемы, свяжитесь с",
+    footer: "© 2026 AInside. Все права защищены."
+  }
+};
+
 // Función para generar código OTP de 6 dígitos
 function generateOTP(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// Función para generar HTML del email
-function generateEmailHTML(code: string, email: string): string {
+// Función para generar HTML del email con diseño minimalista elegante
+function generateEmailHTML(code: string, email: string, lang: string = "es"): string {
+  const t = translations[lang as keyof typeof translations] || translations.es;
+  const t = translations[lang as keyof typeof translations] || translations.es;
+  
   return `
 <!DOCTYPE html>
-<html>
+<html lang="${lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Código de Verificación - AInside</title>
+  <title>${t.subject} ${code}</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #0f172a;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse;">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
     <tr>
-      <td align="center" style="padding: 40px 0;">
-        <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+      <td style="padding: 40px 20px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
           
           <!-- Header -->
           <tr>
-            <td style="padding: 40px 40px 20px; text-align: center;">
-              <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
-                🔐 AInside
-              </h1>
-              <p style="margin: 10px 0 0; font-size: 14px; color: #94a3b8;">
-                Algotrading Inteligente
+            <td style="background: #f8fafc; padding: 50px 40px 40px; border-radius: 16px 16px 0 0; text-align: center; border-bottom: 1px solid #e2e8f0;">
+              <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 200px; height: auto; margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto;" />
+              <h1 style="margin: 0; color: #1e293b; font-size: 26px; font-weight: 600; letter-spacing: -0.5px;">${t.title}</h1>
+              <p style="margin: 12px 0 0; color: #64748b; font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px;">
+                ${t.subtitle}
               </p>
             </td>
           </tr>
 
           <!-- Código OTP -->
           <tr>
-            <td style="padding: 30px 40px; text-align: center;">
-              <div style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); padding: 30px; border-radius: 12px; margin: 20px 0;">
-                <p style="margin: 0 0 15px; font-size: 16px; color: #e0e7ff; font-weight: 500;">
-                  Tu código de verificación es:
-                </p>
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.2);">
-                  <span style="font-size: 42px; font-weight: 700; color: #ffffff; letter-spacing: 8px; font-family: 'Courier New', monospace;">
+            <td style="padding: 50px 40px;">
+              <p style="margin: 0 0 25px; color: #475569; font-size: 15px; line-height: 1.8; text-align: center;">
+                ${t.yourCode}
+              </p>
+              
+              <!-- Código en caja elegante -->
+              <div style="background-color: #f8fafc; border-left: 3px solid #334155; padding: 35px; margin: 30px 0; border-radius: 6px; text-align: center;">
+                <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 25px; border-radius: 12px; border: 1px solid #334155; display: inline-block;">
+                  <span style="font-size: 48px; font-weight: 700; color: #ffffff; letter-spacing: 12px; font-family: 'Courier New', monospace;">
                     ${code}
                   </span>
                 </div>
               </div>
               
-              <p style="margin: 25px 0 10px; font-size: 14px; color: #cbd5e1; line-height: 1.6;">
-                Ingresa este código en la página de inicio de sesión para acceder a tu cuenta.
+              <p style="margin: 25px 0; color: #64748b; font-size: 14px; line-height: 1.7; text-align: center;">
+                ${t.instructions}
               </p>
               
-              <div style="background: #1e293b; padding: 20px; border-radius: 8px; margin-top: 25px; border-left: 4px solid #f59e0b;">
-                <p style="margin: 0; font-size: 13px; color: #fbbf24; line-height: 1.6;">
-                  ⏱️ <strong>Este código expira en 10 minutos</strong>
+              <!-- Advertencia de expiración -->
+              <div style="background-color: #fef3c7; border-left: 3px solid #f59e0b; padding: 18px; margin: 25px 0; border-radius: 6px;">
+                <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.7;">
+                  <strong style="font-weight: 600;">⏱️ ${t.expiresWarning}</strong>
                 </p>
               </div>
-            </td>
-          </tr>
 
-          <!-- Información de seguridad -->
-          <tr>
-            <td style="padding: 20px 40px 40px;">
-              <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
-                <p style="margin: 0 0 10px; font-size: 13px; color: #fca5a5; font-weight: 600;">
-                  🛡️ Medidas de Seguridad:
-                </p>
-                <ul style="margin: 0; padding-left: 20px; font-size: 12px; color: #fecaca; line-height: 1.8;">
-                  <li>No compartas este código con nadie</li>
-                  <li>AInside nunca te pedirá este código por teléfono o email</li>
-                  <li>Si no solicitaste este código, ignora este email</li>
-                </ul>
+              <!-- Información de seguridad -->
+              <div style="background-color: #f8fafc; border-left: 3px solid #334155; padding: 25px; margin: 30px 0; border-radius: 6px;">
+                <h3 style="margin: 0 0 18px; color: #1e293b; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">${t.securityTitle}</h3>
+                ${t.securityTips.map(tip => `<p style="margin: 10px 0; color: #64748b; font-size: 14px; line-height: 1.7;">• ${tip}</p>`).join('')}
               </div>
               
-              <p style="margin: 25px 0 0; font-size: 12px; color: #64748b; text-align: center; line-height: 1.6;">
-                Email enviado a: <strong style="color: #94a3b8;">${email}</strong><br>
-                Si tienes problemas, contacta a soporte@ainside.me
+              <!-- Footer info -->
+              <p style="margin: 30px 0 10px; color: #64748b; font-size: 14px; line-height: 1.7; text-align: center;">
+                ${t.emailSentTo} <strong style="color: #1e293b;">${email}</strong><br>
+                ${t.support} <a href="mailto:support@ainside.me" style="color: #0369a1; text-decoration: none; font-weight: 500;">support@ainside.me</a>
               </p>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="padding: 30px 40px; background: #0f172a; text-align: center; border-top: 1px solid #1e293b;">
-              <p style="margin: 0; font-size: 11px; color: #475569; line-height: 1.6;">
-                © 2026 AInside. Todos los derechos reservados.<br>
-                <a href="https://ainside.me" style="color: #3b82f6; text-decoration: none;">ainside.me</a>
+              
+              <p style="margin: 20px 0 0; color: #94a3b8; font-size: 12px; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 25px; text-align: center;">
+                ${t.footer}<br>
+                <a href="https://ainside.me" style="color: #0369a1; text-decoration: none; font-weight: 500;">ainside.me</a>
               </p>
             </td>
           </tr>
@@ -115,7 +212,7 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { email } = await req.json();
+    const { email, lang } = await req.json();
 
     if (!email || !email.includes("@")) {
       return new Response(
@@ -123,6 +220,10 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    // Validar y establecer idioma (por defecto español)
+    const supportedLangs = ['es', 'en', 'fr', 'he', 'ar', 'ru'];
+    const userLang = lang && supportedLangs.includes(lang) ? lang : 'es';
 
     // Generar código OTP
     const code = generateOTP();
@@ -152,6 +253,9 @@ serve(async (req) => {
       throw new Error("Servicio de email no configurado");
     }
 
+    // Obtener traducciones para el subject
+    const t = translations[userLang as keyof typeof translations] || translations.es;
+
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -161,8 +265,8 @@ serve(async (req) => {
       body: JSON.stringify({
         from: "AInside <noreply@ainside.me>",
         to: [email],
-        subject: `🔐 Tu código de verificación: ${code}`,
-        html: generateEmailHTML(code, email),
+        subject: `${t.subject} ${code}`,
+        html: generateEmailHTML(code, email, userLang),
       }),
     });
 

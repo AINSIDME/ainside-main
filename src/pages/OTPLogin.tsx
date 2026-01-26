@@ -14,7 +14,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Rebuild timestamp: 2026-01-24
 
 export default function OTPLogin() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [step, setStep] = useState<"email" | "code">("email");
@@ -34,7 +34,10 @@ export default function OTPLogin() {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ 
+          email,
+          lang: i18n.language // Enviar el idioma actual del usuario
+        }),
       });
 
       const data = await response.json();
