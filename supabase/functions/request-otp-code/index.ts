@@ -6,105 +6,105 @@ import { getCorsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
 // Traducciones multiidioma
 const translations = {
   es: {
-    subject: "🔐 Tu código de verificación:",
+    subject: "Código de Autenticación",
     title: "AInside",
-    subtitle: "Algotrading Inteligente",
-    yourCode: "Tu código de verificación es:",
-    instructions: "Ingresa este código en la página de inicio de sesión para acceder a tu cuenta.",
-    expiresWarning: "Este código expira en 10 minutos",
-    securityTitle: "🛡️ Medidas de Seguridad:",
+    subtitle: "Institutional Algorithmic Trading",
+    yourCode: "Su código de verificación:",
+    instructions: "Ingrese este código en la plataforma de autenticación para acceder a su cuenta institucional.",
+    expiresWarning: "Validez: 10 minutos",
+    securityTitle: "AVISO DE SEGURIDAD",
     securityTips: [
-      "No compartas este código con nadie",
-      "AInside nunca te pedirá este código por teléfono o email",
-      "Si no solicitaste este código, ignora este email"
+      "Este código es estrictamente confidencial y de uso personal",
+      "Nuestro equipo nunca solicitará este código por ningún medio",
+      "Si no ha solicitado este código, ignore este mensaje y notifique al departamento de seguridad"
     ],
-    emailSentTo: "Email enviado a:",
-    support: "Si tienes problemas, contacta a",
+    emailSentTo: "Destinatario:",
+    support: "Departamento de Soporte",
     footer: "© 2026 AInside. Todos los derechos reservados."
   },
   en: {
-    subject: "🔐 Your verification code:",
+    subject: "Authentication Code",
     title: "AInside",
-    subtitle: "Intelligent Algotrading",
-    yourCode: "Your verification code is:",
-    instructions: "Enter this code on the login page to access your account.",
-    expiresWarning: "This code expires in 10 minutes",
-    securityTitle: "🛡️ Security Measures:",
+    subtitle: "Institutional Algorithmic Trading",
+    yourCode: "Your verification code:",
+    instructions: "Enter this code on the authentication platform to access your institutional account.",
+    expiresWarning: "Validity: 10 minutes",
+    securityTitle: "SECURITY NOTICE",
     securityTips: [
-      "Do not share this code with anyone",
-      "AInside will never ask for this code by phone or email",
-      "If you didn't request this code, ignore this email"
+      "This code is strictly confidential and for personal use only",
+      "Our team will never request this code through any channel",
+      "If you did not request this code, please ignore this message and notify the security department"
     ],
-    emailSentTo: "Email sent to:",
-    support: "If you have problems, contact",
+    emailSentTo: "Recipient:",
+    support: "Support Department",
     footer: "© 2026 AInside. All rights reserved."
   },
   fr: {
-    subject: "🔐 Votre code de vérification:",
+    subject: "Code d'Authentification",
     title: "AInside",
-    subtitle: "Algotrading Intelligent",
-    yourCode: "Votre code de vérification est:",
-    instructions: "Entrez ce code sur la page de connexion pour accéder à votre compte.",
-    expiresWarning: "Ce code expire dans 10 minutes",
-    securityTitle: "🛡️ Mesures de Sécurité:",
+    subtitle: "Institutional Algorithmic Trading",
+    yourCode: "Votre code de vérification:",
+    instructions: "Veuillez saisir ce code sur la plateforme d'authentification pour accéder à votre compte institutionnel.",
+    expiresWarning: "Validité: 10 minutes",
+    securityTitle: "AVIS DE SÉCURITÉ",
     securityTips: [
-      "Ne partagez pas ce code avec qui que ce soit",
-      "AInside ne vous demandera jamais ce code par téléphone ou email",
-      "Si vous n'avez pas demandé ce code, ignorez cet email"
+      "Ce code est strictement confidentiel et à usage personnel uniquement",
+      "Notre équipe ne demandera jamais ce code par aucun moyen",
+      "Si vous n'avez pas demandé ce code, veuillez ignorer ce message et notifier le département de sécurité"
     ],
-    emailSentTo: "Email envoyé à:",
-    support: "Si vous avez des problèmes, contactez",
+    emailSentTo: "Destinataire:",
+    support: "Département Support",
     footer: "© 2026 AInside. Tous droits réservés."
   },
   he: {
-    subject: "🔐 קוד האימות שלך:",
+    subject: "קוד אימות",
     title: "AInside",
-    subtitle: "אלגו-טריידינג חכם",
-    yourCode: "קוד האימות שלך הוא:",
-    instructions: "הזן קוד זה בעמוד ההתחברות כדי לגשת לחשבונך.",
-    expiresWarning: "קוד זה פג תוקף בעוד 10 דקות",
-    securityTitle: "🛡️ אמצעי אבטחה:",
+    subtitle: "Institutional Algorithmic Trading",
+    yourCode: "קוד האימות שלך:",
+    instructions: "הזן קוד זה בפלטפורמת האימות כדי לגשת לחשבון המוסדי שלך.",
+    expiresWarning: "תוקף: 10 דקות",
+    securityTitle: "הודעת אבטחה",
     securityTips: [
-      "אל תשתף קוד זה עם אף אחד",
-      "AInside לעולם לא תבקש ממך קוד זה בטלפון או באימייל",
-      "אם לא ביקשת קוד זה, התעלם מאימייל זה"
+      "קוד זה הינו סודי לחלוטין ולשימוש אישי בלבד",
+      "הצוות שלנו לעולם לא יבקש קוד זה בשום אמצעי",
+      "אם לא ביקשת קוד זה, אנא התעלם מהודעה זו והודע למחלקת האבטחה"
     ],
-    emailSentTo: "אימייל נשלח אל:",
-    support: "אם יש לך בעיות, צור קשר עם",
+    emailSentTo: "נמען:",
+    support: "מחלקת תמיכה",
     footer: "© 2026 AInside. כל הזכויות שמורות."
   },
   ar: {
-    subject: "🔐 رمز التحقق الخاص بك:",
+    subject: "رمز المصادقة",
     title: "AInside",
-    subtitle: "تداول خوارزمي ذكي",
-    yourCode: "رمز التحقق الخاص بك هو:",
-    instructions: "أدخل هذا الرمز في صفحة تسجيل الدخول للوصول إلى حسابك.",
-    expiresWarning: "ينتهي صلاحية هذا الرمز خلال 10 دقائق",
-    securityTitle: "🛡️ إجراءات الأمان:",
+    subtitle: "Institutional Algorithmic Trading",
+    yourCode: "رمز التحقق الخاص بك:",
+    instructions: "أدخل هذا الرمز في منصة المصادقة للوصول إلى حسابك المؤسسي.",
+    expiresWarning: "الصلاحية: 10 دقائق",
+    securityTitle: "إشعار أمني",
     securityTips: [
-      "لا تشارك هذا الرمز مع أي شخص",
-      "AInside لن تطلب منك هذا الرمز عبر الهاتف أو البريد الإلكتروني",
-      "إذا لم تطلب هذا الرمز، تجاهل هذا البريد الإلكتروني"
+      "هذا الرمز سري تمامًا وللاستخدام الشخصي فقط",
+      "فريقنا لن يطلب هذا الرمز أبدًا عبر أي قناة",
+      "إذا لم تطلب هذا الرمز، يرجى تجاهل هذه الرسالة وإخطار قسم الأمن"
     ],
-    emailSentTo: "تم إرسال البريد الإلكتروني إلى:",
-    support: "إذا كان لديك مشاكل، اتصل بـ",
+    emailSentTo: "المستلم:",
+    support: "قسم الدعم",
     footer: "© 2026 AInside. جميع الحقوق محفوظة."
   },
   ru: {
-    subject: "🔐 Ваш код подтверждения:",
+    subject: "Код Аутентификации",
     title: "AInside",
-    subtitle: "Интеллектуальный Алготрейдинг",
+    subtitle: "Institutional Algorithmic Trading",
     yourCode: "Ваш код подтверждения:",
-    instructions: "Введите этот код на странице входа, чтобы получить доступ к вашей учетной записи.",
-    expiresWarning: "Этот код истекает через 10 минут",
-    securityTitle: "🛡️ Меры Безопасности:",
+    instructions: "Введите этот код на платформе аутентификации для доступа к вашему институциональному счету.",
+    expiresWarning: "Действителен: 10 минут",
+    securityTitle: "УВЕДОМЛЕНИЕ О БЕЗОПАСНОСТИ",
     securityTips: [
-      "Не делитесь этим кодом ни с кем",
-      "AInside никогда не попросит у вас этот код по телефону или электронной почте",
-      "Если вы не запрашивали этот код, проигнорируйте это письмо"
+      "Этот код строго конфиденциален и предназначен только для личного использования",
+      "Наша команда никогда не запросит этот код каким-либо способом",
+      "Если вы не запрашивали этот код, пожалуйста, проигнорируйте это сообщение и уведомите отдел безопасности"
     ],
-    emailSentTo: "Электронное письмо отправлено:",
-    support: "Если у вас есть проблемы, свяжитесь с",
+    emailSentTo: "Получатель:",
+    support: "Отдел Поддержки",
     footer: "© 2026 AInside. Все права защищены."
   }
 };
