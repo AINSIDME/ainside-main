@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Lock, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Shield, ArrowRight, Loader2, CheckCircle2, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -125,49 +125,53 @@ export default function OTPLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
-      {/* Logo en la esquina superior izquierda */}
-      <div className="fixed top-8 left-8">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+      {/* Logo elegante */}
+      <div className="fixed top-10 left-10">
         <img 
           src="https://ainside.me/brand/logo-master.png" 
           alt="AInside" 
-          className="h-8 opacity-60"
+          className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
         />
       </div>
 
-      <Card className="w-full max-w-md bg-white border-neutral-200 shadow-sm">
-        <CardHeader className="space-y-4 pb-8 pt-12">
-          <div className="text-center space-y-2">
-            <CardTitle className="text-2xl font-light text-black tracking-tight">
+      <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+        <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
+              <Shield className="w-8 h-8 text-neutral-800" />
+            </div>
+            <CardTitle className="text-3xl font-light text-black tracking-tight">
               {t('otpLogin.title')}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.2em] font-normal">
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em] font-normal">
               Institutional Algorithmic Trading
             </p>
           </div>
-          <CardDescription className="text-center text-sm text-neutral-600 font-light">
+          <CardDescription className="text-center text-sm text-neutral-600 font-light leading-relaxed">
             {step === "email" 
               ? t('otpLogin.emailDescription')
               : t('otpLogin.codeDescription')}
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="pb-12">
+        <CardContent className="pb-16 px-12">
           {step === "email" ? (
-            <form onSubmit={handleRequestCode} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-medium text-neutral-700 uppercase tracking-wider">
+            <form onSubmit={handleRequestCode} className="space-y-8">
+              <div className="space-y-3">
+                <label className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5" />
                   {t('common.email')}
                 </label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-4 h-4 w-4 text-neutral-400" />
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-neutral-200 to-neutral-100 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Input
                     type="email"
                     placeholder={t('otpLogin.emailPlaceholder')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="pl-12 h-14 bg-white border-neutral-300 text-black focus:border-black focus:ring-1 focus:ring-black rounded-none"
+                    className="relative h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300"
                   />
                 </div>
               </div>
@@ -175,50 +179,61 @@ export default function OTPLogin() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 bg-black hover:bg-neutral-800 text-white rounded-none font-normal tracking-wide"
+                className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wide text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                     {t('otpLogin.sending')}
                   </>
                 ) : (
                   <>
                     {t('otpLogin.sendCode')}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-3 h-5 w-5" />
                   </>
                 )}
               </Button>
             </form>
           ) : (
-            <form onSubmit={handleVerifyCode} className="space-y-6">
-              <div className="bg-neutral-50 border border-neutral-200 p-4 mb-6">
-                <div className="flex items-center gap-2 text-sm text-neutral-700 mb-2">
-                  <CheckCircle2 className="h-4 w-4 text-black" />
-                  <span className="text-xs">{t('otpLogin.codeSentTo')}:</span>
-                  <span className="font-medium text-black">{email}</span>
+            <form onSubmit={handleVerifyCode} className="space-y-8">
+              <div className="bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 p-6 rounded-xl mb-8">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                    <CheckCircle2 className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <p className="text-xs text-neutral-500 uppercase tracking-wider mb-1">
+                      {t('otpLogin.codeSentTo')}
+                    </p>
+                    <p className="text-sm font-medium text-black">{email}</p>
+                  </div>
                 </div>
                 {expiresIn > 0 && (
-                  <div className="text-xs text-neutral-500 mt-2">
-                    {t('otpLogin.expiresIn')}: <span className="font-mono text-black">{formatTime(expiresIn)}</span>
+                  <div className="flex items-center gap-2 pt-3 border-t border-neutral-200">
+                    <div className="w-2 h-2 rounded-full bg-black animate-pulse" />
+                    <span className="text-xs text-neutral-600">
+                      {t('otpLogin.expiresIn')}: 
+                      <span className="font-mono font-medium text-black ml-2">{formatTime(expiresIn)}</span>
+                    </span>
                   </div>
                 )}
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-medium text-neutral-700 uppercase tracking-wider">
+              <div className="space-y-3">
+                <label className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+                  <KeyRound className="w-3.5 h-3.5" />
                   {t('otpLogin.verificationCode')}
                 </label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-5 h-4 w-4 text-neutral-400" />
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-neutral-200 to-neutral-100 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Input
                     type="text"
-                    placeholder="000000"
+                    placeholder="• • • • • •"
                     value={code}
                     onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     required
                     maxLength={6}
-                    className="pl-12 h-16 bg-white border-2 border-neutral-300 focus:border-black focus:ring-0 text-black text-center text-3xl font-mono tracking-[0.5em] rounded-none"
+                    className="relative h-20 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-center text-4xl font-mono tracking-[0.5em] rounded-lg transition-all duration-300"
                   />
                 </div>
               </div>
@@ -226,17 +241,18 @@ export default function OTPLogin() {
               <Button
                 type="submit"
                 disabled={loading || code.length !== 6}
-                className="w-full h-14 bg-black hover:bg-neutral-800 text-white rounded-none font-medium tracking-wider text-base disabled:bg-neutral-300 disabled:text-neutral-500 border-2 border-black"
+                className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                     {t('otpLogin.verifying')}
                   </>
                 ) : (
                   <>
+                    <Shield className="mr-3 h-5 w-5" />
                     {t('otpLogin.login')}
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-3 h-5 w-5" />
                   </>
                 )}
               </Button>
@@ -248,14 +264,14 @@ export default function OTPLogin() {
                   setStep("email");
                   setCode("");
                 }}
-                className="w-full text-neutral-500 hover:text-black hover:bg-transparent font-light"
+                className="w-full h-12 text-neutral-500 hover:text-black hover:bg-neutral-100 font-light rounded-lg transition-all duration-300"
               >
                 ← {t('otpLogin.useAnotherEmail')}
               </Button>
             </form>
           )}
 
-          <div className="mt-8 text-center text-xs text-neutral-400 font-light">
+          <div className="mt-10 pt-8 border-t border-neutral-200 text-center text-xs text-neutral-400 font-light leading-relaxed">
             {t('otpLogin.termsAcceptance')}
           </div>
         </CardContent>
