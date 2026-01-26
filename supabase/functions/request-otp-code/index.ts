@@ -127,18 +127,18 @@ function generateEmailHTML(code: string, email: string, lang: string = "es"): st
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${t.subject} ${code}</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
     <tr>
       <td style="padding: 40px 20px;">
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
           
           <!-- Header -->
           <tr>
-            <td style="background: #f8fafc; padding: 50px 40px 40px; border-radius: 16px 16px 0 0; text-align: center; border-bottom: 1px solid #e2e8f0;">
-              <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 200px; height: auto; margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto;" />
-              <h1 style="margin: 0; color: #1e293b; font-size: 26px; font-weight: 600; letter-spacing: -0.5px;">${t.title}</h1>
-              <p style="margin: 12px 0 0; color: #64748b; font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px;">
+            <td style="background: #ffffff; padding: 50px 40px 30px; text-align: center; border-bottom: 1px solid #e5e5e5;">
+              <img src="https://ainside.me/brand/logo-master.png" alt="AInside Logo" style="width: 180px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
+              <h1 style="margin: 0; color: #000000; font-size: 22px; font-weight: 500; letter-spacing: -0.3px;">${t.title}</h1>
+              <p style="margin: 8px 0 0; color: #737373; font-size: 13px; font-weight: 400; text-transform: uppercase; letter-spacing: 2px;">
                 ${t.subtitle}
               </p>
             </td>
@@ -147,45 +147,45 @@ function generateEmailHTML(code: string, email: string, lang: string = "es"): st
           <!-- Código OTP -->
           <tr>
             <td style="padding: 50px 40px;">
-              <p style="margin: 0 0 25px; color: #475569; font-size: 15px; line-height: 1.8; text-align: center;">
+              <p style="margin: 0 0 30px; color: #404040; font-size: 15px; line-height: 1.6; text-align: center; font-weight: 400;">
                 ${t.yourCode}
               </p>
               
-              <!-- Código en caja elegante -->
-              <div style="background-color: #f8fafc; border-left: 3px solid #334155; padding: 35px; margin: 30px 0; border-radius: 6px; text-align: center;">
-                <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 25px; border-radius: 12px; border: 1px solid #334155; display: inline-block;">
-                  <span style="font-size: 48px; font-weight: 700; color: #ffffff; letter-spacing: 12px; font-family: 'Courier New', monospace;">
-                    ${code}
-                  </span>
-                </div>
+              <!-- Código en caja minimalista -->
+              <div style="background-color: #fafafa; border: 1px solid #e5e5e5; padding: 40px; margin: 30px 0; text-align: center;">
+                <span style="font-size: 42px; font-weight: 600; color: #000000; letter-spacing: 14px; font-family: 'Courier New', monospace; display: inline-block; padding: 15px 25px; background: #ffffff; border: 2px solid #000000;">
+                  ${code}
+                </span>
               </div>
               
-              <p style="margin: 25px 0; color: #64748b; font-size: 14px; line-height: 1.7; text-align: center;">
+              <p style="margin: 30px 0; color: #737373; font-size: 14px; line-height: 1.6; text-align: center;">
                 ${t.instructions}
               </p>
               
               <!-- Advertencia de expiración -->
-              <div style="background-color: #fef3c7; border-left: 3px solid #f59e0b; padding: 18px; margin: 25px 0; border-radius: 6px;">
-                <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.7;">
-                  <strong style="font-weight: 600;">⏱️ ${t.expiresWarning}</strong>
+              <div style="background-color: #fafafa; border-left: 2px solid #000000; padding: 20px; margin: 30px 0;">
+                <p style="margin: 0; color: #404040; font-size: 13px; line-height: 1.6; font-weight: 500;">
+                  ${t.expiresWarning}
                 </p>
               </div>
 
               <!-- Información de seguridad -->
-              <div style="background-color: #f8fafc; border-left: 3px solid #334155; padding: 25px; margin: 30px 0; border-radius: 6px;">
-                <h3 style="margin: 0 0 18px; color: #1e293b; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">${t.securityTitle}</h3>
-                ${t.securityTips.map(tip => `<p style="margin: 10px 0; color: #64748b; font-size: 14px; line-height: 1.7;">• ${tip}</p>`).join('')}
+              <div style="background-color: #ffffff; border: 1px solid #e5e5e5; padding: 25px; margin: 30px 0;">
+                <h3 style="margin: 0 0 15px; color: #000000; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">${t.securityTitle}</h3>
+                ${t.securityTips.map(tip => `<p style="margin: 8px 0; color: #737373; font-size: 13px; line-height: 1.6;">• ${tip}</p>`).join('')}
               </div>
               
               <!-- Footer info -->
-              <p style="margin: 30px 0 10px; color: #64748b; font-size: 14px; line-height: 1.7; text-align: center;">
-                ${t.emailSentTo} <strong style="color: #1e293b;">${email}</strong><br>
-                ${t.support} <a href="mailto:support@ainside.me" style="color: #0369a1; text-decoration: none; font-weight: 500;">support@ainside.me</a>
+              <p style="margin: 35px 0 0; color: #737373; font-size: 13px; line-height: 1.6; text-align: center;">
+                ${t.emailSentTo} <strong style="color: #000000;">${email}</strong>
+              </p>
+              <p style="margin: 8px 0 0; color: #737373; font-size: 13px; line-height: 1.6; text-align: center;">
+                ${t.support} <a href="mailto:support@ainside.me" style="color: #000000; text-decoration: underline; font-weight: 400;">support@ainside.me</a>
               </p>
               
-              <p style="margin: 20px 0 0; color: #94a3b8; font-size: 12px; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 25px; text-align: center;">
+              <p style="margin: 35px 0 0; color: #a3a3a3; font-size: 11px; line-height: 1.6; border-top: 1px solid #e5e5e5; padding-top: 25px; text-align: center;">
                 ${t.footer}<br>
-                <a href="https://ainside.me" style="color: #0369a1; text-decoration: none; font-weight: 500;">ainside.me</a>
+                <a href="https://ainside.me" style="color: #737373; text-decoration: none; font-weight: 400;">ainside.me</a>
               </p>
             </td>
           </tr>
