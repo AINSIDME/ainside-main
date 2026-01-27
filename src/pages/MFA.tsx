@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, ShieldCheck } from "lucide-react";
+import { Loader2, Shield, ArrowRight, KeyRound, CheckCircle2, QrCode } from "lucide-react";
 
 type LocationState = {
   redirectTo?: string;
@@ -276,108 +276,156 @@ const MFA = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="text-white flex items-center gap-2">
-          <Loader2 className="h-5 w-5 animate-spin" />
-          {t("mfa.loading", { defaultValue: "Cargando..." })}
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+          <CardContent className="p-16 text-center">
+            <Loader2 className="w-12 h-12 text-neutral-800 mx-auto mb-6 animate-spin" />
+            <h2 className="text-2xl font-light text-black mb-3 tracking-tight">{t("mfa.loading", { defaultValue: "Cargando..." })}</h2>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Verificación de Seguridad</p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   if (needsLogin) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6 flex items-center justify-center">
-        <div className="container mx-auto max-w-md">
-          <Card className="bg-slate-900/50 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5" />
-                {t("mfa.loginRequired.title", { defaultValue: "Iniciar sesión requerido" })}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-slate-300 text-sm">
-                {t("mfa.loginRequired.message", {
-                  defaultValue:
-                    "Para configurar o verificar tu 2FA, primero tenés que iniciar sesión con tu cuenta.",
-                })}
-              </p>
-              <Button
-                className="w-full"
-                onClick={() => navigate("/login", { state: { redirectTo: "/mfa" } })}
-              >
-                {t("mfa.loginRequired.cta", { defaultValue: "Ir a iniciar sesión" })}
-              </Button>
-              <Button variant="outline" className="w-full" onClick={() => navigate("/")}
-              >
-                {t("mfa.back", { defaultValue: "Volver" })}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+          <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
+              <Shield className="w-8 h-8 text-neutral-800" />
+            </div>
+            <CardTitle className="text-3xl font-light text-black tracking-tight">
+              {t("mfa.loginRequired.title", { defaultValue: "Iniciar sesión requerido" })}
+            </CardTitle>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Institutional Access Control</p>
+            <CardDescription className="text-neutral-600 text-base font-light pt-4">
+              {t("mfa.loginRequired.message", {
+                defaultValue:
+                  "Para configurar o verificar tu 2FA, primero tenés que iniciar sesión con tu cuenta.",
+              })}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pb-16 px-12 space-y-4">
+            <Button
+              className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300"
+              onClick={() => navigate("/login", { state: { redirectTo: "/mfa" } })}
+            >
+              <Shield className="mr-3 h-5 w-5" />
+              {t("mfa.loginRequired.cta", { defaultValue: "Ir a iniciar sesión" })}
+              <ArrowRight className="ml-3 h-5 w-5" />
+            </Button>
+            <Button 
+              variant="outline" 
+              className="w-full h-14 border-2 border-neutral-200 hover:border-neutral-300 text-neutral-700 hover:text-black rounded-lg font-medium tracking-wide transition-all duration-300" 
+              onClick={() => navigate("/")}
+            >
+              {t("mfa.back", { defaultValue: "Volver" })}
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6">
-      <div className="container mx-auto max-w-md">
-        <Card className="bg-slate-900/50 border-slate-800">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5" />
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+      {/* Fixed Logo */}
+      <div className="fixed top-10 left-10">
+        <img 
+          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+          alt="AInside" 
+          className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
+        />
+      </div>
+
+      <div className="w-full max-w-lg">
+        <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+          <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
+              <Shield className="w-8 h-8 text-neutral-800" />
+            </div>
+            <CardTitle className="text-3xl font-light text-black tracking-tight">
               {t("mfa.title", { defaultValue: "Seguridad 2FA" })}
             </CardTitle>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Institutional Algorithmic Trading</p>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="text-slate-300 text-sm">
+          <CardContent className="pb-16 px-12 space-y-6">
+            <CardDescription className="text-neutral-600 text-base font-light">
               {t("mfa.subtitle", {
                 defaultValue:
                   "Activa verificación en dos pasos con una app (Google Authenticator / Authy).",
               })}
-            </div>
+            </CardDescription>
 
             {!factorId && (
-              <Button className="w-full" onClick={handleStartEnroll} disabled={isEnrolling}>
+              <Button 
+                className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group" 
+                onClick={handleStartEnroll} 
+                disabled={isEnrolling}
+              >
                 {isEnrolling ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {t("mfa.enabling", { defaultValue: "Activando..." })}
+                    <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                    {t("mfa.enabling", { defaultValue: "ACTIVANDO" })}
+                    <div className="w-5 h-5 ml-3"></div>
                   </>
                 ) : (
-                  t("mfa.enable", { defaultValue: "Activar 2FA" })
+                  <>
+                    <Shield className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                    {t("mfa.enable", { defaultValue: "ACTIVAR 2FA" })}
+                    <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </>
                 )}
               </Button>
             )}
 
             {factorId && hasUnverifiedFactor && !qrCode && !secret && (
-              <div className="space-y-3 rounded-lg border border-slate-800 bg-slate-950/30 p-4">
-                <p className="text-sm text-slate-200">
-                  {t("mfa.pending.title", { defaultValue: "2FA pendiente" })}
-                </p>
-                <p className="text-xs text-slate-300">
-                  {t("mfa.pending.message", {
-                    defaultValue:
-                      "Ya hay un registro de 2FA en tu cuenta, pero el QR no se puede recuperar. Si ya escaneaste el QR, ingresá el código abajo. Si no lo escaneaste o lo perdiste, generá un nuevo QR.",
-                  })}
-                </p>
-                <Button className="w-full" onClick={handleResetEnroll} disabled={isEnrolling}>
+              <div className="space-y-4 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-neutral-200 flex-shrink-0">
+                    <QrCode className="w-5 h-5 text-neutral-700" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-black uppercase tracking-wide mb-2">
+                      {t("mfa.pending.title", { defaultValue: "2FA pendiente" })}
+                    </p>
+                    <p className="text-sm text-neutral-600 font-light">
+                      {t("mfa.pending.message", {
+                        defaultValue:
+                          "Ya hay un registro de 2FA en tu cuenta, pero el QR no se puede recuperar. Si ya escaneaste el QR, ingresá el código abajo. Si no lo escaneaste o lo perdiste, generá un nuevo QR.",
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full h-14 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider transition-all duration-300" 
+                  onClick={handleResetEnroll} 
+                  disabled={isEnrolling}
+                >
                   {isEnrolling ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t("mfa.reset.loading", { defaultValue: "Generando..." })}
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      {t("mfa.reset.loading", { defaultValue: "GENERANDO" })}
                     </>
                   ) : (
-                    t("mfa.reset.cta", { defaultValue: "Generar nuevo QR" })
+                    <>
+                      <QrCode className="mr-2 h-5 w-5" />
+                      {t("mfa.reset.cta", { defaultValue: "GENERAR NUEVO QR" })}
+                    </>
                   )}
                 </Button>
               </div>
             )}
 
             {factorId && hasVerifiedFactor && !qrCode && !secret && (
-              <div className="rounded-lg border border-slate-800 bg-slate-950/30 p-4">
-                <p className="text-xs text-slate-300">
+              <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle2 className="w-5 h-5 text-neutral-700" />
+                  <p className="text-xs font-medium text-black uppercase tracking-widest">Configuración Completa</p>
+                </div>
+                <p className="text-sm text-neutral-600 font-light">
                   {t("mfa.verified.note", {
                     defaultValue:
                       "Tu 2FA ya está configurado. Abrí tu app (Authenticator/Authy) e ingresá el código para verificar.",
@@ -387,20 +435,30 @@ const MFA = () => {
             )}
 
             {(qrCode || secret) && (
-              <div className="space-y-3">
+              <div className="space-y-4 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <QrCode className="w-5 h-5 text-neutral-700" />
+                  <p className="text-xs font-medium text-black uppercase tracking-widest">Escanear Código QR</p>
+                </div>
                 {renderQr()}
                 {secret && (
-                  <p className="text-xs text-slate-300 break-all">
-                    {t("mfa.secret", { defaultValue: "Clave:" })} <span className="font-mono">{secret}</span>
-                  </p>
+                  <div className="pt-4 border-t border-neutral-200">
+                    <p className="text-xs text-neutral-600 font-light mb-2">
+                      {t("mfa.secret", { defaultValue: "Clave manual:" })}
+                    </p>
+                    <p className="text-sm font-mono bg-white border border-neutral-200 rounded px-3 py-2 text-neutral-800 break-all">
+                      {secret}
+                    </p>
+                  </div>
                 )}
               </div>
             )}
 
             {factorId && (
-              <form onSubmit={handleVerify} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="mfaCode" className="text-slate-200">
+              <form onSubmit={handleVerify} className="space-y-6">
+                <div className="space-y-3">
+                  <Label htmlFor="mfaCode" className="text-black font-medium uppercase tracking-wide text-xs flex items-center gap-2">
+                    <KeyRound className="w-4 h-4" />
                     {t("mfa.code.label", { defaultValue: "Código 2FA" })}
                   </Label>
                   <Input
@@ -411,31 +469,45 @@ const MFA = () => {
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
                     required
-                    className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-6 rounded-xl"
+                    className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black rounded-lg transition-all duration-300"
                   />
+                  <p className="text-xs text-neutral-500 text-center uppercase tracking-widest">
+                    Renovación cada 30 segundos
+                  </p>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <Button 
+                  type="submit" 
+                  className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group" 
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t("mfa.verifying", { defaultValue: "Verificando..." })}
+                      <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                      {t("mfa.verifying", { defaultValue: "VERIFICANDO" })}
+                      <div className="w-5 h-5 ml-3"></div>
                     </>
                   ) : (
-                    t("mfa.verify.button", { defaultValue: "Verificar" })
+                    <>
+                      <Shield className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                      {t("mfa.verify.button", { defaultValue: "VERIFICAR" })}
+                      <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </>
                   )}
                 </Button>
               </form>
             )}
 
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={() => navigate(redirectTo)}
-            >
-              {t("mfa.back", { defaultValue: "Volver" })}
-            </Button>
+            <div className="pt-6 border-t border-neutral-200">
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full h-12 text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg font-light tracking-wide transition-all duration-300"
+                onClick={() => navigate(redirectTo)}
+              >
+                {t("mfa.back", { defaultValue: "Volver" })}
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

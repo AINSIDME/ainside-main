@@ -90,6 +90,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
+            <Route path="/mfa" element={<MFA />} />
             
             {/* Rutas con Header y layout normal */}
             <Route path="/*" element={
@@ -131,7 +132,6 @@ const App = () => {
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/crypto" element={<Crypto />} />
                     <Route path="/login-oauth" element={<Login />} />
-                    <Route path="/mfa" element={<MFA />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/trading" element={<Trading />} />
                     <Route path="/educacion/indicadores" element={<EducacionIndicadores />} />
