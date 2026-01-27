@@ -89,6 +89,7 @@ const App = () => {
             <Route path="/login" element={<OTPLogin />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
             
             {/* Rutas con Header y layout normal */}
             <Route path="/*" element={
@@ -140,7 +141,6 @@ const App = () => {
                     <Route path="/educacion/analisis" element={<EducacionAnalisis />} />
                     <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="/admin/logs" element={<AdminLogs />} />
-                    <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
                     <Route path="/admin/control" element={<AdminControl />} />
                     <Route path="/admin/users" element={<AdminUsers />} />
                     <Route path="/admin/messages" element={<AdminMessages />} />

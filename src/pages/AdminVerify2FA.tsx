@@ -8,12 +8,14 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { 
-  ShieldCheck, 
+  Shield, 
   Smartphone, 
   Lock, 
   KeyRound,
   AlertTriangle,
-  Loader2
+  Loader2,
+  ArrowRight,
+  CheckCircle2
 } from "lucide-react";
 
 const AdminVerify2FA = () => {
@@ -109,12 +111,12 @@ const AdminVerify2FA = () => {
 
   if (isChecking) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <Card className="w-96 bg-slate-800/50 border-slate-700">
-          <CardContent className="p-8 text-center">
-            <Loader2 className="w-10 h-10 text-blue-500 mx-auto mb-4 animate-spin" />
-            <h2 className="text-xl font-semibold text-white mb-2">Cargando sesión...</h2>
-            <p className="text-slate-400">Validando acceso de administrador</p>
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+          <CardContent className="p-16 text-center">
+            <Loader2 className="w-12 h-12 text-neutral-800 mx-auto mb-6 animate-spin" />
+            <h2 className="text-2xl font-light text-black mb-3 tracking-tight">Validando Sesión</h2>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Verificación de Acceso</p>
           </CardContent>
         </Card>
       </div>
@@ -135,23 +137,29 @@ const AdminVerify2FA = () => {
         });
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center p-6">
-        <Card className="w-full max-w-md bg-slate-800/50 border-slate-700 backdrop-blur">
-          <CardHeader className="text-center space-y-3">
-            <div className="mx-auto w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center">
-              <ShieldCheck className="w-8 h-8 text-blue-400" />
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+          <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
+              <Shield className="w-8 h-8 text-neutral-800" />
             </div>
-            <CardTitle className="text-2xl font-bold text-white">{title}</CardTitle>
-            <CardDescription className="text-slate-400">{message}</CardDescription>
+            <CardTitle className="text-3xl font-light text-black tracking-tight">{title}</CardTitle>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Institutional Access Control</p>
+            <CardDescription className="text-neutral-600 text-base font-light pt-4">{message}</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="pb-16 px-12 space-y-4">
             <Button
-              className="w-full"
+              className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300"
               onClick={() => navigate('/login', { state: { redirectTo: '/admin/verify-2fa' } as any })}
             >
+              <Shield className="mr-3 h-5 w-5" />
               {t('admin.2fa.cta.login', { defaultValue: 'Ir a iniciar sesión' })}
+              <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => navigate('/')}
+            <Button 
+              variant="outline" 
+              className="w-full h-14 border-2 border-neutral-200 hover:border-neutral-300 text-neutral-700 hover:text-black rounded-lg font-medium tracking-wide transition-all duration-300" 
+              onClick={() => navigate('/')}
             >
               {t('admin.2fa.cta.back', { defaultValue: 'Volver' })}
             </Button>
@@ -280,40 +288,63 @@ const AdminVerify2FA = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center p-6">
-      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700 backdrop-blur">
-        <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <ShieldCheck className="w-8 h-8 text-blue-400" />
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+      {/* Fixed Logo */}
+      <div className="fixed top-10 left-10">
+        <img 
+          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+          alt="AInside" 
+          className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
+        />
+      </div>
+
+      <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+        <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
+            <Shield className="w-8 h-8 text-neutral-800" />
           </div>
-          <CardTitle className="text-2xl font-bold text-white">
+          <CardTitle className="text-3xl font-light text-black tracking-tight">
             Verificación de Dos Factores
           </CardTitle>
-          <CardDescription className="text-slate-400">
+          <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">
+            Institutional Algorithmic Trading
+          </p>
+          <CardDescription className="text-neutral-600 text-base font-light pt-2">
             Ingresa el código de 6 dígitos de tu aplicación Google Authenticator
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-6">
+        <CardContent className="pb-16 px-12 space-y-6">
           {/* Instrucciones */}
-          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-2">
-            <div className="flex items-start gap-3">
-              <Smartphone className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-slate-300">
-                <p className="font-semibold mb-1">Cómo obtener tu código:</p>
-                <ol className="space-y-1 text-slate-400">
-                  <li>1. Abre Google Authenticator</li>
-                  <li>2. Busca "AInside Admin"</li>
-                  <li>3. Ingresa el código de 6 dígitos</li>
+          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6 space-y-3">
+            <div className="flex items-start gap-4">
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-neutral-200 flex-shrink-0">
+                <Smartphone className="w-5 h-5 text-neutral-700" />
+              </div>
+              <div className="text-sm text-neutral-700">
+                <p className="font-medium mb-3 text-black uppercase tracking-wide text-xs">Instrucciones de Verificación</p>
+                <ol className="space-y-2 text-neutral-600 font-light">
+                  <li className="flex items-center gap-2">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">1</span>
+                    Abre Google Authenticator
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">2</span>
+                    Busca "AInside Admin"
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">3</span>
+                    Ingresa el código de 6 dígitos
+                  </li>
                 </ol>
               </div>
             </div>
           </div>
 
           {/* Formulario */}
-          <form onSubmit={verify2FACode} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="code" className="text-white flex items-center gap-2">
+          <form onSubmit={verify2FACode} className="space-y-6">
+            <div className="space-y-3">
+              <Label htmlFor="code" className="text-black font-medium uppercase tracking-wide text-xs flex items-center gap-2">
                 <KeyRound className="w-4 h-4" />
                 Código de Verificación
               </Label>
@@ -327,20 +358,20 @@ const AdminVerify2FA = () => {
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                 placeholder="000000"
                 disabled={isLocked || isVerifying}
-                className="text-center text-2xl tracking-widest font-mono bg-slate-900 border-slate-600 text-white placeholder:text-slate-500"
+                className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black rounded-lg transition-all duration-300 group-hover:shadow-lg group-hover:shadow-black/5"
                 autoComplete="off"
                 autoFocus
               />
-              <p className="text-xs text-slate-400 text-center">
-                El código cambia cada 30 segundos
+              <p className="text-xs text-neutral-500 text-center uppercase tracking-widest">
+                Renovación cada 30 segundos
               </p>
             </div>
 
             {/* Advertencia de intentos */}
             {attempts > 0 && !isLocked && (
-              <div className="flex items-center gap-2 text-yellow-500 text-sm bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                <span>
+              <div className="flex items-center gap-3 text-neutral-700 text-sm bg-neutral-50 border border-neutral-300 rounded-lg p-4">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0 text-neutral-600" />
+                <span className="font-light">
                   {3 - attempts} intento{3 - attempts !== 1 ? 's' : ''} restante{3 - attempts !== 1 ? 's' : ''}
                 </span>
               </div>
@@ -348,9 +379,9 @@ const AdminVerify2FA = () => {
 
             {/* Bloqueo */}
             {isLocked && (
-              <div className="flex items-center gap-2 text-red-500 text-sm bg-red-500/10 border border-red-500/30 rounded-lg p-3">
-                <Lock className="w-4 h-4 flex-shrink-0" />
-                <span>
+              <div className="flex items-center gap-3 text-black text-sm bg-neutral-100 border-2 border-black rounded-lg p-4">
+                <Lock className="w-5 h-5 flex-shrink-0" />
+                <span className="font-medium">
                   Cuenta bloqueada por seguridad. Espera 15 minutos.
                 </span>
               </div>
@@ -358,34 +389,39 @@ const AdminVerify2FA = () => {
 
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group"
               disabled={isLocked || isVerifying || code.length !== 6}
             >
               {isVerifying ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Verificando...
+                  <Loader2 className="w-5 h-5 mr-3 animate-spin" />
+                  VERIFICANDO
+                  <div className="w-5 h-5 ml-3"></div>
                 </>
               ) : (
                 <>
-                  <ShieldCheck className="w-4 h-4 mr-2" />
-                  Verificar Código
+                  <Shield className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-300" />
+                  VERIFICAR CÓDIGO
+                  <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                 </>
               )}
             </Button>
           </form>
 
           {/* Información de seguridad */}
-          <div className="text-xs text-slate-400 text-center space-y-1 pt-4 border-t border-slate-700">
-            <p>🔒 Conexión segura cifrada</p>
-            <p className="text-slate-500">Esta verificación es válida solo para esta sesión</p>
+          <div className="text-xs text-neutral-500 text-center space-y-2 pt-6 border-t border-neutral-200">
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle2 className="w-4 h-4" />
+              <p className="uppercase tracking-widest">Conexión Segura Cifrada</p>
+            </div>
+            <p className="text-neutral-400 font-light">Esta verificación es válida solo para esta sesión</p>
           </div>
 
           {/* Botón de cancelar */}
           <Button
             type="button"
             variant="ghost"
-            className="w-full text-slate-400 hover:text-white"
+            className="w-full h-12 text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg font-light tracking-wide transition-all duration-300"
             onClick={() => navigate('/dashboard')}
           >
             Cancelar
