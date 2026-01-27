@@ -293,13 +293,19 @@ const MFA = () => {
       <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
         <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
           <CardHeader className="space-y-6 pb-10 pt-16 px-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
-              <Shield className="w-8 h-8 text-neutral-800" />
+            {/* Badge ADMIN prominente */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] mb-2">
+              <Shield className="w-4 h-4" />
+              ADMIN
+            </div>
+            
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border-2 border-red-100 mb-2">
+              <Shield className="w-8 h-8 text-red-600" />
             </div>
             <CardTitle className="text-3xl font-light text-black tracking-tight">
               {t("mfa.loginRequired.title", { defaultValue: "Iniciar sesión requerido" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Institutional Access Control</p>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Administrator Access Control</p>
             <CardDescription className="text-neutral-600 text-base font-light pt-4">
               {t("mfa.loginRequired.message", {
                 defaultValue:
@@ -343,13 +349,19 @@ const MFA = () => {
       <div className="w-full max-w-lg">
         <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
           <CardHeader className="space-y-6 pb-10 pt-16 px-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-2">
-              <Shield className="w-8 h-8 text-neutral-800" />
+            {/* Badge ADMIN prominente */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] mb-2">
+              <Shield className="w-4 h-4" />
+              ADMIN
+            </div>
+            
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border-2 border-red-100 mb-2">
+              <Shield className="w-8 h-8 text-red-600" />
             </div>
             <CardTitle className="text-3xl font-light text-black tracking-tight">
-              {t("mfa.title", { defaultValue: "Seguridad 2FA" })}
+              {t("mfa.title", { defaultValue: "Seguridad 2FA Administrador" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Institutional Algorithmic Trading</p>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Administrator Access Control</p>
           </CardHeader>
           <CardContent className="pb-16 px-12 space-y-6">
             <CardDescription className="text-neutral-600 text-base font-light">
