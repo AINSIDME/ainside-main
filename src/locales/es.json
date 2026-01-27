@@ -1924,7 +1924,86 @@
       },
       "error": "Código inválido.",
       "challengeStartError": "No se pudo iniciar el desafío 2FA."
+    },
+    "loginRequired": {
+      "title": "Iniciar sesión requerido",
+      "message": "Para configurar o verificar tu 2FA, primero tenés que iniciar sesión con tu cuenta.",
+      "cta": "Ir a iniciar sesión"
+    },
+    "pending": {
+      "title": "2FA pendiente",
+      "message": "Ya hay un registro de 2FA en tu cuenta, pero el QR no se puede recuperar. Si ya escaneaste el QR, ingresá el código abajo. Si no lo escaneaste o lo perdiste, generá un nuevo QR."
+    },
+    "verified": {
+      "note": "Tu 2FA ya está configurado. Abrí tu app (Authenticator/Authy) e ingresá el código para verificar."
+    },
+    "reset": {
+      "cta": "Generar nuevo QR",
+      "loading": "Generando...",
+      "error": "No se pudo generar un nuevo QR de 2FA."
+    },
+    "qrCode": {
+      "title": "Escanear Código QR",
+      "renewMessage": "Renovación cada 30 segundos"
+    },
+    "security": {
+      "loading": "Verificación de Seguridad"
     }
+  },
+  "adminVerify2FA": {
+    "title": "Verificación Administrador",
+    "subtitle": "Administrator Access Control",
+    "description": "Ingresa el código de 6 dígitos de tu aplicación Google Authenticator",
+    "loading": "Validando Sesión",
+    "loadingSubtitle": "Verificación de Acceso",
+    "instructions": {
+      "title": "Instrucciones de Verificación",
+      "step1": "Abre Google Authenticator",
+      "step2": "Busca \"AInside Admin\"",
+      "step3": "Ingresa el código de 6 dígitos"
+    },
+    "code": {
+      "label": "Código de Verificación",
+      "placeholder": "000000",
+      "renewMessage": "Renovación cada 30 segundos"
+    },
+    "security": {
+      "secureConnection": "Conexión Segura Cifrada",
+      "sessionNote": "Esta verificación es válida solo para esta sesión"
+    },
+    "cancel": "Cancelar",
+    "verify": "Verificar Código",
+    "verifying": "Verificando",
+    "errors": {
+      "locked": {
+        "title": "Cuenta Bloqueada",
+        "description": "Demasiados intentos fallidos. Espera 15 minutos."
+      },
+      "invalidCode": {
+        "title": "Código Inválido",
+        "description": "El código debe tener 6 dígitos"
+      },
+      "incorrect": {
+        "title": "Código Incorrecto",
+        "description": "Intento {{attempt}} de 3. Verifica tu aplicación Authenticator."
+      },
+      "lockout": {
+        "title": "Cuenta Bloqueada",
+        "description": "Demasiados intentos fallidos. Bloqueado por 15 minutos."
+      },
+      "verification": {
+        "title": "Error de Verificación"
+      }
+    },
+    "success": {
+      "title": "✓ Verificación Exitosa",
+      "description": "Acceso al panel de administración autorizado"
+    },
+    "attempts": {
+      "remaining": "{{count}} intento restante",
+      "remaining_plural": "{{count}} intentos restantes"
+    },
+    "lockMessage": "Cuenta bloqueada por seguridad. Espera 15 minutos."
   },
   "dashboard": {
     "loading": "Cargando...",

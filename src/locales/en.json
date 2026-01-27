@@ -1924,7 +1924,86 @@
       },
       "error": "Invalid code.",
       "challengeStartError": "Could not start 2FA challenge."
+    },
+    "loginRequired": {
+      "title": "Sign in required",
+      "message": "To configure or verify your 2FA, you must sign in to your account first.",
+      "cta": "Go to sign in"
+    },
+    "pending": {
+      "title": "2FA pending",
+      "message": "There is already a 2FA registration on your account, but the QR cannot be recovered. If you already scanned the QR, enter the code below. If you didn't scan it or lost it, generate a new QR."
+    },
+    "verified": {
+      "note": "Your 2FA is already configured. Open your app (Authenticator/Authy) and enter the code to verify."
+    },
+    "reset": {
+      "cta": "Generate new QR",
+      "loading": "Generating...",
+      "error": "Could not generate a new 2FA QR."
+    },
+    "qrCode": {
+      "title": "Scan QR Code",
+      "renewMessage": "Renews every 30 seconds"
+    },
+    "security": {
+      "loading": "Security Verification"
     }
+  },
+  "adminVerify2FA": {
+    "title": "Administrator Verification",
+    "subtitle": "Administrator Access Control",
+    "description": "Enter the 6-digit code from your Google Authenticator app",
+    "loading": "Validating Session",
+    "loadingSubtitle": "Access Verification",
+    "instructions": {
+      "title": "Verification Instructions",
+      "step1": "Open Google Authenticator",
+      "step2": "Find \"AInside Admin\"",
+      "step3": "Enter the 6-digit code"
+    },
+    "code": {
+      "label": "Verification Code",
+      "placeholder": "000000",
+      "renewMessage": "Renews every 30 seconds"
+    },
+    "security": {
+      "secureConnection": "Secure Encrypted Connection",
+      "sessionNote": "This verification is valid only for this session"
+    },
+    "cancel": "Cancel",
+    "verify": "Verify Code",
+    "verifying": "Verifying",
+    "errors": {
+      "locked": {
+        "title": "Account Locked",
+        "description": "Too many failed attempts. Wait 15 minutes."
+      },
+      "invalidCode": {
+        "title": "Invalid Code",
+        "description": "Code must be 6 digits"
+      },
+      "incorrect": {
+        "title": "Incorrect Code",
+        "description": "Attempt {{attempt}} of 3. Check your Authenticator app."
+      },
+      "lockout": {
+        "title": "Account Locked",
+        "description": "Too many failed attempts. Locked for 15 minutes."
+      },
+      "verification": {
+        "title": "Verification Error"
+      }
+    },
+    "success": {
+      "title": "✓ Verification Successful",
+      "description": "Access to admin panel authorized"
+    },
+    "attempts": {
+      "remaining": "{{count}} attempt remaining",
+      "remaining_plural": "{{count}} attempts remaining"
+    },
+    "lockMessage": "Account locked for security. Wait 15 minutes."
   },
   "dashboard": {
     "loading": "Loading...",

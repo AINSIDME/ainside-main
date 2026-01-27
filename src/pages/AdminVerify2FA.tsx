@@ -115,8 +115,8 @@ const AdminVerify2FA = () => {
         <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
           <CardContent className="p-16 text-center">
             <Loader2 className="w-12 h-12 text-neutral-800 mx-auto mb-6 animate-spin" />
-            <h2 className="text-2xl font-light text-black mb-3 tracking-tight">Validando Sesión</h2>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Verificación de Acceso</p>
+            <h2 className="text-2xl font-light text-black mb-3 tracking-tight">{t('adminVerify2FA.loading', { defaultValue: 'Validando Sesión' })}</h2>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t('adminVerify2FA.loadingSubtitle', { defaultValue: 'Verificación de Acceso' })}</p>
           </CardContent>
         </Card>
       </div>
@@ -180,8 +180,8 @@ const AdminVerify2FA = () => {
     
     if (isLocked) {
       toast({
-        title: "Cuenta Bloqueada",
-        description: "Demasiados intentos fallidos. Espera 15 minutos.",
+        title: t('adminVerify2FA.errors.locked.title', { defaultValue: 'Cuenta Bloqueada' }),
+        description: t('adminVerify2FA.errors.locked.description', { defaultValue: 'Demasiados intentos fallidos. Espera 15 minutos.' }),
         variant: "destructive"
       });
       return;
@@ -189,8 +189,8 @@ const AdminVerify2FA = () => {
 
     if (code.length !== 6) {
       toast({
-        title: "Código Inválido",
-        description: "El código debe tener 6 dígitos",
+        title: t('adminVerify2FA.errors.invalidCode.title', { defaultValue: 'Código Inválido' }),
+        description: t('adminVerify2FA.errors.invalidCode.description', { defaultValue: 'El código debe tener 6 dígitos' }),
         variant: "destructive"
       });
       return;
@@ -219,8 +219,8 @@ const AdminVerify2FA = () => {
         localStorage.setItem('admin_2fa_token', data.token);
 
         toast({
-          title: "✓ Verificación Exitosa",
-          description: "Acceso al panel de administración autorizado",
+          title: t('adminVerify2FA.success.title', { defaultValue: '✓ Verificación Exitosa' }),
+          description: t('adminVerify2FA.success.description', { defaultValue: 'Acceso al panel de administración autorizado' }),
         });
 
         navigate('/admin');
@@ -228,7 +228,7 @@ const AdminVerify2FA = () => {
         const serverMsg = (data?.error || data?.message || '').toString().trim();
         if (serverMsg && serverMsg !== 'Código inválido') {
           toast({
-            title: "Error de Verificación",
+            title: t('adminVerify2FA.errors.verification.title', { defaultValue: 'Error de Verificación' }),
             description: serverMsg,
             variant: "destructive",
           });
@@ -248,14 +248,14 @@ const AdminVerify2FA = () => {
           }, 15 * 60 * 1000);
 
           toast({
-            title: "Cuenta Bloqueada",
-            description: "Demasiados intentos fallidos. Bloqueado por 15 minutos.",
+            title: t('adminVerify2FA.errors.lockout.title', { defaultValue: 'Cuenta Bloqueada' }),
+            description: t('adminVerify2FA.errors.lockout.description', { defaultValue: 'Demasiados intentos fallidos. Bloqueado por 15 minutos.' }),
             variant: "destructive"
           });
         } else {
           toast({
-            title: "Código Incorrecto",
-            description: `Intento ${newAttempts} de 3. Verifica tu aplicación Authenticator.`,
+            title: t('adminVerify2FA.errors.incorrect.title', { defaultValue: 'Código Incorrecto' }),
+            description: t('adminVerify2FA.errors.incorrect.description', { defaultValue: 'Intento {{attempt}} de 3. Verifica tu aplicación Authenticator.', attempt: newAttempts }),
             variant: "destructive"
           });
         }
@@ -284,7 +284,7 @@ const AdminVerify2FA = () => {
                 : 'No se pudo verificar el código. Intenta nuevamente.';
 
       toast({
-        title: "Error de Verificación",
+        title: t('adminVerify2FA.errors.verification.title', { defaultValue: 'Error de Verificación' }),
         description: friendly,
         variant: "destructive"
       });
@@ -316,13 +316,13 @@ const AdminVerify2FA = () => {
             <Shield className="w-8 h-8 text-red-600" />
           </div>
           <CardTitle className="text-3xl font-light text-black tracking-tight">
-            Verificación Administrador
+            {t('adminVerify2FA.title', { defaultValue: 'Verificación Administrador' })}
           </CardTitle>
           <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">
-            Administrator Access Control
+            {t('adminVerify2FA.subtitle', { defaultValue: 'Administrator Access Control' })}
           </p>
           <CardDescription className="text-neutral-600 text-base font-light pt-2">
-            Ingresa el código de 6 dígitos de tu aplicación Google Authenticator
+            {t('adminVerify2FA.description', { defaultValue: 'Ingresa el código de 6 dígitos de tu aplicación Google Authenticator' })}
           </CardDescription>
         </CardHeader>
 
@@ -334,19 +334,19 @@ const AdminVerify2FA = () => {
                 <Smartphone className="w-5 h-5 text-neutral-700" />
               </div>
               <div className="text-sm text-neutral-700">
-                <p className="font-medium mb-3 text-black uppercase tracking-wide text-xs">Instrucciones de Verificación</p>
+                <p className="font-medium mb-3 text-black uppercase tracking-wide text-xs">{t('adminVerify2FA.instructions.title', { defaultValue: 'Instrucciones de Verificación' })}</p>
                 <ol className="space-y-2 text-neutral-600 font-light">
                   <li className="flex items-center gap-2">
                     <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">1</span>
-                    Abre Google Authenticator
+                    {t('adminVerify2FA.instructions.step1', { defaultValue: 'Abre Google Authenticator' })}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">2</span>
-                    Busca "AInside Admin"
+                    {t('adminVerify2FA.instructions.step2', { defaultValue: 'Busca "AInside Admin"' })}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-200 text-neutral-700 text-xs font-medium">3</span>
-                    Ingresa el código de 6 dígitos
+                    {t('adminVerify2FA.instructions.step3', { defaultValue: 'Ingresa el código de 6 dígitos' })}
                   </li>
                 </ol>
               </div>
@@ -358,7 +358,7 @@ const AdminVerify2FA = () => {
             <div className="space-y-3">
               <Label htmlFor="code" className="text-black font-medium uppercase tracking-wide text-xs flex items-center gap-2">
                 <KeyRound className="w-4 h-4" />
-                Código de Verificación
+                {t('adminVerify2FA.code.label', { defaultValue: 'Código de Verificación' })}
               </Label>
               <Input
                 id="code"
@@ -368,14 +368,14 @@ const AdminVerify2FA = () => {
                 maxLength={6}
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
-                placeholder="000000"
+                placeholder={t('adminVerify2FA.code.placeholder', { defaultValue: '000000' })}
                 disabled={isLocked || isVerifying}
                 className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black rounded-lg transition-all duration-300 group-hover:shadow-lg group-hover:shadow-black/5"
                 autoComplete="off"
                 autoFocus
               />
               <p className="text-xs text-neutral-500 text-center uppercase tracking-widest">
-                Renovación cada 30 segundos
+                {t('adminVerify2FA.code.renewMessage', { defaultValue: 'Renovación cada 30 segundos' })}
               </p>
             </div>
 
@@ -384,7 +384,11 @@ const AdminVerify2FA = () => {
               <div className="flex items-center gap-3 text-neutral-700 text-sm bg-neutral-50 border border-neutral-300 rounded-lg p-4">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 text-neutral-600" />
                 <span className="font-light">
-                  {3 - attempts} intento{3 - attempts !== 1 ? 's' : ''} restante{3 - attempts !== 1 ? 's' : ''}
+                  {t('adminVerify2FA.attempts.remaining', {
+                    defaultValue: '{{count}} intento restante',
+                    defaultValue_plural: '{{count}} intentos restantes',
+                    count: 3 - attempts
+                  })}
                 </span>
               </div>
             )}
@@ -394,7 +398,7 @@ const AdminVerify2FA = () => {
               <div className="flex items-center gap-3 text-black text-sm bg-neutral-100 border-2 border-black rounded-lg p-4">
                 <Lock className="w-5 h-5 flex-shrink-0" />
                 <span className="font-medium">
-                  Cuenta bloqueada por seguridad. Espera 15 minutos.
+                  {t('adminVerify2FA.lockMessage', { defaultValue: 'Cuenta bloqueada por seguridad. Espera 15 minutos.' })}
                 </span>
               </div>
             )}
@@ -407,13 +411,13 @@ const AdminVerify2FA = () => {
               {isVerifying ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-3 animate-spin" />
-                  VERIFICANDO
+                  {t('adminVerify2FA.verifying', { defaultValue: 'VERIFICANDO' }).toUpperCase()}
                   <div className="w-5 h-5 ml-3"></div>
                 </>
               ) : (
                 <>
                   <Shield className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-300" />
-                  VERIFICAR CÓDIGO
+                  {t('adminVerify2FA.verify', { defaultValue: 'VERIFICAR CÓDIGO' }).toUpperCase()}
                   <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                 </>
               )}
@@ -424,9 +428,9 @@ const AdminVerify2FA = () => {
           <div className="text-xs text-neutral-500 text-center space-y-2 pt-6 border-t border-neutral-200">
             <div className="flex items-center justify-center gap-2">
               <CheckCircle2 className="w-4 h-4" />
-              <p className="uppercase tracking-widest">Conexión Segura Cifrada</p>
+              <p className="uppercase tracking-widest">{t('adminVerify2FA.security.secureConnection', { defaultValue: 'Conexión Segura Cifrada' })}</p>
             </div>
-            <p className="text-neutral-400 font-light">Esta verificación es válida solo para esta sesión</p>
+            <p className="text-neutral-400 font-light">{t('adminVerify2FA.security.sessionNote', { defaultValue: 'Esta verificación es válida solo para esta sesión' })}</p>
           </div>
 
           {/* Botón de cancelar */}
@@ -436,7 +440,7 @@ const AdminVerify2FA = () => {
             className="w-full h-12 text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg font-light tracking-wide transition-all duration-300"
             onClick={() => navigate('/dashboard')}
           >
-            Cancelar
+            {t('adminVerify2FA.cancel', { defaultValue: 'Cancelar' })}
           </Button>
         </CardContent>
       </Card>

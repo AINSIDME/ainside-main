@@ -281,7 +281,7 @@ const MFA = () => {
           <CardContent className="p-16 text-center">
             <Loader2 className="w-12 h-12 text-neutral-800 mx-auto mb-6 animate-spin" />
             <h2 className="text-2xl font-light text-black mb-3 tracking-tight">{t("mfa.loading", { defaultValue: "Cargando..." })}</h2>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Verificación de Seguridad</p>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t("mfa.security.loading", { defaultValue: "Verificación de Seguridad" })}</p>
           </CardContent>
         </Card>
       </div>
@@ -450,7 +450,7 @@ const MFA = () => {
               <div className="space-y-4 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <QrCode className="w-5 h-5 text-neutral-700" />
-                  <p className="text-xs font-medium text-black uppercase tracking-widest">Escanear Código QR</p>
+                  <p className="text-xs font-medium text-black uppercase tracking-widest">{t("mfa.qrCode.title", { defaultValue: "Escanear Código QR" })}</p>
                 </div>
                 {renderQr()}
                 {secret && (
@@ -484,7 +484,7 @@ const MFA = () => {
                     className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black rounded-lg transition-all duration-300"
                   />
                   <p className="text-xs text-neutral-500 text-center uppercase tracking-widest">
-                    Renovación cada 30 segundos
+                    {t("mfa.qrCode.renewMessage", { defaultValue: "Renovación cada 30 segundos" })}
                   </p>
                 </div>
 
