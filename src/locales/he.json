@@ -1756,67 +1756,67 @@
   },
   "registerPage": {
     "faq": {
-      "q3": "What if I change my computer?",
-      "a1": "HWID registration links your algorithm license to your specific computer, ensuring security and preventing unauthorized use.",
-      "q2": "Can I use the algorithm on multiple computers?",
-      "a3": "Contact our support team at support@ainside.me and we'll help you transfer your license to your new computer.",
-      "a2": "Each license is for one computer. Contact support if you need to transfer your license or purchase additional licenses.",
-      "q1": "Why do I need to register my HWID?",
-      "title": "Frequently Asked Questions"
+      "q3": "מה קורה אם אני מחליף מחשב?",
+      "a1": "רישום HWID מקשר את רישיון האלגוריתם שלך למחשב הספציפי שלך, מבטיח אבטחה ומונע שימוש לא מורשה.",
+      "q2": "האם אוכל להשתמש באלגוריתם במספר מחשבים?",
+      "a3": "צור קשר עם צוות התמיכה שלנו ב-support@ainside.me ונעזור לך להעביר את הרישיון שלך למחשב החדש.",
+      "a2": "כל רישיון הוא למחשב אחד. צור קשר עם התמיכה אם אתה צריך להעביר את הרישיון שלך או לרכוש רישיונות נוספים.",
+      "q1": "למה אני צריך לרשום את ה-HWID שלי?",
+      "title": "שאלות נפוצות"
     },
-    "subtitle": "הירשם כדי להתחיל",
+    "subtitle": "רשום את מזהה החומרה (HWID) שלך כדי להפעיל את הרישיון",
     "copyToast": {
-      "desc": "Command copied to clipboard",
-      "title": "Copied"
+      "desc": "הפקודה הועתקה ללוח",
+      "title": "הועתק"
     },
     "instructions": {
-      "step2": "Run the command below:",
-      "note": "Your HWID is unique to your computer. You'll need to register it to activate the algorithm. Contact support if you need to change computers.",
-      "windowsTitle": "Windows Users",
-      "step4": "Paste the UUID in the HWID field on the left",
-      "step3": "Copy the UUID shown (format: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)",
-      "noteTitle": "Important Note",
-      "troubleText": "If you have issues getting your HWID, contact our support team:",
-      "title": "How to Get Your HWID",
-      "troubleTitle": "Need Help?",
-      "step1": "Press Windows + X and select 'Terminal' or 'PowerShell'"
+      "step2": "הפעל את הפקודה הבאה:",
+      "note": "ה-HWID שלך הוא ייחודי למחשב שלך. תצטרך לרשום אותו כדי להפעיל את האלגוריתם. צור קשר עם התמיכה אם אתה צריך להחליף מחשבים.",
+      "windowsTitle": "משתמשי Windows",
+      "step4": "הדבק את ה-UUID בשדה HWID משמאל",
+      "step3": "העתק את ה-UUID המוצג (פורמט: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)",
+      "noteTitle": "הערה חשובה",
+      "troubleText": "אם יש לך בעיות בקבלת ה-HWID שלך, צור קשר עם צוות התמיכה שלנו:",
+      "title": "איך להשיג את ה-HWID שלך",
+      "troubleTitle": "צריך עזרה?",
+      "step1": "לחץ על Windows + X ובחר 'Terminal' או 'PowerShell'"
     },
     "success": {
-      "title": "Registration Complete!",
-      "message": "Your HWID has been successfully registered. You can now activate your algorithm.",
-      "documentation": "View Documentation"
+      "title": "הרישום הושלם!",
+      "message": "ה-HWID שלך נרשם בהצלחה. כעת תוכל להפעיל את האלגוריתם שלך.",
+      "documentation": "צפה בתיעוד"
     },
-    "badge": "License Activation",
+    "badge": "הפעלת רישיון",
     "form": {
-      "description": "Complete the form below to activate your algorithm",
+      "description": "מלא את הטופס למטה כדי להפעיל את האלגוריתם שלך",
       "toast": {
-        "errorTitle": "Error",
-        "errorDesc": "Failed to register HWID. Please contact support.",
-        "successDesc": "Your HWID has been registered successfully",
-        "errorMissing": "Please fill in all fields",
-        "successTitle": "Registration Successful"
+        "errorTitle": "שגיאה",
+        "errorDesc": "נכשל ברישום HWID. אנא צור קשר עם התמיכה.",
+        "successDesc": "ה-HWID שלך נרשם בהצלחה",
+        "errorMissing": "אנא מלא את כל השדות",
+        "successTitle": "הרישום הצליח"
       },
-      "submitting": "Registering...",
-      "submit": "Register HWID",
+      "submitting": "רושם...",
+      "submit": "רשום HWID",
       "name": {
-        "placeholder": "John Doe",
-        "label": "Full Name"
+        "placeholder": "ישראל ישראלי",
+        "label": "שם מלא"
       },
       "orderId": {
-        "label": "Order ID",
-        "hint": "Find this in your confirmation email",
+        "label": "מזהה הזמנה",
+        "hint": "מצא זאת באימייל האישור שלך",
         "placeholder": "ORDER-20260104-XXXXX"
       },
       "hwid": {
-        "label": "Hardware ID (HWID)",
-        "hint": "See instructions on the right ",
+        "label": "מזהה חומרה (HWID)",
+        "hint": "ראה הוראות מימין ",
         "placeholder": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
       },
-      "title": "Register Your License",
+      "title": "רשום את הרישיון שלך",
       "email": {
-        "label": "Email Address",
-        "hint": "Use the email from your purchase",
-        "placeholder": "john@example.com"
+        "label": "כתובת אימייל",
+        "hint": "השתמש באימייל מהרכישה שלך",
+        "placeholder": "israel@example.com"
       }
     },
     "seo": {
