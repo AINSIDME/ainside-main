@@ -139,16 +139,14 @@ const Dashboard = () => {
       // Supabase JS supports scopes in v2; using any to avoid type mismatches in some setups.
       await (supabase.auth as any).signOut({ scope: "others" });
       toast({
-        title: t("dashboard.security.sessions.successTitle", { defaultValue: "Sesiones cerradas" }),
-        description: t("dashboard.security.sessions.successDesc", {
-          defaultValue: "Se cerró la sesión en otros dispositivos.",
-        }),
+        title: t("dashboard.security.sessions.successTitle"),
+        description: t("dashboard.security.sessions.successDesc"),
       });
     } catch (e: any) {
       console.error("Sign out others error:", e);
       toast({
-        title: t("dashboard.error", { defaultValue: "Error" }),
-        description: e?.message || t("dashboard.security.sessions.errorDesc", { defaultValue: "No se pudo cerrar sesiones." }),
+        title: t("dashboard.error"),
+        description: e?.message || t("dashboard.security.sessions.error"),
         variant: "destructive",
       });
     }
@@ -168,14 +166,14 @@ const Dashboard = () => {
 
       setDownloadEmailOtpSent(true);
       toast({
-        title: t("dashboard.software.otpSentTitle", { defaultValue: "Código enviado" }),
-        description: t("dashboard.software.otpSentDesc", { defaultValue: "Revisá tu email e ingresá el código para descargar." }),
+        title: t("dashboard.software.otpSent"),
+        description: t("dashboard.software.otpSentDesc"),
       });
     } catch (e: any) {
       console.error("OTP request error:", e);
       toast({
-        title: t("dashboard.error", { defaultValue: "Error" }),
-        description: e?.message || t("dashboard.software.otpErrorDesc", { defaultValue: "No se pudo enviar el código." }),
+        title: t("dashboard.error"),
+        description: e?.message || t("dashboard.software.otpError"),
         variant: "destructive",
       });
     } finally {
@@ -204,8 +202,8 @@ const Dashboard = () => {
     } catch (e: any) {
       console.error("Download with email OTP error:", e);
       toast({
-        title: t("dashboard.error", { defaultValue: "Error" }),
-        description: e?.message || t("dashboard.software.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+        title: t("dashboard.error"),
+        description: e?.message || t("dashboard.software.downloadErrorDesc"),
         variant: "destructive",
       });
     } finally {
@@ -222,14 +220,14 @@ const Dashboard = () => {
       
       await supabase.auth.signOut();
       toast({
-        title: t("dashboard.logout.success", { defaultValue: "Sesión cerrada" }),
-        description: t("dashboard.logout.message", { defaultValue: "Has cerrado sesión correctamente" }),
+        title: t("dashboard.logout.success"),
+        description: t("dashboard.logout.message"),
       });
       navigate("/login");
     } catch (error) {
       toast({
-        title: t("dashboard.error", { defaultValue: "Error" }),
-        description: "No se pudo cerrar sesión",
+        title: t("dashboard.error"),
+        description: t("dashboard.logout.error"),
         variant: "destructive",
       });
     }
@@ -238,7 +236,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="text-white">{t("dashboard.loading", { defaultValue: "Cargando..." })}</div>
+        <div className="text-white">{t("dashboard.loading")}</div>
       </div>
     );
   }
@@ -251,13 +249,10 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5" />
-                {t("dashboard.mfaRequired.title", { defaultValue: "Verificación 2FA requerida" })}
+                {t("dashboard.mfaRequired.title")}
               </CardTitle>
               <CardDescription className="text-slate-400">
-                {t("dashboard.mfaRequired.message", {
-                  defaultValue:
-                    "Para ver tu panel, primero tenés que verificar tu 2FA (nivel AAL2).",
-                })}
+                {t("dashboard.mfaRequired.message")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -265,11 +260,11 @@ const Dashboard = () => {
                 className="w-full"
                 onClick={() => navigate("/mfa", { state: { redirectTo: "/dashboard" } })}
               >
-                {t("dashboard.mfaRequired.cta", { defaultValue: "Ir a 2FA" })}
+                {t("dashboard.mfaRequired.cta")}
               </Button>
               <Button variant="outline" className="w-full" onClick={() => navigate("/")}
               >
-                {t("dashboard.mfaRequired.back", { defaultValue: "Volver" })}
+                {t("dashboard.mfaRequired.back")}
               </Button>
             </CardContent>
           </Card>
@@ -285,15 +280,15 @@ const Dashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold text-white mb-2">
-              {t("dashboard.title", { defaultValue: "Mi Panel de Control" })}
+              {t("dashboard.title")}
             </h1>
             <p className="text-slate-400">
-              {t("dashboard.subtitle", { defaultValue: "Gestiona tu cuenta y configuración" })}
+              {t("dashboard.subtitle")}
             </p>
           </div>
           <Button onClick={handleLogout} variant="outline" className="gap-2">
             <LogOut className="h-4 w-4" />
-            {t("dashboard.logout.button", { defaultValue: "Cerrar Sesión" })}
+            {t("dashboard.logout.button")}
           </Button>
         </div>
 
@@ -303,7 +298,7 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <User className="h-5 w-5" />
-                {t("dashboard.profile.title", { defaultValue: "Información de Usuario" })}
+                {t("dashboard.profile.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -311,7 +306,7 @@ const Dashboard = () => {
                 <Mail className="h-4 w-4 text-slate-400" />
                 <div>
                     <p className="text-sm text-slate-400">
-                      {t("dashboard.profile.emailLabel", { defaultValue: "Email" })}
+                      {t("dashboard.profile.emailLabel")}
                     </p>
                   <p className="text-white font-medium">{userData?.email}</p>
                 </div>
@@ -320,7 +315,7 @@ const Dashboard = () => {
                 <Calendar className="h-4 w-4 text-slate-400" />
                 <div>
                     <p className="text-sm text-slate-400">
-                      {t("dashboard.profile.memberSince", { defaultValue: "Miembro desde" })}
+                      {t("dashboard.profile.memberSince")}
                     </p>
                   <p className="text-white font-medium">
                     {new Date(userData?.created_at || "").toLocaleDateString()}
@@ -332,7 +327,7 @@ const Dashboard = () => {
                   <Settings className="h-4 w-4 text-slate-400" />
                   <div>
                       <p className="text-sm text-slate-400">
-                        {t("dashboard.plan.label", { defaultValue: "Plan" })}
+                        {t("dashboard.plan.label")}
                       </p>
                     <Badge className="bg-blue-600 mt-1">{userData.plan_name}</Badge>
                   </div>
@@ -346,29 +341,25 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Settings className="h-5 w-5" />
-                {t("dashboard.security.title", { defaultValue: "Seguridad" })}
+                {t("dashboard.security.title")}
               </CardTitle>
               <CardDescription className="text-slate-400">
-                {t("dashboard.security.description", {
-                  defaultValue:
-                    "Protegé tu cuenta con 2FA, cerrá sesiones en otros dispositivos y asegurá descargas.",
-                })}
+                {t("dashboard.security.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <p className="text-sm text-slate-400">
-                    {t("dashboard.security.mfaStatusLabel", { defaultValue: "Estado 2FA" })}
+                    {t("dashboard.security.mfaStatusLabel")}
                   </p>
                   <p className="text-white font-medium">
                     {mfaEnabled
-                      ? t("dashboard.security.mfaEnabled", { defaultValue: "Activado" })
-                      : t("dashboard.security.mfaDisabled", { defaultValue: "Desactivado" })}
+                      ? t("dashboard.security.mfaEnabled")
+                      : t("dashboard.security.mfaDisabled")}
                   </p>
                   <p className="text-xs text-slate-500">
                     {t("dashboard.security.aal", {
-                      defaultValue: "Nivel de sesión: {{current}} (siguiente: {{next}})",
                       current: mfaCurrentLevel ?? "-",
                       next: mfaNextLevel ?? "-",
                     })}
@@ -377,30 +368,26 @@ const Dashboard = () => {
                 <Badge variant="outline" className="text-slate-200 border-slate-600">
                   {mfaEnabled
                     ? t("dashboard.security.mfaFactors", {
-                        defaultValue: "Verificados: {{count}}",
                         count: mfaVerifiedCount,
                       })
-                    : t("dashboard.security.mfaNoFactors", { defaultValue: "Sin 2FA" })}
+                    : t("dashboard.security.mfaNoFactors")}
                 </Badge>
               </div>
 
               <div className="grid gap-2">
                 <Button onClick={() => navigate("/mfa", { state: { redirectTo: "/dashboard" } })} className="w-full">
                   {mfaEnabled
-                    ? t("dashboard.security.mfaManage", { defaultValue: "Administrar 2FA" })
-                    : t("dashboard.security.mfaEnable", { defaultValue: "Activar 2FA" })}
+                    ? t("dashboard.security.mfaManage")
+                    : t("dashboard.security.mfaEnable")}
                 </Button>
                 <Button onClick={handleSignOutOtherSessions} variant="outline" className="w-full">
-                  {t("dashboard.security.sessions.cta", { defaultValue: "Cerrar sesión en otros dispositivos" })}
+                  {t("dashboard.security.sessions.cta")}
                 </Button>
               </div>
 
               <div className="rounded-md border border-slate-800 bg-slate-950/30 p-3">
                 <p className="text-xs text-slate-400">
-                  {t("dashboard.security.downloadsNote", {
-                    defaultValue:
-                      "Las descargas se generan con enlaces temporales y pueden requerir 2FA (recomendado). Además, podés recibir un email cuando se genere un enlace.",
-                  })}
+                  {t("dashboard.security.downloadsNote")}
                 </p>
               </div>
             </CardContent>
@@ -411,7 +398,7 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Key className="h-5 w-5" />
-                {t("dashboard.hwid.title", { defaultValue: "Estado de HWID" })}
+                {t("dashboard.hwid.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -421,7 +408,7 @@ const Dashboard = () => {
                     <CheckCircle className="h-5 w-5 text-green-400 mt-0.5" />
                     <div>
                       <p className="text-white font-medium">
-                        {t("dashboard.hwid.registered.title", { defaultValue: "HWID Registrado" })}
+                        {t("dashboard.hwid.registered.title")}
                       </p>
                       <div className="mt-2 flex items-start gap-2">
                         <p className="text-sm text-slate-200 font-mono whitespace-normal break-all">
@@ -440,8 +427,8 @@ const Dashboard = () => {
                               window.setTimeout(() => setHwidCopied(false), 1200);
                             } catch {
                               toast({
-                                title: t("dashboard.error", { defaultValue: "Error" }),
-                                description: t("dashboard.hwid.copyError", { defaultValue: "No se pudo copiar el HWID." }),
+                                title: t("dashboard.error"),
+                                description: t("dashboard.hwid.copyError"),
                                 variant: "destructive",
                               });
                             }
@@ -449,8 +436,8 @@ const Dashboard = () => {
                         >
                           <Copy className="h-4 w-4" />
                           {hwidCopied
-                            ? t("dashboard.hwid.copied", { defaultValue: "Copiado" })
-                            : t("dashboard.hwid.copy", { defaultValue: "Copiar" })}
+                            ? t("dashboard.hwid.copied")
+                            : t("dashboard.hwid.copy")}
                         </Button>
                       </div>
                     </div>
@@ -459,21 +446,21 @@ const Dashboard = () => {
                     <Activity className="h-4 w-4 text-slate-400" />
                     <div>
                       <p className="text-sm text-slate-400">
-                        {t("dashboard.hwid.connectionStatus.label", { defaultValue: "Estado de Conexión" })}
+                        {t("dashboard.hwid.connectionStatus.label")}
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         {userData.status === "online" ? (
                           <>
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                             <span className="text-green-400 font-medium">
-                              {t("dashboard.hwid.connectionStatus.online", { defaultValue: "En Línea" })}
+                              {t("dashboard.hwid.connectionStatus.online")}
                             </span>
                           </>
                         ) : (
                           <>
                             <div className="w-2 h-2 rounded-full bg-gray-500" />
                             <span className="text-gray-400 font-medium">
-                              {t("dashboard.hwid.connectionStatus.offline", { defaultValue: "Fuera de Línea" })}
+                              {t("dashboard.hwid.connectionStatus.offline")}
                             </span>
                           </>
                         )}
@@ -483,7 +470,7 @@ const Dashboard = () => {
                   {userData.strategies_active && userData.strategies_active.length > 0 && (
                     <div>
                       <p className="text-sm text-slate-400 mb-2">
-                        {t("dashboard.hwid.activeStrategies.label", { defaultValue: "Estrategias Activas" })}
+                        {t("dashboard.hwid.activeStrategies.label")}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {userData.strategies_active.map((strategy) => (
@@ -501,10 +488,10 @@ const Dashboard = () => {
                     <XCircle className="h-5 w-5 text-yellow-400 mt-0.5" />
                     <div>
                       <p className="text-white font-medium">
-                        {t("dashboard.hwid.notRegistered.title", { defaultValue: "HWID No Registrado" })}
+                        {t("dashboard.hwid.notRegistered.title")}
                       </p>
                       <p className="text-sm text-slate-400 mt-1">
-                        {t("dashboard.hwid.notRegistered.desc", { defaultValue: "Registra tu HWID para activar tu licencia" })}
+                        {t("dashboard.hwid.notRegistered.desc")}
                       </p>
                     </div>
                   </div>
@@ -513,7 +500,7 @@ const Dashboard = () => {
                     className="w-full gap-2"
                   >
                     <Key className="h-4 w-4" />
-                    {t("dashboard.hwid.registerButton", { defaultValue: "Registrar HWID" })}
+                    {t("dashboard.hwid.registerButton")}
                   </Button>
                 </>
               )}
@@ -525,10 +512,10 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-blue-100 flex items-center gap-2">
                 <Download className="h-5 w-5" />
-                {t("dashboard.software.title", { defaultValue: "Software AInside HWID Tool" })}
+                {t("dashboard.software.title")}
               </CardTitle>
               <CardDescription className="text-slate-300">
-                {t("dashboard.software.description", { defaultValue: "Descarga el software oficial para gestionar tu HWID y conectarte en tiempo real" })}
+                {t("dashboard.software.description")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -561,8 +548,8 @@ const Dashboard = () => {
                   } catch (e: any) {
                     console.error("Download error:", e);
                     toast({
-                      title: t("dashboard.software.downloadErrorTitle", { defaultValue: "Error" }),
-                      description: e?.message || t("dashboard.software.downloadErrorDesc", { defaultValue: "No se pudo generar el enlace de descarga." }),
+                      title: t("dashboard.software.downloadErrorTitle"),
+                      description: e?.message || t("dashboard.software.downloadErrorDesc"),
                       variant: "destructive",
                     });
                   }
@@ -570,20 +557,20 @@ const Dashboard = () => {
                 className="gap-2 bg-blue-600 hover:bg-blue-700"
               >
                 <Download className="h-4 w-4" />
-                {t("dashboard.software.download", { defaultValue: "Descargar para Windows" })}
+                {t("dashboard.software.download")}
               </Button>
 
               {downloadEmailOtpSent && (
                 <div className="mt-4 rounded-md border border-blue-500/20 bg-slate-950/20 p-4 space-y-3">
                   <div className="space-y-2">
                     <Label htmlFor="dashboard-download-email-otp" className="text-slate-200">
-                      {t("dashboard.software.otpLabel", { defaultValue: "Código por email" })}
+                      {t("dashboard.software.otpLabel")}
                     </Label>
                     <Input
                       id="dashboard-download-email-otp"
                       value={downloadEmailOtpValue}
                       onChange={(e) => setDownloadEmailOtpValue(e.target.value)}
-                      placeholder={t("dashboard.software.otpPlaceholder", { defaultValue: "Ingresá el código de 6 dígitos" })}
+                      placeholder={t("dashboard.software.otpPlaceholder")}
                       className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400"
                       inputMode="numeric"
                       autoComplete="one-time-code"
@@ -597,8 +584,8 @@ const Dashboard = () => {
                       className="flex-1"
                     >
                       {downloadVerifying
-                        ? t("dashboard.software.otpVerifying", { defaultValue: "Verificando..." })
-                        : t("dashboard.software.otpDownload", { defaultValue: "Verificar y descargar" })}
+                        ? t("dashboard.software.otpVerifying")
+                        : t("dashboard.software.otpDownload")}
                     </Button>
                     <Button
                       type="button"
@@ -608,8 +595,8 @@ const Dashboard = () => {
                       className="flex-1 border-slate-600/40 text-slate-200"
                     >
                       {downloadEmailOtpLoading
-                        ? t("dashboard.software.otpResendLoading", { defaultValue: "Enviando..." })
-                        : t("dashboard.software.otpResend", { defaultValue: "Reenviar código" })}
+                        ? t("dashboard.software.otpResendLoading")
+                        : t("dashboard.software.otpResend")}
                     </Button>
                   </div>
                 </div>

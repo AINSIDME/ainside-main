@@ -2093,7 +2093,14 @@
     "logout": {
       "button": "התנתק",
       "success": "התנתקת",
-      "message": "התנתקת בהצלחה"
+      "message": "התנתקת בהצלחה",
+      "error": "לא ניתן להתנתק"
+    },
+    "mfaRequired": {
+      "title": "נדרש אימות 2FA",
+      "message": "כדי לצפות בלוח הבקרה, עליכם תחילה לאמת את ה‑2FA (רמת AAL2).",
+      "cta": "מעבר ל‑2FA",
+      "back": "חזרה"
     },
     "profile": {
       "title": "פרטי משתמש",
@@ -2105,8 +2112,22 @@
     },
     "security": {
       "title": "אבטחה",
-      "description": "הפעילו 2FA כדי להגן על החשבון.",
-      "mfa": "הגדרת 2FA"
+      "description": "הגנו על חשבונכם עם 2FA, נתקו התחברויות מכשירים אחרים ואבטחו הורדות.",
+      "mfaStatusLabel": "סטטוס 2FA",
+      "mfaEnabled": "פעיל",
+      "mfaDisabled": "לא פעיל",
+      "aal": "רמת התחברות: {{current}} (הבאה: {{next}})",
+      "mfaFactors": "מאומתים: {{count}}",
+      "mfaNoFactors": "ללא 2FA",
+      "mfaManage": "ניהול 2FA",
+      "mfaEnable": "הפעלת 2FA",
+      "downloadsNote": "ההורדות מופקות עם קישורים זמניים ועשויות לדרוש 2FA (מומלץ). בנוסף, תוכלו לקבל דוא״ל בעת יצירת קישור.",
+      "sessions": {
+        "cta": "ניתוק מכשירים אחרים",
+        "successTitle": "ההתחברויות נותקו",
+        "successDesc": "התנתקתם ממכשירים אחרים.",
+        "error": "לא ניתן לנתק התחברויות."
+      }
     },
     "hwid": {
       "title": "סטטוס HWID",
@@ -2118,6 +2139,9 @@
         "desc": "רשמו את ה‑HWID כדי להפעיל את הרישיון"
       },
       "registerButton": "רישום HWID",
+      "copyError": "לא ניתן להעתיק את ה‑HWID.",
+      "copied": "הועתק",
+      "copy": "העתקה",
       "connectionStatus": {
         "label": "סטטוס חיבור",
         "online": "מחובר",
@@ -2130,7 +2154,18 @@
     "software": {
       "title": "AInside HWID Tool",
       "description": "הורידו את התוכנה הרשמית לניהול HWID ולהתחברות בזמן אמת",
-      "download": "הורדה ל‑Windows"
+      "download": "הורדה ל‑Windows",
+      "downloadErrorTitle": "שגיאה",
+      "downloadErrorDesc": "לא ניתן ליצור קישור הורדה.",
+      "otpLabel": "קוד בדוא״ל",
+      "otpPlaceholder": "הזינו את הקוד בן 6 הספרות",
+      "otpVerifying": "מאמת...",
+      "otpDownload": "אימות והורדה",
+      "otpResendLoading": "שולח...",
+      "otpResend": "שליחת קוד מחדש",
+      "otpSent": "קוד הורדה נשלח",
+      "otpSentDesc": "בדקו את הדוא״ל שלכם והזינו את הקוד כדי להוריד.",
+      "otpError": "לא ניתן לשלוח קוד."
     }
   },
   "cryptoPage": {

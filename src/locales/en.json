@@ -2092,9 +2092,16 @@
     "subtitle": "Manage your account and settings",
     "error": "Error",
     "logout": {
-      "button": "Sign out",
+      "button": "Sign Out",
       "success": "Signed out",
-      "message": "You have signed out successfully"
+      "message": "You have signed out successfully",
+      "error": "Could not sign out"
+    },
+    "mfaRequired": {
+      "title": "2FA Verification Required",
+      "message": "To view your dashboard, you must first verify your 2FA (AAL2 level).",
+      "cta": "Go to 2FA",
+      "back": "Back"
     },
     "profile": {
       "title": "User Information",
@@ -2106,8 +2113,22 @@
     },
     "security": {
       "title": "Security",
-      "description": "Enable 2FA to protect your account.",
-      "mfa": "Configure 2FA"
+      "description": "Protect your account with 2FA, sign out other sessions, and secure downloads.",
+      "mfaStatusLabel": "2FA Status",
+      "mfaEnabled": "Enabled",
+      "mfaDisabled": "Disabled",
+      "aal": "Session level: {{current}} (next: {{next}})",
+      "mfaFactors": "Verified: {{count}}",
+      "mfaNoFactors": "No 2FA",
+      "mfaManage": "Manage 2FA",
+      "mfaEnable": "Enable 2FA",
+      "downloadsNote": "Downloads are generated with temporary links and may require 2FA (recommended). You can also receive an email when a link is generated.",
+      "sessions": {
+        "cta": "Sign out other devices",
+        "successTitle": "Sessions closed",
+        "successDesc": "Signed out from other devices.",
+        "error": "Could not close sessions."
+      }
     },
     "hwid": {
       "title": "HWID Status",
@@ -2119,19 +2140,33 @@
         "desc": "Register your HWID to activate your license"
       },
       "registerButton": "Register HWID",
+      "copyError": "Could not copy HWID.",
+      "copied": "Copied",
+      "copy": "Copy",
       "connectionStatus": {
-        "label": "Connection status",
+        "label": "Connection Status",
         "online": "Online",
         "offline": "Offline"
       },
       "activeStrategies": {
-        "label": "Active strategies"
+        "label": "Active Strategies"
       }
     },
     "software": {
       "title": "AInside HWID Tool",
       "description": "Download the official software to manage your HWID and connect in real time",
-      "download": "Download for Windows"
+      "download": "Download for Windows",
+      "downloadErrorTitle": "Error",
+      "downloadErrorDesc": "Could not generate download link.",
+      "otpLabel": "Email code",
+      "otpPlaceholder": "Enter the 6-digit code",
+      "otpVerifying": "Verifying...",
+      "otpDownload": "Verify and download",
+      "otpResendLoading": "Sending...",
+      "otpResend": "Resend code",
+      "otpSent": "Download code sent",
+      "otpSentDesc": "Check your email and enter the code to download.",
+      "otpError": "Could not send code."
     }
   },
   "cryptoPage": {

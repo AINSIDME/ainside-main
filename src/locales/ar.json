@@ -2093,7 +2093,14 @@
     "logout": {
       "button": "تسجيل الخروج",
       "success": "تم تسجيل الخروج",
-      "message": "تم تسجيل الخروج بنجاح"
+      "message": "تم تسجيل الخروج بنجاح",
+      "error": "تعذر تسجيل الخروج"
+    },
+    "mfaRequired": {
+      "title": "مطلوب التحقق بخطوتين",
+      "message": "لعرض لوحة التحكم، يجب أولاً التحقق من المصادقة الثنائية (مستوى AAL2).",
+      "cta": "الانتقال إلى 2FA",
+      "back": "رجوع"
     },
     "profile": {
       "title": "معلومات المستخدم",
@@ -2105,8 +2112,22 @@
     },
     "security": {
       "title": "الأمان",
-      "description": "فعّل 2FA لحماية حسابك.",
-      "mfa": "إعداد 2FA"
+      "description": "احمِ حسابك بالمصادقة الثنائية، وقم بتسجيل الخروج من الأجهزة الأخرى، وتأمين التنزيلات.",
+      "mfaStatusLabel": "حالة 2FA",
+      "mfaEnabled": "مفعّل",
+      "mfaDisabled": "معطّل",
+      "aal": "مستوى الجلسة: {{current}} (التالي: {{next}})",
+      "mfaFactors": "تم التحقق: {{count}}",
+      "mfaNoFactors": "بدون 2FA",
+      "mfaManage": "إدارة 2FA",
+      "mfaEnable": "تفعيل 2FA",
+      "downloadsNote": "يتم إنشاء التنزيلات بروابط مؤقتة وقد تتطلب 2FA (موصى به). بالإضافة إلى ذلك، يمكنك تلقي بريد إلكتروني عند إنشاء رابط.",
+      "sessions": {
+        "cta": "تسجيل الخروج من الأجهزة الأخرى",
+        "successTitle": "تم إغلاق الجلسات",
+        "successDesc": "تم تسجيل الخروج من الأجهزة الأخرى.",
+        "error": "تعذر إغلاق الجلسات."
+      }
     },
     "hwid": {
       "title": "حالة HWID",
@@ -2118,6 +2139,9 @@
         "desc": "سجّل HWID لتفعيل الترخيص"
       },
       "registerButton": "تسجيل HWID",
+      "copyError": "تعذر نسخ HWID.",
+      "copied": "تم النسخ",
+      "copy": "نسخ",
       "connectionStatus": {
         "label": "حالة الاتصال",
         "online": "متصل",
@@ -2130,7 +2154,18 @@
     "software": {
       "title": "أداة HWID من AInside",
       "description": "نزّل البرنامج الرسمي لإدارة HWID والاتصال في الوقت الحقيقي",
-      "download": "تنزيل لـ Windows"
+      "download": "تنزيل لـ Windows",
+      "downloadErrorTitle": "خطأ",
+      "downloadErrorDesc": "تعذر إنشاء رابط التنزيل.",
+      "otpLabel": "رمز البريد الإلكتروني",
+      "otpPlaceholder": "أدخل الرمز المكون من 6 أرقام",
+      "otpVerifying": "جارٍ التحقق...",
+      "otpDownload": "التحقق والتنزيل",
+      "otpResendLoading": "جارٍ الإرسال...",
+      "otpResend": "إعادة إرسال الرمز",
+      "otpSent": "تم إرسال رمز التنزيل",
+      "otpSentDesc": "تحقق من بريدك الإلكتروني وأدخل الرمز للتنزيل.",
+      "otpError": "تعذر إرسال الرمز."
     }
   },
   "cryptoPage": {

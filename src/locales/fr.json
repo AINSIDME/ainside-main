@@ -1960,7 +1960,14 @@
     "logout": {
       "button": "Se déconnecter",
       "success": "Déconnecté",
-      "message": "Vous vous êtes déconnecté avec succès"
+      "message": "Vous vous êtes déconnecté avec succès",
+      "error": "Impossible de se déconnecter"
+    },
+    "mfaRequired": {
+      "title": "Vérification 2FA requise",
+      "message": "Pour voir votre tableau de bord, vous devez d'abord vérifier votre 2FA (niveau AAL2).",
+      "cta": "Aller à 2FA",
+      "back": "Retour"
     },
     "profile": {
       "title": "Informations utilisateur",
@@ -1972,8 +1979,22 @@
     },
     "security": {
       "title": "Sécurité",
-      "description": "Activez la 2FA pour protéger votre compte.",
-      "mfa": "Configurer la 2FA"
+      "description": "Protégez votre compte avec 2FA, déconnectez les autres sessions et sécurisez les téléchargements.",
+      "mfaStatusLabel": "Statut 2FA",
+      "mfaEnabled": "Activé",
+      "mfaDisabled": "Désactivé",
+      "aal": "Niveau de session : {{current}} (suivant : {{next}})",
+      "mfaFactors": "Vérifiés : {{count}}",
+      "mfaNoFactors": "Sans 2FA",
+      "mfaManage": "Gérer 2FA",
+      "mfaEnable": "Activer 2FA",
+      "downloadsNote": "Les téléchargements sont générés avec des liens temporaires et peuvent nécessiter 2FA (recommandé). Vous pouvez également recevoir un e-mail lors de la génération d'un lien.",
+      "sessions": {
+        "cta": "Déconnecter les autres appareils",
+        "successTitle": "Sessions fermées",
+        "successDesc": "Déconnecté des autres appareils.",
+        "error": "Impossible de fermer les sessions."
+      }
     },
     "hwid": {
       "title": "Statut HWID",
@@ -1985,6 +2006,9 @@
         "desc": "Enregistrez votre HWID pour activer votre licence"
       },
       "registerButton": "Enregistrer HWID",
+      "copyError": "Impossible de copier le HWID.",
+      "copied": "Copié",
+      "copy": "Copier",
       "connectionStatus": {
         "label": "Statut de connexion",
         "online": "En ligne",
@@ -1997,7 +2021,18 @@
     "software": {
       "title": "Outil HWID AInside",
       "description": "Téléchargez le logiciel officiel pour gérer votre HWID et vous connecter en temps réel",
-      "download": "Télécharger pour Windows"
+      "download": "Télécharger pour Windows",
+      "downloadErrorTitle": "Erreur",
+      "downloadErrorDesc": "Impossible de générer le lien de téléchargement.",
+      "otpLabel": "Code par e-mail",
+      "otpPlaceholder": "Entrez le code à 6 chiffres",
+      "otpVerifying": "Vérification...",
+      "otpDownload": "Vérifier et télécharger",
+      "otpResendLoading": "Envoi...",
+      "otpResend": "Renvoyer le code",
+      "otpSent": "Code de téléchargement envoyé",
+      "otpSentDesc": "Consultez votre e-mail et entrez le code pour télécharger.",
+      "otpError": "Impossible d'envoyer le code."
     }
   },
   "adminVerify2FA": {

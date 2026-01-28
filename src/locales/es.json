@@ -2092,9 +2092,16 @@
     "subtitle": "Gestiona tu cuenta y configuración",
     "error": "Error",
     "logout": {
-      "button": "Cerrar sesión",
+      "button": "Cerrar Sesión",
       "success": "Sesión cerrada",
-      "message": "Has cerrado sesión correctamente"
+      "message": "Has cerrado sesión correctamente",
+      "error": "No se pudo cerrar sesión"
+    },
+    "mfaRequired": {
+      "title": "Verificación 2FA requerida",
+      "message": "Para ver tu panel, primero tenés que verificar tu 2FA (nivel AAL2).",
+      "cta": "Ir a 2FA",
+      "back": "Volver"
     },
     "profile": {
       "title": "Información de Usuario",
@@ -2106,8 +2113,22 @@
     },
     "security": {
       "title": "Seguridad",
-      "description": "Activa 2FA para proteger tu cuenta.",
-      "mfa": "Configurar 2FA"
+      "description": "Protegé tu cuenta con 2FA, cerrá sesiones en otros dispositivos y asegurá descargas.",
+      "mfaStatusLabel": "Estado 2FA",
+      "mfaEnabled": "Activado",
+      "mfaDisabled": "Desactivado",
+      "aal": "Nivel de sesión: {{current}} (siguiente: {{next}})",
+      "mfaFactors": "Verificados: {{count}}",
+      "mfaNoFactors": "Sin 2FA",
+      "mfaManage": "Administrar 2FA",
+      "mfaEnable": "Activar 2FA",
+      "downloadsNote": "Las descargas se generan con enlaces temporales y pueden requerir 2FA (recomendado). Además, podés recibir un email cuando se genere un enlace.",
+      "sessions": {
+        "cta": "Cerrar sesión en otros dispositivos",
+        "successTitle": "Sesiones cerradas",
+        "successDesc": "Se cerró la sesión en otros dispositivos.",
+        "error": "No se pudo cerrar sesiones."
+      }
     },
     "hwid": {
       "title": "Estado de HWID",
@@ -2119,19 +2140,33 @@
         "desc": "Registra tu HWID para activar tu licencia"
       },
       "registerButton": "Registrar HWID",
+      "copyError": "No se pudo copiar el HWID.",
+      "copied": "Copiado",
+      "copy": "Copiar",
       "connectionStatus": {
-        "label": "Estado de conexión",
-        "online": "En línea",
-        "offline": "Fuera de línea"
+        "label": "Estado de Conexión",
+        "online": "En Línea",
+        "offline": "Fuera de Línea"
       },
       "activeStrategies": {
-        "label": "Estrategias activas"
+        "label": "Estrategias Activas"
       }
     },
     "software": {
       "title": "Software AInside HWID Tool",
       "description": "Descarga el software oficial para gestionar tu HWID y conectarte en tiempo real",
-      "download": "Descargar para Windows"
+      "download": "Descargar para Windows",
+      "downloadErrorTitle": "Error",
+      "downloadErrorDesc": "No se pudo generar el enlace de descarga.",
+      "otpLabel": "Código por email",
+      "otpPlaceholder": "Ingresá el código de 6 dígitos",
+      "otpVerifying": "Verificando...",
+      "otpDownload": "Verificar y descargar",
+      "otpResendLoading": "Enviando...",
+      "otpResend": "Reenviar código",
+      "otpSent": "Código de descarga enviado",
+      "otpSentDesc": "Revisá tu email e ingresá el código para descargar.",
+      "otpError": "No se pudo enviar el código."
     }
   },
   "cryptoPage": {
