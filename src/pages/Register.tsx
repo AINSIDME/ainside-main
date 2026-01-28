@@ -8,19 +8,28 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Key, AlertCircle, CheckCircle } from "lucide-react";
-import { LoginCard } from "./Login";
+import { Loader2, Key, AlertCircle, CheckCircle, Mail, ArrowRight, Shield } from "lucide-react";
 
-// Force rebuild - v2
+// URL y key para Edge Functions
+const SUPABASE_URL = "https://odlxhgatqyodxdessxts.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyMzY5MTMsImV4cCI6MjA3MjgxMjkxM30.btScPRHOEIdRShS7kYNFdzHKpQrwMZKRJ54KlGCl52s";
 
 const Register = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  
+  // OTP states
+  const [otpEmail, setOtpEmail] = useState("");
+  const [otpCode, setOtpCode] = useState("");
+  const [otpStep, setOtpStep] = useState<"email" | "code">("email");
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [otpExpiresIn, setOtpExpiresIn] = useState(0);
+  
   const [downloadEmailOtpSent, setDownloadEmailOtpSent] = useState(false);
   const [downloadEmailOtpValue, setDownloadEmailOtpValue] = useState("");
   const [downloadEmailOtpLoading, setDownloadEmailOtpLoading] = useState(false);
@@ -44,6 +53,101 @@ const Register = () => {
     };
     checkAuth();
   }, []);
+
+  // OTP Functions
+  const handleRequestOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setOtpLoading(true);
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/request-otp-code`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ 
+          email: otpEmail,
+          lang: i18n.language
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al enviar código");
+      }
+
+      if (data?.success) {
+        setOtpStep("code");
+        setOtpExpiresIn(data.expiresIn || 600);
+        toast({
+          title: t('otpLogin.codeSent'),
+          description: `${t('otpLogin.checkEmail')}: ${otpEmail}`,
+        });
+        
+        const interval = setInterval(() => {
+          setOtpExpiresIn((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      }
+    } catch (error: any) {
+      toast({
+        title: t('common.error'),
+        description: error.message || t('otpLogin.sendError'),
+        variant: "destructive",
+      });
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setOtpLoading(true);
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-otp-code`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ email: otpEmail, code: otpCode }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al verificar código");
+      }
+
+      if (data?.success && data?.magic_link) {
+        window.location.href = data.magic_link;
+      } else {
+        throw new Error(t('otpLogin.noAuthLink'));
+      }
+    } catch (error: any) {
+      toast({
+        title: t('common.error'),
+        description: error.message || t('otpLogin.invalidCode'),
+        variant: "destructive",
+      });
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -198,7 +302,121 @@ const Register = () => {
                 </p>
               </div>
               
-              <LoginCard redirectTo="/register" />
+              {/* OTP Login Card */}
+              <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
+                <CardContent className="pt-6 pb-8 px-6">
+                  {otpStep === "email" ? (
+                    <form onSubmit={handleRequestOTP} className="space-y-5">
+                      <div className="space-y-2">
+                        <Label htmlFor="otpEmail" className="text-slate-200 text-sm font-medium flex items-center gap-2">
+                          <Mail className="w-4 h-4" />
+                          {t('common.email')}
+                        </Label>
+                        <Input
+                          id="otpEmail"
+                          type="email"
+                          placeholder={t('otpLogin.emailPlaceholder')}
+                          value={otpEmail}
+                          onChange={(e) => setOtpEmail(e.target.value)}
+                          required
+                          className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={otpLoading}
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                      >
+                        {otpLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            {t('otpLogin.sending')}
+                          </>
+                        ) : (
+                          <>
+                            {t('otpLogin.sendCode')}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  ) : (
+                    <form onSubmit={handleVerifyOTP} className="space-y-5">
+                      <div className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-lg mb-4">
+                        <div className="flex items-start gap-3 mb-3">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                            <CheckCircle className="h-4 w-4 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">
+                              {t('otpLogin.codeSentTo')}
+                            </p>
+                            <p className="text-sm font-medium text-white">{otpEmail}</p>
+                          </div>
+                        </div>
+                        {otpExpiresIn > 0 && (
+                          <div className="flex items-center gap-2 pt-3 border-t border-slate-700/50">
+                            <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                            <span className="text-xs text-slate-400">
+                              {t('otpLogin.expiresIn')}: 
+                              <span className="font-mono font-medium text-white ml-2">{formatTime(otpExpiresIn)}</span>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="otpCode" className="text-slate-200 text-sm font-medium flex items-center gap-2">
+                          <Shield className="w-4 h-4" />
+                          {t('otpLogin.verificationCode')}
+                        </Label>
+                        <Input
+                          id="otpCode"
+                          type="text"
+                          placeholder="• • • • • •"
+                          value={otpCode}
+                          onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                          required
+                          maxLength={6}
+                          className="bg-slate-800/50 border-slate-700/50 text-white text-center text-2xl font-mono tracking-[0.5em] placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={otpLoading || otpCode.length !== 6}
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                      >
+                        {otpLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            {t('otpLogin.verifying')}
+                          </>
+                        ) : (
+                          <>
+                            <Shield className="mr-2 h-4 w-4" />
+                            {t('otpLogin.login')}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        onClick={() => {
+                          setOtpStep("email");
+                          setOtpCode("");
+                        }}
+                        className="w-full text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all"
+                      >
+                        ← {t('otpLogin.useAnotherEmail')}
+                      </Button>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
               
               <div className="mt-6 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg backdrop-blur-sm">
                 <div className="flex gap-3">
