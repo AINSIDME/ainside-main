@@ -286,30 +286,39 @@ const Register = () => {
         keywords={t("registerPage.seo.keywords")}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        {/* Fixed Logo */}
+        <div className="fixed top-10 left-10">
+          <img 
+            src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+            alt="AInside" 
+            className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
+          />
+        </div>
+
+        <div className="w-full max-w-lg">
           {!isAuthenticated ? (
             <>
               <div className="text-center mb-8">
-                <div className="inline-block p-3 bg-blue-500/10 rounded-2xl mb-4">
-                  <Key className="w-8 h-8 text-blue-400" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neutral-100 mb-4">
+                  <Key className="w-8 h-8 text-neutral-800" />
                 </div>
-                <h1 className="text-3xl font-bold text-white mb-2">
+                <h1 className="text-3xl font-light text-black tracking-tight mb-2">
                   {t("registerPage.title")}
                 </h1>
-                <p className="text-slate-400">
+                <p className="text-xs text-neutral-500 uppercase tracking-[0.25em] font-normal">
                   {t("registerPage.subtitle")}
                 </p>
               </div>
               
               {/* OTP Login Card */}
-              <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
+              <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
                 <CardContent className="pt-6 pb-8 px-6">
                   {otpStep === "email" ? (
                     <form onSubmit={handleRequestOTP} className="space-y-5">
-                      <div className="space-y-2">
-                        <Label htmlFor="otpEmail" className="text-slate-200 text-sm font-medium flex items-center gap-2">
-                          <Mail className="w-4 h-4" />
+                      <div className="space-y-3">
+                        <Label htmlFor="otpEmail" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+                          <Mail className="w-3.5 h-3.5" />
                           {t('common.email')}
                         </Label>
                         <Input
@@ -319,56 +328,56 @@ const Register = () => {
                           value={otpEmail}
                           onChange={(e) => setOtpEmail(e.target.value)}
                           required
-                          className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                          className="h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300"
                         />
                       </div>
 
                       <Button
                         type="submit"
                         disabled={otpLoading}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                        className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wide text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
                       >
                         {otpLoading ? (
                           <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                             {t('otpLogin.sending')}
                           </>
                         ) : (
                           <>
                             {t('otpLogin.sendCode')}
-                            <ArrowRight className="ml-2 h-4 w-4" />
+                            <ArrowRight className="ml-3 h-5 w-5" />
                           </>
                         )}
                       </Button>
                     </form>
                   ) : (
                     <form onSubmit={handleVerifyOTP} className="space-y-5">
-                      <div className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-lg mb-4">
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-                            <CheckCircle className="h-4 w-4 text-white" />
+                      <div className="bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 p-6 rounded-xl mb-6">
+                        <div className="flex items-start gap-3 mb-4">
+                          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                            <CheckCircle className="h-5 w-5 text-white" />
                           </div>
-                          <div className="flex-1">
-                            <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">
+                          <div className="flex-1 pt-1">
+                            <p className="text-xs text-neutral-500 uppercase tracking-wider mb-1">
                               {t('otpLogin.codeSentTo')}
                             </p>
-                            <p className="text-sm font-medium text-white">{otpEmail}</p>
+                            <p className="text-sm font-medium text-black">{otpEmail}</p>
                           </div>
                         </div>
                         {otpExpiresIn > 0 && (
-                          <div className="flex items-center gap-2 pt-3 border-t border-slate-700/50">
-                            <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                            <span className="text-xs text-slate-400">
+                          <div className="flex items-center gap-2 pt-3 border-t border-neutral-200">
+                            <div className="w-2 h-2 rounded-full bg-black animate-pulse" />
+                            <span className="text-xs text-neutral-600">
                               {t('otpLogin.expiresIn')}: 
-                              <span className="font-mono font-medium text-white ml-2">{formatTime(otpExpiresIn)}</span>
+                              <span className="font-mono font-medium text-black ml-2">{formatTime(otpExpiresIn)}</span>
                             </span>
                           </div>
                         )}
                       </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="otpCode" className="text-slate-200 text-sm font-medium flex items-center gap-2">
-                          <Shield className="w-4 h-4" />
+                      <div className="space-y-3">
+                        <Label htmlFor="otpCode" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+                          <Shield className="w-3.5 h-3.5" />
                           {t('otpLogin.verificationCode')}
                         </Label>
                         <Input
@@ -379,25 +388,25 @@ const Register = () => {
                           onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                           required
                           maxLength={6}
-                          className="bg-slate-800/50 border-slate-700/50 text-white text-center text-2xl font-mono tracking-[0.5em] placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                          className="h-20 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-center text-4xl font-mono tracking-[0.5em] rounded-lg transition-all duration-300"
                         />
                       </div>
 
                       <Button
                         type="submit"
                         disabled={otpLoading || otpCode.length !== 6}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                        className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
                       >
                         {otpLoading ? (
                           <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                             {t('otpLogin.verifying')}
                           </>
                         ) : (
                           <>
-                            <Shield className="mr-2 h-4 w-4" />
+                            <Shield className="mr-3 h-5 w-5" />
                             {t('otpLogin.login')}
-                            <ArrowRight className="ml-2 h-4 w-4" />
+                            <ArrowRight className="ml-3 h-5 w-5" />
                           </>
                         )}
                       </Button>
@@ -409,7 +418,7 @@ const Register = () => {
                           setOtpStep("email");
                           setOtpCode("");
                         }}
-                        className="w-full text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all"
+                        className="w-full h-12 text-neutral-500 hover:text-black hover:bg-neutral-100 font-light rounded-lg transition-all duration-300"
                       >
                         ← {t('otpLogin.useAnotherEmail')}
                       </Button>
@@ -418,21 +427,21 @@ const Register = () => {
                 </CardContent>
               </Card>
               
-              <div className="mt-6 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg backdrop-blur-sm">
+              <div className="mt-6 p-4 bg-neutral-100 border border-neutral-200 rounded-lg">
                 <div className="flex gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-slate-300">
+                  <AlertCircle className="w-5 h-5 text-neutral-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-neutral-700 font-light">
                     {t("registerPage.auth.noteText")}
                   </p>
                 </div>
               </div>
             </>
           ) : !isRegistered ? (
-            <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
-              <CardContent className="pt-6 pb-8 px-6 space-y-5">
+            <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+              <CardContent className="pt-6 pb-8 px-6 space-y-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="orderId" className="text-slate-200 text-sm font-medium">
+                  <div className="space-y-3">
+                    <Label htmlFor="orderId" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em]">
                       {t("registerPage.form.orderId.label")}
                     </Label>
                     <div className="relative">
@@ -444,13 +453,13 @@ const Register = () => {
                         value={formData.orderId}
                         onChange={handleInputChange}
                         required
-                        className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                        className="h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="hwid" className="text-slate-200 text-sm font-medium">
+                  <div className="space-y-3">
+                    <Label htmlFor="hwid" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em]">
                       {t("registerPage.form.hwid.label")}
                     </Label>
                     <div className="relative">
@@ -462,10 +471,10 @@ const Register = () => {
                         value={formData.hwid}
                         onChange={handleInputChange}
                         required
-                        className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5 font-mono"
+                        className="h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base font-mono rounded-lg transition-all duration-300"
                       />
                     </div>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-neutral-500 mt-1">
                       {t("registerPage.form.hwid.hint")}
                     </p>
                   </div>
@@ -473,16 +482,16 @@ const Register = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
+                    className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wide text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                         {t("registerPage.form.submitting")}
                       </>
                     ) : (
                       <>
-                        <Key className="mr-2 h-4 w-4" />
+                        <Key className="mr-3 h-5 w-5" />
                         {t("registerPage.form.submit")}
                       </>
                     )}

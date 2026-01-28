@@ -255,14 +255,14 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
   };
 
   return (
-    <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
-      <CardContent className="pt-6 pb-8 px-6 space-y-5">{/* Google Login (only in login mode) */}
+    <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+      <CardContent className="pt-12 pb-10 px-12 space-y-6">{/* Google Login (only in login mode) */}
         {!isSignUpMode && (
           <>
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white hover:bg-gray-50 text-gray-900 border-gray-300 py-5 rounded-lg font-medium transition-all hover:shadow-md"
+              className="w-full h-14 bg-white hover:bg-gray-50 text-gray-900 border-2 border-neutral-200 hover:border-neutral-300 rounded-lg font-medium transition-all hover:shadow-md"
               onClick={handleGoogleLogin}
               disabled={isGoogleLoading}
             >
@@ -293,10 +293,10 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-slate-700/50" />
+                <span className="w-full border-t border-neutral-200" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-slate-900/50 px-2 text-slate-400">{t("login.or", { defaultValue: "O" })}</span>
+                <span className="bg-white px-2 text-neutral-400">{t("login.or", { defaultValue: "O" })}</span>
               </div>
             </div>
           </>
@@ -304,11 +304,11 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
 
         <form
           onSubmit={isSignUpMode ? handleEmailSignUp : handleEmailLogin}
-          className="space-y-4"
+          className="space-y-5"
         >
           {isSignUpMode && (
-            <div className="space-y-2">
-              <Label htmlFor="fullName" className="text-slate-200">
+            <div className="space-y-3">
+              <Label htmlFor="fullName" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em]">
                 {t("login.signup.name.label", { defaultValue: "Nombre" })}
               </Label>
               <Input
@@ -317,7 +317,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                 placeholder={t("login.signup.name.placeholder", { defaultValue: "Tu nombre" })}
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-5 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                className="h-14 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300"
               />
             </div>
           )}
@@ -327,7 +327,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
               <Button
                 type="button"
                 onClick={handleGeneratePassword}
-                className="flex-1 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+                className="flex-1 h-12 bg-neutral-800 hover:bg-neutral-900 text-white rounded-lg transition-all"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 Generar Password Seguro
@@ -337,7 +337,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                   type="button"
                   onClick={handleCopyPassword}
                   variant="outline"
-                  className="border-slate-600 hover:bg-slate-700"
+                  className="h-12 border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 rounded-lg transition-all"
                 >
                   <Copy className="w-4 h-4" />
                 </Button>
@@ -345,9 +345,9 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
             </div>
           )}
 
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-200 text-sm font-medium">
-              <Mail className="inline h-4 w-4 mr-2" />
+          <div className="space-y-3">
+            <Label htmlFor="email" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+              <Mail className="inline h-3.5 w-3.5" />
               {t("login.email.label", { defaultValue: "Email" })}
             </Label>
             <Input
@@ -357,13 +357,13 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-5 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+              className="h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300"
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-slate-200 text-sm font-medium">
-              <Lock className="inline h-4 w-4 mr-2" />
+          <div className="space-y-3">
+            <Label htmlFor="password" className="text-xs font-medium text-neutral-700 uppercase tracking-[0.15em] flex items-center gap-2">
+              <Lock className="inline h-3.5 w-3.5" />
               {t("login.password.label", { defaultValue: "Contraseña" })}
             </Label>
               <div className="relative">
@@ -374,19 +374,19 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-5 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all pr-10"
+                  className="h-16 px-6 bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black text-base rounded-lg transition-all duration-300 pr-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 transition-colors"
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
               
               {isSignUpMode && password && (
-                <div className={`flex items-center gap-2 px-3 py-2 rounded-md border ${passwordStrength.color}`}>
+                <div className={`flex items-center gap-2 px-3 py-2 rounded-md border-2 ${passwordStrength.color}`}>
                   <passwordStrength.icon className="w-4 h-4" />
                   <span className="text-xs font-medium">Seguridad: {passwordStrength.label}</span>
                   <div className="ml-auto flex gap-1">
@@ -394,7 +394,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                       <div
                         key={i}
                         className={`w-1 h-3 rounded-full ${
-                          i < passwordStrength.score ? 'bg-current' : 'bg-slate-700'
+                          i < passwordStrength.score ? 'bg-current' : 'bg-neutral-200'
                         }`}
                       />
                     ))}
@@ -405,7 +405,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
 
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold py-5 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all"
+            className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wide text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 disabled:bg-neutral-300 disabled:shadow-none"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -425,11 +425,11 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
         </form>
 
         <div className="text-center text-sm pt-2">
-          <div className="text-slate-300">
+          <div className="text-neutral-600 font-light">
             {t("login.noAccount", { defaultValue: "¿No tienes cuenta?" })}{" "}
             <button
               type="button"
-              className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+              className="text-neutral-900 hover:text-black font-medium transition-colors"
               onClick={() => setMode(isSignUpMode ? "login" : "signup")}
             >
               {isSignUpMode
@@ -464,15 +464,18 @@ const Login = () => {
         keywords={t("login.seo.keywords", { defaultValue: "login, iniciar sesión, acceso, cuenta, dashboard" })}
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+        {/* Fixed Logo */}
+        <div className="fixed top-10 left-10">
+          <img 
+            src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+            alt="AInside" 
+            className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
+          />
         </div>
 
         {/* Login Card Container */}
-        <div className="relative w-full max-w-md">
+        <div className="w-full max-w-lg">
           {/* Login Form */}
           <LoginCard redirectTo={redirectTo} />
         </div>

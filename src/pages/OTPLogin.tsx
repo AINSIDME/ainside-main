@@ -129,7 +129,7 @@ export default function OTPLogin() {
       {/* Logo elegante */}
       <div className="fixed top-10 left-10">
         <img 
-          src="https://ainside.me/brand/logo-master.png" 
+          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
           alt="AInside" 
           className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
         />
