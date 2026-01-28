@@ -1765,7 +1765,7 @@
       "q1": "Por qué necesito registrar mi HWID?",
       "title": "Preguntas Frecuentes"
     },
-    "subtitle": "Activa tu licencia del algoritmo registrando tu ID de Hardware",
+    "subtitle": "Registra tu ID de Hardware (HWID) para activar tu licencia",
     "copyToast": {
       "desc": "Comando copiado al portapapeles",
       "title": "Copiado"
@@ -1787,6 +1787,7 @@
       "message": "Tu HWID ha sido registrado exitosamente. Ahora puedes activar tu algoritmo.",
       "documentation": "Ver documentación"
     },
+    "title": "Registro de HWID",
     "badge": "Activación de Licencia",
     "form": {
       "description": "Completa el formulario para activar tu algoritmo",
@@ -1813,7 +1814,7 @@
         "hint": "Ver instrucciones a la derecha ",
         "placeholder": "123456789012 o XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
       },
-      "title": "Registra tu Licencia",
+      "title": "Registro de HWID",
       "email": {
         "label": "Correo Electrónico",
         "hint": "Usa el email de tu compra",
@@ -1821,11 +1822,11 @@
       }
     },
     "seo": {
-      "title": "Registrar HWID - AInside",
-      "description": "Registra tu ID de Hardware (HWID) para activar tu licencia del algoritmo",
-      "keywords": "HWID, registro, algoritmo, licencia, activación"
+      "title": "Registro de HWID - Activación de Licencia - AInside",
+      "description": "Registra tu ID de Hardware (HWID) para activar tu licencia del algoritmo AInside de trading",
+      "keywords": "HWID, registro, algoritmo, licencia, activación, hardware id"
     },
-    "title": "Registra tu HWID"
+    "title": "Registro de HWID"
   },
   "login": {
     "seo": {

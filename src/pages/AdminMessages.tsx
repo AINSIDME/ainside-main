@@ -69,9 +69,15 @@ const AdminMessages = () => {
 
   const updateMessageStatus = async (id: string, status: 'read' | 'archived') => {
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .update({ status, updated_at: new Date().toISOString() })
+      const updatePayload: { status: 'read' | 'archived'; updated_at: string } = {
+        status,
+        updated_at: new Date().toISOString(),
+      };
+
+      // `contact_messages` is typed as non-updatable (Update = never) in the generated Supabase types,
+      // so we cast only this update query to `any` to avoid the TS error.
+      const { error } = await (supabase.from('contact_messages') as any)
+        .update(updatePayload)
         .eq('id', id);
 
       if (error) throw error;

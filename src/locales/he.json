@@ -1820,11 +1820,11 @@
       }
     },
     "seo": {
-      "title": "הרשמה - AInside",
-      "description": "Register your Hardware ID (HWID) to activate your algorithm license",
-      "keywords": "HWID, registration, algorithm, license, activation"
+      "title": "רישום HWID - הפעלת רישיון - AInside",
+      "description": "רשום את מזהה החומרה (HWID) שלך כדי להפעיל את רישיון האלגוריתם של AInside",
+      "keywords": "HWID, רישום, אלגוריתם, רישיון, הפעלה, מזהה חומרה"
     },
-    "title": "צור חשבון חדש"
+    "title": "רישום HWID"
   },
   "login": {
     "seo": {

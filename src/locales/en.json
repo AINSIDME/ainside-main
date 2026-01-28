@@ -1821,11 +1821,11 @@
       }
     },
     "seo": {
-      "title": "Register HWID - AInside",
-      "description": "Register your Hardware ID (HWID) to activate your algorithm license",
-      "keywords": "HWID, registration, algorithm, license, activation"
+      "title": "HWID Registration - License Activation - AInside",
+      "description": "Register your Hardware ID (HWID) to activate your AInside trading algorithm license",
+      "keywords": "HWID, registration, algorithm, license, activation, hardware id"
     },
-    "title": "Register Your HWID"
+    "title": "HWID Registration"
   },
   "login": {
     "seo": {

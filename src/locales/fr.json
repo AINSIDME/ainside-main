@@ -1819,11 +1819,11 @@
       }
     },
     "seo": {
-      "title": "Enregistrer HWID - AInside",
-      "description": "Enregistrez votre ID matériel (HWID) pour activer votre licence d'algorithme",
-      "keywords": "HWID, enregistrement, algorithme, licence, activation"
+      "title": "Enregistrement HWID - Activation de Licence - AInside",
+      "description": "Enregistrez votre ID matériel (HWID) pour activer votre licence d'algorithme de trading AInside",
+      "keywords": "HWID, enregistrement, algorithme, licence, activation, id matériel"
     },
-    "title": "Enregistrez Votre HWID"
+    "title": "Enregistrement HWID"
   },
   "login": {
     "seo": {
