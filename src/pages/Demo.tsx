@@ -14,113 +14,288 @@ const Demo = () => {
   const [trades, setTrades] = useState<Array<{ type: string, entry: number, exit: number, pnl: number }>>([]);
   const [totalPnL, setTotalPnL] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Generar datos de respaldo
+  const generateFallbackData = () => {
+    const data: CandlestickData[] = [];
+    let price = 6025;
+    const now = Math.floor(Date.now() / 1000);
+
+    for (let i = 0; i < 168; i++) {
+      const time = now - (168 - i) * 3600;
+      const open = price;
+      const change = (Math.random() - 0.5) * 8;
+      const close = open + change;
+      const high = Math.max(open, close) + Math.random() * 4;
+      const low = Math.min(open, close) - Math.random() * 4;
+
+      data.push({ time: time as any, open, high, low, close });
+      price = close;
+    }
+
+    return data;
+  };
+
+  // Agregar señales de trading
+  const addTradingSignals = (data: CandlestickData[]) => {
+    const markers: any[] = [];
+    let inPosition = false;
+    let entryPrice = 0;
+    let entryTime = 0;
+
+    for (let i = 20; i < data.length - 10; i++) {
+      const candle = data[i];
+      
+      if (!inPosition && Math.random() > 0.92) {
+        const isLong = Math.random() > 0.5;
+        inPosition = true;
+        entryPrice = candle.close;
+        entryTime = candle.time as number;
+        
+        markers.push({
+          time: candle.time,
+          position: isLong ? 'belowBar' : 'aboveBar',
+          color: isLong ? '#26a69a' : '#ef5350',
+          shape: isLong ? 'arrowUp' : 'arrowDown',
+          text: isLong ? `LONG @ ${candle.close.toFixed(2)}` : `SHORT @ ${candle.close.toFixed(2)}`,
+          size: 2,
+        });
+      } else if (inPosition && (i as number) > entryTime + 5) {
+        const priceDiff = candle.close - entryPrice;
+        const shouldExit = Math.abs(priceDiff) > 15 || Math.random() > 0.85;
+        
+        if (shouldExit) {
+          const pnl = priceDiff * 50;
+          markers.push({
+            time: candle.time,
+            position: pnl >= 0 ? 'aboveBar' : 'belowBar',
+            color: pnl >= 0 ? '#2196F3' : '#ff9800',
+            shape: 'circle',
+            text: `EXIT ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(0)}`,
+            size: 1,
+          });
+          inPosition = false;
+        }
+      }
+    }
+
+    return markers;
+  };
 
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
-    // Crear el gráfico con configuración profesional tipo TradingView
-    const chart = createChart(chartContainerRef.current, {
-      width: chartContainerRef.current.clientWidth,
-      height: 800,
-      layout: {
-        background: { color: '#0a0a0a' },
-        textColor: '#d1d4dc',
-      },
-      grid: {
-        vertLines: { color: '#1a1a1a' },
-        horzLines: { color: '#1a1a1a' },
-      },
-      crosshair: {
-        mode: 1,
-        vertLine: {
-          width: 1,
-          color: '#758696',
-          style: LineStyle.Dashed,
-        },
-        horzLine: {
-          width: 1,
-          color: '#758696',
-          style: LineStyle.Dashed,
-        },
-      },
-      rightPriceScale: {
-        borderColor: '#2B2B43',
-        textColor: '#d1d4dc',
-      },
-      timeScale: {
-        borderColor: '#2B2B43',
-        textColor: '#d1d4dc',
-        timeVisible: true,
-        secondsVisible: false,
-      },
-    });
+    let chart: IChartApi | null = null;
+    let candlestickSeries: ISeriesApi<"Candlestick"> | null = null;
+    let tradingInterval: NodeJS.Timeout | null = null;
 
-    chartRef.current = chart;
-
-    // Crear serie de velas
-    const candlestickSeries = chart.addCandlestickSeries({
-      upColor: '#26a69a',
-      downColor: '#ef5350',
-      borderVisible: false,
-      wickUpColor: '#26a69a',
-      wickDownColor: '#ef5350',
-    });
-
-    candlestickSeriesRef.current = candlestickSeries;
-
-    // Cargar datos históricos reales de Yahoo Finance
-    const fetchData = async () => {
+    const initChart = async () => {
       try {
-        const response = await fetch(
-          'https://query1.finance.yahoo.com/v8/finance/chart/ES=F?interval=1h&range=7d'
-        );
-        const data = await response.json();
-        
-        if (data.chart?.result?.[0]) {
-          const result = data.chart.result[0];
-          const timestamps = result.timestamp || [];
-          const quote = result.indicators.quote[0];
-          
-          const candleData: CandlestickData[] = timestamps
-            .map((timestamp: number, idx: number) => {
-              const open = quote.open[idx];
-              const high = quote.high[idx];
-              const low = quote.low[idx];
-              const close = quote.close[idx];
-              
-              if (open && high && low && close) {
-                return {
-                  time: timestamp as any,
-                  open,
-                  high,
-                  low,
-                  close,
-                };
-              }
-              return null;
-            })
-            .filter((candle): candle is CandlestickData => candle !== null);
+        // Crear el gráfico
+        chart = createChart(chartContainerRef.current!, {
+          width: chartContainerRef.current!.clientWidth,
+          height: 800,
+          layout: {
+            background: { color: '#0a0a0a' },
+            textColor: '#d1d4dc',
+          },
+          grid: {
+            vertLines: { color: '#1a1a1a' },
+            horzLines: { color: '#1a1a1a' },
+          },
+          crosshair: {
+            mode: 1,
+            vertLine: {
+              width: 1,
+              color: '#758696',
+              style: LineStyle.Dashed,
+            },
+            horzLine: {
+              width: 1,
+              color: '#758696',
+              style: LineStyle.Dashed,
+            },
+          },
+          rightPriceScale: {
+            borderColor: '#2B2B43',
+            textColor: '#d1d4dc',
+          },
+          timeScale: {
+            borderColor: '#2B2B43',
+            textColor: '#d1d4dc',
+            timeVisible: true,
+            secondsVisible: false,
+          },
+        });
 
-          if (candleData.length > 0) {
-            candlestickSeries.setData(candleData);
-            setCurrentPrice(candleData[candleData.length - 1].close);
+        chartRef.current = chart;
+
+        // Crear serie de velas
+        candlestickSeries = chart.addCandlestickSeries({
+          upColor: '#26a69a',
+          downColor: '#ef5350',
+          borderVisible: false,
+          wickUpColor: '#26a69a',
+          wickDownColor: '#ef5350',
+        });
+
+        candlestickSeriesRef.current = candlestickSeries;
+
+        // Intentar cargar datos reales
+        let candleData: CandlestickData[] = [];
+        
+        try {
+          console.log('Fetching data from Yahoo Finance...');
+          const response = await fetch(
+            'https://query1.finance.yahoo.com/v8/finance/chart/ES=F?interval=1h&range=7d',
+            { mode: 'cors' }
+          );
+          
+          if (!response.ok) throw new Error('API response not OK');
+          
+          const data = await response.json();
+          
+          if (data.chart?.result?.[0]) {
+            const result = data.chart.result[0];
+            const timestamps = result.timestamp || [];
+            const quote = result.indicators.quote[0];
             
-            // Agregar señales de trading algorítmico realistas
-            addTradingSignals(candlestickSeries, candleData);
+            candleData = timestamps
+              .map((timestamp: number, idx: number) => {
+                const open = quote.open[idx];
+                const high = quote.high[idx];
+                const low = quote.low[idx];
+                const close = quote.close[idx];
+                
+                if (open && high && low && close) {
+                  return {
+                    time: timestamp as any,
+                    open,
+                    high,
+                    low,
+                    close,
+                  };
+                }
+                return null;
+              })
+              .filter((candle): candle is CandlestickData => candle !== null);
+              
+            console.log('Data loaded successfully:', candleData.length, 'candles');
           }
+        } catch (apiError) {
+          console.warn('API failed, using fallback data:', apiError);
+          candleData = generateFallbackData();
         }
+
+        // Si no hay datos, usar fallback
+        if (candleData.length === 0) {
+          console.log('No data from API, using fallback');
+          candleData = generateFallbackData();
+        }
+
+        // Establecer datos en el gráfico
+        candlestickSeries.setData(candleData);
+        setCurrentPrice(candleData[candleData.length - 1].close);
+        
+        // Agregar señales de trading
+        const markers = addTradingSignals(candleData);
+        candlestickSeries.setMarkers(markers);
+
         setIsLoading(false);
-      } catch (error) {
-        console.error('Error loading data:', error);
-        // Fallback a datos simulados
-        generateFallbackData(candlestickSeries);
+
+        // Simulación de trading en tiempo real
+        tradingInterval = setInterval(() => {
+          if (!candlestickSeries) return;
+
+          const data = candlestickSeries.data() as CandlestickData[];
+          if (data.length === 0) return;
+
+          const lastCandle = data[data.length - 1];
+          const lastTime = lastCandle.time as number;
+          const newTime = lastTime + 3600;
+
+          const volatility = 2.5;
+          const trend = (Math.random() - 0.48) * 3;
+          const open = lastCandle.close;
+          const change = trend + (Math.random() - 0.5) * volatility;
+          const close = open + change;
+          const high = Math.max(open, close) + Math.random() * volatility;
+          const low = Math.min(open, close) - Math.random() * volatility;
+
+          const newCandle: CandlestickData = {
+            time: newTime as any,
+            open,
+            high,
+            low,
+            close,
+          };
+
+          candlestickSeries.update(newCandle);
+          setCurrentPrice(close);
+
+          // Lógica de posición automática
+          if (!position && Math.random() > 0.85) {
+            const isLong = Math.random() > 0.5;
+            setPosition({ type: isLong ? 'long' : 'short', entry: close, pnl: 0 });
+            
+            const markers = candlestickSeries.markers();
+            markers.push({
+              time: newTime as any,
+              position: isLong ? 'belowBar' : 'aboveBar',
+              color: isLong ? '#26a69a' : '#ef5350',
+              shape: isLong ? 'arrowUp' : 'arrowDown',
+              text: isLong ? `LONG ${Math.floor(Math.random() * 80 + 20)}` : `SHORT ${Math.floor(Math.random() * 80 + 20)}`,
+              size: 2,
+            });
+            candlestickSeries.setMarkers(markers);
+          } else if (position) {
+            const priceDiff = position.type === 'long' 
+              ? close - position.entry 
+              : position.entry - close;
+            const currentPnL = priceDiff * 50;
+            
+            setPosition({ ...position, pnl: currentPnL });
+
+            if (priceDiff > 12 || priceDiff < -6) {
+              const finalPnL = priceDiff * 50;
+              
+              setTrades(prev => [{
+                type: position.type.toUpperCase(),
+                entry: position.entry,
+                exit: close,
+                pnl: finalPnL
+              }, ...prev].slice(0, 10));
+              
+              setTotalPnL(prev => prev + finalPnL);
+              
+              const markers = candlestickSeries.markers();
+              markers.push({
+                time: newTime as any,
+                position: finalPnL >= 0 ? 'aboveBar' : 'belowBar',
+                color: finalPnL >= 0 ? '#2196F3' : '#ff9800',
+                shape: 'circle',
+                text: `CloseEOD ${finalPnL >= 0 ? '+' : ''}$${finalPnL.toFixed(0)}`,
+                size: 1,
+              });
+              candlestickSeries.setMarkers(markers);
+              
+              setPosition(null);
+            }
+          }
+        }, 8000);
+
+      } catch (err) {
+        console.error('Error initializing chart:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error');
         setIsLoading(false);
       }
     };
 
-    fetchData();
+    // Inicializar el gráfico
+    initChart();
 
-    // Redimensionar gráfico cuando cambia el tamaño de la ventana
+    // Redimensionar
     const handleResize = () => {
       if (chartContainerRef.current && chart) {
         chart.applyOptions({ 
@@ -132,27 +307,25 @@ const Demo = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Simulación de trading en tiempo real
-    const tradingInterval = setInterval(() => {
-      simulateAlgoTrading(candlestickSeries);
-    }, 8000);
-
     return () => {
       window.removeEventListener('resize', handleResize);
-      clearInterval(tradingInterval);
-      chart.remove();
+      if (tradingInterval) clearInterval(tradingInterval);
+      if (chart) chart.remove();
     };
   }, []);
 
-  // Función para agregar señales de trading realistas en el gráfico
-  const addTradingSignals = (series: ISeriesApi<"Candlestick">, data: CandlestickData[]) => {
-    const markers: any[] = [];
-    let inPosition = false;
-    let entryPrice = 0;
-    let entryTime = 0;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <Activity className="w-12 h-12 text-blue-500 animate-pulse mx-auto mb-4" />
+          <div className="text-white font-mono text-xl">Loading Professional Chart...</div>
+        </div>
+      </div>
+    );
+  }
 
-    for (let i = 20; i < data.length - 10; i++) {
-      const candle = data[i];
+  return (
       
       // Lógica de entrada (basada en promedios móviles simulados)
       if (!inPosition && Math.random() > 0.92) {
