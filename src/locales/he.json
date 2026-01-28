@@ -865,10 +865,10 @@
     "agreementRequired": "You must accept the Responsibility Agreement to proceed"
   },
   "contact": {
-    "badge": "Get In Touch",
-    "title": "Contact",
-    "subtitle": "Us",
-    "description": "Contact our software development team to learn about our trading algorithms and analytical tool rental services"
+    "badge": "צור קשר",
+    "title": "צור קשר",
+    "subtitle": "איתנו",
+    "description": "צור קשר עם צוות פיתוח התוכנה שלנו כדי ללמוד על אלגוריתמי המסחר ושירותי השכרת כלי הניתוח שלנו"
   },
   "accessibility": {
     "title": "Accessibility Statement",

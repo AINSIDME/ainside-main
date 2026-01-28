@@ -11,7 +11,7 @@ import ar from '../locales/ar.json';
 import ru from '../locales/ru.json';
 
 // Clear old i18next cache on version change
-const I18N_VERSION = '1.0.11';
+const I18N_VERSION = '1.0.12';
 const storedVersion = localStorage.getItem('i18n_version');
 if (storedVersion !== I18N_VERSION) {
   // Clear all i18next related localStorage keys
