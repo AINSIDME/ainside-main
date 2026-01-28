@@ -361,12 +361,11 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
             />
           </div>
 
-          {!isResetMode && (
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-200 text-sm font-medium">
-                <Lock className="inline h-4 w-4 mr-2" />
-                {t("login.password.label", { defaultValue: "Contraseña" })}
-              </Label>
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-slate-200 text-sm font-medium">
+              <Lock className="inline h-4 w-4 mr-2" />
+              {t("login.password.label", { defaultValue: "Contraseña" })}
+            </Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -403,7 +402,6 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                 </div>
               )}
             </div>
-          )}
 
           <Button
             type="submit"
