@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PageSEO } from "@/components/seo/PageSEO";
@@ -8,7 +8,49 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Mail, Lock, LogIn } from "lucide-react";
+import { Loader2, Mail, Lock, LogIn, Sparkles, Copy, Eye, EyeOff, Shield, ShieldAlert, ShieldCheck } from "lucide-react";
+
+// Función para generar password aleatorio seguro
+const generateSecurePassword = (length: number = 16): string => {
+  const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+  const numbers = '0123456789';
+  const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+  const allChars = uppercase + lowercase + numbers + symbols;
+  
+  let password = '';
+  password += uppercase[Math.floor(Math.random() * uppercase.length)];
+  password += lowercase[Math.floor(Math.random() * lowercase.length)];
+  password += numbers[Math.floor(Math.random() * numbers.length)];
+  password += symbols[Math.floor(Math.random() * symbols.length)];
+  
+  for (let i = password.length; i < length; i++) {
+    password += allChars[Math.floor(Math.random() * allChars.length)];
+  }
+  
+  return password.split('').sort(() => Math.random() - 0.5).join('');
+};
+
+// Función para evaluar seguridad del password
+const evaluatePasswordStrength = (password: string): { score: number; label: string; color: string; icon: any } => {
+  if (!password) return { score: 0, label: '', color: '', icon: Shield };
+  
+  let score = 0;
+  if (password.length >= 8) score += 1;
+  if (password.length >= 12) score += 1;
+  if (password.length >= 16) score += 1;
+  if (/[a-z]/.test(password)) score += 1;
+  if (/[A-Z]/.test(password)) score += 1;
+  if (/[0-9]/.test(password)) score += 1;
+  if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+  if (/(.)\1{2,}/.test(password)) score -= 1;
+  if (/123|abc|qwerty|password/i.test(password)) score -= 2;
+  
+  if (score <= 2) return { score, label: 'Débil', color: 'text-red-400 bg-red-500/10 border-red-500/30', icon: ShieldAlert };
+  if (score <= 4) return { score, label: 'Media', color: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30', icon: Shield };
+  if (score <= 6) return { score, label: 'Fuerte', color: 'text-green-400 bg-green-500/10 border-green-500/30', icon: ShieldCheck };
+  return { score, label: 'Muy Fuerte', color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30', icon: ShieldCheck };
+};
 
 const getAppOrigin = () => {
   const configured = (import.meta.env.VITE_APP_ORIGIN as string | undefined)?.trim();
@@ -37,10 +79,40 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
   const [fullName, setFullName] = useState("");
   const [isResetMode, setIsResetMode] = useState(false);
   const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const passwordStrength = useMemo(() => evaluatePasswordStrength(password), [password]);
 
   const setMode = (mode: "login" | "reset" | "signup") => {
     setIsResetMode(mode === "reset");
     setIsSignUpMode(mode === "signup");
+  };
+
+  const handleGeneratePassword = () => {
+    const newPassword = generateSecurePassword(16);
+    setPassword(newPassword);
+    setShowPassword(true);
+    toast({
+      title: "🔐 Password Generado",
+      description: "Password aleatorio seguro creado. ¡Copialo ahora!",
+    });
+  };
+
+  const handleCopyPassword = async () => {
+    if (!password) return;
+    try {
+      await navigator.clipboard.writeText(password);
+      toast({
+        title: "✓ Copiado",
+        description: "Password copiado al portapapeles",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo copiar el password",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleEmailLogin = async (e: React.FormEvent) => {
@@ -281,6 +353,29 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
             </div>
           )}
 
+          {isSignUpMode && (
+            <div className="flex gap-2 mb-4">
+              <Button
+                type="button"
+                onClick={handleGeneratePassword}
+                className="flex-1 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Generar Password Seguro
+              </Button>
+              {password && (
+                <Button
+                  type="button"
+                  onClick={handleCopyPassword}
+                  variant="outline"
+                  className="border-slate-600 hover:bg-slate-700"
+                >
+                  <Copy className="w-4 h-4" />
+                </Button>
+              )}
+            </div>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="email" className="text-slate-200 text-sm font-medium">
               <Mail className="inline h-4 w-4 mr-2" />
@@ -303,15 +398,41 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
                 <Lock className="inline h-4 w-4 mr-2" />
                 {t("login.password.label", { defaultValue: "Contraseña" })}
               </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-5 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="bg-slate-800/50 border-slate-600/40 text-slate-100 placeholder:text-slate-400 py-5 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+              
+              {isSignUpMode && password && (
+                <div className={`flex items-center gap-2 px-3 py-2 rounded-md border ${passwordStrength.color}`}>
+                  <passwordStrength.icon className="w-4 h-4" />
+                  <span className="text-xs font-medium">Seguridad: {passwordStrength.label}</span>
+                  <div className="ml-auto flex gap-1">
+                    {[...Array(7)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-1 h-3 rounded-full ${
+                          i < passwordStrength.score ? 'bg-current' : 'bg-slate-700'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
