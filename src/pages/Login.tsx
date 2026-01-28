@@ -77,14 +77,12 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [isResetMode, setIsResetMode] = useState(false);
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const passwordStrength = useMemo(() => evaluatePasswordStrength(password), [password]);
 
-  const setMode = (mode: "login" | "reset" | "signup") => {
-    setIsResetMode(mode === "reset");
+  const setMode = (mode: "login" | "signup") => {
     setIsSignUpMode(mode === "signup");
   };
 
@@ -256,39 +254,10 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
     }
   };
 
-  const handlePasswordReset = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      const appOrigin = getAppOrigin();
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${appOrigin}/reset-password`,
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: t("login.reset.success.title", { defaultValue: "Email Enviado" }),
-        description: t("login.reset.success.message", { defaultValue: "Revisa tu email para restablecer tu contraseña" }),
-      });
-
-      setIsResetMode(false);
-    } catch (error: any) {
-      toast({
-        title: t("login.error.title", { defaultValue: "Error" }),
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
       <CardContent className="pt-6 pb-8 px-6 space-y-5">{/* Google Login (only in login mode) */}
-        {!isResetMode && !isSignUpMode && (
+        {!isSignUpMode && (
           <>
             <Button
               type="button"
@@ -334,7 +303,7 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
         )}
 
         <form
-          onSubmit={isResetMode ? handlePasswordReset : isSignUpMode ? handleEmailSignUp : handleEmailLogin}
+          onSubmit={isSignUpMode ? handleEmailSignUp : handleEmailLogin}
           className="space-y-4"
         >
           {isSignUpMode && (
@@ -449,37 +418,21 @@ export const LoginCard = ({ redirectTo = "/dashboard" }: LoginCardProps) => {
             ) : (
               <>
                 <LogIn className="mr-2 h-4 w-4" />
-                {isResetMode
-                  ? t("login.reset.button", { defaultValue: "Enviar Email" })
-                  : isSignUpMode
-                    ? t("login.signup.submit", { defaultValue: "Crear Cuenta" })
-                    : t("login.button", { defaultValue: "Iniciar Sesión" })}
+                {isSignUpMode
+                  ? t("login.signup.submit", { defaultValue: "Crear Cuenta" })
+                  : t("login.button", { defaultValue: "Iniciar Sesión" })}
               </>
             )}
           </Button>
         </form>
 
-        <div className="space-y-3 text-center text-sm pt-2">
-          <button
-            type="button"
-            onClick={() => {
-              if (isResetMode) setMode("login");
-              else setMode("reset");
-            }}
-            className="text-blue-400 hover:text-blue-300 transition-colors block w-full font-medium"
-          >
-            {isResetMode
-              ? t("login.backToLogin", { defaultValue: "Volver a iniciar sesión" })
-              : t("login.forgotPassword", { defaultValue: "¿Olvidaste tu contraseña?" })}
-          </button>
-
+        <div className="text-center text-sm pt-2">
           <div className="text-slate-300">
             {t("login.noAccount", { defaultValue: "¿No tienes cuenta?" })}{" "}
             <button
               type="button"
               className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
               onClick={() => setMode(isSignUpMode ? "login" : "signup")}
-              disabled={isResetMode}
             >
               {isSignUpMode
                 ? t("login.backToLogin", { defaultValue: "Volver a iniciar sesión" })

@@ -37,7 +37,6 @@ import Crypto from "./pages/Crypto";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import OTPLogin from "./pages/OTPLogin";
-import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import MFA from "./pages/MFA";
 import AdminControl from "./pages/AdminControl";
@@ -88,7 +87,6 @@ const App = () => {
             {/* Rutas sin Header - pantalla completa */}
             <Route path="/login" element={<OTPLogin />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin/verify-2fa" element={<AdminVerify2FA />} />
             <Route path="/mfa" element={<MFA />} />
             
