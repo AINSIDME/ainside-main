@@ -11,6 +11,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Key, AlertCircle, CheckCircle } from "lucide-react";
 import { LoginCard } from "./Login";
 
+// Force rebuild - v2
+
 const Register = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -298,5 +300,6 @@ const Register = () => {
 };
 
 export default Register;
-/ /   F o r c e   r e b u i l d  
+/ /   F o r c e   r e b u i l d 
+ 
  
