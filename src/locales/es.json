@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "Iniciar Sesión",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "Te enviaremos un código a tu email",
     "codeDescription": "Ingresa el código que recibiste",
     "emailPlaceholder": "tu@email.com",
@@ -1891,6 +1892,9 @@
   },
   "mfa": {
     "title": "Seguridad 2FA",
+    "adminTitle": "Seguridad 2FA Administrador",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "Configuración Completa",
     "subtitle": "Activa verificación en dos pasos con una app (Google Authenticator / Authy).",
     "loading": "Cargando...",
     "enable": "Activar 2FA",
@@ -2004,6 +2008,83 @@
       "remaining_plural": "{{count}} intentos restantes"
     },
     "lockMessage": "Cuenta bloqueada por seguridad. Espera 15 minutos."
+  },
+  "resetPassword": {
+    "title": "Restablecer contraseña",
+    "subtitle": "Establece una nueva contraseña para tu cuenta.",
+    "checking": "Verificando enlace…",
+    "noSession": {
+      "title": "No se detectó una sesión de recuperación.",
+      "message": "Abre el enlace desde tu email o solicita uno nuevo.",
+      "button": "Ir a iniciar sesión"
+    },
+    "form": {
+      "newPassword": {
+        "label": "Nueva contraseña",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "Confirmar contraseña",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "Las contraseñas no coinciden.",
+      "updating": "Actualizando…",
+      "updateButton": "Actualizar contraseña"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "Contraseña muy corta",
+        "description": "Usa al menos 8 caracteres."
+      },
+      "mismatch": {
+        "title": "Las contraseñas no coinciden",
+        "description": "Verifica que ambas contraseñas sean iguales."
+      },
+      "update": {
+        "title": "No se pudo actualizar",
+        "description": "Intenta nuevamente o solicita un nuevo enlace."
+      }
+    },
+    "success": {
+      "title": "Contraseña actualizada",
+      "description": "Ya puedes iniciar sesión con tu nueva contraseña."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "Clientes",
+        "description": "Registro HWID, conexiones, compras, plan, cupón."
+      },
+      "users": {
+        "title": "Usuarios Registrados",
+        "description": "Usuarios con login OTP (auth.users)."
+      },
+      "coupons": {
+        "title": "Cupones",
+        "description": "Crear/activar/desactivar cupones y enviar email."
+      },
+      "twofa": {
+        "title": "2FA Admin",
+        "description": "Verificar/renovar sesión 2FA."
+      },
+      "logs": {
+        "title": "Logs",
+        "description": "Auditoría de acciones admin (seguridad)."
+      },
+      "contact": {
+        "title": "Mensajes",
+        "description": "Mensajes del formulario de contacto."
+      },
+      "downloads": {
+        "title": "Descargas",
+        "description": "Estado de descargas, links y accesos."
+      },
+      "analytics": {
+        "title": "Métricas",
+        "description": "KPIs (compras, activaciones, retención)."
+      }
+    }
   },
   "dashboard": {
     "loading": "Cargando...",

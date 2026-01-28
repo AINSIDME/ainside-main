@@ -145,7 +145,7 @@ export default function OTPLogin() {
               {t('otpLogin.title')}
             </CardTitle>
             <p className="text-xs text-neutral-500 uppercase tracking-[0.25em] font-normal">
-              Institutional Algorithmic Trading
+              {t('otpLogin.institutionalTagline')}
             </p>
           </div>
           <CardDescription className="text-center text-sm text-neutral-600 font-light leading-relaxed">

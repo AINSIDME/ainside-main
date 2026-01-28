@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "تسجيل الدخول",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "سنرسل لك رمزًا إلى بريدك الإلكتروني",
     "codeDescription": "أدخل الرمز الذي تلقيته",
     "emailPlaceholder": "your@email.com",
@@ -1923,6 +1924,165 @@
       },
       "error": "رمز غير صحيح.",
       "challengeStartError": "تعذر بدء تحدي 2FA."
+    },
+    "loginRequired": {
+      "title": "تسجيل الدخول مطلوب",
+      "message": "لتكوين أو التحقق من 2FA الخاص بك، يجب عليك تسجيل الدخول أولاً.",
+      "cta": "تسجيل الدخول"
+    },
+    "pending": {
+      "title": "2FA معلق",
+      "message": "يوجد بالفعل تسجيل 2FA في حسابك، ولكن لا يمكن استرداد رمز QR. إذا قمت بالفعل بمسح رمز QR، أدخل الرمز أدناه. إذا لم تمسحه أو فقدته، قم بإنشاء رمز QR جديد."
+    },
+    "verified": {
+      "note": "تم تكوين 2FA الخاص بك بالفعل. افتح تطبيقك (Authenticator/Authy) وأدخل الرمز للتحقق."
+    },
+    "reset": {
+      "cta": "إنشاء رمز QR جديد",
+      "loading": "جارٍ الإنشاء...",
+      "error": "تعذر إنشاء رمز QR جديد لـ 2FA."
+    },
+    "qrCode": {
+      "title": "مسح رمز QR",
+      "renewMessage": "تجديد كل 30 ثانية"
+    },
+    "security": {
+      "loading": "التحقق الأمني"
+    },
+    "adminTitle": "أمان 2FA للمسؤول",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "اكتمل التكوين"
+  },
+  "adminVerify2FA": {
+    "title": "تحقق المسؤول",
+    "subtitle": "Administrator Access Control",
+    "description": "أدخل الرمز المكون من 6 أرقام من تطبيق Google Authenticator",
+    "loading": "التحقق من الجلسة",
+    "loadingSubtitle": "التحقق من الوصول",
+    "instructions": {
+      "title": "تعليمات التحقق",
+      "step1": "افتح Google Authenticator",
+      "step2": "ابحث عن \"AInside Admin\"",
+      "step3": "أدخل الرمز المكون من 6 أرقام"
+    },
+    "code": {
+      "label": "رمز التحقق",
+      "placeholder": "000000",
+      "renewMessage": "تجديد كل 30 ثانية"
+    },
+    "security": {
+      "secureConnection": "اتصال آمن مشفر",
+      "sessionNote": "هذا التحقق صالح فقط لهذه الجلسة"
+    },
+    "cancel": "إلغاء",
+    "verify": "تحقق من الرمز",
+    "verifying": "جارٍ التحقق",
+    "errors": {
+      "locked": {
+        "title": "الحساب مقفل",
+        "description": "محاولات فاشلة كثيرة جداً. انتظر 15 دقيقة."
+      },
+      "invalidCode": {
+        "title": "رمز غير صحيح",
+        "description": "يجب أن يتكون الرمز من 6 أرقام"
+      },
+      "incorrect": {
+        "title": "رمز خاطئ",
+        "description": "المحاولة {{attempt}} من 3. تحقق من تطبيق Authenticator الخاص بك."
+      },
+      "lockout": {
+        "title": "الحساب مقفل",
+        "description": "محاولات فاشلة كثيرة جداً. مقفل لمدة 15 دقيقة."
+      },
+      "verification": {
+        "title": "خطأ في التحقق"
+      }
+    },
+    "success": {
+      "title": "✓ نجح التحقق",
+      "description": "تم السماح بالوصول إلى لوحة الإدارة"
+    },
+    "attempts": {
+      "remaining": "{{count}} محاولة متبقية",
+      "remaining_plural": "{{count}} محاولات متبقية"
+    },
+    "lockMessage": "الحساب مقفل لأسباب أمنية. انتظر 15 دقيقة."
+  },
+  "resetPassword": {
+    "title": "إعادة تعيين كلمة المرور",
+    "subtitle": "تعيين كلمة مرور جديدة لحسابك.",
+    "checking": "التحقق من الرابط…",
+    "noSession": {
+      "title": "لم يتم اكتشاف جلسة استرداد.",
+      "message": "افتح الرابط من بريدك الإلكتروني أو اطلب رابطاً جديداً.",
+      "button": "تسجيل الدخول"
+    },
+    "form": {
+      "newPassword": {
+        "label": "كلمة مرور جديدة",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "كلمات المرور غير متطابقة.",
+      "updating": "جارٍ التحديث…",
+      "updateButton": "تحديث كلمة المرور"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "كلمة المرور قصيرة جداً",
+        "description": "استخدم 8 أحرف على الأقل."
+      },
+      "mismatch": {
+        "title": "كلمات المرور غير متطابقة",
+        "description": "تأكد من أن كلمتي المرور متطابقتان."
+      },
+      "update": {
+        "title": "تعذر التحديث",
+        "description": "حاول مرة أخرى أو اطلب رابطاً جديداً."
+      }
+    },
+    "success": {
+      "title": "تم تحديث كلمة المرور",
+      "description": "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "العملاء",
+        "description": "سجل HWID، الاتصالات، المشتريات، الخطة، القسيمة."
+      },
+      "users": {
+        "title": "المستخدمون المسجلون",
+        "description": "المستخدمون بتسجيل دخول OTP (auth.users)."
+      },
+      "coupons": {
+        "title": "القسائم",
+        "description": "إنشاء/تفعيل/إلغاء تفعيل القسائم وإرسال البريد الإلكتروني."
+      },
+      "twofa": {
+        "title": "2FA مسؤول",
+        "description": "التحقق/تجديد جلسة 2FA."
+      },
+      "logs": {
+        "title": "السجلات",
+        "description": "تدقيق إجراءات المسؤول (الأمان)."
+      },
+      "contact": {
+        "title": "الرسائل",
+        "description": "الرسائل من نموذج الاتصال."
+      },
+      "downloads": {
+        "title": "التنزيلات",
+        "description": "حالة التنزيلات والروابط والوصول."
+      },
+      "analytics": {
+        "title": "المقاييس",
+        "description": "مؤشرات الأداء الرئيسية (المشتريات، التفعيلات، الاحتفاظ)."
+      }
     }
   },
   "dashboard": {

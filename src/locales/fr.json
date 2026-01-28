@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "Connexion",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "Nous vous enverrons un code par email",
     "codeDescription": "Entrez le code que vous avez reçu",
     "emailPlaceholder": "votre@email.com",
@@ -1889,6 +1890,9 @@
   },
   "mfa": {
     "title": "Sécurité 2FA",
+    "adminTitle": "Sécurité 2FA Administrateur",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "Configuration Complète",
     "subtitle": "Activez la vérification en deux étapes avec une application (Google Authenticator / Authy).",
     "loading": "Chargement...",
     "enable": "Activer la 2FA",
@@ -1922,6 +1926,30 @@
       },
       "error": "Code invalide.",
       "challengeStartError": "Impossible de démarrer le défi 2FA."
+    },
+    "loginRequired": {
+      "title": "Connexion requise",
+      "message": "Pour configurer ou vérifier votre 2FA, vous devez d'abord vous connecter à votre compte.",
+      "cta": "Se connecter"
+    },
+    "pending": {
+      "title": "2FA en attente",
+      "message": "Il existe déjà un enregistrement 2FA sur votre compte, mais le QR ne peut pas être récupéré. Si vous avez déjà scanné le QR, entrez le code ci-dessous. Si vous ne l'avez pas scanné ou l'avez perdu, générez un nouveau QR."
+    },
+    "verified": {
+      "note": "Votre 2FA est déjà configurée. Ouvrez votre application (Authenticator/Authy) et entrez le code pour vérifier."
+    },
+    "reset": {
+      "cta": "Générer un nouveau QR",
+      "loading": "Génération...",
+      "error": "Impossible de générer un nouveau QR 2FA."
+    },
+    "qrCode": {
+      "title": "Scanner le code QR",
+      "renewMessage": "Renouvellement toutes les 30 secondes"
+    },
+    "security": {
+      "loading": "Vérification de Sécurité"
     }
   },
   "dashboard": {
@@ -1970,6 +1998,138 @@
       "title": "Outil HWID AInside",
       "description": "Téléchargez le logiciel officiel pour gérer votre HWID et vous connecter en temps réel",
       "download": "Télécharger pour Windows"
+    }
+  },
+  "adminVerify2FA": {
+    "title": "Vérification Administrateur",
+    "subtitle": "Administrator Access Control",
+    "description": "Entrez le code à 6 chiffres de votre application Google Authenticator",
+    "loading": "Validation de la Session",
+    "loadingSubtitle": "Vérification d'Accès",
+    "instructions": {
+      "title": "Instructions de Vérification",
+      "step1": "Ouvrir Google Authenticator",
+      "step2": "Chercher \"AInside Admin\"",
+      "step3": "Entrer le code à 6 chiffres"
+    },
+    "code": {
+      "label": "Code de Vérification",
+      "placeholder": "000000",
+      "renewMessage": "Renouvellement toutes les 30 secondes"
+    },
+    "security": {
+      "secureConnection": "Connexion Sécurisée Chiffrée",
+      "sessionNote": "Cette vérification n'est valable que pour cette session"
+    },
+    "cancel": "Annuler",
+    "verify": "Vérifier le Code",
+    "verifying": "Vérification",
+    "errors": {
+      "locked": {
+        "title": "Compte Bloqué",
+        "description": "Trop de tentatives échouées. Attendez 15 minutes."
+      },
+      "invalidCode": {
+        "title": "Code Invalide",
+        "description": "Le code doit contenir 6 chiffres"
+      },
+      "incorrect": {
+        "title": "Code Incorrect",
+        "description": "Tentative {{attempt}} sur 3. Vérifiez votre application Authenticator."
+      },
+      "lockout": {
+        "title": "Compte Bloqué",
+        "description": "Trop de tentatives échouées. Bloqué pour 15 minutes."
+      },
+      "verification": {
+        "title": "Erreur de Vérification"
+      }
+    },
+    "success": {
+      "title": "✓ Vérification Réussie",
+      "description": "Accès au panneau d'administration autorisé"
+    },
+    "attempts": {
+      "remaining": "{{count}} tentative restante",
+      "remaining_plural": "{{count}} tentatives restantes"
+    },
+    "lockMessage": "Compte bloqué pour sécurité. Attendez 15 minutes."
+  },
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "subtitle": "Définir un nouveau mot de passe pour votre compte.",
+    "checking": "Vérification du lien…",
+    "noSession": {
+      "title": "Aucune session de récupération détectée.",
+      "message": "Ouvrez le lien depuis votre email ou demandez-en un nouveau.",
+      "button": "Se connecter"
+    },
+    "form": {
+      "newPassword": {
+        "label": "Nouveau mot de passe",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "Confirmer le mot de passe",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "Les mots de passe ne correspondent pas.",
+      "updating": "Mise à jour…",
+      "updateButton": "Mettre à jour le mot de passe"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "Mot de passe trop court",
+        "description": "Utilisez au moins 8 caractères."
+      },
+      "mismatch": {
+        "title": "Les mots de passe ne correspondent pas",
+        "description": "Assurez-vous que les deux mots de passe sont identiques."
+      },
+      "update": {
+        "title": "Impossible de mettre à jour",
+        "description": "Réessayez ou demandez un nouveau lien."
+      }
+    },
+    "success": {
+      "title": "Mot de passe mis à jour",
+      "description": "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "Clients",
+        "description": "Registre HWID, connexions, achats, plan, coupon."
+      },
+      "users": {
+        "title": "Utilisateurs Enregistrés",
+        "description": "Utilisateurs avec connexion OTP (auth.users)."
+      },
+      "coupons": {
+        "title": "Coupons",
+        "description": "Créer/activer/désactiver des coupons et envoyer un email."
+      },
+      "twofa": {
+        "title": "2FA Admin",
+        "description": "Vérifier/renouveler la session 2FA."
+      },
+      "logs": {
+        "title": "Journaux",
+        "description": "Audit des actions admin (sécurité)."
+      },
+      "contact": {
+        "title": "Messages",
+        "description": "Messages du formulaire de contact."
+      },
+      "downloads": {
+        "title": "Téléchargements",
+        "description": "État des téléchargements, liens et accès."
+      },
+      "analytics": {
+        "title": "Métriques",
+        "description": "KPIs (achats, activations, rétention)."
+      }
     }
   },
   "cryptoPage": {

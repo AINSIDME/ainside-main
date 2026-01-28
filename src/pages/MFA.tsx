@@ -305,7 +305,7 @@ const MFA = () => {
             <CardTitle className="text-3xl font-light text-black tracking-tight">
               {t("mfa.loginRequired.title", { defaultValue: "Iniciar sesión requerido" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Administrator Access Control</p>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
             <CardDescription className="text-neutral-600 text-base font-light pt-4">
               {t("mfa.loginRequired.message", {
                 defaultValue:
@@ -361,7 +361,7 @@ const MFA = () => {
             <CardTitle className="text-3xl font-light text-black tracking-tight">
               {t("mfa.title", { defaultValue: "Seguridad 2FA Administrador" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">Administrator Access Control</p>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
           </CardHeader>
           <CardContent className="pb-16 px-12 space-y-6">
             <CardDescription className="text-neutral-600 text-base font-light">
@@ -435,7 +435,7 @@ const MFA = () => {
               <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <CheckCircle2 className="w-5 h-5 text-neutral-700" />
-                  <p className="text-xs font-medium text-black uppercase tracking-widest">Configuración Completa</p>
+                  <p className="text-xs font-medium text-black uppercase tracking-widest">{t("mfa.configComplete", { defaultValue: "Configuración Completa" })}</p>
                 </div>
                 <p className="text-sm text-neutral-600 font-light">
                   {t("mfa.verified.note", {

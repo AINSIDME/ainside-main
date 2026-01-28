@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "התחברות",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "נשלח לך קוד לאימייל",
     "codeDescription": "הזן את הקוד שקיבלת",
     "emailPlaceholder": "your@email.com",
@@ -1923,6 +1924,165 @@
       },
       "error": "קוד לא תקין.",
       "challengeStartError": "לא ניתן להתחיל אתגר 2FA."
+    },
+    "loginRequired": {
+      "title": "נדרשת התחברות",
+      "message": "כדי להגדיר או לאמת את ה-2FA שלך, עליך להתחבר תחילה.",
+      "cta": "התחבר"
+    },
+    "pending": {
+      "title": "2FA ממתין",
+      "message": "כבר קיים רישום 2FA בחשבון שלך, אך לא ניתן לשחזר את ה-QR. אם כבר סרקת את ה-QR, הזן את הקוד למטה. אם לא סרקת אותו או שאיבדת אותו, צור QR חדש."
+    },
+    "verified": {
+      "note": "ה-2FA שלך כבר מוגדר. פתח את האפליקציה (Authenticator/Authy) והזן את הקוד לאימות."
+    },
+    "reset": {
+      "cta": "צור QR חדש",
+      "loading": "יוצר...",
+      "error": "לא ניתן ליצור QR חדש ל-2FA."
+    },
+    "qrCode": {
+      "title": "סרוק קוד QR",
+      "renewMessage": "חידוש כל 30 שניות"
+    },
+    "security": {
+      "loading": "אימות אבטחה"
+    },
+    "adminTitle": "אבטחת 2FA מנהל",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "ההגדרה הושלמה"
+  },
+  "adminVerify2FA": {
+    "title": "אימות מנהל",
+    "subtitle": "Administrator Access Control",
+    "description": "הזן את הקוד בן 6 הספרות מאפליקציית Google Authenticator שלך",
+    "loading": "מאמת הפעלה",
+    "loadingSubtitle": "אימות גישה",
+    "instructions": {
+      "title": "הוראות אימות",
+      "step1": "פתח Google Authenticator",
+      "step2": "חפש \"AInside Admin\"",
+      "step3": "הזן את הקוד בן 6 הספרות"
+    },
+    "code": {
+      "label": "קוד אימות",
+      "placeholder": "000000",
+      "renewMessage": "חידוש כל 30 שניות"
+    },
+    "security": {
+      "secureConnection": "חיבור מאובטח מוצפן",
+      "sessionNote": "אימות זה תקף רק להפעלה זו"
+    },
+    "cancel": "ביטול",
+    "verify": "אמת קוד",
+    "verifying": "מאמת",
+    "errors": {
+      "locked": {
+        "title": "חשבון נעול",
+        "description": "יותר מדי ניסיונות כושלים. המתן 15 דקות."
+      },
+      "invalidCode": {
+        "title": "קוד לא תקין",
+        "description": "הקוד חייב להכיל 6 ספרות"
+      },
+      "incorrect": {
+        "title": "קוד שגוי",
+        "description": "ניסיון {{attempt}} מתוך 3. בדוק את אפליקציית Authenticator שלך."
+      },
+      "lockout": {
+        "title": "חשבון נעול",
+        "description": "יותר מדי ניסיונות כושלים. נעול למשך 15 דקות."
+      },
+      "verification": {
+        "title": "שגיאת אימות"
+      }
+    },
+    "success": {
+      "title": "✓ אימות הצליח",
+      "description": "גישה למערכת הניהול אושרה"
+    },
+    "attempts": {
+      "remaining": "{{count}} ניסיון נותר",
+      "remaining_plural": "{{count}} ניסיונות נותרים"
+    },
+    "lockMessage": "חשבון נעול מטעמי אבטחה. המתן 15 דקות."
+  },
+  "resetPassword": {
+    "title": "איפוס סיסמה",
+    "subtitle": "הגדר סיסמה חדשה לחשבון שלך.",
+    "checking": "מאמת קישור…",
+    "noSession": {
+      "title": "לא התגלתה הפעלת שחזור.",
+      "message": "פתח את הקישור מהאימייל שלך או בקש חדש.",
+      "button": "התחבר"
+    },
+    "form": {
+      "newPassword": {
+        "label": "סיסמה חדשה",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "אישור סיסמה",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "הסיסמאות לא תואמות.",
+      "updating": "מעדכן…",
+      "updateButton": "עדכן סיסמה"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "סיסמה קצרה מדי",
+        "description": "השתמש לפחות ב-8 תווים."
+      },
+      "mismatch": {
+        "title": "הסיסמאות לא תואמות",
+        "description": "ודא ששתי הסיסמאות זהות."
+      },
+      "update": {
+        "title": "לא ניתן לעדכן",
+        "description": "נסה שוב או בקש קישור חדש."
+      }
+    },
+    "success": {
+      "title": "הסיסמה עודכנה",
+      "description": "כעת תוכל להתחבר עם הסיסמה החדשה שלך."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "לקוחות",
+        "description": "רישום HWID, חיבורים, רכישות, תוכנית, קופון."
+      },
+      "users": {
+        "title": "משתמשים רשומים",
+        "description": "משתמשים עם כניסת OTP (auth.users)."
+      },
+      "coupons": {
+        "title": "קופונים",
+        "description": "יצירה/הפעלה/השבתה של קופונים ושליחת אימייל."
+      },
+      "twofa": {
+        "title": "2FA מנהל",
+        "description": "אימות/חידוש הפעלת 2FA."
+      },
+      "logs": {
+        "title": "יומנים",
+        "description": "ביקורת פעולות מנהל (אבטחה)."
+      },
+      "contact": {
+        "title": "הודעות",
+        "description": "הודעות מטופס יצירת קשר."
+      },
+      "downloads": {
+        "title": "הורדות",
+        "description": "סטטוס הורדות, קישורים וגישה."
+      },
+      "analytics": {
+        "title": "מדדים",
+        "description": "KPIs (רכישות, הפעלות, שימור)."
+      }
     }
   },
   "dashboard": {

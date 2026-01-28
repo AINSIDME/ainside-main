@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "Вход",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "Мы отправим вам код на email",
     "codeDescription": "Введите полученный код",
     "emailPlaceholder": "your@email.com",
@@ -1924,6 +1925,165 @@
       },
       "error": "Неверный код.",
       "challengeStartError": "Не удалось начать проверку 2FA."
+    },
+    "loginRequired": {
+      "title": "Требуется вход",
+      "message": "Чтобы настроить или проверить 2FA, сначала необходимо войти в систему.",
+      "cta": "Войти"
+    },
+    "pending": {
+      "title": "2FA ожидает",
+      "message": "В вашей учетной записи уже есть регистрация 2FA, но QR-код не может быть восстановлен. Если вы уже отсканировали QR-код, введите код ниже. Если вы его не сканировали или потеряли, создайте новый QR-код."
+    },
+    "verified": {
+      "note": "Ваша 2FA уже настроена. Откройте приложение (Authenticator/Authy) и введите код для проверки."
+    },
+    "reset": {
+      "cta": "Создать новый QR",
+      "loading": "Создание...",
+      "error": "Не удалось создать новый QR для 2FA."
+    },
+    "qrCode": {
+      "title": "Сканировать QR-код",
+      "renewMessage": "Обновление каждые 30 секунд"
+    },
+    "security": {
+      "loading": "Проверка безопасности"
+    },
+    "adminTitle": "Безопасность 2FA администратора",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "Настройка завершена"
+  },
+  "adminVerify2FA": {
+    "title": "Проверка администратора",
+    "subtitle": "Administrator Access Control",
+    "description": "Введите 6-значный код из приложения Google Authenticator",
+    "loading": "Проверка сеанса",
+    "loadingSubtitle": "Проверка доступа",
+    "instructions": {
+      "title": "Инструкции по проверке",
+      "step1": "Откройте Google Authenticator",
+      "step2": "Найдите \"AInside Admin\"",
+      "step3": "Введите 6-значный код"
+    },
+    "code": {
+      "label": "Код подтверждения",
+      "placeholder": "000000",
+      "renewMessage": "Обновление каждые 30 секунд"
+    },
+    "security": {
+      "secureConnection": "Защищенное зашифрованное соединение",
+      "sessionNote": "Эта проверка действительна только для данного сеанса"
+    },
+    "cancel": "Отмена",
+    "verify": "Проверить код",
+    "verifying": "Проверка",
+    "errors": {
+      "locked": {
+        "title": "Аккаунт заблокирован",
+        "description": "Слишком много неудачных попыток. Подождите 15 минут."
+      },
+      "invalidCode": {
+        "title": "Неверный код",
+        "description": "Код должен состоять из 6 цифр"
+      },
+      "incorrect": {
+        "title": "Неправильный код",
+        "description": "Попытка {{attempt}} из 3. Проверьте приложение Authenticator."
+      },
+      "lockout": {
+        "title": "Аккаунт заблокирован",
+        "description": "Слишком много неудачных попыток. Заблокировано на 15 минут."
+      },
+      "verification": {
+        "title": "Ошибка проверки"
+      }
+    },
+    "success": {
+      "title": "✓ Проверка успешна",
+      "description": "Доступ к панели администратора разрешен"
+    },
+    "attempts": {
+      "remaining": "{{count}} попытка осталась",
+      "remaining_plural": "{{count}} попыток осталось"
+    },
+    "lockMessage": "Аккаунт заблокирован в целях безопасности. Подождите 15 минут."
+  },
+  "resetPassword": {
+    "title": "Сброс пароля",
+    "subtitle": "Установите новый пароль для вашего аккаунта.",
+    "checking": "Проверка ссылки…",
+    "noSession": {
+      "title": "Сеанс восстановления не обнаружен.",
+      "message": "Откройте ссылку из вашего email или запросите новую.",
+      "button": "Войти"
+    },
+    "form": {
+      "newPassword": {
+        "label": "Новый пароль",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "Подтвердите пароль",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "Пароли не совпадают.",
+      "updating": "Обновление…",
+      "updateButton": "Обновить пароль"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "Пароль слишком короткий",
+        "description": "Используйте не менее 8 символов."
+      },
+      "mismatch": {
+        "title": "Пароли не совпадают",
+        "description": "Убедитесь, что оба пароля одинаковы."
+      },
+      "update": {
+        "title": "Не удалось обновить",
+        "description": "Попробуйте снова или запросите новую ссылку."
+      }
+    },
+    "success": {
+      "title": "Пароль обновлен",
+      "description": "Теперь вы можете войти с новым паролем."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "Клиенты",
+        "description": "Регистрация HWID, подключения, покупки, тариф, купон."
+      },
+      "users": {
+        "title": "Зарегистрированные пользователи",
+        "description": "Пользователи с входом OTP (auth.users)."
+      },
+      "coupons": {
+        "title": "Купоны",
+        "description": "Создание/активация/деактивация купонов и отправка email."
+      },
+      "twofa": {
+        "title": "2FA администратора",
+        "description": "Проверка/обновление сеанса 2FA."
+      },
+      "logs": {
+        "title": "Журналы",
+        "description": "Аудит действий администратора (безопасность)."
+      },
+      "contact": {
+        "title": "Сообщения",
+        "description": "Сообщения из формы обратной связи."
+      },
+      "downloads": {
+        "title": "Загрузки",
+        "description": "Статус загрузок, ссылки и доступ."
+      },
+      "analytics": {
+        "title": "Метрики",
+        "description": "KPI (покупки, активации, удержание)."
+      }
     }
   },
   "dashboard": {

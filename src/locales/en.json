@@ -960,6 +960,7 @@
   },
   "otpLogin": {
     "title": "Login",
+    "institutionalTagline": "Institutional Algorithmic Trading",
     "emailDescription": "We'll send you a code to your email",
     "codeDescription": "Enter the code you received",
     "emailPlaceholder": "your@email.com",
@@ -1891,6 +1892,9 @@
   },
   "mfa": {
     "title": "2FA Security",
+    "adminTitle": "Administrator 2FA Security",
+    "adminSubtitle": "Administrator Access Control",
+    "configComplete": "Configuration Complete",
     "subtitle": "Enable two-step verification with an app (Google Authenticator / Authy).",
     "loading": "Loading...",
     "enable": "Enable 2FA",
@@ -2004,6 +2008,83 @@
       "remaining_plural": "{{count}} attempts remaining"
     },
     "lockMessage": "Account locked for security. Wait 15 minutes."
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Set a new password for your account.",
+    "checking": "Verifying link…",
+    "noSession": {
+      "title": "No recovery session detected.",
+      "message": "Open the link from your email or request a new one.",
+      "button": "Go to sign in"
+    },
+    "form": {
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "••••••••"
+      },
+      "confirmPassword": {
+        "label": "Confirm password",
+        "placeholder": "••••••••"
+      },
+      "mismatch": "Passwords don't match.",
+      "updating": "Updating…",
+      "updateButton": "Update password"
+    },
+    "errors": {
+      "tooShort": {
+        "title": "Password too short",
+        "description": "Use at least 8 characters."
+      },
+      "mismatch": {
+        "title": "Passwords don't match",
+        "description": "Make sure both passwords are the same."
+      },
+      "update": {
+        "title": "Could not update",
+        "description": "Try again or request a new link."
+      }
+    },
+    "success": {
+      "title": "Password updated",
+      "description": "You can now sign in with your new password."
+    }
+  },
+  "adminDashboard": {
+    "modules": {
+      "clients": {
+        "title": "Clients",
+        "description": "HWID registry, connections, purchases, plan, coupon."
+      },
+      "users": {
+        "title": "Registered Users",
+        "description": "Users with OTP login (auth.users)."
+      },
+      "coupons": {
+        "title": "Coupons",
+        "description": "Create/activate/deactivate coupons and send email."
+      },
+      "twofa": {
+        "title": "2FA Admin",
+        "description": "Verify/renew 2FA session."
+      },
+      "logs": {
+        "title": "Logs",
+        "description": "Audit of admin actions (security)."
+      },
+      "contact": {
+        "title": "Messages",
+        "description": "Messages from contact form."
+      },
+      "downloads": {
+        "title": "Downloads",
+        "description": "Download status, links and access."
+      },
+      "analytics": {
+        "title": "Metrics",
+        "description": "KPIs (purchases, activations, retention)."
+      }
+    }
   },
   "dashboard": {
     "loading": "Loading...",
