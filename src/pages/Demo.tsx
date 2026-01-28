@@ -140,7 +140,36 @@ const Demo = () => {
       upLineColor: '#22c55e',
       tooltip: {
         valueDecimals: 2
+      },
+      dataLabels: {
+        enabled: false // Las etiquetas se muestran via markers
       }
+    }, {
+      // Serie de etiquetas de señales (texto flotante)
+      name: 'Signal Labels',
+      type: 'scatter',
+      data: entryMarkers.map(marker => ({
+        x: marker.x,
+        y: marker.y + 15, // Posicionar arriba del marcador
+        marker: {
+          enabled: false
+        },
+        dataLabels: {
+          enabled: true,
+          format: marker.label,
+          style: {
+            color: '#ffffff',
+            fontSize: '11px',
+            fontWeight: 'bold',
+            textOutline: '2px contrast'
+          },
+          backgroundColor: marker.marker.fillColor,
+          borderRadius: 3,
+          padding: 4
+        }
+      })),
+      enableMouseTracking: false,
+      zIndex: 11
     }, {
       // Serie de marcadores de ENTRADA (flechas hacia arriba o abajo)
       name: 'Entry Signals',
@@ -390,11 +419,15 @@ const Demo = () => {
           setPosition(isLong ? 'long' : 'short');
           setEntryPrice(close);
           
+          // Generar valor de señal realista (como en TradeStation)
+          const signalValue = Math.floor(Math.random() * 100) + 20;
+          
           // Agregar marcador de ENTRADA en el gráfico
           const entryMarker = {
             x: newTimestamp,
             y: close,
-            label: isLong ? '🟢 LONG ENTRY' : '🔴 SHORT ENTRY',
+            label: isLong ? `Long\n${signalValue}` : `Short\n${signalValue}`,
+            signalValue: signalValue,
             marker: {
               fillColor: isLong ? '#22c55e' : '#ef4444',
               lineColor: '#ffffff',
@@ -417,17 +450,18 @@ const Demo = () => {
             const profitLoss = priceDiff * 50; // $50 por punto en ES
             
             // Agregar marcador de SALIDA en el gráfico
+            const closeLabel = position === 'long' ? 'CloseEOD_L' : 'CloseEOD_S';
             const exitMarker = {
               x: newTimestamp,
               y: close,
-              label: profitLoss >= 0 ? `✓ EXIT +$${profitLoss.toFixed(0)}` : `✗ EXIT $${profitLoss.toFixed(0)}`,
+              label: `${closeLabel}\n0`,
               pnl: profitLoss >= 0 ? `+$${profitLoss.toFixed(0)}` : `$${profitLoss.toFixed(0)}`,
               marker: {
                 fillColor: profitLoss >= 0 ? '#3b82f6' : '#f59e0b',
                 lineColor: '#ffffff',
                 lineWidth: 2,
                 symbol: 'circle',
-                radius: 10
+                radius: 8
               }
             };
             setExitMarkers(prev => [...prev, exitMarker].slice(-10));
@@ -617,6 +651,37 @@ const Demo = () => {
 
                 {/* Gráfico Profesional con Highcharts Stock */}
                 <div className="relative bg-black">
+                  {/* Barra de información del símbolo estilo TradeStation */}
+                  {!loading && (
+                    <div className="absolute top-2 left-2 z-20 bg-black/80 backdrop-blur-sm px-3 py-1.5 font-mono text-xs space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-bold">ES=F - 60 min</span>
+                        <span className="text-gray-400">ARCX</span>
+                        <span className={`font-semibold ${
+                          currentPrice >= (ohlcData[ohlcData.length - 1]?.[1] || currentPrice) 
+                            ? 'text-green-400' 
+                            : 'text-red-400'
+                        }`}>
+                          L={currentPrice.toFixed(2)}
+                        </span>
+                        <span className="text-gray-400">+{((Math.random() * 2)).toFixed(2)}</span>
+                        <span className="text-green-400">+{((Math.random() * 0.5)).toFixed(2)}%</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-[10px] text-gray-400">
+                        <span>TS={Math.floor(Math.random() * 200 + 100)}</span>
+                        <span>TE=ARCX</span>
+                        <span>B={currentPrice.toFixed(2)}</span>
+                        <span>BS={Math.floor(Math.random() * 1000 + 100)}</span>
+                        <span>A={(currentPrice + 0.25).toFixed(2)}</span>
+                        <span>AS={Math.floor(Math.random() * 1000 + 100)}</span>
+                        <span>O={ohlcData[0]?.[1]?.toFixed(2) || currentPrice.toFixed(2)}</span>
+                        <span>Hi={Math.max(...ohlcData.map(c => c[2] || 0)).toFixed(2)}</span>
+                        <span>Lo={Math.min(...ohlcData.map(c => c[3] || 9999)).toFixed(2)}</span>
+                        <span>V={Math.floor(Math.random() * 100000 + 50000)}</span>
+                      </div>
+                    </div>
+                  )}
+                  
                   {loading ? (
                     <div className="flex items-center justify-center" style={{ height: '550px' }}>
                       <div className="text-slate-400 font-mono">{t('demoPage.liveChart.loading', { defaultValue: 'Loading...' })}</div>
