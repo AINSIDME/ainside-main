@@ -58,7 +58,7 @@ const Demo = () => {
   const chartOptions = {
     chart: {
       backgroundColor: '#0a0a0a',
-      height: 550,
+      height: 800,
     },
     rangeSelector: {
       selected: 1,
@@ -340,8 +340,8 @@ const Demo = () => {
             }
           });
           
-          const finalDataArea = historicalDataArea.slice(-100); // Más datos para mejor visualización
-          const finalDataOHLC = historicalDataOHLC.slice(-100);
+          const finalDataArea = historicalDataArea.slice(-500); // Más datos para mejor visualización
+          const finalDataOHLC = historicalDataOHLC.slice(-500);
           
           console.log('✅ Datos cargados desde Yahoo Finance:', finalDataArea.length, 'puntos');
           console.log('Muestra de datos área:', finalDataArea.slice(0, 3));
@@ -488,7 +488,7 @@ const Demo = () => {
           close // Precio
         ];
 
-        const newData = [...prev, newCandleArea].slice(-100); // Mantener últimas 100 velas
+        const newData = [...prev, newCandleArea].slice(-500); // Mantener últimas 500 velas
         
         return newData;
       });
@@ -517,7 +517,7 @@ const Demo = () => {
           close
         ];
         
-        return [...prev, newCandleOHLC].slice(-100);
+        return [...prev, newCandleOHLC].slice(-500);
       });
     }, 5000); // Actualizar cada 5 segundos para demo (más visible)
 
@@ -574,13 +574,13 @@ const Demo = () => {
       </section>
 
       {/* Live Chart */}
-      <section className="py-8 px-4">
-        <div className="container mx-auto max-w-7xl">
+      <section className="py-4 px-2">
+        <div className="container mx-auto max-w-[98%]">
           {/* Grid Layout Profesional */}
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-12 gap-4">
             
-            {/* Panel Principal del Gráfico */}
-            <div className="col-span-12 lg:col-span-9">
+            {/* Panel Principal del Gráfico - PANTALLA COMPLETA */}
+            <div className="col-span-12">
               <div className="bg-slate-950 border border-slate-800">
                 {/* Header del Instrumento */}
                 <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-slate-900/50">
@@ -697,93 +697,80 @@ const Demo = () => {
               </div>
             </div>
 
-            {/* Panel Lateral de Estadísticas */}
-            <div className="col-span-12 lg:col-span-3 space-y-4">
-              
-              {/* Posición Activa */}
-              <div className="bg-slate-950 border border-slate-800 p-4">
-                <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.position', { defaultValue: 'Current Position' })}</div>
-                {position ? (
-                  <div>
-                    <div className={`inline-flex px-3 py-1 text-xs font-mono font-semibold mb-2 ${
-                      position === 'long' 
-                        ? 'bg-emerald-500/20 text-emerald-400' 
-                        : 'bg-rose-500/20 text-rose-400'
-                    }`}>
-                      {position.toUpperCase()}
-                    </div>
-                    <div className="space-y-1 text-xs font-mono">
-                      <div className="flex justify-between text-slate-400">
-                        <span>{t('demoPage.liveChart.entryAt', { defaultValue: 'Entry' })}:</span>
-                        <span className="text-white">{entryPrice.toFixed(2)}</span>
+            {/* Panel de Estadísticas Compacto - DEBAJO DEL GRÁFICO */}
+            <div className="col-span-12">
+              <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                {/* Posición Activa */}
+                <div className="bg-slate-950 border border-slate-800 p-4">
+                  <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.position', { defaultValue: 'Current Position' })}</div>
+                  {position ? (
+                    <div>
+                      <div className={`inline-flex px-3 py-1 text-xs font-mono font-semibold mb-2 ${
+                        position === 'long' 
+                          ? 'bg-emerald-500/20 text-emerald-400' 
+                          : 'bg-rose-500/20 text-rose-400'
+                      }`}>
+                        {position.toUpperCase()}
                       </div>
-                      <div className="flex justify-between text-slate-400">
-                        <span>{t('demoPage.liveChart.currentPnL', { defaultValue: 'Current' })}:</span>
-                        <span className="text-white">{currentPrice.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-400">
-                        <span>P&L:</span>
-                        <span className={`font-semibold ${
-                          ((position === 'long' ? currentPrice - entryPrice : entryPrice - currentPrice) * 50) >= 0 
-                            ? 'text-emerald-400' 
-                            : 'text-rose-400'
-                        }`}>
-                          ${((position === 'long' ? currentPrice - entryPrice : entryPrice - currentPrice) * 50).toFixed(2)}
-                        </span>
+                      <div className="space-y-1 text-xs font-mono">
+                        <div className="flex justify-between text-slate-400">
+                          <span>{t('demoPage.liveChart.entryAt', { defaultValue: 'Entry' })}:</span>
+                          <span className="text-white">{entryPrice.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-slate-400">
+                          <span>P&L:</span>
+                          <span className={`font-semibold ${
+                            ((position === 'long' ? currentPrice - entryPrice : entryPrice - currentPrice) * 50) >= 0 
+                              ? 'text-emerald-400' 
+                              : 'text-rose-400'
+                          }`}>
+                            ${((position === 'long' ? currentPrice - entryPrice : entryPrice - currentPrice) * 50).toFixed(2)}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="text-xs text-slate-500 font-mono">{t('demoPage.liveChart.noPosition', { defaultValue: 'No active position' })}</div>
-                )}
-              </div>
+                  ) : (
+                    <div className="text-xs text-slate-500 font-mono">{t('demoPage.liveChart.noPosition', { defaultValue: 'No active position' })}</div>
+                  )}
+                </div>
 
-              {/* Estadísticas */}
-              <div className="bg-slate-950 border border-slate-800 p-4">
-                <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.statistics', { defaultValue: 'Statistics' })}</div>
-                <div className="space-y-3">
-                  <div>
-                    <div className="text-xs text-slate-500 font-mono mb-1">{t('demoPage.liveChart.totalPnL')}</div>
-                    <div className={`text-xl font-mono font-bold ${
-                      pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'
-                    }`}>
-                      {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800">
-                    <div>
-                      <div className="text-[10px] text-slate-500 font-mono mb-1">{t('demoPage.liveChart.totalTrades', { defaultValue: 'Total' })}</div>
-                      <div className="text-sm font-mono text-white">{trades.length}</div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-500 font-mono mb-1">{t('demoPage.liveChart.winningTrades', { defaultValue: 'Wins' })}</div>
-                      <div className="text-sm font-mono text-emerald-400">{trades.filter(t => t.pnl > 0).length}</div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-500 font-mono mb-1">{t('demoPage.liveChart.losingTrades', { defaultValue: 'Loss' })}</div>
-                      <div className="text-sm font-mono text-rose-400">{trades.filter(t => t.pnl < 0).length}</div>
-                    </div>
-                  </div>
-                  <div className="pt-3 border-t border-slate-800">
-                    <div className="text-[10px] text-slate-500 font-mono mb-1">{t('demoPage.liveChart.winRate', { defaultValue: 'Win Rate' })}</div>
-                    <div className="text-sm font-mono text-white">
-                      {trades.length > 0 ? ((trades.filter(t => t.pnl > 0).length / trades.length) * 100).toFixed(1) : '0.0'}%
-                    </div>
+                {/* Total P&L */}
+                <div className="bg-slate-950 border border-slate-800 p-4">
+                  <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.totalPnL')}</div>
+                  <div className={`text-2xl font-mono font-bold ${
+                    pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'
+                  }`}>
+                    {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
                   </div>
                 </div>
-              </div>
 
-              {/* Trades Recientes - CONTINUACIÓN */}
-              <div className="bg-slate-950 border border-slate-800 p-4">
-                <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.recentTrades')}</div>
-                <div className="space-y-2">
-                  {trades.slice(0, 5).map((trade, idx) => (
-                    <div key={idx} className="text-xs font-mono pb-2 border-b border-slate-800 last:border-0">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className={`text-[10px] px-2 py-0.5 ${
-                          trade.type === 'long' 
-                            ? 'bg-emerald-500/20 text-emerald-400' 
-                            : 'bg-rose-500/20 text-rose-400'
+                {/* Trades */}
+                <div className="bg-slate-950 border border-slate-800 p-4">
+                  <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.totalTrades', { defaultValue: 'Total' })}</div>
+                  <div className="text-2xl font-mono font-bold text-white">{trades.length}</div>
+                  <div className="flex gap-3 mt-2 text-xs font-mono">
+                    <span className="text-emerald-400">{trades.filter(t => t.pnl > 0).length}W</span>
+                    <span className="text-rose-400">{trades.filter(t => t.pnl < 0).length}L</span>
+                  </div>
+                </div>
+
+                {/* Win Rate */}
+                <div className="bg-slate-950 border border-slate-800 p-4">
+                  <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.winRate', { defaultValue: 'Win Rate' })}</div>
+                  <div className="text-2xl font-mono font-bold text-white">
+                    {trades.length > 0 ? ((trades.filter(t => t.pnl > 0).length / trades.length) * 100).toFixed(1) : '0.0'}%
+                  </div>
+                </div>
+
+                {/* Trades Recientes */}
+                <div className="bg-slate-950 border border-slate-800 p-4">
+                  <div className="text-xs text-slate-500 font-mono uppercase tracking-wider mb-3">{t('demoPage.liveChart.recentTrades')}</div>
+                  <div className="space-y-1">
+                    {trades.slice(0, 3).map((trade, idx) => (
+                      <div key={idx} className="text-xs font-mono flex justify-between">
+                        <span className={`${
+                          trade.type === 'long' ? 'text-emerald-400' : 'text-rose-400'
                         }`}>
                           {trade.type.toUpperCase()}
                         </span>
@@ -793,21 +780,16 @@ const Demo = () => {
                           {trade.pnl >= 0 ? '+' : ''}${trade.pnl.toFixed(0)}
                         </span>
                       </div>
-                      <div className="flex justify-between text-slate-500">
-                        <span>{trade.entry.toFixed(2)}</span>
-                        <span>→</span>
-                        <span>{trade.exit.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  ))}
-                  {trades.length === 0 && (
-                    <div className="text-xs text-slate-600 font-mono text-center py-4">{t('demoPage.liveChart.noTrades', { defaultValue: 'No trades yet' })}</div>
-                  )}
+                    ))}
+                    {trades.length === 0 && (
+                      <div className="text-xs text-slate-600 font-mono">{t('demoPage.liveChart.noTrades', { defaultValue: 'No trades yet' })}</div>
+                    )}
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
-
           {/* Cards Informativos */}
           <div className="grid lg:grid-cols-3 gap-6 mt-8">
             {/* Card 1 */}
