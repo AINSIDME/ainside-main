@@ -801,10 +801,10 @@
     }
   },
   "legal": {
-    "terms": "Terms & Conditions",
-    "privacy": "Privacy Policy",
-    "disclaimer": "Legal Disclaimer",
-    "accessibility": "Accessibility",
+    "terms": "תנאים והגבלות",
+    "privacy": "מדיניות פרטיות",
+    "disclaimer": "כתב ויתור משפטי",
+    "accessibility": "נגישות",
     "responsibility": "Responsibility Agreement",
     "disclaimerText": "IMPORTANT LEGAL NOTICE: AInside.me is a SOFTWARE DEVELOPMENT COMPANY, NOT a financial services provider, broker, or investment advisor. Our tools are for EDUCATIONAL and RESEARCH purposes ONLY. We provide NO investment advice, recommendations, or financial services. Trading involves substantial risk of loss. Users are solely responsible for their trading decisions and outcomes. AInside.me disclaims ALL liability for any financial losses, damages, or consequences arising from use of our software tools.",
     "responsibilityText": "DISCLAIMER OF LIABILITY: By using our software tools, you acknowledge that: (1) AInside.me is a programming/software company only, (2) We provide NO financial advice or recommendations, (3) All trading decisions are your sole responsibility, (4) You assume ALL risks and liability, (5) AInside.me is NOT liable for any losses, damages, or consequences, (6) Our tools are for educational/research purposes only, (7) Past performance does not guarantee future results, (8) You will not hold AInside.me responsible for any trading outcomes."
