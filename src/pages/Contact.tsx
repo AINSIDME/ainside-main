@@ -97,9 +97,6 @@ const Contact = () => {
       {/* Header */}
       <section className="relative py-32 px-4 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/98 backdrop-blur-sm">
         <div className="container mx-auto text-center max-w-5xl">
-          <div className="inline-block px-6 py-3 text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-200 rounded-full mb-8 tracking-wide uppercase border border-blue-500/30 backdrop-blur-sm shadow-lg">
-            {t('contact.badge')}
-          </div>
           <h1 className="text-5xl md:text-7xl font-light text-slate-100 mb-8 leading-[1.1] tracking-tight">
             {t('contact.title')}
             <br />
