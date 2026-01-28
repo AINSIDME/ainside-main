@@ -1378,71 +1378,71 @@
     }
   },
   "faq": {
-    "badge": "Frequently Asked Questions",
-    "title": "FAQ",
-    "subtitle": "Answers to the most common questions about our strategies and services",
+    "badge": "שאלות נפוצות",
+    "title": "שאלות נפוצות",
+    "subtitle": "תשובות לשאלות הנפוצות ביותר אודות האסטרטגיות והשירותים שלנו",
     "seo": {
-      "title": "Frequently Asked Questions - AIinside.me",
-      "description": "Find answers to your questions about algorithmic trading, strategies, refunds and technical support."
+      "title": "שאלות נפוצות - AIinside.me",
+      "description": "מצא תשובות לשאלות שלך אודות מסחר אלגוריתמי, אסטרטגיות, החזרים ותמיכה טכנית."
     },
     "categories": {
-      "general": "General",
-      "refunds": "Refunds & Policy",
-      "strategies": "Strategies & Usage",
-      "technical": "Technical Support",
-      "investment": "Investment & Risks"
+      "general": "מידע כללי",
+      "refunds": "מדיניות החזרים",
+      "strategies": "תאימות ושימוש",
+      "technical": "דרישות טכניות",
+      "investment": "סיכונים ואזהרות"
     },
     "general": {
-      "q1": "Why is AlgoTrading absolutely private?",
-      "a1": "All strategies run directly in your broker account via EasyLanguage on TradeStation or MultiCharts. We never have access to your funds, account, or trading activity. The code executes locally on your platform, ensuring complete privacy and control.",
-      "q2": "Refund Policy: Is refund possible after download?",
-      "a2": "IMPORTANT: As a downloadable digital product, NO REFUNDS are possible once you've downloaded the files. We recommend carefully reviewing the demo and documentation before purchasing. Download implies final acceptance of the product.",
-      "q3": "What are the differences between the Micro, Mini plans?",
-      "a3": "Micro offers access to 1 proven strategy ideal for small accounts ($100-$1,000). Mini includes 2 optimized strategies with priority support, perfect for serious traders ($1,000-$5,000).",
-      "q4": "Where can I cancel my subscription?",
-      "a4": "You can cancel your subscription anytime from your user panel in 'My Account' → 'Subscriptions' section. You can also contact support and we'll cancel your subscription immediately."
+      "q1": "מה בדיוק מקבלים עם התוכנית?",
+      "a1": "מקבלים קבצי אסטרטגיה בפורמט EasyLanguage (‎.ELD עבור TradeStation, ‎.PLA עבור MultiCharts), סביבות עבודה לדוגמה, פרמטרים מומלצים ב-JSON, מדריך התקנה PDF, וגישה לתמיכה טכנית 24/6.",
+      "q2": "מדיניות החזר כספי: האם אפשרי לאחר הורדה?",
+      "a2": "חשוב: מכיוון שמדובר במוצר דיגיטלי להורדה, אין החזר כספי לאחר הורדת הקבצים. מומלץ לבדוק בקפידה את הדמו והתיעוד לפני הרכישה. ההורדה מהווה קבלה סופית של המוצר.",
+      "q3": "מה ההבדל בין תוכניות Micro ו-Mini?",
+      "a3": "Micro (‎$99/חודש): גישה לאסטרטגיה עבור חוזים Micro (‎/MES). Mini (‎$999/חודש): גישה לאסטרטגיה עבור חוזים Mini (‎/ES). שתיהן כוללות תמיכה, עדכונים חודשיים ותיעוד מלא.",
+      "q4": "איפה אפשר לבטל את המנוי?",
+      "a4": "ניתן לבטל בכל עת על ידי יצירת קשר עם support@ainside.me. הביטול מיידי אך לא מוחזרים כספים עבור החודש הנוכחי. הקבצים שהורדו נשארים שלך אך לא תקבל עדכונים עתידיים."
     },
     "refunds": {
-      "q1": "What is the minimum investment?",
-      "a1": "For Micro plan we recommend $100-$1,000. For Mini plan we recommend $1,000-$5,000. However, you can start with less in demo account to familiarize yourself with the strategy risk-free.",
-      "q2": "What is the expected profit?",
-      "a2": "We don't guarantee specific profits as it depends on market conditions, initial capital and risk management. Our strategies have shown historical results between 8-25% annually, but past performance doesn't guarantee future results.",
-      "q3": "Can I change my strategy mid-month if it doesn't work for me?",
-      "a3": "Yes, if you have Mini plan or higher, you can switch between available strategies anytime. For Micro plan, the change can be made when renewing your monthly subscription."
+      "q1": "איזה הון נדרש למסחר?",
+      "a1": "תוכנית Micro (‎/MES): מומלץ מינימום ‎$500-$2,000 בחשבון אמיתי. תוכנית Mini (‎/ES): מומלץ מינימום ‎$5,000-$15,000. ניתן לתרגל תחילה בחשבון דמו ללא סיכון. ההון המומלץ מאפשר ניהול סיכונים הולם.",
+      "q2": "האם מובטחים רווחים או תוצאות?",
+      "a2": "לא. אין הבטחה לרווחים או לתוצאות ספציפיות. מסחר בעתידיים כרוך בסיכון גבוה לאובדן הון. התוצאות ההיסטוריות המוצגות הן backtests ואינן מבטיחות ביצועים עתידיים. סחור רק עם הון שאתה יכול להרשות לעצמך להפסיד.",
+      "q3": "האם אפשר לקבל החזר כספי אם התוצאות לא טובות?",
+      "a3": "לא. מכיוון שמדובר במוצר דיגיטלי להורדה, אין החזרים לאחר הורדת הקבצים. ביצועי האסטרטגיה תלויים בתנאי שוק, ביצוע של הברוקר וניהול הסיכונים שלך. איננו אחראים להפסדים במסחר."
     },
     "strategies": {
-      "q1": "How long average do I need?",
-      "a1": "We recommend evaluating any strategy for at least 30-90 days to get meaningful results. Algorithmic trading requires patience - profits are medium to long-term, not overnight.",
-      "q2": "What is the advantage of algorithmic trading?",
-      "a2": "Eliminates emotions, operates 24/7 without supervision, executes trades with pinpoint precision, instant backtesting on years of historical data, and systematic risk management based on objective rules.",
-      "q3": "Can I use the strategy on multiple accounts?",
-      "a3": "The license includes use on ONE trading account. If you need to use on multiple accounts (personal/business), contact support@ainside.me for additional licenses. Each additional license has a separate cost.",
-      "q4": "What platforms are compatible with the strategies?",
-      "a4": "Strategies are in EasyLanguage format, compatible ONLY with TradeStation and MultiCharts (PowerLanguage). They do NOT work on TradingView, MetaTrader, NinjaTrader, or other platforms. You must have TradeStation or MultiCharts installed to use them."
+      "q1": "אילו פלטפורמות תואמות לאסטרטגיות?",
+      "a1": "האסטרטגיות בפורמט EasyLanguage, תואמות רק ל-TradeStation ו-MultiCharts (PowerLanguage). לא עובדות ב-TradingView, MetaTrader, NinjaTrader או פלטפורמות אחרות. חייב להיות לך TradeStation או MultiCharts מותקן כדי להשתמש בהן.",
+      "q2": "האם אפשר להשתמש באסטרטגיה במספר חשבונות?",
+      "a2": "הרישיון כולל שימוש בחשבון מסחר אחד. אם צריך להשתמש במספר חשבונות (אישי/עסקי), צור קשר עם support@ainside.me לרישיונות נוספים. לכל רישיון נוסף יש עלות נפרדת.",
+      "q3": "האם האסטרטגיות פועלות אוטומטית 24/7?",
+      "a3": "האסטרטגיות מייצרות אותות אוטומטיים, אך דורשות שהמחשב שלך עם TradeStation/MultiCharts יהיה דלוק במהלך שעות שוק CME. ניתן להשתמש ב-VPS למסחר רצוף. זה לא 100% אוטומטי - דורש פיקוח.",
+      "q4": "האם האסטרטגיות עובדות בכל העתידיים?",
+      "a4": "לא. כל אסטרטגיה מותאמת רק לחוזה הספציפי שנרכש: תוכנית Micro רק עבור ‎/MES (E-mini S&P 500 Micro). תוכנית Mini רק עבור ‎/ES (E-mini S&P 500). לא כולל עתידיים אחרים כמו ‎/GC, ‎/NQ, ‎/CL וכו'."
     },
     "technical": {
-      "q1": "How do I install the software?",
-      "a1": "After purchase, you'll receive strategy files in EasyLanguage format (.ELD for TradeStation, .PLA for MultiCharts), PDF installation manual with step-by-step instructions, recommended parameters in JSON, and access to technical support. Import the files into your platform and test in demo account first.",
-      "q2": "What are the benefits of algorithmic trading?",
-      "a2": "Emotional consistency (no FOMO, panic or revenge trading), 24/7 availability, instant execution of complex operations, scientific backtesting, multi-strategy diversification, and massive time savings (2,400+ hours per year).",
-      "q3": "Are you looking for additional assistance to support your decision?",
-      "a3": "Yes, we offer free 30-minute consultation for new clients. Contact us by email (support@ainside.me) or Telegram and a specialist will guide you to choose the ideal strategy according to your risk profile and capital.",
-      "q4": "Do I need programming experience?",
-      "a4": "No. Strategies come ready to use with step-by-step installation. You just need to follow the manual. However, if you want to customize advanced parameters, we offer technical support included in all plans."
+      "q1": "אילו דרישות טכניות נדרשות?",
+      "a1": "חובה: TradeStation או MultiCharts מותקן עם רישיון פעיל. חיבור יציב ≥20 Mbps. מחשב עם 8GB RAM מינימום (או VPS). חשבון עם ברוקר שמציע נתוני CME עבור ‎/ES או ‎/MES. ללא דרישות אלה, האסטרטגיות לא יעבדו.",
+      "q2": "האם השירות כולל ברוקר או נתוני שוק?",
+      "a2": "לא. התוכנית כוללת רק קבצי אסטרטגיה. צריך להיות לך ברוקר משלך, לשלם עמלות מסחר, מנוי לנתוני CME ורישיון TradeStation/MultiCharts. עלויות אלה נוספות ויכולות להיות כ-‎$100-$300/חודש בקירוב.",
+      "q3": "האם יש תמיכה טכנית במקרה של בעיות?",
+      "a3": "כן, תמיכה 24/6 דרך אימייל (support@ainside.me) לבעיות התקנה והגדרת אסטרטגיות. לא מספקים תמיכה על: שימוש ב-TradeStation/MultiCharts (עיין בתיעוד שלהם), בעיות עם הברוקר שלך, או עצות מסחר.",
+      "q4": "האם אפשר לשנות את קוד האסטרטגיות?",
+      "a4": "הקבצים ‎.ELD/‎.PLA מוגנים ולא מאפשרים עריכת קוד המקור. ניתן רק לכוונן פרמטרי קלט מותרים (stops, targets וכו'). זה מגן על הקניין הרוחני שלנו. קוד המקור לא נמסר בשום נסיבות."
     },
     "investment": {
-      "q1": "Can I use the strategies on mobile devices?",
-      "a1": "EasyLanguage strategies require TradeStation or MultiCharts desktop software. You can access these platforms remotely via VPS (Virtual Private Server) from mobile devices, but the strategies themselves don't run natively on smartphones or tablets.",
-      "q2": "Live trackrecord and backtested",
-      "a2": "All our plans include detailed backtesting reports (2-3 years of historical data) and access to verified live trading results. Mini+ clients get access to real-time dashboard with transparent metrics.",
-      "q3": "Can I try for free before buying?",
-      "a3": "We offer free live demo where you can see the strategy operating in real-time with market data. Review the demo and documentation carefully before purchasing, as digital products cannot be refunded after download."
+      "q1": "אילו סיכונים חשוב לדעת לפני הרכישה?",
+      "a1": "למסחר בעתידיים יש סיכון גבוה לאובדן מלא של ההון. האסטרטגיות לא מבטיחות רווחים. עלול להפסיד יותר מההשקעה הראשונית. Backtests לא מנבאים תוצאות עתידיות. סחור רק אם מבין ומקבל סיכונים אלה. לא מתאים למתחילים.",
+      "q2": "האם מוצגות תוצאות מסחר בזמן אמת?",
+      "a2": "דוחות הבקטסטינג מציגים תוצאות היסטוריות מדומות, לא מסחר בזמן אמת. אין לנו חשבונות ציבוריים מאומתים על ידי צדדים שלישיים. התוצאות האישיות ישתנו בהתאם לברוקר, slippage, עמלות וביצוע. Backtests ≠ מציאות.",
+      "q3": "האם אפשר לנסות את האסטרטגיה לפני הרכישה?",
+      "a3": "ניתן לראות דמו ויזואלי ב-/demo ולעיין בתיעוד ב-/getting-started. לא מציעים ניסיון חינם של קבצים להורדה. לאחר רכישה והורדה, אין החזר כספי. עיין בכל המידע הזמין לפני ההחלטה."
     },
     "cta": {
-      "title": "Still have questions?",
-      "description": "Our team is here to help you. Contact us via email and we'll respond as soon as possible.",
-      "contact": "Contact Support",
-      "docs": "View Documentation"
+      "title": "עדיין יש שאלות?",
+      "description": "הצוות שלנו כאן כדי לעזור. צור קשר באימייל ונענה בהקדם האפשרי.",
+      "contact": "צור קשר עם תמיכה",
+      "docs": "צפה בתיעוד"
     }
   },
   "blog": {
