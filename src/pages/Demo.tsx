@@ -404,6 +404,10 @@ const Demo = () => {
         
         const lastClose = lastCandle[1]; // En formato área es [timestamp, close]
         
+        // Calcular el siguiente timestamp PRIMERO
+        const lastTimestamp = lastCandle[0]; // [0] es el timestamp en milisegundos
+        const newTimestamp = lastTimestamp + 5000; // +5000 ms (5 segundos para demo)
+        
         // Generar nueva vela con variación realista
         const open = lastClose;
         const change = (Math.random() - 0.5) * 6; // Variación más realista
@@ -479,10 +483,6 @@ const Demo = () => {
           }
         }
 
-        // Calcular el siguiente timestamp
-        const lastTimestamp = lastCandle[0]; // [0] es el timestamp en milisegundos
-        const newTimestamp = lastTimestamp + 5000; // +5000 ms (5 segundos para demo)
-        
         const newCandleArea = [
           newTimestamp, // timestamp en milisegundos
           close // Precio
@@ -559,6 +559,9 @@ const Demo = () => {
               </h1>
               <p className="text-sm text-slate-400 max-w-2xl">
                 {t('demoPage.header.description', { defaultValue: 'Real-time E-mini S&P 500 futures with automated algorithm' })}
+              </p>
+              <p className="text-xs text-slate-500 mt-1 font-mono">
+                Data source: Yahoo Finance API (ES=F) | Timeframe: 1 Hour | Last 500 candles
               </p>
             </div>
           </div>
@@ -653,33 +656,41 @@ const Demo = () => {
                 <div className="relative bg-black">
                   {/* Barra de información del símbolo estilo TradeStation */}
                   {!loading && (
-                    <div className="absolute top-2 left-2 z-20 bg-black/80 backdrop-blur-sm px-3 py-1.5 font-mono text-xs space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="text-white font-bold">ES=F - 60 min</span>
-                        <span className="text-gray-400">ARCX</span>
-                        <span className={`font-semibold ${
-                          currentPrice >= (ohlcData[ohlcData.length - 1]?.[1] || currentPrice) 
-                            ? 'text-green-400' 
-                            : 'text-red-400'
-                        }`}>
-                          L={currentPrice.toFixed(2)}
-                        </span>
-                        <span className="text-gray-400">+{((Math.random() * 2)).toFixed(2)}</span>
-                        <span className="text-green-400">+{((Math.random() * 0.5)).toFixed(2)}%</span>
+                    <>
+                      {/* Info del símbolo - Esquina superior izquierda */}
+                      <div className="absolute top-2 left-2 z-20 bg-black/80 backdrop-blur-sm px-3 py-1.5 font-mono text-xs space-y-0.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-bold">ES=F - 60 min</span>
+                          <span className="text-gray-400">ARCX</span>
+                          <span className={`font-semibold ${
+                            currentPrice >= (ohlcData[ohlcData.length - 1]?.[1] || currentPrice) 
+                              ? 'text-green-400' 
+                              : 'text-red-400'
+                          }`}>
+                            L={currentPrice.toFixed(2)}
+                          </span>
+                          <span className="text-gray-400">+{((Math.random() * 2)).toFixed(2)}</span>
+                          <span className="text-green-400">+{((Math.random() * 0.5)).toFixed(2)}%</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-[10px] text-gray-400">
+                          <span>TS={Math.floor(Math.random() * 200 + 100)}</span>
+                          <span>TE=ARCX</span>
+                          <span>B={currentPrice.toFixed(2)}</span>
+                          <span>BS={Math.floor(Math.random() * 1000 + 100)}</span>
+                          <span>A={(currentPrice + 0.25).toFixed(2)}</span>
+                          <span>AS={Math.floor(Math.random() * 1000 + 100)}</span>
+                          <span>O={ohlcData[0]?.[1]?.toFixed(2) || currentPrice.toFixed(2)}</span>
+                          <span>Hi={Math.max(...ohlcData.map(c => c[2] || 0)).toFixed(2)}</span>
+                          <span>Lo={Math.min(...ohlcData.map(c => c[3] || 9999)).toFixed(2)}</span>
+                          <span>V={Math.floor(Math.random() * 100000 + 50000)}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3 text-[10px] text-gray-400">
-                        <span>TS={Math.floor(Math.random() * 200 + 100)}</span>
-                        <span>TE=ARCX</span>
-                        <span>B={currentPrice.toFixed(2)}</span>
-                        <span>BS={Math.floor(Math.random() * 1000 + 100)}</span>
-                        <span>A={(currentPrice + 0.25).toFixed(2)}</span>
-                        <span>AS={Math.floor(Math.random() * 1000 + 100)}</span>
-                        <span>O={ohlcData[0]?.[1]?.toFixed(2) || currentPrice.toFixed(2)}</span>
-                        <span>Hi={Math.max(...ohlcData.map(c => c[2] || 0)).toFixed(2)}</span>
-                        <span>Lo={Math.min(...ohlcData.map(c => c[3] || 9999)).toFixed(2)}</span>
-                        <span>V={Math.floor(Math.random() * 100000 + 50000)}</span>
+                      
+                      {/* Timeframe - Esquina superior derecha */}
+                      <div className="absolute top-2 right-2 z-20 bg-blue-600/90 backdrop-blur-sm px-4 py-2 font-mono text-sm font-bold text-white shadow-lg border border-blue-400">
+                        60 MIN
                       </div>
-                    </div>
+                    </>
                   )}
                   
                   {loading ? (
