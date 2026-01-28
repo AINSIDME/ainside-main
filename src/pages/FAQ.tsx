@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, BookOpen, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -135,12 +134,6 @@ const FAQ = () => {
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="container max-w-6xl mx-auto text-center">
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
-              {t("faq.badge")}
-            </Badge>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent leading-tight">
               {t("faq.title")}
             </h1>
