@@ -208,51 +208,44 @@ const Register = () => {
               </div>
             </>
           ) : !isRegistered ? (
-            <Card className="bg-slate-900/50 border-slate-700 backdrop-blur-xl shadow-2xl">
-              <CardHeader className="text-center">
-                <div className="inline-block p-3 bg-blue-500/10 rounded-2xl mb-4 mx-auto">
-                  <Key className="w-8 h-8 text-blue-400" />
-                </div>
-                <CardTitle className="text-2xl text-white">
-                  {t("registerPage.form.title")}
-                </CardTitle>
-                <p className="text-slate-400 text-sm mt-2">
-                  {t("registerPage.form.description")}
-                </p>
-              </CardHeader>
-              <CardContent>
+            <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-xl shadow-2xl">
+              <CardContent className="pt-6 pb-8 px-6 space-y-5">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="orderId" className="text-slate-200">
+                    <Label htmlFor="orderId" className="text-slate-200 text-sm font-medium">
                       {t("registerPage.form.orderId.label")}
                     </Label>
-                    <Input
-                      id="orderId"
-                      name="orderId"
-                      type="text"
-                      placeholder="ORDER-XXXXX"
-                      value={formData.orderId}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="orderId"
+                        name="orderId"
+                        type="text"
+                        placeholder="ORDER-XXXXX"
+                        value={formData.orderId}
+                        onChange={handleInputChange}
+                        required
+                        className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="hwid" className="text-slate-200">
+                    <Label htmlFor="hwid" className="text-slate-200 text-sm font-medium">
                       {t("registerPage.form.hwid.label")}
                     </Label>
-                    <Input
-                      id="hwid"
-                      name="hwid"
-                      type="text"
-                      placeholder="XXXX-XXXX-XXXX"
-                      value={formData.hwid}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 font-mono"
-                    />
-                    <p className="text-xs text-slate-500">
+                    <div className="relative">
+                      <Input
+                        id="hwid"
+                        name="hwid"
+                        type="text"
+                        placeholder="XXXX-XXXX-XXXX"
+                        value={formData.hwid}
+                        onChange={handleInputChange}
+                        required
+                        className="bg-slate-800/50 border-slate-700/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 rounded-lg py-5 font-mono"
+                      />
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1">
                       {t("registerPage.form.hwid.hint")}
                     </p>
                   </div>
@@ -260,7 +253,7 @@ const Register = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
                   >
                     {isSubmitting ? (
                       <>
@@ -268,7 +261,10 @@ const Register = () => {
                         {t("registerPage.form.submitting")}
                       </>
                     ) : (
-                      t("registerPage.form.submit")
+                      <>
+                        <Key className="mr-2 h-4 w-4" />
+                        {t("registerPage.form.submit")}
+                      </>
                     )}
                   </Button>
                 </form>
