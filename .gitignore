@@ -46,6 +46,10 @@ admin-2fa-qr.png
 # Local schema/debug dumps
 remote-public-schema.sql
 
+# Private trading strategies (NEVER COMMIT)
+src/strategies/private/
+*.strategy.ts
+
 # Supabase temp artifacts
 supabase/.temp/
 

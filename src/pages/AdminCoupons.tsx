@@ -175,6 +175,66 @@ const AdminCoupons = () => {
       navigator.clipboard.writeText(newCode);
       setCopiedCode(newCode);
       setTimeout(() => setCopiedCode(null), 2000);
+      
+      toast({
+        title: "✅ Cupón creado",
+        description: `Cupón ${newCode} copiado al portapapeles`,
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  const createReferralCoupon = async () => {
+    setCreating(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+      if (!accessToken) return;
+
+      const newCode = 'FRIEND-' + generateCouponCode().replace(/-/g, '').substring(0, 8);
+
+      const { error } = await supabase.functions.invoke('admin-coupons', {
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: {
+          action: 'create',
+          code: newCode,
+          discount_percent: 25,
+          duration_months: 12,
+          max_uses: 5, // Puede usarse hasta 5 veces
+          expires_at: expiresAt || null,
+          notes: notes || '🎁 Cupón de Referido - 25% OFF',
+        },
+      });
+
+      if (error) {
+        console.error('Error creating referral coupon:', error);
+        toast({
+          title: "❌ Error",
+          description: 'Error al crear cupón: ' + (error as any).message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setNotes('');
+      setExpiresAt('');
+      await loadCoupons();
+      
+      // Copy new code to clipboard
+      navigator.clipboard.writeText(newCode);
+      setCopiedCode(newCode);
+      setTimeout(() => setCopiedCode(null), 2000);
+      
+      toast({
+        title: "✅ Cupón de Referido creado",
+        description: `${newCode} - 25% OFF para compartir (hasta 5 usos)`,
+      });
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -342,11 +402,21 @@ const AdminCoupons = () => {
         </div>
 
         {/* Info Alert */}
-        <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
-          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-          <div className="text-xs sm:text-sm text-blue-300">
-            <p className="font-semibold mb-1">50% de descuento por 12 meses - Uso único</p>
-            <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y ofrece un <strong>50% de descuento</strong> durante todo el año.</p>
+        <div className="mb-6 sm:mb-8 space-y-3">
+          <div className="p-3 sm:p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+            <div className="text-xs sm:text-sm text-blue-300">
+              <p className="font-semibold mb-1">50% de descuento por 12 meses - Uso único</p>
+              <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y ofrece un <strong>50% de descuento</strong> durante todo el año.</p>
+            </div>
+          </div>
+          
+          <div className="p-3 sm:p-4 bg-green-500/10 border border-green-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-0.5" />
+            <div className="text-xs sm:text-sm text-green-300">
+              <p className="font-semibold mb-1">🎁 Cupones de Referido - 25% de descuento</p>
+              <p className="hidden sm:block">Para que clientes compartan con amigos. <strong>Hasta 5 usos</strong> por cupón con <strong>25% OFF</strong> por 12 meses.</p>
+            </div>
           </div>
         </div>
 
@@ -381,14 +451,25 @@ const AdminCoupons = () => {
             </div>
           </div>
 
-          <Button
-            onClick={createCoupon}
-            disabled={creating}
-            className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            {creating ? 'Creando...' : 'Generar Cupón'}
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <Button
+              onClick={createCoupon}
+              disabled={creating}
+              className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              {creating ? 'Creando...' : 'Generar Cupón 50%'}
+            </Button>
+            
+            <Button
+              onClick={createReferralCoupon}
+              disabled={creating}
+              className="bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              {creating ? 'Creando...' : '🎁 Cupón Referido 25%'}
+            </Button>
+          </div>
         </div>
 
         {/* Coupons List */}

@@ -7,6 +7,7 @@ import type { Bar } from '../strategies/private/strategy';
 const Demo = () => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
+  const barsRef = useRef<Bar[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<{totalTrades: number, profit: number, winners: number, losers: number} | null>(null);
@@ -16,6 +17,7 @@ const Demo = () => {
     if (!chartContainerRef.current) return;
 
     let mounted = true;
+    let liveInterval: any = null;
 
     const loadDataAndRender = async () => {
       try {
@@ -73,6 +75,9 @@ const Demo = () => {
           winners,
           losers
         });
+        
+        // Guardar bars en ref para actualizaciones en vivo
+        barsRef.current = bars;
 
         // Convertir a formato Highcharts
         const ohlc: number[][] = bars.map(bar => [
@@ -100,6 +105,9 @@ const Demo = () => {
         plotBorderWidth: 0,
         margin: [5, 60, 25, 55],
         spacing: [0, 0, 0, 0],
+        animation: {
+          duration: 300
+        },
       },
       title: { text: '' },
       credits: { enabled: false },
@@ -301,6 +309,81 @@ const Demo = () => {
 
     chartRef.current = chart;
     setLoading(false);
+    
+    // INICIAR ACTUALIZACIÓN EN VIVO - Nuevas velas cada 1 segundo
+    liveInterval = setInterval(() => {
+      if (!mounted || !chart) return;
+      
+      const currentBars = barsRef.current;
+      if (currentBars.length === 0) return;
+      
+      const lastBar = currentBars[currentBars.length - 1];
+      const newTime = lastBar.time + 1000; // +1 segundo
+      
+      // Generar movimiento de precio realista
+      const volatility = 0.5; // Menor volatilidad para movimientos suaves
+      const trend = (Math.random() - 0.5) * 0.3;
+      const open = lastBar.close;
+      const change = trend + (Math.random() - 0.5) * volatility;
+      const close = open + change;
+      const high = Math.max(open, close) + Math.random() * 0.3;
+      const low = Math.min(open, close) - Math.random() * 0.3;
+      const volume = Math.floor(Math.random() * 500 + 100);
+      
+      const newBar: Bar = {
+        time: newTime,
+        open,
+        high,
+        low,
+        close,
+        volume
+      };
+      
+      // Agregar nueva barra
+      currentBars.push(newBar);
+      
+      // Mantener solo las últimas 100 velas para rendimiento
+      if (currentBars.length > 100) {
+        currentBars.shift();
+      }
+      
+      // Actualizar serie de velas
+      const candleSeries = chart.get('main');
+      if (candleSeries) {
+        candleSeries.addPoint([
+          newTime,
+          parseFloat(open.toFixed(2)),
+          parseFloat(high.toFixed(2)),
+          parseFloat(low.toFixed(2)),
+          parseFloat(close.toFixed(2))
+        ], false, currentBars.length > 100);
+      }
+      
+      // Actualizar volumen
+      const volumeSeries = chart.series[1];
+      if (volumeSeries) {
+        volumeSeries.addPoint([newTime, volume], false, currentBars.length > 100);
+      }
+      
+      // Re-ejecutar estrategia sobre datos actualizados
+      const newStrategyResult = runStrategy(currentBars);
+      
+      // Actualizar stats
+      const newTotalProfit = newStrategyResult.trades.reduce((sum, t) => sum + t.profit, 0);
+      const newWinners = newStrategyResult.trades.filter(t => t.profit > 0).length;
+      const newLosers = newStrategyResult.trades.filter(t => t.profit < 0).length;
+      
+      setStats({
+        totalTrades: newStrategyResult.trades.length,
+        profit: newTotalProfit,
+        winners: newWinners,
+        losers: newLosers
+      });
+      
+      // Redibujar gráfico
+      chart.redraw();
+      
+    }, 1000); // Cada 1 segundo
 
       } catch (err) {
         console.error('Error loading data:', err);
@@ -315,6 +398,9 @@ const Demo = () => {
 
     return () => {
       mounted = false;
+      if (liveInterval) {
+        clearInterval(liveInterval);
+      }
       if (chartRef.current) {
         chartRef.current.destroy();
       }
@@ -327,7 +413,7 @@ const Demo = () => {
       <div className="h-8 bg-black border-b border-[#1a1a1a] flex items-center px-3 justify-between">
         <div className="flex items-center gap-4">
           <span className="text-[#999] text-[11px] font-semibold">
-            ES (S&P 500 Futures) - 5 Min {tradingDate && `| ${tradingDate}`} {loading && '(Cargando...)'}
+            ES (S&P 500 Futures) - 1 SEC LIVE {tradingDate && `| ${tradingDate}`} {loading && '(Cargando...)'}
           </span>
           {stats && (
             <span className="text-[#666] text-[10px]">
