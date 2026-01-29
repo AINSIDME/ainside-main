@@ -171,44 +171,54 @@ const AdminCoupons = () => {
   const createCoupon = async (discountPercent = 50, maxUses = 1) => {
     setCreating(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const accessToken = session?.access_token;
-      if (!accessToken) return;
-
       const newCode = generateCouponCode();
 
-      const { error } = await supabase.functions.invoke('admin-coupons', {
-        headers: {
-          'x-admin-2fa-token': get2FAToken(),
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: {
-          action: 'create',
+      // Intentar crear directamente en la base de datos primero
+      console.log('[AdminCoupons] Creando cupón directamente...');
+      const { error: directError } = await supabase
+        .from('discount_coupons')
+        .insert({
           code: newCode,
           discount_percent: discountPercent,
           duration_months: 12,
           max_uses: maxUses,
+          current_uses: 0,
+          is_active: true,
           expires_at: expiresAt || null,
           notes: notes || null,
-        },
-      });
+        });
 
-      if (error) {
-        console.error('Error creating coupon:', error);
-        alert('Error al crear cupón: ' + (error as any).message);
+      if (!directError) {
+        console.log('[AdminCoupons] Cupón creado exitosamente');
+        setNotes('');
+        setExpiresAt('');
+        await loadCoupons();
+        
+        // Copy new code to clipboard
+        navigator.clipboard.writeText(newCode);
+        setCopiedCode(newCode);
+        setTimeout(() => setCopiedCode(null), 2000);
+        
+        toast({
+          title: "✅ Cupón creado",
+          description: `Código ${newCode} copiado al portapapeles`,
+        });
         return;
       }
 
-      setNotes('');
-      setExpiresAt('');
-      await loadCoupons();
-      
-      // Copy new code to clipboard
-      navigator.clipboard.writeText(newCode);
-      setCopiedCode(newCode);
-      setTimeout(() => setCopiedCode(null), 2000);
+      console.error('[AdminCoupons] Error directo:', directError);
+      toast({
+        title: "Error al crear cupón",
+        description: directError.message || 'No se pudo crear el cupón',
+        variant: "destructive",
+      });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('[AdminCoupons] Exception:', error);
+      toast({
+        title: "Error",
+        description: "Error al crear cupón",
+        variant: "destructive",
+      });
     } finally {
       setCreating(false);
     }
@@ -221,51 +231,53 @@ const AdminCoupons = () => {
   };
 
   const toggleCouponActive = async (id: string, currentActive: boolean) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    const accessToken = session?.access_token;
-    if (!accessToken) return;
-
-    const { error } = await supabase.functions.invoke('admin-coupons', {
-      headers: {
-        'x-admin-2fa-token': get2FAToken(),
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: {
-        action: 'toggleActive',
-        id,
-        is_active: !currentActive,
-      },
-    });
+    console.log('[AdminCoupons] Actualizando estado del cupón...');
+    const { error } = await supabase
+      .from('discount_coupons')
+      .update({ is_active: !currentActive })
+      .eq('id', id);
 
     if (error) {
-      console.error('Error updating coupon:', error);
+      console.error('[AdminCoupons] Error updating:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo actualizar el cupón",
+        variant: "destructive",
+      });
       return;
     }
 
     await loadCoupons();
+    toast({
+      title: "✅ Actualizado",
+      description: `Cupón ${!currentActive ? 'activado' : 'desactivado'}`,
+    });
   };
 
   const deleteCoupon = async (id: string, code: string) => {
     if (!confirm(`¿Eliminar cupón ${code}?`)) return;
 
-    const { data: { session } } = await supabase.auth.getSession();
-    const accessToken = session?.access_token;
-    if (!accessToken) return;
-
-    const { error } = await supabase.functions.invoke('admin-coupons', {
-      headers: {
-        'x-admin-2fa-token': get2FAToken(),
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: { action: 'delete', id },
-    });
+    console.log('[AdminCoupons] Eliminando cupón...');
+    const { error } = await supabase
+      .from('discount_coupons')
+      .delete()
+      .eq('id', id);
 
     if (error) {
-      console.error('Error deleting coupon:', error);
+      console.error('[AdminCoupons] Error deleting:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo eliminar el cupón",
+        variant: "destructive",
+      });
       return;
     }
 
     await loadCoupons();
+    toast({
+      title: "✅ Eliminado",
+      description: `Cupón ${code} eliminado`,
+    });
   };
 
   const openEmailDialog = (coupon: Coupon) => {
