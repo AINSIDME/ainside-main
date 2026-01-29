@@ -168,7 +168,7 @@ const AdminCoupons = () => {
     return code;
   };
 
-  const createCoupon = async () => {
+  const createCoupon = async (discountPercent = 50, maxUses = 1) => {
     setCreating(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
@@ -185,9 +185,9 @@ const AdminCoupons = () => {
         body: {
           action: 'create',
           code: newCode,
-          discount_percent: 50,
+          discount_percent: discountPercent,
           duration_months: 12,
-          max_uses: 1,
+          max_uses: maxUses,
           expires_at: expiresAt || null,
           notes: notes || null,
         },
@@ -377,8 +377,9 @@ const AdminCoupons = () => {
         <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-blue-500/10 border border-blue-500/50 rounded-lg flex items-start gap-2 sm:gap-3">
           <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
           <div className="text-xs sm:text-sm text-blue-300">
-            <p className="font-semibold mb-1">50% de descuento por 12 meses - Uso único</p>
-            <p className="hidden sm:block">Cada cupón es de <strong>uso único</strong> y ofrece un <strong>50% de descuento</strong> durante todo el año.</p>
+            <p className="font-semibold mb-1">Tipos de cupones disponibles</p>
+            <p><strong>50% de descuento:</strong> 1 uso, 12 meses de duración</p>
+            <p><strong>25% para amigo:</strong> 5 usos, 12 meses - ideal para referir clientes</p>
           </div>
         </div>
 
@@ -413,14 +414,24 @@ const AdminCoupons = () => {
             </div>
           </div>
 
-          <Button
-            onClick={createCoupon}
-            disabled={creating}
-            className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            {creating ? 'Creando...' : 'Generar Cupón'}
-          </Button>
+          <div className="flex gap-2 flex-col sm:flex-row">
+            <Button
+              onClick={() => createCoupon(50, 1)}
+              disabled={creating}
+              className="bg-blue-600 hover:bg-blue-700 text-white flex-1"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              {creating ? 'Creando...' : 'Cupón 50% (1 uso)'}
+            </Button>
+            <Button
+              onClick={() => createCoupon(25, 5)}
+              disabled={creating}
+              className="bg-green-600 hover:bg-green-700 text-white flex-1"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              {creating ? 'Creando...' : 'Cupón 25% Amigo (5 usos)'}
+            </Button>
+          </div>
         </div>
 
         {/* Coupons List */}

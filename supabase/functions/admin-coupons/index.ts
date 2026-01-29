@@ -27,13 +27,18 @@ serve(async (req) => {
     }
 
     if (action === 'list') {
+      console.log('[admin-coupons] Listing coupons...');
       const { data, error } = await supabaseAdmin
         .from('discount_coupons')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('[admin-coupons] List error:', error);
+        throw error;
+      }
 
+      console.log('[admin-coupons] Found', data?.length || 0, 'coupons');
       return new Response(JSON.stringify({ data }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -127,7 +132,11 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error?.message ?? 'Internal error' }), {
+    console.error('[admin-coupons] Error:', error);
+    return new Response(JSON.stringify({ 
+      error: error?.message ?? 'Internal error',
+      details: String(error)
+    }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
