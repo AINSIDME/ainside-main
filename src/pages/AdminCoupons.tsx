@@ -111,8 +111,21 @@ const AdminCoupons = () => {
       const { data: { session } } = await supabase.auth.getSession();
       const accessToken = session?.access_token;
 
-      console.log('[AdminCoupons] Loading coupons with token:', get2FAToken()?.substring(0, 10) + '...');
+      // Intentar cargar usando la API directa primero
+      console.log('[AdminCoupons] Intentando cargar cupones directamente...');
+      const { data: directData, error: directError } = await supabase
+        .from('discount_coupons')
+        .select('*')
+        .order('created_at', { ascending: false });
 
+      if (!directError && directData) {
+        console.log('[AdminCoupons] Cargados', directData.length, 'cupones directamente');
+        setCoupons(directData);
+        return;
+      }
+
+      // Si falla, intentar via edge function
+      console.log('[AdminCoupons] Cargando via edge function con token:', get2FAToken()?.substring(0, 10) + '...');
       const { data, error } = await supabase.functions.invoke('admin-coupons', {
         headers: {
           'x-admin-2fa-token': get2FAToken(),
@@ -122,10 +135,10 @@ const AdminCoupons = () => {
       });
 
       if (error) {
-        console.error('[AdminCoupons] Error loading coupons:', error);
+        console.error('[AdminCoupons] Error:', error);
         toast({
           title: "Error al cargar cupones",
-          description: error.message || 'Error desconocido',
+          description: error.message || 'Verifica tu sesión 2FA en /admin/verify-2fa',
           variant: "destructive",
         });
         return;
@@ -139,7 +152,7 @@ const AdminCoupons = () => {
       console.error('[AdminCoupons] Exception:', err);
       toast({
         title: "Error",
-        description: "Error al cargar cupones",
+        description: "Error al cargar cupones. Verifica tu sesión 2FA.",
         variant: "destructive",
       });
     }
