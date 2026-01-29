@@ -1,8 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Highcharts from 'highcharts/highstock';
-import { fetchPreviousDayData } from '../strategies/private/dataFetcher';
-import { runStrategy } from '../strategies/private/strategy';
-import type { Bar } from '../strategies/private/strategy';
+// import { fetchPreviousDayData } from '../strategies/private/dataFetcher';
+// import { runStrategy } from '../strategies/private/strategy';
+// import type { Bar } from '../strategies/private/strategy';
+
+interface Bar {
+  time: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
 
 const Demo = () => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -24,31 +33,87 @@ const Demo = () => {
         setLoading(true);
         setError(null);
 
-        // Descargar datos del día anterior (15 min bars) - Contrato ES (E-mini S&P 500)
-        console.log('🔄 Descargando datos del contrato ES del día anterior...');
-        let bars = await fetchPreviousDayData('ES=F', '5m'); // Cambiar a 5 min para más velas
+        // Generar datos sintéticos para demostración
+        console.log('🔄 Generando datos de demostración...');
+        const bars: Bar[] = [];
+        let price = 6000;
+        const now = Date.now();
+        const barCount = 78; // ~6.5 horas * 12 barras/hora (5min)
+        
+        for (let i = 0; i < barCount; i++) {
+          const time = now - (barCount - i) * 5 * 60 * 1000; // 5 min intervals
+          const volatility = 2;
+          const open = price;
+          const change = (Math.random() - 0.5) * volatility;
+          const close = open + change;
+          const high = Math.max(open, close) + Math.random() * volatility;
+          const low = Math.min(open, close) - Math.random() * volatility;
+          const volume = Math.floor(Math.random() * 1000 + 500);
+          
+          bars.push({ time, open, high, low, close, volume });
+          price = close;
+        }
         
         if (!mounted) return;
 
-        if (bars.length === 0) {
-          setError('No se pudieron cargar datos del contrato ES');
-          setLoading(false);
-          return;
-        }
-
         const firstBarDate = new Date(bars[0].time);
-        const lastBarDate = new Date(bars[bars.length - 1].time);
-        
         setTradingDate(firstBarDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
         
-        console.log(`✅ Cargadas ${bars.length} velas del contrato ES`);
-        console.log(`📅 Día: ${firstBarDate.toLocaleDateString()}`);
-        console.log(`⏰ Rango: ${firstBarDate.toLocaleTimeString()} - ${lastBarDate.toLocaleTimeString()}`);
-        console.log(`💰 Rango de precios: ${Math.min(...bars.map(b => b.low)).toFixed(2)} - ${Math.max(...bars.map(b => b.high)).toFixed(2)}`);
+        console.log(`✅ Generadas ${bars.length} velas sintéticas`);
 
-        // Ejecutar estrategia sobre los datos
-        console.log('🤖 Ejecutando algoritmo de trading...');
-        const strategyResult = runStrategy(bars);
+        // Estrategia simple de demostración
+        const strategyResult = { trades: [], indicators: [] };
+        let position = 0;
+        let entryBar = 0;
+        let entryPrice = 0;
+        
+        for (let i = 20; i < bars.length; i++) {
+          const bar = bars[i];
+          const prevBar = bars[i - 1];
+          const momentum = bar.close - prevBar.close;
+          
+          // Long entries
+          if (position === 0 && momentum < -1.5 && Math.random() > 0.8) {
+            position = 1;
+            entryBar = i;
+            entryPrice = bar.close;
+          }
+          
+          // Long exits con profit
+          if (position === 1 && (bar.close - entryPrice) >= 3) {
+            const profit = (bar.close - entryPrice) * 50;
+            strategyResult.trades.push({
+              entryBar,
+              exitBar: i,
+              entryPrice,
+              exitPrice: bar.close,
+              type: 'long' as const,
+              profit
+            });
+            position = 0;
+          }
+          
+          // Short entries
+          if (position === 0 && momentum > 1.5 && Math.random() > 0.8) {
+            position = -1;
+            entryBar = i;
+            entryPrice = bar.close;
+          }
+          
+          // Short exits con profit
+          if (position === -1 && (entryPrice - bar.close) >= 3) {
+            const profit = (entryPrice - bar.close) * 50;
+            strategyResult.trades.push({
+              entryBar,
+              exitBar: i,
+              entryPrice,
+              exitPrice: bar.close,
+              type: 'short' as const,
+              profit
+            });
+            position = 0;
+          }
+        }
         
         console.log(`📊 Estrategia generó ${strategyResult.trades.length} operaciones`);
         
@@ -348,8 +413,8 @@ const Demo = () => {
       }
       
       // Actualizar serie de velas
-      const candleSeries = chart.get('main');
-      if (candleSeries) {
+      const candleSeries = chart.get('main') as any;
+      if (candleSeries && candleSeries.addPoint) {
         candleSeries.addPoint([
           newTime,
           parseFloat(open.toFixed(2)),
@@ -365,16 +430,39 @@ const Demo = () => {
         volumeSeries.addPoint([newTime, volume], false, currentBars.length > 100);
       }
       
-      // Re-ejecutar estrategia sobre datos actualizados
-      const newStrategyResult = runStrategy(currentBars);
+      // Re-ejecutar estrategia simple sobre datos actualizados
+      const trades: any[] = [];
+      let position = 0;
+      let entryBar = 0;
+      let entryPrice = 0;
+      
+      for (let i = 20; i < currentBars.length; i++) {
+        const bar = currentBars[i];
+        const prevBar = currentBars[i - 1];
+        const momentum = bar.close - prevBar.close;
+        
+        if (position === 0 && momentum < -1.5 && Math.random() > 0.9) {
+          position = 1;
+          entryBar = i;
+          entryPrice = bar.close;
+        }
+        
+        if (position === 1 && (bar.close - entryPrice) >= 3) {
+          trades.push({
+            entryBar, exitBar: i, entryPrice, exitPrice: bar.close,
+            type: 'long', profit: (bar.close - entryPrice) * 50
+          });
+          position = 0;
+        }
+      }
       
       // Actualizar stats
-      const newTotalProfit = newStrategyResult.trades.reduce((sum, t) => sum + t.profit, 0);
-      const newWinners = newStrategyResult.trades.filter(t => t.profit > 0).length;
-      const newLosers = newStrategyResult.trades.filter(t => t.profit < 0).length;
+      const newTotalProfit = trades.reduce((sum, t) => sum + t.profit, 0);
+      const newWinners = trades.filter(t => t.profit > 0).length;
+      const newLosers = trades.filter(t => t.profit < 0).length;
       
       setStats({
-        totalTrades: newStrategyResult.trades.length,
+        totalTrades: trades.length,
         profit: newTotalProfit,
         winners: newWinners,
         losers: newLosers
