@@ -1,116 +1,360 @@
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Highcharts from 'highcharts/highstock';
-import HighchartsReact from 'highcharts-react-official';
-import { AlertTriangle, TrendingUp, TrendingDown, Activity, DollarSign } from "lucide-react";
+import { fetchPreviousDayData } from '../strategies/private/dataFetcher';
+import { runStrategy } from '../strategies/private/strategy';
+import type { Bar } from '../strategies/private/strategy';
 
 const Demo = () => {
-  const { t } = useTranslation();
-  
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [currentPrice, setCurrentPrice] = useState(6025.50);
-  const [position, setPosition] = useState<{ type: 'long' | 'short', entry: number, pnl: number } | null>(null);
-  const [trades, setTrades] = useState<Array<{ type: string, entry: number, exit: number, pnl: number }>>([]);
-  const [totalPnL, setTotalPnL] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [stats, setStats] = useState<{totalTrades: number, profit: number, winners: number, losers: number} | null>(null);
+  const [tradingDate, setTradingDate] = useState<string>('');
 
   useEffect(() => {
-    // Generar datos simulados inmediatamente
-    const data: any[] = [];
-    let price = 6025;
-    const now = Date.now();
+    if (!chartContainerRef.current) return;
 
-    for (let i = 0; i < 168; i++) {
-      const time = now - (168 - i) * 3600000;
-      const open = price;
-      const change = (Math.random() - 0.5) * 8;
-      const close = open + change;
-      const high = Math.max(open, close) + Math.random() * 4;
-      const low = Math.min(open, close) - Math.random() * 4;
+    let mounted = true;
 
-      data.push([time, open, high, low, close]);
-      price = close;
-    }
+    const loadDataAndRender = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    setChartData(data);
-    setCurrentPrice(price);
-    setIsLoading(false);
-
-    // Simulación de trading
-    const tradingInterval = setInterval(() => {
-      setChartData(prev => {
-        if (prev.length === 0) return prev;
+        // Descargar datos del día anterior (15 min bars) - Contrato ES (E-mini S&P 500)
+        console.log('🔄 Descargando datos del contrato ES del día anterior...');
+        let bars = await fetchPreviousDayData('ES=F', '5m'); // Cambiar a 5 min para más velas
         
-        const lastCandle = prev[prev.length - 1];
-        const lastTime = lastCandle[0];
-        const lastClose = lastCandle[4];
-        const newTime = lastTime + 3600000;
+        if (!mounted) return;
 
-        const open = lastClose;
-        const change = (Math.random() - 0.5) * 6;
-        const close = open + change;
-        const high = Math.max(open, close) + Math.random() * 3;
-        const low = Math.min(open, close) - Math.random() * 3;
+        if (bars.length === 0) {
+          setError('No se pudieron cargar datos del contrato ES');
+          setLoading(false);
+          return;
+        }
 
-        setCurrentPrice(close);
+        const firstBarDate = new Date(bars[0].time);
+        const lastBarDate = new Date(bars[bars.length - 1].time);
+        
+        setTradingDate(firstBarDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
+        
+        console.log(`✅ Cargadas ${bars.length} velas del contrato ES`);
+        console.log(`📅 Día: ${firstBarDate.toLocaleDateString()}`);
+        console.log(`⏰ Rango: ${firstBarDate.toLocaleTimeString()} - ${lastBarDate.toLocaleTimeString()}`);
+        console.log(`💰 Rango de precios: ${Math.min(...bars.map(b => b.low)).toFixed(2)} - ${Math.max(...bars.map(b => b.high)).toFixed(2)}`);
 
-        return [...prev, [newTime, open, high, low, close]].slice(-200);
+        // Ejecutar estrategia sobre los datos
+        console.log('🤖 Ejecutando algoritmo de trading...');
+        const strategyResult = runStrategy(bars);
+        
+        console.log(`📊 Estrategia generó ${strategyResult.trades.length} operaciones`);
+        
+        // Calcular estadísticas
+        const totalProfit = strategyResult.trades.reduce((sum, t) => sum + t.profit, 0);
+        const winners = strategyResult.trades.filter(t => t.profit > 0).length;
+        const losers = strategyResult.trades.filter(t => t.profit < 0).length;
+        const winRate = strategyResult.trades.length > 0 ? (winners / strategyResult.trades.length * 100) : 0;
+        
+        console.log(`💵 P&L Total: $${totalProfit.toFixed(2)}`);
+        console.log(`✅ Ganadoras: ${winners} (${winRate.toFixed(1)}%)`);
+        console.log(`❌ Perdedoras: ${losers}`);
+        
+        if (strategyResult.trades.length > 0) {
+          const avgWin = strategyResult.trades.filter(t => t.profit > 0).reduce((sum, t) => sum + t.profit, 0) / (winners || 1);
+          const avgLoss = Math.abs(strategyResult.trades.filter(t => t.profit < 0).reduce((sum, t) => sum + t.profit, 0)) / (losers || 1);
+          console.log(`📈 Promedio ganador: $${avgWin.toFixed(2)}`);
+          console.log(`📉 Promedio perdedor: $${avgLoss.toFixed(2)}`);
+        }
+        
+        setStats({
+          totalTrades: strategyResult.trades.length,
+          profit: totalProfit,
+          winners,
+          losers
+        });
+
+        // Convertir a formato Highcharts
+        const ohlc: number[][] = bars.map(bar => [
+          bar.time,
+          parseFloat(bar.open.toFixed(2)),
+          parseFloat(bar.high.toFixed(2)),
+          parseFloat(bar.low.toFixed(2)),
+          parseFloat(bar.close.toFixed(2))
+        ]);
+
+        const volume: number[][] = bars.map(bar => [
+          bar.time,
+          bar.volume
+        ]);
+
+        if (!mounted) return;
+
+    const chart = Highcharts.stockChart(chartContainerRef.current, {
+      chart: {
+        backgroundColor: '#000000',
+        height: window.innerHeight - 32,
+        style: {
+          fontFamily: "'Arial', sans-serif",
+        },
+        plotBorderWidth: 0,
+        margin: [5, 60, 25, 55],
+        spacing: [0, 0, 0, 0],
+      },
+      title: { text: '' },
+      credits: { enabled: false },
+      rangeSelector: { enabled: false },
+      scrollbar: { enabled: false },
+      navigator: { enabled: false },
+      xAxis: {
+        type: 'datetime',
+        gridLineWidth: 0,
+        lineColor: '#1a1a1a',
+        lineWidth: 0,
+        tickColor: '#1a1a1a',
+        labels: { 
+          enabled: false,
+        },
+        crosshair: false,
+        min: bars[0]?.time,
+        max: bars[bars.length - 1]?.time,
+      },
+      yAxis: [{
+        labels: { 
+          align: 'right', 
+          x: -5, 
+          style: { 
+            color: '#888',
+            fontSize: '10px',
+          },
+          formatter: function() {
+            return (this.value as number).toFixed(2);
+          }
+        },
+        title: { text: '' },
+        height: '95%',
+        lineWidth: 0,
+        gridLineWidth: 0,
+      }, {
+        labels: { enabled: false },
+        title: { text: '' },
+        top: '95%',
+        height: '5%',
+        lineWidth: 0,
+        gridLineWidth: 0,
+      }],
+      tooltip: {
+        enabled: false,
+      },
+      plotOptions: {
+        candlestick: {
+          color: '#CC0000',
+          upColor: '#00CC00',
+          lineColor: '#CC0000',
+          upLineColor: '#00CC00',
+          lineWidth: 1,
+        },
+        column: {
+          color: '#2a2a2a',
+        },
+        line: {
+          marker: { enabled: false },
+        },
+      },
+      series: [
+        {
+          type: 'candlestick',
+          name: 'ES',
+          data: ohlc,
+          id: 'main',
+        },
+        {
+          type: 'column',
+          name: 'Volume',
+          data: volume,
+          yAxis: 1,
+        },
+      ],
+    });
+
+    // Convertir trades de la estrategia a formato para renderizar
+    const tradesToRender = strategyResult.trades.map(trade => {
+      const entryBar = bars[trade.entryBar];
+      const exitBar = bars[trade.exitBar];
+      
+      const type = trade.type === 'long' ? 'Long' : 'Short';
+      const entryColor = trade.type === 'long' ? '#00FF00' : '#FF0000';
+      const above = trade.type === 'short'; // Short arriba, Long abajo
+      
+      // Calcular puntos de profit/loss
+      const points = trade.type === 'long' 
+        ? (trade.exitPrice - trade.entryPrice)
+        : (trade.entryPrice - trade.exitPrice);
+      
+      // Formato: +15.50 o -8.25 puntos
+      const pointsLabel = points >= 0 ? `+${points.toFixed(2)}` : `${points.toFixed(2)}`;
+      
+      return {
+        entry: {
+          x: entryBar.time,
+          y: trade.type === 'long' ? entryBar.low : entryBar.high,
+          text: `${type}\n@${trade.entryPrice.toFixed(2)}`,
+          color: entryColor,
+          above: above
+        },
+        exit: {
+          x: exitBar.time,
+          y: trade.type === 'long' ? exitBar.high : exitBar.low,
+          text: `Exit\n${pointsLabel}pts`,
+          color: points >= 0 ? '#00FF00' : '#FF0000',
+          above: !above
+        }
+      };
+    });
+
+    // Array para almacenar elementos renderizados
+    let renderedElements: any[] = [];
+
+    // Función para renderizar trades
+    const renderTrades = () => {
+      // Limpiar elementos previos
+      renderedElements.forEach(el => el.destroy());
+      renderedElements = [];
+
+      // Líneas entre trades
+      tradesToRender.forEach(trade => {
+        const entryXPos = chart.xAxis[0].toPixels(trade.entry.x, false);
+        const entryYPos = chart.yAxis[0].toPixels(trade.entry.y, false);
+        const exitXPos = chart.xAxis[0].toPixels(trade.exit.x, false);
+        const exitYPos = chart.yAxis[0].toPixels(trade.exit.y, false);
+        
+        // Línea sólida conectando entrada y salida
+        const line = (chart.renderer as any).path([
+          ['M', entryXPos, entryYPos],
+          ['L', exitXPos, exitYPos]
+        ])
+        .attr({
+          stroke: trade.entry.color,
+          'stroke-width': 2,
+          zIndex: 2,
+          opacity: 0.8,
+        })
+        .add();
+        renderedElements.push(line);
       });
-    }, 5000);
 
-    return () => clearInterval(tradingInterval);
+      // Renderizar anotaciones
+      const allAnnotations = tradesToRender.flatMap(trade => [trade.entry, trade.exit]);
+      
+      allAnnotations.forEach(annotation => {
+        const xPos = chart.xAxis[0].toPixels(annotation.x, false);
+        const yPos = chart.yAxis[0].toPixels(annotation.y, false);
+        const offset = annotation.above ? -28 : 28;
+        
+        const lines = annotation.text.split('\n');
+        
+        // Tipo de operación
+        const text1 = chart.renderer.text(
+          lines[0],
+          xPos,
+          yPos + offset
+        )
+        .attr({
+          zIndex: 100,
+          align: 'center',
+        })
+        .css({
+          color: annotation.color,
+          fontSize: '11px',
+          fontWeight: 'bold',
+          textShadow: '0 0 3px rgba(0,0,0,1), 1px 1px 3px rgba(0,0,0,1)',
+        })
+        .add();
+        renderedElements.push(text1);
+        
+        // P&L
+        const text2 = chart.renderer.text(
+          lines[1],
+          xPos,
+          yPos + offset + 14
+        )
+        .attr({
+          zIndex: 100,
+          align: 'center',
+        })
+        .css({
+          color: annotation.color,
+          fontSize: '11px',
+          fontWeight: 'bold',
+          textShadow: '0 0 3px rgba(0,0,0,1), 1px 1px 3px rgba(0,0,0,1)',
+        })
+        .add();
+        renderedElements.push(text2);
+      });
+    };
+
+    // Renderizar inicialmente
+    renderTrades();
+
+    // Actualizar en cada redraw
+    Highcharts.addEvent(chart, 'redraw', renderTrades);
+
+    chartRef.current = chart;
+    setLoading(false);
+
+      } catch (err) {
+        console.error('Error loading data:', err);
+        if (mounted) {
+          setError(err instanceof Error ? err.message : 'Error desconocido');
+          setLoading(false);
+        }
+      }
+    };
+
+    loadDataAndRender();
+
+    return () => {
+      mounted = false;
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
   }, []);
 
-  const chartOptions = {
-    chart: {
-      backgroundColor: '#0a0a0a',
-      height: 800,
-    },
-    title: { text: '' },
-    xAxis: {
-      type: 'datetime',
-      labels: { style: { color: '#94a3b8' } },
-    },
-    yAxis: {
-      opposite: true,
-      labels: { style: { color: '#94a3b8' } },
-      gridLineColor: '#1e293b'
-    },
-    series: [{
-      name: 'ES=F',
-      type: 'candlestick',
-      data: chartData,
-      color: '#ef4444',
-      upColor: '#22c55e',
-    }],
-    credits: { enabled: false },
-    rangeSelector: { enabled: false },
-    navigator: { enabled: false },
-    scrollbar: { enabled: false }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <Activity className="w-12 h-12 text-blue-500 animate-pulse" />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-black p-4">
-      <div className="mb-4">
-        <h1 className="text-2xl font-bold text-white">E-mini S&P 500 - Live Demo</h1>
-        <p className="text-slate-400">Current Price: ${currentPrice.toFixed(2)}</p>
+    <div className="w-screen h-screen overflow-hidden bg-black">
+      {/* Header minimalista tipo TradeStation */}
+      <div className="h-8 bg-black border-b border-[#1a1a1a] flex items-center px-3 justify-between">
+        <div className="flex items-center gap-4">
+          <span className="text-[#999] text-[11px] font-semibold">
+            ES (S&P 500 Futures) - 5 Min {tradingDate && `| ${tradingDate}`} {loading && '(Cargando...)'}
+          </span>
+          {stats && (
+            <span className="text-[#666] text-[10px]">
+              Trades: {stats.totalTrades} | 
+              <span className={stats.profit >= 0 ? 'text-[#00ff00]' : 'text-[#ff0000]'}>
+                {' '}P&L: ${stats.profit.toFixed(2)}
+              </span>
+              {' '}| Win: {stats.winners} | Loss: {stats.losers}
+            </span>
+          )}
+        </div>
+        {error && (
+          <span className="text-[#ff0000] text-[10px]">Error: {error}</span>
+        )}
       </div>
       
-      <div className="bg-slate-950 border border-slate-800">
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType={'stockChart'}
-          options={chartOptions}
-        />
-      </div>
+      {/* Gráfico a pantalla completa */}
+      {loading && (
+        <div className="w-full h-[calc(100vh-32px)] bg-black flex items-center justify-center">
+          <div className="text-white text-sm">Descargando datos del día anterior...</div>
+        </div>
+      )}
+      <div 
+        ref={chartContainerRef} 
+        className="w-full h-[calc(100vh-32px)] bg-black" 
+        style={{ display: loading ? 'none' : 'block' }}
+      />
     </div>
   );
 };

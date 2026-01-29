@@ -207,8 +207,8 @@ const AdminUsers = () => {
                         <td className="py-3 px-4 text-slate-300 text-sm">
                           {formatDate(user.last_sign_in_at)}
                         </td>
-                        <td className="py-3 px-4 text-slate-400 text-xs font-mono">
-                          {user.id.substring(0, 8)}...
+                        <td className="py-3 px-4 text-slate-400 text-xs font-mono break-all max-w-xs">
+                          {user.id}
                         </td>
                       </tr>
                     ))}
