@@ -107,23 +107,42 @@ const AdminCoupons = () => {
   };
 
   const loadCoupons = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    const accessToken = session?.access_token;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
 
-    const { data, error } = await supabase.functions.invoke('admin-coupons', {
-      headers: {
-        'x-admin-2fa-token': get2FAToken(),
-        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-      },
-      body: { action: 'list' },
-    });
+      console.log('[AdminCoupons] Loading coupons...');
+      
+      const { data, error } = await supabase.functions.invoke('admin-coupons', {
+        headers: {
+          'x-admin-2fa-token': get2FAToken(),
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
+        body: { action: 'list' },
+      });
 
-    if (error) {
-      console.error('Error loading coupons:', error);
-      return;
+      if (error) {
+        console.error('[AdminCoupons] Error loading coupons:', error);
+        toast({
+          title: "Error",
+          description: `No se pudieron cargar los cupones: ${error.message}`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      console.log('[AdminCoupons] Response:', data);
+      const couponsData = (data as any)?.data || [];
+      console.log('[AdminCoupons] Loaded coupons:', couponsData.length);
+      setCoupons(couponsData);
+    } catch (err) {
+      console.error('[AdminCoupons] Exception:', err);
+      toast({
+        title: "Error",
+        description: "Error al cargar cupones",
+        variant: "destructive",
+      });
     }
-
-    setCoupons((data as any)?.data || []);
   };
 
   const generateCouponCode = () => {
@@ -163,7 +182,11 @@ const AdminCoupons = () => {
 
       if (error) {
         console.error('Error creating coupon:', error);
-        alert('Error al crear cupón: ' + (error as any).message);
+        toast({
+          title: "❌ Error",
+          description: `Error al crear cupón: ${error.message}`,
+          variant: "destructive",
+        });
         return;
       }
 
