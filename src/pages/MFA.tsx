@@ -340,7 +340,7 @@ const MFA = () => {
       {/* Fixed Logo */}
       <div className="fixed top-10 left-10">
         <img 
-          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+          src="/brand/logo-mono-navy.png" 
           alt="AInside" 
           className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
         />
