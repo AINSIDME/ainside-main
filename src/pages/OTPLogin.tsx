@@ -25,6 +25,13 @@ export default function OTPLogin() {
     setLoading(true);
 
     try {
+      console.log('DEBUG - SUPABASE_URL:', SUPABASE_URL);
+      console.log('DEBUG - SUPABASE_ANON_KEY (últimos 10):', SUPABASE_ANON_KEY?.slice(-10));
+      
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+        throw new Error('Variables de entorno no configuradas');
+      }
+      
       // Usar fetch directo para evitar proxy de Vercel
       const response = await fetch(`${SUPABASE_URL}/functions/v1/request-otp-code`, {
         method: "POST",
