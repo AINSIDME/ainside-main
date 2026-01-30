@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Debug Environment</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #00ff00; }
         .good { color: #00ff00; }
@@ -15,8 +14,15 @@
     <h1>Debug: Verificando configuración de Supabase</h1>
     <div id="output"></div>
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="runTests()"></script>
     <script>
         const output = document.getElementById('output');
+        
+        function runTests() {
+            if (!window.supabase) {
+                output.innerHTML = '<div class="bad">❌ Error: Librería Supabase no se cargó</div>';
+                return;
+            }
         
         function log(msg, type = 'good') {
             const div = document.createElement('div');
@@ -86,6 +92,7 @@
             log('', 'info');
             log('=== DEBUG COMPLETO ===', 'info');
         })();
+        }
     </script>
 </body>
 </html>
