@@ -12,87 +12,89 @@
 </head>
 <body>
     <h1>Debug: Verificando configuración de Supabase</h1>
-    <div id="output"></div>
+    <div id="output">Cargando librería Supabase...</div>
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="runTests()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const output = document.getElementById('output');
-        
-        function runTests() {
+        setTimeout(() => {
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            
+            function log(msg, type = 'good') {
+                const div = document.createElement('div');
+                div.className = type;
+                div.textContent = msg;
+                output.appendChild(div);
+            }
+            
             if (!window.supabase) {
-                output.innerHTML = '<div class="bad">❌ Error: Librería Supabase no se cargó</div>';
+                log('❌ Error: Librería Supabase no se cargó', 'bad');
                 return;
             }
-        
-        function log(msg, type = 'good') {
-            const div = document.createElement('div');
-            div.className = type;
-            div.textContent = msg;
-            output.appendChild(div);
-        }
-        
-        log('=== INICIANDO DEBUG ===', 'info');
-        log('', 'info');
-        
-        // Probar conectar directamente con ambas keys
-        async function testKey(keyName, keyValue) {
-            log(`Probando ${keyName}...`, 'info');
-            log(`Últimos 10 caracteres: ...${keyValue.slice(-10)}`, 'info');
             
-            try {
-                const supabaseUrl = 'https://odlxhgatqyodxdessxts.supabase.co';
-                const { createClient } = window.supabase;
-                const client = createClient(supabaseUrl, keyValue);
+            log('=== INICIANDO DEBUG ===', 'info');
+            log('✅ Librería Supabase cargada', 'good');
+            log('', 'info');
+            
+            // Probar conectar directamente con ambas keys
+            async function testKey(keyName, keyValue) {
+                log(`Probando ${keyName}...`, 'info');
+                log(`Últimos 10 caracteres: ...${keyValue.slice(-10)}`, 'info');
                 
-                const { data, error } = await client.auth.getSession();
-                
-                if (error) {
-                    log(`❌ ${keyName}: Error - ${error.message}`, 'bad');
+                try {
+                    const supabaseUrl = 'https://odlxhgatqyodxdessxts.supabase.co';
+                    const { createClient } = window.supabase;
+                    const client = createClient(supabaseUrl, keyValue);
+                    
+                    const { data, error } = await client.auth.getSession();
+                    
+                    if (error) {
+                        log(`❌ ${keyName}: Error - ${error.message}`, 'bad');
+                        return false;
+                    } else {
+                        log(`✅ ${keyName}: FUNCIONA!`, 'good');
+                        return true;
+                    }
+                } catch (err) {
+                    log(`❌ ${keyName}: Exception - ${err.message}`, 'bad');
                     return false;
-                } else {
-                    log(`✅ ${keyName}: FUNCIONA!`, 'good');
-                    return true;
                 }
-            } catch (err) {
-                log(`❌ ${keyName}: Exception - ${err.message}`, 'bad');
-                return false;
-            }
-        }
-        
-        // Key vieja (la que probablemente está en producción)
-        const oldKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY5ODc1MTUsImV4cCI6MjA1MjU2MzUxNX0.4HJL3MOuiVLW96PpMpxJlIeREIZY2a6j-BHwLnbw2Y4';
-        
-        // Key nueva (la que debería estar)
-        const newKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NDgzNTAsImV4cCI6MjA4NTEwODM1MH0.Qjpq0pKl_NEGEkHFaUzHv3hWh2rgeke_DKujdcB-xLA';
-        
-        (async () => {
-            log('', 'info');
-            log('TEST 1: Key VIEJA (termina en ...nbw2Y4)', 'info');
-            const oldWorks = await testKey('KEY VIEJA', oldKey);
-            
-            log('', 'info');
-            log('TEST 2: Key NUEVA (termina en ...dcB-xLA)', 'info');
-            const newWorks = await testKey('KEY NUEVA', newKey);
-            
-            log('', 'info');
-            log('=== CONCLUSIÓN ===', 'info');
-            
-            if (oldWorks && !newWorks) {
-                log('❌ PROBLEMA: Vercel está usando la KEY VIEJA invalidada', 'bad');
-                log('SOLUCIÓN: La variable de entorno NO se actualizó correctamente', 'bad');
-            } else if (!oldWorks && newWorks) {
-                log('✅ CORRECTO: Vercel está usando la KEY NUEVA', 'good');
-                log('El login debería funcionar ahora', 'good');
-            } else if (oldWorks && newWorks) {
-                log('⚠️ RARO: Ambas keys funcionan (JWT no fue rotado?)', 'info');
-            } else {
-                log('❌ GRAVE: Ninguna key funciona - problema en Supabase', 'bad');
             }
             
-            log('', 'info');
-            log('=== DEBUG COMPLETO ===', 'info');
-        })();
-        }
+            // Key vieja (la que probablemente está en producción)
+            const oldKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY5ODc1MTUsImV4cCI6MjA1MjU2MzUxNX0.4HJL3MOuiVLW96PpMpxJlIeREIZY2a6j-BHwLnbw2Y4';
+            
+            // Key nueva (la que debería estar)
+            const newKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NDgzNTAsImV4cCI6MjA4NTEwODM1MH0.Qjpq0pKl_NEGEkHFaUzHv3hWh2rgeke_DKujdcB-xLA';
+            
+            (async () => {
+                log('', 'info');
+                log('TEST 1: Key VIEJA (termina en ...nbw2Y4)', 'info');
+                const oldWorks = await testKey('KEY VIEJA', oldKey);
+                
+                log('', 'info');
+                log('TEST 2: Key NUEVA (termina en ...dcB-xLA)', 'info');
+                const newWorks = await testKey('KEY NUEVA', newKey);
+                
+                log('', 'info');
+                log('=== CONCLUSIÓN ===', 'info');
+                
+                if (oldWorks && !newWorks) {
+                    log('❌ PROBLEMA: Vercel está usando la KEY VIEJA invalidada', 'bad');
+                    log('SOLUCIÓN: La variable de entorno NO se actualizó correctamente', 'bad');
+                } else if (!oldWorks && newWorks) {
+                    log('✅ CORRECTO: Vercel está usando la KEY NUEVA', 'good');
+                    log('El login debería funcionar ahora', 'good');
+                } else if (oldWorks && newWorks) {
+                    log('⚠️ RARO: Ambas keys funcionan (JWT no fue rotado?)', 'info');
+                } else {
+                    log('❌ GRAVE: Ninguna key funciona - problema en Supabase', 'bad');
+                }
+                
+                log('', 'info');
+                log('=== DEBUG COMPLETO ===', 'info');
+            })();
+        }, 1000);
     </script>
 </body>
 </html>
