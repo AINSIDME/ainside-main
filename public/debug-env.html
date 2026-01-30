@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>Debug Environment</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #00ff00; }
         .good { color: #00ff00; }
         .bad { color: #ff0000; }
+        .info { color: #ffff00; }
         pre { background: #000; padding: 10px; border: 1px solid #00ff00; }
     </style>
 </head>
@@ -13,73 +15,77 @@
     <h1>Debug: Verificando configuración de Supabase</h1>
     <div id="output"></div>
     
-    <script type="module">
+    <script>
         const output = document.getElementById('output');
         
-        function log(msg, isGood = true) {
+        function log(msg, type = 'good') {
             const div = document.createElement('div');
-            div.className = isGood ? 'good' : 'bad';
+            div.className = type;
             div.textContent = msg;
             output.appendChild(div);
         }
         
-        log('=== INICIANDO DEBUG ===');
-        log('');
+        log('=== INICIANDO DEBUG ===', 'info');
+        log('', 'info');
         
-        // Test 1: Verificar si los módulos se pueden importar
-        try {
-            const module = await import('/src/integrations/supabase/client.ts');
-            log('✅ Módulo supabase importado correctamente');
+        // Probar conectar directamente con ambas keys
+        async function testKey(keyName, keyValue) {
+            log(`Probando ${keyName}...`, 'info');
+            log(`Últimos 10 caracteres: ...${keyValue.slice(-10)}`, 'info');
             
-            // Test 2: Verificar el cliente
-            if (module.supabase) {
-                log('✅ Cliente Supabase existe');
+            try {
+                const supabaseUrl = 'https://odlxhgatqyodxdessxts.supabase.co';
+                const { createClient } = window.supabase;
+                const client = createClient(supabaseUrl, keyValue);
                 
-                // Test 3: Verificar la URL
-                const supabaseUrl = module.supabase.supabaseUrl;
-                log('URL Supabase: ' + supabaseUrl);
+                const { data, error } = await client.auth.getSession();
                 
-                // Test 4: Verificar el key (últimos 10 caracteres)
-                const supabaseKey = module.supabase.supabaseKey;
-                if (supabaseKey) {
-                    log('✅ Anon Key detectada');
-                    log('Últimos 10 caracteres: ...' + supabaseKey.slice(-10));
-                    
-                    if (supabaseKey.slice(-10) === 'ujdcB-xLA') {
-                        log('✅ ¡KEY CORRECTA! (termina en ...ujdcB-xLA)', true);
-                    } else {
-                        log('❌ KEY INCORRECTA! Termina en: ' + supabaseKey.slice(-10), false);
-                        log('Debería terminar en: ...ujdcB-xLA', false);
-                    }
+                if (error) {
+                    log(`❌ ${keyName}: Error - ${error.message}`, 'bad');
+                    return false;
                 } else {
-                    log('❌ No se pudo leer el anon key', false);
+                    log(`✅ ${keyName}: FUNCIONA!`, 'good');
+                    return true;
                 }
-                
-                // Test 5: Probar una llamada simple
-                log('');
-                log('Probando conexión...');
-                try {
-                    const { data, error } = await module.supabase.auth.getSession();
-                    if (error) {
-                        log('Error en getSession: ' + error.message, false);
-                    } else {
-                        log('✅ Conexión exitosa a Supabase Auth');
-                    }
-                } catch (err) {
-                    log('❌ Error al conectar: ' + err.message, false);
-                }
-                
-            } else {
-                log('❌ Cliente Supabase no existe', false);
+            } catch (err) {
+                log(`❌ ${keyName}: Exception - ${err.message}`, 'bad');
+                return false;
             }
-            
-        } catch (err) {
-            log('❌ Error al importar módulo: ' + err.message, false);
-            log('Stack: ' + err.stack, false);
         }
         
-        log('');
-        log('=== DEBUG COMPLETO ===');
+        // Key vieja (la que probablemente está en producción)
+        const oldKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY5ODc1MTUsImV4cCI6MjA1MjU2MzUxNX0.4HJL3MOuiVLW96PpMpxJlIeREIZY2a6j-BHwLnbw2Y4';
+        
+        // Key nueva (la que debería estar)
+        const newKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NDgzNTAsImV4cCI6MjA4NTEwODM1MH0.Qjpq0pKl_NEGEkHFaUzHv3hWh2rgeke_DKujdcB-xLA';
+        
+        (async () => {
+            log('', 'info');
+            log('TEST 1: Key VIEJA (termina en ...nbw2Y4)', 'info');
+            const oldWorks = await testKey('KEY VIEJA', oldKey);
+            
+            log('', 'info');
+            log('TEST 2: Key NUEVA (termina en ...dcB-xLA)', 'info');
+            const newWorks = await testKey('KEY NUEVA', newKey);
+            
+            log('', 'info');
+            log('=== CONCLUSIÓN ===', 'info');
+            
+            if (oldWorks && !newWorks) {
+                log('❌ PROBLEMA: Vercel está usando la KEY VIEJA invalidada', 'bad');
+                log('SOLUCIÓN: La variable de entorno NO se actualizó correctamente', 'bad');
+            } else if (!oldWorks && newWorks) {
+                log('✅ CORRECTO: Vercel está usando la KEY NUEVA', 'good');
+                log('El login debería funcionar ahora', 'good');
+            } else if (oldWorks && newWorks) {
+                log('⚠️ RARO: Ambas keys funcionan (JWT no fue rotado?)', 'info');
+            } else {
+                log('❌ GRAVE: Ninguna key funciona - problema en Supabase', 'bad');
+            }
+            
+            log('', 'info');
+            log('=== DEBUG COMPLETO ===', 'info');
+        })();
     </script>
 </body>
 </html>
