@@ -53,6 +53,7 @@ import EducacionInstrumentos from "./pages/EducacionInstrumentos";
 import EducacionTiposTrading from "./pages/EducacionTiposTrading";
 import EducacionLenguaje from "./pages/EducacionLenguaje";
 import EducacionAnalisis from "./pages/EducacionAnalisis";
+import DebugKey from "./pages/DebugKey";
 import "./lib/i18n";
 
 const queryClient = new QueryClient();
@@ -143,6 +144,7 @@ const App = () => {
                     <Route path="/admin/users" element={<AdminUsers />} />
                     <Route path="/admin/messages" element={<AdminMessages />} />
                     <Route path="/admin/coupons" element={<AdminCoupons />} />
+                    <Route path="/debug-key" element={<DebugKey />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>

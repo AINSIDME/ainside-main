@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #result { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-top: 10px;
+            background: #f5f5f5;
+            white-space: pre-wrap;
+        }
+        button { padding: 10px 20px; font-size: 16px; }
+        input { padding: 8px; width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Test Login Supabase</h1>
+    <input id="email" type="email" placeholder="Email" value="jonathangolubok@gmail.com"><br><br>
+    <button onclick="testLogin()">Test Login</button>
+    <div id="result">Esperando...</div>
+
+    <script>
+        console.log('Script cargado');
+        document.getElementById('result').textContent = 'Listo para probar. Click en el boton.';
+
+        async function testLogin() {
+            const result = document.getElementById('result');
+            const email = document.getElementById('email').value;
+            
+            result.textContent = 'Probando conexion a Supabase...';
+            console.log('Iniciando test con email:', email);
+
+            try {
+                // Test 1: Cargar libreria
+                result.textContent = 'Cargando libreria Supabase...';
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+                script.onload = async function() {
+                    try {
+                        result.textContent = 'Libreria cargada. Creando cliente...';
+                        
+                        const supabaseUrl = 'https://odlxhgatqyodxdessxts.supabase.co';
+                        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbHhoZ2F0cXlvZHhkZXNzeHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NDgzNTAsImV4cCI6MjA4NTEwODM1MH0.Qjpq0pKl_NEGEkHFaUzHv3hWh2rgeke_DKujdcB-xLA';
+                        
+                        const { createClient } = window.supabase;
+                        const supabase = createClient(supabaseUrl, supabaseKey);
+                        
+                        result.textContent = 'Cliente creado. Intentando login...';
+                        console.log('Enviando OTP a:', email);
+
+                        const { data, error } = await supabase.auth.signInWithOtp({
+                            email: email
+                        });
+
+                        if (error) {
+                            result.textContent = 'ERROR:\n' + JSON.stringify(error, null, 2);
+                            console.error('Error:', error);
+                        } else {
+                            result.textContent = 'SUCCESS! Email enviado:\n' + JSON.stringify(data, null, 2);
+                            console.log('Success:', data);
+                        }
+                    } catch (err) {
+                        result.textContent = 'ERROR INTERNO:\n' + err.message + '\n\n' + err.stack;
+                        console.error('Exception:', err);
+                    }
+                };
+                script.onerror = function() {
+                    result.textContent = 'ERROR: No se pudo cargar la libreria Supabase';
+                };
+                document.head.appendChild(script);
+
+            } catch (err) {
+                result.textContent = 'ERROR GENERAL:\n' + err.message + '\n\n' + err.stack;
+                console.error('Error general:', err);
+            }
+        }
+    </script>
+</body>
+</html>
