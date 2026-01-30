@@ -290,32 +290,32 @@ const MFA = () => {
 
   if (needsLogin) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
-        <Card className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
-          <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+      <div className="min-h-screen bg-[#0b0f17] flex items-center justify-center p-6">
+        <Card className="w-full max-w-lg bg-[#0f1626] border border-white/10 shadow-[0_14px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl rounded-[20px]">
+          <CardHeader className="space-y-6 pb-10 pt-16 px-12 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
             {/* Badge ADMIN prominente */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] mb-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 text-blue-100 rounded-full text-xs font-semibold uppercase tracking-[0.3em] mb-2">
               <Shield className="w-4 h-4" />
               ADMIN
             </div>
             
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border-2 border-red-100 mb-2">
-              <Shield className="w-8 h-8 text-red-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 border-2 border-red-400/30 mb-2">
+              <Shield className="w-8 h-8 text-red-400" />
             </div>
-            <CardTitle className="text-3xl font-light text-black tracking-tight">
+            <CardTitle className="text-3xl font-light text-white tracking-tight">
               {t("mfa.loginRequired.title", { defaultValue: "Iniciar sesión requerido" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
-            <CardDescription className="text-neutral-600 text-base font-light pt-4">
+            <p className="text-xs text-white/60 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
+            <CardDescription className="text-white/70 text-base font-light pt-4">
               {t("mfa.loginRequired.message", {
                 defaultValue:
                   "Para configurar o verificar tu 2FA, primero tenés que iniciar sesión con tu cuenta.",
               })}
             </CardDescription>
           </CardHeader>
-          <CardContent className="pb-16 px-12 space-y-4">
+          <CardContent className="pb-16 px-12 space-y-4 pt-10">
             <Button
-              className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300"
+              className="w-full h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-[14px] font-semibold tracking-wider text-base shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 border border-white/10"
               onClick={() => navigate("/login", { state: { redirectTo: "/mfa" } })}
             >
               <Shield className="mr-3 h-5 w-5" />
@@ -324,7 +324,7 @@ const MFA = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="w-full h-14 border-2 border-neutral-200 hover:border-neutral-300 text-neutral-700 hover:text-black rounded-lg font-medium tracking-wide transition-all duration-300" 
+              className="w-full h-14 border-2 border-white/10 hover:border-white/20 text-white/70 hover:text-white rounded-lg font-medium tracking-wide transition-all duration-300 bg-transparent hover:bg-white/5" 
               onClick={() => navigate("/")}
             >
               {t("mfa.back", { defaultValue: "Volver" })}
@@ -336,35 +336,35 @@ const MFA = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#0b0f17] flex items-center justify-center p-6">
       {/* Fixed Logo */}
       <div className="fixed top-10 left-10">
         <img 
-          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/ainside-logo-black.svg" 
+          src="https://odlxhgatqyodxdessxts.supabase.co/storage/v1/object/public/system-assets/logo-mono-white.png" 
           alt="AInside" 
-          className="h-10 opacity-50 hover:opacity-70 transition-opacity duration-300"
+          className="h-10 opacity-80 hover:opacity-100 transition-opacity duration-300"
         />
       </div>
 
       <div className="w-full max-w-lg">
-        <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
-          <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+        <Card className="bg-[#0f1626] border border-white/10 shadow-[0_14px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl rounded-[20px]">
+          <CardHeader className="space-y-6 pb-10 pt-16 px-12 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
             {/* Badge ADMIN prominente */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] mb-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 text-blue-100 rounded-full text-xs font-semibold uppercase tracking-[0.3em] mb-2">
               <Shield className="w-4 h-4" />
               ADMIN
             </div>
             
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border-2 border-red-100 mb-2">
-              <Shield className="w-8 h-8 text-red-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 border-2 border-red-400/30 mb-2">
+              <Shield className="w-8 h-8 text-red-400" />
             </div>
-            <CardTitle className="text-3xl font-light text-black tracking-tight">
+            <CardTitle className="text-3xl font-light text-white tracking-tight">
               {t("mfa.title", { defaultValue: "Seguridad 2FA Administrador" })}
             </CardTitle>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
+            <p className="text-xs text-white/60 uppercase tracking-[0.25em]">{t("mfa.adminSubtitle", { defaultValue: "Administrator Access Control" })}</p>
           </CardHeader>
-          <CardContent className="pb-16 px-12 space-y-6">
-            <CardDescription className="text-neutral-600 text-base font-light">
+          <CardContent className="pb-16 px-12 space-y-6 pt-10">
+            <CardDescription className="text-white/70 text-base font-light">
               {t("mfa.subtitle", {
                 defaultValue:
                   "Activa verificación en dos pasos con una app (Google Authenticator / Authy).",
@@ -373,7 +373,7 @@ const MFA = () => {
 
             {!factorId && (
               <Button 
-                className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group" 
+                className="w-full h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-[14px] font-semibold tracking-wider text-base shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 group border border-white/10" 
                 onClick={handleStartEnroll} 
                 disabled={isEnrolling}
               >
@@ -394,16 +394,16 @@ const MFA = () => {
             )}
 
             {factorId && hasUnverifiedFactor && !qrCode && !secret && (
-              <div className="space-y-4 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+              <div className="space-y-4 rounded-lg border border-white/10 bg-white/5 p-6">
                 <div className="flex items-start gap-3">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-neutral-200 flex-shrink-0">
-                    <QrCode className="w-5 h-5 text-neutral-700" />
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 flex-shrink-0">
+                    <QrCode className="w-5 h-5 text-white/70" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-black uppercase tracking-wide mb-2">
+                    <p className="text-sm font-medium text-white uppercase tracking-wide mb-2">
                       {t("mfa.pending.title", { defaultValue: "2FA pendiente" })}
                     </p>
-                    <p className="text-sm text-neutral-600 font-light">
+                    <p className="text-sm text-white/60 font-light">
                       {t("mfa.pending.message", {
                         defaultValue:
                           "Ya hay un registro de 2FA en tu cuenta, pero el QR no se puede recuperar. Si ya escaneaste el QR, ingresá el código abajo. Si no lo escaneaste o lo perdiste, generá un nuevo QR.",
@@ -412,7 +412,7 @@ const MFA = () => {
                   </div>
                 </div>
                 <Button 
-                  className="w-full h-14 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider transition-all duration-300" 
+                  className="w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-[14px] font-semibold tracking-wider shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all duration-300 border border-white/10" 
                   onClick={handleResetEnroll} 
                   disabled={isEnrolling}
                 >
@@ -432,12 +432,12 @@ const MFA = () => {
             )}
 
             {factorId && hasVerifiedFactor && !qrCode && !secret && (
-              <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <CheckCircle2 className="w-5 h-5 text-neutral-700" />
-                  <p className="text-xs font-medium text-black uppercase tracking-widest">{t("mfa.configComplete", { defaultValue: "Configuración Completa" })}</p>
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  <p className="text-xs font-medium text-white uppercase tracking-widest">{t("mfa.configComplete", { defaultValue: "Configuración Completa" })}</p>
                 </div>
-                <p className="text-sm text-neutral-600 font-light">
+                <p className="text-sm text-white/60 font-light">
                   {t("mfa.verified.note", {
                     defaultValue:
                       "Tu 2FA ya está configurado. Abrí tu app (Authenticator/Authy) e ingresá el código para verificar.",
@@ -447,18 +447,18 @@ const MFA = () => {
             )}
 
             {(qrCode || secret) && (
-              <div className="space-y-4 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
+              <div className="space-y-4 rounded-lg border border-white/10 bg-white/5 p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <QrCode className="w-5 h-5 text-neutral-700" />
-                  <p className="text-xs font-medium text-black uppercase tracking-widest">{t("mfa.qrCode.title", { defaultValue: "Escanear Código QR" })}</p>
+                  <QrCode className="w-5 h-5 text-white/70" />
+                  <p className="text-xs font-medium text-white uppercase tracking-widest">{t("mfa.qrCode.title", { defaultValue: "Escanear Código QR" })}</p>
                 </div>
                 {renderQr()}
                 {secret && (
-                  <div className="pt-4 border-t border-neutral-200">
-                    <p className="text-xs text-neutral-600 font-light mb-2">
+                  <div className="pt-4 border-t border-white/10">
+                    <p className="text-xs text-white/60 font-light mb-2">
                       {t("mfa.secret", { defaultValue: "Clave manual:" })}
                     </p>
-                    <p className="text-sm font-mono bg-white border border-neutral-200 rounded px-3 py-2 text-neutral-800 break-all">
+                    <p className="text-sm font-mono bg-black/40 border border-white/10 rounded px-3 py-2 text-white/90 break-all">
                       {secret}
                     </p>
                   </div>
@@ -469,7 +469,7 @@ const MFA = () => {
             {factorId && (
               <form onSubmit={handleVerify} className="space-y-6">
                 <div className="space-y-3">
-                  <Label htmlFor="mfaCode" className="text-black font-medium uppercase tracking-wide text-xs flex items-center gap-2">
+                  <Label htmlFor="mfaCode" className="text-white font-medium uppercase tracking-wide text-xs flex items-center gap-2">
                     <KeyRound className="w-4 h-4" />
                     {t("mfa.code.label", { defaultValue: "Código 2FA" })}
                   </Label>
@@ -481,16 +481,16 @@ const MFA = () => {
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
                     required
-                    className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-white border-2 border-neutral-200 hover:border-neutral-300 focus:border-black focus:ring-2 focus:ring-black/5 text-black rounded-lg transition-all duration-300"
+                    className="h-20 text-center text-4xl tracking-[0.5em] font-mono bg-black/40 border-2 border-white/10 hover:border-white/20 focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 text-white rounded-lg transition-all duration-300"
                   />
-                  <p className="text-xs text-neutral-500 text-center uppercase tracking-widest">
+                  <p className="text-xs text-white/50 text-center uppercase tracking-widest">
                     {t("mfa.qrCode.renewMessage", { defaultValue: "Renovación cada 30 segundos" })}
                   </p>
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group" 
+                  className="w-full h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-[14px] font-semibold tracking-wider text-base shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 group border border-white/10" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -510,11 +510,11 @@ const MFA = () => {
               </form>
             )}
 
-            <div className="pt-6 border-t border-neutral-200">
+            <div className="pt-6 border-t border-white/10">
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full h-12 text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg font-light tracking-wide transition-all duration-300"
+                className="w-full h-12 text-white/60 hover:text-white hover:bg-white/5 rounded-lg font-light tracking-wide transition-all duration-300"
                 onClick={() => navigate(redirectTo)}
               >
                 {t("mfa.back", { defaultValue: "Volver" })}
