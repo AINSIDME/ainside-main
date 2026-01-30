@@ -1,108 +1,53 @@
 import { useState } from "react";
-import { Mail, Shield, ArrowRight, Loader2, CheckCircle2, KeyRound } from "lucide-react";
+import { Mail, Shield, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
-
-// URL y key desde variables de entorno (NO hardcodeadas)
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+import { useNavigate } from "react-router-dom";
 
 export default function OTPLogin() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [step, setStep] = useState<"email" | "code">("email");
   const [loading, setLoading] = useState(false);
-  const [expiresIn, setExpiresIn] = useState(0);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleRequestCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      console.log('DEBUG - SUPABASE_URL:', SUPABASE_URL);
-      console.log('DEBUG - SUPABASE_ANON_KEY (últimos 10):', SUPABASE_ANON_KEY?.slice(-10));
-      
-      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-        throw new Error('Variables de entorno no configuradas');
-      }
-      
-      // Usar fetch directo para evitar proxy de Vercel
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/request-otp-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ 
-          email,
-          lang: i18n.language // Enviar el idioma actual del usuario
-        }),
+      // Usar el método NATIVO de Supabase (no Edge Functions)
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim(),
+        options: {
+          shouldCreateUser: false,
+        }
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al enviar código");
+      if (error) {
+        throw error;
       }
 
-      if (data?.success) {
-        setStep("code");
-        setExpiresIn(data.expiresIn || 600);
-        toast({
-          title: t('otpLogin.codeSent'),
-          description: `${t('otpLogin.checkEmail')}: ${email}`,
-        });
-        
-        // Countdown timer
-        const interval = setInterval(() => {
-          setExpiresIn((prev) => {
-            if (prev <= 1) {
-              clearInterval(interval);
-              return 0;
-            }
-            return prev - 1;
-          });
-        }, 1000);
-      }
-    } catch (error: any) {
       toast({
-        title: t('common.error'),
-        description: error.message || t('otpLogin.sendError'),
+        title: "✅ Email enviado",
+        description: `Revisa tu bandeja de entrada: ${email}`,
+      });
+      
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Error al enviar el código",
         variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
   };
-
-  const handleVerifyCode = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Verificar el código con nuestro backend
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-otp-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({ email, code }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al verificar código");
-      }
-
-      if (data?.success && data?.magic_link) {
         // El magic_link es una URL completa con tokens en el hash
         console.log("Magic link recibido:", data.magic_link);
         
