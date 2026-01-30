@@ -33,22 +33,23 @@ const Demo = () => {
         setLoading(true);
         setError(null);
 
-        // Generar datos sintéticos para demostración
+        // Generar datos sintéticos para demostración con más volatilidad
         console.log('🔄 Generando datos de demostración...');
         const bars: Bar[] = [];
         let price = 6000;
         const now = Date.now();
-        const barCount = 78; // ~6.5 horas * 12 barras/hora (5min)
+        const barCount = 100; // Más barras para mostrar
         
         for (let i = 0; i < barCount; i++) {
-          const time = now - (barCount - i) * 5 * 60 * 1000; // 5 min intervals
-          const volatility = 2;
+          const time = now - (barCount - i) * 3000; // 3 segundos por barra
+          const volatility = 8; // Mayor volatilidad para movimientos visibles
+          const trend = Math.sin(i / 10) * 5; // Tendencia ondulatoria
           const open = price;
-          const change = (Math.random() - 0.5) * volatility;
+          const change = trend + (Math.random() - 0.5) * volatility;
           const close = open + change;
-          const high = Math.max(open, close) + Math.random() * volatility;
-          const low = Math.min(open, close) - Math.random() * volatility;
-          const volume = Math.floor(Math.random() * 1000 + 500);
+          const high = Math.max(open, close) + Math.random() * volatility * 0.5;
+          const low = Math.min(open, close) - Math.random() * volatility * 0.5;
+          const volume = Math.floor(Math.random() * 2000 + 800);
           
           bars.push({ time, open, high, low, close, volume });
           price = close;
@@ -61,7 +62,7 @@ const Demo = () => {
         
         console.log(`✅ Generadas ${bars.length} velas sintéticas`);
 
-        // Estrategia simple de demostración
+        // Estrategia simple de demostración con más trades
         const strategyResult = { trades: [], indicators: [] };
         let position = 0;
         let entryBar = 0;
@@ -72,15 +73,15 @@ const Demo = () => {
           const prevBar = bars[i - 1];
           const momentum = bar.close - prevBar.close;
           
-          // Long entries
-          if (position === 0 && momentum < -1.5 && Math.random() > 0.8) {
+          // Long entries - más frecuentes
+          if (position === 0 && momentum < -3 && Math.random() > 0.6) {
             position = 1;
             entryBar = i;
             entryPrice = bar.close;
           }
           
-          // Long exits con profit
-          if (position === 1 && (bar.close - entryPrice) >= 3) {
+          // Long exits con profit más realista
+          if (position === 1 && (bar.close - entryPrice) >= 5) {
             const profit = (bar.close - entryPrice) * 50;
             strategyResult.trades.push({
               entryBar,
@@ -93,15 +94,15 @@ const Demo = () => {
             position = 0;
           }
           
-          // Short entries
-          if (position === 0 && momentum > 1.5 && Math.random() > 0.8) {
+          // Short entries - más frecuentes
+          if (position === 0 && momentum > 3 && Math.random() > 0.6) {
             position = -1;
             entryBar = i;
             entryPrice = bar.close;
           }
           
-          // Short exits con profit
-          if (position === -1 && (entryPrice - bar.close) >= 3) {
+          // Short exits con profit más realista
+          if (position === -1 && (entryPrice - bar.close) >= 5) {
             const profit = (entryPrice - bar.close) * 50;
             strategyResult.trades.push({
               entryBar,
@@ -375,7 +376,7 @@ const Demo = () => {
     chartRef.current = chart;
     setLoading(false);
     
-    // INICIAR ACTUALIZACIÓN EN VIVO - Nuevas velas cada 1 segundo
+    // INICIAR ACTUALIZACIÓN EN VIVO - Nuevas velas cada 500ms (más rápido)
     liveInterval = setInterval(() => {
       if (!mounted || !chart) return;
       
@@ -383,17 +384,17 @@ const Demo = () => {
       if (currentBars.length === 0) return;
       
       const lastBar = currentBars[currentBars.length - 1];
-      const newTime = lastBar.time + 1000; // +1 segundo
+      const newTime = lastBar.time + 3000; // +3 segundos
       
-      // Generar movimiento de precio realista
-      const volatility = 0.5; // Menor volatilidad para movimientos suaves
-      const trend = (Math.random() - 0.5) * 0.3;
+      // Generar movimiento de precio REALISTA y VISIBLE
+      const volatility = 4; // Mayor volatilidad para movimientos visibles
+      const trend = Math.sin(Date.now() / 10000) * 2; // Tendencia ondulatoria
       const open = lastBar.close;
       const change = trend + (Math.random() - 0.5) * volatility;
       const close = open + change;
-      const high = Math.max(open, close) + Math.random() * 0.3;
-      const low = Math.min(open, close) - Math.random() * 0.3;
-      const volume = Math.floor(Math.random() * 500 + 100);
+      const high = Math.max(open, close) + Math.random() * 2;
+      const low = Math.min(open, close) - Math.random() * 2;
+      const volume = Math.floor(Math.random() * 1500 + 500);
       
       const newBar: Bar = {
         time: newTime,
@@ -441,16 +442,30 @@ const Demo = () => {
         const prevBar = currentBars[i - 1];
         const momentum = bar.close - prevBar.close;
         
-        if (position === 0 && momentum < -1.5 && Math.random() > 0.9) {
+        if (position === 0 && momentum < -3 && Math.random() > 0.7) {
           position = 1;
           entryBar = i;
           entryPrice = bar.close;
         }
         
-        if (position === 1 && (bar.close - entryPrice) >= 3) {
+        if (position === 1 && (bar.close - entryPrice) >= 5) {
           trades.push({
             entryBar, exitBar: i, entryPrice, exitPrice: bar.close,
             type: 'long', profit: (bar.close - entryPrice) * 50
+          });
+          position = 0;
+        }
+        
+        if (position === 0 && momentum > 3 && Math.random() > 0.7) {
+          position = -1;
+          entryBar = i;
+          entryPrice = bar.close;
+        }
+        
+        if (position === -1 && (entryPrice - bar.close) >= 5) {
+          trades.push({
+            entryBar, exitBar: i, entryPrice, exitPrice: bar.close,
+            type: 'short', profit: (entryPrice - bar.close) * 50
           });
           position = 0;
         }
@@ -471,7 +486,7 @@ const Demo = () => {
       // Redibujar gráfico
       chart.redraw();
       
-    }, 1000); // Cada 1 segundo
+    }, 500); // Cada 500ms (más rápido y visible)
 
       } catch (err) {
         console.error('Error loading data:', err);
@@ -501,7 +516,7 @@ const Demo = () => {
       <div className="h-8 bg-black border-b border-[#1a1a1a] flex items-center px-3 justify-between">
         <div className="flex items-center gap-4">
           <span className="text-[#999] text-[11px] font-semibold">
-            ES (S&P 500 Futures) - 1 SEC LIVE {tradingDate && `| ${tradingDate}`} {loading && '(Cargando...)'}
+            ES (S&P 500 Futures) - LIVE SIMULATION {tradingDate && `| ${tradingDate}`}
           </span>
           {stats && (
             <span className="text-[#666] text-[10px]">
@@ -509,7 +524,8 @@ const Demo = () => {
               <span className={stats.profit >= 0 ? 'text-[#00ff00]' : 'text-[#ff0000]'}>
                 {' '}P&L: ${stats.profit.toFixed(2)}
               </span>
-              {' '}| Win: {stats.winners} | Loss: {stats.losers}
+              {' '}| Wins: {stats.winners} | Losses: {stats.losers}
+              {stats.totalTrades > 0 && ` | Win Rate: ${((stats.winners / stats.totalTrades) * 100).toFixed(1)}%`}
             </span>
           )}
         </div>
