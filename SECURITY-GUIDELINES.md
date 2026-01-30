@@ -33,6 +33,7 @@ const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 ### Paso 1: NO ENTRAR EN PÁNICO
 - Git guarda el historial completo
 - Simplemente borrar el archivo NO es suficiente
+- **El key sigue visible en el historial de commits**
 
 ### Paso 2: Rotar el key INMEDIATAMENTE
 1. **Service Role Key**: Supabase Dashboard → Settings → JWT Keys → Generate random secret
@@ -41,19 +42,38 @@ const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 ### Paso 3: Limpiar el repositorio
 ```powershell
-# Eliminar del tracking de Git
+# OPCIÓN 1: Eliminar del tracking (para archivos nuevos)
 git rm --cached archivo-con-key.js
-
-# Agregar al .gitignore
 echo "archivo-con-key.js" >> .gitignore
-
-# Commit y push
 git add .gitignore
 git commit -m "security: remove exposed keys from tracking"
 git push origin master
+
+# OPCIÓN 2: Limpiar HISTORIAL COMPLETO (si ya fue commiteado antes)
+# Usa git filter-branch para eliminar el archivo de TODO el historial
+git filter-branch --force --index-filter \
+  "git rm --cached --ignore-unmatch archivo-con-key.js" \
+  --prune-empty --tag-name-filter cat -- --all
+
+# Limpiar referencias locales
+Remove-Item .git/refs/original -Recurse -Force
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
+# Force push para actualizar el remoto
+git push origin --force --all
+git push origin --force --tags
+
+# ⚠️ ADVERTENCIA: Force push reescribe el historial
+# Todos los colaboradores deben hacer `git clone` de nuevo
 ```
 
-### Paso 4: Notificar si es crítico
+### Paso 4: Verificar con GitGuardian
+- Ve a tu email o dashboard de GitGuardian
+- Marca los incidentes como "Revoked" una vez que hayas rotado las keys
+- GitGuardian dejará de alertar sobre esos keys específicos
+
+### Paso 5: Notificar si es crítico
 - Si el key tenía acceso a datos sensibles
 - Si el key era de producción
 - Si el repositorio es público
