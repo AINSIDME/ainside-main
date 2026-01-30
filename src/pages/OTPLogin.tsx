@@ -23,6 +23,7 @@ export default function OTPLogin() {
         email: email.trim(),
         options: {
           shouldCreateUser: false,
+          emailRedirectTo: `${window.location.origin}/`,
         }
       });
 
