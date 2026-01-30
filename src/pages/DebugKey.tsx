@@ -6,7 +6,7 @@ export default function DebugKey() {
   const supabaseUrl = supabase.supabaseUrl;
   
   const lastTenChars = supabaseKey ? supabaseKey.slice(-10) : 'NO KEY';
-  const isCorrectKey = lastTenChars === 'ujdcB-xLA';
+  const isCorrectKey = lastTenChars === 'KujdcB-xLA';
 
   return (
     <div style={{ 
@@ -32,13 +32,16 @@ export default function DebugKey() {
         <div style={{ color: '#ffff00' }}>Estado:</div>
         {isCorrectKey ? (
           <div style={{ color: '#00ff00', fontSize: '20px' }}>
-            ✅ KEY CORRECTA - Termina en ...ujdcB-xLA (key nueva)
+            ✅ KEY CORRECTA - Termina en ...KujdcB-xLA (key nueva)
+            <div style={{ marginTop: '20px', fontSize: '16px' }}>
+              🎉 ¡El login debería funcionar ahora!
+            </div>
           </div>
         ) : (
           <div style={{ color: '#ff0000', fontSize: '20px' }}>
             ❌ KEY INCORRECTA - No es la key nueva
             <div style={{ marginTop: '10px', fontSize: '14px' }}>
-              Debería terminar en: ...ujdcB-xLA
+              Debería terminar en: ...KujdcB-xLA
             </div>
             <div style={{ marginTop: '10px', fontSize: '14px' }}>
               Termina en: ...{lastTenChars}
