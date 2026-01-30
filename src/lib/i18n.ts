@@ -48,13 +48,13 @@ i18n
     lowerCaseLng: true,
 
     detection: {
-      // Prefer saved choice; otherwise detect from browser, then default to ES
+      // Prefer saved choice; otherwise detect from browser, then default to EN
       order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],
       convertDetectedLanguage: (lng: string) => {
-        const detected = lng?.toLowerCase?.() ?? 'es';
-        // If detected language is not supported, use Spanish
-        return ['en', 'es', 'fr', 'he', 'ar', 'ru'].includes(detected) ? detected : 'es';
+        const detected = lng?.toLowerCase?.() ?? 'en';
+        // If detected language is not supported, use English
+        return ['en', 'es', 'fr', 'he', 'ar', 'ru'].includes(detected) ? detected : 'en';
       },
     },
 
