@@ -37,9 +37,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
+    lng: 'en', // Force English as default
     fallbackLng: 'en',
-    // No fixed `lng`: LanguageDetector will pick from localStorage/browser;
-    // fallbackLng keeps English as the default.
     debug: false,
     // Expose all available languages; missing keys fall back to ES
     supportedLngs: ['en', 'es', 'fr', 'he', 'ar', 'ru'],
@@ -48,14 +47,9 @@ i18n
     lowerCaseLng: true,
 
     detection: {
-      // Prefer saved choice; otherwise detect from browser, then default to EN
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      // Only use localStorage, ignore browser language
+      order: ['localStorage'],
       caches: ['localStorage'],
-      convertDetectedLanguage: (lng: string) => {
-        const detected = lng?.toLowerCase?.() ?? 'en';
-        // If detected language is not supported, use English
-        return ['en', 'es', 'fr', 'he', 'ar', 'ru'].includes(detected) ? detected : 'en';
-      },
     },
 
     interpolation: {
