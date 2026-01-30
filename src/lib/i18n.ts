@@ -37,9 +37,9 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'es',
+    fallbackLng: 'en',
     // No fixed `lng`: LanguageDetector will pick from localStorage/browser;
-    // fallbackLng keeps Spanish as the default.
+    // fallbackLng keeps English as the default.
     debug: false,
     // Expose all available languages; missing keys fall back to ES
     supportedLngs: ['en', 'es', 'fr', 'he', 'ar', 'ru'],
