@@ -48,31 +48,6 @@ export default function OTPLogin() {
       setLoading(false);
     }
   };
-        // El magic_link es una URL completa con tokens en el hash
-        console.log("Magic link recibido:", data.magic_link);
-        
-        // Redirigir directamente al magic link - Supabase Auth lo manejará
-        window.location.href = data.magic_link;
-      } else {
-        throw new Error(t('otpLogin.noAuthLink'));
-      }
-    } catch (error: any) {
-      console.error("Error en verificación:", error);
-      toast({
-        title: t('common.error'),
-        description: error.message || t('otpLogin.invalidCode'),
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 flex items-center justify-center p-6">
