@@ -243,26 +243,37 @@ const Dashboard = () => {
 
   if (needsMfa) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-6 flex items-center justify-center">
-        <div className="container mx-auto max-w-md">
-          <Card className="bg-slate-900/50 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5" />
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 p-6 flex items-center justify-center">
+        <div className="container mx-auto max-w-lg">
+          <Card className="bg-white/80 backdrop-blur-xl border border-neutral-200/50 shadow-2xl shadow-neutral-200/50">
+            <CardHeader className="space-y-6 pb-10 pt-16 px-12">
+              {/* Badge ADMIN prominente */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] mb-2">
+                <ShieldCheck className="w-4 h-4" />
+                2FA
+              </div>
+              
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border-2 border-red-100 mb-2">
+                <ShieldCheck className="w-8 h-8 text-red-600" />
+              </div>
+              <CardTitle className="text-3xl font-light text-black tracking-tight">
                 {t("dashboard.mfaRequired.title")}
               </CardTitle>
-              <CardDescription className="text-slate-400">
+              <CardDescription className="text-neutral-600 text-base font-light pt-2">
                 {t("dashboard.mfaRequired.message")}
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="pb-16 px-12 space-y-4">
               <Button
-                className="w-full"
+                className="w-full h-16 bg-black hover:bg-neutral-900 text-white rounded-lg font-medium tracking-wider text-base shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300"
                 onClick={() => navigate("/mfa", { state: { redirectTo: "/dashboard" } })}
               >
                 {t("dashboard.mfaRequired.cta")}
               </Button>
-              <Button variant="outline" className="w-full" onClick={() => navigate("/")}
+              <Button 
+                variant="outline" 
+                className="w-full h-14 border-2 border-neutral-200 hover:border-neutral-300 text-neutral-700 hover:text-black rounded-lg font-medium tracking-wide transition-all duration-300"
+                onClick={() => navigate("/")}
               >
                 {t("dashboard.mfaRequired.back")}
               </Button>
